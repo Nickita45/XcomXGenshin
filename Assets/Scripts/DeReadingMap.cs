@@ -6,7 +6,6 @@ using System.IO;
 
 public class DeReadingMap : MonoBehaviour
 {
-    private MatrixMap _matrixMap;
 
     [SerializeField]
     private GameObject _mainObject;
@@ -30,7 +29,7 @@ public class DeReadingMap : MonoBehaviour
 
         string jsonContent = File.ReadAllText(filePath);
         string jsonFile = jsonContent.ToString();
-        _matrixMap = JsonConvert.DeserializeObject<MatrixMap>(jsonFile);
+        MatrixMap _matrixMap = JsonConvert.DeserializeObject<MatrixMap>(jsonFile);
     
         foreach(var item in _matrixMap)
         {
@@ -44,8 +43,14 @@ public class DeReadingMap : MonoBehaviour
             obj.transform.localPosition = new Vector3(item.XPosition, item.YPosition, item.ZPosition);
             obj.transform.localRotation = new Quaternion(item.XRotation, item.YRotation, item.ZRotation, item.WRotation);
             obj.transform.localScale = new Vector3(item.XSize, item.YSize, item.ZSize);
+
+            if(item.TerritoryInfo == TerritoryType.MapObject)
+            {
+                obj.GetComponent<CharacterInfo>().ActualTerritory = item;
+            }
         }
         _matrixMap.DebugToConsole();
+        GameManagerMap.Instance.Map = _matrixMap;
     }
 
 }

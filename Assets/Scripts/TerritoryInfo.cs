@@ -20,6 +20,7 @@ public enum TerritoryType
     Air,
     Shelter,
     ShelterGround,
-    Boarder
+    Boarder,
+    MapObject
      
 }

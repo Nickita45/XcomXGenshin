@@ -588,8 +588,8 @@
         "2,5_0,5_-0,5"
       ],
       "Index": "3,5_0,5_-0,5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2
+      "PathPrefab": "Prefabs/Capsule",
+      "TerritoryInfo": 6
     },
     "3,5_0,5_0,5": {
       "XSize": 0.5,
@@ -3769,7 +3769,9 @@
       "IndexRight": [
         "3,5_1,5_0,5"
       ],
-      "IndexUp": [],
+      "IndexUp": [
+        "3,5_2,5_-0,5"
+      ],
       "IndexDown": [
         "3,5_0,5_-0,5"
       ],
@@ -6412,6 +6414,29 @@
       "IndexFront": [],
       "IndexBottom": [],
       "Index": "3,5_2,5_-4,5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2
+    },
+    "3,5_2,5_-0,5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": 3.5,
+      "YPosition": 2.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [],
+      "IndexUp": [],
+      "IndexDown": [
+        "3,5_1,5_-0,5"
+      ],
+      "IndexFront": [],
+      "IndexBottom": [],
+      "Index": "3,5_2,5_-0,5",
       "PathPrefab": null,
       "TerritoryInfo": 2
     },

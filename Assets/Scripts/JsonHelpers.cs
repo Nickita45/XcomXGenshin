@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TerritroyReaded
 {
@@ -32,5 +33,30 @@ public class TerritroyReaded
         WRotation = transform.localRotation.w;
 
         Index = XPosition + ReadingMap.SPLITTER + YPosition + ReadingMap.SPLITTER + ZPosition;
+    }
+
+    public Vector3 GetCordinats() => new Vector3(XPosition, YPosition, ZPosition);
+
+    public IEnumerator<string> GetEnumerator()
+    {
+        foreach (var item in IndexLeft)
+        {
+            yield return item;
+        }
+
+        foreach (var item in IndexRight)
+        {
+            yield return item;
+        }
+
+        foreach (var item in IndexBottom)
+        {
+            yield return item;
+        }
+
+        foreach (var item in IndexFront)
+        {
+            yield return item;
+        }
     }
 }

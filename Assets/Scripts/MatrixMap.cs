@@ -14,6 +14,8 @@ public class MatrixMap
         return ter;
     }
 
+    public TerritroyReaded this[string index] => _vertex[index];
+    public TerritroyReaded this[Vector3 cordinats] => _vertex[MakeFromVector3ToIndex(cordinats)];
     public bool ContainsVertexByPox(Vector3 vector, out TerritroyReaded game)
     {
         string index = vector.x + ReadingMap.SPLITTER + vector.y + ReadingMap.SPLITTER + vector.z;
@@ -47,4 +49,7 @@ public class MatrixMap
             yield return item.Value;
         }
     }
+
+
+    public static string MakeFromVector3ToIndex(Vector3 vector) => vector.x + ReadingMap.SPLITTER + vector.y + ReadingMap.SPLITTER + vector.z;
 }

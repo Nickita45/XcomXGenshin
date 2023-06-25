@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.VersionControl;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class ReadingMap : MonoBehaviour
@@ -158,11 +156,22 @@ public class ReadingMap : MonoBehaviour
                 return;
             }
             if (!_matrixMap.ContainsVertexByPox(_aktualGameObject.transform.position, out newItem))
-                newItem = _matrixMap.AddVertex(new TerritroyReaded(_aktualGameObject.transform)
+                if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.MapObject)
                 {
-                    TerritoryInfo = _aktualGameObject.GetComponent<TerritoryInfo>().Type,
-                    PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
-                });
+                    newItem = _matrixMap.AddVertex(new TerritroyReaded(_aktualGameObject.transform)
+                    {
+                        TerritoryInfo = TerritoryType.MapObject,
+                        PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
+                    });
+                }
+                else
+                {
+                    newItem = _matrixMap.AddVertex(new TerritroyReaded(_aktualGameObject.transform)
+                    {
+                        TerritoryInfo = _aktualGameObject.GetComponent<TerritoryInfo>().Type,
+                        PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
+                    });
+                }
         }
 
         if (_lastReadedTerritory != null && newItem != _lastReadedTerritory)
