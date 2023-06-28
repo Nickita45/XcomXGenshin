@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ReadingMap : MonoBehaviour
 {
-    public static string SPLITTER = "_";
+    public static readonly string SPLITTER = "_";
 
     private const float TIMEWAITREADING = 0.02f;//optimal is 0.05f
 

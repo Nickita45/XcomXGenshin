@@ -2229,6 +2229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c53477adbc4e6954c8b23529ab14a1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _countMove: 5
+  _speed: 1
   _prefabPossibleTerritory: {fileID: 367235445393243085, guid: 5350567c8f01e904098f662ca01a15f1, type: 3}
 --- !u!1 &1779611582
 GameObject:
