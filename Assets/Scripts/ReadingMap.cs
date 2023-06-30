@@ -23,7 +23,8 @@ public class ReadingMap : MonoBehaviour
 
     private TerritroyReaded _lastReadedTerritory;
 
-
+    [Header("Map")]
+    [SerializeField]
     private MatrixMap _matrixMap = new MatrixMap();
 
     private void Start()
@@ -32,9 +33,6 @@ public class ReadingMap : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-    }
 
     private IEnumerator AlgoritmusReadingMap()
     {
@@ -63,21 +61,28 @@ public class ReadingMap : MonoBehaviour
 
         while (true)
         {
+            int countHeightOrWeight = 0;
             if (vector != DetecterVector.UpDown)
             {
                 while (_aktualGameObject == null ||
                     (_aktualGameObject.GetComponent<TerritoryInfo>() && _aktualGameObject.GetComponent<TerritoryInfo>().Type != TerritoryType.Boarder))
                 {
+                    countHeightOrWeight++;
                     AlgoritmusRowMove(wayRow, ref isDetectSomething);
 
                     yield return new WaitForSeconds(TIMEWAITREADING);
                     AddNewTerritory(vector);
                 }
-            } else
+
+                if(countHeightOrWeight > _matrixMap.wight)
+                    _matrixMap.wight = countHeightOrWeight;
+            }
+            else
             {
                 GameObject beforeObj = null;
                 do
                 {
+                    countHeightOrWeight++;
                     beforeObj = _aktualGameObject;
                     AlgoritmusRowMove(wayRow, ref isDetectSomething);
 
@@ -88,6 +93,8 @@ public class ReadingMap : MonoBehaviour
 
                 } while (beforeObj != null || _aktualGameObject != null);
 
+                if (countHeightOrWeight > _matrixMap.height)
+                    _matrixMap.height = countHeightOrWeight;
             }
 
             row++;

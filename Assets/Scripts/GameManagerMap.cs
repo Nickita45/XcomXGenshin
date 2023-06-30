@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class GameManagerMap : MonoBehaviour
 {
-    public MatrixMap Map { get; set; }
+    [SerializeField]
+    private MatrixMap _map;
 
     [SerializeField]
     private CharacterMovemovent _characterMovemovent;
+
+    [Header("MainObjects")]
     [SerializeField]
     private GameObject _mainParent;
     [SerializeField]
@@ -20,6 +23,8 @@ public class GameManagerMap : MonoBehaviour
     public CharacterMovemovent CharacterMovemovent => _characterMovemovent;
     public GameObject MainParent => _mainParent;
     public GameObject GenereteTerritoryMove => _genereteTerritoryMove;
+
+    public MatrixMap Map { get => _map; set => _map = value; }
 
     private void Awake()
     {

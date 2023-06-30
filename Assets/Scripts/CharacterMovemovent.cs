@@ -19,13 +19,20 @@ public class CharacterMovemovent : MonoBehaviour
     [Header("Script Objects")]
     [SerializeField]
     private GameObject _prefabPossibleTerritory;
+    [SerializeField]
+    private LineRenderer _lineRenderer;
 
     private CharacterInfo _selectedCharacter;
 
     //private HashSet<TerritroyReaded> _objectsCalculated;
     private Dictionary<TerritroyReaded, TerritroyReaded> _objectsCalculated; //orig, previous
 
-    public void Update()
+
+    private void Start()
+    {
+        _lineRenderer.gameObject.SetActive(false);
+    }
+    private void Update()
     {
         if (_selectedCharacter != null && _selectedCharacter.MoverActive())
         {
@@ -58,10 +65,13 @@ public class CharacterMovemovent : MonoBehaviour
                 if (_objectsCalculated.Keys.Contains(detectTerritory) && detectTerritory.TerritoryInfo != TerritoryType.Shelter && detectTerritory.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground).Count() == 1)
                 {
                     _selectedCharacter.SetCordintasToMover(detectTerritory.GetCordinats() + GameManagerMap.Instance.MainParent.transform.position - new Vector3(0, 0.5f, 0));
+                    var list = calculatePoints(detectTerritory);
+                    list.Add(detectTerritory.GetCordinats());
+                    DrawLine(list);
 
                     if (Input.GetMouseButton(0) && !_selectedCharacter.isAktualTerritory(detectTerritory))
                     {
-                        StartCoroutine(CoroutineNewPositionCharacter(detectTerritory));
+                        StartCoroutine(CoroutineNewPositionCharacter(detectTerritory, list));
                         
                     }
                 }
@@ -72,7 +82,9 @@ public class CharacterMovemovent : MonoBehaviour
 
     public void CharacterSelect(CharacterInfo character)
     {
-        if(_selectedCharacter != null && _selectedCharacter != character)
+        _lineRenderer.gameObject.SetActive(true);
+
+        if (_selectedCharacter != null && _selectedCharacter != character)
         {
             _selectedCharacter.OnDeselected();
         }
@@ -88,6 +100,7 @@ public class CharacterMovemovent : MonoBehaviour
 
     public void CharacterDeselect()
     {
+        _lineRenderer.gameObject.SetActive(false);
 
         _selectedCharacter = null;
 
@@ -99,11 +112,11 @@ public class CharacterMovemovent : MonoBehaviour
     }
 
 
-    private IEnumerator CoroutineNewPositionCharacter(TerritroyReaded newTerritory)
+    private IEnumerator CoroutineNewPositionCharacter(TerritroyReaded newTerritory, List<Vector3> points)
     {
         _selectedCharacter.MoverActive(false);
-        calculatePoints(newTerritory);
-        yield return StartCoroutine(CoroutineMove(newTerritory.GetCordinats()));
+
+        yield return StartCoroutine(CoroutineMove(points));
         _selectedCharacter.ActualTerritory = newTerritory;
 
         var save = _selectedCharacter;
@@ -113,31 +126,71 @@ public class CharacterMovemovent : MonoBehaviour
 
     private IEnumerator CoroutineMove(Vector3 target)
     {
-        Vector3 startPosition = _selectedCharacter.gameObject.transform.localPosition; // Начальная позиция объекта
+        Vector3 startPosition = _selectedCharacter.gameObject.transform.localPosition;
 
-        float elapsedTime = 0f; // Время, прошедшее с начала перемещения
+        float elapsedTime = 0f;
 
         while (elapsedTime < 1f)
         {
-            // Интерполируем позицию объекта между начальной и целевой позицией
             _selectedCharacter.gameObject.transform.localPosition = Vector3.Lerp(startPosition, target, elapsedTime);
 
-            elapsedTime += Time.deltaTime * _speed; // Увеличиваем время в соответствии с прошедшим временем
+            elapsedTime += Time.deltaTime * _speed;
 
-            yield return null; // Ждем следующего кадра
+            yield return null; 
         }
 
-        // Убедиться, что объект точно достиг целевой позиции
         _selectedCharacter.gameObject.transform.localPosition = target;
+    }
+
+    private IEnumerator CoroutineMove(List<Vector3> targets)
+    {
+        Vector3 startPosition = _selectedCharacter.gameObject.transform.localPosition; 
+
+        float elapsedTime = 0f;
+        int index = 0;
+        Vector3 target = targets[++index]; //ignore first, becouse its for line
+
+        while(true)
+        {
+            Debug.Log(target);
+            while (elapsedTime < 1f)
+            {
+                _selectedCharacter.gameObject.transform.localPosition = Vector3.Lerp(startPosition, target, elapsedTime);
+
+                elapsedTime += Time.deltaTime * _speed; 
+
+                yield return null; 
+            }
+            _selectedCharacter.gameObject.transform.localPosition = target;
+            startPosition = _selectedCharacter.gameObject.transform.localPosition;
+            elapsedTime = 0f;
+
+            if (target == targets[^1]) //last
+            {
+                break;
+            }
+            target = targets[++index];
+            yield return null;
+        }
+    }
+
+    private void DrawLine(List<Vector3> points)
+    {
+        
+        _lineRenderer.positionCount = points.Count;
+
+        for (int i = 0; i < points.Count; i++)
+        {
+            _lineRenderer.SetPosition(i, points[i] + GameManagerMap.Instance.MainParent.transform.position);
+        }
     }
 
     public List<Vector3> calculatePoints(TerritroyReaded starter)
     {
-        List<Vector3> points = new List<Vector3>();
+        LinkedList<Vector3> points = new LinkedList<Vector3>();
         TerritroyReaded aktual = starter;
-        //Debug.Log($"{starter.GetCordinats()} a {_selectedCharacter.ActualTerritory.GetCordinats()}: {(starter.GetCordinats() - _selectedCharacter.ActualTerritory.GetCordinats())}");
+        TerritroyReaded previus = null;
         Vector3 sub = CharacterMovemovent.BIGVECTOR;
-        string debug = string.Empty;
         while(true)
         {
             var next = _objectsCalculated[aktual];
@@ -150,58 +203,21 @@ public class CharacterMovemovent : MonoBehaviour
                 var ifSub = sub - newSub;
                 if (!((ifSub.x == 0f && ifSub.y == 0f) || (ifSub.x == 0f && ifSub.z == 0f) || (ifSub.y == 0f && ifSub.z == 0f)))
                 {
-                    debug += aktual.Index + "\n";
-                    //if()
+                    if (TerritroyReaded.DetectSampleShelters(next, previus))
+                    {
+                        points.AddFirst(aktual.GetCordinats());
+                    }
                 }
             }
+            previus = aktual;
             sub = newSub;
                 
             aktual = next;
 
         }
-        Debug.Log(debug);
 
-       /* while(aktual != _selectedCharacter.ActualTerritory)
-        {
-            bool newPoint = false;
-            var sub = starter.GetCordinats() - _selectedCharacter.ActualTerritory.GetCordinats();
-            TerritroyReaded newAktual = aktual;
-            if (sub.x < 0)
-            {
-                newAktual = GameManagerMap.Instance.Map[aktual.IndexBottom.First()];
-            } else if(sub.x > 0)
-            {
-                newAktual = GameManagerMap.Instance.Map[aktual.IndexFront.First()];
-            }
-
-            if (!_objectsCalculated.Contains(newAktual))
-                newPoint = true;
-
-
-            if (sub.y < 0)
-            {
-                newAktual = GameManagerMap.Instance.Map[aktual.IndexLeft.First()];
-            }
-            else if(sub.y > 0)
-            {
-                newAktual = GameManagerMap.Instance.Map[aktual.IndexRight.First()];
-            }
-
-            if (!_objectsCalculated.Contains(newAktual))
-            {
-                if(newPoint == false)
-                {
-
-                    newPoint = true;
-                }
-                else
-                {
-
-                }
-            }
-        }
-       */
-        return points;
+        points.AddFirst(_selectedCharacter.ActualTerritory.GetCordinats()); //first is player
+        return points.ToList();
     }
 
 
@@ -212,7 +228,6 @@ public class CharacterMovemovent : MonoBehaviour
         Stack<(TerritroyReaded orig, TerritroyReaded previus)> notCalculatedYet = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>();
         Stack<(TerritroyReaded orig, TerritroyReaded previus)> nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>();
 
-        // actual = SelectedCharacter.ActualTerritory;
         nextCalculated.Push((_selectedCharacter.ActualTerritory, null));
 
         for (int i = 0; i <= _countMove;i++)

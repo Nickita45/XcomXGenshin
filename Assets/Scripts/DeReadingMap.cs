@@ -49,7 +49,6 @@ public class DeReadingMap : MonoBehaviour
                 obj.GetComponent<CharacterInfo>().ActualTerritory = item;
             }
         }
-        //_matrixMap.DebugToConsole();
         GameManagerMap.Instance.Map = _matrixMap;
     }
 
