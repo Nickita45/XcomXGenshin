@@ -4,9 +4,11 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[System.Serializable]
 public class MatrixMap 
 {
     public Dictionary<string, TerritroyReaded> _vertex = new Dictionary<string, TerritroyReaded>();
+    public int wight, height;
 
     public TerritroyReaded AddVertex(TerritroyReaded ter)
     {

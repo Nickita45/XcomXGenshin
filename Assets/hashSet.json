@@ -6762,5 +6762,7 @@
       "PathPrefab": null,
       "TerritoryInfo": 2
     }
-  }
+  },
+  "wight": 10,
+  "height": 3
 }

@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 public class TerritroyReaded
 {
@@ -39,6 +41,15 @@ public class TerritroyReaded
 
     public IEnumerator<string> GetEnumerator()
     {
+        foreach (var item in IndexBottom)
+        {
+            yield return item;
+        }
+
+        foreach (var item in IndexFront)
+        {
+            yield return item;
+        }
         foreach (var item in IndexLeft)
         {
             yield return item;
@@ -49,14 +60,30 @@ public class TerritroyReaded
             yield return item;
         }
 
-        foreach (var item in IndexBottom)
+        
+    }
+
+    public static bool DetectSampleShelters(TerritroyReaded first, TerritroyReaded second)
+    {
+        HashSet<TerritroyReaded> allSheltersFirst = new HashSet<TerritroyReaded>();
+        
+        foreach (var item in first)
         {
-            yield return item;
+            TerritroyReaded itemTerritory = GameManagerMap.Instance.Map[item];
+            if (itemTerritory.TerritoryInfo == TerritoryType.Shelter)
+            {
+                allSheltersFirst.Add(itemTerritory);
+            }
         }
 
-        foreach (var item in IndexFront)
+        foreach (var item in second)
         {
-            yield return item;
+            TerritroyReaded itemTerritory = GameManagerMap.Instance.Map[item];
+            if (itemTerritory.TerritoryInfo == TerritoryType.Shelter && allSheltersFirst.Contains(itemTerritory))
+            {
+                return true;
+            }
         }
+        return false;
     }
 }
