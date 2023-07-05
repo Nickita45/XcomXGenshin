@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 public class MatrixMap 
 {
     public Dictionary<string, TerritroyReaded> _vertex = new Dictionary<string, TerritroyReaded>();
-    public int wight, height;
+    public int width, height;
 
     public TerritroyReaded AddVertex(TerritroyReaded ter)
     {

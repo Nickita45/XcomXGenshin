@@ -74,8 +74,8 @@ public class ReadingMap : MonoBehaviour
                     AddNewTerritory(vector);
                 }
 
-                if(countHeightOrWeight > _matrixMap.wight)
-                    _matrixMap.wight = countHeightOrWeight;
+                if(countHeightOrWeight > _matrixMap.width)
+                    _matrixMap.width = countHeightOrWeight;
             }
             else
             {
