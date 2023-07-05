@@ -1,9 +1,13 @@
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using static UnityEngine.UI.Image;
 
 public class CharacterMovemovent : MonoBehaviour
 {
@@ -66,7 +70,9 @@ public class CharacterMovemovent : MonoBehaviour
                 {
                     _selectedCharacter.SetCordintasToMover(detectTerritory.GetCordinats() + GameManagerMap.Instance.MainParent.transform.position - new Vector3(0, 0.5f, 0));
                     var list = calculatePoints(detectTerritory);
-                    list.Add(detectTerritory.GetCordinats());
+                    if(!list.Contains(detectTerritory.GetCordinats()))
+                        list.Add(detectTerritory.GetCordinats());
+                    
                     DrawLine(list);
 
                     if (Input.GetMouseButton(0) && !_selectedCharacter.isAktualTerritory(detectTerritory))
@@ -152,7 +158,6 @@ public class CharacterMovemovent : MonoBehaviour
 
         while(true)
         {
-            Debug.Log(target);
             while (elapsedTime < 1f)
             {
                 _selectedCharacter.gameObject.transform.localPosition = Vector3.Lerp(startPosition, target, elapsedTime);
@@ -185,40 +190,111 @@ public class CharacterMovemovent : MonoBehaviour
         }
     }
 
+
+
+
     public List<Vector3> calculatePoints(TerritroyReaded starter)
     {
-        LinkedList<Vector3> points = new LinkedList<Vector3>();
+        Dictionary<Vector3, int> paths = new Dictionary<Vector3, int>(); //index from high to below
         TerritroyReaded aktual = starter;
-        TerritroyReaded previus = null;
-        Vector3 sub = CharacterMovemovent.BIGVECTOR;
-        while(true)
+        int indexes = 0;
+        while (aktual != null)
         {
-            var next = _objectsCalculated[aktual];
-            if (next == null)
-                break;
-            
-            var newSub = aktual.GetCordinats() - next.GetCordinats();
-            if(sub != CharacterMovemovent.BIGVECTOR)
+            paths.Add(aktual.GetCordinats(), indexes++);
+            aktual = _objectsCalculated[aktual];
+        }
+        Vector3 targetPosition = starter.GetCordinats() + GameManagerMap.Instance.MainParent.transform.position - _selectedCharacter.transform.position;
+        RaycastHit[] hits = Physics.RaycastAll(_selectedCharacter.transform.position, targetPosition, paths.Count - 2);
+        Debug.DrawRay(_selectedCharacter.transform.position, targetPosition, Color.red);
+
+        Dictionary<Vector3, int> nextPaths = new Dictionary<Vector3, int>();
+
+        foreach (RaycastHit hit in hits)
+        {
+            GameObject hitObject = hit.collider.gameObject;
+            if (!hitObject.GetComponent<TerritoryInfo>())
             {
-                var ifSub = sub - newSub;
-                if (!((ifSub.x == 0f && ifSub.y == 0f) || (ifSub.x == 0f && ifSub.z == 0f) || (ifSub.y == 0f && ifSub.z == 0f)))
+                continue;
+            }
+            TerritroyReaded finded = GameManagerMap.Instance.Map[hitObject.transform.localPosition];
+            foreach (var item in finded)
+            {
+                TerritroyReaded detectedItem = GameManagerMap.Instance.Map[item];
+
+                if (!paths.Keys.Contains(detectedItem.GetCordinats()))
                 {
-                    if (TerritroyReaded.DetectSampleShelters(next, previus))
+                    continue;
+                }
+
+                if (paths.Keys.Contains(detectedItem.GetCordinats()) && !nextPaths.Keys.Contains(detectedItem.GetCordinats()) )
+                {
+                    nextPaths.Add(detectedItem.GetCordinats(), paths[detectedItem.GetCordinats()]);
+                }
+                
+
+                foreach (var nextItem in detectedItem)
+                {
+                    TerritroyReaded nextDetectedItem = GameManagerMap.Instance.Map[nextItem];
+
+                    if (nextDetectedItem == starter)
                     {
-                        points.AddFirst(aktual.GetCordinats());
+//                        continue;
+                    }
+
+                    if (paths.Keys.Contains(nextDetectedItem.GetCordinats()) && !nextPaths.Keys.Contains(nextDetectedItem.GetCordinats()))
+                    {
+                        nextPaths.Add(nextDetectedItem.GetCordinats(), paths[nextDetectedItem.GetCordinats()]);
                     }
                 }
+
             }
-            previus = aktual;
-            sub = newSub;
-                
-            aktual = next;
 
         }
 
-        points.AddFirst(_selectedCharacter.ActualTerritory.GetCordinats()); //first is player
-        return points.ToList();
-    }
+        Vector3[] finalCordinats = new Vector3[indexes];
+        Array.Fill(finalCordinats, BIGVECTOR);
+
+        finalCordinats[indexes-1] = _selectedCharacter.transform.localPosition;
+        foreach (var item in nextPaths)
+        {
+            finalCordinats[item.Value] = item.Key;
+        }
+
+        var endList = finalCordinats.Where(n => n != BIGVECTOR).Distinct().Reverse().ToList();
+        
+        return endList;
+            /*LinkedList<Vector3> points = new LinkedList<Vector3>();
+            TerritroyReaded aktual = starter;
+            TerritroyReaded previus = null;
+            Vector3 sub = CharacterMovemovent.BIGVECTOR;
+            while(true)
+            {
+                var next = _objectsCalculated[aktual];
+                if (next == null)
+                    break;
+
+                var newSub = aktual.GetCordinats() - next.GetCordinats();
+                if(sub != CharacterMovemovent.BIGVECTOR)
+                {
+                    var ifSub = sub - newSub;
+                    if (!((ifSub.x == 0f && ifSub.y == 0f) || (ifSub.x == 0f && ifSub.z == 0f) || (ifSub.y == 0f && ifSub.z == 0f)))
+                    {
+                        if (TerritroyReaded.DetectSampleShelters(next, previus))
+                        {
+                            points.AddFirst(aktual.GetCordinats());
+                        }
+                    }
+                }
+                previus = aktual;
+                sub = newSub;
+
+                aktual = next;
+
+            }
+
+            points.AddFirst(_selectedCharacter.ActualTerritory.GetCordinats()); //first is player
+            return points.ToList();*/
+        }
 
 
     public Dictionary<TerritroyReaded, TerritroyReaded> CalculateAllPossible()
