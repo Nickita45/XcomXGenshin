@@ -44,36 +44,35 @@ public class CameraController : MonoBehaviour
 
         movement = _cameraParent.transform.TransformDirection(movement);
         Vector3 newPosition = mainObject.transform.position + movement;
-    
+
         // Check if the new position is within the boundary
-        if (IsWithinBoundary(newPosition))
-        {
-            mainObject.transform.position = newPosition;
-        }
-        
+        IsWithinBoundary(ref newPosition);
+        mainObject.transform.position = newPosition;
+
     }
-    private bool IsWithinBoundary(Vector3 position)
+    private void IsWithinBoundary(ref Vector3 position)
     {
         // Making the width more distance to working camera 
-        float widthValuePlus = 3f;
+        float widthValuePlus = 8f;
         // Define the center and width of the boundary
         Vector3 boundaryCenter = GameManagerMap.Instance.MainParent.transform.position;
-        boundaryCenter.x += 5;
         float boundaryWidth = GameManagerMap.Instance.Map.width + widthValuePlus;
 
         // Calculate the minimum and maximum values for the x and z coordinates of the boundary
-        float minX = boundaryCenter.x - boundaryWidth / 2f;
-        float maxX = boundaryCenter.x + boundaryWidth / 2f;
-        float minZ = boundaryCenter.z - boundaryWidth / 2f;
-        float maxZ = boundaryCenter.z + boundaryWidth / 2f;
-
+        (float minX, float maxX, float minZ, float maxZ) maxPos = (boundaryCenter.x - boundaryWidth / 2 , boundaryCenter.x + boundaryWidth ,
+                                                                    boundaryCenter.z - boundaryWidth , boundaryCenter.z + boundaryWidth );
         // Check if the position is within the boundary
-        if (position.x >= minX && position.x <= maxX && position.z >= minZ && position.z <= maxZ)
+        if (position.x < maxPos.minX || position.x > maxPos.maxX)
         {
-            return true;
+            position.x = mainObject.transform.position.x;
         }
 
-        return false;
+        if(position.z < maxPos.minZ || position.z > maxPos.maxZ)
+        {
+            position.z = mainObject.transform.position.z;
+        }
+
+        
     }
     private void HandleRotationInput(KeyCode keyCode, float angle)
     {

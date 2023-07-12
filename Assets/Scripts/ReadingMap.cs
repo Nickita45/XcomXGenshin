@@ -16,6 +16,8 @@ public class ReadingMap : MonoBehaviour
     private GameObject _objectDetecterPrefab;
     [SerializeField]
     private Transform _startTransform;
+    [SerializeField]
+    private string _fileName;
 
     private GameObject _objectDetect;
     private GameObject _aktualGameObject;
@@ -216,7 +218,7 @@ public class ReadingMap : MonoBehaviour
         Debug.Log(jsonText);
         
         
-        string filePath = Application.dataPath + "/hashSet.json";
+        string filePath = Application.dataPath + _fileName;
         System.IO.File.WriteAllText(filePath, jsonText);
     }
 }
