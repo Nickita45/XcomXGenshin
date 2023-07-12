@@ -21,15 +21,18 @@ public class DeReadingMap : MonoBehaviour
 
     private void DeSerelizete()
     {
-        string filePath = Application.dataPath + _path;
-        if (!File.Exists(filePath))
+        //string filePath = Application.dataPath + _path;
+        TextAsset json = Resources.Load<TextAsset>(_path);
+        string filePath = json.ToString();
+       // Debug.Log(filePath);
+        //if (!File.Exists(filePath))
         {
-            return;
+       //     return;
         }
 
-        string jsonContent = File.ReadAllText(filePath);
-        string jsonFile = jsonContent.ToString();
-        MatrixMap _matrixMap = JsonConvert.DeserializeObject<MatrixMap>(jsonFile);
+      //  string jsonContent = File.ReadAllText(filePath);
+      //  string jsonFile = jsonContent.ToString();
+        MatrixMap _matrixMap = JsonConvert.DeserializeObject<MatrixMap>(filePath);
     
         foreach(var item in _matrixMap)
         {

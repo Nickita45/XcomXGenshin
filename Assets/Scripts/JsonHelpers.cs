@@ -59,8 +59,8 @@ public class TerritroyReaded
         {
             yield return item;
         }
-       
 
+       
     }
 
     public static bool DetectSampleShelters(TerritroyReaded first, TerritroyReaded second)
