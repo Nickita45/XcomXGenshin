@@ -18,18 +18,25 @@ public class CameraController : MonoBehaviour
     private float _speed = 5f;
     [SerializeField]
     private float _speedRotation = 5f;
+    [SerializeField]
+    private float _speedZoom = 60f;
 
     private bool _isRotating = false;
 
     private bool _isMoving = false;
-    private Vector2 _target;
+    private Vector2 _targetMove;
+
+    private float _zoom = 1f;
+    [SerializeField]
+    private float _zoomMin = 2.27f;
+    [SerializeField]
+    private float _zoomMax = 20.8f;
 
     private Quaternion _targetRotation;
     private readonly Vector3 rotationAxis = Vector3.up;
 
     private void Start()
     {
-
         //ChangePositionForCamera();
     }
 
@@ -46,7 +53,9 @@ public class CameraController : MonoBehaviour
             HandleMovementInput();
             HandleRotationInput(KeyCode.E, -90f);
             HandleRotationInput(KeyCode.Q, 90f);
+            HandleZoomInput();
         }
+        HandleZoom();
         HandleRotation();
     }
 
@@ -66,10 +75,10 @@ public class CameraController : MonoBehaviour
 
         // Move the projected point to the target
         Vector2 projected2D = new(projected.x, projected.z);
-        projected2D = Vector2.MoveTowards(projected2D, _target, _speed * Time.deltaTime * 4);
+        projected2D = Vector2.MoveTowards(projected2D, _targetMove, _speed * Time.deltaTime * 4);
 
         // Stop moving if reached the target
-        if (Vector2.Distance(projected2D, _target) < 0.0001f) _isMoving = false;
+        if (Vector2.Distance(projected2D, _targetMove) < 0.0001f) _isMoving = false;
 
         // Convert back to the camera position and move
         (projected.x, projected.z) = (projected2D.x, projected2D.y);
@@ -144,6 +153,38 @@ public class CameraController : MonoBehaviour
             }
         }
     }
+
+    private void HandleZoom()
+    {
+
+        // Find the difference vector between the projected point
+        // and the camera position (assuming the camera angle is 45 degrees)
+        Vector3 diff = GetVectorFromCameraToProjectedPoint(_mainObject.transform.position);
+
+        // Find the coordinates of the projected point
+        Vector3 projected = _mainObject.transform.position + diff;
+
+        // Find the target position after zoom
+        Vector3 target = projected - _camera.transform.forward * _zoom;
+
+        Debug.Log(_zoom + ": " + _mainObject.transform.position.ToString() + " -> " + target.ToString() + " <(" + projected + ")");
+
+        // Move to the target position
+        if (Vector3.Distance(_mainObject.transform.position, target) > 0.001f)
+        {
+            Vector3 newPosition = Vector3.MoveTowards(_mainObject.transform.position, target, _speedZoom * Time.deltaTime);
+            _mainObject.transform.position = newPosition;
+        }
+    }
+
+    private void HandleZoomInput()
+    {
+        float input = -Input.mouseScrollDelta.y;
+        _zoom += input * _speedZoom * 2 * Time.deltaTime;
+        if (_zoom < _zoomMin) _zoom = _zoomMin;
+        else if (_zoom > _zoomMax) _zoom = _zoomMax;
+    }
+
     /*public void ChangePositionForCamera()
     {
         Vector3 newPositionForRotate = _targetObject.position - _camera.transform.forward * Vector3.Distance(_targetObject.position, _camera.transform.position);
@@ -160,7 +201,7 @@ public class CameraController : MonoBehaviour
             _isMoving = true;
 
             Vector3 targetPosition = selectedCharacter.gameObject.transform.position;
-            _target = new(targetPosition.x, targetPosition.z);
+            _targetMove = new(targetPosition.x, targetPosition.z);
         }
     }
 }
