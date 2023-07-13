@@ -1,16 +1,9 @@
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.GraphicsBuffer;
-using static UnityEngine.UI.Image;
 
 public class CharacterMovemovent : MonoBehaviour
 {
@@ -31,7 +24,7 @@ public class CharacterMovemovent : MonoBehaviour
     private CharacterInfo _selectedCharacter;
 
     private (TerritroyReaded aktualTerritoryReaded, List<Vector3> path) _aktualTerritory;
-    //private HashSet<TerritroyReaded> _objectsCalculated;
+
     private Dictionary<TerritroyReaded, TerritroyReaded> _objectsCalculated; //orig, previous
 
     public int CountMoveCharacter { get => _countMove; set => _countMove = value; }
@@ -73,7 +66,8 @@ public class CharacterMovemovent : MonoBehaviour
             {
                 
 
-                if (_objectsCalculated.Keys.Contains(detectTerritory) && detectTerritory.TerritoryInfo != TerritoryType.Shelter && detectTerritory.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground).Count() == 1)
+                if (_objectsCalculated.ContainsKey(detectTerritory) && detectTerritory.TerritoryInfo != TerritoryType.Shelter 
+                    && detectTerritory.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground).Count() == 1)
                 {
                     if (detectTerritory != _aktualTerritory.aktualTerritoryReaded)
                     {
@@ -286,7 +280,7 @@ public class CharacterMovemovent : MonoBehaviour
                 {
                     TerritroyReaded newFinded = territoryes.Pop();
                     alreadyFinded.Add(newFinded);
-                    Debug.Log(newFinded);
+
                     foreach (var item in newFinded)
                     {
                         TerritroyReaded detectItem = GameManagerMap.Instance.Map[item];
@@ -313,7 +307,6 @@ public class CharacterMovemovent : MonoBehaviour
                             }
                         } else
                         {
-                            //if(!newTerritoryes.Contains(detectItem))
                             newTerritoryes.Push(detectItem);
                         }
                     }
@@ -393,7 +386,9 @@ public class CharacterMovemovent : MonoBehaviour
                     var detectItem = GameManagerMap.Instance.Map[item];
 
                     
-                    if (detectItem.TerritoryInfo == TerritoryType.Shelter)
+                    if (detectItem.TerritoryInfo == TerritoryType.Shelter || 
+                        detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air || 
+                        GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Shelter).Count() > 0)
                         continue;
 
                     if (objectsCalculated.ContainsKey(detectItem) || already.Contains(detectItem))
