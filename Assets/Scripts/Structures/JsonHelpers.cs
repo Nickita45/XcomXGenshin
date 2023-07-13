@@ -63,7 +63,7 @@ public class TerritroyReaded
        
     }
 
-    public static bool DetectSampleShelters(TerritroyReaded first, TerritroyReaded second)
+    /*public static bool DetectSampleShelters(TerritroyReaded first, TerritroyReaded second)
     {
         HashSet<TerritroyReaded> allSheltersFirst = new HashSet<TerritroyReaded>();
         
@@ -85,7 +85,7 @@ public class TerritroyReaded
             }
         }
         return false;
-    }
+    }*/
 
     public override string ToString() => $"({Index})";
 }

@@ -218,8 +218,8 @@ public class ReadingMap : MonoBehaviour
         Debug.Log(jsonText);
         
         
-        string filePath = Application.dataPath + _fileName;
-        System.IO.File.WriteAllText(filePath, jsonText);
+        string filePath = Application.dataPath + "/Resources" + _fileName;
+        System.IO.File.WriteAllText(filePath, jsonText); 
     }
 }
 
