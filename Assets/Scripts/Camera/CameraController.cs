@@ -167,8 +167,6 @@ public class CameraController : MonoBehaviour
         // Find the target position after zoom
         Vector3 target = projected - _camera.transform.forward * _zoom;
 
-        Debug.Log(_zoom + ": " + _mainObject.transform.position.ToString() + " -> " + target.ToString() + " <(" + projected + ")");
-
         // Move to the target position
         if (Vector3.Distance(_mainObject.transform.position, target) > 0.001f)
         {
