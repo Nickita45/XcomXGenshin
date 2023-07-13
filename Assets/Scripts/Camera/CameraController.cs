@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float _speed = 5f;
     [SerializeField]
-    private float _speedRotation = 5f;
+    private float _speedRotation = 150;
     [SerializeField]
     private float _speedZoom = 60f;
 
@@ -51,8 +51,8 @@ public class CameraController : MonoBehaviour
         else
         {
             HandleMovementInput();
-            HandleRotationInput(KeyCode.E, -90f);
-            HandleRotationInput(KeyCode.Q, 90f);
+            HandleRotationInput(KeyCode.E, 90f);
+            HandleRotationInput(KeyCode.Q, -90f);
             HandleZoomInput();
         }
         HandleZoom();
