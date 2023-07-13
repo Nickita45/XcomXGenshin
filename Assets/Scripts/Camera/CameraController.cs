@@ -20,20 +20,60 @@ public class CameraController : MonoBehaviour
     private float _speedRotation = 5f;
 
     private bool _isRotating = false;
+
+    private bool _isMoving = false;
+    private Vector2 _target;
+
     private Quaternion _targetRotation;
     private readonly Vector3 rotationAxis = Vector3.up;
 
     private void Start()
     {
+
         //ChangePositionForCamera();
     }
 
     private void Update()
     {
-        HandleMovementInput();
-        HandleRotationInput(KeyCode.E, -90f);
-        HandleRotationInput(KeyCode.Q, 90f);
+        // Automatic movement
+        if (_isMoving)
+        {
+            HandleMovement();
+        }
+        // Manual movement
+        else
+        {
+            HandleMovementInput();
+            HandleRotationInput(KeyCode.E, -90f);
+            HandleRotationInput(KeyCode.Q, 90f);
+        }
         HandleRotation();
+    }
+
+    // Find vector difference between the world coordinates at the center of the screen
+    // and the camera position (assuming the camera angle is 45 degrees)
+    private Vector3 GetVectorFromCameraToProjectedPoint(Vector3 position)
+    {
+        float cameraHeight = position.y - transform.position.y;
+        return _camera.transform.forward * cameraHeight * Mathf.Sqrt(2);
+    }
+
+    private void HandleMovement()
+    {
+        // Get the projected point (the center of the screen)
+        Vector3 diff = GetVectorFromCameraToProjectedPoint(_mainObject.transform.position);
+        Vector3 projected = _mainObject.transform.position + diff;
+
+        // Move the projected point to the target
+        Vector2 projected2D = new(projected.x, projected.z);
+        projected2D = Vector2.MoveTowards(projected2D, _target, _speed * Time.deltaTime * 4);
+
+        // Stop moving if reached the target
+        if (Vector2.Distance(projected2D, _target) < 0.0001f) _isMoving = false;
+
+        // Convert back to the camera position and move
+        (projected.x, projected.z) = (projected2D.x, projected2D.y);
+        _mainObject.transform.position = projected - diff;
     }
 
     private void HandleMovementInput()
@@ -58,7 +98,7 @@ public class CameraController : MonoBehaviour
 
         // Find the difference vector between the projected point
         // and the camera position (assuming the camera angle is 45 degrees)
-        Vector3 diff = _camera.transform.forward * cameraHeight * Mathf.Sqrt(2);
+        Vector3 diff = GetVectorFromCameraToProjectedPoint(position);
 
         // Find the coordinates of the projected point
         Vector3 projected = position + diff;
@@ -110,4 +150,17 @@ public class CameraController : MonoBehaviour
         newPositionForRotate.y = _cameraParent.transform.position.y;
         _cameraParent.transform.position = newPositionForRotate;
     }*/
+
+    public void MoveToPlayer()
+    {
+        CharacterInfo selectedCharacter = GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter;
+        // Only start moving if there is a selected character
+        if (selectedCharacter != null)
+        {
+            _isMoving = true;
+
+            Vector3 targetPosition = selectedCharacter.gameObject.transform.position;
+            _target = new(targetPosition.x, targetPosition.z);
+        }
+    }
 }

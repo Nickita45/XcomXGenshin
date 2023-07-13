@@ -30,6 +30,8 @@ public class CharacterMovemovent : MonoBehaviour
     public int CountMoveCharacter { get => _countMove; set => _countMove = value; }
     public float SpeedCharacter { get => _speed; set => _speed = value; }
 
+    public CharacterInfo SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
+
     private void Start()
     {
         _lineRenderer.gameObject.SetActive(false);
@@ -42,11 +44,11 @@ public class CharacterMovemovent : MonoBehaviour
         }
 
 
-        if(Input.GetKey(KeyCode.K))
+        if (Input.GetKey(KeyCode.K))
         {
             var test = CalculateAllPossible();
             Debug.Log(test.Count);
-           
+
         }
     }
 
@@ -64,9 +66,9 @@ public class CharacterMovemovent : MonoBehaviour
             if (GameManagerMap.Instance.Map.ContainsVertexByPox(cordinats, out detectTerritory) ||
                 GameManagerMap.Instance.Map.ContainsVertexByPox(cordinats + new Vector3(0.5f, 0.5f, 0.5f), out detectTerritory))
             {
-                
 
-                if (_objectsCalculated.ContainsKey(detectTerritory) && detectTerritory.TerritoryInfo != TerritoryType.Shelter 
+
+                if (_objectsCalculated.ContainsKey(detectTerritory) && detectTerritory.TerritoryInfo != TerritoryType.Shelter
                     && detectTerritory.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground).Count() == 1)
                 {
                     if (detectTerritory != _aktualTerritory.aktualTerritoryReaded)
@@ -75,7 +77,7 @@ public class CharacterMovemovent : MonoBehaviour
 
                         _selectedCharacter.SetCordintasToMover(detectTerritory.GetCordinats() + GameManagerMap.Instance.MainParent.transform.position - new Vector3(0, 0.5f, 0));
                         _aktualTerritory.path = calculateAllPath(detectTerritory);//calculatePoints(detectTerritory, _selectedCharacter.transform.localPosition);//
-                                                                      //var list = calculatePoints(detectTerritory, _selectedCharacter.transform.localPosition);//calculatePoints(detectTerritory, _selectedCharacter.transform.localPosition);//
+                                                                                  //var list = calculatePoints(detectTerritory, _selectedCharacter.transform.localPosition);//calculatePoints(detectTerritory, _selectedCharacter.transform.localPosition);//
                         DrawLine(_aktualTerritory.path);
 
                     }
@@ -83,11 +85,11 @@ public class CharacterMovemovent : MonoBehaviour
                     if (Input.GetMouseButtonDown(0) && !_selectedCharacter.isAktualTerritory(_aktualTerritory.aktualTerritoryReaded))
                     {
                         StartCoroutine(CoroutineNewPositionCharacter(_aktualTerritory.aktualTerritoryReaded, _aktualTerritory.path));
-                        
+
                     }
                 }
             }
-           
+
         }
     }
 
@@ -118,7 +120,7 @@ public class CharacterMovemovent : MonoBehaviour
         _objectsCalculated.Clear();
         foreach (Transform item in GameManagerMap.Instance.GenereteTerritoryMove.transform)
         {
-            Destroy(item.gameObject);   
+            Destroy(item.gameObject);
         }
     }
 
@@ -147,7 +149,7 @@ public class CharacterMovemovent : MonoBehaviour
 
             elapsedTime += Time.deltaTime * _speed;
 
-            yield return null; 
+            yield return null;
         }
 
         _selectedCharacter.gameObject.transform.localPosition = target;
@@ -155,21 +157,21 @@ public class CharacterMovemovent : MonoBehaviour
 
     private IEnumerator CoroutineMove(List<Vector3> targets)
     {
-        Vector3 startPosition = _selectedCharacter.gameObject.transform.localPosition; 
+        Vector3 startPosition = _selectedCharacter.gameObject.transform.localPosition;
 
         float elapsedTime = 0f;
         int index = 0;
         Vector3 target = targets[++index]; //ignore first, becouse its for line
 
-        while(true)
+        while (true)
         {
             while (elapsedTime < 1f)
             {
                 _selectedCharacter.gameObject.transform.localPosition = Vector3.Lerp(startPosition, target, elapsedTime);
 
-                elapsedTime += Time.deltaTime * _speed; 
+                elapsedTime += Time.deltaTime * _speed;
 
-                yield return null; 
+                yield return null;
             }
             _selectedCharacter.gameObject.transform.localPosition = target;
             startPosition = _selectedCharacter.gameObject.transform.localPosition;
@@ -186,7 +188,7 @@ public class CharacterMovemovent : MonoBehaviour
 
     private void DrawLine(List<Vector3> points)
     {
-        
+
         _lineRenderer.positionCount = points.Count;
 
         for (int i = 0; i < points.Count; i++)
@@ -208,7 +210,7 @@ public class CharacterMovemovent : MonoBehaviour
         while (true)
         {
             List<Vector3> newPath = new List<Vector3>();
-            for(int i = 0; i < path.Count - 1;i++)
+            for (int i = 0; i < path.Count - 1; i++)
             {
                 var iList = calculatePoints(GameManagerMap.Instance.Map[path[i + 1]], path[i]);
                 newPath.AddRange(iList);
@@ -219,7 +221,7 @@ public class CharacterMovemovent : MonoBehaviour
                 break;
 
             path.Clear();
-            foreach(var i in newPath)
+            foreach (var i in newPath)
             {
                 path.Add(i);
             }
@@ -232,7 +234,7 @@ public class CharacterMovemovent : MonoBehaviour
         Vector3[] finalCordinats = new Vector3[indexes];
         Array.Fill(finalCordinats, BIGVECTOR);
 
-        if(path.Count == 0)
+        if (path.Count == 0)
         {
             return path;
         }
@@ -247,7 +249,7 @@ public class CharacterMovemovent : MonoBehaviour
         var endList = finalCordinats.Where(n => n != BIGVECTOR).Distinct().Reverse().ToList();
 
         return endList;
-    } 
+    }
 
     public List<Vector3> calculatePoints(TerritroyReaded starter, Vector3 firstVector)
     {
@@ -271,7 +273,7 @@ public class CharacterMovemovent : MonoBehaviour
             Stack<TerritroyReaded> territoryes = new Stack<TerritroyReaded>();
             HashSet<TerritroyReaded> alreadyFinded = new HashSet<TerritroyReaded>();
             territoryes.Push(finded);
-            
+
             bool doesFindSomething = false;
             while (true)
             {
@@ -305,13 +307,14 @@ public class CharacterMovemovent : MonoBehaviour
                                     nextPaths.Add(nextDetectedItem.GetCordinats(), paths[nextDetectedItem.GetCordinats()]);
                                 }
                             }
-                        } else
+                        }
+                        else
                         {
                             newTerritoryes.Push(detectItem);
                         }
                     }
 
- 
+
                     if (doesFindSomething || territoryes.Count == 0)
                         break;
 
@@ -324,7 +327,7 @@ public class CharacterMovemovent : MonoBehaviour
                 {
                     territoryes.Push(newTerritoryes.Pop());
                 }
-               
+
             }
 
         }
@@ -339,7 +342,7 @@ public class CharacterMovemovent : MonoBehaviour
         }
 
         var endList = finalCordinats.Where(n => n != BIGVECTOR).Distinct().Reverse().ToList();
-        if(!endList.Contains(starter.GetCordinats()))
+        if (!endList.Contains(starter.GetCordinats()))
         {
             endList.Add(starter.GetCordinats());
         }
@@ -364,12 +367,12 @@ public class CharacterMovemovent : MonoBehaviour
     public Dictionary<TerritroyReaded, TerritroyReaded> CalculateAllPossible()
     {
         Dictionary<TerritroyReaded, TerritroyReaded> objectsCalculated = new Dictionary<TerritroyReaded, TerritroyReaded>();
-        
+
         Stack<(TerritroyReaded orig, TerritroyReaded previus)> notCalculatedYet = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>();
         Stack<(TerritroyReaded orig, TerritroyReaded previus)> nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>();
         nextCalculated.Push((_selectedCharacter.ActualTerritory, null));
 
-        for (int i = 0; i <= _countMove;i++)
+        for (int i = 0; i <= _countMove; i++)
         {
             HashSet<TerritroyReaded> already = new HashSet<TerritroyReaded>();
             while (nextCalculated.Count > 0)
@@ -385,9 +388,9 @@ public class CharacterMovemovent : MonoBehaviour
 
                     var detectItem = GameManagerMap.Instance.Map[item];
 
-                    
-                    if (detectItem.TerritoryInfo == TerritoryType.Shelter || 
-                        detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air || 
+
+                    if (detectItem.TerritoryInfo == TerritoryType.Shelter ||
+                        detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air ||
                         GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Shelter).Count() > 0)
                         continue;
 
@@ -399,7 +402,7 @@ public class CharacterMovemovent : MonoBehaviour
                 }
             }
 
-            while(notCalculatedYet.Count > 0)
+            while (notCalculatedYet.Count > 0)
             {
                 nextCalculated.Push(notCalculatedYet.Pop());
             }
