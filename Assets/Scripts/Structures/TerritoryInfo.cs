@@ -10,7 +10,7 @@ public class TerritoryInfo : MonoBehaviour
     private string PathPrefab;
 
     public string Path => PathPrefab;
-    public TerritoryType Type => type;
+    public TerritoryType Type { get => type; set => type = value; }
 }
 
 public enum TerritoryType

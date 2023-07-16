@@ -652,7 +652,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 18.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2379,7 +2379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainObject: {fileID: 1775152536}
-  _path: testFirstLevel
+  _path: testFirstLevelSG
 --- !u!4 &1025817883
 Transform:
   m_ObjectHideFlags: 0
@@ -4076,7 +4076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _countMove: 30
-  _speed: 3
+  _speed: 10
   _prefabPossibleTerritory: {fileID: 367235445393243085, guid: 5350567c8f01e904098f662ca01a15f1, type: 3}
   _lineRenderer: {fileID: 606821813}
 --- !u!114 &1775152540

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class TerritroyReaded
 {
@@ -38,7 +39,7 @@ public class TerritroyReaded
     }
 
     public Vector3 GetCordinats() => new Vector3(XPosition, YPosition, ZPosition);
-
+    
     public IEnumerator<string> GetEnumerator()
     {
         foreach (var item in IndexBottom)
@@ -60,32 +61,51 @@ public class TerritroyReaded
             yield return item;
         }
 
-       
+        foreach (var item in IndexDown)
+        {
+            yield return item;
+        }
+
+        if (TerritoryInfo == TerritoryType.ShelterGround)
+        {
+            foreach (var item in IndexUp)
+            {
+                yield return item;
+            }
+
+        }
     }
 
-    /*public static bool DetectSampleShelters(TerritroyReaded first, TerritroyReaded second)
-    {
-        HashSet<TerritroyReaded> allSheltersFirst = new HashSet<TerritroyReaded>();
-        
-        foreach (var item in first)
-        {
-            TerritroyReaded itemTerritory = GameManagerMap.Instance.Map[item];
-            if (itemTerritory.TerritoryInfo == TerritoryType.Shelter)
-            {
-                allSheltersFirst.Add(itemTerritory);
-            }
-        }
 
-        foreach (var item in second)
+    public IEnumerable<string> GetEnumeratorByOne(string index)
+    {
+        if(IndexBottom.Any())
+        yield return IndexBottom.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault();
+
+        if (IndexFront.Any())
+            yield return IndexFront.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault();
+
+        if (IndexLeft.Any())
+            yield return IndexLeft.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault();
+        
+        if (IndexRight.Any())
+            yield return IndexRight.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault();
+
+        if (IndexDown.Any())
+            yield return IndexDown.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault();
+
+        if (TerritoryInfo == TerritoryType.ShelterGround && IndexUp.Any())
         {
-            TerritroyReaded itemTerritory = GameManagerMap.Instance.Map[item];
-            if (itemTerritory.TerritoryInfo == TerritoryType.Shelter && allSheltersFirst.Contains(itemTerritory))
-            {
-                return true;
-            }
+           yield return IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault();
         }
-        return false;
-    }*/
+    }
+
+    public static bool IsNotShelter(TerritroyReaded territory) => territory.TerritoryInfo != TerritoryType.ShelterGround && territory.TerritoryInfo != TerritoryType.Shelter;
+    public static Vector3 MakeVectorFromIndex(string index) => new Vector3(float.Parse(index.Split(ReadingMap.SPLITTER)[0]), 
+        float.Parse(index.Split(ReadingMap.SPLITTER)[1]), 
+        float.Parse(index.Split(ReadingMap.SPLITTER)[2]));
 
     public override string ToString() => $"({Index})";
+
+  
 }
