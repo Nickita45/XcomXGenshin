@@ -35,6 +35,8 @@ public class CharacterMovemovent : MonoBehaviour
     public int CountMoveCharacter { get => _countMove; set => _countMove = value; }
     public float SpeedCharacter { get => _speed; set => _speed = value; }
 
+    public CharacterInfo SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
+
     private void Start()
     {
         _lineRenderer.gameObject.SetActive(false);
@@ -45,7 +47,6 @@ public class CharacterMovemovent : MonoBehaviour
         {
             SpawnMover();
         }
-
     }
 
     private void SpawnMover() //Detect Territory to move
@@ -73,7 +74,6 @@ public class CharacterMovemovent : MonoBehaviour
                     + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
 
                 _aktualTerritory.path = calculateAllPath(detectTerritory); //actual path to selected territory
-
                 DrawLine(_aktualTerritory.path); //draw the line
 
             }
@@ -81,7 +81,6 @@ public class CharacterMovemovent : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && !_selectedCharacter.isAktualTerritory(_aktualTerritory.aktualTerritoryReaded))
             {
                 StartCoroutine(CoroutineNewPositionCharacter(_aktualTerritory.aktualTerritoryReaded, _aktualTerritory.path)); //make movement to person
-
             }
 
         }
@@ -146,8 +145,6 @@ public class CharacterMovemovent : MonoBehaviour
             {
                 elapsedTime = Time.deltaTime * _speed;
                 _selectedCharacter.gameObject.transform.localPosition = Vector3.MoveTowards(_selectedCharacter.gameObject.transform.localPosition, target, elapsedTime);
-
-
                 yield return null;
             }
             _selectedCharacter.gameObject.transform.localPosition = target;
@@ -185,6 +182,7 @@ public class CharacterMovemovent : MonoBehaviour
         {
             List<Vector3> newPath = new List<Vector3>();
             for (int i = 0; i < path.Count - 1; i++) //in this, we detect, if the between points exist shelters
+
             {
                 var iList = calculatePoints(GameManagerMap.Instance.Map[path[i + 1]], path[i]);
                 newPath.AddRange(iList);//if yes, we add them to list
@@ -276,7 +274,7 @@ public class CharacterMovemovent : MonoBehaviour
             GameObject hitObject = hit.collider.gameObject;
             if (!hitObject.GetComponent<TerritoryInfo>())
                 continue;
-            
+
             TerritroyReaded finded = GameManagerMap.Instance.Map[hitObject.transform.localPosition];//find hit territory
             Stack<TerritroyReaded> territoryes = new Stack<TerritroyReaded>(); //Stack for new territories, which we must detect
             HashSet<TerritroyReaded> alreadyFinded = new HashSet<TerritroyReaded>(); //This hashSet we use to optimation our future calculations
@@ -343,7 +341,7 @@ public class CharacterMovemovent : MonoBehaviour
         }
 
         var endList = finalCordinats.Where(n => n != BIGVECTOR).Distinct().Reverse().ToList();//clear from BIGVECTOR and reserve the array
-            endList.Add(starter.GetCordinats());
+        endList.Add(starter.GetCordinats());
         
         return endList;
 
