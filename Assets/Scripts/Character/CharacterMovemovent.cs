@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using TMPro;
 using Unity.VisualScripting;
@@ -11,6 +12,7 @@ using UnityEngine.UIElements;
 public class CharacterMovemovent : MonoBehaviour
 {
     public static readonly Vector3 BIGVECTOR = new Vector3(int.MaxValue, int.MaxValue, int.MaxValue);
+    public static readonly Vector3 POSITIONFORSPAWN = new Vector3(0, 0.5f, 0);
 
     [Header("Consts Test")]
     [SerializeField]
@@ -44,55 +46,42 @@ public class CharacterMovemovent : MonoBehaviour
             SpawnMover();
         }
 
-
-        if (Input.GetKey(KeyCode.K))
-        {
-            //var test = CalculateAllPossible();
-            //Debug.Log(test.Count);
-            Debug.Log(_objectsCalculated[GameManagerMap.Instance.Map["-5,5_1,5_-9,5"]]);
-            Debug.Log(_objectsCalculated[GameManagerMap.Instance.Map["-6_-0,07_-9,59"]]);
-        }
     }
 
-    private void SpawnMover()
+    private void SpawnMover() //Detect Territory to move
     {
         Vector3 mousePosition = Input.mousePosition;
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-        RaycastHit[] hits = Physics.RaycastAll(ray);
+        RaycastHit[] hits = Physics.RaycastAll(ray); //RayCast from Mouse
 
         if (hits.Count() > 0)
         {
-            var neededHits = hits.Where(n => n.collider.gameObject.tag == "PanelMovement");
+            var neededHits = hits.Where(n => n.collider.gameObject.tag == "PanelMovement"); //Detect hits only from Territory than can be moved to
             if (neededHits.Count() == 0)
-            {
                 return;
-            }
-            var hit = neededHits.First();
+
+            var hit = neededHits.FirstOrDefault(); //get First one
 
             TerritroyReaded detectTerritory;
+            detectTerritory = GameManagerMap.Instance.Map[hit.collider.gameObject.transform.localPosition + POSITIONFORSPAWN]; //get air territory
 
-            detectTerritory = GameManagerMap.Instance.Map[hit.collider.gameObject.transform.localPosition + new Vector3(0, 0.5f, 0)];
-            if (_objectsCalculated.ContainsKey(detectTerritory) && TerritroyReaded.IsNotShelter(detectTerritory)
-                && detectTerritory.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
-                GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0)
+            if (detectTerritory != _aktualTerritory.aktualTerritoryReaded) //if another territory detected
             {
-                if (detectTerritory != _aktualTerritory.aktualTerritoryReaded)
-                {
-                    _aktualTerritory.aktualTerritoryReaded = detectTerritory;
+                _aktualTerritory.aktualTerritoryReaded = detectTerritory;
 
-                    _selectedCharacter.SetCordintasToMover(detectTerritory.GetCordinats() + GameManagerMap.Instance.MainParent.transform.position - new Vector3(0, 0.5f, 0));
-                    _aktualTerritory.path = calculateAllPath(detectTerritory);//calculatePoints(detectTerritory, _selectedCharacter.transform.localPosition);//
-                                                                              //var list = calculatePoints(detectTerritory, _selectedCharacter.transform.localPosition);//calculatePoints(detectTerritory, _selectedCharacter.transform.localPosition);//
-                    DrawLine(_aktualTerritory.path);
-                    Debug.Log(string.Join(",", _aktualTerritory.path));
+                _selectedCharacter.SetCordintasToMover(detectTerritory.GetCordinats() 
+                    + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
 
-                }
+                _aktualTerritory.path = calculateAllPath(detectTerritory); //actual path to selected territory
 
-                if (Input.GetMouseButtonDown(0) && !_selectedCharacter.isAktualTerritory(_aktualTerritory.aktualTerritoryReaded))
-                {
-                    StartCoroutine(CoroutineNewPositionCharacter(_aktualTerritory.aktualTerritoryReaded, _aktualTerritory.path));
+                DrawLine(_aktualTerritory.path); //draw the line
 
-                }
+            }
+
+            if (Input.GetMouseButtonDown(0) && !_selectedCharacter.isAktualTerritory(_aktualTerritory.aktualTerritoryReaded))
+            {
+                StartCoroutine(CoroutineNewPositionCharacter(_aktualTerritory.aktualTerritoryReaded, _aktualTerritory.path)); //make movement to person
+
             }
 
         }
@@ -104,15 +93,15 @@ public class CharacterMovemovent : MonoBehaviour
 
         if (_selectedCharacter != null && _selectedCharacter != character)
         {
-            _selectedCharacter.OnDeselected();
+            _selectedCharacter.OnDeselected();//deselect other chracters
         }
         _selectedCharacter = character;
-        _objectsCalculated = CalculateAllPossible();
+        _objectsCalculated = CalculateAllPossible(_countMove); //algoritmus calculate all territories that player can move
 
         foreach (var item in _objectsCalculated.Keys)
         {
             var obj = Instantiate(_prefabPossibleTerritory, GameManagerMap.Instance.GenereteTerritoryMove.transform);
-            obj.transform.localPosition = item.GetCordinats() - new Vector3(0, 0.5f, 0);
+            obj.transform.localPosition = item.GetCordinats() - POSITIONFORSPAWN;
         }
     }
 
@@ -132,9 +121,12 @@ public class CharacterMovemovent : MonoBehaviour
 
     private IEnumerator CoroutineNewPositionCharacter(TerritroyReaded newTerritory, List<Vector3> points)
     {
-        _selectedCharacter.MoverActive(false);
+        _selectedCharacter.MoverActive(false);//disable mover
+        _selectedCharacter.ActualTerritory = null;
 
-        yield return StartCoroutine(CoroutineMove(points));
+        yield return StartCoroutine(CoroutineMove(points)); //start movements
+
+        _lineRenderer.positionCount = 0;
         _selectedCharacter.ActualTerritory = newTerritory;
 
         var save = _selectedCharacter;
@@ -142,45 +134,23 @@ public class CharacterMovemovent : MonoBehaviour
         save.OnSelected(save);
     }
 
-    private IEnumerator CoroutineMove(Vector3 target)
-    {
-        Vector3 startPosition = _selectedCharacter.gameObject.transform.localPosition;
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < 1f)
-        {
-            _selectedCharacter.gameObject.transform.localPosition = Vector3.Lerp(startPosition, target, elapsedTime);
-
-            elapsedTime += Time.deltaTime * _speed;
-
-            yield return null;
-        }
-
-        _selectedCharacter.gameObject.transform.localPosition = target;
-    }
-
     private IEnumerator CoroutineMove(List<Vector3> targets)
     {
-        Vector3 startPosition = _selectedCharacter.gameObject.transform.localPosition;
-
         float elapsedTime = 0f;
         int index = 0;
         Vector3 target = targets[++index]; //ignore first, becouse its for line
 
         while (true)
         {
-            while (elapsedTime < 1f)
+            while (Vector3.Distance(_selectedCharacter.gameObject.transform.localPosition, target) > 0.1f)
             {
-                _selectedCharacter.gameObject.transform.localPosition = Vector3.Lerp(startPosition, target, elapsedTime);
+                elapsedTime = Time.deltaTime * _speed;
+                _selectedCharacter.gameObject.transform.localPosition = Vector3.MoveTowards(_selectedCharacter.gameObject.transform.localPosition, target, elapsedTime);
 
-                elapsedTime += Time.deltaTime * _speed;
 
                 yield return null;
             }
             _selectedCharacter.gameObject.transform.localPosition = target;
-            startPosition = _selectedCharacter.gameObject.transform.localPosition;
-            elapsedTime = 0f;
 
             if (target == targets[^1]) //last
             {
@@ -205,38 +175,31 @@ public class CharacterMovemovent : MonoBehaviour
 
     public List<Vector3> calculateAllPath(TerritroyReaded starter)
     {
-        List<Vector3> path = new List<Vector3>
+        List<Vector3> path = new List<Vector3> //start with begin and end
         {
             _selectedCharacter.transform.localPosition,
             starter.GetCordinats()
-
         };
 
-        while (true)
+        while (true) //in this cyklus we will find points in which ones must line gone
         {
             List<Vector3> newPath = new List<Vector3>();
-            for (int i = 0; i < path.Count - 1; i++)
+            for (int i = 0; i < path.Count - 1; i++) //in this, we detect, if the between points exist shelters
             {
                 var iList = calculatePoints(GameManagerMap.Instance.Map[path[i + 1]], path[i]);
-                newPath.AddRange(iList);
+                newPath.AddRange(iList);//if yes, we add them to list
             }
 
-            newPath = newPath.Distinct().ToList();
-            if (newPath.Count == path.Count)
+            newPath = newPath.Distinct().ToList();//delete all same pieces
+            if (newPath.Count == path.Count)//if old path and new path has same count, it means that we cant find new territories to stop
                 break;
 
-            path.Clear();
-            foreach (var i in newPath)
-            {
-                path.Add(i);
-            }
-
-
+            path = new List<Vector3>(newPath);
         }
 
-        var basicPaths = FindPathBack(starter);
-        int indexes = basicPaths.Count + 1;
-        Vector3[] finalCordinats = new Vector3[indexes];
+        var basicPaths = FindPathBack(starter); //detect all path from begin to end
+        int indexes = basicPaths.Count + 1; 
+        Vector3[] finalCordinats = new Vector3[indexes]; //create array to make consistent path
         Array.Fill(finalCordinats, BIGVECTOR);
 
         if (path.Count == 0)
@@ -245,7 +208,7 @@ public class CharacterMovemovent : MonoBehaviour
         }
 
 
-        finalCordinats[indexes - 1] = path.First();
+        finalCordinats[indexes - 1] = path.First();//set first element, because for reserve
 
         foreach (var item in path)
         {
@@ -256,22 +219,19 @@ public class CharacterMovemovent : MonoBehaviour
         return endList;
     }
 
-    public List<Vector3> calculatePoints(TerritroyReaded starter, Vector3 firstVector)
+    public List<Vector3> calculatePoints(TerritroyReaded starter, Vector3 firstVector) 
     {
-        var paths = FindPathBack(starter);
-        int indexes = paths.Count + 1;
-
-        
-
+        var paths = FindPathBack(starter); //find all path from starter to aktual player (path is territories with their numeration)
+        int indexes = paths.Count + 1;//spesial indexer for future sort path
 
         Vector3 targetPosition = starter.GetCordinats() - firstVector;
         RaycastHit[] hits = Physics.RaycastAll(firstVector + GameManagerMap.Instance.MainParent.transform.position, targetPosition, Vector3.Distance(firstVector, starter.GetCordinats()));
+        
         Debug.DrawRay(firstVector + GameManagerMap.Instance.MainParent.transform.position, targetPosition, Color.red);
 
-        Dictionary<Vector3, int> nextPaths = new Dictionary<Vector3, int>();
-        Debug.Log(string.Join(",", paths));
-        Dictionary<int, Vector3> aboveBlocks = new Dictionary<int, Vector3>();
-        foreach (var item in paths)
+        Dictionary<Vector3, int> nextPaths = new Dictionary<Vector3, int>(); //the points where we need to make stops for line
+        
+        foreach (var item in paths) //in this cycle we detect all air points (only for shelter ground)
         {
             var aktualItem = GameManagerMap.Instance.Map[item.Key];
             var beforeItem = _objectsCalculated[aktualItem];
@@ -279,71 +239,77 @@ public class CharacterMovemovent : MonoBehaviour
             if (beforeItem == null || aktualItem == null)
                 continue;
 
-            if (beforeItem.YPosition != aktualItem.YPosition)
+            if (beforeItem.YPosition != aktualItem.YPosition || !beforeItem.HasGround())
             {
-                Debug.Log(beforeItem + " " + aktualItem);
-                if(!nextPaths.ContainsKey(item.Key))
-                    nextPaths.Add(item.Key, item.Value);
+                nextPaths.TryAdd(item.Key, item.Value);
 
-                if (!nextPaths.ContainsKey(beforeItem.GetCordinats()))
-                    nextPaths.Add(beforeItem.GetCordinats(), paths[beforeItem.GetCordinats()]);
-                
-                if (beforeItem.YPosition < aktualItem.YPosition)
+
+                if (nextPaths.TryAdd(beforeItem.GetCordinats(), paths[beforeItem.GetCordinats()]))
                 {
-                   // aboveBlocks.Add(item.Value, GameManagerMap.Instance.Map[beforeItem.IndexUp.First()].GetCordinats());
-                    
-                }
-                else if (beforeItem.YPosition > aktualItem.YPosition)
-                {
-                   // aboveBlocks.Add(item.Value, GameManagerMap.Instance.Map[aktualItem.IndexUp.First()].GetCordinats());
+                    TerritroyReaded newAir = null;//detected Air territory
+                    if (beforeItem.YPosition < aktualItem.YPosition) //get correct territory
+                    {
+                        newAir = GameManagerMap.Instance.Map[beforeItem.IndexUp.First()];
+                    }
+                    else if (beforeItem.YPosition > aktualItem.YPosition)
+                    {
+                        newAir = GameManagerMap.Instance.Map[aktualItem.IndexUp.First()];
+                    }
+
+                    if (newAir != null && !_objectsCalculated.ContainsKey(newAir)) //we need to create new connects, to make it faster to other calculathions
+                    {
+                        _objectsCalculated.Remove(aktualItem);
+                        _objectsCalculated.Add(aktualItem, newAir);
+                        _objectsCalculated.Add(newAir, beforeItem);
+                    } 
                 }
             }
-        }
-        Debug.Log(string.Join(",", aboveBlocks));
 
-        foreach (RaycastHit hit in hits)
+            if(aktualItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0) // for moving on only ShelterGrounds, no on air
+                nextPaths.TryAdd(item.Key, item.Value);
+
+
+        }
+
+        foreach (RaycastHit hit in hits) // check all hits
         {
             GameObject hitObject = hit.collider.gameObject;
             if (!hitObject.GetComponent<TerritoryInfo>())
-            {
                 continue;
-            }
-            TerritroyReaded finded = GameManagerMap.Instance.Map[hitObject.transform.localPosition];
-            Stack<TerritroyReaded> territoryes = new Stack<TerritroyReaded>();
-            HashSet<TerritroyReaded> alreadyFinded = new HashSet<TerritroyReaded>();
-            territoryes.Push(finded);
+            
+            TerritroyReaded finded = GameManagerMap.Instance.Map[hitObject.transform.localPosition];//find hit territory
+            Stack<TerritroyReaded> territoryes = new Stack<TerritroyReaded>(); //Stack for new territories, which we must detect
+            HashSet<TerritroyReaded> alreadyFinded = new HashSet<TerritroyReaded>(); //This hashSet we use to optimation our future calculations
+            territoryes.Push(finded); // first territory
 
-            bool doesFindSomething = false;
-            while (true)
+            bool doesFindSomething = false; // stop boolean
+            while (true) // in this cycle we search from hit for any territory which is in our path and
             {
-                Stack<TerritroyReaded> newTerritoryes = new Stack<TerritroyReaded>();
+                Stack<TerritroyReaded> newTerritoryes = new Stack<TerritroyReaded>(); //future territories which we must detect after one cycle
                 while (true)
                 {
                     TerritroyReaded newFinded = territoryes.Pop();
                     alreadyFinded.Add(newFinded);
 
-                    foreach (var item in newFinded)
+                    foreach (var item in newFinded) //analyze all neighbors
                     {
                         TerritroyReaded detectItem = GameManagerMap.Instance.Map[item];
-                        if (alreadyFinded.Contains(detectItem) || newTerritoryes.Contains(detectItem))//???
+                        if (alreadyFinded.Contains(detectItem) || newTerritoryes.Contains(detectItem))//IT CAN BE MAKED FASTER O(n)!!!! newTerritoryes is a stack and contains is O(n) operation
                             continue;
 
                         if (paths.ContainsKey(detectItem.GetCordinats()))
                         {
-                            if (!nextPaths.ContainsKey(detectItem.GetCordinats()))
-                            {
-                                nextPaths.Add(detectItem.GetCordinats(), paths[detectItem.GetCordinats()]);
-                            }
+                            nextPaths.TryAdd(detectItem.GetCordinats(), paths[detectItem.GetCordinats()]); 
 
-                            doesFindSomething = true;
+                            doesFindSomething = true; //stop algoritmus after all cycle
 
-                            foreach (var nextItem in detectItem)
+                            foreach (var nextItem in detectItem) // detect also neighbors' neigbors
                             {
                                 TerritroyReaded nextDetectedItem = GameManagerMap.Instance.Map[nextItem];
 
-                                if (paths.ContainsKey(nextDetectedItem.GetCordinats()) && !nextPaths.ContainsKey(nextDetectedItem.GetCordinats()))
+                                if (paths.ContainsKey(nextDetectedItem.GetCordinats()))
                                 {
-                                    nextPaths.Add(nextDetectedItem.GetCordinats(), paths[nextDetectedItem.GetCordinats()]);
+                                    nextPaths.TryAdd(nextDetectedItem.GetCordinats(), paths[nextDetectedItem.GetCordinats()]);
                                 }
                             }
                         }
@@ -362,100 +328,86 @@ public class CharacterMovemovent : MonoBehaviour
                 if (doesFindSomething)
                     break;
 
-                while (newTerritoryes.Count > 0)
-                {
-                    territoryes.Push(newTerritoryes.Pop());
-                }
-
+                territoryes = new Stack<TerritroyReaded>(newTerritoryes); //add all newTerritoryes to territoryes for detect other terriotories
             }
-
         }
 
-        Vector3[] finalCordinats = new Vector3[indexes + aboveBlocks.Count];
+        //the final phase of the algoritmus
+        Vector3[] finalCordinats = new Vector3[indexes]; //create array to make new numeration
         Array.Fill(finalCordinats, BIGVECTOR);
-        int aboveIndex = 0;
-        finalCordinats[indexes - 1] = firstVector;
-        foreach (var item in nextPaths)
+        
+        finalCordinats[indexes - 1] = firstVector; //set last as first, because reserve in the finish of algoritmus
+        foreach (var item in nextPaths) //set all points in which we need to make stops
         {
-            finalCordinats[item.Value + aboveIndex] = item.Key;
-            if(aboveBlocks.ContainsKey(item.Value))
-            {
-                aboveIndex++;
-                finalCordinats[item.Value + aboveIndex] = aboveBlocks[item.Value];
-            }
+            finalCordinats[item.Value] = item.Key;
         }
 
-        var endList = finalCordinats.Where(n => n != BIGVECTOR).Distinct().Reverse().ToList();
-        if (!endList.Contains(starter.GetCordinats()))
-        {
+        var endList = finalCordinats.Where(n => n != BIGVECTOR).Distinct().Reverse().ToList();//clear from BIGVECTOR and reserve the array
             endList.Add(starter.GetCordinats());
-        }
+        
         return endList;
 
     }
 
-    public Dictionary<Vector3, int> FindPathBack(TerritroyReaded starter)
+    public Dictionary<Vector3, int> FindPathBack(TerritroyReaded starter, TerritroyReaded begin = null)
     {
         Dictionary<Vector3, int> paths = new Dictionary<Vector3, int>(); //index from high to below
         TerritroyReaded aktual = starter;
         int indexes = 0;
-        while (aktual != null)
+        while (aktual != begin)
         {
             paths.Add(aktual.GetCordinats(), indexes++);
-
-            if (aktual.TerritoryInfo == TerritoryType.ShelterGround)
-                Debug.Log(aktual + " " + _objectsCalculated[aktual]);
 
             aktual = _objectsCalculated[aktual];
         }
         return paths;
     }
 
-    public Dictionary<TerritroyReaded, TerritroyReaded> CalculateAllPossible()
+    public Dictionary<TerritroyReaded, TerritroyReaded> CalculateAllPossible(int countMove)
     {
-        Dictionary<TerritroyReaded, TerritroyReaded> objectsCalculated = new Dictionary<TerritroyReaded, TerritroyReaded>();
-        Dictionary<TerritroyReaded, TerritroyReaded> shelterGround = new Dictionary<TerritroyReaded, TerritroyReaded>();
+        Dictionary<TerritroyReaded, TerritroyReaded> objectsCalculated = new Dictionary<TerritroyReaded, TerritroyReaded>();//the final version of list of territories
 
-        Stack<(TerritroyReaded orig, TerritroyReaded previus)> notCalculatedYet = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>();
-        Stack<(TerritroyReaded orig, TerritroyReaded previus)> nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>();
-        nextCalculated.Push((_selectedCharacter.ActualTerritory, null));
+        Stack<(TerritroyReaded orig, TerritroyReaded previus)> nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>();//need to calculate territories
+        nextCalculated.Push((_selectedCharacter.ActualTerritory, null));//first element
 
-        for (int i = 0; i <= _countMove; i++)
+        for (int i = 0; i <= countMove; i++)
         {
-            HashSet<TerritroyReaded> already = new HashSet<TerritroyReaded>();
+            Stack<(TerritroyReaded orig, TerritroyReaded previus)> notCalculatedYet = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>(); //the elements which we need to detect in next cycle
+            HashSet<TerritroyReaded> already = new HashSet<TerritroyReaded>(); //save all territries that we dont need to detect
+
             while (nextCalculated.Count > 0)
             {
                 (TerritroyReaded orig, TerritroyReaded previus) actual = nextCalculated.Pop();
-                if (!objectsCalculated.ContainsKey(actual.orig) && actual.orig.TerritoryInfo != TerritoryType.ShelterGround)
+                if (actual.orig.TerritoryInfo != TerritoryType.ShelterGround) // we cant move on shelterground element
                 {
-                    TerritroyReaded previus = actual.previus;
-                    while(previus != null && previus.TerritoryInfo == TerritoryType.ShelterGround)
-                    {
-                        previus = shelterGround[previus];
-                    }
-                    
-
-                    objectsCalculated.Add(actual.orig, previus);
+                    objectsCalculated.TryAdd(actual.orig, actual.previus);
                 }
 
-                foreach (var item in actual.orig.GetEnumeratorByOne(_selectedCharacter.ActualTerritory.Index))
+                foreach (var item in actual.orig)// detect all neighbors
                 {
-
                     var detectItem = GameManagerMap.Instance.Map[item];
 
+                    if (detectItem.TerritoryInfo == TerritoryType.ShelterGround) //if we detect Shelter Ground, set detectItem as air above it 
+                       detectItem = GameManagerMap.Instance.Map[detectItem.IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(actual.orig.Index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault()];
+                    
+                    if(detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)//for down air
+                    {
+                        var newItem = detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).FirstOrDefault();
+                        if (GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround ||
+                                    GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground).Count() == 1)
+                        {
+                            detectItem = GameManagerMap.Instance.Map[newItem];
+                        }
+                    }
 
                     if (detectItem.TerritoryInfo == TerritoryType.Shelter ||
-                        detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
-                        GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0)
+                       detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
+                       GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0) // we dont select such territories
                         continue;
 
                     if (objectsCalculated.ContainsKey(detectItem) || already.Contains(detectItem))
                         continue;
 
-                    if(detectItem.TerritoryInfo == TerritoryType.ShelterGround && !shelterGround.ContainsKey(detectItem))
-                    {
-                        shelterGround.Add(detectItem, actual.orig);
-                    }
 
                     notCalculatedYet.Push((detectItem, actual.orig));
                     already.Add(detectItem);
@@ -463,11 +415,9 @@ public class CharacterMovemovent : MonoBehaviour
                 }
             }
 
-            while (notCalculatedYet.Count > 0)
-            {
-                nextCalculated.Push(notCalculatedYet.Pop());
-            }
+            nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>(notCalculatedYet);
         }
+
         return objectsCalculated;
     }
 }

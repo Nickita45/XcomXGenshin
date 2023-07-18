@@ -652,7 +652,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.4
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4075,8 +4075,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c53477adbc4e6954c8b23529ab14a1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _countMove: 30
-  _speed: 10
+  _countMove: 8
+  _speed: 5
   _prefabPossibleTerritory: {fileID: 367235445393243085, guid: 5350567c8f01e904098f662ca01a15f1, type: 3}
   _lineRenderer: {fileID: 606821813}
 --- !u!114 &1775152540

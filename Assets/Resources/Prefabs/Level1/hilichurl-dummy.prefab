@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 870532476094528800}
   - component: {fileID: 3166091996089469418}
   - component: {fileID: -4469091267659225771}
-  - component: {fileID: 4802966707976024115}
+  - component: {fileID: 8906670467143836794}
   m_Layer: 0
   m_Name: hilichurl-dummy
   m_TagString: Untagged
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   PathPrefab: Prefabs/Level1/hilichurl-dummy
---- !u!65 &4802966707976024115
+--- !u!65 &8906670467143836794
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,5 +111,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.0099646095, y: 0.022009552, z: 0.009928945}
-  m_Center: {x: 0.00004307856, y: 0.011142982, z: 0.00056667696}
+  m_Size: {x: 0.012195964, y: 0.022009552, z: 0.011726923}
+  m_Center: {x: -0.00205568, y: 0.011142982, z: -0.00033231176}

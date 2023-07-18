@@ -61,46 +61,11 @@ public class TerritroyReaded
             yield return item;
         }
 
-        foreach (var item in IndexDown)
-        {
-            yield return item;
-        }
-
-        if (TerritoryInfo == TerritoryType.ShelterGround)
-        {
-            foreach (var item in IndexUp)
-            {
-                yield return item;
-            }
-
-        }
     }
 
+    public bool HasGround() => this.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
+                GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0;
 
-    public IEnumerable<string> GetEnumeratorByOne(string index)
-    {
-        if(IndexBottom.Any())
-        yield return IndexBottom.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault();
-
-        if (IndexFront.Any())
-            yield return IndexFront.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault();
-
-        if (IndexLeft.Any())
-            yield return IndexLeft.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault();
-        
-        if (IndexRight.Any())
-            yield return IndexRight.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault();
-
-        if (IndexDown.Any())
-            yield return IndexDown.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault();
-
-        if (TerritoryInfo == TerritoryType.ShelterGround && IndexUp.Any())
-        {
-           yield return IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault();
-        }
-    }
-
-    public static bool IsNotShelter(TerritroyReaded territory) => territory.TerritoryInfo != TerritoryType.ShelterGround && territory.TerritoryInfo != TerritoryType.Shelter;
     public static Vector3 MakeVectorFromIndex(string index) => new Vector3(float.Parse(index.Split(ReadingMap.SPLITTER)[0]), 
         float.Parse(index.Split(ReadingMap.SPLITTER)[1]), 
         float.Parse(index.Split(ReadingMap.SPLITTER)[2]));
