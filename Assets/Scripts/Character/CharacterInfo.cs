@@ -54,11 +54,13 @@ public class CharacterInfo : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (_selected)
-            OnDeselected();
-        else
-            OnSelected(this);
-
+        if (ActualTerritory != null)
+        {
+            if (_selected)
+                OnDeselected();
+            else
+                OnSelected(this);
+        }
     }
 
     private void Select(CharacterInfo character)

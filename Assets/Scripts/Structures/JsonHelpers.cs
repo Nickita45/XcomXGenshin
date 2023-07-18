@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class TerritroyReaded
 {
@@ -38,7 +39,7 @@ public class TerritroyReaded
     }
 
     public Vector3 GetCordinats() => new Vector3(XPosition, YPosition, ZPosition);
-
+    
     public IEnumerator<string> GetEnumerator()
     {
         foreach (var item in IndexBottom)
@@ -60,32 +61,16 @@ public class TerritroyReaded
             yield return item;
         }
 
-       
     }
 
-    /*public static bool DetectSampleShelters(TerritroyReaded first, TerritroyReaded second)
-    {
-        HashSet<TerritroyReaded> allSheltersFirst = new HashSet<TerritroyReaded>();
-        
-        foreach (var item in first)
-        {
-            TerritroyReaded itemTerritory = GameManagerMap.Instance.Map[item];
-            if (itemTerritory.TerritoryInfo == TerritoryType.Shelter)
-            {
-                allSheltersFirst.Add(itemTerritory);
-            }
-        }
+    public bool HasGround() => this.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
+                GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0;
 
-        foreach (var item in second)
-        {
-            TerritroyReaded itemTerritory = GameManagerMap.Instance.Map[item];
-            if (itemTerritory.TerritoryInfo == TerritoryType.Shelter && allSheltersFirst.Contains(itemTerritory))
-            {
-                return true;
-            }
-        }
-        return false;
-    }*/
+    public static Vector3 MakeVectorFromIndex(string index) => new Vector3(float.Parse(index.Split(ReadingMap.SPLITTER)[0]), 
+        float.Parse(index.Split(ReadingMap.SPLITTER)[1]), 
+        float.Parse(index.Split(ReadingMap.SPLITTER)[2]));
 
     public override string ToString() => $"({Index})";
+
+  
 }

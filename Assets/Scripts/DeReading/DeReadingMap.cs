@@ -38,6 +38,7 @@ public class DeReadingMap : MonoBehaviour
             obj.transform.localPosition = new Vector3(item.XPosition, item.YPosition, item.ZPosition);
             obj.transform.localRotation = new Quaternion(item.XRotation, item.YRotation, item.ZRotation, item.WRotation);
             obj.transform.localScale = new Vector3(item.XSize, item.YSize, item.ZSize);
+            obj.GetComponent<TerritoryInfo>().Type = item.TerritoryInfo;
 
             if(item.TerritoryInfo == TerritoryType.MapObject)
             {
