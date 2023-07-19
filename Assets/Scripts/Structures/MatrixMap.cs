@@ -53,5 +53,6 @@ public class MatrixMap
         }
     }
 
-    public static string MakeFromVector3ToIndex(Vector3 vector) => vector.x + ReadingMap.SPLITTER + vector.y + ReadingMap.SPLITTER + vector.z;
+    public static string MakeFromVector3ToIndex(Vector3 vector) => (vector.x + ReadingMap.SPLITTER + vector.y + ReadingMap.SPLITTER + vector.z).Replace('.', ',');
+
 }
