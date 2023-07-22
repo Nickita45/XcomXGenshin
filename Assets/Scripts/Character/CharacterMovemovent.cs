@@ -2,12 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class CharacterMovemovent : MonoBehaviour
 {
@@ -37,9 +32,15 @@ public class CharacterMovemovent : MonoBehaviour
 
     public CharacterInfo SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
 
+    public Action<(TerritroyReaded aktualTerritoryReaded, List<Vector3> path), CharacterInfo> OnSelectNewTerritory;
+    public Action<TerritroyReaded, CharacterInfo> OnEndMoveToNewTerritory;
+
     private void Start()
     {
         _lineRenderer.gameObject.SetActive(false);
+
+        OnEndMoveToNewTerritory += DisableToBasic;
+        OnSelectNewTerritory += SelectNewTerritory;
     }
     private void Update()
     {
@@ -70,12 +71,7 @@ public class CharacterMovemovent : MonoBehaviour
             {
                 _aktualTerritory.aktualTerritoryReaded = detectTerritory;
 
-                _selectedCharacter.SetCordintasToMover(detectTerritory.GetCordinats() 
-                    + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
-
-                _aktualTerritory.path = calculateAllPath(detectTerritory); //actual path to selected territory
-                DrawLine(_aktualTerritory.path); //draw the line
-
+                OnSelectNewTerritory(_aktualTerritory, _selectedCharacter);
             }
 
             if (Input.GetMouseButtonDown(0) && !_selectedCharacter.isAktualTerritory(_aktualTerritory.aktualTerritoryReaded))
@@ -85,6 +81,19 @@ public class CharacterMovemovent : MonoBehaviour
 
         }
     }
+
+    private void SelectNewTerritory((TerritroyReaded aktualTerritoryReaded, List<Vector3> path) territory, CharacterInfo character)
+    {
+
+        _selectedCharacter.SetCordintasToMover(territory.aktualTerritoryReaded.GetCordinats()
+            + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
+
+        _aktualTerritory.path = calculateAllPath(territory.aktualTerritoryReaded); //actual path to selected territory
+
+        DrawLine(_aktualTerritory.path); //draw the line
+
+    }
+
 
     public void CharacterSelect(CharacterInfo character)
     {
@@ -120,16 +129,22 @@ public class CharacterMovemovent : MonoBehaviour
 
     private IEnumerator CoroutineNewPositionCharacter(TerritroyReaded newTerritory, List<Vector3> points)
     {
+
         _selectedCharacter.MoverActive(false);//disable mover
         _selectedCharacter.ActualTerritory = null;
 
         yield return StartCoroutine(CoroutineMove(points)); //start movements
 
-        _lineRenderer.positionCount = 0;
-        _selectedCharacter.ActualTerritory = newTerritory;
+        OnEndMoveToNewTerritory(newTerritory, _selectedCharacter);
+    }
 
-        var save = _selectedCharacter;
-        _selectedCharacter.OnDeselected();
+    private void DisableToBasic(TerritroyReaded newTerritory, CharacterInfo character)
+    {
+        character.ActualTerritory = newTerritory;
+        _lineRenderer.positionCount = 0;
+
+        var save = character;
+        character.OnDeselected();
         save.OnSelected(save);
     }
 

@@ -156,7 +156,10 @@ public class ReadingMap : MonoBehaviour
         if (_aktualGameObject == null)
         {
             if (!_matrixMap.ContainsVertexByPox(_objectDetect.transform.position, out newItem))
-                newItem = _matrixMap.AddVertex(new TerritroyReaded(_objectDetect.transform) { TerritoryInfo = TerritoryType.Air });
+                newItem = _matrixMap.AddVertex(new TerritroyReaded(_objectDetect.transform) {
+                        TerritoryInfo = TerritoryType.Air,
+                        ShelterType = new ShelterInfo(),
+                }) ;
         }
         else
         {
@@ -169,6 +172,7 @@ public class ReadingMap : MonoBehaviour
                 {
                     newItem = _matrixMap.AddVertex(new TerritroyReaded(_aktualGameObject.transform)
                     {
+
                         TerritoryInfo = TerritoryType.MapObject,
                         PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
                     });
@@ -178,6 +182,7 @@ public class ReadingMap : MonoBehaviour
                     newItem = _matrixMap.AddVertex(new TerritroyReaded(_aktualGameObject.transform)
                     {
                         TerritoryInfo = _aktualGameObject.GetComponent<TerritoryInfo>().Type,
+                        ShelterType = _aktualGameObject.GetComponent<TerritoryInfo>().ShelterType,
                         PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
                     });
                 }

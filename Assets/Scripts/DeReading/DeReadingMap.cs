@@ -32,13 +32,13 @@ public class DeReadingMap : MonoBehaviour
             {
                 continue;
             }
-            
             GameObject prefab = Resources.Load<GameObject>(item.PathPrefab);
             var obj = Instantiate(prefab, _mainObject.transform);
             obj.transform.localPosition = new Vector3(item.XPosition, item.YPosition, item.ZPosition);
             obj.transform.localRotation = new Quaternion(item.XRotation, item.YRotation, item.ZRotation, item.WRotation);
             obj.transform.localScale = new Vector3(item.XSize, item.YSize, item.ZSize);
             obj.GetComponent<TerritoryInfo>().Type = item.TerritoryInfo;
+            obj.GetComponent<TerritoryInfo>().ShelterType = item.ShelterType;
 
             if(item.TerritoryInfo == TerritoryType.MapObject)
             {

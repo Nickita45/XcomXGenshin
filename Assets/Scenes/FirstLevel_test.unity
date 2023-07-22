@@ -214,8 +214,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
-  PathPrefab: Prefabs/Level1/stone1
+  _type: 4
+  _pathPrefab: Prefabs/Level1/stone1
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 2
 --- !u!65 &49737433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -436,8 +442,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &182740645
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,8 +560,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 5
-  PathPrefab: 
+  _type: 5
+  _pathPrefab: 
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &206665159
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,8 +723,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &240067694
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,8 +919,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
-  PathPrefab: Prefabs/Level1/stone1
+  _type: 4
+  _pathPrefab: Prefabs/Level1/stone1
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 2
 --- !u!65 &264067160
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1215,8 +1245,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &415340882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1524,8 +1560,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &561777460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,8 +1678,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &578499615
 GameObject:
   m_ObjectHideFlags: 0
@@ -1845,8 +1893,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1001 &633781907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1951,8 +2005,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/hilichurl-dummy
+  _type: 3
+  _pathPrefab: Prefabs/Level1/hilichurl-dummy
+  _shelterInfo:
+    _shelterInfoLeft: 1
+    _shelterInfoRight: 1
+    _shelterInfoBottom: 1
+    _shelterInfoFront: 1
+  _setOnStartToEveryone: 0
 --- !u!1 &654117451
 GameObject:
   m_ObjectHideFlags: 0
@@ -2063,8 +2123,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2250,8 +2316,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
-  PathPrefab: Prefabs/Level1/stone1
+  _type: 4
+  _pathPrefab: Prefabs/Level1/stone1
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 2
 --- !u!65 &756310213
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2473,8 +2545,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 5
-  PathPrefab: 
+  _type: 5
+  _pathPrefab: 
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1001 &793666749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2566,8 +2644,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/hilichurl-tower-alternate
+  _type: 3
+  _pathPrefab: Prefabs/Level1/hilichurl-tower-alternate
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!65 &793666753
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2692,8 +2776,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  PathPrefab: Prefabs/Level1/EnemySpawn
+  _type: 0
+  _pathPrefab: 
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &822071526
 GameObject:
   m_ObjectHideFlags: 0
@@ -2788,6 +2878,10 @@ PrefabInstance:
     - target: {fileID: 4544055790510231721, guid: 35a42e542f9d1ab40898e558c5188b1c, type: 3}
       propertyPath: m_Name
       value: Capsule
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759195883400651934, guid: 35a42e542f9d1ab40898e558c5188b1c, type: 3}
+      propertyPath: _pathPrefab
+      value: Prefabs/Capsule
       objectReference: {fileID: 0}
     - target: {fileID: 9130585696758153772, guid: 35a42e542f9d1ab40898e558c5188b1c, type: 3}
       propertyPath: m_IsActive
@@ -2932,7 +3026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectDetecterPrefab: {fileID: 7888743088166133105, guid: b510f840f37be9e469e43ab156278d07, type: 3}
   _startTransform: {fileID: 2012679527}
-  _fileName: /testFirstLevelSG.json
+  _fileName: /testFirstLevel.json
   _matrixMap:
     width: 0
     height: 0
@@ -3061,8 +3155,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &917033008
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,8 +3273,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &926583413
 GameObject:
   m_ObjectHideFlags: 0
@@ -3382,8 +3488,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3559,8 +3671,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
-  PathPrefab: Prefabs/Level1/stone5
+  _type: 4
+  _pathPrefab: Prefabs/Level1/stone5
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 2
 --- !u!65 &1070347765
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3762,8 +3880,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/hilichurl-target
+  _type: 3
+  _pathPrefab: Prefabs/Level1/hilichurl-target
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 1
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!65 &1149923723
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3887,8 +4011,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1001 &1295488171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3980,8 +4110,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/stone1
+  _type: 3
+  _pathPrefab: Prefabs/Level1/stone1
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!65 &1295488175
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4202,8 +4338,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &1361388961
 GameObject:
   m_ObjectHideFlags: 0
@@ -4508,8 +4650,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &1435540661
 GameObject:
   m_ObjectHideFlags: 0
@@ -4816,8 +4964,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  PathPrefab: Prefabs/Level1/EnemySpawn
+  _type: 0
+  _pathPrefab: 
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1547809605
 GameObject:
   m_ObjectHideFlags: 0
@@ -4928,8 +5082,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &1556743749
 GameObject:
   m_ObjectHideFlags: 0
@@ -5041,8 +5201,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  PathPrefab: Prefabs/Level1/EnemySpawn
+  _type: 0
+  _pathPrefab: 
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1625882503
 GameObject:
   m_ObjectHideFlags: 0
@@ -5153,8 +5319,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 5
-  PathPrefab: 
+  _type: 5
+  _pathPrefab: 
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1001 &1662942396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5246,8 +5418,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/hilichurl-tower-alternate
+  _type: 3
+  _pathPrefab: Prefabs/Level1/hilichurl-tower-alternate
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!65 &1662942400
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5371,8 +5549,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 5
-  PathPrefab: 
+  _type: 5
+  _pathPrefab: 
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1001 &1690234855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5439,6 +5623,10 @@ PrefabInstance:
     - target: {fileID: 6000860025135985757, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922548334371915227, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
+      propertyPath: _type
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
@@ -5751,8 +5939,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &1823842263
 GameObject:
   m_ObjectHideFlags: 0
@@ -5960,8 +6154,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &1850632769
 GameObject:
   m_ObjectHideFlags: 0
@@ -6348,8 +6548,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
-  PathPrefab: Prefabs/Level1/stone1
+  _type: 4
+  _pathPrefab: Prefabs/Level1/stone1
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 2
 --- !u!65 &1940496636
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6473,8 +6679,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &1968359832
 GameObject:
   m_ObjectHideFlags: 0
@@ -7033,8 +7245,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/hilichurl-barricade
+  _type: 3
+  _pathPrefab: Prefabs/Level1/hilichurl-barricade
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1 &2075955636
 GameObject:
   m_ObjectHideFlags: 0
@@ -7146,8 +7364,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  PathPrefab: Prefabs/Level1/EnemySpawn
+  _type: 0
+  _pathPrefab: 
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1001 &2109421400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7252,8 +7476,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/stone
+  _type: 3
+  _pathPrefab: Prefabs/Level1/stone
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!1001 &91240188191317806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7264,6 +7494,18 @@ PrefabInstance:
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: type
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
+      propertyPath: _type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
+      propertyPath: _pathPrefab
+      value: Prefabs/Level1/stone5
+      objectReference: {fileID: 0}
+    - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
+      propertyPath: _setOnStartToEveryone
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 490504277651700111, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: m_RootOrder
@@ -7415,6 +7657,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 760121607}
     m_Modifications:
+    - target: {fileID: -4459980420605518443, guid: afa5fcf24dc3cc84eba2e23611b2ed1a, type: 3}
+      propertyPath: _type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4459980420605518443, guid: afa5fcf24dc3cc84eba2e23611b2ed1a, type: 3}
+      propertyPath: _pathPrefab
+      value: Prefabs/Level1/hilichurl-target
+      objectReference: {fileID: 0}
+    - target: {fileID: -4459980420605518443, guid: afa5fcf24dc3cc84eba2e23611b2ed1a, type: 3}
+      propertyPath: _shelterInfo._shelterInfoLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4459980420605518443, guid: afa5fcf24dc3cc84eba2e23611b2ed1a, type: 3}
+      propertyPath: _shelterInfo._shelterInfoRight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 342351024816031261, guid: afa5fcf24dc3cc84eba2e23611b2ed1a, type: 3}
       propertyPath: m_Name
       value: hilichurl-target
@@ -7497,8 +7755,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/Tree
+  _type: 3
+  _pathPrefab: Prefabs/Level1/Tree
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!23 &1711813854533085939
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7562,8 +7826,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 760121607}
     m_Modifications:
     - target: {fileID: -4840215351017620806, guid: 41c73326959887c49ac74430215ac89c, type: 3}
+      propertyPath: _type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4840215351017620806, guid: 41c73326959887c49ac74430215ac89c, type: 3}
       propertyPath: PathPrefab
       value: Prefabs/Level1/hilichurl-barricade
+      objectReference: {fileID: 0}
+    - target: {fileID: -4840215351017620806, guid: 41c73326959887c49ac74430215ac89c, type: 3}
+      propertyPath: _shelterInfo._shelterInfoLeft
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1331184399237498336, guid: 41c73326959887c49ac74430215ac89c, type: 3}
       propertyPath: m_Name
@@ -7735,6 +8007,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6575152584172267610, guid: 51b80e60aa43839418d3e47d3b7a4168, type: 3}
+      propertyPath: _type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575152584172267610, guid: 51b80e60aa43839418d3e47d3b7a4168, type: 3}
+      propertyPath: _shelterInfo._shelterInfoLeft
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575152584172267610, guid: 51b80e60aa43839418d3e47d3b7a4168, type: 3}
+      propertyPath: _shelterInfo._shelterInfoFront
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575152584172267610, guid: 51b80e60aa43839418d3e47d3b7a4168, type: 3}
+      propertyPath: _shelterInfo._shelterInfoRight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575152584172267610, guid: 51b80e60aa43839418d3e47d3b7a4168, type: 3}
+      propertyPath: _shelterInfo._shelterInfoBottom
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51b80e60aa43839418d3e47d3b7a4168, type: 3}
 --- !u!1001 &5249121220300292346
@@ -7744,6 +8036,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 760121607}
     m_Modifications:
+    - target: {fileID: -4900295794376493732, guid: bff9dad3f73d0894fb173b7f1173fcc8, type: 3}
+      propertyPath: _type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4900295794376493732, guid: bff9dad3f73d0894fb173b7f1173fcc8, type: 3}
+      propertyPath: _pathPrefab
+      value: Prefabs/Level1/hilichurl-bath
+      objectReference: {fileID: 0}
+    - target: {fileID: -4900295794376493732, guid: bff9dad3f73d0894fb173b7f1173fcc8, type: 3}
+      propertyPath: _shelterInfo._shelterInfoLeft
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4900295794376493732, guid: bff9dad3f73d0894fb173b7f1173fcc8, type: 3}
+      propertyPath: _shelterInfo._shelterInfoFront
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4900295794376493732, guid: bff9dad3f73d0894fb173b7f1173fcc8, type: 3}
+      propertyPath: _shelterInfo._shelterInfoRight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4900295794376493732, guid: bff9dad3f73d0894fb173b7f1173fcc8, type: 3}
+      propertyPath: _shelterInfo._shelterInfoBottom
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4907223893247463549, guid: bff9dad3f73d0894fb173b7f1173fcc8, type: 3}
       propertyPath: m_Name
       value: hilichurl-bath
@@ -7849,6 +8165,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5503606730445796121, guid: 9fb7e9b723d3d724fa7c01ded05c1af9, type: 3}
+      propertyPath: _type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503606730445796121, guid: 9fb7e9b723d3d724fa7c01ded05c1af9, type: 3}
+      propertyPath: _shelterInfo._shelterInfoLeft
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503606730445796121, guid: 9fb7e9b723d3d724fa7c01ded05c1af9, type: 3}
+      propertyPath: _shelterInfo._shelterInfoFront
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503606730445796121, guid: 9fb7e9b723d3d724fa7c01ded05c1af9, type: 3}
+      propertyPath: _shelterInfo._shelterInfoRight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503606730445796121, guid: 9fb7e9b723d3d724fa7c01ded05c1af9, type: 3}
+      propertyPath: _shelterInfo._shelterInfoBottom
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fb7e9b723d3d724fa7c01ded05c1af9, type: 3}
 --- !u!1001 &6141335919015358001
@@ -7903,8 +8239,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
+      propertyPath: _type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: PathPrefab
       value: Prefabs/Level1/stone1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
+      propertyPath: _shelterInfo._shelterInfoLeft
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
+      propertyPath: _shelterInfo._shelterInfoFront
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
+      propertyPath: _shelterInfo._shelterInfoRight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
+      propertyPath: _shelterInfo._shelterInfoBottom
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6483777922874044560, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: m_Name
@@ -7922,6 +8278,26 @@ PrefabInstance:
     - target: {fileID: 5814732251488104834, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: m_Name
       value: stone-8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
+      propertyPath: _type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
+      propertyPath: _shelterInfo._shelterInfoLeft
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
+      propertyPath: _shelterInfo._shelterInfoFront
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
+      propertyPath: _shelterInfo._shelterInfoRight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
+      propertyPath: _shelterInfo._shelterInfoBottom
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: m_RootOrder
@@ -8038,8 +8414,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  PathPrefab: Prefabs/Level1/EnemySpawn
+  _type: 0
+  _pathPrefab: 
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!114 &8532716717866083863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8052,5 +8434,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/stone
+  _type: 3
+  _pathPrefab: Prefabs/Level1/stone
+  _shelterInfo:
+    _shelterInfoLeft: 2
+    _shelterInfoRight: 2
+    _shelterInfoBottom: 2
+    _shelterInfoFront: 2
+  _setOnStartToEveryone: 0

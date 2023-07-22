@@ -9,7 +9,7 @@ public class GameManagerMap : MonoBehaviour
 
     [SerializeField]
     private CharacterMovemovent _characterMovemovent;
-
+    
     [Header("MainObjects")]
     [SerializeField]
     private GameObject _mainParent;

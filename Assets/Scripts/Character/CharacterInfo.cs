@@ -18,12 +18,21 @@ public class CharacterInfo : MonoBehaviour
     [SerializeField]
     private GameObject _mover;
 
+    [Header("Shelters")]
+    [SerializeField]
+    private GameObject[] _shelterSize;//on indexes SidesShelter in ShelterDetecter
+    public GameObject this[int index] => _shelterSize[index];
+
+
     private bool _selected;
 
     public Action<CharacterInfo> OnSelected;
     public Action OnDeselected;
 
     public TerritroyReaded ActualTerritory { get; set; }
+
+
+
     private void Start()
     {
         _selectItem.SetActive(false);
@@ -37,6 +46,7 @@ public class CharacterInfo : MonoBehaviour
         OnDeselected += Disable;
         OnDeselected += GameManagerMap.Instance.CharacterMovemovent.CharacterDeselect;
 
+        ActualTerritory = GameManagerMap.Instance.Map[transform.localPosition];
     }
 
 
