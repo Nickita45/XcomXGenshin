@@ -348,6 +348,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &185641019
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +466,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &251429724
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +584,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &273200847
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,7 +670,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.6
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1027,6 +1030,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &360145012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,6 +1756,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &620286619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,6 +1874,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &621583776
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,6 +2189,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!4 &796295248 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2050091957837005723, guid: 35a42e542f9d1ab40898e558c5188b1c, type: 3}
@@ -2402,6 +2409,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1025817881
 GameObject:
   m_ObjectHideFlags: 0
@@ -2565,6 +2573,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1182747433
 GameObject:
   m_ObjectHideFlags: 0
@@ -2682,6 +2691,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1208596091
 GameObject:
   m_ObjectHideFlags: 0
@@ -3397,6 +3407,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!65 &1435540667
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3560,6 +3571,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1503658647
 GameObject:
   m_ObjectHideFlags: 0
@@ -3745,6 +3757,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1681076466
 GameObject:
   m_ObjectHideFlags: 0
@@ -3862,6 +3875,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1689636651
 GameObject:
   m_ObjectHideFlags: 0
@@ -3979,6 +3993,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1752232538
 GameObject:
   m_ObjectHideFlags: 0
@@ -4164,7 +4179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c53477adbc4e6954c8b23529ab14a1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _countMove: 8
+  _countMove: 30
   _speed: 5
   _prefabPossibleTerritory: {fileID: 367235445393243085, guid: 5350567c8f01e904098f662ca01a15f1, type: 3}
   _lineRenderer: {fileID: 606821813}
@@ -4318,6 +4333,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1878613295
 GameObject:
   m_ObjectHideFlags: 0
@@ -4466,6 +4482,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1912329889
 GameObject:
   m_ObjectHideFlags: 0
@@ -4583,6 +4600,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1914913201
 GameObject:
   m_ObjectHideFlags: 0
@@ -4700,6 +4718,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!1 &1999467435
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CharacterMovemovent : MonoBehaviour
 {
@@ -146,6 +147,9 @@ public class CharacterMovemovent : MonoBehaviour
         var save = character;
         character.OnDeselected();
         save.OnSelected(save);
+
+        _selectedCharacter.SetCordintasToMover(newTerritory.GetCordinats()
+            + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
     }
 
     private IEnumerator CoroutineMove(List<Vector3> targets)
@@ -391,7 +395,7 @@ public class CharacterMovemovent : MonoBehaviour
             while (nextCalculated.Count > 0)
             {
                 (TerritroyReaded orig, TerritroyReaded previus) actual = nextCalculated.Pop();
-                if (actual.orig.TerritoryInfo != TerritoryType.ShelterGround) // we cant move on shelterground element
+                if (actual.orig.TerritoryInfo != TerritoryType.ShelterGround && actual.orig.TerritoryInfo != TerritoryType.Enemy) // we cant move on shelterground element
                 {
                     objectsCalculated.TryAdd(actual.orig, actual.previus);
                 }
@@ -412,13 +416,27 @@ public class CharacterMovemovent : MonoBehaviour
                             detectItem = GameManagerMap.Instance.Map[newItem];
                         }
                     }
-
-                    if (detectItem.TerritoryInfo == TerritoryType.Shelter ||
-                       detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
-                       GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0) // we dont select such territories
+                    if (detectItem.TerritoryInfo == TerritoryType.Shelter || detectItem.TerritoryInfo == TerritoryType.Enemy ||
+                      detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
+                      GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0) // we dont select such territories
                         continue;
 
-                    if (objectsCalculated.ContainsKey(detectItem) || already.Contains(detectItem))
+                    if (objectsCalculated.ContainsKey(detectItem))
+                    {
+                       /* var oldItem = objectsCalculated[detectItem];
+
+                        if(objectsCalculated[detectItem] != null && 
+                            oldItem.YPosition != detectItem.YPosition && detectItem.YPosition == actual.orig.YPosition)
+                        {
+                            objectsCalculated.Remove(detectItem);
+                            objectsCalculated.Add(detectItem, actual.orig);
+
+                        }*/
+                        continue;
+
+                    }
+
+                    if (already.Contains(detectItem))
                         continue;
 
 

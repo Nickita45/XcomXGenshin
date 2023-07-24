@@ -73,6 +73,7 @@ public enum TerritoryType
     Shelter,
     ShelterGround,
     Boarder,
-    MapObject
+    Enemy,
+    MapObject,//didnt work
      
 }
