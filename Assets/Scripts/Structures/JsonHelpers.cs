@@ -1,16 +1,17 @@
-using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
+[System.Serializable]
 public class TerritroyReaded
 {
     public string Index { get; set; }
     public string PathPrefab { get; set; }
     public TerritoryType TerritoryInfo { get; set; }
+
+    [SerializeField]
+    public ShelterInfo ShelterType { get; set; }
+    
     public float XSize, YSize, ZSize;
     public float XPosition, YPosition, ZPosition;
     public float XRotation, YRotation, ZRotation, WRotation;

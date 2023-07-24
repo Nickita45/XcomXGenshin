@@ -27,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3526542350781343807}
-  m_LocalRotation: {x: 0.00000005865014, y: -0.693992, z: 0.000000056532933, w: 0.7199827}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 2.49, y: -0.01, z: -4.35}
   m_LocalScale: {x: 75, y: 75, z: 75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &870532476094528800
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -98,8 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/hilichurl-dummy
+  _type: 3
+  _pathPrefab: Prefabs/Level1/hilichurl-dummy
+  _shelterInfo:
+    _shelterInfoLeft: 1
+    _shelterInfoRight: 1
+    _shelterInfoBottom: 1
+    _shelterInfoFront: 1
+  _setOnStartToEveryone: 0
 --- !u!65 &8906670467143836794
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111,5 +117,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.012195964, y: 0.022009552, z: 0.011726923}
-  m_Center: {x: -0.00205568, y: 0.011142982, z: -0.00033231176}
+  m_Size: {x: 0.014314608, y: 0.022009552, z: 0.01421402}
+  m_Center: {x: -0.0019175061, y: 0.011142982, z: -0.00019413869}

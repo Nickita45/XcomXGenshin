@@ -98,8 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/hilichurl-tower-alternate
+  _type: 0
+  _pathPrefab: Prefabs/Level1/hilichurl-tower-alternate
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!65 &6731958138032840708
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111,5 +117,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.06310694, y: 0.077068396, z: 0.06428239}
-  m_Center: {x: -0.0019824626, y: 0.033236124, z: 0.0002867361}
+  m_Size: {x: 0.070218556, y: 0.077068396, z: 0.070933215}
+  m_Center: {x: -0.001549252, y: 0.033236124, z: 0.0013079982}

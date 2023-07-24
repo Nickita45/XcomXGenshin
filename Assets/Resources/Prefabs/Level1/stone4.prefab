@@ -97,8 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/stone4
+  _type: 0
+  _pathPrefab: Prefabs/Level1/stone4
+  _shelterType: 0
 --- !u!65 &8459694684947633348
 BoxCollider:
   m_ObjectHideFlags: 0

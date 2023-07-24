@@ -98,8 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
-  PathPrefab: Prefabs/Level1/hilichurl-barricade
+  _type: 0
+  _pathPrefab: Prefabs/Level1/hilichurl-barricade
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!65 &6011287971116909972
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111,5 +117,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.018797468, y: 0.023261191, z: 0.020652795}
-  m_Center: {x: -0.0016075623, y: 0.011430553, z: -0.0005604553}
+  m_Size: {x: 0.021804402, y: 0.023261191, z: 0.021376163}
+  m_Center: {x: -0.0017913932, y: 0.011430553, z: 0.000020461082}
