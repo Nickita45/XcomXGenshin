@@ -64,6 +64,12 @@ public class TerritroyReaded
 
     }
 
+    public bool IsNearIsGround() => IndexBottom.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0 ||
+                                    IndexFront.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0 ||
+                                    IndexRight.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0 ||
+                                    IndexLeft.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0 ||
+                                    IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0;
+
     public bool HasGround() => this.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
                 GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0;
 
