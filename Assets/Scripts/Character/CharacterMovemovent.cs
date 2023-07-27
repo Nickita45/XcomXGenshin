@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -238,7 +239,7 @@ public class CharacterMovemovent : MonoBehaviour
 
     public List<Vector3> calculatePoints(TerritroyReaded starter, Vector3 firstVector) 
     {
-        var paths = FindPathBack(starter); //find all path from starter to aktual player (path is territories with their numeration)
+        Dictionary<Vector3, int> paths = FindPathBack(starter); //find all path from starter to aktual player (path is territories with their numeration)
         int indexes = paths.Count + 1;//spesial indexer for future sort path
 
         Vector3 targetPosition = starter.GetCordinats() - firstVector;
@@ -247,7 +248,9 @@ public class CharacterMovemovent : MonoBehaviour
         Debug.DrawRay(firstVector + GameManagerMap.Instance.MainParent.transform.position, targetPosition, Color.red);
 
         Dictionary<Vector3, int> nextPaths = new Dictionary<Vector3, int>(); //the points where we need to make stops for line
-        
+
+        Dictionary<int, Vector3> airPaths = new Dictionary<int, Vector3>();
+
         foreach (var item in paths) //in this cycle we detect all air points (only for shelter ground)
         {
             var aktualItem = GameManagerMap.Instance.Map[item.Key];
@@ -275,19 +278,26 @@ public class CharacterMovemovent : MonoBehaviour
 
                     if (newAir != null && !_objectsCalculated.ContainsKey(newAir)) //we need to create new connects, to make it faster to other calculathions
                     {
+                        if (_objectsCalculated.ContainsKey(newAir))
+                            _objectsCalculated.Remove(newAir);
+
                         _objectsCalculated.Remove(aktualItem);
                         _objectsCalculated.Add(aktualItem, newAir);
                         _objectsCalculated.Add(newAir, beforeItem);
-                    } 
+                    }
+                    else if (newAir != null && _objectsCalculated.ContainsKey(newAir) && _objectsCalculated[aktualItem] != newAir && aktualItem.HasGround())
+                    {
+                        _objectsCalculated.Remove(aktualItem);
+                        _objectsCalculated.Add(aktualItem, newAir);
+                    }
                 }
             }
 
-            if(aktualItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0) // for moving on only ShelterGrounds, no on air
+            if (aktualItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0) // for moving on only ShelterGrounds, no on air
                 nextPaths.TryAdd(item.Key, item.Value);
 
-
         }
-
+        
         foreach (RaycastHit hit in hits) // check all hits
         {
             GameObject hitObject = hit.collider.gameObject;
@@ -350,13 +360,19 @@ public class CharacterMovemovent : MonoBehaviour
         }
 
         //the final phase of the algoritmus
-        Vector3[] finalCordinats = new Vector3[indexes]; //create array to make new numeration
+        Vector3[] finalCordinats = new Vector3[indexes + airPaths.Count]; //create array to make new numeration
         Array.Fill(finalCordinats, BIGVECTOR);
         
-        finalCordinats[indexes - 1] = firstVector; //set last as first, because reserve in the finish of algoritmus
+        finalCordinats[indexes + airPaths.Count - 1] = firstVector; //set last as first, because reserve in the finish of algoritmus
+        int indexAddedAir = 0;
         foreach (var item in nextPaths) //set all points in which we need to make stops
         {
-            finalCordinats[item.Value] = item.Key;
+            finalCordinats[item.Value + indexAddedAir] = item.Key;
+            if (airPaths.ContainsKey(item.Value)) {
+                finalCordinats[item.Value + ++indexAddedAir] = airPaths[item.Value];
+                indexAddedAir++;
+            }
+
         }
 
         var endList = finalCordinats.Where(n => n != BIGVECTOR).Distinct().Reverse().ToList();//clear from BIGVECTOR and reserve the array
@@ -374,7 +390,7 @@ public class CharacterMovemovent : MonoBehaviour
         while (aktual != begin)
         {
             paths.Add(aktual.GetCordinats(), indexes++);
-
+            
             aktual = _objectsCalculated[aktual];
         }
         return paths;
@@ -387,17 +403,36 @@ public class CharacterMovemovent : MonoBehaviour
         Stack<(TerritroyReaded orig, TerritroyReaded previus)> nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>();//need to calculate territories
         nextCalculated.Push((_selectedCharacter.ActualTerritory, null));//first element
 
+        HashSet<TerritroyReaded> territoriesBan = new HashSet<TerritroyReaded>();
         for (int i = 0; i <= countMove; i++)
         {
             Stack<(TerritroyReaded orig, TerritroyReaded previus)> notCalculatedYet = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>(); //the elements which we need to detect in next cycle
             HashSet<TerritroyReaded> already = new HashSet<TerritroyReaded>(); //save all territries that we dont need to detect
-
             while (nextCalculated.Count > 0)
             {
                 (TerritroyReaded orig, TerritroyReaded previus) actual = nextCalculated.Pop();
                 if (actual.orig.TerritoryInfo != TerritoryType.ShelterGround && actual.orig.TerritoryInfo != TerritoryType.Enemy) // we cant move on shelterground element
                 {
-                    objectsCalculated.TryAdd(actual.orig, actual.previus);
+                    if (objectsCalculated.ContainsKey(actual.orig))
+                    {
+                        var oldItem = objectsCalculated[actual.orig];
+                        if (oldItem != null) {
+                            if ((oldItem.YPosition != actual.orig.YPosition && actual.previus.YPosition == actual.orig.YPosition) ||
+                                (oldItem.YPosition != actual.orig.YPosition && actual.previus.YPosition != actual.orig.YPosition &&
+                                   Vector3.Distance(_selectedCharacter.transform.localPosition, actual.previus.GetCordinats()) < Vector3.Distance(_selectedCharacter.transform.localPosition, oldItem.GetCordinats()))) //||
+                            {
+                                objectsCalculated.Remove(actual.orig);
+                                objectsCalculated.Add(actual.orig, actual.previus);
+                            } 
+                        }
+                    } else
+                    {
+                        objectsCalculated.Add(actual.orig, actual.previus);
+                    }
+
+                    //alreadyUpDown.TryAdd(actual.orig, actual.previus);
+
+
                 }
 
                 foreach (var item in actual.orig)// detect all neighbors
@@ -405,15 +440,17 @@ public class CharacterMovemovent : MonoBehaviour
                     var detectItem = GameManagerMap.Instance.Map[item];
 
                     if (detectItem.TerritoryInfo == TerritoryType.ShelterGround) //if we detect Shelter Ground, set detectItem as air above it 
-                       detectItem = GameManagerMap.Instance.Map[detectItem.IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(actual.orig.Index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault()];
-                    
-                    if(detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)//for down air
+                    {
+                        detectItem = GameManagerMap.Instance.Map[detectItem.IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(actual.orig.Index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault()];
+                    }
+                    if (detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)//for down air
                     {
                         var newItem = detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).FirstOrDefault();
                         if (GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround ||
                                     GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground).Count() == 1)
                         {
                             detectItem = GameManagerMap.Instance.Map[newItem];
+
                         }
                     }
                     if (detectItem.TerritoryInfo == TerritoryType.Shelter || detectItem.TerritoryInfo == TerritoryType.Enemy ||
@@ -423,24 +460,14 @@ public class CharacterMovemovent : MonoBehaviour
 
                     if (objectsCalculated.ContainsKey(detectItem))
                     {
-                       /* var oldItem = objectsCalculated[detectItem];
-
-                        if(objectsCalculated[detectItem] != null && 
-                            oldItem.YPosition != detectItem.YPosition && detectItem.YPosition == actual.orig.YPosition)
-                        {
-                            objectsCalculated.Remove(detectItem);
-                            objectsCalculated.Add(detectItem, actual.orig);
-
-                        }*/
                         continue;
-
                     }
 
-                    if (already.Contains(detectItem))
+                    if (already.Contains(detectItem) && detectItem.IsNearIsGround() == false)
                         continue;
 
-
                     notCalculatedYet.Push((detectItem, actual.orig));
+
                     already.Add(detectItem);
 
                 }
