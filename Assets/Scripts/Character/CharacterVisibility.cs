@@ -17,7 +17,7 @@ public class CharacterVisibility : MonoBehaviour
     [SerializeField]
     private GameObject _enemyImageUI;
 
-    private readonly List<GameObject> visibleEnemies = new();
+    private readonly HashSet<GameObject> _visibleEnemies = new();
 
     [SerializeField]
     private float _maxVisionDistance = 10.0f;
@@ -28,27 +28,22 @@ public class CharacterVisibility : MonoBehaviour
         _enemyUI = GameObject.Find("EnemyUI");
     }
 
-    // Update the list of enemies visible by the selected character
+    // Update the set of enemies visible by the selected character
     // and adjust UI accordingly.
     public void UpdateVisibility(CharacterInfo character)
     {
-        // Clear the current list of visible enemies
-        visibleEnemies.Clear();
-
-        // Make a list of all enemies on the scene
-        List<TerritoryInfo> enemies = FindObjectsOfType<TerritoryInfo>()
-                .Where(info => info.Type == TerritoryType.Enemy)
-                .ToList();
+        // Clear the current set of visible enemies
+        _visibleEnemies.Clear();
 
         // If a character is selected, look for visible enemies
         if (character)
         {
-            foreach (TerritoryInfo enemy in enemies
+            foreach (TerritoryInfo enemy in TerritoryInfo.Enemies
                 .Where(info => Vector3.Distance(info.transform.position, character.transform.position) < _maxVisionDistance)
                 .Where(info => IsEnemyVisible(character, info)))
             {
-                // Add visible enemies to list
-                visibleEnemies.Add(enemy.gameObject);
+                // Add visible enemies to set
+                _visibleEnemies.Add(enemy.gameObject);
             }
         }
 
@@ -59,15 +54,15 @@ public class CharacterVisibility : MonoBehaviour
         }
 
         // Add icons on UI for each visible enemy 
-        foreach (GameObject enemy in visibleEnemies)
+        foreach (GameObject enemy in _visibleEnemies)
         {
             AddEnemyIcon(enemy);
         }
 
         // Mark visible enemies with colors
-        foreach (TerritoryInfo enemy in enemies)
+        foreach (TerritoryInfo enemy in TerritoryInfo.Enemies)
         {
-            Color color = visibleEnemies.Contains(enemy.gameObject) ? Color.blue : Color.red;
+            Color color = _visibleEnemies.Contains(enemy.gameObject) ? Color.blue : Color.red;
             enemy.GetComponent<MeshRenderer>().material.color = color;
         }
     }
