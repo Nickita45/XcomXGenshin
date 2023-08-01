@@ -9,7 +9,13 @@ public class GameManagerMap : MonoBehaviour
 
     [SerializeField]
     private CharacterMovemovent _characterMovemovent;
-    
+
+    [SerializeField]
+    private CameraController _cameraController;
+
+    [SerializeField]
+    private CharacterVisibility _characterVisibility;
+
     [Header("MainObjects")]
     [SerializeField]
     private GameObject _mainParent;
@@ -21,6 +27,8 @@ public class GameManagerMap : MonoBehaviour
     public static GameManagerMap Instance => _instance;
 
     public CharacterMovemovent CharacterMovemovent => _characterMovemovent;
+    public CameraController CameraController => _cameraController;
+    public CharacterVisibility CharacterVisibility => _characterVisibility;
     public GameObject MainParent => _mainParent;
     public GameObject GenereteTerritoryMove => _genereteTerritoryMove;
 
