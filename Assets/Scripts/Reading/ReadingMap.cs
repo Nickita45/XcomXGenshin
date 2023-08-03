@@ -82,21 +82,19 @@ public class ReadingMap : MonoBehaviour
             else
             {
                 GameObject beforeObj = null;
+                int countUp = 0;
                 do
                 {
-                    countHeightOrWeight++;
                     beforeObj = _aktualGameObject;
                     AlgoritmusRowMove(wayRow, ref isDetectSomething);
 
                     yield return new WaitForSeconds(TIMEWAITREADING);
 
                     AddNewTerritory(vector);
+                    countUp++;
 
+                } while (countUp != _matrixMap.height);//(beforeObj != null || _aktualGameObject != null);
 
-                } while (beforeObj != null || _aktualGameObject != null);
-
-                if (countHeightOrWeight > _matrixMap.height)
-                    _matrixMap.height = countHeightOrWeight;
             }
 
             row++;
@@ -111,6 +109,9 @@ public class ReadingMap : MonoBehaviour
             {
                 if (!isDetectSomething)
                 {
+                    if(vector == DetecterVector.Vertical)
+                        _matrixMap.height = column;
+                    
                     break;
                 }
                 isDetectSomething = false;
@@ -123,6 +124,9 @@ public class ReadingMap : MonoBehaviour
 
                 if(_aktualGameObject != null && _aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder)
                 {
+                    if (vector == DetecterVector.Vertical)
+                        _matrixMap.height = column;
+                    
                     break;
                 }
 
@@ -160,26 +164,42 @@ public class ReadingMap : MonoBehaviour
                         TerritoryInfo = TerritoryType.Air,
                         ShelterType = new ShelterInfo(),
                 }) ;
-        }
+        } 
         else
         {
             if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder)
             {
                 return;
             }
-            if (!_matrixMap.ContainsVertexByPox(_aktualGameObject.transform.position, out newItem))
-                if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.MapObject)
-                {
-                    newItem = _matrixMap.AddVertex(new TerritroyReaded(_aktualGameObject.transform)
-                    {
+            Transform transforObject = _aktualGameObject.transform;
+            if(_aktualGameObject.name == "NoParent")
+            {
+                transforObject = _aktualGameObject.transform.parent;
+            } else if(_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Decor)
+            {
+                transforObject = _objectDetect.transform;
+            }
 
-                        TerritoryInfo = TerritoryType.MapObject,
+            if (!_matrixMap.ContainsVertexByPox(transforObject.position, out newItem))
+
+                if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Decor)
+                {
+                    newItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject)
+                    {
+                        TerritoryInfo = TerritoryType.Air,
+                        ShelterType = new ShelterInfo(),
+                    });
+                    var decorItem = _matrixMap.AddDecor(new TerritroyReaded(transforObject)
+                    {
+                        TerritoryInfo = TerritoryType.Decor,
                         PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
                     });
+                    decorItem.SetNewPosition(_aktualGameObject.transform);
+
                 }
                 else
                 {
-                    newItem = _matrixMap.AddVertex(new TerritroyReaded(_aktualGameObject.transform)
+                    newItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject)
                     {
                         TerritoryInfo = _aktualGameObject.GetComponent<TerritoryInfo>().Type,
                         ShelterType = _aktualGameObject.GetComponent<TerritoryInfo>().ShelterType,
