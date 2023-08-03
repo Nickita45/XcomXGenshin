@@ -114,6 +114,8 @@ public class CharacterMovemovent : MonoBehaviour
             var obj = Instantiate(_prefabPossibleTerritory, GameManagerMap.Instance.GenereteTerritoryMove.transform);
             obj.transform.localPosition = item.GetCordinats() - POSITIONFORSPAWN;
         }
+
+        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
     }
 
     public void CharacterDeselect()
@@ -127,6 +129,8 @@ public class CharacterMovemovent : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+
+        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
     }
 
 
@@ -149,6 +153,8 @@ public class CharacterMovemovent : MonoBehaviour
         var save = character;
         character.OnDeselected();
         save.OnSelected(save);
+
+        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
 
         _selectedCharacter.SetCordintasToMover(newTerritory.GetCordinats()
             + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
@@ -209,11 +215,11 @@ public class CharacterMovemovent : MonoBehaviour
             {
                 var iList = calculatePoints(GameManagerMap.Instance.Map[path[i + 1]], path[i]);
                 newPath.AddRange(iList.paths);//if yes, we add them to list
-                foreach(var item in iList.airPaths)
+                foreach (var item in iList.airPaths)
                 {
                     airPaths.TryAdd(item.Key, item.Value);
                 }
-            
+
             }
 
             newPath = newPath.Distinct().ToList();//delete all same pieces
@@ -224,7 +230,7 @@ public class CharacterMovemovent : MonoBehaviour
         }
 
         var basicPaths = FindPathBack(starter); //detect all path from begin to end
-        int indexes = basicPaths.Count + 1; 
+        int indexes = basicPaths.Count + 1;
         Vector3[] finalCordinats = new Vector3[indexes + airPaths.Count]; //create array to make consistent path
         Array.Fill(finalCordinats, BIGVECTOR);
 
@@ -236,6 +242,7 @@ public class CharacterMovemovent : MonoBehaviour
 
         finalCordinats[indexes + airPaths.Count - 1] = path.First();//set first element, because for reserve
         int airIndex = airPaths.Count; // index for seting path in raw
+
         foreach (var item in path)
         {
             if (airPaths.ContainsKey(item)) //if here is air
@@ -254,14 +261,14 @@ public class CharacterMovemovent : MonoBehaviour
         return endList;
     }
 
-    public (List<Vector3> paths, Dictionary<Vector3, Vector3> airPaths) calculatePoints(TerritroyReaded starter, Vector3 firstVector) 
+    public (List<Vector3> paths, Dictionary<Vector3, Vector3> airPaths) calculatePoints(TerritroyReaded starter, Vector3 firstVector)
     {
         Dictionary<Vector3, int> paths = FindPathBack(starter); //find all path from starter to aktual player (path is territories with their numeration)
         int indexes = paths.Count + 1;//spesial indexer for future sort path
 
         Vector3 targetPosition = starter.GetCordinats() - firstVector;
         RaycastHit[] hits = Physics.RaycastAll(firstVector + GameManagerMap.Instance.MainParent.transform.position, targetPosition, Vector3.Distance(firstVector, starter.GetCordinats()));
-        
+
         Debug.DrawRay(firstVector + GameManagerMap.Instance.MainParent.transform.position, targetPosition, Color.red);
 
         Dictionary<Vector3, int> nextPaths = new Dictionary<Vector3, int>(); //the points where we need to make stops for line
@@ -278,26 +285,26 @@ public class CharacterMovemovent : MonoBehaviour
 
             if (beforeItem.YPosition != aktualItem.YPosition && beforeItem.HasGround() && aktualItem.HasGround())
             {
-                    TerritroyReaded newAir = null;//detected Air territory
-                    if (beforeItem.YPosition < aktualItem.YPosition) //get correct territory
-                    {
-                        newAir = GameManagerMap.Instance.Map[beforeItem.IndexUp.First()];
-                    }
-                    else if (beforeItem.YPosition > aktualItem.YPosition)
-                    {
-                        newAir = GameManagerMap.Instance.Map[aktualItem.IndexUp.First()];
-                    }
+                TerritroyReaded newAir = null;//detected Air territory
+                if (beforeItem.YPosition < aktualItem.YPosition) //get correct territory
+                {
+                    newAir = GameManagerMap.Instance.Map[beforeItem.IndexUp.First()];
+                }
+                else if (beforeItem.YPosition > aktualItem.YPosition)
+                {
+                    newAir = GameManagerMap.Instance.Map[aktualItem.IndexUp.First()];
+                }
 
-                    if (newAir != null)
-                    {
-                        nextPaths.TryAdd(item.Key, item.Value);
-                        nextPaths.TryAdd(beforeItem.GetCordinats(), paths[beforeItem.GetCordinats()]);
-                        airPaths.TryAdd(aktualItem.GetCordinats(), newAir.GetCordinats());
-                    }
+                if (newAir != null)
+                {
+                    nextPaths.TryAdd(item.Key, item.Value);
+                    nextPaths.TryAdd(beforeItem.GetCordinats(), paths[beforeItem.GetCordinats()]);
+                    airPaths.TryAdd(aktualItem.GetCordinats(), newAir.GetCordinats());
+                }
 
             }
         }
-        
+
         foreach (RaycastHit hit in hits) // check all hits
         {
             GameObject hitObject = hit.collider.gameObject;
@@ -329,7 +336,7 @@ public class CharacterMovemovent : MonoBehaviour
 
                         if (paths.ContainsKey(detectItem.GetCordinats()))
                         {
-                            nextPaths.TryAdd(detectItem.GetCordinats(), paths[detectItem.GetCordinats()]); 
+                            nextPaths.TryAdd(detectItem.GetCordinats(), paths[detectItem.GetCordinats()]);
 
                             doesFindSomething = true; //stop algoritmus after all cycle
 
@@ -374,7 +381,7 @@ public class CharacterMovemovent : MonoBehaviour
 
         var endList = finalCordinats.Where(n => n != BIGVECTOR).Distinct().Reverse().ToList();//clear from BIGVECTOR and reserve the array
         endList.Add(starter.GetCordinats());
-        
+
         return (endList, airPaths);
 
     }
@@ -387,7 +394,7 @@ public class CharacterMovemovent : MonoBehaviour
         while (aktual != begin)
         {
             paths.Add(aktual.GetCordinats(), indexes++);
-            
+
             aktual = _objectsCalculated[aktual];
         }
         return paths;
@@ -417,16 +424,18 @@ public class CharacterMovemovent : MonoBehaviour
                     if (objectsCalculated.ContainsKey(actual.orig))
                     {
                         var oldItem = objectsCalculated[actual.orig];
-                        if (oldItem != null) {
+                        if (oldItem != null)
+                        {
                             if ((oldItem.YPosition != actual.orig.YPosition && actual.previus.YPosition == actual.orig.YPosition) ||
                                 (oldItem.YPosition != actual.orig.YPosition && actual.previus.YPosition != actual.orig.YPosition &&
                                    Vector3.Distance(_selectedCharacter.transform.localPosition, actual.previus.GetCordinats()) < Vector3.Distance(_selectedCharacter.transform.localPosition, oldItem.GetCordinats()))) //||
                             {
                                 objectsCalculated.Remove(actual.orig);
                                 objectsCalculated.Add(actual.orig, actual.previus);
-                            } 
+                            }
                         }
-                    } else
+                    }
+                    else
                     {
                         objectsCalculated.Add(actual.orig, actual.previus);
                     }

@@ -20,12 +20,27 @@ public class TerritoryInfo : MonoBehaviour
     public TerritoryType Type { get => _type; set => _type = value; }
     public ShelterInfo ShelterType { get => _shelterInfo; set => _shelterInfo = value; }
 
+    private static List<TerritoryInfo> _enemies = new();
+    public static List<TerritoryInfo> Enemies => _enemies;
 
     private void Start()
     {
-        if(_setOnStartToEveryone == global::ShelterType.Full || _setOnStartToEveryone == global::ShelterType.Semi)
+        if (Type == TerritoryType.Enemy)
+        {
+            _enemies.Add(this);
+        }
+
+        if (_setOnStartToEveryone == global::ShelterType.Full || _setOnStartToEveryone == global::ShelterType.Semi)
         {
             _shelterInfo.SetForEvery(_setOnStartToEveryone);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (Type == TerritoryType.Enemy)
+        {
+            _enemies.Remove(this);
         }
     }
 }
@@ -76,5 +91,5 @@ public enum TerritoryType
     Enemy,
     Decor,
     MapObject,//didnt work
-     
+
 }

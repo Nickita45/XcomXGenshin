@@ -193,12 +193,20 @@ public class CameraController : MonoBehaviour
     public void MoveToPlayer()
     {
         CharacterInfo selectedCharacter = GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter;
+
         // Only start moving if there is a selected character
         if (selectedCharacter != null)
         {
-            _isMoving = true;
+            MoveTo(selectedCharacter.gameObject.transform.position);
+        }
+    }
 
-            Vector3 targetPosition = selectedCharacter.gameObject.transform.position;
+    public void MoveTo(Vector3 targetPosition)
+    {
+        // Only start moving if not moving already
+        if (!_isMoving)
+        {
+            _isMoving = true;
             _targetMove = new(targetPosition.x, targetPosition.z);
         }
     }
