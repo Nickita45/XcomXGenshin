@@ -236,7 +236,6 @@ public class CharacterMovemovent : MonoBehaviour
 
         finalCordinats[indexes + airPaths.Count - 1] = path.First();//set first element, because for reserve
         int airIndex = airPaths.Count; // index for seting path in raw
-        Debug.Log(airIndex);
         foreach (var item in path)
         {
             if (airPaths.ContainsKey(item)) //if here is air
@@ -304,6 +303,9 @@ public class CharacterMovemovent : MonoBehaviour
             GameObject hitObject = hit.collider.gameObject;
             if (!hitObject.GetComponent<TerritoryInfo>())
                 continue;
+
+            if (hitObject.name == "NoParent")
+                hitObject = hitObject.transform.parent.gameObject;
 
             TerritroyReaded finded = GameManagerMap.Instance.Map[hitObject.transform.localPosition];//find hit territory
             Stack<TerritroyReaded> territoryes = new Stack<TerritroyReaded>(); //Stack for new territories, which we must detect
@@ -397,14 +399,18 @@ public class CharacterMovemovent : MonoBehaviour
 
         Stack<(TerritroyReaded orig, TerritroyReaded previus)> nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>();//need to calculate territories
         nextCalculated.Push((_selectedCharacter.ActualTerritory, null));//first element
+        HashSet<TerritroyReaded> already = new HashSet<TerritroyReaded>(); //save all territries that we dont need to detect
 
         HashSet<TerritroyReaded> territoriesBan = new HashSet<TerritroyReaded>();
         for (int i = 0; i <= countMove; i++)
         {
+            int calcs = 0;
+
             Stack<(TerritroyReaded orig, TerritroyReaded previus)> notCalculatedYet = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>(); //the elements which we need to detect in next cycle
-            HashSet<TerritroyReaded> already = new HashSet<TerritroyReaded>(); //save all territries that we dont need to detect
+            calcs = nextCalculated.Count();
             while (nextCalculated.Count > 0)
             {
+
                 (TerritroyReaded orig, TerritroyReaded previus) actual = nextCalculated.Pop();
                 if (actual.orig.TerritoryInfo != TerritoryType.ShelterGround && actual.orig.TerritoryInfo != TerritoryType.Enemy) // we cant move on shelterground element
                 {
@@ -437,12 +443,12 @@ public class CharacterMovemovent : MonoBehaviour
                     if (detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)//for down air
                     {
                         var newItem = detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).FirstOrDefault();
-                        if (GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround ||
-                                    GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground).Count() == 1)
+                        while(GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)
                         {
-                            detectItem = GameManagerMap.Instance.Map[newItem];
-
+                            newItem = GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).FirstOrDefault();
                         }
+                        detectItem = GameManagerMap.Instance.Map[newItem];
+
                     }
                     if (detectItem.TerritoryInfo == TerritoryType.Shelter || detectItem.TerritoryInfo == TerritoryType.Enemy ||
                       detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
@@ -454,19 +460,20 @@ public class CharacterMovemovent : MonoBehaviour
                         continue;
                     }
 
-                    if (already.Contains(detectItem) && detectItem.IsNearIsGround() == false)
+                    if (already.Contains(detectItem) && (detectItem.IsNearIsGround() == false || detectItem.InACenterOfGronds() == true))
                         continue;
 
                     notCalculatedYet.Push((detectItem, actual.orig));
 
+                    if(!already.Contains(detectItem))
                     already.Add(detectItem);
 
                 }
             }
 
             nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>(notCalculatedYet);
+          //  Debug.Log(calcs);
         }
-
         return objectsCalculated;
     }
 }

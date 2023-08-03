@@ -12,10 +12,18 @@ public class DeReadingMap : MonoBehaviour
 
     [SerializeField]
     private string _path;
+    [SerializeField]
+    private string _path2;
+    [SerializeField]
+    private bool path2;
 
     private void Start()
     {
+        if (path2 == true)
+            _path = _path2;
+        
         DeSerelizete();
+
     }
 
 
@@ -32,20 +40,39 @@ public class DeReadingMap : MonoBehaviour
             {
                 continue;
             }
-            GameObject prefab = Resources.Load<GameObject>(item.PathPrefab);
-            var obj = Instantiate(prefab, _mainObject.transform);
-            obj.transform.localPosition = new Vector3(item.XPosition, item.YPosition, item.ZPosition);
-            obj.transform.localRotation = new Quaternion(item.XRotation, item.YRotation, item.ZRotation, item.WRotation);
-            obj.transform.localScale = new Vector3(item.XSize, item.YSize, item.ZSize);
-            obj.GetComponent<TerritoryInfo>().Type = item.TerritoryInfo;
-            obj.GetComponent<TerritoryInfo>().ShelterType = item.ShelterType;
-
-            if(item.TerritoryInfo == TerritoryType.MapObject)
-            {
-                obj.GetComponent<CharacterInfo>().ActualTerritory = item;
-            }
+            CreateMapObject(item);
         }
+
+        foreach (var item in _matrixMap._decors)
+        {
+            CreateMapObject(item.Value);
+        }
+
         GameManagerMap.Instance.Map = _matrixMap;
     }
 
+    public void CreateMapObject(TerritroyReaded item)
+    {
+        GameObject prefab = Resources.Load<GameObject>(item.PathPrefab);
+        var obj = Instantiate(prefab, _mainObject.transform);
+        obj.transform.localPosition = new Vector3(item.XPosition, item.YPosition, item.ZPosition);
+        obj.transform.localRotation = new Quaternion(item.XRotation, item.YRotation, item.ZRotation, item.WRotation);
+        obj.transform.localScale = new Vector3(item.XSize, item.YSize, item.ZSize);
+
+        TerritoryInfo territoryInfo = obj.GetComponent<TerritoryInfo>();
+        if (territoryInfo == null)
+        {
+            territoryInfo = obj.GetComponentInChildren<TerritoryInfo>();
+        }
+
+        territoryInfo.Type = item.TerritoryInfo;
+        territoryInfo.ShelterType = item.ShelterType;
+
+        if(item.TerritoryInfo == TerritoryType.Decor)
+            obj.GetComponent<BoxCollider>().enabled = false;
+
+    }
+
 }
+
+

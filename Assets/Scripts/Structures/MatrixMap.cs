@@ -8,12 +8,19 @@ using UnityEngine.UIElements;
 public class MatrixMap 
 {
     public Dictionary<string, TerritroyReaded> _vertex = new Dictionary<string, TerritroyReaded>();
+    public Dictionary<string, TerritroyReaded> _decors = new Dictionary<string, TerritroyReaded>();
     public int width, height;
 
     public TerritroyReaded AddVertex(TerritroyReaded ter)
     {
         _vertex.Add(ter.Index,ter);
         return ter;
+    }
+    public TerritroyReaded AddDecor(TerritroyReaded ter)
+    {
+        _decors.Add(ter.Index, ter);
+        return ter;
+
     }
 
     public TerritroyReaded this[string index] => _vertex[index];
