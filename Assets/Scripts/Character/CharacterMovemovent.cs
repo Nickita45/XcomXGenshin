@@ -5,6 +5,8 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
 public class CharacterMovemovent : MonoBehaviour
@@ -19,8 +21,7 @@ public class CharacterMovemovent : MonoBehaviour
     private float _speed = 1f;
 
     [Header("Script Objects")]
-    [SerializeField]
-    private GameObject _prefabPossibleTerritory;
+
     [SerializeField]
     private LineRenderer _lineRenderer;
 
@@ -41,6 +42,8 @@ public class CharacterMovemovent : MonoBehaviour
     private void Start()
     {
         _lineRenderer.gameObject.SetActive(false);
+        GameManagerMap.Instance.OnClearMap += Clear;
+
 
         OnEndMoveToNewTerritory += DisableToBasic;
         OnSelectNewTerritory += SelectNewTerritory;
@@ -62,7 +65,7 @@ public class CharacterMovemovent : MonoBehaviour
         if (hits.Count() > 0)
         {
             var neededHits = hits.Where(n => n.collider.gameObject.tag == "PanelMovement"); //Detect hits only from Territory than can be moved to
-            if (neededHits.Count() == 0)
+            if (neededHits.Count() == 0 || hits.Where(n => n.collider.gameObject.GetComponent<CharacterInfo>()).Count() > 0)
                 return;
 
             var hit = neededHits.FirstOrDefault(); //get First one
@@ -77,7 +80,7 @@ public class CharacterMovemovent : MonoBehaviour
                 OnSelectNewTerritory(_aktualTerritory, _selectedCharacter);
             }
 
-            if (Input.GetMouseButtonDown(0) && !_selectedCharacter.isAktualTerritory(_aktualTerritory.aktualTerritoryReaded))
+            if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && !_selectedCharacter.isAktualTerritory(_aktualTerritory.aktualTerritoryReaded))
             {
                 StartCoroutine(CoroutineNewPositionCharacter(_aktualTerritory.aktualTerritoryReaded, _aktualTerritory.path)); //make movement to person
             }
@@ -100,6 +103,7 @@ public class CharacterMovemovent : MonoBehaviour
 
     public void CharacterSelect(CharacterInfo character)
     {
+
         _lineRenderer.gameObject.SetActive(true);
 
         if (_selectedCharacter != null && _selectedCharacter != character)
@@ -109,11 +113,8 @@ public class CharacterMovemovent : MonoBehaviour
         _selectedCharacter = character;
         _objectsCalculated = CalculateAllPossible(_countMove); //algoritmus calculate all territories that player can move
 
-        foreach (var item in _objectsCalculated.Keys)
-        {
-            var obj = Instantiate(_prefabPossibleTerritory, GameManagerMap.Instance.GenereteTerritoryMove.transform);
-            obj.transform.localPosition = item.GetCordinats() - POSITIONFORSPAWN;
-        }
+        AirPlatformsSet(true);
+
 
         GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
     }
@@ -123,16 +124,23 @@ public class CharacterMovemovent : MonoBehaviour
         _lineRenderer.gameObject.SetActive(false);
 
         _selectedCharacter = null;
+        AirPlatformsSet(false);
 
         _objectsCalculated.Clear();
-        foreach (Transform item in GameManagerMap.Instance.GenereteTerritoryMove.transform)
-        {
-            Destroy(item.gameObject);
-        }
 
         GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
     }
 
+    private void AirPlatformsSet(bool result)
+    {
+        foreach (var item in _objectsCalculated.Keys)
+        {
+            if (GameManagerMap.Instance.Map.GetAirPlatform(item) != null)
+            {
+                GameManagerMap.Instance.Map.GetAirPlatform(item).SetActive(result);
+            }
+        }
+    }
 
     private IEnumerator CoroutineNewPositionCharacter(TerritroyReaded newTerritory, List<Vector3> points)
     {
@@ -484,5 +492,17 @@ public class CharacterMovemovent : MonoBehaviour
           //  Debug.Log(calcs);
         }
         return objectsCalculated;
+    }
+
+    private void Clear()
+    {
+        StopAllCoroutines();
+        _lineRenderer.gameObject.SetActive(false);
+        _lineRenderer.positionCount = 0;
+
+        if (_selectedCharacter != null)
+        {
+            _selectedCharacter.OnDeselected();
+        }
     }
 }

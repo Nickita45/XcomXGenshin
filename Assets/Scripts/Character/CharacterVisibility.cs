@@ -1,14 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
 
 public class CharacterVisibility : MonoBehaviour
 {
@@ -22,9 +14,13 @@ public class CharacterVisibility : MonoBehaviour
     [SerializeField]
     private float _maxVisionDistance = 10.0f;
 
+    public float MaxVisionDistance { get => _maxVisionDistance; set => _maxVisionDistance = value; }
+
     // Start is called before the first frame update
     void Start()
     {
+        GameManagerMap.Instance.OnClearMap += ClearIcons;
+
         _enemyUI = GameObject.Find("EnemyUI");
     }
 
@@ -38,20 +34,19 @@ public class CharacterVisibility : MonoBehaviour
         // If a character is selected, look for visible enemies
         if (character)
         {
-            foreach (TerritoryInfo enemy in TerritoryInfo.Enemies
+
+            foreach (TerritoryInfo enemy in GameManagerMap.Instance.Map.Enemy.Select(n => n.GetComponent<TerritoryInfo>())
                 .Where(info => Vector3.Distance(info.transform.position, character.transform.position) < _maxVisionDistance)
                 .Where(info => IsEnemyVisible(character, info)))
             {
                 // Add visible enemies to set
                 _visibleEnemies.Add(enemy.gameObject);
             }
+
         }
 
         // Clear icons
-        for (int i = 0; i < _enemyUI.transform.childCount; i++)
-        {
-            Destroy(_enemyUI.transform.GetChild(i).gameObject);
-        }
+        ClearIcons();
 
         // Add icons on UI for each visible enemy 
         foreach (GameObject enemy in _visibleEnemies)
@@ -60,10 +55,18 @@ public class CharacterVisibility : MonoBehaviour
         }
 
         // Mark visible enemies with colors
-        foreach (TerritoryInfo enemy in TerritoryInfo.Enemies)
+        foreach (TerritoryInfo enemy in GameManagerMap.Instance.Map.Enemy.Select(n => n.GetComponent<TerritoryInfo>()))
         {
-            Color color = _visibleEnemies.Contains(enemy.gameObject) ? Color.blue : Color.red;
-            enemy.GetComponent<MeshRenderer>().material.color = color;
+             Color color = _visibleEnemies.Contains(enemy.gameObject) ? Color.blue : Color.red;
+            enemy.gameObject.GetComponent<MeshRenderer>().material.color = color;
+        }
+    }
+
+    private void ClearIcons()
+    {
+        for (int i = 0; i < _enemyUI.transform.childCount; i++)
+        {
+            Destroy(_enemyUI.transform.GetChild(i).gameObject);
         }
     }
 

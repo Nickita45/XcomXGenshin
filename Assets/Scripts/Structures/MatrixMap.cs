@@ -1,28 +1,39 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [System.Serializable]
 public class MatrixMap 
 {
     public Dictionary<string, TerritroyReaded> _vertex = new Dictionary<string, TerritroyReaded>();
     public Dictionary<string, TerritroyReaded> _decors = new Dictionary<string, TerritroyReaded>();
+    public Dictionary<string, GameObject> _planeToMovement = new Dictionary<string, GameObject>();
+    public List<GameObject> _enemy = new List<GameObject>();
     public int width, height;
 
-    public TerritroyReaded AddVertex(TerritroyReaded ter)
+    public TerritroyReaded AddVertex(TerritroyReaded ter, ref Dictionary<string, TerritroyReaded> collection)
     {
-        _vertex.Add(ter.Index,ter);
+        collection.Add(ter.Index,ter);
         return ter;
     }
-    public TerritroyReaded AddDecor(TerritroyReaded ter)
-    {
-        _decors.Add(ter.Index, ter);
-        return ter;
 
+    public void AddAirPlane(TerritroyReaded ter, GameObject obj)
+    {
+        _planeToMovement.Add(ter.Index, obj);
     }
 
+    public GameObject GetAirPlatform(TerritroyReaded ter)
+    {
+        GameObject obj;
+        _planeToMovement.TryGetValue(ter.Index, out obj);
+        return obj;
+    }
+
+    public List<GameObject> Enemy => _enemy;
+    public ref Dictionary<string, TerritroyReaded> Decors => ref _decors;
+    public ref Dictionary<string, TerritroyReaded> Vertex => ref _vertex;
+
+    public void AirPlanfromRemove(TerritroyReaded ter) => _planeToMovement.Remove(ter.Index);
+ 
     public TerritroyReaded this[string index] => _vertex[index];
     public TerritroyReaded this[Vector3 cordinats] => _vertex[MakeFromVector3ToIndex(cordinats)];
 
@@ -55,6 +66,10 @@ public class MatrixMap
     public IEnumerator<TerritroyReaded> GetEnumerator()
     {
         foreach(var item in _vertex)
+        {
+            yield return item.Value;
+        }
+        foreach (var item in _decors)
         {
             yield return item.Value;
         }

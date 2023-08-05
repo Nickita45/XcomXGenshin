@@ -163,7 +163,7 @@ public class ReadingMap : MonoBehaviour
                 newItem = _matrixMap.AddVertex(new TerritroyReaded(_objectDetect.transform) {
                         TerritoryInfo = TerritoryType.Air,
                         ShelterType = new ShelterInfo(),
-                }) ;
+                }, ref _matrixMap.Vertex); 
         } 
         else
         {
@@ -188,12 +188,12 @@ public class ReadingMap : MonoBehaviour
                     {
                         TerritoryInfo = TerritoryType.Air,
                         ShelterType = new ShelterInfo(),
-                    });
-                    var decorItem = _matrixMap.AddDecor(new TerritroyReaded(transforObject)
+                    }, ref _matrixMap.Vertex); 
+                    var decorItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject)
                     {
                         TerritoryInfo = TerritoryType.Decor,
                         PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
-                    });
+                    }, ref _matrixMap.Decors); 
                     decorItem.SetNewPosition(_aktualGameObject.transform);
 
                 }
@@ -204,7 +204,7 @@ public class ReadingMap : MonoBehaviour
                         TerritoryInfo = _aktualGameObject.GetComponent<TerritoryInfo>().Type,
                         ShelterType = _aktualGameObject.GetComponent<TerritoryInfo>().ShelterType,
                         PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
-                    });
+                    }, ref _matrixMap.Decors);
                 }
         }
 

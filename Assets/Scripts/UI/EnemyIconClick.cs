@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -17,12 +15,16 @@ public class EnemyIconClick : MonoBehaviour, IPointerClickHandler, IPointerEnter
 
     public void OnPointerEnter(PointerEventData data)
     {
-        _image.color = _image.color.WithAlpha(0.5f);
+        Color tempColor = _image.color;
+        tempColor.a = 0.5f;
+        _image.color = tempColor;
     }
 
     public void OnPointerExit(PointerEventData data)
     {
-        _image.color = _image.color.WithAlpha(1.0f);
+        Color tempColor = _image.color;
+        tempColor.a = 1f;
+        _image.color = tempColor;
     }
 
     public void SetEnemy(GameObject enemy)

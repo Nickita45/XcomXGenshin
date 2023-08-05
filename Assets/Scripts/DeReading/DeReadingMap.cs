@@ -7,6 +7,8 @@ using System.IO;
 public class DeReadingMap : MonoBehaviour
 {
 
+
+    [Header("Sctipt Settings")]
     [SerializeField]
     private GameObject _mainObject;
 
@@ -19,39 +21,46 @@ public class DeReadingMap : MonoBehaviour
 
     private void Start()
     {
-        if (path2 == true)
-            _path = _path2;
+       // if (path2 == true)
+       //     _path = _path2;
         
-        DeSerelizete();
+       // DeSerelizete();
 
     }
 
 
-    private void DeSerelizete()
+    public void DeSerelizete(string nameFile)
     {
-        TextAsset json = Resources.Load<TextAsset>(_path);
+        TextAsset json = Resources.Load<TextAsset>(nameFile);
         string filePath = json.ToString();
 
         MatrixMap _matrixMap = JsonConvert.DeserializeObject<MatrixMap>(filePath);
     
         foreach(var item in _matrixMap)
         {
-            if(item.TerritoryInfo == TerritoryType.Air)
+            if(item.TerritoryInfo == TerritoryType.Air || item.TerritoryInfo == TerritoryType.Undefined || item.TerritoryInfo == TerritoryType.Enemy)
             {
-                continue;
-            }
-            CreateMapObject(item);
-        }
+                var obj = GameManagerMap.Instance.CreatePlatformMovement(item);
+                _matrixMap.AddAirPlane(item, obj);
 
-        foreach (var item in _matrixMap._decors)
-        {
-            CreateMapObject(item.Value);
+            }
+            //make switch?
+            if(item.TerritoryInfo == TerritoryType.Air)
+                continue;
+
+            var objMap = CreateMapObject(item);
+            
+            if(item.TerritoryInfo == TerritoryType.Decor)
+                objMap.GetComponent<BoxCollider>().enabled = false;
+
+            if (item.TerritoryInfo == TerritoryType.Enemy)
+                _matrixMap.Enemy.Add(objMap);
         }
 
         GameManagerMap.Instance.Map = _matrixMap;
     }
 
-    public void CreateMapObject(TerritroyReaded item)
+    public GameObject CreateMapObject(TerritroyReaded item)
     {
         GameObject prefab = Resources.Load<GameObject>(item.PathPrefab);
         var obj = Instantiate(prefab, _mainObject.transform);
@@ -67,9 +76,8 @@ public class DeReadingMap : MonoBehaviour
 
         territoryInfo.Type = item.TerritoryInfo;
         territoryInfo.ShelterType = item.ShelterType;
-
-        if(item.TerritoryInfo == TerritoryType.Decor)
-            obj.GetComponent<BoxCollider>().enabled = false;
+        return obj;
+       
 
     }
 
