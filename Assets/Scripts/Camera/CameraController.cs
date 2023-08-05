@@ -42,6 +42,8 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManagerMap.Instance.Map == null)
+            return;
         // Automatic movement
         if (_isMoving)
         {

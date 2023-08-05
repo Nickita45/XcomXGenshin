@@ -20,15 +20,11 @@ public class TerritoryInfo : MonoBehaviour
     public TerritoryType Type { get => _type; set => _type = value; }
     public ShelterInfo ShelterType { get => _shelterInfo; set => _shelterInfo = value; }
 
-    private static List<TerritoryInfo> _enemies = new();
-    public static List<TerritoryInfo> Enemies => _enemies;
+
 
     private void Start()
     {
-        if (Type == TerritoryType.Enemy)
-        {
-            _enemies.Add(this);
-        }
+
 
         if (_setOnStartToEveryone == global::ShelterType.Full || _setOnStartToEveryone == global::ShelterType.Semi)
         {
@@ -36,13 +32,6 @@ public class TerritoryInfo : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        if (Type == TerritoryType.Enemy)
-        {
-            _enemies.Remove(this);
-        }
-    }
 }
 
 [System.Serializable]

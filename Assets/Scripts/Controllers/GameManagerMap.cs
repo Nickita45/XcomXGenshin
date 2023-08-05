@@ -1,9 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GameManagerMap : MonoBehaviour
 {
+    [Header("Serialize elemnets")]
+    [SerializeField]
+    private DeReadingMap _deReadingMap;
+
+    public DeReadingMap DeReadingMap => _deReadingMap;
+
+    [Header("Game elements")]
     [SerializeField]
     private MatrixMap _map;
 
@@ -22,6 +28,10 @@ public class GameManagerMap : MonoBehaviour
     [SerializeField]
     private GameObject _genereteTerritoryMove;
 
+    [Header("Plane to movement")]
+    [SerializeField]
+    private GameObject _prefabPossibleTerritory;
+
 
     private static GameManagerMap _instance;
     public static GameManagerMap Instance => _instance;
@@ -34,6 +44,8 @@ public class GameManagerMap : MonoBehaviour
 
     public MatrixMap Map { get => _map; set => _map = value; }
 
+    public Action OnClearMap;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -43,5 +55,46 @@ public class GameManagerMap : MonoBehaviour
         }
 
         _instance = this;
+    }
+
+    private void Start()
+    {
+        OnClearMap += ClearMap;
+    }
+
+    public GameObject CreatePlatformMovement(TerritroyReaded item)
+    {
+        var obj = Instantiate(_prefabPossibleTerritory, GameManagerMap.Instance.GenereteTerritoryMove.transform);
+        obj.transform.localPosition = item.GetCordinats() - CharacterMovemovent.POSITIONFORSPAWN;
+        obj.SetActive(false);
+        return obj;
+    }
+
+    private void ClearMap()
+    {
+        Map = null;
+        DeleteAllChildren(MainParent);
+        DeleteAllChildren(GenereteTerritoryMove);
+
+       /* foreach(GameObject item in MainParent.transform)
+        {
+            Destroy(item);
+        }
+
+        foreach (GameObject item in GenereteTerritoryMove.transform)
+        {
+            Destroy(item);
+        }*/
+    }
+
+    private static void DeleteAllChildren(GameObject parent)
+    {
+        int childCount = parent.transform.childCount;
+
+        for (int i = childCount - 1; i >= 0; i--)
+        {
+            Transform child = parent.transform.GetChild(i);
+            DestroyImmediate(child.gameObject);
+        }
     }
 }

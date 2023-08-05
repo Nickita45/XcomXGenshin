@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CharacterInfo : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class CharacterInfo : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (ActualTerritory != null)
+        if (ActualTerritory != null && !EventSystem.current.IsPointerOverGameObject())
         {
             if (_selected)
                 OnDeselected();
