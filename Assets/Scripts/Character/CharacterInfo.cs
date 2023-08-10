@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -24,6 +21,16 @@ public class CharacterInfo : MonoBehaviour
     private GameObject[] _shelterSize;//on indexes SidesShelter in ShelterDetecter
     public GameObject this[int index] => _shelterSize[index];
 
+    [Header("Characters Paramenters")]
+    [SerializeField]
+    private int _basicAimCharacter = 90;
+
+    [Header("Other")]
+    [SerializeField]
+    private GameObject[] _gunGameObjects;
+    [SerializeField]
+    private GameObject _gunPrefab;
+    public int BasicAimCharacter => _basicAimCharacter;
 
     private bool _selected;
 
@@ -32,7 +39,7 @@ public class CharacterInfo : MonoBehaviour
 
     public TerritroyReaded ActualTerritory { get; set; }
 
-
+    public GameObject GunPrefab => _gunPrefab;
 
     private void Start()
     {
@@ -48,6 +55,8 @@ public class CharacterInfo : MonoBehaviour
         OnDeselected += GameManagerMap.Instance.CharacterMovemovent.CharacterDeselect;
 
         ActualTerritory = GameManagerMap.Instance.Map[transform.localPosition];
+
+        SetGunByIndex((int)GameManagerMap.Instance.Gun);
     }
 
 
@@ -76,6 +85,7 @@ public class CharacterInfo : MonoBehaviour
 
     private void Select(CharacterInfo character)
     {
+        SetGunByIndex((int)GameManagerMap.Instance.Gun);
 
         _selected = true;
         _selectItem.GetComponent<MeshRenderer>().material = _materialSelect;
@@ -89,7 +99,14 @@ public class CharacterInfo : MonoBehaviour
         _mover.transform.localPosition = new Vector3(0, _mover.transform.localPosition.y, 0);
         MoverActive(false);
     }
-
+    public void SetGunByIndex(int index)
+    {
+        foreach (var item in _gunGameObjects)
+        {
+            item.SetActive(false);
+        }
+        _gunGameObjects[index].SetActive(true);
+    }
     public void MoverActive(bool result) => _mover.SetActive(result);
     public bool MoverActive() => _mover.activeSelf;
 

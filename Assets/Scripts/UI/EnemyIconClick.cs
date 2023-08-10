@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,6 +7,9 @@ public class EnemyIconClick : MonoBehaviour, IPointerClickHandler, IPointerEnter
 {
     private GameObject _enemy;
     private Image _image;
+
+    [SerializeField]
+    private TextMeshProUGUI _textPercent;
 
     public void OnPointerClick(PointerEventData data)
     {
@@ -36,11 +39,22 @@ public class EnemyIconClick : MonoBehaviour, IPointerClickHandler, IPointerEnter
     void Start()
     {
         _image = GetComponent<Image>();
+
+        SetProcent();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetProcent()
     {
+        var resultCaclulations = AimCalculater.CalculateShelterPercent(defender: GameManagerMap.Instance.Map[_enemy.transform.localPosition],
+                                    shooter: GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.ActualTerritory,
+                                    gun: GameManagerMap.Instance.Gun,
+                                    0, GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.BasicAimCharacter);
+        _textPercent.text = resultCaclulations.procent.ToString() + "%";
 
+        if (resultCaclulations.status == ShelterType.Nope)
+            _textPercent.color = Color.yellow;
+        else
+            _textPercent.color = Color.red;
     }
+
 }

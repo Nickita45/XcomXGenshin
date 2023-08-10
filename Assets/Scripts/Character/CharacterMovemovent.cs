@@ -176,8 +176,10 @@ public class CharacterMovemovent : MonoBehaviour
 
         while (true)
         {
+
             while (Vector3.Distance(_selectedCharacter.gameObject.transform.localPosition, target) > 0.1f)
             {
+                _selectedCharacter.GunPrefab.transform.LookAt(target + GameManagerMap.Instance.MainParent.transform.position);
                 elapsedTime = Time.deltaTime * _speed;
                 _selectedCharacter.gameObject.transform.localPosition = Vector3.MoveTowards(_selectedCharacter.gameObject.transform.localPosition, target, elapsedTime);
                 yield return null;
