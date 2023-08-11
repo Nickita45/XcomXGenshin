@@ -3,7 +3,22 @@ guid: 8d02ae2c09e9f0a448bc92a447fa3459
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stages_Build_HiliArena04
+    second: {fileID: 2100000, guid: dbc3621b871859242934864e2e6a6a3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stages_Build_HiliHouse01
+    second: {fileID: 2100000, guid: 71c79a5d65abfe24792f797655cd3d3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stages_Build_HiliSentryPost01
+    second: {fileID: 2100000, guid: 2f93c5ce8a1adc942b11c98d42c0e871, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
