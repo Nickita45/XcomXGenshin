@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 
@@ -163,7 +164,7 @@ public class ReadingMap : MonoBehaviour
                 newItem = _matrixMap.AddVertex(new TerritroyReaded(_objectDetect.transform) {
                         TerritoryInfo = TerritoryType.Air,
                         ShelterType = new ShelterInfo(),
-                }, ref _matrixMap.Vertex); 
+                },  _matrixMap.Vertex); 
         } 
         else
         {
@@ -188,12 +189,12 @@ public class ReadingMap : MonoBehaviour
                     {
                         TerritoryInfo = TerritoryType.Air,
                         ShelterType = new ShelterInfo(),
-                    }, ref _matrixMap.Vertex); 
+                    },  _matrixMap.Vertex); 
                     var decorItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject)
                     {
                         TerritoryInfo = TerritoryType.Decor,
                         PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
-                    }, ref _matrixMap.Decors); 
+                    },  _matrixMap.Decors); 
                     decorItem.SetNewPosition(_aktualGameObject.transform);
 
                 }
@@ -204,7 +205,7 @@ public class ReadingMap : MonoBehaviour
                         TerritoryInfo = _aktualGameObject.GetComponent<TerritoryInfo>().Type,
                         ShelterType = _aktualGameObject.GetComponent<TerritoryInfo>().ShelterType,
                         PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
-                    }, ref _matrixMap.Decors);
+                    },  _matrixMap.Vertex);
                 }
         }
 
@@ -238,7 +239,7 @@ public class ReadingMap : MonoBehaviour
     public void SavetToJson()
     {
         _matrixMap.DebugToConsole();
-
+        Debug.Log(CultureInfo.CurrentCulture.Name);
         string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(_matrixMap, Newtonsoft.Json.Formatting.Indented);
         Debug.Log(jsonText);
         

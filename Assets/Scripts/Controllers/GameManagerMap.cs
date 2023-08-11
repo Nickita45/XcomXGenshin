@@ -46,6 +46,8 @@ public class GameManagerMap : MonoBehaviour
 
     public Action OnClearMap;
 
+    public GunType Gun { get; set; } //in feature we need to move it to character
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
