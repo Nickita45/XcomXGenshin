@@ -235,7 +235,9 @@
         "-1.5_0.5_-4.5",
         "-1.493_-0.01_-3.658",
         "-1.5_0.5_-2.5",
-        "-3.59_0.229_0.59",
+        "-1.5_0.5_-1.5",
+        "-3.59_0.479_0.59",
+        "-1.5_0.5_2.5",
         "-1.5_0.5_3.5",
         "-1.5_0.5_4.5",
         "-1.5_0.5_5.5",
@@ -293,6 +295,8 @@
         "-5.5_0.5_-6.5",
         "-5.5_0.5_-5.5",
         "-5.5_0.5_-2.5",
+        "-5.5_0.5_-1.5",
+        "-5.5_0.5_2.5",
         "-5.5_0.5_3.5",
         "-5.5_0.5_4.5",
         "-5.5_0.5_5.5",
@@ -8793,7 +8797,7 @@
         "0.5_0.5_-1.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_0.5_-1.5"
       ],
       "Index": "-0.5_0.5_-1.5",
       "PathPrefab": null,
@@ -8832,7 +8836,7 @@
         "0.5_0.5_-0.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-3.59_0.479_0.59"
       ],
       "Index": "-0.5_0.5_-0.5",
       "PathPrefab": null,
@@ -8871,11 +8875,11 @@
         "0.5_0.5_0.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-3.59_0.479_0.59"
       ],
       "Index": "-0.5_0.5_0.5",
-      "PathPrefab": "Prefabs/Level1/EnemySpawn",
-      "TerritoryInfo": 6,
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -8910,11 +8914,11 @@
         "0.5_0.5_1.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-3.59_0.479_0.59"
       ],
       "Index": "-0.5_0.5_1.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
+      "PathPrefab": "Prefabs/Level1/EnemySpawn",
+      "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -8949,7 +8953,7 @@
         "0.5_0.5_2.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_0.5_2.5"
       ],
       "Index": "-0.5_0.5_2.5",
       "PathPrefab": null,
@@ -9522,7 +9526,7 @@
         "-1.493_-0.01_-3.658"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-1.5_0.5_-1.5"
       ],
       "IndexUp": [
         "-1.5_1.5_-2.5"
@@ -9546,123 +9550,157 @@
         "Front": 0
       }
     },
-    "-3.59_0.229_0.59": {
-      "XSize": 40.0,
-      "YSize": 40.0,
-      "ZSize": 40.0,
-      "XPosition": -3.59,
-      "YPosition": 0.229000032,
-      "ZPosition": 0.59,
+    "-1.5_0.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 0.5,
+      "ZPosition": -1.5,
       "XRotation": 0.0,
-      "YRotation": 0.7071068,
+      "YRotation": 0.0,
       "ZRotation": 0.0,
-      "WRotation": 0.7071068,
+      "WRotation": 1.0,
       "IndexLeft": [
-        "-1.5_0.5_-2.5",
-        "-2.5_0.5_-2.5",
-        "-3.5_0.5_-2.5",
-        "-4.5_0.5_-2.5",
-        "-5.5_0.5_-2.5",
-        "-1.5_1.5_-2.5",
-        "-2.5_1.5_-2.5",
-        "-3.5_1.5_-2.5",
-        "-4.5_1.5_-2.5",
-        "-5.5_1.5_-2.5",
-        "-1.5_2.5_-2.5",
-        "-2.5_2.5_-2.5",
-        "-3.5_2.5_-2.5",
-        "-4.5_2.5_-2.5",
-        "-5.5_2.5_-2.5"
+        "-1.5_0.5_-2.5"
       ],
       "IndexRight": [
-        "-1.5_0.5_3.5",
-        "-2.5_0.5_3.5",
-        "-3.5_0.5_3.5",
-        "-4.5_0.5_3.5",
-        "-5.5_0.5_3.5",
-        "-1.5_1.5_3.5",
-        "-2.5_1.5_3.5",
-        "-3.5_1.5_3.5",
-        "-4.5_1.5_3.5",
-        "-5.5_1.5_3.5",
-        "-1.5_2.5_3.5",
-        "-2.5_2.5_3.5",
-        "-3.5_2.5_3.5",
-        "-4.5_2.5_3.5",
-        "-5.5_2.5_3.5"
+        "-3.59_0.479_0.59"
       ],
       "IndexUp": [
-        "-1.5_3.5_-1.5",
-        "-1.5_3.5_-0.5",
-        "-1.5_3.5_0.5",
-        "-1.5_3.5_1.5",
-        "-1.5_3.5_2.5",
-        "-2.5_3.5_-1.5",
-        "-2.5_3.5_-0.5",
-        "-2.5_3.5_0.5",
-        "-2.5_3.5_1.5",
-        "-2.5_3.5_2.5",
-        "-3.5_3.5_-1.5",
-        "-3.5_3.5_-0.5",
-        "-3.5_3.5_0.5",
-        "-3.5_3.5_1.5",
-        "-3.5_3.5_2.5",
-        "-4.5_3.5_-1.5",
-        "-4.5_3.5_-0.5",
-        "-4.5_3.5_0.5",
-        "-4.5_3.5_1.5",
-        "-4.5_3.5_2.5",
-        "-5.5_3.5_-1.5",
-        "-5.5_3.5_-0.5",
-        "-5.5_3.5_0.5",
-        "-5.5_3.5_1.5",
-        "-5.5_3.5_2.5"
+        "-1.5_1.5_-1.5"
       ],
       "IndexDown": [
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-0.5_0.5_-1.5",
+        "-0.5_0.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-3.59_0.479_0.59"
+      ],
+      "Index": "-1.5_0.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.59_0.479_0.59": {
+      "XSize": 40.0,
+      "YSize": 45.0,
+      "ZSize": 40.0,
+      "XPosition": -3.59,
+      "YPosition": 0.479000032,
+      "ZPosition": 0.59,
+      "XRotation": 9.974803E-08,
+      "YRotation": 0.707106769,
+      "ZRotation": 9.974801E-08,
+      "WRotation": 0.7071069,
+      "IndexLeft": [
+        "-1.5_0.5_-1.5",
+        "-2.5_0.5_-2.5",
+        "-3.5_0.5_-2.5",
+        "-4.5_0.5_-2.5",
+        "-5.5_0.5_-1.5"
+      ],
+      "IndexRight": [
+        "-1.5_0.5_2.5",
+        "-2.5_0.5_2.5",
+        "-3.5_0.5_2.5",
+        "-4.5_0.5_2.5",
+        "-5.5_0.5_2.5"
+      ],
+      "IndexUp": [
+        "-1.5_1.5_-0.5",
+        "-1.5_1.5_0.5",
+        "-1.5_1.5_1.5",
+        "-2.5_1.5_-1.5",
+        "-2.5_1.5_-0.5",
+        "-2.5_1.5_0.5",
+        "-2.5_1.5_1.5",
+        "-2.5_1.5_2.5",
+        "-3.5_1.5_-1.5",
+        "-3.5_1.5_-0.5",
+        "-3.5_1.5_0.5",
+        "-3.5_1.5_1.5",
+        "-3.5_1.5_2.5",
+        "-4.5_1.5_-1.5",
+        "-4.5_1.5_-0.5",
+        "-4.5_1.5_0.5",
+        "-4.5_1.5_1.5",
+        "-4.5_1.5_2.5",
+        "-5.5_1.5_-0.5",
+        "-5.5_1.5_0.5",
+        "-5.5_1.5_1.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-1.5_0.5_-1.5",
         "-0.5_0.5_-0.5",
         "-0.5_0.5_0.5",
         "-0.5_0.5_1.5",
-        "-0.5_0.5_2.5",
-        "-0.5_1.5_-1.5",
-        "-0.5_1.5_-0.5",
-        "-0.5_1.5_0.5",
-        "-0.5_1.5_1.5",
-        "-0.5_1.5_2.5",
-        "-0.5_2.5_-1.5",
-        "-0.5_2.5_-0.5",
-        "-0.5_2.5_0.5",
-        "-0.5_2.5_1.5",
-        "-0.5_2.5_2.5"
+        "-1.5_0.5_2.5"
       ],
       "IndexBottom": [
-        "-6.5_0.5_-1.5",
-        "-6.5_0.5_-0.5",
-        "-6.5_0.5_0.5",
-        "-6.5_0.5_1.5",
-        "-6.5_0.5_2.5",
-        "-6.5_1.5_-1.5",
-        "-6.5_1.5_-0.5",
-        "-6.5_1.5_0.5",
-        "-6.5_1.5_1.5",
-        "-6.5_1.5_2.5",
-        "-6.5_2.5_-1.5",
-        "-6.5_2.5_-0.5",
-        "-6.5_2.5_0.5",
-        "-6.5_2.5_1.5",
-        "-6.5_2.5_2.5"
+        "-5.5_0.5_-1.5",
+        "-5.5_0.5_-0.5",
+        "-5.5_0.5_0.5",
+        "-5.5_0.5_1.5",
+        "-5.5_0.5_2.5"
       ],
-      "Index": "-3.59_0.229_0.59",
-      "PathPrefab": "Prefabs/Level1/hilichurl-house",
-      "TerritoryInfo": 3,
+      "Index": "-3.59_0.479_0.59",
+      "PathPrefab": "Prefabs/Level1/HilichurlHouseFixed",
+      "TerritoryInfo": 4,
       "ShelterType": {
         "Left": 2,
         "Right": 2,
         "Bottom": 2,
         "Front": 2
+      }
+    },
+    "-1.5_0.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 0.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexRight": [
+        "-1.5_0.5_3.5"
+      ],
+      "IndexUp": [
+        "-1.5_1.5_2.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-0.5_0.5_2.5"
+      ],
+      "IndexBottom": [
+        "-3.59_0.479_0.59"
+      ],
+      "Index": "-1.5_0.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
       }
     },
     "-1.5_0.5_3.5": {
@@ -9677,7 +9715,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-1.5_0.5_2.5"
       ],
       "IndexRight": [
         "-1.5_0.5_4.5"
@@ -10222,7 +10260,7 @@
         "-2.5_0.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-3.59_0.479_0.59"
       ],
       "IndexUp": [
         "-2.5_1.5_-2.5"
@@ -10246,6 +10284,37 @@
         "Front": 0
       }
     },
+    "-2.5_0.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 0.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexRight": [
+        "-2.5_0.5_3.5"
+      ],
+      "IndexUp": [],
+      "IndexDown": [],
+      "IndexFront": [],
+      "IndexBottom": [],
+      "Index": "-2.5_0.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-2.5_0.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -10258,7 +10327,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-2.5_0.5_2.5"
       ],
       "IndexRight": [
         "-2.5_0.5_4.5"
@@ -10803,7 +10872,7 @@
         "-3.5_0.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-3.59_0.479_0.59"
       ],
       "IndexUp": [
         "-3.5_1.5_-2.5"
@@ -10827,6 +10896,37 @@
         "Front": 0
       }
     },
+    "-3.5_0.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 0.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexRight": [
+        "-3.5_0.5_3.5"
+      ],
+      "IndexUp": [],
+      "IndexDown": [],
+      "IndexFront": [],
+      "IndexBottom": [],
+      "Index": "-3.5_0.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-3.5_0.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -10839,7 +10939,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-3.5_0.5_2.5"
       ],
       "IndexRight": [
         "-3.5_0.5_4.5"
@@ -11360,7 +11460,7 @@
         "-4.95_0_-4.02"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-3.59_0.479_0.59"
       ],
       "IndexUp": [
         "-4.5_1.5_-2.5"
@@ -11384,6 +11484,37 @@
         "Front": 0
       }
     },
+    "-4.5_0.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 0.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexRight": [
+        "-4.5_0.5_3.5"
+      ],
+      "IndexUp": [],
+      "IndexDown": [],
+      "IndexFront": [],
+      "IndexBottom": [],
+      "Index": "-4.5_0.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-4.5_0.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -11396,7 +11527,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-4.5_0.5_2.5"
       ],
       "IndexRight": [
         "-4.5_0.5_4.5"
@@ -11865,7 +11996,7 @@
         "-4.95_0_-4.02"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_-1.5"
       ],
       "IndexUp": [
         "-5.5_1.5_-2.5"
@@ -11889,6 +12020,84 @@
         "Front": 0
       }
     },
+    "-5.5_0.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 0.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_0.5_-2.5"
+      ],
+      "IndexRight": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexUp": [
+        "-5.5_1.5_-1.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexBottom": [
+        "-6.5_0.5_-1.5"
+      ],
+      "Index": "-5.5_0.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_0.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 0.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexRight": [
+        "-5.5_0.5_3.5"
+      ],
+      "IndexUp": [
+        "-5.5_1.5_2.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexBottom": [
+        "-6.5_0.5_2.5"
+      ],
+      "Index": "-5.5_0.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-5.5_0.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -11901,7 +12110,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_2.5"
       ],
       "IndexRight": [
         "-5.5_0.5_4.5"
@@ -12457,7 +12666,7 @@
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_-1.5"
       ],
       "IndexBottom": [
         "-7.5_0.5_-1.5"
@@ -12496,7 +12705,7 @@
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_-0.5"
       ],
       "IndexBottom": [
         "-7.5_0.5_-0.5"
@@ -12535,7 +12744,7 @@
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_0.5"
       ],
       "IndexBottom": [
         "-7.5_0.5_0.5"
@@ -12574,7 +12783,7 @@
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_1.5"
       ],
       "IndexBottom": [
         "-7.5_0.5_1.5"
@@ -12613,7 +12822,7 @@
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_2.5"
       ],
       "IndexBottom": [
         "-7.5_0.5_2.5"
@@ -22655,7 +22864,7 @@
         "0.5_1.5_-1.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_-1.5"
       ],
       "Index": "-0.5_1.5_-1.5",
       "PathPrefab": null,
@@ -22694,7 +22903,7 @@
         "0.5_1.5_-0.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_-0.5"
       ],
       "Index": "-0.5_1.5_-0.5",
       "PathPrefab": null,
@@ -22733,7 +22942,7 @@
         "0.5_1.5_0.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_0.5"
       ],
       "Index": "-0.5_1.5_0.5",
       "PathPrefab": null,
@@ -22772,7 +22981,7 @@
         "0.5_1.5_1.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_1.5"
       ],
       "Index": "-0.5_1.5_1.5",
       "PathPrefab": null,
@@ -22811,7 +23020,7 @@
         "0.5_1.5_2.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_2.5"
       ],
       "Index": "-0.5_1.5_2.5",
       "PathPrefab": null,
@@ -23341,7 +23550,7 @@
         "-1.493_-0.01_-3.658"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_-1.5"
       ],
       "IndexUp": [
         "-1.5_2.5_-2.5"
@@ -23365,6 +23574,201 @@
         "Front": 0
       }
     },
+    "-1.5_1.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 1.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_1.5_-2.5"
+      ],
+      "IndexRight": [
+        "-1.5_1.5_-0.5"
+      ],
+      "IndexUp": [
+        "-1.5_2.5_-1.5"
+      ],
+      "IndexDown": [
+        "-1.5_0.5_-1.5"
+      ],
+      "IndexFront": [
+        "-0.5_1.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-2.5_1.5_-1.5"
+      ],
+      "Index": "-1.5_1.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-1.5_1.5_-0.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -1.5,
+      "YPosition": 1.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_1.5_-1.5"
+      ],
+      "IndexRight": [
+        "-1.5_1.5_0.5"
+      ],
+      "IndexUp": [
+        "-1.5_2.5_-0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-0.5_1.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-2.5_1.5_-0.5"
+      ],
+      "Index": "-1.5_1.5_-0.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-1.5_1.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 1.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_1.5_-0.5"
+      ],
+      "IndexRight": [
+        "-1.5_1.5_1.5"
+      ],
+      "IndexUp": [
+        "-1.5_2.5_0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-0.5_1.5_0.5"
+      ],
+      "IndexBottom": [
+        "-2.5_1.5_0.5"
+      ],
+      "Index": "-1.5_1.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-1.5_1.5_1.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -1.5,
+      "YPosition": 1.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_1.5_0.5"
+      ],
+      "IndexRight": [
+        "-1.5_1.5_2.5"
+      ],
+      "IndexUp": [
+        "-1.5_2.5_1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-0.5_1.5_1.5"
+      ],
+      "IndexBottom": [
+        "-2.5_1.5_1.5"
+      ],
+      "Index": "-1.5_1.5_1.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-1.5_1.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 1.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_1.5_1.5"
+      ],
+      "IndexRight": [
+        "-1.5_1.5_3.5"
+      ],
+      "IndexUp": [
+        "-1.5_2.5_2.5"
+      ],
+      "IndexDown": [
+        "-1.5_0.5_2.5"
+      ],
+      "IndexFront": [
+        "-0.5_1.5_2.5"
+      ],
+      "IndexBottom": [
+        "-2.5_1.5_2.5"
+      ],
+      "Index": "-1.5_1.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-1.5_1.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -23377,7 +23781,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_2.5"
       ],
       "IndexRight": [
         "-1.5_1.5_4.5"
@@ -23922,7 +24326,7 @@
         "-2.5_1.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-2.5_1.5_-1.5"
       ],
       "IndexUp": [
         "-2.5_2.5_-2.5"
@@ -23946,6 +24350,201 @@
         "Front": 0
       }
     },
+    "-2.5_1.5_-1.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -2.5,
+      "YPosition": 1.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_1.5_-2.5"
+      ],
+      "IndexRight": [
+        "-2.5_1.5_-0.5"
+      ],
+      "IndexUp": [
+        "-2.5_2.5_-1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-1.5_1.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-3.5_1.5_-1.5"
+      ],
+      "Index": "-2.5_1.5_-1.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-2.5_1.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 1.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_1.5_-1.5"
+      ],
+      "IndexRight": [
+        "-2.5_1.5_0.5"
+      ],
+      "IndexUp": [
+        "-2.5_2.5_-0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-1.5_1.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-3.5_1.5_-0.5"
+      ],
+      "Index": "-2.5_1.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_1.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 1.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_1.5_-0.5"
+      ],
+      "IndexRight": [
+        "-2.5_1.5_1.5"
+      ],
+      "IndexUp": [
+        "-2.5_2.5_0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-1.5_1.5_0.5"
+      ],
+      "IndexBottom": [
+        "-3.5_1.5_0.5"
+      ],
+      "Index": "-2.5_1.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_1.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 1.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_1.5_0.5"
+      ],
+      "IndexRight": [
+        "-2.5_1.5_2.5"
+      ],
+      "IndexUp": [
+        "-2.5_2.5_1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-1.5_1.5_1.5"
+      ],
+      "IndexBottom": [
+        "-3.5_1.5_1.5"
+      ],
+      "Index": "-2.5_1.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_1.5_2.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -2.5,
+      "YPosition": 1.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_1.5_1.5"
+      ],
+      "IndexRight": [
+        "-2.5_1.5_3.5"
+      ],
+      "IndexUp": [
+        "-2.5_2.5_2.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-1.5_1.5_2.5"
+      ],
+      "IndexBottom": [
+        "-3.5_1.5_2.5"
+      ],
+      "Index": "-2.5_1.5_2.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
     "-2.5_1.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -23958,7 +24557,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-2.5_1.5_2.5"
       ],
       "IndexRight": [
         "-2.5_1.5_4.5"
@@ -24503,7 +25102,7 @@
         "-3.5_1.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-3.5_1.5_-1.5"
       ],
       "IndexUp": [
         "-3.5_2.5_-2.5"
@@ -24527,6 +25126,201 @@
         "Front": 0
       }
     },
+    "-3.5_1.5_-1.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -3.5,
+      "YPosition": 1.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_1.5_-2.5"
+      ],
+      "IndexRight": [
+        "-3.5_1.5_-0.5"
+      ],
+      "IndexUp": [
+        "-3.5_2.5_-1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-2.5_1.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-4.5_1.5_-1.5"
+      ],
+      "Index": "-3.5_1.5_-1.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 1,
+        "Right": 1,
+        "Bottom": 1,
+        "Front": 1
+      }
+    },
+    "-3.5_1.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 1.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_1.5_-1.5"
+      ],
+      "IndexRight": [
+        "-3.5_1.5_0.5"
+      ],
+      "IndexUp": [
+        "-3.5_2.5_-0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-2.5_1.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-4.5_1.5_-0.5"
+      ],
+      "Index": "-3.5_1.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_1.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 1.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_1.5_-0.5"
+      ],
+      "IndexRight": [
+        "-3.5_1.5_1.5"
+      ],
+      "IndexUp": [
+        "-3.5_2.5_0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-2.5_1.5_0.5"
+      ],
+      "IndexBottom": [
+        "-4.5_1.5_0.5"
+      ],
+      "Index": "-3.5_1.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_1.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 1.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_1.5_0.5"
+      ],
+      "IndexRight": [
+        "-3.5_1.5_2.5"
+      ],
+      "IndexUp": [
+        "-3.5_2.5_1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-2.5_1.5_1.5"
+      ],
+      "IndexBottom": [
+        "-4.5_1.5_1.5"
+      ],
+      "Index": "-3.5_1.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_1.5_2.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -3.5,
+      "YPosition": 1.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_1.5_1.5"
+      ],
+      "IndexRight": [
+        "-3.5_1.5_3.5"
+      ],
+      "IndexUp": [
+        "-3.5_2.5_2.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-2.5_1.5_2.5"
+      ],
+      "IndexBottom": [
+        "-4.5_1.5_2.5"
+      ],
+      "Index": "-3.5_1.5_2.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 1,
+        "Right": 1,
+        "Bottom": 1,
+        "Front": 1
+      }
+    },
     "-3.5_1.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -24539,7 +25333,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-3.5_1.5_2.5"
       ],
       "IndexRight": [
         "-3.5_1.5_4.5"
@@ -25006,7 +25800,7 @@
         "-4.95_0_-4.02"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-4.5_1.5_-1.5"
       ],
       "IndexUp": [
         "-4.5_2.5_-2.5"
@@ -25030,6 +25824,201 @@
         "Front": 0
       }
     },
+    "-4.5_1.5_-1.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -4.5,
+      "YPosition": 1.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_1.5_-2.5"
+      ],
+      "IndexRight": [
+        "-4.5_1.5_-0.5"
+      ],
+      "IndexUp": [
+        "-4.5_2.5_-1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-3.5_1.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-5.5_1.5_-1.5"
+      ],
+      "Index": "-4.5_1.5_-1.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-4.5_1.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 1.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_1.5_-1.5"
+      ],
+      "IndexRight": [
+        "-4.5_1.5_0.5"
+      ],
+      "IndexUp": [
+        "-4.5_2.5_-0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-3.5_1.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-5.5_1.5_-0.5"
+      ],
+      "Index": "-4.5_1.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_1.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 1.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_1.5_-0.5"
+      ],
+      "IndexRight": [
+        "-4.5_1.5_1.5"
+      ],
+      "IndexUp": [
+        "-4.5_2.5_0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-3.5_1.5_0.5"
+      ],
+      "IndexBottom": [
+        "-5.5_1.5_0.5"
+      ],
+      "Index": "-4.5_1.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_1.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 1.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_1.5_0.5"
+      ],
+      "IndexRight": [
+        "-4.5_1.5_2.5"
+      ],
+      "IndexUp": [
+        "-4.5_2.5_1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-3.5_1.5_1.5"
+      ],
+      "IndexBottom": [
+        "-5.5_1.5_1.5"
+      ],
+      "Index": "-4.5_1.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_1.5_2.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -4.5,
+      "YPosition": 1.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_1.5_1.5"
+      ],
+      "IndexRight": [
+        "-4.5_1.5_3.5"
+      ],
+      "IndexUp": [
+        "-4.5_2.5_2.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-3.5_1.5_2.5"
+      ],
+      "IndexBottom": [
+        "-5.5_1.5_2.5"
+      ],
+      "Index": "-4.5_1.5_2.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
     "-4.5_1.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -25042,7 +26031,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-4.5_1.5_2.5"
       ],
       "IndexRight": [
         "-4.5_1.5_4.5"
@@ -25509,7 +26498,7 @@
         "-4.95_0_-4.02"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_-1.5"
       ],
       "IndexUp": [
         "-5.5_2.5_-2.5"
@@ -25533,6 +26522,201 @@
         "Front": 0
       }
     },
+    "-5.5_1.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 1.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_1.5_-2.5"
+      ],
+      "IndexRight": [
+        "-5.5_1.5_-0.5"
+      ],
+      "IndexUp": [
+        "-5.5_2.5_-1.5"
+      ],
+      "IndexDown": [
+        "-5.5_0.5_-1.5"
+      ],
+      "IndexFront": [
+        "-4.5_1.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-6.5_1.5_-1.5"
+      ],
+      "Index": "-5.5_1.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_1.5_-0.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -5.5,
+      "YPosition": 1.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_1.5_-1.5"
+      ],
+      "IndexRight": [
+        "-5.5_1.5_0.5"
+      ],
+      "IndexUp": [
+        "-5.5_2.5_-0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-4.5_1.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-6.5_1.5_-0.5"
+      ],
+      "Index": "-5.5_1.5_-0.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-5.5_1.5_0.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -5.5,
+      "YPosition": 1.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_1.5_-0.5"
+      ],
+      "IndexRight": [
+        "-5.5_1.5_1.5"
+      ],
+      "IndexUp": [
+        "-5.5_2.5_0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-4.5_1.5_0.5"
+      ],
+      "IndexBottom": [
+        "-6.5_1.5_0.5"
+      ],
+      "Index": "-5.5_1.5_0.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-5.5_1.5_1.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -5.5,
+      "YPosition": 1.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_1.5_0.5"
+      ],
+      "IndexRight": [
+        "-5.5_1.5_2.5"
+      ],
+      "IndexUp": [
+        "-5.5_2.5_1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-4.5_1.5_1.5"
+      ],
+      "IndexBottom": [
+        "-6.5_1.5_1.5"
+      ],
+      "Index": "-5.5_1.5_1.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-5.5_1.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 1.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_1.5_1.5"
+      ],
+      "IndexRight": [
+        "-5.5_1.5_3.5"
+      ],
+      "IndexUp": [
+        "-5.5_2.5_2.5"
+      ],
+      "IndexDown": [
+        "-5.5_0.5_2.5"
+      ],
+      "IndexFront": [
+        "-4.5_1.5_2.5"
+      ],
+      "IndexBottom": [
+        "-6.5_1.5_2.5"
+      ],
+      "Index": "-5.5_1.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-5.5_1.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -25545,7 +26729,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_2.5"
       ],
       "IndexRight": [
         "-5.5_1.5_4.5"
@@ -26138,7 +27322,7 @@
         "-6.5_0.5_-1.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_-1.5"
       ],
       "IndexBottom": [
         "-7.5_1.5_-1.5"
@@ -26177,7 +27361,7 @@
         "-6.5_0.5_-0.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_-0.5"
       ],
       "IndexBottom": [
         "-7.5_1.5_-0.5"
@@ -26216,7 +27400,7 @@
         "-6.5_0.5_0.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_0.5"
       ],
       "IndexBottom": [
         "-7.5_1.5_0.5"
@@ -26255,7 +27439,7 @@
         "-6.5_0.5_1.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_1.5"
       ],
       "IndexBottom": [
         "-7.5_1.5_1.5"
@@ -26294,7 +27478,7 @@
         "-6.5_0.5_2.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_2.5"
       ],
       "IndexBottom": [
         "-7.5_1.5_2.5"
@@ -36623,7 +37807,7 @@
         "0.5_2.5_-1.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_-1.5"
       ],
       "Index": "-0.5_2.5_-1.5",
       "PathPrefab": null,
@@ -36662,7 +37846,7 @@
         "0.5_2.5_-0.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_-0.5"
       ],
       "Index": "-0.5_2.5_-0.5",
       "PathPrefab": null,
@@ -36701,7 +37885,7 @@
         "0.5_2.5_0.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_0.5"
       ],
       "Index": "-0.5_2.5_0.5",
       "PathPrefab": null,
@@ -36740,7 +37924,7 @@
         "0.5_2.5_1.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_1.5"
       ],
       "Index": "-0.5_2.5_1.5",
       "PathPrefab": null,
@@ -36779,7 +37963,7 @@
         "0.5_2.5_2.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_2.5"
       ],
       "Index": "-0.5_2.5_2.5",
       "PathPrefab": null,
@@ -37348,7 +38532,7 @@
         "-1.5_2.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_-1.5"
       ],
       "IndexUp": [
         "-1.5_3.5_-2.5"
@@ -37372,6 +38556,201 @@
         "Front": 0
       }
     },
+    "-1.5_2.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 2.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_2.5_-2.5"
+      ],
+      "IndexRight": [
+        "-1.5_2.5_-0.5"
+      ],
+      "IndexUp": [
+        "-1.5_3.5_-1.5"
+      ],
+      "IndexDown": [
+        "-1.5_1.5_-1.5"
+      ],
+      "IndexFront": [
+        "-0.5_2.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-2.5_2.5_-1.5"
+      ],
+      "Index": "-1.5_2.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-1.5_2.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 2.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_2.5_-1.5"
+      ],
+      "IndexRight": [
+        "-1.5_2.5_0.5"
+      ],
+      "IndexUp": [
+        "-1.5_3.5_-0.5"
+      ],
+      "IndexDown": [
+        "-1.5_1.5_-0.5"
+      ],
+      "IndexFront": [
+        "-0.5_2.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-2.5_2.5_-0.5"
+      ],
+      "Index": "-1.5_2.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-1.5_2.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 2.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_2.5_-0.5"
+      ],
+      "IndexRight": [
+        "-1.5_2.5_1.5"
+      ],
+      "IndexUp": [
+        "-1.5_3.5_0.5"
+      ],
+      "IndexDown": [
+        "-1.5_1.5_0.5"
+      ],
+      "IndexFront": [
+        "-0.5_2.5_0.5"
+      ],
+      "IndexBottom": [
+        "-2.5_2.5_0.5"
+      ],
+      "Index": "-1.5_2.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-1.5_2.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 2.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_2.5_0.5"
+      ],
+      "IndexRight": [
+        "-1.5_2.5_2.5"
+      ],
+      "IndexUp": [
+        "-1.5_3.5_1.5"
+      ],
+      "IndexDown": [
+        "-1.5_1.5_1.5"
+      ],
+      "IndexFront": [
+        "-0.5_2.5_1.5"
+      ],
+      "IndexBottom": [
+        "-2.5_2.5_1.5"
+      ],
+      "Index": "-1.5_2.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-1.5_2.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 2.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_2.5_1.5"
+      ],
+      "IndexRight": [
+        "-1.5_2.5_3.5"
+      ],
+      "IndexUp": [
+        "-1.5_3.5_2.5"
+      ],
+      "IndexDown": [
+        "-1.5_1.5_2.5"
+      ],
+      "IndexFront": [
+        "-0.5_2.5_2.5"
+      ],
+      "IndexBottom": [
+        "-2.5_2.5_2.5"
+      ],
+      "Index": "-1.5_2.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-1.5_2.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -37384,7 +38763,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_2.5"
       ],
       "IndexRight": [
         "-1.5_2.5_4.5"
@@ -37929,7 +39308,7 @@
         "-2.5_2.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_-1.5"
       ],
       "IndexUp": [
         "-2.5_3.5_-2.5"
@@ -37953,6 +39332,201 @@
         "Front": 0
       }
     },
+    "-2.5_2.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 2.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_2.5_-2.5"
+      ],
+      "IndexRight": [
+        "-2.5_2.5_-0.5"
+      ],
+      "IndexUp": [
+        "-2.5_3.5_-1.5"
+      ],
+      "IndexDown": [
+        "-2.5_1.5_-1.5"
+      ],
+      "IndexFront": [
+        "-1.5_2.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-3.5_2.5_-1.5"
+      ],
+      "Index": "-2.5_2.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_2.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 2.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_2.5_-1.5"
+      ],
+      "IndexRight": [
+        "-2.5_2.5_0.5"
+      ],
+      "IndexUp": [
+        "-2.5_3.5_-0.5"
+      ],
+      "IndexDown": [
+        "-2.5_1.5_-0.5"
+      ],
+      "IndexFront": [
+        "-1.5_2.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-3.5_2.5_-0.5"
+      ],
+      "Index": "-2.5_2.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_2.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 2.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_2.5_-0.5"
+      ],
+      "IndexRight": [
+        "-2.5_2.5_1.5"
+      ],
+      "IndexUp": [
+        "-2.5_3.5_0.5"
+      ],
+      "IndexDown": [
+        "-2.5_1.5_0.5"
+      ],
+      "IndexFront": [
+        "-1.5_2.5_0.5"
+      ],
+      "IndexBottom": [
+        "-3.5_2.5_0.5"
+      ],
+      "Index": "-2.5_2.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_2.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 2.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_2.5_0.5"
+      ],
+      "IndexRight": [
+        "-2.5_2.5_2.5"
+      ],
+      "IndexUp": [
+        "-2.5_3.5_1.5"
+      ],
+      "IndexDown": [
+        "-2.5_1.5_1.5"
+      ],
+      "IndexFront": [
+        "-1.5_2.5_1.5"
+      ],
+      "IndexBottom": [
+        "-3.5_2.5_1.5"
+      ],
+      "Index": "-2.5_2.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_2.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 2.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_2.5_1.5"
+      ],
+      "IndexRight": [
+        "-2.5_2.5_3.5"
+      ],
+      "IndexUp": [
+        "-2.5_3.5_2.5"
+      ],
+      "IndexDown": [
+        "-2.5_1.5_2.5"
+      ],
+      "IndexFront": [
+        "-1.5_2.5_2.5"
+      ],
+      "IndexBottom": [
+        "-3.5_2.5_2.5"
+      ],
+      "Index": "-2.5_2.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-2.5_2.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -37965,7 +39539,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_2.5"
       ],
       "IndexRight": [
         "-2.5_2.5_4.5"
@@ -38510,7 +40084,7 @@
         "-3.5_2.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_-1.5"
       ],
       "IndexUp": [
         "-3.5_3.5_-2.5"
@@ -38534,6 +40108,201 @@
         "Front": 0
       }
     },
+    "-3.5_2.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 2.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_2.5_-2.5"
+      ],
+      "IndexRight": [
+        "-3.5_2.5_-0.5"
+      ],
+      "IndexUp": [
+        "-3.5_3.5_-1.5"
+      ],
+      "IndexDown": [
+        "-3.5_1.5_-1.5"
+      ],
+      "IndexFront": [
+        "-2.5_2.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-4.5_2.5_-1.5"
+      ],
+      "Index": "-3.5_2.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_2.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 2.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_2.5_-1.5"
+      ],
+      "IndexRight": [
+        "-3.5_2.5_0.5"
+      ],
+      "IndexUp": [
+        "-3.5_3.5_-0.5"
+      ],
+      "IndexDown": [
+        "-3.5_1.5_-0.5"
+      ],
+      "IndexFront": [
+        "-2.5_2.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-4.5_2.5_-0.5"
+      ],
+      "Index": "-3.5_2.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_2.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 2.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_2.5_-0.5"
+      ],
+      "IndexRight": [
+        "-3.5_2.5_1.5"
+      ],
+      "IndexUp": [
+        "-3.5_3.5_0.5"
+      ],
+      "IndexDown": [
+        "-3.5_1.5_0.5"
+      ],
+      "IndexFront": [
+        "-2.5_2.5_0.5"
+      ],
+      "IndexBottom": [
+        "-4.5_2.5_0.5"
+      ],
+      "Index": "-3.5_2.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_2.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 2.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_2.5_0.5"
+      ],
+      "IndexRight": [
+        "-3.5_2.5_2.5"
+      ],
+      "IndexUp": [
+        "-3.5_3.5_1.5"
+      ],
+      "IndexDown": [
+        "-3.5_1.5_1.5"
+      ],
+      "IndexFront": [
+        "-2.5_2.5_1.5"
+      ],
+      "IndexBottom": [
+        "-4.5_2.5_1.5"
+      ],
+      "Index": "-3.5_2.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_2.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 2.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_2.5_1.5"
+      ],
+      "IndexRight": [
+        "-3.5_2.5_3.5"
+      ],
+      "IndexUp": [
+        "-3.5_3.5_2.5"
+      ],
+      "IndexDown": [
+        "-3.5_1.5_2.5"
+      ],
+      "IndexFront": [
+        "-2.5_2.5_2.5"
+      ],
+      "IndexBottom": [
+        "-4.5_2.5_2.5"
+      ],
+      "Index": "-3.5_2.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-3.5_2.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -38546,7 +40315,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_2.5"
       ],
       "IndexRight": [
         "-3.5_2.5_4.5"
@@ -39091,7 +40860,7 @@
         "-4.5_2.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_-1.5"
       ],
       "IndexUp": [
         "-4.5_3.5_-2.5"
@@ -39115,6 +40884,201 @@
         "Front": 0
       }
     },
+    "-4.5_2.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 2.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_2.5_-2.5"
+      ],
+      "IndexRight": [
+        "-4.5_2.5_-0.5"
+      ],
+      "IndexUp": [
+        "-4.5_3.5_-1.5"
+      ],
+      "IndexDown": [
+        "-4.5_1.5_-1.5"
+      ],
+      "IndexFront": [
+        "-3.5_2.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-5.5_2.5_-1.5"
+      ],
+      "Index": "-4.5_2.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_2.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 2.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_2.5_-1.5"
+      ],
+      "IndexRight": [
+        "-4.5_2.5_0.5"
+      ],
+      "IndexUp": [
+        "-4.5_3.5_-0.5"
+      ],
+      "IndexDown": [
+        "-4.5_1.5_-0.5"
+      ],
+      "IndexFront": [
+        "-3.5_2.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-5.5_2.5_-0.5"
+      ],
+      "Index": "-4.5_2.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_2.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 2.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_2.5_-0.5"
+      ],
+      "IndexRight": [
+        "-4.5_2.5_1.5"
+      ],
+      "IndexUp": [
+        "-4.5_3.5_0.5"
+      ],
+      "IndexDown": [
+        "-4.5_1.5_0.5"
+      ],
+      "IndexFront": [
+        "-3.5_2.5_0.5"
+      ],
+      "IndexBottom": [
+        "-5.5_2.5_0.5"
+      ],
+      "Index": "-4.5_2.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_2.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 2.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_2.5_0.5"
+      ],
+      "IndexRight": [
+        "-4.5_2.5_2.5"
+      ],
+      "IndexUp": [
+        "-4.5_3.5_1.5"
+      ],
+      "IndexDown": [
+        "-4.5_1.5_1.5"
+      ],
+      "IndexFront": [
+        "-3.5_2.5_1.5"
+      ],
+      "IndexBottom": [
+        "-5.5_2.5_1.5"
+      ],
+      "Index": "-4.5_2.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_2.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 2.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_2.5_1.5"
+      ],
+      "IndexRight": [
+        "-4.5_2.5_3.5"
+      ],
+      "IndexUp": [
+        "-4.5_3.5_2.5"
+      ],
+      "IndexDown": [
+        "-4.5_1.5_2.5"
+      ],
+      "IndexFront": [
+        "-3.5_2.5_2.5"
+      ],
+      "IndexBottom": [
+        "-5.5_2.5_2.5"
+      ],
+      "Index": "-4.5_2.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-4.5_2.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -39127,7 +41091,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_2.5"
       ],
       "IndexRight": [
         "-4.5_2.5_4.5"
@@ -39672,7 +41636,7 @@
         "-5.24_2.45_-3.88"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_-1.5"
       ],
       "IndexUp": [
         "-5.5_3.5_-2.5"
@@ -39696,6 +41660,201 @@
         "Front": 0
       }
     },
+    "-5.5_2.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 2.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_2.5_-2.5"
+      ],
+      "IndexRight": [
+        "-5.5_2.5_-0.5"
+      ],
+      "IndexUp": [
+        "-5.5_3.5_-1.5"
+      ],
+      "IndexDown": [
+        "-5.5_1.5_-1.5"
+      ],
+      "IndexFront": [
+        "-4.5_2.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-6.5_2.5_-1.5"
+      ],
+      "Index": "-5.5_2.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_2.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 2.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_2.5_-1.5"
+      ],
+      "IndexRight": [
+        "-5.5_2.5_0.5"
+      ],
+      "IndexUp": [
+        "-5.5_3.5_-0.5"
+      ],
+      "IndexDown": [
+        "-5.5_1.5_-0.5"
+      ],
+      "IndexFront": [
+        "-4.5_2.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-6.5_2.5_-0.5"
+      ],
+      "Index": "-5.5_2.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_2.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 2.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_2.5_-0.5"
+      ],
+      "IndexRight": [
+        "-5.5_2.5_1.5"
+      ],
+      "IndexUp": [
+        "-5.5_3.5_0.5"
+      ],
+      "IndexDown": [
+        "-5.5_1.5_0.5"
+      ],
+      "IndexFront": [
+        "-4.5_2.5_0.5"
+      ],
+      "IndexBottom": [
+        "-6.5_2.5_0.5"
+      ],
+      "Index": "-5.5_2.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_2.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 2.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_2.5_0.5"
+      ],
+      "IndexRight": [
+        "-5.5_2.5_2.5"
+      ],
+      "IndexUp": [
+        "-5.5_3.5_1.5"
+      ],
+      "IndexDown": [
+        "-5.5_1.5_1.5"
+      ],
+      "IndexFront": [
+        "-4.5_2.5_1.5"
+      ],
+      "IndexBottom": [
+        "-6.5_2.5_1.5"
+      ],
+      "Index": "-5.5_2.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_2.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 2.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_2.5_1.5"
+      ],
+      "IndexRight": [
+        "-5.5_2.5_3.5"
+      ],
+      "IndexUp": [
+        "-5.5_3.5_2.5"
+      ],
+      "IndexDown": [
+        "-5.5_1.5_2.5"
+      ],
+      "IndexFront": [
+        "-4.5_2.5_2.5"
+      ],
+      "IndexBottom": [
+        "-6.5_2.5_2.5"
+      ],
+      "Index": "-5.5_2.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-5.5_2.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -39708,7 +41867,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_2.5"
       ],
       "IndexRight": [
         "-5.5_2.5_4.5"
@@ -40301,7 +42460,7 @@
         "-6.5_1.5_-1.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_-1.5"
       ],
       "IndexBottom": [
         "-7.5_2.5_-1.5"
@@ -40340,7 +42499,7 @@
         "-6.5_1.5_-0.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_-0.5"
       ],
       "IndexBottom": [
         "-7.5_2.5_-0.5"
@@ -40379,7 +42538,7 @@
         "-6.5_1.5_0.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_0.5"
       ],
       "IndexBottom": [
         "-7.5_2.5_0.5"
@@ -40418,7 +42577,7 @@
         "-6.5_1.5_1.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_1.5"
       ],
       "IndexBottom": [
         "-7.5_2.5_1.5"
@@ -40457,7 +42616,7 @@
         "-6.5_1.5_2.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_2.5"
       ],
       "IndexBottom": [
         "-7.5_2.5_2.5"
@@ -51400,7 +53559,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_-1.5"
       ],
       "IndexFront": [
         "-0.5_3.5_-1.5"
@@ -51437,7 +53596,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_-0.5"
       ],
       "IndexFront": [
         "-0.5_3.5_-0.5"
@@ -51474,7 +53633,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_0.5"
       ],
       "IndexFront": [
         "-0.5_3.5_0.5"
@@ -51511,7 +53670,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_1.5"
       ],
       "IndexFront": [
         "-0.5_3.5_1.5"
@@ -51548,7 +53707,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_2.5"
       ],
       "IndexFront": [
         "-0.5_3.5_2.5"
@@ -52136,7 +54295,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_-1.5"
       ],
       "IndexFront": [
         "-1.5_3.5_-1.5"
@@ -52173,7 +54332,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_-0.5"
       ],
       "IndexFront": [
         "-1.5_3.5_-0.5"
@@ -52210,7 +54369,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_0.5"
       ],
       "IndexFront": [
         "-1.5_3.5_0.5"
@@ -52247,7 +54406,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_1.5"
       ],
       "IndexFront": [
         "-1.5_3.5_1.5"
@@ -52284,7 +54443,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_2.5"
       ],
       "IndexFront": [
         "-1.5_3.5_2.5"
@@ -52872,7 +55031,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_-1.5"
       ],
       "IndexFront": [
         "-2.5_3.5_-1.5"
@@ -52909,7 +55068,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_-0.5"
       ],
       "IndexFront": [
         "-2.5_3.5_-0.5"
@@ -52946,7 +55105,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_0.5"
       ],
       "IndexFront": [
         "-2.5_3.5_0.5"
@@ -52983,7 +55142,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_1.5"
       ],
       "IndexFront": [
         "-2.5_3.5_1.5"
@@ -53020,7 +55179,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_2.5"
       ],
       "IndexFront": [
         "-2.5_3.5_2.5"
@@ -53608,7 +55767,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_-1.5"
       ],
       "IndexFront": [
         "-3.5_3.5_-1.5"
@@ -53645,7 +55804,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_-0.5"
       ],
       "IndexFront": [
         "-3.5_3.5_-0.5"
@@ -53682,7 +55841,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_0.5"
       ],
       "IndexFront": [
         "-3.5_3.5_0.5"
@@ -53719,7 +55878,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_1.5"
       ],
       "IndexFront": [
         "-3.5_3.5_1.5"
@@ -53756,7 +55915,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_2.5"
       ],
       "IndexFront": [
         "-3.5_3.5_2.5"
@@ -54344,7 +56503,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_-1.5"
       ],
       "IndexFront": [
         "-4.5_3.5_-1.5"
@@ -54381,7 +56540,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_-0.5"
       ],
       "IndexFront": [
         "-4.5_3.5_-0.5"
@@ -54418,7 +56577,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_0.5"
       ],
       "IndexFront": [
         "-4.5_3.5_0.5"
@@ -54455,7 +56614,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_1.5"
       ],
       "IndexFront": [
         "-4.5_3.5_1.5"
@@ -54492,7 +56651,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_2.5"
       ],
       "IndexFront": [
         "-4.5_3.5_2.5"
@@ -58650,6 +60809,99 @@
       ],
       "IndexBottom": [],
       "Index": "-9.5_-0.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_0.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 0.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [],
+      "IndexUp": [],
+      "IndexDown": [],
+      "IndexFront": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexBottom": [
+        "-6.5_0.5_-0.5"
+      ],
+      "Index": "-5.5_0.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_0.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 0.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [],
+      "IndexUp": [],
+      "IndexDown": [],
+      "IndexFront": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexBottom": [
+        "-6.5_0.5_0.5"
+      ],
+      "Index": "-5.5_0.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_0.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 0.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [],
+      "IndexUp": [],
+      "IndexDown": [],
+      "IndexFront": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexBottom": [
+        "-6.5_0.5_1.5"
+      ],
+      "Index": "-5.5_0.5_1.5",
       "PathPrefab": null,
       "TerritoryInfo": 2,
       "ShelterType": {
@@ -59151,7 +61403,9 @@
         "-1.5_0.5_-4.5",
         "-1.493_-0.01_-3.658",
         "-1.5_0.5_-2.5",
-        "-3.59_0.229_0.59",
+        "-1.5_0.5_-1.5",
+        "-3.59_0.479_0.59",
+        "-1.5_0.5_2.5",
         "-1.5_0.5_3.5",
         "-1.5_0.5_4.5",
         "-1.5_0.5_5.5",
@@ -59209,6 +61463,8 @@
         "-5.5_0.5_-6.5",
         "-5.5_0.5_-5.5",
         "-5.5_0.5_-2.5",
+        "-5.5_0.5_-1.5",
+        "-5.5_0.5_2.5",
         "-5.5_0.5_3.5",
         "-5.5_0.5_4.5",
         "-5.5_0.5_5.5",
@@ -67709,7 +69965,7 @@
         "0.5_0.5_-1.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_0.5_-1.5"
       ],
       "Index": "-0.5_0.5_-1.5",
       "PathPrefab": null,
@@ -67748,7 +70004,7 @@
         "0.5_0.5_-0.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-3.59_0.479_0.59"
       ],
       "Index": "-0.5_0.5_-0.5",
       "PathPrefab": null,
@@ -67787,11 +70043,11 @@
         "0.5_0.5_0.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-3.59_0.479_0.59"
       ],
       "Index": "-0.5_0.5_0.5",
-      "PathPrefab": "Prefabs/Level1/EnemySpawn",
-      "TerritoryInfo": 6,
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -67826,11 +70082,11 @@
         "0.5_0.5_1.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-3.59_0.479_0.59"
       ],
       "Index": "-0.5_0.5_1.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
+      "PathPrefab": "Prefabs/Level1/EnemySpawn",
+      "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -67865,7 +70121,7 @@
         "0.5_0.5_2.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_0.5_2.5"
       ],
       "Index": "-0.5_0.5_2.5",
       "PathPrefab": null,
@@ -68438,7 +70694,7 @@
         "-1.493_-0.01_-3.658"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-1.5_0.5_-1.5"
       ],
       "IndexUp": [
         "-1.5_1.5_-2.5"
@@ -68462,123 +70718,157 @@
         "Front": 0
       }
     },
-    "-3.59_0.229_0.59": {
-      "XSize": 40.0,
-      "YSize": 40.0,
-      "ZSize": 40.0,
-      "XPosition": -3.59,
-      "YPosition": 0.229000032,
-      "ZPosition": 0.59,
+    "-1.5_0.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 0.5,
+      "ZPosition": -1.5,
       "XRotation": 0.0,
-      "YRotation": 0.7071068,
+      "YRotation": 0.0,
       "ZRotation": 0.0,
-      "WRotation": 0.7071068,
+      "WRotation": 1.0,
       "IndexLeft": [
-        "-1.5_0.5_-2.5",
-        "-2.5_0.5_-2.5",
-        "-3.5_0.5_-2.5",
-        "-4.5_0.5_-2.5",
-        "-5.5_0.5_-2.5",
-        "-1.5_1.5_-2.5",
-        "-2.5_1.5_-2.5",
-        "-3.5_1.5_-2.5",
-        "-4.5_1.5_-2.5",
-        "-5.5_1.5_-2.5",
-        "-1.5_2.5_-2.5",
-        "-2.5_2.5_-2.5",
-        "-3.5_2.5_-2.5",
-        "-4.5_2.5_-2.5",
-        "-5.5_2.5_-2.5"
+        "-1.5_0.5_-2.5"
       ],
       "IndexRight": [
-        "-1.5_0.5_3.5",
-        "-2.5_0.5_3.5",
-        "-3.5_0.5_3.5",
-        "-4.5_0.5_3.5",
-        "-5.5_0.5_3.5",
-        "-1.5_1.5_3.5",
-        "-2.5_1.5_3.5",
-        "-3.5_1.5_3.5",
-        "-4.5_1.5_3.5",
-        "-5.5_1.5_3.5",
-        "-1.5_2.5_3.5",
-        "-2.5_2.5_3.5",
-        "-3.5_2.5_3.5",
-        "-4.5_2.5_3.5",
-        "-5.5_2.5_3.5"
+        "-3.59_0.479_0.59"
       ],
       "IndexUp": [
-        "-1.5_3.5_-1.5",
-        "-1.5_3.5_-0.5",
-        "-1.5_3.5_0.5",
-        "-1.5_3.5_1.5",
-        "-1.5_3.5_2.5",
-        "-2.5_3.5_-1.5",
-        "-2.5_3.5_-0.5",
-        "-2.5_3.5_0.5",
-        "-2.5_3.5_1.5",
-        "-2.5_3.5_2.5",
-        "-3.5_3.5_-1.5",
-        "-3.5_3.5_-0.5",
-        "-3.5_3.5_0.5",
-        "-3.5_3.5_1.5",
-        "-3.5_3.5_2.5",
-        "-4.5_3.5_-1.5",
-        "-4.5_3.5_-0.5",
-        "-4.5_3.5_0.5",
-        "-4.5_3.5_1.5",
-        "-4.5_3.5_2.5",
-        "-5.5_3.5_-1.5",
-        "-5.5_3.5_-0.5",
-        "-5.5_3.5_0.5",
-        "-5.5_3.5_1.5",
-        "-5.5_3.5_2.5"
+        "-1.5_1.5_-1.5"
       ],
       "IndexDown": [
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-0.5_0.5_-1.5",
+        "-0.5_0.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-3.59_0.479_0.59"
+      ],
+      "Index": "-1.5_0.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.59_0.479_0.59": {
+      "XSize": 40.0,
+      "YSize": 45.0,
+      "ZSize": 40.0,
+      "XPosition": -3.59,
+      "YPosition": 0.479000032,
+      "ZPosition": 0.59,
+      "XRotation": 9.974803E-08,
+      "YRotation": 0.707106769,
+      "ZRotation": 9.974801E-08,
+      "WRotation": 0.7071069,
+      "IndexLeft": [
+        "-1.5_0.5_-1.5",
+        "-2.5_0.5_-2.5",
+        "-3.5_0.5_-2.5",
+        "-4.5_0.5_-2.5",
+        "-5.5_0.5_-1.5"
+      ],
+      "IndexRight": [
+        "-1.5_0.5_2.5",
+        "-2.5_0.5_2.5",
+        "-3.5_0.5_2.5",
+        "-4.5_0.5_2.5",
+        "-5.5_0.5_2.5"
+      ],
+      "IndexUp": [
+        "-1.5_1.5_-0.5",
+        "-1.5_1.5_0.5",
+        "-1.5_1.5_1.5",
+        "-2.5_1.5_-1.5",
+        "-2.5_1.5_-0.5",
+        "-2.5_1.5_0.5",
+        "-2.5_1.5_1.5",
+        "-2.5_1.5_2.5",
+        "-3.5_1.5_-1.5",
+        "-3.5_1.5_-0.5",
+        "-3.5_1.5_0.5",
+        "-3.5_1.5_1.5",
+        "-3.5_1.5_2.5",
+        "-4.5_1.5_-1.5",
+        "-4.5_1.5_-0.5",
+        "-4.5_1.5_0.5",
+        "-4.5_1.5_1.5",
+        "-4.5_1.5_2.5",
+        "-5.5_1.5_-0.5",
+        "-5.5_1.5_0.5",
+        "-5.5_1.5_1.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-1.5_0.5_-1.5",
         "-0.5_0.5_-0.5",
         "-0.5_0.5_0.5",
         "-0.5_0.5_1.5",
-        "-0.5_0.5_2.5",
-        "-0.5_1.5_-1.5",
-        "-0.5_1.5_-0.5",
-        "-0.5_1.5_0.5",
-        "-0.5_1.5_1.5",
-        "-0.5_1.5_2.5",
-        "-0.5_2.5_-1.5",
-        "-0.5_2.5_-0.5",
-        "-0.5_2.5_0.5",
-        "-0.5_2.5_1.5",
-        "-0.5_2.5_2.5"
+        "-1.5_0.5_2.5"
       ],
       "IndexBottom": [
-        "-6.5_0.5_-1.5",
-        "-6.5_0.5_-0.5",
-        "-6.5_0.5_0.5",
-        "-6.5_0.5_1.5",
-        "-6.5_0.5_2.5",
-        "-6.5_1.5_-1.5",
-        "-6.5_1.5_-0.5",
-        "-6.5_1.5_0.5",
-        "-6.5_1.5_1.5",
-        "-6.5_1.5_2.5",
-        "-6.5_2.5_-1.5",
-        "-6.5_2.5_-0.5",
-        "-6.5_2.5_0.5",
-        "-6.5_2.5_1.5",
-        "-6.5_2.5_2.5"
+        "-5.5_0.5_-1.5",
+        "-5.5_0.5_-0.5",
+        "-5.5_0.5_0.5",
+        "-5.5_0.5_1.5",
+        "-5.5_0.5_2.5"
       ],
-      "Index": "-3.59_0.229_0.59",
-      "PathPrefab": "Prefabs/Level1/hilichurl-house",
-      "TerritoryInfo": 3,
+      "Index": "-3.59_0.479_0.59",
+      "PathPrefab": "Prefabs/Level1/HilichurlHouseFixed",
+      "TerritoryInfo": 4,
       "ShelterType": {
         "Left": 2,
         "Right": 2,
         "Bottom": 2,
         "Front": 2
+      }
+    },
+    "-1.5_0.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 0.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexRight": [
+        "-1.5_0.5_3.5"
+      ],
+      "IndexUp": [
+        "-1.5_1.5_2.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-0.5_0.5_2.5"
+      ],
+      "IndexBottom": [
+        "-3.59_0.479_0.59"
+      ],
+      "Index": "-1.5_0.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
       }
     },
     "-1.5_0.5_3.5": {
@@ -68593,7 +70883,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-1.5_0.5_2.5"
       ],
       "IndexRight": [
         "-1.5_0.5_4.5"
@@ -69138,7 +71428,7 @@
         "-2.5_0.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-3.59_0.479_0.59"
       ],
       "IndexUp": [
         "-2.5_1.5_-2.5"
@@ -69162,6 +71452,37 @@
         "Front": 0
       }
     },
+    "-2.5_0.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 0.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexRight": [
+        "-2.5_0.5_3.5"
+      ],
+      "IndexUp": [],
+      "IndexDown": [],
+      "IndexFront": [],
+      "IndexBottom": [],
+      "Index": "-2.5_0.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-2.5_0.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -69174,7 +71495,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-2.5_0.5_2.5"
       ],
       "IndexRight": [
         "-2.5_0.5_4.5"
@@ -69719,7 +72040,7 @@
         "-3.5_0.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-3.59_0.479_0.59"
       ],
       "IndexUp": [
         "-3.5_1.5_-2.5"
@@ -69743,6 +72064,37 @@
         "Front": 0
       }
     },
+    "-3.5_0.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 0.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexRight": [
+        "-3.5_0.5_3.5"
+      ],
+      "IndexUp": [],
+      "IndexDown": [],
+      "IndexFront": [],
+      "IndexBottom": [],
+      "Index": "-3.5_0.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-3.5_0.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -69755,7 +72107,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-3.5_0.5_2.5"
       ],
       "IndexRight": [
         "-3.5_0.5_4.5"
@@ -70276,7 +72628,7 @@
         "-4.95_0_-4.02"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-3.59_0.479_0.59"
       ],
       "IndexUp": [
         "-4.5_1.5_-2.5"
@@ -70300,6 +72652,37 @@
         "Front": 0
       }
     },
+    "-4.5_0.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 0.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexRight": [
+        "-4.5_0.5_3.5"
+      ],
+      "IndexUp": [],
+      "IndexDown": [],
+      "IndexFront": [],
+      "IndexBottom": [],
+      "Index": "-4.5_0.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-4.5_0.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -70312,7 +72695,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-4.5_0.5_2.5"
       ],
       "IndexRight": [
         "-4.5_0.5_4.5"
@@ -70781,7 +73164,7 @@
         "-4.95_0_-4.02"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_-1.5"
       ],
       "IndexUp": [
         "-5.5_1.5_-2.5"
@@ -70805,6 +73188,84 @@
         "Front": 0
       }
     },
+    "-5.5_0.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 0.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_0.5_-2.5"
+      ],
+      "IndexRight": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexUp": [
+        "-5.5_1.5_-1.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexBottom": [
+        "-6.5_0.5_-1.5"
+      ],
+      "Index": "-5.5_0.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_0.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 0.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexRight": [
+        "-5.5_0.5_3.5"
+      ],
+      "IndexUp": [
+        "-5.5_1.5_2.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexBottom": [
+        "-6.5_0.5_2.5"
+      ],
+      "Index": "-5.5_0.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-5.5_0.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -70817,7 +73278,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_2.5"
       ],
       "IndexRight": [
         "-5.5_0.5_4.5"
@@ -71373,7 +73834,7 @@
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_-1.5"
       ],
       "IndexBottom": [
         "-7.5_0.5_-1.5"
@@ -71412,7 +73873,7 @@
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_-0.5"
       ],
       "IndexBottom": [
         "-7.5_0.5_-0.5"
@@ -71451,7 +73912,7 @@
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_0.5"
       ],
       "IndexBottom": [
         "-7.5_0.5_0.5"
@@ -71490,7 +73951,7 @@
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_1.5"
       ],
       "IndexBottom": [
         "-7.5_0.5_1.5"
@@ -71529,7 +73990,7 @@
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_0.5_2.5"
       ],
       "IndexBottom": [
         "-7.5_0.5_2.5"
@@ -81571,7 +84032,7 @@
         "0.5_1.5_-1.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_-1.5"
       ],
       "Index": "-0.5_1.5_-1.5",
       "PathPrefab": null,
@@ -81610,7 +84071,7 @@
         "0.5_1.5_-0.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_-0.5"
       ],
       "Index": "-0.5_1.5_-0.5",
       "PathPrefab": null,
@@ -81649,7 +84110,7 @@
         "0.5_1.5_0.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_0.5"
       ],
       "Index": "-0.5_1.5_0.5",
       "PathPrefab": null,
@@ -81688,7 +84149,7 @@
         "0.5_1.5_1.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_1.5"
       ],
       "Index": "-0.5_1.5_1.5",
       "PathPrefab": null,
@@ -81727,7 +84188,7 @@
         "0.5_1.5_2.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_2.5"
       ],
       "Index": "-0.5_1.5_2.5",
       "PathPrefab": null,
@@ -82257,7 +84718,7 @@
         "-1.493_-0.01_-3.658"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_-1.5"
       ],
       "IndexUp": [
         "-1.5_2.5_-2.5"
@@ -82281,6 +84742,201 @@
         "Front": 0
       }
     },
+    "-1.5_1.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 1.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_1.5_-2.5"
+      ],
+      "IndexRight": [
+        "-1.5_1.5_-0.5"
+      ],
+      "IndexUp": [
+        "-1.5_2.5_-1.5"
+      ],
+      "IndexDown": [
+        "-1.5_0.5_-1.5"
+      ],
+      "IndexFront": [
+        "-0.5_1.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-2.5_1.5_-1.5"
+      ],
+      "Index": "-1.5_1.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-1.5_1.5_-0.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -1.5,
+      "YPosition": 1.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_1.5_-1.5"
+      ],
+      "IndexRight": [
+        "-1.5_1.5_0.5"
+      ],
+      "IndexUp": [
+        "-1.5_2.5_-0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-0.5_1.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-2.5_1.5_-0.5"
+      ],
+      "Index": "-1.5_1.5_-0.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-1.5_1.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 1.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_1.5_-0.5"
+      ],
+      "IndexRight": [
+        "-1.5_1.5_1.5"
+      ],
+      "IndexUp": [
+        "-1.5_2.5_0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-0.5_1.5_0.5"
+      ],
+      "IndexBottom": [
+        "-2.5_1.5_0.5"
+      ],
+      "Index": "-1.5_1.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-1.5_1.5_1.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -1.5,
+      "YPosition": 1.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_1.5_0.5"
+      ],
+      "IndexRight": [
+        "-1.5_1.5_2.5"
+      ],
+      "IndexUp": [
+        "-1.5_2.5_1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-0.5_1.5_1.5"
+      ],
+      "IndexBottom": [
+        "-2.5_1.5_1.5"
+      ],
+      "Index": "-1.5_1.5_1.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-1.5_1.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 1.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_1.5_1.5"
+      ],
+      "IndexRight": [
+        "-1.5_1.5_3.5"
+      ],
+      "IndexUp": [
+        "-1.5_2.5_2.5"
+      ],
+      "IndexDown": [
+        "-1.5_0.5_2.5"
+      ],
+      "IndexFront": [
+        "-0.5_1.5_2.5"
+      ],
+      "IndexBottom": [
+        "-2.5_1.5_2.5"
+      ],
+      "Index": "-1.5_1.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-1.5_1.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -82293,7 +84949,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-1.5_1.5_2.5"
       ],
       "IndexRight": [
         "-1.5_1.5_4.5"
@@ -82838,7 +85494,7 @@
         "-2.5_1.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-2.5_1.5_-1.5"
       ],
       "IndexUp": [
         "-2.5_2.5_-2.5"
@@ -82862,6 +85518,201 @@
         "Front": 0
       }
     },
+    "-2.5_1.5_-1.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -2.5,
+      "YPosition": 1.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_1.5_-2.5"
+      ],
+      "IndexRight": [
+        "-2.5_1.5_-0.5"
+      ],
+      "IndexUp": [
+        "-2.5_2.5_-1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-1.5_1.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-3.5_1.5_-1.5"
+      ],
+      "Index": "-2.5_1.5_-1.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-2.5_1.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 1.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_1.5_-1.5"
+      ],
+      "IndexRight": [
+        "-2.5_1.5_0.5"
+      ],
+      "IndexUp": [
+        "-2.5_2.5_-0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-1.5_1.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-3.5_1.5_-0.5"
+      ],
+      "Index": "-2.5_1.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_1.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 1.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_1.5_-0.5"
+      ],
+      "IndexRight": [
+        "-2.5_1.5_1.5"
+      ],
+      "IndexUp": [
+        "-2.5_2.5_0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-1.5_1.5_0.5"
+      ],
+      "IndexBottom": [
+        "-3.5_1.5_0.5"
+      ],
+      "Index": "-2.5_1.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_1.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 1.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_1.5_0.5"
+      ],
+      "IndexRight": [
+        "-2.5_1.5_2.5"
+      ],
+      "IndexUp": [
+        "-2.5_2.5_1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-1.5_1.5_1.5"
+      ],
+      "IndexBottom": [
+        "-3.5_1.5_1.5"
+      ],
+      "Index": "-2.5_1.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_1.5_2.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -2.5,
+      "YPosition": 1.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_1.5_1.5"
+      ],
+      "IndexRight": [
+        "-2.5_1.5_3.5"
+      ],
+      "IndexUp": [
+        "-2.5_2.5_2.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-1.5_1.5_2.5"
+      ],
+      "IndexBottom": [
+        "-3.5_1.5_2.5"
+      ],
+      "Index": "-2.5_1.5_2.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
     "-2.5_1.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -82874,7 +85725,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-2.5_1.5_2.5"
       ],
       "IndexRight": [
         "-2.5_1.5_4.5"
@@ -83419,7 +86270,7 @@
         "-3.5_1.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-3.5_1.5_-1.5"
       ],
       "IndexUp": [
         "-3.5_2.5_-2.5"
@@ -83443,6 +86294,201 @@
         "Front": 0
       }
     },
+    "-3.5_1.5_-1.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -3.5,
+      "YPosition": 1.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_1.5_-2.5"
+      ],
+      "IndexRight": [
+        "-3.5_1.5_-0.5"
+      ],
+      "IndexUp": [
+        "-3.5_2.5_-1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-2.5_1.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-4.5_1.5_-1.5"
+      ],
+      "Index": "-3.5_1.5_-1.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 1,
+        "Right": 1,
+        "Bottom": 1,
+        "Front": 1
+      }
+    },
+    "-3.5_1.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 1.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_1.5_-1.5"
+      ],
+      "IndexRight": [
+        "-3.5_1.5_0.5"
+      ],
+      "IndexUp": [
+        "-3.5_2.5_-0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-2.5_1.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-4.5_1.5_-0.5"
+      ],
+      "Index": "-3.5_1.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_1.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 1.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_1.5_-0.5"
+      ],
+      "IndexRight": [
+        "-3.5_1.5_1.5"
+      ],
+      "IndexUp": [
+        "-3.5_2.5_0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-2.5_1.5_0.5"
+      ],
+      "IndexBottom": [
+        "-4.5_1.5_0.5"
+      ],
+      "Index": "-3.5_1.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_1.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 1.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_1.5_0.5"
+      ],
+      "IndexRight": [
+        "-3.5_1.5_2.5"
+      ],
+      "IndexUp": [
+        "-3.5_2.5_1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-2.5_1.5_1.5"
+      ],
+      "IndexBottom": [
+        "-4.5_1.5_1.5"
+      ],
+      "Index": "-3.5_1.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_1.5_2.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -3.5,
+      "YPosition": 1.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_1.5_1.5"
+      ],
+      "IndexRight": [
+        "-3.5_1.5_3.5"
+      ],
+      "IndexUp": [
+        "-3.5_2.5_2.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-2.5_1.5_2.5"
+      ],
+      "IndexBottom": [
+        "-4.5_1.5_2.5"
+      ],
+      "Index": "-3.5_1.5_2.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 1,
+        "Right": 1,
+        "Bottom": 1,
+        "Front": 1
+      }
+    },
     "-3.5_1.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -83455,7 +86501,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-3.5_1.5_2.5"
       ],
       "IndexRight": [
         "-3.5_1.5_4.5"
@@ -83922,7 +86968,7 @@
         "-4.95_0_-4.02"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-4.5_1.5_-1.5"
       ],
       "IndexUp": [
         "-4.5_2.5_-2.5"
@@ -83946,6 +86992,201 @@
         "Front": 0
       }
     },
+    "-4.5_1.5_-1.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -4.5,
+      "YPosition": 1.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_1.5_-2.5"
+      ],
+      "IndexRight": [
+        "-4.5_1.5_-0.5"
+      ],
+      "IndexUp": [
+        "-4.5_2.5_-1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-3.5_1.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-5.5_1.5_-1.5"
+      ],
+      "Index": "-4.5_1.5_-1.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-4.5_1.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 1.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_1.5_-1.5"
+      ],
+      "IndexRight": [
+        "-4.5_1.5_0.5"
+      ],
+      "IndexUp": [
+        "-4.5_2.5_-0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-3.5_1.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-5.5_1.5_-0.5"
+      ],
+      "Index": "-4.5_1.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_1.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 1.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_1.5_-0.5"
+      ],
+      "IndexRight": [
+        "-4.5_1.5_1.5"
+      ],
+      "IndexUp": [
+        "-4.5_2.5_0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-3.5_1.5_0.5"
+      ],
+      "IndexBottom": [
+        "-5.5_1.5_0.5"
+      ],
+      "Index": "-4.5_1.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_1.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 1.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_1.5_0.5"
+      ],
+      "IndexRight": [
+        "-4.5_1.5_2.5"
+      ],
+      "IndexUp": [
+        "-4.5_2.5_1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-3.5_1.5_1.5"
+      ],
+      "IndexBottom": [
+        "-5.5_1.5_1.5"
+      ],
+      "Index": "-4.5_1.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_1.5_2.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -4.5,
+      "YPosition": 1.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_1.5_1.5"
+      ],
+      "IndexRight": [
+        "-4.5_1.5_3.5"
+      ],
+      "IndexUp": [
+        "-4.5_2.5_2.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-3.5_1.5_2.5"
+      ],
+      "IndexBottom": [
+        "-5.5_1.5_2.5"
+      ],
+      "Index": "-4.5_1.5_2.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
     "-4.5_1.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -83958,7 +87199,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-4.5_1.5_2.5"
       ],
       "IndexRight": [
         "-4.5_1.5_4.5"
@@ -84425,7 +87666,7 @@
         "-4.95_0_-4.02"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_-1.5"
       ],
       "IndexUp": [
         "-5.5_2.5_-2.5"
@@ -84449,6 +87690,201 @@
         "Front": 0
       }
     },
+    "-5.5_1.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 1.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_1.5_-2.5"
+      ],
+      "IndexRight": [
+        "-5.5_1.5_-0.5"
+      ],
+      "IndexUp": [
+        "-5.5_2.5_-1.5"
+      ],
+      "IndexDown": [
+        "-5.5_0.5_-1.5"
+      ],
+      "IndexFront": [
+        "-4.5_1.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-6.5_1.5_-1.5"
+      ],
+      "Index": "-5.5_1.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_1.5_-0.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -5.5,
+      "YPosition": 1.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_1.5_-1.5"
+      ],
+      "IndexRight": [
+        "-5.5_1.5_0.5"
+      ],
+      "IndexUp": [
+        "-5.5_2.5_-0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-4.5_1.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-6.5_1.5_-0.5"
+      ],
+      "Index": "-5.5_1.5_-0.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-5.5_1.5_0.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -5.5,
+      "YPosition": 1.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_1.5_-0.5"
+      ],
+      "IndexRight": [
+        "-5.5_1.5_1.5"
+      ],
+      "IndexUp": [
+        "-5.5_2.5_0.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-4.5_1.5_0.5"
+      ],
+      "IndexBottom": [
+        "-6.5_1.5_0.5"
+      ],
+      "Index": "-5.5_1.5_0.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-5.5_1.5_1.5": {
+      "XSize": 1.0,
+      "YSize": 1.0,
+      "ZSize": 1.0,
+      "XPosition": -5.5,
+      "YPosition": 1.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_1.5_0.5"
+      ],
+      "IndexRight": [
+        "-5.5_1.5_2.5"
+      ],
+      "IndexUp": [
+        "-5.5_2.5_1.5"
+      ],
+      "IndexDown": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexFront": [
+        "-4.5_1.5_1.5"
+      ],
+      "IndexBottom": [
+        "-6.5_1.5_1.5"
+      ],
+      "Index": "-5.5_1.5_1.5",
+      "PathPrefab": "Prefabs/CubeNew",
+      "TerritoryInfo": 3,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
+    "-5.5_1.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 1.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_1.5_1.5"
+      ],
+      "IndexRight": [
+        "-5.5_1.5_3.5"
+      ],
+      "IndexUp": [
+        "-5.5_2.5_2.5"
+      ],
+      "IndexDown": [
+        "-5.5_0.5_2.5"
+      ],
+      "IndexFront": [
+        "-4.5_1.5_2.5"
+      ],
+      "IndexBottom": [
+        "-6.5_1.5_2.5"
+      ],
+      "Index": "-5.5_1.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-5.5_1.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -84461,7 +87897,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_2.5"
       ],
       "IndexRight": [
         "-5.5_1.5_4.5"
@@ -85054,7 +88490,7 @@
         "-6.5_0.5_-1.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_-1.5"
       ],
       "IndexBottom": [
         "-7.5_1.5_-1.5"
@@ -85093,7 +88529,7 @@
         "-6.5_0.5_-0.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_-0.5"
       ],
       "IndexBottom": [
         "-7.5_1.5_-0.5"
@@ -85132,7 +88568,7 @@
         "-6.5_0.5_0.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_0.5"
       ],
       "IndexBottom": [
         "-7.5_1.5_0.5"
@@ -85171,7 +88607,7 @@
         "-6.5_0.5_1.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_1.5"
       ],
       "IndexBottom": [
         "-7.5_1.5_1.5"
@@ -85210,7 +88646,7 @@
         "-6.5_0.5_2.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_1.5_2.5"
       ],
       "IndexBottom": [
         "-7.5_1.5_2.5"
@@ -95539,7 +98975,7 @@
         "0.5_2.5_-1.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_-1.5"
       ],
       "Index": "-0.5_2.5_-1.5",
       "PathPrefab": null,
@@ -95578,7 +99014,7 @@
         "0.5_2.5_-0.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_-0.5"
       ],
       "Index": "-0.5_2.5_-0.5",
       "PathPrefab": null,
@@ -95617,7 +99053,7 @@
         "0.5_2.5_0.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_0.5"
       ],
       "Index": "-0.5_2.5_0.5",
       "PathPrefab": null,
@@ -95656,7 +99092,7 @@
         "0.5_2.5_1.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_1.5"
       ],
       "Index": "-0.5_2.5_1.5",
       "PathPrefab": null,
@@ -95695,7 +99131,7 @@
         "0.5_2.5_2.5"
       ],
       "IndexBottom": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_2.5"
       ],
       "Index": "-0.5_2.5_2.5",
       "PathPrefab": null,
@@ -96264,7 +99700,7 @@
         "-1.5_2.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_-1.5"
       ],
       "IndexUp": [
         "-1.5_3.5_-2.5"
@@ -96288,6 +99724,201 @@
         "Front": 0
       }
     },
+    "-1.5_2.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 2.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_2.5_-2.5"
+      ],
+      "IndexRight": [
+        "-1.5_2.5_-0.5"
+      ],
+      "IndexUp": [
+        "-1.5_3.5_-1.5"
+      ],
+      "IndexDown": [
+        "-1.5_1.5_-1.5"
+      ],
+      "IndexFront": [
+        "-0.5_2.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-2.5_2.5_-1.5"
+      ],
+      "Index": "-1.5_2.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-1.5_2.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 2.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_2.5_-1.5"
+      ],
+      "IndexRight": [
+        "-1.5_2.5_0.5"
+      ],
+      "IndexUp": [
+        "-1.5_3.5_-0.5"
+      ],
+      "IndexDown": [
+        "-1.5_1.5_-0.5"
+      ],
+      "IndexFront": [
+        "-0.5_2.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-2.5_2.5_-0.5"
+      ],
+      "Index": "-1.5_2.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-1.5_2.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 2.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_2.5_-0.5"
+      ],
+      "IndexRight": [
+        "-1.5_2.5_1.5"
+      ],
+      "IndexUp": [
+        "-1.5_3.5_0.5"
+      ],
+      "IndexDown": [
+        "-1.5_1.5_0.5"
+      ],
+      "IndexFront": [
+        "-0.5_2.5_0.5"
+      ],
+      "IndexBottom": [
+        "-2.5_2.5_0.5"
+      ],
+      "Index": "-1.5_2.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-1.5_2.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 2.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_2.5_0.5"
+      ],
+      "IndexRight": [
+        "-1.5_2.5_2.5"
+      ],
+      "IndexUp": [
+        "-1.5_3.5_1.5"
+      ],
+      "IndexDown": [
+        "-1.5_1.5_1.5"
+      ],
+      "IndexFront": [
+        "-0.5_2.5_1.5"
+      ],
+      "IndexBottom": [
+        "-2.5_2.5_1.5"
+      ],
+      "Index": "-1.5_2.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-1.5_2.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -1.5,
+      "YPosition": 2.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-1.5_2.5_1.5"
+      ],
+      "IndexRight": [
+        "-1.5_2.5_3.5"
+      ],
+      "IndexUp": [
+        "-1.5_3.5_2.5"
+      ],
+      "IndexDown": [
+        "-1.5_1.5_2.5"
+      ],
+      "IndexFront": [
+        "-0.5_2.5_2.5"
+      ],
+      "IndexBottom": [
+        "-2.5_2.5_2.5"
+      ],
+      "Index": "-1.5_2.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-1.5_2.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -96300,7 +99931,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_2.5"
       ],
       "IndexRight": [
         "-1.5_2.5_4.5"
@@ -96845,7 +100476,7 @@
         "-2.5_2.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_-1.5"
       ],
       "IndexUp": [
         "-2.5_3.5_-2.5"
@@ -96869,6 +100500,201 @@
         "Front": 0
       }
     },
+    "-2.5_2.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 2.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_2.5_-2.5"
+      ],
+      "IndexRight": [
+        "-2.5_2.5_-0.5"
+      ],
+      "IndexUp": [
+        "-2.5_3.5_-1.5"
+      ],
+      "IndexDown": [
+        "-2.5_1.5_-1.5"
+      ],
+      "IndexFront": [
+        "-1.5_2.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-3.5_2.5_-1.5"
+      ],
+      "Index": "-2.5_2.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_2.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 2.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_2.5_-1.5"
+      ],
+      "IndexRight": [
+        "-2.5_2.5_0.5"
+      ],
+      "IndexUp": [
+        "-2.5_3.5_-0.5"
+      ],
+      "IndexDown": [
+        "-2.5_1.5_-0.5"
+      ],
+      "IndexFront": [
+        "-1.5_2.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-3.5_2.5_-0.5"
+      ],
+      "Index": "-2.5_2.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_2.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 2.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_2.5_-0.5"
+      ],
+      "IndexRight": [
+        "-2.5_2.5_1.5"
+      ],
+      "IndexUp": [
+        "-2.5_3.5_0.5"
+      ],
+      "IndexDown": [
+        "-2.5_1.5_0.5"
+      ],
+      "IndexFront": [
+        "-1.5_2.5_0.5"
+      ],
+      "IndexBottom": [
+        "-3.5_2.5_0.5"
+      ],
+      "Index": "-2.5_2.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_2.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 2.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_2.5_0.5"
+      ],
+      "IndexRight": [
+        "-2.5_2.5_2.5"
+      ],
+      "IndexUp": [
+        "-2.5_3.5_1.5"
+      ],
+      "IndexDown": [
+        "-2.5_1.5_1.5"
+      ],
+      "IndexFront": [
+        "-1.5_2.5_1.5"
+      ],
+      "IndexBottom": [
+        "-3.5_2.5_1.5"
+      ],
+      "Index": "-2.5_2.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-2.5_2.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -2.5,
+      "YPosition": 2.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-2.5_2.5_1.5"
+      ],
+      "IndexRight": [
+        "-2.5_2.5_3.5"
+      ],
+      "IndexUp": [
+        "-2.5_3.5_2.5"
+      ],
+      "IndexDown": [
+        "-2.5_1.5_2.5"
+      ],
+      "IndexFront": [
+        "-1.5_2.5_2.5"
+      ],
+      "IndexBottom": [
+        "-3.5_2.5_2.5"
+      ],
+      "Index": "-2.5_2.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-2.5_2.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -96881,7 +100707,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_2.5"
       ],
       "IndexRight": [
         "-2.5_2.5_4.5"
@@ -97426,7 +101252,7 @@
         "-3.5_2.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_-1.5"
       ],
       "IndexUp": [
         "-3.5_3.5_-2.5"
@@ -97450,6 +101276,201 @@
         "Front": 0
       }
     },
+    "-3.5_2.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 2.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_2.5_-2.5"
+      ],
+      "IndexRight": [
+        "-3.5_2.5_-0.5"
+      ],
+      "IndexUp": [
+        "-3.5_3.5_-1.5"
+      ],
+      "IndexDown": [
+        "-3.5_1.5_-1.5"
+      ],
+      "IndexFront": [
+        "-2.5_2.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-4.5_2.5_-1.5"
+      ],
+      "Index": "-3.5_2.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_2.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 2.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_2.5_-1.5"
+      ],
+      "IndexRight": [
+        "-3.5_2.5_0.5"
+      ],
+      "IndexUp": [
+        "-3.5_3.5_-0.5"
+      ],
+      "IndexDown": [
+        "-3.5_1.5_-0.5"
+      ],
+      "IndexFront": [
+        "-2.5_2.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-4.5_2.5_-0.5"
+      ],
+      "Index": "-3.5_2.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_2.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 2.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_2.5_-0.5"
+      ],
+      "IndexRight": [
+        "-3.5_2.5_1.5"
+      ],
+      "IndexUp": [
+        "-3.5_3.5_0.5"
+      ],
+      "IndexDown": [
+        "-3.5_1.5_0.5"
+      ],
+      "IndexFront": [
+        "-2.5_2.5_0.5"
+      ],
+      "IndexBottom": [
+        "-4.5_2.5_0.5"
+      ],
+      "Index": "-3.5_2.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_2.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 2.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_2.5_0.5"
+      ],
+      "IndexRight": [
+        "-3.5_2.5_2.5"
+      ],
+      "IndexUp": [
+        "-3.5_3.5_1.5"
+      ],
+      "IndexDown": [
+        "-3.5_1.5_1.5"
+      ],
+      "IndexFront": [
+        "-2.5_2.5_1.5"
+      ],
+      "IndexBottom": [
+        "-4.5_2.5_1.5"
+      ],
+      "Index": "-3.5_2.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-3.5_2.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -3.5,
+      "YPosition": 2.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-3.5_2.5_1.5"
+      ],
+      "IndexRight": [
+        "-3.5_2.5_3.5"
+      ],
+      "IndexUp": [
+        "-3.5_3.5_2.5"
+      ],
+      "IndexDown": [
+        "-3.5_1.5_2.5"
+      ],
+      "IndexFront": [
+        "-2.5_2.5_2.5"
+      ],
+      "IndexBottom": [
+        "-4.5_2.5_2.5"
+      ],
+      "Index": "-3.5_2.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-3.5_2.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -97462,7 +101483,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_2.5"
       ],
       "IndexRight": [
         "-3.5_2.5_4.5"
@@ -98007,7 +102028,7 @@
         "-4.5_2.5_-3.5"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_-1.5"
       ],
       "IndexUp": [
         "-4.5_3.5_-2.5"
@@ -98031,6 +102052,201 @@
         "Front": 0
       }
     },
+    "-4.5_2.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 2.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_2.5_-2.5"
+      ],
+      "IndexRight": [
+        "-4.5_2.5_-0.5"
+      ],
+      "IndexUp": [
+        "-4.5_3.5_-1.5"
+      ],
+      "IndexDown": [
+        "-4.5_1.5_-1.5"
+      ],
+      "IndexFront": [
+        "-3.5_2.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-5.5_2.5_-1.5"
+      ],
+      "Index": "-4.5_2.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_2.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 2.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_2.5_-1.5"
+      ],
+      "IndexRight": [
+        "-4.5_2.5_0.5"
+      ],
+      "IndexUp": [
+        "-4.5_3.5_-0.5"
+      ],
+      "IndexDown": [
+        "-4.5_1.5_-0.5"
+      ],
+      "IndexFront": [
+        "-3.5_2.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-5.5_2.5_-0.5"
+      ],
+      "Index": "-4.5_2.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_2.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 2.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_2.5_-0.5"
+      ],
+      "IndexRight": [
+        "-4.5_2.5_1.5"
+      ],
+      "IndexUp": [
+        "-4.5_3.5_0.5"
+      ],
+      "IndexDown": [
+        "-4.5_1.5_0.5"
+      ],
+      "IndexFront": [
+        "-3.5_2.5_0.5"
+      ],
+      "IndexBottom": [
+        "-5.5_2.5_0.5"
+      ],
+      "Index": "-4.5_2.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_2.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 2.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_2.5_0.5"
+      ],
+      "IndexRight": [
+        "-4.5_2.5_2.5"
+      ],
+      "IndexUp": [
+        "-4.5_3.5_1.5"
+      ],
+      "IndexDown": [
+        "-4.5_1.5_1.5"
+      ],
+      "IndexFront": [
+        "-3.5_2.5_1.5"
+      ],
+      "IndexBottom": [
+        "-5.5_2.5_1.5"
+      ],
+      "Index": "-4.5_2.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-4.5_2.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -4.5,
+      "YPosition": 2.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-4.5_2.5_1.5"
+      ],
+      "IndexRight": [
+        "-4.5_2.5_3.5"
+      ],
+      "IndexUp": [
+        "-4.5_3.5_2.5"
+      ],
+      "IndexDown": [
+        "-4.5_1.5_2.5"
+      ],
+      "IndexFront": [
+        "-3.5_2.5_2.5"
+      ],
+      "IndexBottom": [
+        "-5.5_2.5_2.5"
+      ],
+      "Index": "-4.5_2.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-4.5_2.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -98043,7 +102259,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_2.5"
       ],
       "IndexRight": [
         "-4.5_2.5_4.5"
@@ -98588,7 +102804,7 @@
         "-5.24_2.45_-3.88"
       ],
       "IndexRight": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_-1.5"
       ],
       "IndexUp": [
         "-5.5_3.5_-2.5"
@@ -98612,6 +102828,201 @@
         "Front": 0
       }
     },
+    "-5.5_2.5_-1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 2.5,
+      "ZPosition": -1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_2.5_-2.5"
+      ],
+      "IndexRight": [
+        "-5.5_2.5_-0.5"
+      ],
+      "IndexUp": [
+        "-5.5_3.5_-1.5"
+      ],
+      "IndexDown": [
+        "-5.5_1.5_-1.5"
+      ],
+      "IndexFront": [
+        "-4.5_2.5_-1.5"
+      ],
+      "IndexBottom": [
+        "-6.5_2.5_-1.5"
+      ],
+      "Index": "-5.5_2.5_-1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_2.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 2.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_2.5_-1.5"
+      ],
+      "IndexRight": [
+        "-5.5_2.5_0.5"
+      ],
+      "IndexUp": [
+        "-5.5_3.5_-0.5"
+      ],
+      "IndexDown": [
+        "-5.5_1.5_-0.5"
+      ],
+      "IndexFront": [
+        "-4.5_2.5_-0.5"
+      ],
+      "IndexBottom": [
+        "-6.5_2.5_-0.5"
+      ],
+      "Index": "-5.5_2.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_2.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 2.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_2.5_-0.5"
+      ],
+      "IndexRight": [
+        "-5.5_2.5_1.5"
+      ],
+      "IndexUp": [
+        "-5.5_3.5_0.5"
+      ],
+      "IndexDown": [
+        "-5.5_1.5_0.5"
+      ],
+      "IndexFront": [
+        "-4.5_2.5_0.5"
+      ],
+      "IndexBottom": [
+        "-6.5_2.5_0.5"
+      ],
+      "Index": "-5.5_2.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_2.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 2.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_2.5_0.5"
+      ],
+      "IndexRight": [
+        "-5.5_2.5_2.5"
+      ],
+      "IndexUp": [
+        "-5.5_3.5_1.5"
+      ],
+      "IndexDown": [
+        "-5.5_1.5_1.5"
+      ],
+      "IndexFront": [
+        "-4.5_2.5_1.5"
+      ],
+      "IndexBottom": [
+        "-6.5_2.5_1.5"
+      ],
+      "Index": "-5.5_2.5_1.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_2.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 2.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-5.5_2.5_1.5"
+      ],
+      "IndexRight": [
+        "-5.5_2.5_3.5"
+      ],
+      "IndexUp": [
+        "-5.5_3.5_2.5"
+      ],
+      "IndexDown": [
+        "-5.5_1.5_2.5"
+      ],
+      "IndexFront": [
+        "-4.5_2.5_2.5"
+      ],
+      "IndexBottom": [
+        "-6.5_2.5_2.5"
+      ],
+      "Index": "-5.5_2.5_2.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-5.5_2.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -98624,7 +103035,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_2.5"
       ],
       "IndexRight": [
         "-5.5_2.5_4.5"
@@ -99217,7 +103628,7 @@
         "-6.5_1.5_-1.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_-1.5"
       ],
       "IndexBottom": [
         "-7.5_2.5_-1.5"
@@ -99256,7 +103667,7 @@
         "-6.5_1.5_-0.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_-0.5"
       ],
       "IndexBottom": [
         "-7.5_2.5_-0.5"
@@ -99295,7 +103706,7 @@
         "-6.5_1.5_0.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_0.5"
       ],
       "IndexBottom": [
         "-7.5_2.5_0.5"
@@ -99334,7 +103745,7 @@
         "-6.5_1.5_1.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_1.5"
       ],
       "IndexBottom": [
         "-7.5_2.5_1.5"
@@ -99373,7 +103784,7 @@
         "-6.5_1.5_2.5"
       ],
       "IndexFront": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_2.5"
       ],
       "IndexBottom": [
         "-7.5_2.5_2.5"
@@ -110316,7 +114727,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_-1.5"
       ],
       "IndexFront": [
         "-0.5_3.5_-1.5"
@@ -110353,7 +114764,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_-0.5"
       ],
       "IndexFront": [
         "-0.5_3.5_-0.5"
@@ -110390,7 +114801,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_0.5"
       ],
       "IndexFront": [
         "-0.5_3.5_0.5"
@@ -110427,7 +114838,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_1.5"
       ],
       "IndexFront": [
         "-0.5_3.5_1.5"
@@ -110464,7 +114875,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-1.5_2.5_2.5"
       ],
       "IndexFront": [
         "-0.5_3.5_2.5"
@@ -111052,7 +115463,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_-1.5"
       ],
       "IndexFront": [
         "-1.5_3.5_-1.5"
@@ -111089,7 +115500,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_-0.5"
       ],
       "IndexFront": [
         "-1.5_3.5_-0.5"
@@ -111126,7 +115537,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_0.5"
       ],
       "IndexFront": [
         "-1.5_3.5_0.5"
@@ -111163,7 +115574,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_1.5"
       ],
       "IndexFront": [
         "-1.5_3.5_1.5"
@@ -111200,7 +115611,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-2.5_2.5_2.5"
       ],
       "IndexFront": [
         "-1.5_3.5_2.5"
@@ -111788,7 +116199,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_-1.5"
       ],
       "IndexFront": [
         "-2.5_3.5_-1.5"
@@ -111825,7 +116236,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_-0.5"
       ],
       "IndexFront": [
         "-2.5_3.5_-0.5"
@@ -111862,7 +116273,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_0.5"
       ],
       "IndexFront": [
         "-2.5_3.5_0.5"
@@ -111899,7 +116310,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_1.5"
       ],
       "IndexFront": [
         "-2.5_3.5_1.5"
@@ -111936,7 +116347,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-3.5_2.5_2.5"
       ],
       "IndexFront": [
         "-2.5_3.5_2.5"
@@ -112524,7 +116935,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_-1.5"
       ],
       "IndexFront": [
         "-3.5_3.5_-1.5"
@@ -112561,7 +116972,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_-0.5"
       ],
       "IndexFront": [
         "-3.5_3.5_-0.5"
@@ -112598,7 +117009,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_0.5"
       ],
       "IndexFront": [
         "-3.5_3.5_0.5"
@@ -112635,7 +117046,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_1.5"
       ],
       "IndexFront": [
         "-3.5_3.5_1.5"
@@ -112672,7 +117083,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-4.5_2.5_2.5"
       ],
       "IndexFront": [
         "-3.5_3.5_2.5"
@@ -113260,7 +117671,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_-1.5"
       ],
       "IndexFront": [
         "-4.5_3.5_-1.5"
@@ -113297,7 +117708,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_-0.5"
       ],
       "IndexFront": [
         "-4.5_3.5_-0.5"
@@ -113334,7 +117745,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_0.5"
       ],
       "IndexFront": [
         "-4.5_3.5_0.5"
@@ -113371,7 +117782,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_1.5"
       ],
       "IndexFront": [
         "-4.5_3.5_1.5"
@@ -113408,7 +117819,7 @@
       ],
       "IndexUp": [],
       "IndexDown": [
-        "-3.59_0.229_0.59"
+        "-5.5_2.5_2.5"
       ],
       "IndexFront": [
         "-4.5_3.5_2.5"
@@ -117566,6 +121977,99 @@
       ],
       "IndexBottom": [],
       "Index": "-9.5_-0.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_0.5_-0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 0.5,
+      "ZPosition": -0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [],
+      "IndexUp": [],
+      "IndexDown": [],
+      "IndexFront": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexBottom": [
+        "-6.5_0.5_-0.5"
+      ],
+      "Index": "-5.5_0.5_-0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_0.5_0.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 0.5,
+      "ZPosition": 0.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [],
+      "IndexUp": [],
+      "IndexDown": [],
+      "IndexFront": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexBottom": [
+        "-6.5_0.5_0.5"
+      ],
+      "Index": "-5.5_0.5_0.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-5.5_0.5_1.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -5.5,
+      "YPosition": 0.5,
+      "ZPosition": 1.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [],
+      "IndexUp": [],
+      "IndexDown": [],
+      "IndexFront": [
+        "-3.59_0.479_0.59"
+      ],
+      "IndexBottom": [
+        "-6.5_0.5_1.5"
+      ],
+      "Index": "-5.5_0.5_1.5",
       "PathPrefab": null,
       "TerritoryInfo": 2,
       "ShelterType": {

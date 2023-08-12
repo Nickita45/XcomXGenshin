@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraObjectTransparency : MonoBehaviour
@@ -39,27 +40,37 @@ public class CameraObjectTransparency : MonoBehaviour
             RaycastHit hit = hits[i];
 
             TerritoryInfo info = hit.transform.GetComponent<TerritoryInfo>();
-            Renderer rend = hit.transform.GetComponent<Renderer>(); if (rend)
+            List<Renderer> rends = hit.transform.GetComponentsInChildren<Renderer>().ToList(); //change this because some objects has TerritoryInfo in children
+            rends.AddRange(hit.transform.GetComponentsInParent<Renderer>().ToList()); // or in parents
+
+            if (hit.transform.GetComponent<Renderer>())
+                rends.Add(hit.transform.GetComponent<Renderer>()); //add himself
+            
+            if (rends.Count() > 0)
             {
-                // Save the renderer either if there is not territory info or info type is Shelter
-                if (info)
+                foreach (var rend in rends) //serch all of them
                 {
-                    if (info.Type == TerritoryType.Shelter)
+                    // Save the renderer either if there is not territory info or info type is Shelter
+                    if (info)
+                    {
+                        if (info.Type == TerritoryType.Shelter)
+                        {
+
+                            newRenderers.Add(
+                                new(rend,
+                                rend.materials.Select(material => material.shader).ToList(),
+                                rend.materials.Select(material => material.color).ToList())
+                            );
+                        }
+                    }
+                    else
                     {
                         newRenderers.Add(
-                            new(rend,
-                            rend.materials.Select(material => material.shader).ToList(),
-                            rend.materials.Select(material => material.color).ToList())
-                        );
+                                new(rend,
+                                rend.materials.Select(material => material.shader).ToList(),
+                                rend.materials.Select(material => material.color).ToList())
+                            );
                     }
-                }
-                else
-                {
-                    newRenderers.Add(
-                            new(rend,
-                            rend.materials.Select(material => material.shader).ToList(),
-                            rend.materials.Select(material => material.color).ToList())
-                        );
                 }
             }
         }
