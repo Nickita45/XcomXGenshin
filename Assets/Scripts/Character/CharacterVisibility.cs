@@ -57,7 +57,7 @@ public class CharacterVisibility : MonoBehaviour
         // Mark visible enemies with colors
         foreach (TerritoryInfo enemy in GameManagerMap.Instance.Map.Enemy.Select(n => n.GetComponent<TerritoryInfo>()))
         {
-             Color color = _visibleEnemies.Contains(enemy.gameObject) ? Color.blue : Color.red;
+            Color color = _visibleEnemies.Contains(enemy.gameObject) ? Color.blue : Color.red;
             enemy.gameObject.GetComponent<MeshRenderer>().material.color = color;
         }
     }

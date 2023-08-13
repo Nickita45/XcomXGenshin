@@ -36,7 +36,7 @@ public class MatrixMap
 
     public TerritroyReaded this[string index] => _vertex[index];
     public TerritroyReaded this[Vector3 cordinats] => _vertex[MakeFromVector3ToIndex(cordinats)];
-    
+
 
     public bool ContainsVertexByPox(Vector3 vector, out TerritroyReaded game)
     {
@@ -55,9 +55,9 @@ public class MatrixMap
 
     public void DebugToConsole()
     {
-        foreach(var item in _vertex)
+        foreach (var item in _vertex)
         {
-            Debug.Log($"K: {item.Key} + V: l = {string.Join(',',item.Value.IndexLeft)}, r = {string.Join(',', item.Value.IndexRight)}, " +
+            Debug.Log($"K: {item.Key} + V: l = {string.Join(',', item.Value.IndexLeft)}, r = {string.Join(',', item.Value.IndexRight)}, " +
                 $"b = {string.Join(',', item.Value.IndexBottom)}, f = {string.Join(',', item.Value.IndexFront)} " +
                 $"d = {string.Join(',', item.Value.IndexDown)}, u = {string.Join(',', item.Value.IndexUp)}");
         }
@@ -66,7 +66,7 @@ public class MatrixMap
 
     public IEnumerator<TerritroyReaded> GetEnumerator()
     {
-        foreach(var item in _vertex)
+        foreach (var item in _vertex)
         {
             yield return item.Value;
         }

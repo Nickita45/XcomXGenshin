@@ -21,10 +21,10 @@ public class DeReadingMap : MonoBehaviour
 
     private void Start()
     {
-       // if (path2 == true)
-       //     _path = _path2;
-        
-       // DeSerelizete();
+        // if (path2 == true)
+        //     _path = _path2;
+
+        // DeSerelizete();
 
     }
 
@@ -35,22 +35,22 @@ public class DeReadingMap : MonoBehaviour
         string filePath = json.ToString();
 
         MatrixMap _matrixMap = JsonConvert.DeserializeObject<MatrixMap>(filePath);
-    
-        foreach(var item in _matrixMap)
+
+        foreach (var item in _matrixMap)
         {
-            if(item.TerritoryInfo == TerritoryType.Air || item.TerritoryInfo == TerritoryType.Undefined || item.TerritoryInfo == TerritoryType.Enemy)
+            if (item.TerritoryInfo == TerritoryType.Air || item.TerritoryInfo == TerritoryType.Undefined || item.TerritoryInfo == TerritoryType.Enemy)
             {
                 var obj = GameManagerMap.Instance.CreatePlatformMovement(item);
                 _matrixMap.AddAirPlane(item, obj);
 
             }
             //make switch?
-            if(item.TerritoryInfo == TerritoryType.Air)
+            if (item.TerritoryInfo == TerritoryType.Air)
                 continue;
 
             var objMap = CreateMapObject(item);
-            
-            if(item.TerritoryInfo == TerritoryType.Decor)
+
+            if (item.TerritoryInfo == TerritoryType.Decor)
                 objMap.GetComponent<BoxCollider>().enabled = false;
 
             if (item.TerritoryInfo == TerritoryType.Enemy)
@@ -77,7 +77,7 @@ public class DeReadingMap : MonoBehaviour
         territoryInfo.Type = item.TerritoryInfo;
         territoryInfo.ShelterType = item.ShelterType;
         return obj;
-       
+
 
     }
 

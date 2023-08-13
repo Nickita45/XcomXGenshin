@@ -45,7 +45,7 @@ public class CameraObjectTransparency : MonoBehaviour
 
             if (hit.transform.GetComponent<Renderer>())
                 rends.Add(hit.transform.GetComponent<Renderer>()); //add himself
-            
+
             if (rends.Count() > 0)
             {
                 foreach (var rend in rends) //serch all of them

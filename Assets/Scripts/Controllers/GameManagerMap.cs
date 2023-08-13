@@ -78,15 +78,15 @@ public class GameManagerMap : MonoBehaviour
         DeleteAllChildren(MainParent);
         DeleteAllChildren(GenereteTerritoryMove);
 
-       /* foreach(GameObject item in MainParent.transform)
-        {
-            Destroy(item);
-        }
+        /* foreach(GameObject item in MainParent.transform)
+         {
+             Destroy(item);
+         }
 
-        foreach (GameObject item in GenereteTerritoryMove.transform)
-        {
-            Destroy(item);
-        }*/
+         foreach (GameObject item in GenereteTerritoryMove.transform)
+         {
+             Destroy(item);
+         }*/
     }
 
     private static void DeleteAllChildren(GameObject parent)

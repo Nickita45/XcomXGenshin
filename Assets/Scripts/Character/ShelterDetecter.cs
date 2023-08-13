@@ -90,7 +90,7 @@ public class ShelterDetecter : MonoBehaviour
     }
 }
 
- enum SidesShelter
+enum SidesShelter
 {
     Left = 0, Right = 1, Front = 2, Bottom = 3
 }

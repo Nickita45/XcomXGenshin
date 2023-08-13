@@ -462,7 +462,7 @@ public class CharacterMovemovent : MonoBehaviour
                     if (detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)//for down air
                     {
                         var newItem = detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).FirstOrDefault();
-                        while(GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)
+                        while (GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)
                         {
                             newItem = GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).FirstOrDefault();
                         }
@@ -484,14 +484,14 @@ public class CharacterMovemovent : MonoBehaviour
 
                     notCalculatedYet.Push((detectItem, actual.orig));
 
-                    if(!already.Contains(detectItem))
-                    already.Add(detectItem);
+                    if (!already.Contains(detectItem))
+                        already.Add(detectItem);
 
                 }
             }
 
             nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>(notCalculatedYet);
-          //  Debug.Log(calcs);
+            //  Debug.Log(calcs);
         }
         return objectsCalculated;
     }

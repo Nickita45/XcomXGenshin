@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class AimCalculater : MonoBehaviour
 {
-   public static int FULLGROUNDPROCENT = -40, SEMIGROUNDPROCENT = -20, HIGHGROUNDPROCENT = -20, LOWGRONTPROCENT = 30;
+    public static int FULLGROUNDPROCENT = -40, SEMIGROUNDPROCENT = -20, HIGHGROUNDPROCENT = -20, LOWGRONTPROCENT = 30;
 
-   public static (int procent, ShelterType status) CalculateShelterPercent(TerritroyReaded defender, TerritroyReaded shooter, GunType gun, params int[] parameters)
-   {
+    public static (int procent, ShelterType status) CalculateShelterPercent(TerritroyReaded defender, TerritroyReaded shooter, GunType gun, params int[] parameters)
+    {
         CordinatesSide xSide, zSide;
-        if(shooter.ZPosition -  defender.ZPosition < 0 && shooter.ZPosition - defender.ZPosition != -1)
+        if (shooter.ZPosition - defender.ZPosition < 0 && shooter.ZPosition - defender.ZPosition != -1)
         {
             xSide = CordinatesSide.Left;
-        } else if(shooter.ZPosition - defender.ZPosition > 0 && shooter.ZPosition - defender.ZPosition != 1)
+        }
+        else if (shooter.ZPosition - defender.ZPosition > 0 && shooter.ZPosition - defender.ZPosition != 1)
         {
             xSide = CordinatesSide.Right;
-        } else
+        }
+        else
         {
             xSide = CordinatesSide.Nope;
         }
@@ -47,7 +49,7 @@ public class AimCalculater : MonoBehaviour
 
     private static ShelterType GetShelterTypeByCordinateSide(TerritroyReaded teritory, CordinatesSide cordinatesSide)
     {
-        switch(cordinatesSide)
+        switch (cordinatesSide)
         {
             case CordinatesSide.Left:
                 return GameManagerMap.Instance.Map[teritory.IndexLeft.First()].ShelterType.Right;
@@ -78,7 +80,7 @@ public class AimCalculater : MonoBehaviour
 
     private static int GetProcentFromGunType(GunType gunType, int distance)
     {
-        switch(gunType)
+        switch (gunType)
         {
             case GunType.Automatic:
                 return 20 - 2 * distance;
