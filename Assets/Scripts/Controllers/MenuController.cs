@@ -70,7 +70,7 @@ public class MenuController : MonoBehaviour
             GameManagerMap.Instance.Gun = selectedGunType;
         }
 
-        var icons = FindObjectsOfType<EnemyIconClick>();
+        var icons = FindObjectsOfType<EnemyIcon>();
         foreach (var icon in icons)
         {
             icon.SetProcent();

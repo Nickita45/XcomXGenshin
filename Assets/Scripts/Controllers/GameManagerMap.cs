@@ -32,6 +32,8 @@ public class GameManagerMap : MonoBehaviour
     [SerializeField]
     private GameObject _prefabPossibleTerritory;
 
+    private GameState _state = GameState.None;
+    public GameState State { get => _state; set => _state = value; }
 
     private static GameManagerMap _instance;
     public static GameManagerMap Instance => _instance;
@@ -45,6 +47,10 @@ public class GameManagerMap : MonoBehaviour
     public MatrixMap Map { get => _map; set => _map = value; }
 
     public Action OnClearMap;
+
+    private EnemyUI _enemyUI;
+    [SerializeField]
+    private GameObject _disableInteraction;
 
     public GunType Gun { get; set; } //in feature we need to move it to character
 
@@ -62,6 +68,7 @@ public class GameManagerMap : MonoBehaviour
     private void Start()
     {
         OnClearMap += ClearMap;
+        _enemyUI = FindObjectOfType<EnemyUI>();
     }
 
     public GameObject CreatePlatformMovement(TerritroyReaded item)
@@ -97,6 +104,53 @@ public class GameManagerMap : MonoBehaviour
         {
             Transform child = parent.transform.GetChild(i);
             DestroyImmediate(child.gameObject);
+        }
+    }
+
+    private void SetState(GameState state)
+    {
+        // Exit current state if any
+        switch (_state)
+        {
+            case GameState.FreeMovement:
+                _cameraController.SaveCamera();
+                _characterMovemovent.AirPlatformsSet(false);
+                _characterMovemovent.LineRendererSet(false);
+                break;
+            case GameState.ViewEnemy:
+                _enemyUI.Exit();
+                _disableInteraction.SetActive(false);
+                break;
+        }
+
+        _state = state;
+    }
+
+    public void FreeMovement()
+    {
+        SetState(GameState.FreeMovement);
+
+        _cameraController.RestoreCamera();
+    }
+
+    public void ViewEnemy(GameObject enemy)
+    {
+        SetState(GameState.ViewEnemy);
+
+        _cameraController.ViewEnemy(_characterMovemovent.SelectedCharacter, enemy);
+        _disableInteraction.SetActive(true);
+    }
+
+    private void Update()
+    {
+        switch (_state)
+        {
+            case GameState.FreeMovement:
+                break;
+            case GameState.ViewEnemy:
+                // Exit the viewing mode
+                if (Input.GetKeyDown(KeyCode.Escape)) FreeMovement();
+                break;
         }
     }
 }

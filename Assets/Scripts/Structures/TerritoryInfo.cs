@@ -60,8 +60,6 @@ public class ShelterInfo
     }
 }
 
-
-
 public enum ShelterType
 {
     Nope,

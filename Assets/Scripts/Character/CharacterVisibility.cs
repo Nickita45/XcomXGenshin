@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class CharacterVisibility : MonoBehaviour
 {
-    private GameObject _enemyUI;
-
-    [SerializeField]
-    private GameObject _enemyImageUI;
+    private EnemyUI _enemyUI;
 
     private readonly HashSet<GameObject> _visibleEnemies = new();
 
@@ -19,13 +16,11 @@ public class CharacterVisibility : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManagerMap.Instance.OnClearMap += ClearIcons;
-
-        _enemyUI = GameObject.Find("EnemyUI");
+        _enemyUI = GameObject.FindAnyObjectByType<EnemyUI>();
     }
 
-    // Update the set of enemies visible by the selected character
-    // and adjust UI accordingly.
+    // Updates the set of enemies visible by the selected character
+    // and adjusts UI accordingly.
     public void UpdateVisibility(CharacterInfo character)
     {
         // Clear the current set of visible enemies
@@ -46,12 +41,12 @@ public class CharacterVisibility : MonoBehaviour
         }
 
         // Clear icons
-        ClearIcons();
+        _enemyUI.ClearVisibleEnemies();
 
         // Add icons on UI for each visible enemy 
         foreach (GameObject enemy in _visibleEnemies)
         {
-            AddEnemyIcon(enemy);
+            _enemyUI.AddVisibleEnemy(enemy);
         }
 
         // Mark visible enemies with colors
@@ -59,14 +54,6 @@ public class CharacterVisibility : MonoBehaviour
         {
             Color color = _visibleEnemies.Contains(enemy.gameObject) ? Color.blue : Color.red;
             enemy.gameObject.GetComponent<MeshRenderer>().material.color = color;
-        }
-    }
-
-    private void ClearIcons()
-    {
-        for (int i = 0; i < _enemyUI.transform.childCount; i++)
-        {
-            Destroy(_enemyUI.transform.GetChild(i).gameObject);
         }
     }
 
@@ -105,12 +92,6 @@ public class CharacterVisibility : MonoBehaviour
         }
 
         return false;
-    }
-
-    void AddEnemyIcon(GameObject enemy)
-    {
-        GameObject image = Instantiate(_enemyImageUI, _enemyUI.transform);
-        image.GetComponent<EnemyIconClick>().SetEnemy(enemy);
     }
 
     private static readonly Vector3[] DIRECTIONS = {

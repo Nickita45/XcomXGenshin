@@ -1,19 +1,24 @@
 using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EnemyIconClick : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    private EnemyUI _enemyUI;
+
     private GameObject _enemy;
     private Image _image;
 
     [SerializeField]
     private TextMeshProUGUI _textPercent;
+    public Image Image => _image;
+    public GameObject Enemy => _enemy;
 
     public void OnPointerClick(PointerEventData data)
     {
-        GameManagerMap.Instance.CameraController.MoveTo(_enemy.transform.position);
+        _enemyUI.SelectEnemy(this);
     }
 
     public void OnPointerEnter(PointerEventData data)
@@ -38,6 +43,7 @@ public class EnemyIconClick : MonoBehaviour, IPointerClickHandler, IPointerEnter
     // Start is called before the first frame update
     void Start()
     {
+        _enemyUI = transform.parent.GetComponent<EnemyUI>();
         _image = GetComponent<Image>();
 
         SetProcent();

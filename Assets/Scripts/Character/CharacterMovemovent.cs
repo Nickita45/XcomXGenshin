@@ -44,13 +44,13 @@ public class CharacterMovemovent : MonoBehaviour
         _lineRenderer.gameObject.SetActive(false);
         GameManagerMap.Instance.OnClearMap += Clear;
 
-
         OnEndMoveToNewTerritory += DisableToBasic;
         OnSelectNewTerritory += SelectNewTerritory;
     }
     private void Update()
     {
-        if (_selectedCharacter != null && _selectedCharacter.MoverActive())
+        if (_selectedCharacter != null && _selectedCharacter.MoverActive()
+            && GameManagerMap.Instance.State == GameState.FreeMovement)
         {
             SpawnMover();
         }
@@ -103,35 +103,40 @@ public class CharacterMovemovent : MonoBehaviour
 
     public void CharacterSelect(CharacterInfo character)
     {
-
-        _lineRenderer.gameObject.SetActive(true);
-
-        if (_selectedCharacter != null && _selectedCharacter != character)
+        if (GameManagerMap.Instance.State == GameState.FreeMovement)
         {
-            _selectedCharacter.OnDeselected();//deselect other chracters
+            _lineRenderer.gameObject.SetActive(true);
+
+            if (_selectedCharacter != null && _selectedCharacter != character)
+            {
+                _selectedCharacter.OnDeselected();//deselect other chracters
+            }
+            _selectedCharacter = character;
+            _objectsCalculated = CalculateAllPossible(_countMove); //algoritmus calculate all territories that player can move
+
+            AirPlatformsSet(true);
+
+
+            GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
         }
-        _selectedCharacter = character;
-        _objectsCalculated = CalculateAllPossible(_countMove); //algoritmus calculate all territories that player can move
-
-        AirPlatformsSet(true);
-
-
-        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
     }
 
     public void CharacterDeselect()
     {
-        _lineRenderer.gameObject.SetActive(false);
+        if (GameManagerMap.Instance.State == GameState.FreeMovement)
+        {
+            _lineRenderer.gameObject.SetActive(false);
 
-        _selectedCharacter = null;
-        AirPlatformsSet(false);
+            _selectedCharacter = null;
+            AirPlatformsSet(false);
 
-        _objectsCalculated.Clear();
+            _objectsCalculated.Clear();
 
-        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+            GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+        }
     }
 
-    private void AirPlatformsSet(bool result)
+    public void AirPlatformsSet(bool result)
     {
         foreach (var item in _objectsCalculated.Keys)
         {
@@ -140,6 +145,11 @@ public class CharacterMovemovent : MonoBehaviour
                 GameManagerMap.Instance.Map.GetAirPlatform(item).SetActive(result);
             }
         }
+    }
+
+    public void LineRendererSet(bool result)
+    {
+        _lineRenderer.gameObject.SetActive(result);
     }
 
     private IEnumerator CoroutineNewPositionCharacter(TerritroyReaded newTerritory, List<Vector3> points)
