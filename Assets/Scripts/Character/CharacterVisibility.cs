@@ -22,6 +22,9 @@ public class CharacterVisibility : MonoBehaviour
         GameManagerMap.Instance.OnClearMap += ClearIcons;
 
         _enemyUI = GameObject.Find("EnemyUI");
+
+        //Config
+        _maxVisionDistance = ConfigurationManager.Instance.CharacterData.characterVisionDistance;
     }
 
     // Update the set of enemies visible by the selected character

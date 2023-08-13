@@ -47,6 +47,10 @@ public class CharacterMovemovent : MonoBehaviour
 
         OnEndMoveToNewTerritory += DisableToBasic;
         OnSelectNewTerritory += SelectNewTerritory;
+
+        //Config
+        _speed = ConfigurationManager.Instance.CharacterData.characterSpeed;
+        _countMove = ConfigurationManager.Instance.CharacterData.characterMoveDistance;
     }
     private void Update()
     {

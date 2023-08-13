@@ -57,6 +57,9 @@ public class CharacterInfo : MonoBehaviour
         ActualTerritory = GameManagerMap.Instance.Map[transform.localPosition];
 
         SetGunByIndex((int)GameManagerMap.Instance.Gun);
+
+        //Config
+        _basicAimCharacter = ConfigurationManager.Instance.CharacterData.characterBaseAim;
     }
 
 
