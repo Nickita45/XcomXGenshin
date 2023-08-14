@@ -50,7 +50,7 @@ public class EnemyUI : MonoBehaviour
         // Every time this is considered new state
         GameManagerMap.Instance.ViewEnemy(icon.Enemy);
 
-        icon.Image.color = Color.blue;
+        icon.Image.color = Color.red;
         _selected = icon;
     }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class GameManagerMap : MonoBehaviour
@@ -131,6 +132,7 @@ public class GameManagerMap : MonoBehaviour
         SetState(GameState.FreeMovement);
 
         _cameraController.RestoreCamera();
+        _characterVisibility.UpdateVisibility(_characterMovemovent.SelectedCharacter);
     }
 
     public void ViewEnemy(GameObject enemy)
@@ -139,6 +141,11 @@ public class GameManagerMap : MonoBehaviour
 
         _cameraController.ViewEnemy(_characterMovemovent.SelectedCharacter, enemy);
         _disableInteraction.SetActive(true);
+
+        foreach (GameObject e in GameManagerMap.Instance.Map.Enemy)
+        {
+            e.GetComponent<Outline>().enabled = e == enemy;
+        }
     }
 
     private void Update()
