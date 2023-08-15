@@ -7,6 +7,7 @@ public class CharacterVisibility : MonoBehaviour
     private EnemyUI _enemyUI;
 
     private readonly HashSet<GameObject> _visibleEnemies = new();
+    public HashSet<GameObject> VisibleEnemies => _visibleEnemies;
 
     [SerializeField]
     private float _maxVisionDistance = 10.0f;
@@ -56,7 +57,7 @@ public class CharacterVisibility : MonoBehaviour
         }
     }
 
-    bool IsEnemyVisible(CharacterInfo character, TerritoryInfo enemy)
+    private bool IsEnemyVisible(CharacterInfo character, TerritoryInfo enemy)
     {
         // Try out all tiles around the character,
         // to account for being able to see through corners

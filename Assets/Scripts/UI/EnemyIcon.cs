@@ -3,22 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections;
 
 public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private EnemyUI _enemyUI;
 
     private GameObject _enemy;
+    public GameObject Enemy => _enemy;
+
+    [SerializeField]
     private Image _image;
+    public Image Image => _image;
 
     [SerializeField]
     private TextMeshProUGUI _textPercent;
-    public Image Image => _image;
-    public GameObject Enemy => _enemy;
+
+    void Start()
+    {
+        _enemyUI = transform.parent.GetComponent<EnemyUI>();
+        SetPercent();
+    }
 
     public void OnPointerClick(PointerEventData data)
     {
-        _enemyUI.SelectEnemy(this);
+        GameManagerMap.Instance.ViewEnemy(this);
     }
 
     public void OnPointerEnter(PointerEventData data)
@@ -26,6 +35,13 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         Color tempColor = _image.color;
         tempColor.a = 0.5f;
         _image.color = tempColor;
+
+        if (GameManagerMap.Instance.State == GameState.FreeMovement)
+        {
+            Vector3 position = CameraUtils.CalculateCameraLookAt(_enemy, Camera.main);
+            GameManagerMap.Instance.FixedCameraController
+                .Init(position, GameManagerMap.Instance.CameraController.TargetRotation, 0.5f);
+        }
     }
 
     public void OnPointerExit(PointerEventData data)
@@ -33,6 +49,14 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         Color tempColor = _image.color;
         tempColor.a = 1f;
         _image.color = tempColor;
+
+        if (GameManagerMap.Instance.State == GameState.FreeMovement)
+            GameManagerMap.Instance.FixedCameraController.Init(
+                GameManagerMap.Instance.CameraController.transform.position,
+                GameManagerMap.Instance.CameraController.transform.rotation,
+                0.5f,
+                GameManagerMap.Instance.CameraController.Init
+            );
     }
 
     public void SetEnemy(GameObject enemy)
@@ -40,16 +64,7 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         _enemy = enemy;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _enemyUI = transform.parent.GetComponent<EnemyUI>();
-        _image = GetComponent<Image>();
-
-        SetProcent();
-    }
-
-    public void SetProcent()
+    public void SetPercent()
     {
         var resultCaclulations = AimCalculater.CalculateShelterPercent(defender: GameManagerMap.Instance.Map[_enemy.transform.localPosition],
                                     shooter: GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.ActualTerritory,

@@ -73,7 +73,7 @@ public class MenuController : MonoBehaviour
         var icons = FindObjectsOfType<EnemyIcon>();
         foreach (var icon in icons)
         {
-            icon.SetProcent();
+            icon.SetPercent();
         }
 
         if (GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null)

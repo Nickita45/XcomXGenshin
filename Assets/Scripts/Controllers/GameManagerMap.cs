@@ -18,7 +18,10 @@ public class GameManagerMap : MonoBehaviour
     private CharacterMovemovent _characterMovemovent;
 
     [SerializeField]
-    private CameraController _cameraController;
+    private FreeCameraController _cameraController;
+
+    [SerializeField]
+    private FixedCameraController _fixedCameraController;
 
     [SerializeField]
     private CharacterVisibility _characterVisibility;
@@ -40,7 +43,8 @@ public class GameManagerMap : MonoBehaviour
     public static GameManagerMap Instance => _instance;
 
     public CharacterMovemovent CharacterMovemovent => _characterMovemovent;
-    public CameraController CameraController => _cameraController;
+    public FreeCameraController CameraController => _cameraController;
+    public FixedCameraController FixedCameraController => _fixedCameraController;
     public CharacterVisibility CharacterVisibility => _characterVisibility;
     public GameObject MainParent => _mainParent;
     public GameObject GenereteTerritoryMove => _genereteTerritoryMove;
@@ -114,7 +118,6 @@ public class GameManagerMap : MonoBehaviour
         switch (_state)
         {
             case GameState.FreeMovement:
-                _cameraController.SaveCamera();
                 _characterMovemovent.AirPlatformsSet(false);
                 _characterMovemovent.LineRendererSet(false);
                 break;
@@ -131,20 +134,28 @@ public class GameManagerMap : MonoBehaviour
     {
         SetState(GameState.FreeMovement);
 
-        _cameraController.RestoreCamera();
+        _cameraController.TeleportToSelectedCharacter();
+        _cameraController.Init();
+
         _characterVisibility.UpdateVisibility(_characterMovemovent.SelectedCharacter);
     }
 
-    public void ViewEnemy(GameObject enemy)
+    public void ViewEnemy(EnemyIcon icon)
     {
         SetState(GameState.ViewEnemy);
 
-        _cameraController.ViewEnemy(_characterMovemovent.SelectedCharacter, enemy);
+        _enemyUI.SelectEnemy(icon);
+
+        CharacterInfo selectedCharacter = Instance.CharacterMovemovent.SelectedCharacter;
+
+        (Vector3 position, Quaternion rotation) = CameraUtils.CalculateEnemyView(selectedCharacter.gameObject, icon.Enemy);
+        _fixedCameraController.Init(position, rotation, 0.5f);
+
         _disableInteraction.SetActive(true);
 
-        foreach (GameObject e in GameManagerMap.Instance.Map.Enemy)
+        foreach (GameObject e in Instance.Map.Enemy)
         {
-            e.GetComponent<Outline>().enabled = e == enemy;
+            e.GetComponent<Outline>().enabled = e == icon.Enemy;
         }
     }
 

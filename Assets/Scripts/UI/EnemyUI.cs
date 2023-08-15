@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class EnemyUI : MonoBehaviour
 {
@@ -22,7 +24,9 @@ public class EnemyUI : MonoBehaviour
                 if (index < 0) index = transform.childCount - 1;
 
                 Transform iconObject = transform.GetChild(index);
-                SelectEnemy(iconObject.GetComponent<EnemyIcon>());
+
+                EnemyIcon icon = iconObject.GetComponent<EnemyIcon>();
+                GameManagerMap.Instance.ViewEnemy(icon);
             }
         }
     }
@@ -47,9 +51,6 @@ public class EnemyUI : MonoBehaviour
 
     public void SelectEnemy(EnemyIcon icon)
     {
-        // Every time this is considered new state
-        GameManagerMap.Instance.ViewEnemy(icon.Enemy);
-
         icon.Image.color = Color.red;
         _selected = icon;
     }
@@ -57,5 +58,15 @@ public class EnemyUI : MonoBehaviour
     public void Exit()
     {
         if (_selected) _selected.Image.color = Color.white;
+    }
+
+    public EnemyIcon GetIconForEnemy(GameObject enemy)
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            EnemyIcon icon = transform.GetChild(i).GetComponent<EnemyIcon>();
+            if (icon.Enemy == enemy) return icon;
+        }
+        return null;
     }
 }
