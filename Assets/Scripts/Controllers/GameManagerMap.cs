@@ -142,20 +142,23 @@ public class GameManagerMap : MonoBehaviour
 
     public void ViewEnemy(EnemyIcon icon)
     {
-        SetState(GameState.ViewEnemy);
-
-        _enemyUI.SelectEnemy(icon);
-
-        CharacterInfo selectedCharacter = Instance.CharacterMovemovent.SelectedCharacter;
-
-        (Vector3 position, Quaternion rotation) = CameraUtils.CalculateEnemyView(selectedCharacter.gameObject, icon.Enemy);
-        _fixedCameraController.Init(position, rotation, 0.5f);
-
-        _disableInteraction.SetActive(true);
-
-        foreach (GameObject e in Instance.Map.Enemy)
+        if (!Instance.CharacterMovemovent.IsMoving)
         {
-            e.GetComponent<Outline>().enabled = e == icon.Enemy;
+            SetState(GameState.ViewEnemy);
+
+            _enemyUI.SelectEnemy(icon);
+
+            CharacterInfo selectedCharacter = Instance.CharacterMovemovent.SelectedCharacter;
+
+            (Vector3 position, Quaternion rotation) = CameraUtils.CalculateEnemyView(selectedCharacter.gameObject, icon.Enemy);
+            _fixedCameraController.Init(position, rotation, 0.5f);
+
+            _disableInteraction.SetActive(true);
+
+            foreach (GameObject e in Instance.Map.Enemy)
+            {
+                e.GetComponent<Outline>().enabled = e == icon.Enemy;
+            }
         }
     }
 

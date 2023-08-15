@@ -39,6 +39,9 @@ public class CharacterMovemovent : MonoBehaviour
     public Action<(TerritroyReaded aktualTerritoryReaded, List<Vector3> path), CharacterInfo> OnSelectNewTerritory;
     public Action<TerritroyReaded, CharacterInfo> OnEndMoveToNewTerritory;
 
+    private bool _isMoving;
+    public bool IsMoving => _isMoving;
+
     private void Start()
     {
         _lineRenderer.gameObject.SetActive(false);
@@ -158,7 +161,11 @@ public class CharacterMovemovent : MonoBehaviour
         _selectedCharacter.MoverActive(false);//disable mover
         _selectedCharacter.ActualTerritory = null;
 
+        _isMoving = true;
+
         yield return StartCoroutine(CoroutineMove(points)); //start movements
+
+        _isMoving = false;
 
         OnEndMoveToNewTerritory(newTerritory, _selectedCharacter);
     }
