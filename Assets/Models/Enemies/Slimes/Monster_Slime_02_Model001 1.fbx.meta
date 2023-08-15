@@ -1,28 +1,28 @@
 fileFormatVersion: 2
-guid: 952ad537b5ee51e41b7f87c9e45be383
+guid: bf14dbfbb8fdc274796e4f8cc61ddd28
 ModelImporter:
-  serializedVersion: 20200
+  serializedVersion: 21300
   internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Monster_Slime_01_Fire_LeftEye_Mat.001
+      name: Monster_Slime_01_Fire_LeftEye_Mat.002
     second: {fileID: 2100000, guid: f5cccc4a076412e49b828c2009ee0ab6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Monster_Slime_01_Fire_RightEye_Mat.001
+      name: Monster_Slime_01_Fire_RightEye_Mat.002
     second: {fileID: 2100000, guid: 2035713f06d13ce40bf7030fe6f77e6b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Monster_Slime_02_Fire_Large_Horn_Mat.001
+      name: Monster_Slime_02_Fire_Large_Horn_Mat.002
     second: {fileID: 2100000, guid: e3f39c7272cd06d43975fd129a2a8774, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Monster_Slime_02_Fire_Large_Mat.001
+      name: Monster_Slime_02_Fire_Large_Mat.002
     second: {fileID: 2100000, guid: 493d58f8ea9a9e1419f864ad50972ed6, type: 2}
   materials:
     materialImportMode: 2
@@ -34,6 +34,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -63,6 +64,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -74,6 +76,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
+    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -116,6 +119,7 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

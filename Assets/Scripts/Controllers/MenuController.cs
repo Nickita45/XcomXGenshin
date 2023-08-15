@@ -61,10 +61,9 @@ public class MenuController : MonoBehaviour
 
     private void OnGunTypeDropdownValueChanged(int selectedIndex)
     {
-        // �������� ��������� ����� �� TMP_Dropdown
+
         string selectedGunTypeText = _dropDownGun.options[selectedIndex].text;
 
-        // ������������� ����� � GunType � ���������� ��������
         if (Enum.TryParse(selectedGunTypeText, out GunType selectedGunType))
         {
             GameManagerMap.Instance.Gun = selectedGunType;

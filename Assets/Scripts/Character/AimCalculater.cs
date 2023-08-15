@@ -6,8 +6,19 @@ public class AimCalculater : MonoBehaviour
 {
     public static int FULLGROUNDPROCENT = -40, SEMIGROUNDPROCENT = -20, HIGHGROUNDPROCENT = -20, LOWGRONTPROCENT = 30;
 
-    public static (int procent, ShelterType status) CalculateShelterPercent(TerritroyReaded defender, TerritroyReaded shooter, GunType gun, params int[] parameters)
+
+    private void Start()
     {
+        //Config
+        FULLGROUNDPROCENT = ConfigurationManager.Instance.CharacterData.bonusAimFromFullCover;
+        SEMIGROUNDPROCENT = ConfigurationManager.Instance.CharacterData.bonusAimFromHalfCover;
+        LOWGRONTPROCENT = ConfigurationManager.Instance.CharacterData.bonusAimFromHighGround;
+        HIGHGROUNDPROCENT = ConfigurationManager.Instance.CharacterData.bonusAimFromLowGround;
+
+    }
+
+    public static (int procent, ShelterType status) CalculateShelterPercent(TerritroyReaded defender, TerritroyReaded shooter, GunType gun, params int[] parameters)
+   {
         CordinatesSide xSide, zSide;
         if (shooter.ZPosition - defender.ZPosition < 0 && shooter.ZPosition - defender.ZPosition != -1)
         {
@@ -43,6 +54,7 @@ public class AimCalculater : MonoBehaviour
 
         ShelterType maxValue = (ShelterType)Mathf.Max((int)GetShelterTypeByCordinateSide(defender, xSide), (int)GetShelterTypeByCordinateSide(defender, zSide));
         int result = (parameters.Sum() + GetProcentByType(maxValue) + groundProcent + GetProcentFromGunType(gun, (int)Mathf.Round(Vector3.Distance(defender.GetCordinats(), shooter.GetCordinats()))));
+        //Debug.Log($"{parameters.Sum()}, {GetProcentByType(maxValue)}, {groundProcent}, {GetProcentFromGunType(gun, (int)Mathf.Round(Vector3.Distance(defender.GetCordinats(), shooter.GetCordinats())))}");
         return (Mathf.Min(result, 100), maxValue);
 
     }
@@ -80,7 +92,7 @@ public class AimCalculater : MonoBehaviour
 
     private static int GetProcentFromGunType(GunType gunType, int distance)
     {
-        switch (gunType)
+       /* switch(gunType)
         {
             case GunType.Automatic:
                 return 20 - 2 * distance;
@@ -89,7 +101,9 @@ public class AimCalculater : MonoBehaviour
             case GunType.Snipergun:
                 return 3 * distance - 15;
         }
-        return 0;
+    */
+        return ConfigurationManager.Instance.CharacterData.typeGun[(int)gunType].baseValue + 
+            ConfigurationManager.Instance.CharacterData.typeGun[(int)gunType].distanceValue * distance;
     }
 
 }

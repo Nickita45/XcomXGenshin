@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.IO;
 
 public class ConfigurationManager : MonoBehaviour
 {
+    private readonly string PATH = Application.streamingAssetsPath + "/configs/configTest.json"; //ask aplication for folder than didnt build
+
     public static ConfigurationManager _instance;
     public static ConfigurationManager Instance => _instance;
 
@@ -26,12 +29,12 @@ public class ConfigurationManager : MonoBehaviour
         _instance = this;
 
     }
+
     private void LoadConfig()
     {
-        TextAsset configText = Resources.Load<TextAsset>("configs/configTest");
-        if (configText != null)
+        if (File.Exists(PATH)) //works like a file 
         {
-            _characterData = JsonUtility.FromJson<CharacterData>(configText.text);
+            _characterData = JsonUtility.FromJson<CharacterData>(File.ReadAllText(PATH));
         }
         else
         {
@@ -40,7 +43,7 @@ public class ConfigurationManager : MonoBehaviour
     }
 }
 [System.Serializable]
-public class GunType
+public class GunTypeConfig
 {
     public string name;
     public int distanceValue;
@@ -52,19 +55,19 @@ public class GunType
 [System.Serializable]
 public class CharacterData
 {
-    public int characterSpeed;
-    public float characterMoveDistance;
+    public float characterSpeed;
+    public int characterMoveDistance;
     public float characterVisionDistance;
     public int characterBaseAim;
     public int characterBaseHealth;
 
     public int bonusAimFromFullCover;
     public int bonusAimFromHalfCover;
-    public int bonusAimFromNoneCover;
+    public int bonusAimFromNoneCover; //hm
 
     public int bonusAimFromHighGround;
     public int bonusAimFromLowGround;
     public int bonusAimFromNoneGround;
 
-    public GunType[] typeGun;
+    public GunTypeConfig[] typeGun;
 }
