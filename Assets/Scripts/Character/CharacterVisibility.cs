@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class CharacterVisibility : MonoBehaviour
 {
-    private GameObject _enemyUI;
-
-    [SerializeField]
-    private GameObject _enemyImageUI;
+    private EnemyUI _enemyUI;
 
     private readonly HashSet<GameObject> _visibleEnemies = new();
+    public HashSet<GameObject> VisibleEnemies => _visibleEnemies;
 
     [SerializeField]
     private float _maxVisionDistance = 10.0f;
@@ -19,16 +17,17 @@ public class CharacterVisibility : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _enemyUI = GameObject.FindAnyObjectByType<EnemyUI>();
         GameManagerMap.Instance.OnClearMap += ClearIcons;
 
-        _enemyUI = GameObject.Find("EnemyUI");
+        //_enemyUI = GameObject.Find("EnemyUI");
 
         //Config
         _maxVisionDistance = ConfigurationManager.Instance.CharacterData.characterVisionDistance;
     }
 
-    // Update the set of enemies visible by the selected character
-    // and adjust UI accordingly.
+    // Updates the set of enemies visible by the selected character
+    // and adjusts UI accordingly.
     public void UpdateVisibility(CharacterInfo character)
     {
         // Clear the current set of visible enemies
@@ -49,31 +48,22 @@ public class CharacterVisibility : MonoBehaviour
         }
 
         // Clear icons
-        ClearIcons();
+        _enemyUI.ClearVisibleEnemies();
 
         // Add icons on UI for each visible enemy 
         foreach (GameObject enemy in _visibleEnemies)
         {
-            AddEnemyIcon(enemy);
+            _enemyUI.AddVisibleEnemy(enemy);
         }
 
         // Mark visible enemies with colors
-        foreach (TerritoryInfo enemy in GameManagerMap.Instance.Map.Enemy.Select(n => n.GetComponent<TerritoryInfo>()))
+        foreach (GameObject enemy in GameManagerMap.Instance.Map.Enemy)
         {
-             Color color = _visibleEnemies.Contains(enemy.gameObject) ? Color.blue : Color.red;
-            enemy.gameObject.GetComponent<MeshRenderer>().material.color = color;
+            enemy.GetComponent<Outline>().enabled = _visibleEnemies.Contains(enemy.gameObject);
         }
     }
 
-    private void ClearIcons()
-    {
-        for (int i = 0; i < _enemyUI.transform.childCount; i++)
-        {
-            Destroy(_enemyUI.transform.GetChild(i).gameObject);
-        }
-    }
-
-    bool IsEnemyVisible(CharacterInfo character, TerritoryInfo enemy)
+    private bool IsEnemyVisible(CharacterInfo character, TerritoryInfo enemy)
     {
         // Try out all tiles around the character,
         // to account for being able to see through corners
@@ -108,12 +98,6 @@ public class CharacterVisibility : MonoBehaviour
         }
 
         return false;
-    }
-
-    void AddEnemyIcon(GameObject enemy)
-    {
-        GameObject image = Instantiate(_enemyImageUI, _enemyUI.transform);
-        image.GetComponent<EnemyIconClick>().SetEnemy(enemy);
     }
 
     private static readonly Vector3[] DIRECTIONS = {

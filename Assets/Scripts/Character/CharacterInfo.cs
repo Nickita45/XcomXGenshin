@@ -65,8 +65,8 @@ public class CharacterInfo : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if(_selected == false)
-        _selectItem.SetActive(true);
+        if (_selected == false)
+            _selectItem.SetActive(true);
     }
 
     private void OnMouseExit()

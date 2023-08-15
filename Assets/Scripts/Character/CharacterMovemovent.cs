@@ -39,11 +39,13 @@ public class CharacterMovemovent : MonoBehaviour
     public Action<(TerritroyReaded aktualTerritoryReaded, List<Vector3> path), CharacterInfo> OnSelectNewTerritory;
     public Action<TerritroyReaded, CharacterInfo> OnEndMoveToNewTerritory;
 
+    private bool _isMoving;
+    public bool IsMoving => _isMoving;
+
     private void Start()
     {
         _lineRenderer.gameObject.SetActive(false);
         GameManagerMap.Instance.OnClearMap += Clear;
-
 
         OnEndMoveToNewTerritory += DisableToBasic;
         OnSelectNewTerritory += SelectNewTerritory;
@@ -54,7 +56,8 @@ public class CharacterMovemovent : MonoBehaviour
     }
     private void Update()
     {
-        if (_selectedCharacter != null && _selectedCharacter.MoverActive())
+        if (_selectedCharacter != null && _selectedCharacter.MoverActive()
+            && GameManagerMap.Instance.State == GameState.FreeMovement)
         {
             SpawnMover();
         }
@@ -107,35 +110,40 @@ public class CharacterMovemovent : MonoBehaviour
 
     public void CharacterSelect(CharacterInfo character)
     {
-
-        _lineRenderer.gameObject.SetActive(true);
-
-        if (_selectedCharacter != null && _selectedCharacter != character)
+        if (GameManagerMap.Instance.State == GameState.FreeMovement)
         {
-            _selectedCharacter.OnDeselected();//deselect other chracters
+            _lineRenderer.gameObject.SetActive(true);
+
+            if (_selectedCharacter != null && _selectedCharacter != character)
+            {
+                _selectedCharacter.OnDeselected();//deselect other chracters
+            }
+            _selectedCharacter = character;
+            _objectsCalculated = CalculateAllPossible(_countMove); //algoritmus calculate all territories that player can move
+
+            AirPlatformsSet(true);
+
+
+            GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
         }
-        _selectedCharacter = character;
-        _objectsCalculated = CalculateAllPossible(_countMove); //algoritmus calculate all territories that player can move
-
-        AirPlatformsSet(true);
-
-
-        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
     }
 
     public void CharacterDeselect()
     {
-        _lineRenderer.gameObject.SetActive(false);
+        if (GameManagerMap.Instance.State == GameState.FreeMovement)
+        {
+            _lineRenderer.gameObject.SetActive(false);
 
-        _selectedCharacter = null;
-        AirPlatformsSet(false);
+            _selectedCharacter = null;
+            AirPlatformsSet(false);
 
-        _objectsCalculated.Clear();
+            _objectsCalculated.Clear();
 
-        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+            GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+        }
     }
 
-    private void AirPlatformsSet(bool result)
+    public void AirPlatformsSet(bool result)
     {
         foreach (var item in _objectsCalculated.Keys)
         {
@@ -146,13 +154,22 @@ public class CharacterMovemovent : MonoBehaviour
         }
     }
 
+    public void LineRendererSet(bool result)
+    {
+        _lineRenderer.gameObject.SetActive(result);
+    }
+
     private IEnumerator CoroutineNewPositionCharacter(TerritroyReaded newTerritory, List<Vector3> points)
     {
 
         _selectedCharacter.MoverActive(false);//disable mover
         _selectedCharacter.ActualTerritory = null;
 
+        _isMoving = true;
+
         yield return StartCoroutine(CoroutineMove(points)); //start movements
+
+        _isMoving = false;
 
         OnEndMoveToNewTerritory(newTerritory, _selectedCharacter);
     }
@@ -466,7 +483,7 @@ public class CharacterMovemovent : MonoBehaviour
                     if (detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)//for down air
                     {
                         var newItem = detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).FirstOrDefault();
-                        while(GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)
+                        while (GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)
                         {
                             newItem = GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).FirstOrDefault();
                         }
@@ -488,14 +505,14 @@ public class CharacterMovemovent : MonoBehaviour
 
                     notCalculatedYet.Push((detectItem, actual.orig));
 
-                    if(!already.Contains(detectItem))
-                    already.Add(detectItem);
+                    if (!already.Contains(detectItem))
+                        already.Add(detectItem);
 
                 }
             }
 
             nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>(notCalculatedYet);
-          //  Debug.Log(calcs);
+            //  Debug.Log(calcs);
         }
         return objectsCalculated;
     }

@@ -12,12 +12,12 @@ public class TerritroyReaded
 
     [SerializeField]
     public ShelterInfo ShelterType { get; set; }
-    
+
     public float XSize, YSize, ZSize;
     public float XPosition, YPosition, ZPosition;
     public float XRotation, YRotation, ZRotation, WRotation;
 
-    public HashSet<string> IndexLeft = new HashSet<string>(), IndexRight = new HashSet<string>(), IndexUp = new HashSet<string>(), 
+    public HashSet<string> IndexLeft = new HashSet<string>(), IndexRight = new HashSet<string>(), IndexUp = new HashSet<string>(),
         IndexDown = new HashSet<string>(), IndexFront = new HashSet<string>(), IndexBottom = new HashSet<string>();
 
     public TerritroyReaded() { }
@@ -46,7 +46,7 @@ public class TerritroyReaded
     }
 
     public Vector3 GetCordinats() => new Vector3(XPosition, YPosition, ZPosition);
-    
+
     public IEnumerator<string> GetEnumerator()
     {
         foreach (var item in IndexBottom)
@@ -85,21 +85,22 @@ public class TerritroyReaded
                                     1, false, IndexBottom, IndexFront, IndexRight, IndexLeft);
 
 
-/*        IndexBottom.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0 &&
-                                       IndexFront.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0 &&
-                                       IndexRight.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0 &&
-                                       IndexLeft.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0;
-*/
+    /*        IndexBottom.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0 &&
+                                           IndexFront.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0 &&
+                                           IndexRight.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0 &&
+                                           IndexLeft.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0;
+    */
     public static bool DetectSomeBooleans(Func<string, bool> predicate, int count, bool IsOr, params HashSet<string>[] sides)
     {
         bool and = true;
-        foreach(var item in sides)
+        foreach (var item in sides)
         {
-            if(item.Where(predicate).Count() == count)
+            if (item.Where(predicate).Count() == count)
             {
                 if (IsOr)
                     return true;
-            } else
+            }
+            else
             {
                 and = false;
             }
@@ -111,11 +112,11 @@ public class TerritroyReaded
     public bool HasGround() => this.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
                 GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0;
 
-    public static Vector3 MakeVectorFromIndex(string index) => new Vector3(float.Parse(index.Split(ReadingMap.SPLITTER)[0]), 
-        float.Parse(index.Split(ReadingMap.SPLITTER)[1]), 
+    public static Vector3 MakeVectorFromIndex(string index) => new Vector3(float.Parse(index.Split(ReadingMap.SPLITTER)[0]),
+        float.Parse(index.Split(ReadingMap.SPLITTER)[1]),
         float.Parse(index.Split(ReadingMap.SPLITTER)[2]));
 
     public override string ToString() => $"({Index})";
 
-  
+
 }

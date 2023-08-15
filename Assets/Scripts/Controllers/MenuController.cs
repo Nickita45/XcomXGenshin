@@ -61,17 +61,18 @@ public class MenuController : MonoBehaviour
 
     private void OnGunTypeDropdownValueChanged(int selectedIndex)
     {
+
         string selectedGunTypeText = _dropDownGun.options[selectedIndex].text;
-        
+
         if (Enum.TryParse(selectedGunTypeText, out GunType selectedGunType))
         {
             GameManagerMap.Instance.Gun = selectedGunType;
         }
 
-        var icons = FindObjectsOfType<EnemyIconClick>();
+        var icons = FindObjectsOfType<EnemyIcon>();
         foreach (var icon in icons)
         {
-            icon.SetProcent();
+            icon.SetPercent();
         }
 
         if (GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null)
