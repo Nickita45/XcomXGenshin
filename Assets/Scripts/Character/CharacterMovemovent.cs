@@ -46,6 +46,7 @@ public class CharacterMovemovent : MonoBehaviour
     {
         _lineRenderer.gameObject.SetActive(false);
         GameManagerMap.Instance.OnClearMap += Clear;
+        GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
 
         OnEndMoveToNewTerritory += DisableToBasic;
         OnSelectNewTerritory += SelectNewTerritory;
@@ -56,8 +57,8 @@ public class CharacterMovemovent : MonoBehaviour
     }
     private void Update()
     {
-        if (_selectedCharacter != null && _selectedCharacter.MoverActive()
-            && GameManagerMap.Instance.State == GameState.FreeMovement)
+        if (_selectedCharacter != null && _selectedCharacter.MoverActive())
+            //GameManagerMap.Instance.State == GameState.FreeMovement)
         {
             SpawnMover();
         }
@@ -110,8 +111,10 @@ public class CharacterMovemovent : MonoBehaviour
 
     public void CharacterSelect(CharacterInfo character)
     {
-        if (GameManagerMap.Instance.State == GameState.FreeMovement)
+        //if (GameManagerMap.Instance.State == GameState.FreeMovement)
         {
+            GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
+
             _lineRenderer.gameObject.SetActive(true);
 
             if (_selectedCharacter != null && _selectedCharacter != character)
@@ -123,14 +126,14 @@ public class CharacterMovemovent : MonoBehaviour
 
             AirPlatformsSet(true);
 
-
             GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+        
         }
     }
 
     public void CharacterDeselect()
     {
-        if (GameManagerMap.Instance.State == GameState.FreeMovement)
+        //if (GameManagerMap.Instance.State == GameState.FreeMovement)
         {
             _lineRenderer.gameObject.SetActive(false);
 
@@ -140,6 +143,8 @@ public class CharacterMovemovent : MonoBehaviour
             _objectsCalculated.Clear();
 
             GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+
+            GameManagerMap.Instance.StatusMain.SetStatusSelectCharacter();
         }
     }
 
@@ -161,7 +166,6 @@ public class CharacterMovemovent : MonoBehaviour
 
     private IEnumerator CoroutineNewPositionCharacter(TerritroyReaded newTerritory, List<Vector3> points)
     {
-
         _selectedCharacter.MoverActive(false);//disable mover
         _selectedCharacter.ActualTerritory = null;
 
@@ -515,6 +519,32 @@ public class CharacterMovemovent : MonoBehaviour
             //  Debug.Log(calcs);
         }
         return objectsCalculated;
+    }
+
+    private void OnStatusChange(HashSet<Permissions> permissions)
+    {
+        if (permissions.Contains(Permissions.SelectPlaceToMovement))
+        {
+            if (SelectedCharacter != null)
+            {
+                SelectedCharacter.SelectChanges();
+                _lineRenderer.gameObject.SetActive(true);
+                _objectsCalculated = CalculateAllPossible(_countMove);
+                SelectedCharacter.MoverActive(true);
+                AirPlatformsSet(true);
+            }
+        }
+        else
+        {
+            if (SelectedCharacter != null)
+            {
+               // SelectedCharacter.OnSelected(SelectedCharacter);
+                SelectedCharacter.MoverActive(false);
+                _lineRenderer.gameObject.SetActive(false);
+                AirPlatformsSet(false);
+                _objectsCalculated.Clear();
+            }
+        }
     }
 
     private void Clear()

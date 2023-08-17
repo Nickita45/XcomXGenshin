@@ -34,7 +34,8 @@ public class FreeCameraController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManagerMap.Instance.Map == null) return;
+        if (GameManagerMap.Instance.Map == null || !GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.CameraMovements)) 
+            return;
 
         HandleMovement();
         HandleRotation();

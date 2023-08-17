@@ -12,7 +12,7 @@ public class EnemyClickHandler : MonoBehaviour
 
     private void Update()
     {
-        if (GameManagerMap.Instance.State == GameState.FreeMovement
+        if (GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.ActionSelect)//(GameManagerMap.Instance.State == GameState.FreeMovement
             && GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null
             && Input.GetMouseButtonDown(0))
         {
