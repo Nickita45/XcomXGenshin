@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class FixedCameraController : MonoBehaviour
@@ -17,9 +21,12 @@ public class FixedCameraController : MonoBehaviour
     private bool _finished;
     private Action _onFinish;
 
+    private List<GameObject> _objectsToHide = new List<GameObject>(); //objects that we will hide
+
     private void Start()
     {
         _camera = GetComponent<Camera>();
+
     }
 
     private void Update()
@@ -36,6 +43,8 @@ public class FixedCameraController : MonoBehaviour
         {
             _finished = true;
             _onFinish?.Invoke();
+            //FinishingDetect();
+
         }
     }
 
@@ -64,5 +73,29 @@ public class FixedCameraController : MonoBehaviour
 
         _finished = false;
         _onFinish = onFinish;
+
     }
+
+    private void FinishingDetect() //hide objects in textures
+    {
+        if (GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter == null)
+            return;
+
+        Vector3 direction = GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.transform.position - transform.position;
+        float distance = Vector3.Distance(GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.transform.position, transform.position);
+
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, distance);
+        Debug.DrawRay(transform.position, direction);
+        Debug.Log(string.Join(",", hits.Select(n => n.collider.gameObject.name)));
+
+        _objectsToHide = hits.Where(n => !n.collider.gameObject.GetComponent<CharacterInfo>()).Select(n => n.collider.gameObject).ToList();
+        _objectsToHide.ForEach(n => n.SetActive(false));
+    }
+
+    public void ClearListHide()
+    {
+       // _objectsToHide.ForEach(n => n.SetActive(true));
+       // _objectsToHide.Clear();
+    }
+
 }

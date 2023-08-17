@@ -18,7 +18,7 @@ public class CharacterVisibility : MonoBehaviour
     void Start()
     {
         _enemyUI = GameObject.FindAnyObjectByType<EnemyUI>();
-        GameManagerMap.Instance.OnClearMap += ClearIcons;
+        //GameManagerMap.Instance.OnClearMap += ClearIcons;
 
         //_enemyUI = GameObject.Find("EnemyUI");
 

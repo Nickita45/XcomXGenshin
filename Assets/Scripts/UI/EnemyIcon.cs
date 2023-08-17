@@ -36,7 +36,7 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         tempColor.a = 0.5f;
         _image.color = tempColor;
 
-        if (GameManagerMap.Instance.State == GameState.FreeMovement)
+        if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy))//(GameManagerMap.Instance.State == GameState.FreeMovement)
         {
             Vector3 position = CameraUtils.CalculateCameraLookAt(_enemy, Camera.main);
             GameManagerMap.Instance.FixedCameraController
@@ -50,7 +50,7 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         tempColor.a = 1f;
         _image.color = tempColor;
 
-        if (GameManagerMap.Instance.State == GameState.FreeMovement)
+        if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy))//(GameManagerMap.Instance.State == GameState.FreeMovement)
             GameManagerMap.Instance.FixedCameraController.Init(
                 GameManagerMap.Instance.CameraController.transform.position,
                 GameManagerMap.Instance.CameraController.transform.rotation,

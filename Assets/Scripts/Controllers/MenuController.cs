@@ -84,6 +84,6 @@ public class MenuController : MonoBehaviour
     {
         GameManagerMap.Instance.OnClearMap();
         GameManagerMap.Instance.DeReadingMap.DeSerelizete(name);
-
+        GameManagerMap.Instance.StatusMain.SetStatusSelectCharacter();
     }
 }

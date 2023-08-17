@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -65,19 +66,19 @@ public class CharacterInfo : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (_selected == false)
+        if (_selected == false && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter))
             _selectItem.SetActive(true);
     }
 
     private void OnMouseExit()
     {
-        if (_selected == false)
+        if (_selected == false && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter))
             _selectItem.SetActive(false);
     }
 
     private void OnMouseDown()
     {
-        if (ActualTerritory != null && !EventSystem.current.IsPointerOverGameObject())
+        if (ActualTerritory != null && !EventSystem.current.IsPointerOverGameObject() && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter))
         {
             if (_selected)
                 OnDeselected();
@@ -88,11 +89,16 @@ public class CharacterInfo : MonoBehaviour
 
     private void Select(CharacterInfo character)
     {
+        SelectChanges();
+        MoverActive(true);
+    }
+
+    public void SelectChanges()
+    {
         SetGunByIndex((int)GameManagerMap.Instance.Gun);
 
         _selected = true;
         _selectItem.GetComponent<MeshRenderer>().material = _materialSelect;
-        MoverActive(true);
     }
 
     private void Disable()
@@ -110,6 +116,7 @@ public class CharacterInfo : MonoBehaviour
         }
         _gunGameObjects[index].SetActive(true);
     }
+
     public void MoverActive(bool result) => _mover.SetActive(result);
     public bool MoverActive() => _mover.activeSelf;
 

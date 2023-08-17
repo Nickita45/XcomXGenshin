@@ -31,13 +31,12 @@ public class GameManagerMap : MonoBehaviour
     private GameObject _mainParent;
     [SerializeField]
     private GameObject _genereteTerritoryMove;
-
+    [SerializeField]
+    private StatusMain _statusMain;
+    
     [Header("Plane to movement")]
     [SerializeField]
     private GameObject _prefabPossibleTerritory;
-
-    private GameState _state = GameState.None;
-    public GameState State { get => _state; set => _state = value; }
 
     private static GameManagerMap _instance;
     public static GameManagerMap Instance => _instance;
@@ -46,6 +45,7 @@ public class GameManagerMap : MonoBehaviour
     public FreeCameraController CameraController => _cameraController;
     public FixedCameraController FixedCameraController => _fixedCameraController;
     public CharacterVisibility CharacterVisibility => _characterVisibility;
+    public StatusMain StatusMain => _statusMain;
     public GameObject MainParent => _mainParent;
     public GameObject GenereteTerritoryMove => _genereteTerritoryMove;
 
@@ -54,8 +54,8 @@ public class GameManagerMap : MonoBehaviour
     public Action OnClearMap;
 
     private EnemyUI _enemyUI;
-    [SerializeField]
-    private GameObject _disableInteraction;
+    //[SerializeField]
+    //private GameObject _disableInteraction;
 
     public GunType Gun { get; set; } //in feature we need to move it to character
 
@@ -112,7 +112,7 @@ public class GameManagerMap : MonoBehaviour
         }
     }
 
-    private void SetState(GameState state)
+    /*private void SetState(GameState state)
     {
         // Exit current state if any
         switch (_state)
@@ -128,32 +128,36 @@ public class GameManagerMap : MonoBehaviour
         }
 
         _state = state;
-    }
+    }*/
 
     public void FreeMovement()
     {
-        SetState(GameState.FreeMovement);
+        //SetState(GameState.FreeMovement);
+        StatusMain.SetStatusSelectAction();
 
         _cameraController.TeleportToSelectedCharacter();
         _cameraController.Init();
+        _fixedCameraController.ClearListHide();
 
         _characterVisibility.UpdateVisibility(_characterMovemovent.SelectedCharacter);
     }
 
     public void ViewEnemy(EnemyIcon icon)
     {
-        if (!Instance.CharacterMovemovent.IsMoving)
+        if (StatusMain.ActualPermissions.Contains(Permissions.ActionSelect))//(!Instance.CharacterMovemovent.IsMoving)
         {
-            SetState(GameState.ViewEnemy);
+            //SetState(GameState.ViewEnemy);
 
             _enemyUI.SelectEnemy(icon);
+            StatusMain.SetStatusSelectEnemy();
+
 
             CharacterInfo selectedCharacter = Instance.CharacterMovemovent.SelectedCharacter;
 
             (Vector3 position, Quaternion rotation) = CameraUtils.CalculateEnemyView(selectedCharacter.gameObject, icon.Enemy);
             _fixedCameraController.Init(position, rotation, 0.5f);
 
-            _disableInteraction.SetActive(true);
+            //_disableInteraction.SetActive(true);
 
             foreach (GameObject e in Instance.Map.Enemy)
             {
@@ -164,7 +168,12 @@ public class GameManagerMap : MonoBehaviour
 
     private void Update()
     {
-        switch (_state)
+        if(StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy) && Input.GetKey(KeyCode.Escape))
+        {
+            FreeMovement();
+        }
+
+        /*switch (_state)
         {
             case GameState.FreeMovement:
                 break;
@@ -172,6 +181,6 @@ public class GameManagerMap : MonoBehaviour
                 // Exit the viewing mode
                 if (Input.GetKeyDown(KeyCode.Escape)) FreeMovement();
                 break;
-        }
+        }*/
     }
 }

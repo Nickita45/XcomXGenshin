@@ -21,7 +21,8 @@ public class EnemyUI : MonoBehaviour
             if (transform.childCount > 1 && _selected)
             {
                 int index = _selected.transform.GetSiblingIndex() - 1;
-                if (index < 0) index = transform.childCount - 1;
+                if (index < 0) 
+                    index = transform.childCount - 1;
 
                 Transform iconObject = transform.GetChild(index);
 
@@ -51,13 +52,15 @@ public class EnemyUI : MonoBehaviour
 
     public void SelectEnemy(EnemyIcon icon)
     {
+        Exit();
         icon.Image.color = Color.red;
         _selected = icon;
     }
 
     public void Exit()
     {
-        if (_selected) _selected.Image.color = Color.white;
+        if (_selected) 
+            _selected.Image.color = Color.white;
     }
 
     public EnemyIcon GetIconForEnemy(GameObject enemy)
