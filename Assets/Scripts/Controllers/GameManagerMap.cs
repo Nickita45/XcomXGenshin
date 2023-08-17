@@ -192,4 +192,19 @@ public class GameManagerMap : MonoBehaviour
                 break;
         }*/
     }
+
+    public void Attack()
+    {
+        Debug.Log("Attack");
+    }
+
+    public void Overwatch()
+    {
+        Debug.Log("Overwatch");
+    }
+
+    public void HunkerDown()
+    {
+        Debug.Log("Hunker Down");
+    }
 }

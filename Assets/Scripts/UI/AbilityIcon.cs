@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -21,6 +18,10 @@ public class AbilityIcon : MonoBehaviour, IPointerClickHandler
     public Image Image => _image;
 
     private AbilityPanel _panel;
+
+    [SerializeField]
+    private UnityEvent _event;
+    public UnityEvent Event => _event;
 
     void Start()
     {

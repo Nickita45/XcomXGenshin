@@ -92,3 +92,6 @@ MonoBehaviour:
   _title: Attack
   _description: Shoot an opponent with your weapon.
   _image: {fileID: 4243823869589733191}
+  _event:
+    m_PersistentCalls:
+      m_Calls: []

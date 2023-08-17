@@ -1,17 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AbilityPanel : MonoBehaviour
 {
-    private AbilityDialog _abilityDialog;
+    [SerializeField]
+    private GameObject _abilityDialog;
+
+    [SerializeField]
+    private TextMeshProUGUI _titleText;
+
+    [SerializeField]
+    private TextMeshProUGUI _descriptionText;
+
+    [SerializeField]
+    private Button _confirm;
 
     private AbilityIcon _selected;
 
     void Start()
     {
-        //GameManagerMap.Instance.OnClearMap += ClearVisibleEnemies;
-        _abilityDialog = FindObjectOfType<AbilityDialog>(true);
+        GameManagerMap.Instance.OnClearMap += () => ClearSelection();
+        _confirm.onClick.AddListener(() => ClearSelection());
     }
 
     void Update()
@@ -27,25 +39,37 @@ public class AbilityPanel : MonoBehaviour
 
     public void SelectAbility(AbilityIcon icon)
     {
-        Exit();
+        AbilityIcon _wasSelected = ClearSelection();
 
-        if (_selected && _selected == icon)
+        if (_wasSelected != icon)
         {
-            _selected = null;
-            _abilityDialog.gameObject.SetActive(false);
-        }
-        else
-        {
-            _selected = icon;
             icon.Image.color = Color.blue;
-            _abilityDialog.View(icon);
-            _abilityDialog.gameObject.SetActive(true);
+
+            _titleText.text = icon.Title;
+            _descriptionText.text = icon.Description;
+            _abilityDialog.SetActive(true);
+            _confirm.onClick.AddListener(icon.Event.Invoke);
+
+            _selected = icon;
         }
     }
 
-    public void Exit()
+    // Clears selection. If any ability was selected, returns it.
+    public AbilityIcon ClearSelection()
     {
-        if (_selected) _selected.Image.color = Color.white;
+        if (_selected)
+        {
+            AbilityIcon tmp = _selected;
+
+            _selected.Image.color = Color.white;
+            _abilityDialog.SetActive(false);
+            _confirm.onClick.RemoveListener(_selected.Event.Invoke);
+            _selected = null;
+
+            return tmp;
+        }
+
+        return null;
     }
 
     public EnemyIcon GetIconForEnemy(GameObject enemy)
