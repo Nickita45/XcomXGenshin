@@ -3,7 +3,22 @@ guid: a1a28a08e220b7047858248dde844cb8
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Girl_Catalyst_Sucrose_Mat_Body.003
+    second: {fileID: 2100000, guid: 7bd4ea3c1391cf04399b6368e6de66d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Girl_Catalyst_Sucrose_Mat_Face.003
+    second: {fileID: 2100000, guid: db945d25f415b564f996f012c5413548, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Girl_Catalyst_Sucrose_Mat_Hair.003
+    second: {fileID: 2100000, guid: 1102c4313c86342458d5e65da0bd8fe7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

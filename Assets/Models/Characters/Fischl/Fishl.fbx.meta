@@ -3,7 +3,32 @@ guid: 70c08fa913d594542b07e903d6bf4d26
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Girl_Bow_Fischl_Mat_Body.001
+    second: {fileID: 2100000, guid: e6f79bd114a2be44e8d13e7de3fa4a02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Girl_Bow_Fischl_Mat_Dress.001
+    second: {fileID: 2100000, guid: 00553e74a7034c6468d8ebd000f88d0b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Girl_Bow_Fischl_Mat_Face.001
+    second: {fileID: 2100000, guid: 776ac3084f24ac94daae2c94c58f0956, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Girl_Bow_Fischl_Mat_Hair.001
+    second: {fileID: 2100000, guid: eae1ee374fb180a43b128898ef5c0b61, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Girl_Sword_Ayaka_Mat_Face.001
+    second: {fileID: 2100000, guid: ab941405e441fcd49ad276a4a3cefbe7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

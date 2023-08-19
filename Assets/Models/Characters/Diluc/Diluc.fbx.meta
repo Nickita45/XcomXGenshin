@@ -3,7 +3,22 @@ guid: a1dfd1f8020dd834aa1e388a7fc82a1c
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Male_Claymore_Diluc_Mat_Body.001
+    second: {fileID: 2100000, guid: 58973709969b21e4c992b67a38fedbcc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Male_Claymore_Diluc_Mat_Face.001
+    second: {fileID: 2100000, guid: 88cca468965118245a4c039af8da1858, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Male_Claymore_Diluc_Mat_Hair.001
+    second: {fileID: 2100000, guid: 8c89f13b0f33ae645aa6ffdfabf438f0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
