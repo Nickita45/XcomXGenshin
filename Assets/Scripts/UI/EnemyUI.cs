@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,12 +8,15 @@ public class EnemyUI : MonoBehaviour
     [SerializeField]
     private GameObject _iconPrefab;
 
-    private EnemyIcon _selected;
+    private List<EnemyIcon> _icons = new();
+    public List<EnemyIcon> Icons => _icons;
 
-    public GameObject EnemyObject => _selected.Enemy;
+    private int? _selectedIndex;
+
+    public GameObject EnemyObject => _icons[_selectedIndex.Value].Enemy;
     public GameObject CanvasEnemyObject => EnemyObject.GetComponent<EnemyCanvasController>().CanvasToMove;
     public EnemyCanvasController EnemyCanvasController => EnemyObject.GetComponent<EnemyCanvasController>();
-    public int SelectedEnemyProcent => _selected.Procent;
+    public int SelectedEnemyProcent => Icons[_selectedIndex.Value].Procent;
 
     void Start()
     {
@@ -23,16 +27,14 @@ public class EnemyUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (transform.childCount > 1 && _selected)
+            if (_selectedIndex.HasValue)
             {
-                int index = _selected.transform.GetSiblingIndex() - 1;
-                if (index < 0) 
-                    index = transform.childCount - 1;
+                int newIndex = _selectedIndex.Value - 1;
+                if (newIndex == -1) newIndex = transform.childCount - 1;
 
-                Transform iconObject = transform.GetChild(index);
+                GameManagerMap.Instance.ViewEnemy(_icons[newIndex]);
 
-                EnemyIcon icon = iconObject.GetComponent<EnemyIcon>();
-                GameManagerMap.Instance.ViewEnemy(icon);
+                _selectedIndex = newIndex;
             }
         }
     }
@@ -43,11 +45,14 @@ public class EnemyUI : MonoBehaviour
 
         EnemyIcon icon = image.GetComponent<EnemyIcon>();
         icon.SetEnemy(enemy);
+
+        _icons.Add(icon);
     }
 
     public void ClearVisibleEnemies()
     {
-        _selected = null;
+        _icons.Clear();
+        _selectedIndex = null;
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -58,23 +63,22 @@ public class EnemyUI : MonoBehaviour
     public void SelectEnemy(EnemyIcon icon)
     {
         Exit();
+        //ClearSelection();
+        _selectedIndex = _icons.FindIndex(i => i == icon);
         icon.Image.color = Color.red;
-        _selected = icon;
     }
 
-    public void Exit()
+    public void ClearSelection()
     {
-        if (_selected)
-            _selected.Image.color = Color.white;
+        if (_selectedIndex.HasValue)
+        {
+            _icons[_selectedIndex.Value].Image.color = Color.white;
+            _selectedIndex = null;
+        }
     }
 
     public EnemyIcon GetIconForEnemy(GameObject enemy)
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            EnemyIcon icon = transform.GetChild(i).GetComponent<EnemyIcon>();
-            if (icon.Enemy == enemy) return icon;
-        }
-        return null;
+        return _icons.Find(i => i.Enemy == enemy);
     }
 }

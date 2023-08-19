@@ -18,21 +18,29 @@ public class AbilityPanel : MonoBehaviour
     [SerializeField]
     private Button _confirm;
 
+    private List<AbilityIcon> _icons = new();
     private AbilityIcon _selected;
 
     void Start()
     {
         GameManagerMap.Instance.OnClearMap += () => ClearSelection();
         _confirm.onClick.AddListener(() => ClearSelection());
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            AbilityIcon icon = transform.GetChild(i).GetComponent<AbilityIcon>();
+            _icons.Add(icon);
+            icon.Index = i + 1;
+        }
     }
 
     void Update()
     {
-        for (int i = 0; i < 10; i++)
+        foreach (AbilityIcon icon in _icons)
         {
-            if (Input.GetKeyDown(i.ToString()))
+            if (Input.GetKeyDown(icon.Index.ToString()))
             {
-                Debug.Log(i);
+                SelectAbility(icon);
             }
         }
     }
@@ -49,6 +57,17 @@ public class AbilityPanel : MonoBehaviour
             _descriptionText.text = icon.Description;
             _abilityDialog.SetActive(true);
             _confirm.onClick.AddListener(icon.Event.Invoke);
+
+            switch (icon.TargetType)
+            {
+                case AbilityTargetType.Enemy:
+                    // TODO: disable this when no enemies are found
+                    GameManagerMap.Instance.ViewLastEnemy();
+                    break;
+                case AbilityTargetType.None:
+                    //GameManagerMap.Instance.FreeMovement();
+                    break;
+            }
 
             _selected = icon;
         }
@@ -69,16 +88,6 @@ public class AbilityPanel : MonoBehaviour
             return tmp;
         }
 
-        return null;
-    }
-
-    public EnemyIcon GetIconForEnemy(GameObject enemy)
-    {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            EnemyIcon icon = transform.GetChild(i).GetComponent<EnemyIcon>();
-            if (icon.Enemy == enemy) return icon;
-        }
         return null;
     }
 }

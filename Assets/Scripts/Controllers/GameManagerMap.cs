@@ -35,7 +35,7 @@ public class GameManagerMap : MonoBehaviour
     private GameObject _genereteTerritoryMove;
     [SerializeField]
     private StatusMain _statusMain;
-    
+
     [Header("Plane to movement")]
     [SerializeField]
     private GameObject _prefabPossibleTerritory;
@@ -56,9 +56,15 @@ public class GameManagerMap : MonoBehaviour
 
     public Action OnClearMap;
 
+    [Header("UI")]
+    [SerializeField]
     private EnemyUI _enemyUI;
-    //[SerializeField]
-    //private GameObject _disableInteraction;
+
+    [SerializeField]
+    private AbilityPanel _abilityPanel;
+
+    [SerializeField]
+    private AbilityIcon _attackAbilityIcon;
 
     public GunType Gun { get; set; } //in feature we need to move it to character
 
@@ -76,7 +82,6 @@ public class GameManagerMap : MonoBehaviour
     private void Start()
     {
         OnClearMap += ClearMap;
-        _enemyUI = FindObjectOfType<EnemyUI>();
     }
 
     public GameObject CreatePlatformMovement(TerritroyReaded item)
@@ -115,7 +120,8 @@ public class GameManagerMap : MonoBehaviour
                 _characterMovemovent.LineRendererSet(false);
                 break;
             case GameState.ViewEnemy:
-                _enemyUI.Exit();
+                _enemyUI.ClearSelection();
+                _abilityPanel.ClearSelection();
                 _disableInteraction.SetActive(false);
                 break;
         }
@@ -141,6 +147,7 @@ public class GameManagerMap : MonoBehaviour
             //SetState(GameState.ViewEnemy);
             _fixedCameraController.ClearListHide();
             _enemyUI.SelectEnemy(icon);
+            //_abilityPanel.SelectAbility(_attackAbilityIcon);
             StatusMain.SetStatusSelectEnemy();
 
 
@@ -167,21 +174,22 @@ public class GameManagerMap : MonoBehaviour
             GameManagerMap.Instance.Gun, _enemyUI.SelectedEnemyProcent, EndFire));
     }
 
-    private void EndFire()
+    public void ViewLastEnemy()
     {
-        CharacterMovemovent.SelectedCharacter = null;
-        FreeMovement();
-        StatusMain.SetStatusSelectCharacter();
+        if (_enemyUI.Icons.Count > 0)
+        {
+            Instance.ViewEnemy(_enemyUI.Icons[^1]);
+        }
     }
 
     private void Update()
     {
-        if(StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy) && Input.GetKeyDown(KeyCode.Escape)) //Down works once
+        if (StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy) && Input.GetKeyDown(KeyCode.Escape)) //Down works once
         {
             FreeMovement();
         }
 
-        
+
         /*switch (_state)
         {
             case GameState.FreeMovement:
