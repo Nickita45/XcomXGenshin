@@ -3,7 +3,32 @@ guid: ddda328a8c7c66f4c8d4a8a35039acbd
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Lady_Pole_Rosaria_Mat_Body
+    second: {fileID: 2100000, guid: 37d47c3aa0ce3ab4388c04816c2e63bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Lady_Pole_Rosaria_Mat_Dress1
+    second: {fileID: 2100000, guid: e1f5361a83ed8c64595169ce028e077d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Lady_Pole_Rosaria_Mat_Dress2
+    second: {fileID: 2100000, guid: e801edd31b0c1e7428ecb39933ca5bb4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Lady_Pole_Rosaria_Mat_Face
+    second: {fileID: 2100000, guid: 50d352be6d4004c4e84c711f57402991, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Lady_Pole_Rosaria_Mat_Hair
+    second: {fileID: 2100000, guid: 25f18f00d15738f4693bd2780b7c2a92, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

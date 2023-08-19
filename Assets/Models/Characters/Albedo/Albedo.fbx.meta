@@ -3,7 +3,27 @@ guid: 2a7bd962e8862ea43b994f4af730a453
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Boy_Sword_Albedo_Mat_Body.003
+    second: {fileID: 2100000, guid: d8a648b27c909dd4db60d77200461cbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Boy_Sword_Albedo_Mat_Dress.003
+    second: {fileID: 2100000, guid: 650173d4b8fa41341bcfbc32d2425de7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Boy_Sword_Albedo_Mat_Face.003
+    second: {fileID: 2100000, guid: 45704ab57b52aad4589114d1cd616538, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Avatar_Boy_Sword_Albedo_Mat_Hair.003
+    second: {fileID: 2100000, guid: 561af5b14f8c75b4e9b314cf7bca982d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
