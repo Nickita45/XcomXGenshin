@@ -3,50 +3,60 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class EnemyUI : MonoBehaviour
+public class EnemyPanel : MonoBehaviour
 {
     [SerializeField]
     private GameObject _iconPrefab;
 
     private List<EnemyIcon> _icons = new();
-    public List<EnemyIcon> Icons => _icons;
 
     private int? _selectedIndex;
 
     public GameObject EnemyObject => _icons[_selectedIndex.Value].Enemy;
     public GameObject CanvasEnemyObject => EnemyObject.GetComponent<EnemyCanvasController>().CanvasToMove;
     public EnemyCanvasController EnemyCanvasController => EnemyObject.GetComponent<EnemyCanvasController>();
-    public int SelectedEnemyProcent => Icons[_selectedIndex.Value].Procent;
+    public int SelectedEnemyProcent => _icons[_selectedIndex.Value].Procent;
+
+    [SerializeField]
+    private AbilityPanel _abilityPanel;
+
+    [SerializeField]
+    private AbilityIcon _attackAbility;
 
     void Start()
     {
         GameManagerMap.Instance.OnClearMap += ClearVisibleEnemies;
+        GameManagerMap.Instance.CharacterMovemovent.OnStartMove += ClearVisibleEnemies;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy)
+            && Input.GetKeyDown(KeyCode.Tab))
         {
             if (_selectedIndex.HasValue)
             {
                 int newIndex = _selectedIndex.Value - 1;
                 if (newIndex == -1) newIndex = transform.childCount - 1;
 
-                GameManagerMap.Instance.ViewEnemy(_icons[newIndex]);
-
-                _selectedIndex = newIndex;
+                SelectEnemy(_icons[newIndex]);
             }
         }
     }
 
-    public void AddVisibleEnemy(GameObject enemy)
+    public void UpdateVisibleEnemies(HashSet<GameObject> enemies)
     {
-        GameObject image = Instantiate(_iconPrefab, transform);
+        ClearVisibleEnemies();
 
-        EnemyIcon icon = image.GetComponent<EnemyIcon>();
-        icon.SetEnemy(enemy);
+        foreach (GameObject enemy in enemies)
+        {
+            GameObject image = Instantiate(_iconPrefab, transform);
 
-        _icons.Add(icon);
+            EnemyIcon icon = image.GetComponent<EnemyIcon>();
+            icon.SetEnemy(enemy);
+
+            _icons.Add(icon);
+        }
     }
 
     public void ClearVisibleEnemies()
@@ -54,18 +64,17 @@ public class EnemyUI : MonoBehaviour
         _icons.Clear();
         _selectedIndex = null;
 
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            Destroy(transform.GetChild(i).gameObject);
-        }
+        ObjectHelpers.DestroyAllChildren(gameObject);
     }
 
     public void SelectEnemy(EnemyIcon icon)
     {
-        Exit();
-        //ClearSelection();
+        ClearSelection();
+
         _selectedIndex = _icons.FindIndex(i => i == icon);
         icon.Image.color = Color.red;
+
+        _abilityPanel.SelectAbility(_attackAbility);
     }
 
     public void ClearSelection()
@@ -77,8 +86,17 @@ public class EnemyUI : MonoBehaviour
         }
     }
 
+    // Gets the EnemyIcon pointing at the given enemy object.
     public EnemyIcon GetIconForEnemy(GameObject enemy)
     {
         return _icons.Find(i => i.Enemy == enemy);
+    }
+
+    // Gets the selected icon.
+    // If the selection is none, selects the last icon and returns it.
+    public EnemyIcon GetSelectedIconOrLast()
+    {
+        if (!_selectedIndex.HasValue) SelectEnemy(_icons[^1]);
+        return _icons[_selectedIndex.Value];
     }
 }

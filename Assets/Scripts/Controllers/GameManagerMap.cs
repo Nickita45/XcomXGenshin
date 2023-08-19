@@ -20,13 +20,14 @@ public class GameManagerMap : MonoBehaviour
     private CharacterMovemovent _characterMovemovent;
 
     [SerializeField]
-    private FreeCameraController _cameraController;
+    private CharacterVisibility _characterVisibility;
+
+    [SerializeField]
+    private FreeCameraController _freeCameraController;
 
     [SerializeField]
     private FixedCameraController _fixedCameraController;
 
-    [SerializeField]
-    private CharacterVisibility _characterVisibility;
 
     [Header("MainObjects")]
     [SerializeField]
@@ -44,11 +45,11 @@ public class GameManagerMap : MonoBehaviour
     public static GameManagerMap Instance => _instance;
 
     public CharacterMovemovent CharacterMovemovent => _characterMovemovent;
-    public FreeCameraController CameraController => _cameraController;
+    public FreeCameraController CameraController => _freeCameraController;
     public FixedCameraController FixedCameraController => _fixedCameraController;
     public CharacterVisibility CharacterVisibility => _characterVisibility;
     public StatusMain StatusMain => _statusMain;
-    public EnemyUI EnemyUI => _enemyUI;
+    public EnemyPanel EnemyPanel => _enemyPanel;
     public GameObject MainParent => _mainParent;
     public GameObject GenereteTerritoryMove => _genereteTerritoryMove;
 
@@ -58,13 +59,7 @@ public class GameManagerMap : MonoBehaviour
 
     [Header("UI")]
     [SerializeField]
-    private EnemyUI _enemyUI;
-
-    [SerializeField]
-    private AbilityPanel _abilityPanel;
-
-    [SerializeField]
-    private AbilityIcon _attackAbilityIcon;
+    private EnemyPanel _enemyPanel;
 
     public GunType Gun { get; set; } //in feature we need to move it to character
 
@@ -82,6 +77,7 @@ public class GameManagerMap : MonoBehaviour
     private void Start()
     {
         OnClearMap += ClearMap;
+        Instance.CharacterVisibility.OnVisibilityUpdate += UpdateEnemyOutlines;
     }
 
     public GameObject CreatePlatformMovement(TerritroyReaded item)
@@ -95,124 +91,104 @@ public class GameManagerMap : MonoBehaviour
     private void ClearMap()
     {
         Map = null;
-        DeleteAllChildren(MainParent);
-        DeleteAllChildren(GenereteTerritoryMove);
+        ObjectHelpers.DestroyAllChildrenImmediate(MainParent);
+        ObjectHelpers.DestroyAllChildrenImmediate(GenereteTerritoryMove);
+
+        /* foreach(GameObject item in MainParent.transform)
+         {
+             Destroy(item);
+         }
+
+         foreach (GameObject item in GenereteTerritoryMove.transform)
+         {
+             Destroy(item);
+         }*/
     }
 
-    private static void DeleteAllChildren(GameObject parent)
+    // Enables the free camera, which allows the player to navigate around the map.
+    public void EnableFreeCameraMovement()
     {
-        int childCount = parent.transform.childCount;
+        UpdateEnemyOutlines(Instance.CharacterVisibility.VisibleEnemies);
+        _freeCameraController.InitAsMainCamera();
 
-        for (int i = childCount - 1; i >= 0; i--)
+        // If coming from enemy selection or shooting, perform additional setup
+        if (StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy)
+            || StatusMain.ActualPermissions.Contains(Permissions.AnimationShooting))
         {
-            Transform child = parent.transform.GetChild(i);
-            DestroyImmediate(child.gameObject);
-        }
-    }
-
-    /*private void SetState(GameState state)
-    {
-        // Exit current state if any
-        switch (_state)
-        {
-            case GameState.FreeMovement:
-                _characterMovemovent.AirPlatformsSet(false);
-                _characterMovemovent.LineRendererSet(false);
-                break;
-            case GameState.ViewEnemy:
-                _enemyUI.ClearSelection();
-                _abilityPanel.ClearSelection();
-                _disableInteraction.SetActive(false);
-                break;
+            _enemyPanel.ClearSelection();
+            _freeCameraController.TeleportToSelectedCharacter();
         }
 
-        _state = state;
-    }*/
-
-    public void FreeMovement()
-    {
         StatusMain.SetStatusSelectAction();
-
-        _cameraController.TeleportToSelectedCharacter();
-        _cameraController.Init();
-        _fixedCameraController.ClearListHide();
-
-        _characterVisibility.UpdateVisibility(_characterMovemovent.SelectedCharacter);
     }
 
-    public void ViewEnemy(EnemyIcon icon)
+    // Transitions the camera to look at the selected enemy.
+    // If none is selected, this also selects the last enemy.
+    //
+    // Used while selecting the enemy target for an ability.
+    public void FixCameraOnSelectedEnemy()
+    {
+        Instance.FixCameraOnEnemy(_enemyPanel.GetSelectedIconOrLast());
+    }
+
+    // Transitions the camera to look at the given enemy.
+    //
+    // Used while selecting the enemy target for an ability.
+    public void FixCameraOnEnemy(EnemyIcon icon)
     {
         if (StatusMain.ActualPermissions.Contains(Permissions.ActionSelect))//(!Instance.CharacterMovemovent.IsMoving)
         {
-            //SetState(GameState.ViewEnemy);
             _fixedCameraController.ClearListHide();
-            _enemyUI.SelectEnemy(icon);
-            //_abilityPanel.SelectAbility(_attackAbilityIcon);
-            StatusMain.SetStatusSelectEnemy();
-
-
             CharacterInfo selectedCharacter = Instance.CharacterMovemovent.SelectedCharacter;
 
             selectedCharacter.GunPrefab.transform.LookAt(icon.Enemy.transform); //gun look to enemy
 
             (Vector3 position, Quaternion rotation) = CameraUtils.CalculateEnemyView(selectedCharacter.gameObject, icon.Enemy);
-            _fixedCameraController.Init(position, rotation, 0.5f, _fixedCameraController.FinishingDetect);
-
-            //_disableInteraction.SetActive(true);
+            _fixedCameraController.InitAsMainCamera(position, rotation, 0.5f);
 
             foreach (GameObject e in Instance.Map.Enemy)
             {
                 e.GetComponent<Outline>().enabled = e == icon.Enemy;
             }
+
+            StatusMain.SetStatusSelectEnemy();
         }
     }
 
-    public void ButtonFire()
+    private void EndFire(Action FinishAbility)
+    {
+        //CharacterMovemovent.SelectedCharacter = null;
+        //EnableFreeCameraMovement();
+        //StatusMain.SetStatusSelectCharacter();
+
+        FinishAbility();
+    }
+
+    // Enables an outline for each visible enemy, disables for others.
+    private void UpdateEnemyOutlines(HashSet<GameObject> visibleEnemies)
+    {
+        foreach (GameObject enemy in Instance.Map.Enemy)
+        {
+            enemy.GetComponent<Outline>().enabled = visibleEnemies.Contains(enemy.gameObject);
+        }
+    }
+
+    public void Attack(Action FinishAbility)
     {
         StatusMain.SetStatusShooting();
-        StartCoroutine(CharacterMovemovent.SelectedCharacter.GetComponent<ShootController>().Shoot(_enemyUI.EnemyObject.transform,
-            GameManagerMap.Instance.Gun, _enemyUI.SelectedEnemyProcent, EndFire));
+        StartCoroutine(CharacterMovemovent.SelectedCharacter.GetComponent<ShootController>().Shoot(_enemyPanel.EnemyObject.transform,
+            GameManagerMap.Instance.Gun, _enemyPanel.SelectedEnemyProcent, () => EndFire(FinishAbility)));
     }
 
-    public void ViewLastEnemy()
-    {
-        if (_enemyUI.Icons.Count > 0)
-        {
-            Instance.ViewEnemy(_enemyUI.Icons[^1]);
-        }
-    }
-
-    private void Update()
-    {
-        if (StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy) && Input.GetKeyDown(KeyCode.Escape)) //Down works once
-        {
-            FreeMovement();
-        }
-
-
-        /*switch (_state)
-        {
-            case GameState.FreeMovement:
-                break;
-            case GameState.ViewEnemy:
-                // Exit the viewing mode
-                if (Input.GetKeyDown(KeyCode.Escape)) FreeMovement();
-                break;
-        }*/
-    }
-
-    public void Attack()
-    {
-        Debug.Log("Attack");
-    }
-
-    public void Overwatch()
+    public void Overwatch(Action FinishAbility)
     {
         Debug.Log("Overwatch");
+        FinishAbility();
     }
 
-    public void HunkerDown()
+    public void HunkerDown(Action FinishAbility)
     {
         Debug.Log("Hunker Down");
+        FinishAbility();
     }
 }

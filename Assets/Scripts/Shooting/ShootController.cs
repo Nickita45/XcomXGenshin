@@ -21,8 +21,8 @@ public class ShootController : MonoBehaviour
         for (int i = 0; i < ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].countBullets; i++)
         {
             Vector3 addShootRange = GenereteCordinatesFromResult(randomGenerate > procent);
-            
-            GameObject bullet = Instantiate(_bulletPrefab, firePoint.position , firePoint.rotation);
+
+            GameObject bullet = Instantiate(_bulletPrefab, firePoint.position, firePoint.rotation);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
 
             if (bulletScript != null && target != null)
@@ -36,9 +36,9 @@ public class ShootController : MonoBehaviour
         }
 
         if (randomGenerate > procent)
-            StartCoroutine(GameManagerMap.Instance.EnemyUI.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyUI.EnemyCanvasController.PanelMiss, 4));
+            StartCoroutine(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelMiss, 4));
         else
-            StartCoroutine(GameManagerMap.Instance.EnemyUI.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyUI.EnemyCanvasController.PanelHit(
+            StartCoroutine(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelHit(
                 UnityEngine.Random.Range(ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].minHitValue, ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].maxHitValue + 1)), 4));
 
         yield return new WaitForSeconds(ConfigurationManager.Instance.CharacterData.timeAfterShooting);
@@ -48,7 +48,7 @@ public class ShootController : MonoBehaviour
     private Vector3 GenereteCordinatesFromResult(bool miss)
     {
         if (!miss)
-           return new Vector3(UnityEngine.Random.Range(-0.15f, 0.15f), UnityEngine.Random.Range(-0.15f, 0.15f), UnityEngine.Random.Range(-0.15f, 0.15f));
+            return new Vector3(UnityEngine.Random.Range(-0.15f, 0.15f), UnityEngine.Random.Range(-0.15f, 0.15f), UnityEngine.Random.Range(-0.15f, 0.15f));
         else
         {
             int minus = UnityEngine.Random.Range(0, 2); //because [0;2)

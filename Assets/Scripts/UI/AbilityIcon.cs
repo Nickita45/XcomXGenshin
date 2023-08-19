@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,18 +22,32 @@ public class AbilityIcon : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private TextMeshProUGUI _indexText;
 
-    private int index;
+    private int _index;
     public int Index
     {
-        get { return index; }
-        set { index = value; _indexText.text = value.ToString(); }
+        get { return _index; }
+        set { _index = value; _indexText.text = value.ToString(); }
+    }
+
+    public bool _abilityEnabled;
+    public bool AbilityEnabled
+    {
+        get { return _abilityEnabled; }
+        set
+        {
+            _abilityEnabled = value;
+
+            Color tmp = _image.color;
+            tmp.a = _abilityEnabled ? 1.0f : 0.5f;
+            _image.color = tmp;
+        }
     }
 
     private AbilityPanel _panel;
 
     [SerializeField]
-    private UnityEvent _event;
-    public UnityEvent Event => _event;
+    private UnityEvent<Action> _event;
+    public UnityEvent<Action> Event => _event;
 
     [SerializeField]
     private AbilityTargetType _targetType;
@@ -45,6 +60,31 @@ public class AbilityIcon : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData data)
     {
-        _panel.SelectAbility(this);
+        if (data.clickCount == 1)
+        {
+            _panel.SelectAbility(this);
+        }
+        else if (data.clickCount == 2)
+        {
+            _panel.ActivateAbility();
+        }
+    }
+
+    public void SetupCameraForTargetEnter()
+    {
+        switch (_targetType)
+        {
+            case AbilityTargetType.Enemy:
+                GameManagerMap.Instance.FixCameraOnSelectedEnemy();
+                break;
+            case AbilityTargetType.None:
+                GameManagerMap.Instance.EnableFreeCameraMovement();
+                break;
+        }
+    }
+
+    public void SetupCameraForTargetExit()
+    {
+        GameManagerMap.Instance.EnableFreeCameraMovement();
     }
 }

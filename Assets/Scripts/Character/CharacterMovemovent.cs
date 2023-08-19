@@ -33,6 +33,7 @@ public class CharacterMovemovent : MonoBehaviour
     public CharacterInfo SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
 
     public Action<(TerritroyReaded aktualTerritoryReaded, List<Vector3> path), CharacterInfo> OnSelectNewTerritory;
+    public Action OnStartMove;
     public Action<TerritroyReaded, CharacterInfo> OnEndMoveToNewTerritory;
 
     private bool _isMoving;
@@ -54,7 +55,7 @@ public class CharacterMovemovent : MonoBehaviour
     private void Update()
     {
         if (_selectedCharacter != null && _selectedCharacter.MoverActive())
-            //GameManagerMap.Instance.State == GameState.FreeMovement)
+        //GameManagerMap.Instance.State == GameState.FreeMovement)
         {
             SpawnMover();
         }
@@ -123,7 +124,7 @@ public class CharacterMovemovent : MonoBehaviour
             AirPlatformsSet(true);
 
             GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
-        
+
         }
     }
 
@@ -166,10 +167,12 @@ public class CharacterMovemovent : MonoBehaviour
         _selectedCharacter.ActualTerritory = null;
 
         _isMoving = true;
+        OnStartMove();
 
         yield return StartCoroutine(CoroutineMove(points)); //start movements
 
         _isMoving = false;
+        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
 
         OnEndMoveToNewTerritory(newTerritory, _selectedCharacter);
     }
@@ -182,8 +185,6 @@ public class CharacterMovemovent : MonoBehaviour
         var save = character;
         character.OnDeselected();
         save.OnSelected(save);
-
-        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
 
         _selectedCharacter.SetCordintasToMover(newTerritory.GetCordinats()
             + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
@@ -534,7 +535,7 @@ public class CharacterMovemovent : MonoBehaviour
                 AirPlatformsSet(true);
             }
         }
-        else 
+        else
         {
             if (SelectedCharacter != null)
             {

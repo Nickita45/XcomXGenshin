@@ -20,11 +20,12 @@ public class AbilityPanel : MonoBehaviour
 
     private List<AbilityIcon> _icons = new();
     private AbilityIcon _selected;
+    public AbilityIcon Selected => _selected;
 
     void Start()
     {
-        GameManagerMap.Instance.OnClearMap += () => ClearSelection();
-        _confirm.onClick.AddListener(() => ClearSelection());
+        GameManagerMap.Instance.OnClearMap += UnselectAbility;
+        _confirm.onClick.AddListener(ActivateAbility);
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -32,62 +33,162 @@ public class AbilityPanel : MonoBehaviour
             _icons.Add(icon);
             icon.Index = i + 1;
         }
+
+        GameManagerMap.Instance.CharacterVisibility.OnVisibilityUpdate += DisableAbilitiesWithoutTargets;
+        GameManagerMap.Instance.CharacterMovemovent.OnStartMove += DisableAllAbilites;
+        GameManagerMap.Instance.CharacterMovemovent.OnEndMoveToNewTerritory += (territory, info) => UpdateConfirmButton();
+        GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
     }
 
     void Update()
     {
         foreach (AbilityIcon icon in _icons)
         {
+            // Keyboard navigation (buttons 1-9)
             if (Input.GetKeyDown(icon.Index.ToString()))
             {
-                SelectAbility(icon);
+                // Select ability
+                if (_selected != icon)
+                {
+                    SelectAbility(icon);
+                }
+                // If already selected, activate
+                else
+                {
+                    ActivateAbility();
+                }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UnselectAbility();
         }
     }
 
+    public void ToggleAbility(AbilityIcon icon)
+    {
+        if (_selected == icon)
+        {
+            SelectAbility(icon);
+        }
+        else
+        {
+            UnselectAbility();
+        }
+    }
+
+    // Clears the selection and replaces it with a given ability icon.
+    // Peforms the camera enter transition.
     public void SelectAbility(AbilityIcon icon)
     {
-        AbilityIcon _wasSelected = ClearSelection();
+        ClearSelection();
 
-        if (_wasSelected != icon)
-        {
-            icon.Image.color = Color.blue;
+        Color tmpColor = Color.blue;
+        tmpColor.a = icon.Image.color.a;
+        icon.Image.color = tmpColor;
 
-            _titleText.text = icon.Title;
-            _descriptionText.text = icon.Description;
-            _abilityDialog.SetActive(true);
-            _confirm.onClick.AddListener(icon.Event.Invoke);
+        _titleText.text = icon.Title;
+        _descriptionText.text = icon.Description;
+        _abilityDialog.SetActive(true);
+        _confirm.interactable = icon.AbilityEnabled;
 
-            switch (icon.TargetType)
-            {
-                case AbilityTargetType.Enemy:
-                    // TODO: disable this when no enemies are found
-                    GameManagerMap.Instance.ViewLastEnemy();
-                    break;
-                case AbilityTargetType.None:
-                    //GameManagerMap.Instance.FreeMovement();
-                    break;
-            }
-
-            _selected = icon;
-        }
+        _selected = icon;
+        if (icon.AbilityEnabled) icon.SetupCameraForTargetEnter();
     }
 
-    // Clears selection. If any ability was selected, returns it.
+    // Clears the selection, as well as performs the camera exit transition.
+    public void UnselectAbility()
+    {
+        AbilityIcon wasSelected = ClearSelection();
+        if (wasSelected != null) wasSelected.SetupCameraForTargetExit();
+    }
+
+    // Clears the selection. If any ability was selected, returns it.
     public AbilityIcon ClearSelection()
     {
         if (_selected)
         {
             AbilityIcon tmp = _selected;
 
-            _selected.Image.color = Color.white;
+            Color tmpColor = Color.white;
+            tmpColor.a = _selected.Image.color.a;
+            _selected.Image.color = tmpColor;
+
             _abilityDialog.SetActive(false);
-            _confirm.onClick.RemoveListener(_selected.Event.Invoke);
             _selected = null;
 
             return tmp;
         }
 
         return null;
+    }
+
+    public void ActivateAbility()
+    {
+        if (_selected && _selected.AbilityEnabled)
+        {
+            _selected.Event.Invoke(UnselectAbility);
+        }
+    }
+
+    // Disables all abilities that target enemies if there are no visible enemies.
+    // Otherwise, enables them. Abilities that do not target enemies become enabled as well.
+    //
+    // If the selected ability has changed from disabled to enabled, performs the
+    // camera enter transition.
+    private void DisableAbilitiesWithoutTargets(HashSet<GameObject> visibleEnemies)
+    {
+        bool enabled = visibleEnemies.Count > 0;
+
+        foreach (AbilityIcon icon in _icons)
+        {
+            if (icon.TargetType == AbilityTargetType.Enemy)
+            {
+                if (_selected == icon && !icon.AbilityEnabled && enabled)
+                {
+                    icon.SetupCameraForTargetEnter();
+                }
+
+                icon.AbilityEnabled = enabled;
+            }
+            else
+            {
+                icon.AbilityEnabled = true;
+            }
+        }
+
+        UpdateConfirmButton();
+    }
+
+    private void DisableAllAbilites()
+    {
+        foreach (AbilityIcon icon in _icons)
+        {
+            icon.AbilityEnabled = false;
+        }
+
+        UpdateConfirmButton();
+    }
+
+    // Make the OK button interactable if the selected ability is enabled,
+    // otherwise disable interactions.
+    private void UpdateConfirmButton()
+    {
+        if (_selected) _confirm.interactable = _selected.AbilityEnabled;
+    }
+
+    private void OnStatusChange(HashSet<Permissions> permissions)
+    {
+        if (permissions.Contains(Permissions.AnimationShooting))
+        {
+            gameObject.SetActive(false);
+            _abilityDialog.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+            _abilityDialog.SetActive(_selected != null);
+        }
     }
 }
