@@ -59,6 +59,12 @@ public class StatusMain : MonoBehaviour
         ActualPermissions = new HashSet<Permissions> { Permissions.CameraMovements, Permissions.AnimationRunning, Permissions.SelectPlaceToMovement };
         OnStatusChange(ActualPermissions);
     }
+
+    public void SetStatusWaiting()
+    {
+        ActualPermissions = new HashSet<Permissions> { Permissions.Waiting };
+        OnStatusChange(ActualPermissions);
+    }
 }
 
 public enum Permissions
@@ -69,7 +75,8 @@ public enum Permissions
     SelectPlaceToMovement,
     SelectEnemy,
     AnimationShooting,
-    AnimationRunning
+    AnimationRunning,
+    Waiting,
 }
 
 //Status:

@@ -103,7 +103,7 @@ public class EnemyPanel : MonoBehaviour
 
     private void OnStatusChange(HashSet<Permissions> permissions)
     {
-        if (permissions.Contains(Permissions.AnimationShooting))
+        if (permissions.Contains(Permissions.AnimationShooting) || permissions.Contains(Permissions.Waiting))
         {
             gameObject.SetActive(false);
         }

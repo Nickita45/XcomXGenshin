@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -170,15 +171,23 @@ public class GameManagerMap : MonoBehaviour
             Instance.Gun, _enemyPanel.SelectedEnemyProcent, FinishAbility));
     }
 
-    public void Overwatch(Action FinishAbility)
+    public IEnumerator WaitAndFinish(Action onFinish)
     {
-        Debug.Log("Overwatch");
-        FinishAbility();
+        yield return new WaitForSeconds(2f);
+        onFinish();
     }
 
-    public void HunkerDown(Action FinishAbility)
+    public void Overwatch(Action onFinish)
+    {
+        Debug.Log("Overwatch");
+        StatusMain.SetStatusWaiting();
+        StartCoroutine(WaitAndFinish(onFinish));
+    }
+
+    public void HunkerDown(Action onFinish)
     {
         Debug.Log("Hunker Down");
-        FinishAbility();
+        StatusMain.SetStatusWaiting();
+        StartCoroutine(WaitAndFinish(onFinish));
     }
 }
