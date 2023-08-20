@@ -2,12 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.EventSystems;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UIElements;
 
 public class CharacterMovemovent : MonoBehaviour
 {
@@ -198,7 +194,8 @@ public class CharacterMovemovent : MonoBehaviour
         float elapsedTime = 0f;
         int index = 0;
         Vector3 target = targets[++index]; //ignore first, becouse its for line
-
+        GameManagerMap.Instance.StatusMain.OnStatusChange -= OnStatusChange;
+        GameManagerMap.Instance.StatusMain.SetStatusRunning();
         while (true)
         {
 
@@ -218,6 +215,9 @@ public class CharacterMovemovent : MonoBehaviour
             target = targets[++index];
             yield return null;
         }
+        GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
+        GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
+
     }
 
     private void DrawLine(List<Vector3> points)
@@ -534,11 +534,11 @@ public class CharacterMovemovent : MonoBehaviour
                 AirPlatformsSet(true);
             }
         }
-        else
+        else 
         {
             if (SelectedCharacter != null)
             {
-               // SelectedCharacter.OnSelected(SelectedCharacter);
+
                 SelectedCharacter.MoverActive(false);
                 _lineRenderer.gameObject.SetActive(false);
                 AirPlatformsSet(false);
@@ -556,6 +556,7 @@ public class CharacterMovemovent : MonoBehaviour
         if (_selectedCharacter != null)
         {
             _selectedCharacter.OnDeselected();
+            _selectedCharacter = null;
         }
     }
 }

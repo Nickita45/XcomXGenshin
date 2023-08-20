@@ -14,6 +14,12 @@ public class StatusMain : MonoBehaviour
     {
         ActualPermissions = new HashSet<Permissions>(); 
     }
+    public void SetStatusZero()
+    {
+        ActualPermissions = new HashSet<Permissions> { };
+        OnStatusChange(ActualPermissions);
+    }
+
     public void SetStatusSelectCharacter()
     {
         ActualPermissions = new HashSet<Permissions> { Permissions.SelectCharacter, Permissions.CameraMovements };
@@ -30,6 +36,18 @@ public class StatusMain : MonoBehaviour
         ActualPermissions = new HashSet<Permissions> { Permissions.ActionSelect, Permissions.SelectEnemy };
         OnStatusChange(ActualPermissions);
     }
+    
+    public void SetStatusShooting()
+    {
+        ActualPermissions = new HashSet<Permissions> { Permissions.AnimationShooting };
+        OnStatusChange(ActualPermissions);
+    }
+
+    public void SetStatusRunning()
+    {
+        ActualPermissions = new HashSet<Permissions> { Permissions.CameraMovements, Permissions.AnimationRunning, Permissions.SelectPlaceToMovement };
+        OnStatusChange(ActualPermissions);
+    }
 }
 
 public enum Permissions
@@ -38,10 +56,15 @@ public enum Permissions
     SelectCharacter,
     ActionSelect,
     SelectPlaceToMovement,
-    SelectEnemy
+    SelectEnemy,
+    AnimationShooting,
+    AnimationRunning
 }
 
 //Status:
-//1) Select Character status
-//2) Select Action status
-//3) Select Enemy Status
+//0) For clearing Map - Zero Status
+//1) Character status
+//2) Action status
+//3) Enemy Status
+//4) Shooting Status 
+//5) Running Status 

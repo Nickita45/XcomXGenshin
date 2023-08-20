@@ -59,8 +59,10 @@ public class CharacterInfo : MonoBehaviour
 
         SetGunByIndex((int)GameManagerMap.Instance.Gun);
 
-        //Config
-        _basicAimCharacter = ConfigurationManager.Instance.CharacterData.characterBaseAim;
+        GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
+
+       //Config
+       _basicAimCharacter = ConfigurationManager.Instance.CharacterData.characterBaseAim;
     }
 
 
@@ -99,13 +101,20 @@ public class CharacterInfo : MonoBehaviour
 
         _selected = true;
         _selectItem.GetComponent<MeshRenderer>().material = _materialSelect;
+
     }
 
-    private void Disable()
+    public void DisableChanges()
     {
         _selected = false;
         _selectItem.GetComponent<MeshRenderer>().material = _basicMaterial;
         _mover.transform.localPosition = new Vector3(0, _mover.transform.localPosition.y, 0);
+
+    }
+
+    private void Disable()
+    {
+        DisableChanges();
         MoverActive(false);
     }
     public void SetGunByIndex(int index)
@@ -115,6 +124,36 @@ public class CharacterInfo : MonoBehaviour
             item.SetActive(false);
         }
         _gunGameObjects[index].SetActive(true);
+    }
+
+    private void OnStatusChange(HashSet<Permissions> permissions)
+    {
+        if(permissions.Count == 0)
+        {
+            GameManagerMap.Instance.StatusMain.OnStatusChange -= OnStatusChange;
+            return;
+        }
+
+
+        if(permissions.Contains(Permissions.ActionSelect) && !permissions.Contains(Permissions.SelectEnemy))
+        {
+            if (GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter == this && GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null)
+                SetSelecter(true);
+
+        } else if(permissions.Contains(Permissions.SelectEnemy))
+        {
+            if (GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter == this && GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null)
+            {
+                _selectItem.GetComponent<MeshRenderer>().material = _basicMaterial;
+                SetSelecter(false);
+            }
+        }
+    }
+
+    private void SetSelecter(bool value)
+    {
+        _selectItem.SetActive(value);
+        _selected = value;
     }
 
     public void MoverActive(bool result) => _mover.SetActive(result);

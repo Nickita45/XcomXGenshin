@@ -9,6 +9,11 @@ public class EnemyUI : MonoBehaviour
 
     private EnemyIcon _selected;
 
+    public GameObject EnemyObject => _selected.Enemy;
+    public GameObject CanvasEnemyObject => EnemyObject.GetComponent<EnemyCanvasController>().CanvasToMove;
+    public EnemyCanvasController EnemyCanvasController => EnemyObject.GetComponent<EnemyCanvasController>();
+    public int SelectedEnemyProcent => _selected.Procent;
+
     void Start()
     {
         GameManagerMap.Instance.OnClearMap += ClearVisibleEnemies;
@@ -59,7 +64,7 @@ public class EnemyUI : MonoBehaviour
 
     public void Exit()
     {
-        if (_selected) 
+        if (_selected)
             _selected.Image.color = Color.white;
     }
 

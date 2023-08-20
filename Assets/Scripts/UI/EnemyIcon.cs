@@ -19,6 +19,8 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     [SerializeField]
     private TextMeshProUGUI _textPercent;
 
+    public int Procent { get; set; }
+
     void Start()
     {
         _enemyUI = transform.parent.GetComponent<EnemyUI>();
@@ -36,7 +38,8 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         tempColor.a = 0.5f;
         _image.color = tempColor;
 
-        if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy))//(GameManagerMap.Instance.State == GameState.FreeMovement)
+        if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy) 
+            && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectPlaceToMovement))//(GameManagerMap.Instance.State == GameState.FreeMovement)
         {
             Vector3 position = CameraUtils.CalculateCameraLookAt(_enemy, Camera.main);
             GameManagerMap.Instance.FixedCameraController
@@ -50,13 +53,15 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         tempColor.a = 1f;
         _image.color = tempColor;
 
-        if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy))//(GameManagerMap.Instance.State == GameState.FreeMovement)
+        if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy) 
+            && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectPlaceToMovement))//(GameManagerMap.Instance.State == GameState.FreeMovement)
             GameManagerMap.Instance.FixedCameraController.Init(
                 GameManagerMap.Instance.CameraController.transform.position,
                 GameManagerMap.Instance.CameraController.transform.rotation,
                 0.5f,
                 GameManagerMap.Instance.CameraController.Init
             );
+        //GameManagerMap.Instance.FixedCameraController.ClearListHide();
     }
 
     public void SetEnemy(GameObject enemy)
@@ -70,6 +75,8 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
                                     shooter: GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.ActualTerritory,
                                     gun: GameManagerMap.Instance.Gun,
                                     0, GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.BasicAimCharacter);
+
+        Procent = resultCaclulations.procent;
         _textPercent.text = resultCaclulations.procent.ToString() + "%";
 
         if (resultCaclulations.status == ShelterType.Nope)
