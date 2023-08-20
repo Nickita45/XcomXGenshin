@@ -28,10 +28,8 @@ public class CameraObjectTransparency : MonoBehaviour
 
     void Update()
     {
-        RaycastHit[] hits;
-
         // Hit all colliders from a position slightly behind of the camera
-        hits = Physics.RaycastAll(transform.position - transform.forward * 3f, transform.forward, 4.5F);
+        RaycastHit[] hits = Physics.RaycastAll(transform.position - transform.forward * 3f, transform.forward, 4.5F);
 
         List<RenderData> newRenderers = new();
 
@@ -46,7 +44,7 @@ public class CameraObjectTransparency : MonoBehaviour
             if (hit.transform.GetComponent<Renderer>())
                 rends.Add(hit.transform.GetComponent<Renderer>()); //add himself
 
-            if (rends.Count() > 0)
+            if (rends.Count > 0)
             {
                 foreach (var rend in rends) //serch all of them
                 {
@@ -55,7 +53,6 @@ public class CameraObjectTransparency : MonoBehaviour
                     {
                         if (info.Type == TerritoryType.Shelter)
                         {
-
                             newRenderers.Add(
                                 new(rend,
                                 rend.materials.Select(material => material.shader).ToList(),

@@ -27,6 +27,7 @@ public class EnemyPanel : MonoBehaviour
     {
         GameManagerMap.Instance.OnClearMap += ClearVisibleEnemies;
         GameManagerMap.Instance.CharacterMovemovent.OnStartMove += ClearVisibleEnemies;
+        GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
     }
 
     void Update()
@@ -98,5 +99,17 @@ public class EnemyPanel : MonoBehaviour
     {
         if (!_selectedIndex.HasValue) SelectEnemy(_icons[^1]);
         return _icons[_selectedIndex.Value];
+    }
+
+    private void OnStatusChange(HashSet<Permissions> permissions)
+    {
+        if (permissions.Contains(Permissions.AnimationShooting))
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+        }
     }
 }

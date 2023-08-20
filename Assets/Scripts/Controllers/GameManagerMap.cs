@@ -28,7 +28,6 @@ public class GameManagerMap : MonoBehaviour
     [SerializeField]
     private FixedCameraController _fixedCameraController;
 
-
     [Header("MainObjects")]
     [SerializeField]
     private GameObject _mainParent;
@@ -82,7 +81,7 @@ public class GameManagerMap : MonoBehaviour
 
     public GameObject CreatePlatformMovement(TerritroyReaded item)
     {
-        var obj = Instantiate(_prefabPossibleTerritory, GameManagerMap.Instance.GenereteTerritoryMove.transform);
+        var obj = Instantiate(_prefabPossibleTerritory, Instance.GenereteTerritoryMove.transform);
         obj.transform.localPosition = item.GetCordinats() - CharacterMovemovent.POSITIONFORSPAWN;
         obj.SetActive(false);
         return obj;
@@ -155,15 +154,6 @@ public class GameManagerMap : MonoBehaviour
         }
     }
 
-    private void EndFire(Action FinishAbility)
-    {
-        //CharacterMovemovent.SelectedCharacter = null;
-        //EnableFreeCameraMovement();
-        //StatusMain.SetStatusSelectCharacter();
-
-        FinishAbility();
-    }
-
     // Enables an outline for each visible enemy, disables for others.
     private void UpdateEnemyOutlines(HashSet<GameObject> visibleEnemies)
     {
@@ -177,7 +167,7 @@ public class GameManagerMap : MonoBehaviour
     {
         StatusMain.SetStatusShooting();
         StartCoroutine(CharacterMovemovent.SelectedCharacter.GetComponent<ShootController>().Shoot(_enemyPanel.EnemyObject.transform,
-            GameManagerMap.Instance.Gun, _enemyPanel.SelectedEnemyProcent, () => EndFire(FinishAbility)));
+            Instance.Gun, _enemyPanel.SelectedEnemyProcent, FinishAbility));
     }
 
     public void Overwatch(Action FinishAbility)

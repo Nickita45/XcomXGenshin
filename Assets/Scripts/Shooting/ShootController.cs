@@ -16,8 +16,6 @@ public class ShootController : MonoBehaviour
 
         int randomGenerate = UnityEngine.Random.Range(0, 101); // [0;101)
 
-
-
         for (int i = 0; i < ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].countBullets; i++)
         {
             Vector3 addShootRange = GenereteCordinatesFromResult(randomGenerate > procent);
@@ -55,7 +53,6 @@ public class ShootController : MonoBehaviour
             return new Vector3(UnityEngine.Random.Range(-0.55f, -0.25f) * minus + UnityEngine.Random.Range(0.25f, 0.55f) * ((minus + 1) % 2),
                 UnityEngine.Random.Range(-0.55f, -0.25f) * minus + UnityEngine.Random.Range(0.25f, 0.55f) * ((minus + 1) % 2),
                 UnityEngine.Random.Range(-0.55f, -0.25f) * minus + UnityEngine.Random.Range(0.25f, 0.55f) * ((minus + 1) % 2));
-
         }
     }
 }

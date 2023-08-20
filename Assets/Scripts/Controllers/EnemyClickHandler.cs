@@ -26,7 +26,7 @@ public class EnemyClickHandler : MonoBehaviour
                 if (closestEnemy == null || distance < closestDistance)
                 {
                     closestEnemy = enemy.gameObject;
-                    distance = closestDistance;
+                    closestDistance = distance;
                 }
             }
 

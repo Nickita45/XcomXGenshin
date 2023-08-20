@@ -4,10 +4,10 @@ using UnityEngine;
 [System.Serializable]
 public class MatrixMap
 {
-    public Dictionary<string, TerritroyReaded> _vertex = new Dictionary<string, TerritroyReaded>();
-    public Dictionary<string, TerritroyReaded> _decors = new Dictionary<string, TerritroyReaded>();
-    public Dictionary<string, GameObject> _planeToMovement = new Dictionary<string, GameObject>();
-    public List<GameObject> _enemy = new List<GameObject>();
+    public Dictionary<string, TerritroyReaded> _vertex = new();
+    public Dictionary<string, TerritroyReaded> _decors = new();
+    public Dictionary<string, GameObject> _planeToMovement = new();
+    public List<GameObject> _enemy = new();
     public int width, height;
 
     public TerritroyReaded AddVertex(TerritroyReaded ter, Dictionary<string, TerritroyReaded> collection)
@@ -23,8 +23,7 @@ public class MatrixMap
 
     public GameObject GetAirPlatform(TerritroyReaded ter)
     {
-        GameObject obj;
-        _planeToMovement.TryGetValue(ter.Index, out obj);
+        _planeToMovement.TryGetValue(ter.Index, out GameObject obj);
         return obj;
     }
 
@@ -36,7 +35,6 @@ public class MatrixMap
 
     public TerritroyReaded this[string index] => _vertex[index];
     public TerritroyReaded this[Vector3 cordinats] => _vertex[MakeFromVector3ToIndex(cordinats)];
-
 
     public bool ContainsVertexByPox(Vector3 vector, out TerritroyReaded game)
     {
@@ -50,7 +48,6 @@ public class MatrixMap
 
         game = null;
         return false;
-
     }
 
     public void DebugToConsole()
@@ -77,5 +74,4 @@ public class MatrixMap
     }
 
     public static string MakeFromVector3ToIndex(Vector3 vector) => (vector.x + ReadingMap.SPLITTER + vector.y + ReadingMap.SPLITTER + vector.z);
-
 }

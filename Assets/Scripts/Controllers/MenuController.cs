@@ -28,23 +28,19 @@ public class MenuController : MonoBehaviour
 
         _inputCharacterMove.onValueChanged.AddListener(n =>
         {
-
-            int result = 0;
-            int.TryParse(n, out result);
+            int.TryParse(n, out int result);
             GameManagerMap.Instance.CharacterMovemovent.CountMoveCharacter = result;
         });
 
         _inputCharacterSpeed.onValueChanged.AddListener(n =>
         {
-            float result = 0;
-            float.TryParse(n, out result);
+            float.TryParse(n, out float result);
             GameManagerMap.Instance.CharacterMovemovent.SpeedCharacter = result;
         });
 
         _inputVisibilityDistance.onValueChanged.AddListener(n =>
         {
-            float result = 0;
-            float.TryParse(n, out result);
+            float.TryParse(n, out float result);
             GameManagerMap.Instance.CharacterVisibility.MaxVisionDistance = result;
         });
 
@@ -59,7 +55,6 @@ public class MenuController : MonoBehaviour
 
     private void OnGunTypeDropdownValueChanged(int selectedIndex)
     {
-
         string selectedGunTypeText = _dropDownGun.options[selectedIndex].text;
 
         if (Enum.TryParse(selectedGunTypeText, out GunType selectedGunType))
@@ -67,16 +62,13 @@ public class MenuController : MonoBehaviour
             GameManagerMap.Instance.Gun = selectedGunType;
         }
 
-        var icons = FindObjectsOfType<EnemyIcon>();
-        foreach (var icon in icons)
+        foreach (var icon in FindObjectsOfType<EnemyIcon>())
         {
             icon.SetPercent();
         }
 
-        if (GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null)
-            GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.SetGunByIndex(selectedIndex);
+        GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter?.SetGunByIndex(selectedIndex);
     }
-
 
     public void SetMapByName(string name)
     {

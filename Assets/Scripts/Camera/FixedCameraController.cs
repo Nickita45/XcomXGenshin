@@ -18,7 +18,7 @@ public class FixedCameraController : MonoBehaviour
     private bool _finished;
     private Action _onFinish;
 
-    private List<GameObject> _objectsToHide = new List<GameObject>(); //objects that we will hide
+    private List<GameObject> _objectsToHide = new(); //objects that we will hide
     private bool _canHide;
 
     private void Start()
