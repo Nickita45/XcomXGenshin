@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using UnityEditor.Build;
 using UnityEngine;
 
 public class FixedCameraController : MonoBehaviour
@@ -22,6 +19,7 @@ public class FixedCameraController : MonoBehaviour
     private Action _onFinish;
 
     private List<GameObject> _objectsToHide = new List<GameObject>(); //objects that we will hide
+    private bool _canHide;
 
     private void Start()
     {
@@ -43,7 +41,6 @@ public class FixedCameraController : MonoBehaviour
         {
             _finished = true;
             _onFinish?.Invoke();
-            //FinishingDetect();
 
         }
     }
@@ -76,26 +73,25 @@ public class FixedCameraController : MonoBehaviour
 
     }
 
-    private void FinishingDetect() //hide objects in textures
+    public void FinishingDetect() //hide objects in textures
     {
-        if (GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter == null)
-            return;
+        _canHide = true;
+   }
 
-        Vector3 direction = GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.transform.position - transform.position;
-        float distance = Vector3.Distance(GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.transform.position, transform.position);
-
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, distance);
-        Debug.DrawRay(transform.position, direction);
-        Debug.Log(string.Join(",", hits.Select(n => n.collider.gameObject.name)));
-
-        _objectsToHide = hits.Where(n => !n.collider.gameObject.GetComponent<CharacterInfo>()).Select(n => n.collider.gameObject).ToList();
-        _objectsToHide.ForEach(n => n.SetActive(false));
+    private void OnTriggerStay(Collider other) //we use this when camera is in object
+    {
+        if(_canHide)
+        {
+            _objectsToHide.Add(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
     }
 
-    public void ClearListHide()
+    public void ClearListHide() //return everything in active status
     {
-       // _objectsToHide.ForEach(n => n.SetActive(true));
-       // _objectsToHide.Clear();
+        _objectsToHide.ForEach(n => n.SetActive(true));
+        _objectsToHide.Clear();
+        _canHide = false;
     }
 
 }

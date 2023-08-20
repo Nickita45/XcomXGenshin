@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class GameManagerMap : MonoBehaviour
 {
@@ -46,6 +48,7 @@ public class GameManagerMap : MonoBehaviour
     public FixedCameraController FixedCameraController => _fixedCameraController;
     public CharacterVisibility CharacterVisibility => _characterVisibility;
     public StatusMain StatusMain => _statusMain;
+    public EnemyUI EnemyUI => _enemyUI;
     public GameObject MainParent => _mainParent;
     public GameObject GenereteTerritoryMove => _genereteTerritoryMove;
 
@@ -89,16 +92,6 @@ public class GameManagerMap : MonoBehaviour
         Map = null;
         DeleteAllChildren(MainParent);
         DeleteAllChildren(GenereteTerritoryMove);
-
-        /* foreach(GameObject item in MainParent.transform)
-         {
-             Destroy(item);
-         }
-
-         foreach (GameObject item in GenereteTerritoryMove.transform)
-         {
-             Destroy(item);
-         }*/
     }
 
     private static void DeleteAllChildren(GameObject parent)
@@ -132,7 +125,6 @@ public class GameManagerMap : MonoBehaviour
 
     public void FreeMovement()
     {
-        //SetState(GameState.FreeMovement);
         StatusMain.SetStatusSelectAction();
 
         _cameraController.TeleportToSelectedCharacter();
@@ -147,15 +139,17 @@ public class GameManagerMap : MonoBehaviour
         if (StatusMain.ActualPermissions.Contains(Permissions.ActionSelect))//(!Instance.CharacterMovemovent.IsMoving)
         {
             //SetState(GameState.ViewEnemy);
-
+            _fixedCameraController.ClearListHide();
             _enemyUI.SelectEnemy(icon);
             StatusMain.SetStatusSelectEnemy();
 
 
             CharacterInfo selectedCharacter = Instance.CharacterMovemovent.SelectedCharacter;
 
+            selectedCharacter.GunPrefab.transform.LookAt(icon.Enemy.transform); //gun look to enemy
+
             (Vector3 position, Quaternion rotation) = CameraUtils.CalculateEnemyView(selectedCharacter.gameObject, icon.Enemy);
-            _fixedCameraController.Init(position, rotation, 0.5f);
+            _fixedCameraController.Init(position, rotation, 0.5f, _fixedCameraController.FinishingDetect);
 
             //_disableInteraction.SetActive(true);
 
@@ -166,13 +160,28 @@ public class GameManagerMap : MonoBehaviour
         }
     }
 
+    public void ButtonFire()
+    {
+        StatusMain.SetStatusShooting();
+        StartCoroutine(CharacterMovemovent.SelectedCharacter.GetComponent<ShootController>().Shoot(_enemyUI.EnemyObject.transform,
+            GameManagerMap.Instance.Gun, _enemyUI.SelectedEnemyProcent, EndFire));
+    }
+
+    private void EndFire()
+    {
+        CharacterMovemovent.SelectedCharacter = null;
+        FreeMovement();
+        StatusMain.SetStatusSelectCharacter();
+    }
+
     private void Update()
     {
-        if(StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy) && Input.GetKey(KeyCode.Escape))
+        if(StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy) && Input.GetKeyDown(KeyCode.Escape)) //Down works once
         {
             FreeMovement();
         }
 
+        
         /*switch (_state)
         {
             case GameState.FreeMovement:

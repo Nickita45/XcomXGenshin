@@ -18,11 +18,13 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     private TMP_Dropdown _dropDownGun;
 
-
+    [SerializeField]
+    private GameObject _panelShootInfo;
 
     private void Start()
     {
         GameManagerMap.Instance.Gun = GunType.Automatic;
+        GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
 
         _inputCharacterMove.text = GameManagerMap.Instance.CharacterMovemovent.CountMoveCharacter.ToString();
         _inputCharacterSpeed.text = GameManagerMap.Instance.CharacterMovemovent.SpeedCharacter.ToString();
@@ -82,8 +84,17 @@ public class MenuController : MonoBehaviour
 
     public void SetMapByName(string name)
     {
+        GameManagerMap.Instance.StatusMain.SetStatusZero();
         GameManagerMap.Instance.OnClearMap();
         GameManagerMap.Instance.DeReadingMap.DeSerelizete(name);
         GameManagerMap.Instance.StatusMain.SetStatusSelectCharacter();
+    }
+
+    private void OnStatusChange(HashSet<Permissions> permissions)
+    {
+        if (permissions.Contains(Permissions.SelectEnemy))
+            _panelShootInfo.SetActive(true);
+        else
+            _panelShootInfo.SetActive(false);
     }
 }

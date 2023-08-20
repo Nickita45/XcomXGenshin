@@ -1,0 +1,61 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
+public class ShootController : MonoBehaviour
+{
+    [SerializeField]
+    private GameObject _bulletPrefab;
+
+    [SerializeField]
+    private string _nameBulletSpawner = "BulletSpawner";
+
+    public IEnumerator Shoot(Transform target, GunType actualGun, int procent, Action onFinish)
+    {
+        Transform firePoint = GetComponent<CharacterInfo>().GunPrefab.transform.GetChild((int)GameManagerMap.Instance.Gun).Find(_nameBulletSpawner);
+
+        int randomGenerate = UnityEngine.Random.Range(0, 101); // [0;101)
+
+
+
+        for (int i = 0; i < ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].countBullets; i++)
+        {
+            Vector3 addShootRange = GenereteCordinatesFromResult(randomGenerate > procent);
+            
+            GameObject bullet = Instantiate(_bulletPrefab, firePoint.position , firePoint.rotation);
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+
+            if (bulletScript != null && target != null)
+            {
+                Vector3 directionToTarget = (target.position - firePoint.position);
+                bullet.transform.forward = directionToTarget + addShootRange;
+            }
+
+            yield return new WaitForSeconds(UnityEngine.Random.Range(ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].minTimeBetweenShooting,
+                ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].maxTimeBetweenShooting));
+        }
+
+        if (randomGenerate > procent)
+            StartCoroutine(GameManagerMap.Instance.EnemyUI.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyUI.EnemyCanvasController.PanelMiss, 4));
+        else
+            StartCoroutine(GameManagerMap.Instance.EnemyUI.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyUI.EnemyCanvasController.PanelHit(
+                UnityEngine.Random.Range(ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].minHitValue, ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].maxHitValue + 1)), 4));
+
+        yield return new WaitForSeconds(ConfigurationManager.Instance.CharacterData.timeAfterShooting);
+        onFinish();
+    }
+
+    private Vector3 GenereteCordinatesFromResult(bool miss)
+    {
+        if (!miss)
+           return new Vector3(UnityEngine.Random.Range(-0.15f, 0.15f), UnityEngine.Random.Range(-0.15f, 0.15f), UnityEngine.Random.Range(-0.15f, 0.15f));
+        else
+        {
+            int minus = UnityEngine.Random.Range(0, 2); //because [0;2)
+            return new Vector3(UnityEngine.Random.Range(-0.55f, -0.25f) * minus + UnityEngine.Random.Range(0.25f, 0.55f) * ((minus + 1) % 2),
+                UnityEngine.Random.Range(-0.55f, -0.25f) * minus + UnityEngine.Random.Range(0.25f, 0.55f) * ((minus + 1) % 2),
+                UnityEngine.Random.Range(-0.55f, -0.25f) * minus + UnityEngine.Random.Range(0.25f, 0.55f) * ((minus + 1) % 2));
+
+        }
+    }
+}
