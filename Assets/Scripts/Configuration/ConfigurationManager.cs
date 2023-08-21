@@ -27,7 +27,6 @@ public class ConfigurationManager : MonoBehaviour
         }
         LoadConfig();
         _instance = this;
-
     }
 
     private void LoadConfig()

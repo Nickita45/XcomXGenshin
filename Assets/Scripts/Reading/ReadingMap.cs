@@ -28,14 +28,12 @@ public class ReadingMap : MonoBehaviour
 
     [Header("Map")]
     [SerializeField]
-    private MatrixMap _matrixMap = new MatrixMap();
+    private MatrixMap _matrixMap = new();
 
     private void Start()
     {
         StartCoroutine(AlgoritmusReadingMap());
-
     }
-
 
     private IEnumerator AlgoritmusReadingMap()
     {
@@ -44,7 +42,6 @@ public class ReadingMap : MonoBehaviour
         yield return AlgoritmusReadingMapOneWay(wayRow: new Vector3(0, 1, 0), koefRow: (0, 0, 1), koefColumn: (-1, 0, 0), vector: DetecterVector.UpDown);
 
         SavetToJson();
-
     }
 
     private IEnumerator AlgoritmusReadingMapOneWay(Vector3 wayRow, (int x, int y, int z) koefRow, (int x, int y, int z) koefColumn, DetecterVector vector)
@@ -77,7 +74,7 @@ public class ReadingMap : MonoBehaviour
                     AddNewTerritory(vector);
                 }
 
-                if(countHeightOrWeight > _matrixMap.width)
+                if (countHeightOrWeight > _matrixMap.width)
                     _matrixMap.width = countHeightOrWeight;
             }
             else
@@ -93,9 +90,7 @@ public class ReadingMap : MonoBehaviour
 
                     AddNewTerritory(vector);
                     countUp++;
-
                 } while (countUp != _matrixMap.height);//(beforeObj != null || _aktualGameObject != null);
-
             }
 
             row++;
@@ -104,15 +99,14 @@ public class ReadingMap : MonoBehaviour
                  _startPosition.y + koefRow.y * row + koefColumn.y * column,
                  _startPosition.z + koefRow.z * row + koefColumn.z * column), vector: vector);
 
-
-            if (_aktualGameObject != null && _aktualGameObject.GetComponent<TerritoryInfo>() &&
-                _aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder )
+            if (_aktualGameObject?.GetComponent<TerritoryInfo>() &&
+                _aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder)
             {
                 if (!isDetectSomething)
                 {
-                    if(vector == DetecterVector.Vertical)
+                    if (vector == DetecterVector.Vertical)
                         _matrixMap.height = column;
-                    
+
                     break;
                 }
                 isDetectSomething = false;
@@ -123,14 +117,13 @@ public class ReadingMap : MonoBehaviour
                   _startPosition.y + koefRow.y * row + koefColumn.y * column,
                   _startPosition.z + koefRow.z * row + koefColumn.z * column), vector: vector);
 
-                if(_aktualGameObject != null && _aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder)
+                if (_aktualGameObject != null && _aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder)
                 {
                     if (vector == DetecterVector.Vertical)
                         _matrixMap.height = column;
-                    
+
                     break;
                 }
-
             }
         }
         _objectDetect.GetComponent<BoxCollider>().enabled = false;
@@ -161,11 +154,14 @@ public class ReadingMap : MonoBehaviour
         if (_aktualGameObject == null)
         {
             if (!_matrixMap.ContainsVertexByPox(_objectDetect.transform.position, out newItem))
-                newItem = _matrixMap.AddVertex(new TerritroyReaded(_objectDetect.transform) {
-                        TerritoryInfo = TerritoryType.Air,
-                        ShelterType = new ShelterInfo(),
-                },  _matrixMap.Vertex); 
-        } 
+            {
+                newItem = _matrixMap.AddVertex(new TerritroyReaded(_objectDetect.transform)
+                {
+                    TerritoryInfo = TerritoryType.Air,
+                    ShelterType = new ShelterInfo(),
+                }, _matrixMap.Vertex);
+            }
+        }
         else
         {
             if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder)
@@ -173,30 +169,30 @@ public class ReadingMap : MonoBehaviour
                 return;
             }
             Transform transforObject = _aktualGameObject.transform;
-            if(_aktualGameObject.name == "NoParent")
+            if (_aktualGameObject.name == "NoParent")
             {
                 transforObject = _aktualGameObject.transform.parent;
-            } else if(_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Decor)
+            }
+            else if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Decor)
             {
                 transforObject = _objectDetect.transform;
             }
 
             if (!_matrixMap.ContainsVertexByPox(transforObject.position, out newItem))
-
+            {
                 if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Decor)
                 {
                     newItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject)
                     {
                         TerritoryInfo = TerritoryType.Air,
                         ShelterType = new ShelterInfo(),
-                    },  _matrixMap.Vertex); 
+                    }, _matrixMap.Vertex);
                     var decorItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject)
                     {
                         TerritoryInfo = TerritoryType.Decor,
                         PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
-                    },  _matrixMap.Decors); 
+                    }, _matrixMap.Decors);
                     decorItem.SetNewPosition(_aktualGameObject.transform);
-
                 }
                 else
                 {
@@ -205,8 +201,9 @@ public class ReadingMap : MonoBehaviour
                         TerritoryInfo = _aktualGameObject.GetComponent<TerritoryInfo>().Type,
                         ShelterType = _aktualGameObject.GetComponent<TerritoryInfo>().ShelterType,
                         PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
-                    },  _matrixMap.Vertex);
+                    }, _matrixMap.Vertex);
                 }
+            }
         }
 
         if (_lastReadedTerritory != null && newItem != _lastReadedTerritory)
@@ -242,10 +239,9 @@ public class ReadingMap : MonoBehaviour
         Debug.Log(CultureInfo.CurrentCulture.Name);
         string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(_matrixMap, Newtonsoft.Json.Formatting.Indented);
         Debug.Log(jsonText);
-        
-        
+
         string filePath = Application.dataPath + "/Resources" + _fileName;
-        System.IO.File.WriteAllText(filePath, jsonText); 
+        System.IO.File.WriteAllText(filePath, jsonText);
     }
 }
 

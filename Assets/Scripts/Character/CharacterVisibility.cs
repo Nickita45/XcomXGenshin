@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class CharacterVisibility : MonoBehaviour
 {
-    private EnemyUI _enemyUI;
+    [SerializeField]
+    private EnemyPanel _enemyPanel;
 
     private readonly HashSet<GameObject> _visibleEnemies = new();
     public HashSet<GameObject> VisibleEnemies => _visibleEnemies;
@@ -12,16 +14,13 @@ public class CharacterVisibility : MonoBehaviour
     [SerializeField]
     private float _maxVisionDistance = 10.0f;
 
+    public Action<HashSet<GameObject>> OnVisibilityUpdate;
+
     public float MaxVisionDistance { get => _maxVisionDistance; set => _maxVisionDistance = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-        _enemyUI = GameObject.FindAnyObjectByType<EnemyUI>();
-        //GameManagerMap.Instance.OnClearMap += ClearIcons;
-
-        //_enemyUI = GameObject.Find("EnemyUI");
-
         //Config
         _maxVisionDistance = ConfigurationManager.Instance.CharacterData.characterVisionDistance;
     }
@@ -37,9 +36,10 @@ public class CharacterVisibility : MonoBehaviour
         if (character)
         {
 
-            foreach (TerritoryInfo enemy in GameManagerMap.Instance.Map.Enemy.Select(n => n.GetComponent<TerritoryInfo>())
-                .Where(info => Vector3.Distance(info.transform.position, character.transform.position) < _maxVisionDistance)
-                .Where(info => IsEnemyVisible(character, info)))
+            foreach (TerritoryInfo enemy in GameManagerMap.Instance.Map.Enemy
+                .Select(obj => obj.GetComponent<TerritoryInfo>())
+                .Where(e => Vector3.Distance(e.transform.position, character.transform.position) < _maxVisionDistance)
+                .Where(e => IsEnemyVisible(character, e)))
             {
                 // Add visible enemies to set
                 _visibleEnemies.Add(enemy.gameObject);
@@ -47,20 +47,11 @@ public class CharacterVisibility : MonoBehaviour
 
         }
 
-        // Clear icons
-        _enemyUI.ClearVisibleEnemies();
+        // We have to update the enemies before any other visibility update,
+        // as some systems rely on using the enemy icons.
+        _enemyPanel.UpdateVisibleEnemies(_visibleEnemies);
 
-        // Add icons on UI for each visible enemy 
-        foreach (GameObject enemy in _visibleEnemies)
-        {
-            _enemyUI.AddVisibleEnemy(enemy);
-        }
-
-        // Mark visible enemies with colors
-        foreach (GameObject enemy in GameManagerMap.Instance.Map.Enemy)
-        {
-            enemy.GetComponent<Outline>().enabled = _visibleEnemies.Contains(enemy.gameObject);
-        }
+        OnVisibilityUpdate(_visibleEnemies);
     }
 
     private bool IsEnemyVisible(CharacterInfo character, TerritoryInfo enemy)

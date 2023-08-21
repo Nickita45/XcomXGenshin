@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using UnityEditor.Build;
 using UnityEngine;
 
 public class FixedCameraController : MonoBehaviour
@@ -21,7 +18,8 @@ public class FixedCameraController : MonoBehaviour
     private bool _finished;
     private Action _onFinish;
 
-    private List<GameObject> _objectsToHide = new List<GameObject>(); //objects that we will hide
+    private List<GameObject> _objectsToHide = new(); //objects that we will hide
+    private bool _canHide;
 
     private void Start()
     {
@@ -43,21 +41,27 @@ public class FixedCameraController : MonoBehaviour
         {
             _finished = true;
             _onFinish?.Invoke();
-            //FinishingDetect();
 
         }
     }
 
     // Switches the game to this camera. Creates a smooth transition to the given position and rotation of the camera.
-    public void Init(Vector3 targetPosition, Quaternion targetRotation, float transitionDuration)
+    public void InitAsMainCamera(Vector3 targetPosition, Quaternion targetRotation, float transitionDuration)
     {
-        Init(targetPosition, targetRotation, transitionDuration, null);
+        InitAsMainCamera(targetPosition, targetRotation, transitionDuration, null);
     }
 
     // Switches the game to this camera. Creates a smooth transition to the given position and rotation of the camera.
     // Performs an action when the transition ends.
-    public void Init(Vector3 targetPosition, Quaternion targetRotation, float transitionDuration, Action onFinish)
+    public void InitAsMainCamera(Vector3 targetPosition, Quaternion targetRotation, float transitionDuration, Action onFinish)
     {
+        // Do not init camera if the target is the same.
+        // This prevents unnecessary resetting of the timer.
+        if (IsMainCamera() && targetPosition == _targetPosition && targetRotation == _targetRotation)
+        {
+            return;
+        }
+
         _startPosition = Camera.main.transform.position;
         _targetPosition = targetPosition;
 
@@ -74,28 +78,30 @@ public class FixedCameraController : MonoBehaviour
         _finished = false;
         _onFinish = onFinish;
 
+        // Update camera to setup starting position in the same frame
+        Update();
     }
+
+    public bool IsMainCamera() => Camera.main == _camera;
 
     private void FinishingDetect() //hide objects in textures
     {
-        if (GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter == null)
-            return;
-
-        Vector3 direction = GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.transform.position - transform.position;
-        float distance = Vector3.Distance(GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.transform.position, transform.position);
-
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, distance);
-        Debug.DrawRay(transform.position, direction);
-        Debug.Log(string.Join(",", hits.Select(n => n.collider.gameObject.name)));
-
-        _objectsToHide = hits.Where(n => !n.collider.gameObject.GetComponent<CharacterInfo>()).Select(n => n.collider.gameObject).ToList();
-        _objectsToHide.ForEach(n => n.SetActive(false));
+        _canHide = true;
     }
 
-    public void ClearListHide()
+    private void OnTriggerStay(Collider other) //we use this when camera is in object
     {
-       // _objectsToHide.ForEach(n => n.SetActive(true));
-       // _objectsToHide.Clear();
+        if (_canHide)
+        {
+            _objectsToHide.Add(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
     }
 
+    public void ClearListHide() //return everything in active status
+    {
+        _objectsToHide.ForEach(n => n.SetActive(true));
+        _objectsToHide.Clear();
+        _canHide = false;
+    }
 }

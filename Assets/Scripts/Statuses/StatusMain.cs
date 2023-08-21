@@ -9,25 +9,60 @@ public class StatusMain : MonoBehaviour
 
     public Action<HashSet<Permissions>> OnStatusChange;
 
-
     private void Start()
     {
-        ActualPermissions = new HashSet<Permissions>(); 
+        ActualPermissions = new HashSet<Permissions>();
     }
+
+    public void SetStatusZero()
+    {
+        ActualPermissions = new HashSet<Permissions> { };
+        OnStatusChange(ActualPermissions);
+    }
+
     public void SetStatusSelectCharacter()
     {
-        ActualPermissions = new HashSet<Permissions> { Permissions.SelectCharacter, Permissions.CameraMovements };
+        ActualPermissions = new HashSet<Permissions> {
+            Permissions.SelectCharacter,
+            Permissions.CameraMovements
+        };
         OnStatusChange(ActualPermissions);
     }
 
     public void SetStatusSelectAction()
     {
-        ActualPermissions = new HashSet<Permissions> { Permissions.SelectCharacter, Permissions.CameraMovements, Permissions.ActionSelect, Permissions.SelectPlaceToMovement};
+        ActualPermissions = new HashSet<Permissions> {
+            Permissions.SelectCharacter,
+            Permissions.CameraMovements,
+            Permissions.ActionSelect,
+            Permissions.SelectPlaceToMovement
+        };
         OnStatusChange(ActualPermissions);
     }
     public void SetStatusSelectEnemy()
     {
-        ActualPermissions = new HashSet<Permissions> { Permissions.ActionSelect, Permissions.SelectEnemy };
+        ActualPermissions = new HashSet<Permissions> {
+            Permissions.ActionSelect,
+            Permissions.SelectEnemy
+        };
+        OnStatusChange(ActualPermissions);
+    }
+
+    public void SetStatusShooting()
+    {
+        ActualPermissions = new HashSet<Permissions> { Permissions.AnimationShooting };
+        OnStatusChange(ActualPermissions);
+    }
+
+    public void SetStatusRunning()
+    {
+        ActualPermissions = new HashSet<Permissions> { Permissions.CameraMovements, Permissions.AnimationRunning, Permissions.SelectPlaceToMovement };
+        OnStatusChange(ActualPermissions);
+    }
+
+    public void SetStatusWaiting()
+    {
+        ActualPermissions = new HashSet<Permissions> { Permissions.Waiting };
         OnStatusChange(ActualPermissions);
     }
 }
@@ -38,10 +73,16 @@ public enum Permissions
     SelectCharacter,
     ActionSelect,
     SelectPlaceToMovement,
-    SelectEnemy
+    SelectEnemy,
+    AnimationShooting,
+    AnimationRunning,
+    Waiting,
 }
 
 //Status:
-//1) Select Character status
-//2) Select Action status
-//3) Select Enemy Status
+//0) For clearing Map - Zero Status
+//1) Character status
+//2) Action status
+//3) Enemy Status
+//4) Shooting Status 
+//5) Running Status 

@@ -1,39 +1,51 @@
 {
-    "characterSpeed": 3.0,
-    "characterMoveDistance": 8,
-    "characterVisionDistance": 10.0,
-    "characterBaseAim": 60,
-    "characterBaseHealth": 5,
+  "characterSpeed": 5.0,
+  "characterMoveDistance": 8,
+  "characterVisionDistance": 10.0,
+  "characterBaseAim": 60,
+  "characterBaseHealth": 5,
 
-    "bonusAimFromFullCover": -40,
-    "bonusAimFromHalfCover": -20,
-    "bonusAimFromNoneCover": 0,
+  "bonusAimFromFullCover": -40,
+  "bonusAimFromHalfCover": -20,
+  "bonusAimFromNoneCover": 0,
 
-    "bonusAimFromHighGround": 30,
-    "bonusAimFromLowGround": -20,
-    "bonusAimFromNoneGround": 0,
+  "bonusAimFromHighGround": 30,
+  "bonusAimFromLowGround": -20,
+  "bonusAimFromNoneGround": 0,
 
-    "typeGun": [
-        {
-            "name": "AssultRifle",
-            "distanceValue": -2,
-            "baseValue": 20,
-            "minHitValue": 3,
-            "maxHitValue": 5
-        },
-        {
-            "name": "Shotgun",
-            "distanceValue": -4,
-            "baseValue": 16,
-            "minHitValue": 4,
-            "maxHitValue": 6
-        },
-        {
-            "name": "Snipergun",
-            "distanceValue": 3,
-            "baseValue": -15,
-            "minHitValue": 2,
-            "maxHitValue": 5
-        }
-    ]
+  "timeAfterShooting": 3.0,
+
+  "typeGun": [
+    {
+      "name": "AssultRifle",
+      "distanceValue": -2,
+      "baseValue": 20,
+      "minHitValue": 3,
+      "maxHitValue": 5,
+      "countBullets": 5,
+      "minTimeBetweenShooting": 0.15,
+      "maxTimeBetweenShooting": 0.25
+    },
+    {
+      "name": "Shotgun",
+      "distanceValue": -4,
+      "baseValue": 16,
+      "minHitValue": 4,
+      "maxHitValue": 6,
+      "countBullets": 10,
+      "minTimeBetweenShooting": 0.0,
+      "maxTimeBetweenShooting": 0.0
+    },
+    {
+      "name": "Snipergun",
+      "distanceValue": 3,
+      "baseValue": -15,
+      "minHitValue": 2,
+      "maxHitValue": 5,
+      "countBullets": 1,
+      "minTimeBetweenShooting": 0.0,
+      "maxTimeBetweenShooting": 0.0
+
+    }
+  ]
 }
