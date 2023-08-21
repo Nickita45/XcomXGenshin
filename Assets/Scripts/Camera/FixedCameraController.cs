@@ -18,7 +18,7 @@ public class FixedCameraController : MonoBehaviour
     private bool _finished;
     private Action _onFinish;
 
-    private List<GameObject> _objectsToHide = new List<GameObject>(); //objects that we will hide
+    private List<GameObject> _objectsToHide = new(); //objects that we will hide
     private bool _canHide;
 
     private void Start()
@@ -46,15 +46,22 @@ public class FixedCameraController : MonoBehaviour
     }
 
     // Switches the game to this camera. Creates a smooth transition to the given position and rotation of the camera.
-    public void Init(Vector3 targetPosition, Quaternion targetRotation, float transitionDuration)
+    public void InitAsMainCamera(Vector3 targetPosition, Quaternion targetRotation, float transitionDuration)
     {
-        Init(targetPosition, targetRotation, transitionDuration, null);
+        InitAsMainCamera(targetPosition, targetRotation, transitionDuration, null);
     }
 
     // Switches the game to this camera. Creates a smooth transition to the given position and rotation of the camera.
     // Performs an action when the transition ends.
-    public void Init(Vector3 targetPosition, Quaternion targetRotation, float transitionDuration, Action onFinish)
+    public void InitAsMainCamera(Vector3 targetPosition, Quaternion targetRotation, float transitionDuration, Action onFinish)
     {
+        // Do not init camera if the target is the same.
+        // This prevents unnecessary resetting of the timer.
+        if (IsMainCamera() && targetPosition == _targetPosition && targetRotation == _targetRotation)
+        {
+            return;
+        }
+
         _startPosition = Camera.main.transform.position;
         _targetPosition = targetPosition;
 
@@ -71,16 +78,20 @@ public class FixedCameraController : MonoBehaviour
         _finished = false;
         _onFinish = onFinish;
 
+        // Update camera to setup starting position in the same frame
+        Update();
     }
 
-    public void FinishingDetect() //hide objects in textures
+    public bool IsMainCamera() => Camera.main == _camera;
+
+    private void FinishingDetect() //hide objects in textures
     {
         _canHide = true;
-   }
+    }
 
     private void OnTriggerStay(Collider other) //we use this when camera is in object
     {
-        if(_canHide)
+        if (_canHide)
         {
             _objectsToHide.Add(other.gameObject);
             other.gameObject.SetActive(false);
@@ -93,5 +104,4 @@ public class FixedCameraController : MonoBehaviour
         _objectsToHide.Clear();
         _canHide = false;
     }
-
 }

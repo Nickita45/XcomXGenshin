@@ -34,7 +34,7 @@ public class FreeCameraController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManagerMap.Instance.Map == null || !GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.CameraMovements)) 
+        if (GameManagerMap.Instance.Map == null || !GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.CameraMovements))
             return;
 
         HandleMovement();
@@ -65,7 +65,7 @@ public class FreeCameraController : MonoBehaviour
             }
         }
         // Manual movement
-        else if (gameObject == Camera.main.gameObject)
+        else if (IsMainCamera())
         {
             HandleMovementInput();
         }
@@ -114,7 +114,7 @@ public class FreeCameraController : MonoBehaviour
             bool moved = ApplyBounds(ref position);
             if (moved) MoveCamera(position);
         }
-        else if (gameObject == Camera.main.gameObject)
+        else if (IsMainCamera())
         {
             HandleRotationInput(KeyCode.E, 90f);
             HandleRotationInput(KeyCode.Q, -90f);
@@ -134,7 +134,7 @@ public class FreeCameraController : MonoBehaviour
     {
         if (!_isMoving && !_isRotating)
         {
-            if (gameObject == Camera.main.gameObject) HandleZoomInput();
+            if (IsMainCamera()) HandleZoomInput();
 
             // Find the difference vector between the projected point
             // and the camera position (assuming the camera angle is 45 degrees)
@@ -255,9 +255,11 @@ public class FreeCameraController : MonoBehaviour
     }
 
     // Switches the game to this camera.
-    public void Init()
+    public void InitAsMainCamera()
     {
         Camera.main.enabled = false;
         _camera.enabled = true;
     }
+
+    public bool IsMainCamera() => Camera.main == _camera;
 }

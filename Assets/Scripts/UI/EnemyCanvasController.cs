@@ -20,7 +20,8 @@ public class EnemyCanvasController : MonoBehaviour
     private GameObject _canvasToMove;
 
     public GameObject PanelMiss => _panelMiss;
-    public GameObject PanelHit(int dmg) {
+    public GameObject PanelHit(int dmg)
+    {
         textHit.text = dmg.ToString();
         return _panelHit;
     }
@@ -28,7 +29,7 @@ public class EnemyCanvasController : MonoBehaviour
     public GameObject CanvasToMove => _canvasToMove;
     private void Start()
     {
-        _fixedCamera = FindObjectOfType<FixedCameraController>().gameObject.GetComponent<Camera>(); 
+        _fixedCamera = FindObjectOfType<FixedCameraController>().gameObject.GetComponent<Camera>();
         _freeCamera = FindObjectOfType<FreeCameraController>().gameObject.GetComponent<Camera>();
         _canvasToMove = transform.GetComponentInChildren<Canvas>().gameObject;
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
@@ -37,7 +38,7 @@ public class EnemyCanvasController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(_actualCamera == _fixedCamera)
+        if (_actualCamera == _fixedCamera)
             _canvasToMove.transform.LookAt(_actualCamera.transform);
         else if (_actualCamera == _freeCamera)
             _canvasToMove.transform.localRotation = _freeCamera.transform.localRotation;
@@ -54,7 +55,7 @@ public class EnemyCanvasController : MonoBehaviour
         if (permissions.Contains(Permissions.SelectEnemy) || permissions.Contains(Permissions.AnimationShooting))
         {
             _actualCamera = _fixedCamera;
-            if (_canvasToMove != GameManagerMap.Instance.EnemyUI.CanvasEnemyObject)
+            if (_canvasToMove != GameManagerMap.Instance.EnemyPanel.CanvasEnemyObject)
                 _canvasToMove.gameObject.SetActive(false);
             else
                 _canvasToMove.gameObject.SetActive(true);
@@ -86,14 +87,15 @@ public class EnemyCanvasController : MonoBehaviour
     //if disppear => speed < 0, if appear => speed > 0
     private IEnumerator PanelAnimation(GameObject panel, float speed, float toNumberEverything, float toNumberPanel, float timeFinish)
     {
-        
+
         List<Image> colors = panel.GetComponentsInChildren<Image>().ToList(); //can be array?
         List<TextMeshProUGUI> texts = panel.GetComponentsInChildren<TextMeshProUGUI>().ToList();
 
         Image panelColor = panel.GetComponent<Image>();
         float gValuePanelColor = panelColor.color.a;
 
-        if (toNumberEverything != 0) {
+        if (toNumberEverything != 0)
+        {
             panelColor.color = new Color(panelColor.color.r, panelColor.color.g, panelColor.color.b, 0);
             colors.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 0));
             texts.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 0));

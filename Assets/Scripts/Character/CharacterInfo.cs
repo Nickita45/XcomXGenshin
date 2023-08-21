@@ -61,20 +61,20 @@ public class CharacterInfo : MonoBehaviour
 
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
 
-       //Config
-       _basicAimCharacter = ConfigurationManager.Instance.CharacterData.characterBaseAim;
+        //Config
+        _basicAimCharacter = ConfigurationManager.Instance.CharacterData.characterBaseAim;
     }
 
 
     private void OnMouseEnter()
     {
-        if (_selected == false && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter))
+        if (!_selected && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter))
             _selectItem.SetActive(true);
     }
 
     private void OnMouseExit()
     {
-        if (_selected == false && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter))
+        if (!_selected && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter))
             _selectItem.SetActive(false);
     }
 
@@ -101,7 +101,6 @@ public class CharacterInfo : MonoBehaviour
 
         _selected = true;
         _selectItem.GetComponent<MeshRenderer>().material = _materialSelect;
-
     }
 
     public void DisableChanges()
@@ -109,7 +108,6 @@ public class CharacterInfo : MonoBehaviour
         _selected = false;
         _selectItem.GetComponent<MeshRenderer>().material = _basicMaterial;
         _mover.transform.localPosition = new Vector3(0, _mover.transform.localPosition.y, 0);
-
     }
 
     private void Disable()
@@ -128,19 +126,18 @@ public class CharacterInfo : MonoBehaviour
 
     private void OnStatusChange(HashSet<Permissions> permissions)
     {
-        if(permissions.Count == 0)
+        if (permissions.Count == 0)
         {
             GameManagerMap.Instance.StatusMain.OnStatusChange -= OnStatusChange;
             return;
         }
 
-
-        if(permissions.Contains(Permissions.ActionSelect) && !permissions.Contains(Permissions.SelectEnemy))
+        if (permissions.Contains(Permissions.ActionSelect) && !permissions.Contains(Permissions.SelectEnemy))
         {
             if (GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter == this && GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null)
                 SetSelecter(true);
-
-        } else if(permissions.Contains(Permissions.SelectEnemy))
+        }
+        else if (permissions.Contains(Permissions.SelectEnemy))
         {
             if (GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter == this && GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null)
             {
@@ -159,7 +156,7 @@ public class CharacterInfo : MonoBehaviour
     public void MoverActive(bool result) => _mover.SetActive(result);
     public bool MoverActive() => _mover.activeSelf;
 
-    public void SetCordintasToMover(Vector3 vector) => _mover.transform.position = vector;
+    public void SetCoordinatsToMover(Vector3 vector) => _mover.transform.position = vector;
 
-    public bool isAktualTerritory(TerritroyReaded territory) => territory == ActualTerritory;
+    public bool IsActualTerritory(TerritroyReaded territory) => territory == ActualTerritory;
 }

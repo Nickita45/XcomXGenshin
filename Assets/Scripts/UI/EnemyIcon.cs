@@ -7,7 +7,7 @@ using System.Collections;
 
 public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private EnemyUI _enemyUI;
+    private EnemyPanel _enemyPanel;
 
     private GameObject _enemy;
     public GameObject Enemy => _enemy;
@@ -23,13 +23,13 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
     void Start()
     {
-        _enemyUI = transform.parent.GetComponent<EnemyUI>();
+        _enemyPanel = transform.parent.GetComponent<EnemyPanel>();
         SetPercent();
     }
 
     public void OnPointerClick(PointerEventData data)
     {
-        GameManagerMap.Instance.ViewEnemy(this);
+        _enemyPanel.SelectEnemy(this);
     }
 
     public void OnPointerEnter(PointerEventData data)
@@ -38,12 +38,12 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         tempColor.a = 0.5f;
         _image.color = tempColor;
 
-        if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy) 
+        if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy)
             && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectPlaceToMovement))//(GameManagerMap.Instance.State == GameState.FreeMovement)
         {
             Vector3 position = CameraUtils.CalculateCameraLookAt(_enemy, Camera.main);
             GameManagerMap.Instance.FixedCameraController
-                .Init(position, GameManagerMap.Instance.CameraController.TargetRotation, 0.5f);
+                .InitAsMainCamera(position, GameManagerMap.Instance.CameraController.TargetRotation, 0.5f);
         }
     }
 
@@ -53,13 +53,13 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         tempColor.a = 1f;
         _image.color = tempColor;
 
-        if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy) 
+        if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy)
             && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectPlaceToMovement))//(GameManagerMap.Instance.State == GameState.FreeMovement)
-            GameManagerMap.Instance.FixedCameraController.Init(
+            GameManagerMap.Instance.FixedCameraController.InitAsMainCamera(
                 GameManagerMap.Instance.CameraController.transform.position,
                 GameManagerMap.Instance.CameraController.transform.rotation,
                 0.5f,
-                GameManagerMap.Instance.CameraController.Init
+                GameManagerMap.Instance.CameraController.InitAsMainCamera
             );
         //GameManagerMap.Instance.FixedCameraController.ClearListHide();
     }

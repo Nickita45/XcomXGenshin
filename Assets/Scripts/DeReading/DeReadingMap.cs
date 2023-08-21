@@ -58,7 +58,7 @@ public class DeReadingMap : MonoBehaviour
         }
 
         GameManagerMap.Instance.Map = _matrixMap;
-        GameManagerMap.Instance.FreeMovement();
+        GameManagerMap.Instance.EnableFreeCameraMovement();
     }
 
     public GameObject CreateMapObject(TerritroyReaded item)

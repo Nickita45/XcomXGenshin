@@ -9,11 +9,11 @@ public class StatusMain : MonoBehaviour
 
     public Action<HashSet<Permissions>> OnStatusChange;
 
-
     private void Start()
     {
-        ActualPermissions = new HashSet<Permissions>(); 
+        ActualPermissions = new HashSet<Permissions>();
     }
+
     public void SetStatusZero()
     {
         ActualPermissions = new HashSet<Permissions> { };
@@ -22,21 +22,32 @@ public class StatusMain : MonoBehaviour
 
     public void SetStatusSelectCharacter()
     {
-        ActualPermissions = new HashSet<Permissions> { Permissions.SelectCharacter, Permissions.CameraMovements };
+        ActualPermissions = new HashSet<Permissions> {
+            Permissions.SelectCharacter,
+            Permissions.CameraMovements
+        };
         OnStatusChange(ActualPermissions);
     }
 
     public void SetStatusSelectAction()
     {
-        ActualPermissions = new HashSet<Permissions> { Permissions.SelectCharacter, Permissions.CameraMovements, Permissions.ActionSelect, Permissions.SelectPlaceToMovement};
+        ActualPermissions = new HashSet<Permissions> {
+            Permissions.SelectCharacter,
+            Permissions.CameraMovements,
+            Permissions.ActionSelect,
+            Permissions.SelectPlaceToMovement
+        };
         OnStatusChange(ActualPermissions);
     }
     public void SetStatusSelectEnemy()
     {
-        ActualPermissions = new HashSet<Permissions> { Permissions.ActionSelect, Permissions.SelectEnemy };
+        ActualPermissions = new HashSet<Permissions> {
+            Permissions.ActionSelect,
+            Permissions.SelectEnemy
+        };
         OnStatusChange(ActualPermissions);
     }
-    
+
     public void SetStatusShooting()
     {
         ActualPermissions = new HashSet<Permissions> { Permissions.AnimationShooting };
@@ -46,6 +57,12 @@ public class StatusMain : MonoBehaviour
     public void SetStatusRunning()
     {
         ActualPermissions = new HashSet<Permissions> { Permissions.CameraMovements, Permissions.AnimationRunning, Permissions.SelectPlaceToMovement };
+        OnStatusChange(ActualPermissions);
+    }
+
+    public void SetStatusWaiting()
+    {
+        ActualPermissions = new HashSet<Permissions> { Permissions.Waiting };
         OnStatusChange(ActualPermissions);
     }
 }
@@ -58,7 +75,8 @@ public enum Permissions
     SelectPlaceToMovement,
     SelectEnemy,
     AnimationShooting,
-    AnimationRunning
+    AnimationRunning,
+    Waiting,
 }
 
 //Status:

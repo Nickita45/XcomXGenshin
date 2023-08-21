@@ -40,7 +40,7 @@ public class ShelterDetecter : MonoBehaviour
             }
 
             // Check if the index set has elements
-            if (indexSet != null && indexSet.Count > 0)
+            if (indexSet?.Count > 0)
             {
                 // Access the corresponding ShelterType from the GameManagerMap
                 ShelterType shelterType = ShelterType.Nope;

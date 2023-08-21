@@ -3,12 +3,8 @@ using UnityEngine;
 
 public class EnemyClickHandler : MonoBehaviour
 {
-    private EnemyUI _enemyUI;
-
-    private void Start()
-    {
-        _enemyUI = FindObjectOfType<EnemyUI>();
-    }
+    [SerializeField]
+    private EnemyPanel _enemyPanel;
 
     private void Update()
     {
@@ -30,13 +26,13 @@ public class EnemyClickHandler : MonoBehaviour
                 if (closestEnemy == null || distance < closestDistance)
                 {
                     closestEnemy = enemy.gameObject;
-                    distance = closestDistance;
+                    closestDistance = distance;
                 }
             }
 
             if (closestEnemy && GameManagerMap.Instance.CharacterVisibility.VisibleEnemies.Contains(closestEnemy))
             {
-                GameManagerMap.Instance.ViewEnemy(_enemyUI.GetIconForEnemy(closestEnemy));
+                _enemyPanel.SelectEnemy(_enemyPanel.GetIconForEnemy(closestEnemy));
             }
         }
     }

@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 
 public class CharacterMovemovent : MonoBehaviour
 {
-    public static readonly Vector3 BIGVECTOR = new Vector3(int.MaxValue, int.MaxValue, int.MaxValue);
-    public static readonly Vector3 POSITIONFORSPAWN = new Vector3(0, 0.5f, 0);
+    public static readonly Vector3 BIGVECTOR = new(int.MaxValue, int.MaxValue, int.MaxValue);
+    public static readonly Vector3 POSITIONFORSPAWN = new(0, 0.5f, 0);
 
     [Header("Consts Test")]
     [SerializeField]
@@ -33,6 +33,7 @@ public class CharacterMovemovent : MonoBehaviour
     public CharacterInfo SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
 
     public Action<(TerritroyReaded aktualTerritoryReaded, List<Vector3> path), CharacterInfo> OnSelectNewTerritory;
+    public Action OnStartMove;
     public Action<TerritroyReaded, CharacterInfo> OnEndMoveToNewTerritory;
 
     private bool _isMoving;
@@ -53,8 +54,8 @@ public class CharacterMovemovent : MonoBehaviour
     }
     private void Update()
     {
-        if (_selectedCharacter != null && _selectedCharacter.MoverActive())
-            //GameManagerMap.Instance.State == GameState.FreeMovement)
+        if (_selectedCharacter?.MoverActive() == true)
+        //GameManagerMap.Instance.State == GameState.FreeMovement)
         {
             SpawnMover();
         }
@@ -66,16 +67,15 @@ public class CharacterMovemovent : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray); //RayCast from Mouse
 
-        if (hits.Count() > 0)
+        if (hits.Length > 0)
         {
             var neededHits = hits.Where(n => n.collider.gameObject.tag == "PanelMovement"); //Detect hits only from Territory than can be moved to
-            if (neededHits.Count() == 0 || hits.Where(n => n.collider.gameObject.GetComponent<CharacterInfo>()).Count() > 0)
+            if (!neededHits.Any() || hits.Count(n => n.collider.gameObject.GetComponent<CharacterInfo>()) > 0)
                 return;
 
             var hit = neededHits.FirstOrDefault(); //get First one
 
-            TerritroyReaded detectTerritory;
-            detectTerritory = GameManagerMap.Instance.Map[hit.collider.gameObject.transform.localPosition + POSITIONFORSPAWN]; //get air territory
+            TerritroyReaded detectTerritory = GameManagerMap.Instance.Map[hit.collider.gameObject.transform.localPosition + POSITIONFORSPAWN]; //get air territory
 
             if (detectTerritory != _aktualTerritory.aktualTerritoryReaded) //if another territory detected
             {
@@ -84,26 +84,22 @@ public class CharacterMovemovent : MonoBehaviour
                 OnSelectNewTerritory(_aktualTerritory, _selectedCharacter);
             }
 
-            if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && !_selectedCharacter.isAktualTerritory(_aktualTerritory.aktualTerritoryReaded))
+            if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && !_selectedCharacter.IsActualTerritory(_aktualTerritory.aktualTerritoryReaded))
             {
                 StartCoroutine(CoroutineNewPositionCharacter(_aktualTerritory.aktualTerritoryReaded, _aktualTerritory.path)); //make movement to person
             }
-
         }
     }
 
     private void SelectNewTerritory((TerritroyReaded aktualTerritoryReaded, List<Vector3> path) territory, CharacterInfo character)
     {
-
-        _selectedCharacter.SetCordintasToMover(territory.aktualTerritoryReaded.GetCordinats()
+        _selectedCharacter.SetCoordinatsToMover(territory.aktualTerritoryReaded.GetCordinats()
             + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
 
-        _aktualTerritory.path = calculateAllPath(territory.aktualTerritoryReaded); //actual path to selected territory
+        _aktualTerritory.path = CalculateAllPath(territory.aktualTerritoryReaded); //actual path to selected territory
 
         DrawLine(_aktualTerritory.path); //draw the line
-
     }
-
 
     public void CharacterSelect(CharacterInfo character)
     {
@@ -123,7 +119,6 @@ public class CharacterMovemovent : MonoBehaviour
             AirPlatformsSet(true);
 
             GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
-        
         }
     }
 
@@ -148,10 +143,7 @@ public class CharacterMovemovent : MonoBehaviour
     {
         foreach (var item in _objectsCalculated.Keys)
         {
-            if (GameManagerMap.Instance.Map.GetAirPlatform(item) != null)
-            {
-                GameManagerMap.Instance.Map.GetAirPlatform(item).SetActive(result);
-            }
+            GameManagerMap.Instance.Map.GetAirPlatform(item)?.SetActive(result);
         }
     }
 
@@ -166,10 +158,12 @@ public class CharacterMovemovent : MonoBehaviour
         _selectedCharacter.ActualTerritory = null;
 
         _isMoving = true;
+        OnStartMove();
 
         yield return StartCoroutine(CoroutineMove(points)); //start movements
 
         _isMoving = false;
+        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
 
         OnEndMoveToNewTerritory(newTerritory, _selectedCharacter);
     }
@@ -183,9 +177,7 @@ public class CharacterMovemovent : MonoBehaviour
         character.OnDeselected();
         save.OnSelected(save);
 
-        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
-
-        _selectedCharacter.SetCordintasToMover(newTerritory.GetCordinats()
+        _selectedCharacter.SetCoordinatsToMover(newTerritory.GetCordinats()
             + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
     }
 
@@ -198,7 +190,6 @@ public class CharacterMovemovent : MonoBehaviour
         GameManagerMap.Instance.StatusMain.SetStatusRunning();
         while (true)
         {
-
             while (Vector3.Distance(_selectedCharacter.gameObject.transform.localPosition, target) > 0.1f)
             {
                 _selectedCharacter.GunPrefab.transform.LookAt(target + GameManagerMap.Instance.MainParent.transform.position);
@@ -217,12 +208,10 @@ public class CharacterMovemovent : MonoBehaviour
         }
         GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
-
     }
 
     private void DrawLine(List<Vector3> points)
     {
-
         _lineRenderer.positionCount = points.Count;
 
         for (int i = 0; i < points.Count; i++)
@@ -231,30 +220,28 @@ public class CharacterMovemovent : MonoBehaviour
         }
     }
 
-
-    public List<Vector3> calculateAllPath(TerritroyReaded starter)
+    public List<Vector3> CalculateAllPath(TerritroyReaded starter)
     {
-        List<Vector3> path = new List<Vector3> //start with begin and end
+        List<Vector3> path = new()
         {
             _selectedCharacter.transform.localPosition,
             starter.GetCordinats()
         };
 
-        Dictionary<Vector3, Vector3> airPaths = new Dictionary<Vector3, Vector3>();
+        Dictionary<Vector3, Vector3> airPaths = new();
 
         while (true) //in this cyklus we will find points in which ones must line gone
         {
-            List<Vector3> newPath = new List<Vector3>();
+            List<Vector3> newPath = new();
             for (int i = 0; i < path.Count - 1; i++) //in this, we detect, if the between points exist shelters
 
             {
-                var iList = calculatePoints(GameManagerMap.Instance.Map[path[i + 1]], path[i]);
+                var iList = CalculatePoints(GameManagerMap.Instance.Map[path[i + 1]], path[i]);
                 newPath.AddRange(iList.paths);//if yes, we add them to list
                 foreach (var item in iList.airPaths)
                 {
                     airPaths.TryAdd(item.Key, item.Value);
                 }
-
             }
 
             newPath = newPath.Distinct().ToList();//delete all same pieces
@@ -274,7 +261,6 @@ public class CharacterMovemovent : MonoBehaviour
             return path;
         }
 
-
         finalCordinats[indexes + airPaths.Count - 1] = path.First();//set first element, because for reserve
         int airIndex = airPaths.Count; // index for seting path in raw
 
@@ -287,16 +273,13 @@ public class CharacterMovemovent : MonoBehaviour
                 airIndex--; // after add next item
             }
             finalCordinats[basicPaths[item] + airIndex] = item;
-
-
-
         }
         var endList = finalCordinats.Where(n => n != BIGVECTOR).Distinct().Reverse().ToList();
 
         return endList;
     }
 
-    public (List<Vector3> paths, Dictionary<Vector3, Vector3> airPaths) calculatePoints(TerritroyReaded starter, Vector3 firstVector)
+    public (List<Vector3> paths, Dictionary<Vector3, Vector3> airPaths) CalculatePoints(TerritroyReaded starter, Vector3 firstVector)
     {
         Dictionary<Vector3, int> paths = FindPathBack(starter); //find all path from starter to aktual player (path is territories with their numeration)
         int indexes = paths.Count + 1;//spesial indexer for future sort path
@@ -306,9 +289,9 @@ public class CharacterMovemovent : MonoBehaviour
 
         Debug.DrawRay(firstVector + GameManagerMap.Instance.MainParent.transform.position, targetPosition, Color.red);
 
-        Dictionary<Vector3, int> nextPaths = new Dictionary<Vector3, int>(); //the points where we need to make stops for line
+        Dictionary<Vector3, int> nextPaths = new(); //the points where we need to make stops for line
 
-        Dictionary<Vector3, Vector3> airPaths = new Dictionary<Vector3, Vector3>(); //the points with air paths
+        Dictionary<Vector3, Vector3> airPaths = new(); //the points with air paths
 
         foreach (var item in paths) //in this cycle we detect all air points (only for shelter ground)
         {
@@ -336,7 +319,6 @@ public class CharacterMovemovent : MonoBehaviour
                     nextPaths.TryAdd(beforeItem.GetCordinats(), paths[beforeItem.GetCordinats()]);
                     airPaths.TryAdd(aktualItem.GetCordinats(), newAir.GetCordinats());
                 }
-
             }
         }
 
@@ -350,15 +332,15 @@ public class CharacterMovemovent : MonoBehaviour
                 hitObject = hitObject.transform.parent.gameObject;
 
             TerritroyReaded finded = GameManagerMap.Instance.Map[hitObject.transform.localPosition];//find hit territory
-            Stack<TerritroyReaded> territoryes = new Stack<TerritroyReaded>(); //Stack for new territories, which we must detect
-            HashSet<TerritroyReaded> alreadyFinded = new HashSet<TerritroyReaded>(); //This hashSet we use to optimation our future calculations
+            Stack<TerritroyReaded> territoryes = new(); //Stack for new territories, which we must detect
+            HashSet<TerritroyReaded> alreadyFinded = new(); //This hashSet we use to optimation our future calculations
             territoryes.Push(finded); // first territory
 
             bool doesFindSomething = false; // stop boolean
             while (true) // in this cycle we search from hit for any territory which is in our path and
             {
-                Stack<TerritroyReaded> newTerritoryes = new Stack<TerritroyReaded>(); //future territories which we must detect after one cycle
-                while (true)
+                Stack<TerritroyReaded> newTerritoryes = new(); //future territories which we must detect after one cycle
+                do
                 {
                     TerritroyReaded newFinded = territoryes.Pop();
                     alreadyFinded.Add(newFinded);
@@ -390,12 +372,8 @@ public class CharacterMovemovent : MonoBehaviour
                             newTerritoryes.Push(detectItem);
                         }
                     }
-
-
-                    if (doesFindSomething || territoryes.Count == 0)
-                        break;
-
                 }
+                while (!doesFindSomething && territoryes.Count != 0);
 
                 if (doesFindSomething)
                     break;
@@ -418,12 +396,11 @@ public class CharacterMovemovent : MonoBehaviour
         endList.Add(starter.GetCordinats());
 
         return (endList, airPaths);
-
     }
 
     public Dictionary<Vector3, int> FindPathBack(TerritroyReaded starter, TerritroyReaded begin = null)
     {
-        Dictionary<Vector3, int> paths = new Dictionary<Vector3, int>(); //index from high to below
+        Dictionary<Vector3, int> paths = new(); //index from high to below
         TerritroyReaded aktual = starter;
         int indexes = 0;
         while (aktual != begin)
@@ -437,81 +414,80 @@ public class CharacterMovemovent : MonoBehaviour
 
     public Dictionary<TerritroyReaded, TerritroyReaded> CalculateAllPossible(int countMove)
     {
-        Dictionary<TerritroyReaded, TerritroyReaded> objectsCalculated = new Dictionary<TerritroyReaded, TerritroyReaded>();//the final version of list of territories
+        Dictionary<TerritroyReaded, TerritroyReaded> objectsCalculated = new();//the final version of list of territories
 
-        Stack<(TerritroyReaded orig, TerritroyReaded previus)> nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>();//need to calculate territories
+        Stack<(TerritroyReaded orig, TerritroyReaded previus)> nextCalculated = new();//need to calculate territories
         nextCalculated.Push((_selectedCharacter.ActualTerritory, null));//first element
-        HashSet<TerritroyReaded> already = new HashSet<TerritroyReaded>(); //save all territries that we dont need to detect
+        HashSet<TerritroyReaded> already = new(); //save all territries that we dont need to detect
 
-        HashSet<TerritroyReaded> territoriesBan = new HashSet<TerritroyReaded>();
+        HashSet<TerritroyReaded> territoriesBan = new();
         for (int i = 0; i <= countMove; i++)
         {
             int calcs = 0;
 
-            Stack<(TerritroyReaded orig, TerritroyReaded previus)> notCalculatedYet = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>(); //the elements which we need to detect in next cycle
-            calcs = nextCalculated.Count();
+            Stack<(TerritroyReaded orig, TerritroyReaded previus)> notCalculatedYet = new(); //the elements which we need to detect in next cycle
+            calcs = nextCalculated.Count;
             while (nextCalculated.Count > 0)
             {
-
-                (TerritroyReaded orig, TerritroyReaded previus) actual = nextCalculated.Pop();
-                if (actual.orig.TerritoryInfo != TerritoryType.ShelterGround && actual.orig.TerritoryInfo != TerritoryType.Enemy) // we cant move on shelterground element
+                (TerritroyReaded orig, TerritroyReaded previus) = nextCalculated.Pop();
+                if (orig.TerritoryInfo != TerritoryType.ShelterGround && orig.TerritoryInfo != TerritoryType.Enemy) // we cant move on shelterground element
                 {
-                    if (objectsCalculated.ContainsKey(actual.orig))
+                    if (objectsCalculated.ContainsKey(orig))
                     {
-                        var oldItem = objectsCalculated[actual.orig];
+                        var oldItem = objectsCalculated[orig];
                         if (oldItem != null)
                         {
-                            if ((oldItem.YPosition != actual.orig.YPosition && actual.previus.YPosition == actual.orig.YPosition) ||
-                                (oldItem.YPosition != actual.orig.YPosition && actual.previus.YPosition != actual.orig.YPosition &&
-                                   Vector3.Distance(_selectedCharacter.transform.localPosition, actual.previus.GetCordinats()) < Vector3.Distance(_selectedCharacter.transform.localPosition, oldItem.GetCordinats()))) //||
+                            if ((oldItem.YPosition != orig.YPosition && previus.YPosition == orig.YPosition) ||
+                                (oldItem.YPosition != orig.YPosition && previus.YPosition != orig.YPosition &&
+                                   Vector3.Distance(_selectedCharacter.transform.localPosition, previus.GetCordinats()) < Vector3.Distance(_selectedCharacter.transform.localPosition, oldItem.GetCordinats()))) //||
                             {
-                                objectsCalculated.Remove(actual.orig);
-                                objectsCalculated.Add(actual.orig, actual.previus);
+                                objectsCalculated.Remove(orig);
+                                objectsCalculated.Add(orig, previus);
                             }
                         }
                     }
                     else
                     {
-                        objectsCalculated.Add(actual.orig, actual.previus);
+                        objectsCalculated.Add(orig, previus);
                     }
                 }
 
-                foreach (var item in actual.orig)// detect all neighbors
+                foreach (var item in orig)// detect all neighbors
                 {
                     var detectItem = GameManagerMap.Instance.Map[item];
 
                     if (detectItem.TerritoryInfo == TerritoryType.ShelterGround) //if we detect Shelter Ground, set detectItem as air above it 
                     {
-                        detectItem = GameManagerMap.Instance.Map[detectItem.IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(actual.orig.Index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault()];
+                        detectItem = GameManagerMap.Instance.Map[detectItem.IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(orig.Index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault()];
                     }
-                    if (detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)//for down air
+                    if (detectItem.IndexDown.Count(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air) == 1)//for down air
                     {
-                        var newItem = detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).FirstOrDefault();
-                        while (GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).Count() == 1)
+                        var newItem = detectItem.IndexDown.FirstOrDefault(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air);
+                        while (GameManagerMap.Instance.Map[newItem].IndexDown.Count(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air) == 1)
                         {
-                            newItem = GameManagerMap.Instance.Map[newItem].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air).FirstOrDefault();
+                            newItem = GameManagerMap.Instance.Map[newItem].IndexDown.FirstOrDefault(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air);
                         }
                         detectItem = GameManagerMap.Instance.Map[newItem];
-
                     }
                     if (detectItem.TerritoryInfo == TerritoryType.Shelter || detectItem.TerritoryInfo == TerritoryType.Enemy ||
-                      detectItem.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
-                      GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0) // we dont select such territories
+                      detectItem.IndexDown.Count(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
+                      GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround) == 0) // we dont select such territories
+                    {
                         continue;
+                    }
 
                     if (objectsCalculated.ContainsKey(detectItem))
                     {
                         continue;
                     }
 
-                    if (already.Contains(detectItem) && (detectItem.IsNearIsGround() == false || detectItem.InACenterOfGronds() == true))
+                    if (already.Contains(detectItem) && (!detectItem.IsNearIsGround() || detectItem.InACenterOfGronds()))
                         continue;
 
-                    notCalculatedYet.Push((detectItem, actual.orig));
+                    notCalculatedYet.Push((detectItem, orig));
 
                     if (!already.Contains(detectItem))
                         already.Add(detectItem);
-
                 }
             }
 
@@ -534,11 +510,10 @@ public class CharacterMovemovent : MonoBehaviour
                 AirPlatformsSet(true);
             }
         }
-        else 
+        else
         {
             if (SelectedCharacter != null)
             {
-
                 SelectedCharacter.MoverActive(false);
                 _lineRenderer.gameObject.SetActive(false);
                 AirPlatformsSet(false);

@@ -18,7 +18,7 @@ public class AimCalculater : MonoBehaviour
     }
 
     public static (int procent, ShelterType status) CalculateShelterPercent(TerritroyReaded defender, TerritroyReaded shooter, GunType gun, params int[] parameters)
-   {
+    {
         CordinatesSide xSide, zSide;
         if (shooter.ZPosition - defender.ZPosition < 0 && shooter.ZPosition - defender.ZPosition != -1)
         {
@@ -92,20 +92,19 @@ public class AimCalculater : MonoBehaviour
 
     private static int GetProcentFromGunType(GunType gunType, int distance)
     {
-       /* switch(gunType)
-        {
-            case GunType.Automatic:
-                return 20 - 2 * distance;
-            case GunType.Shotgun:
-                return 16 - 4 * distance;
-            case GunType.Snipergun:
-                return 3 * distance - 15;
-        }
-    */
-        return ConfigurationManager.Instance.CharacterData.typeGun[(int)gunType].baseValue + 
+        /* switch(gunType)
+         {
+             case GunType.Automatic:
+                 return 20 - 2 * distance;
+             case GunType.Shotgun:
+                 return 16 - 4 * distance;
+             case GunType.Snipergun:
+                 return 3 * distance - 15;
+         }
+     */
+        return ConfigurationManager.Instance.CharacterData.typeGun[(int)gunType].baseValue +
             ConfigurationManager.Instance.CharacterData.typeGun[(int)gunType].distanceValue * distance;
     }
-
 }
 
 enum CordinatesSide
