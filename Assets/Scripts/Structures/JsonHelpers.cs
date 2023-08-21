@@ -126,8 +126,10 @@ public class GunTypeConfig
     public int baseValue;
     public int minHitValue;
     public int maxHitValue;
+    public int countBullets;
+    public float minTimeBetweenShooting;
+    public float maxTimeBetweenShooting;
 }
-
 [System.Serializable]
 public class CharacterData
 {
@@ -144,6 +146,8 @@ public class CharacterData
     public int bonusAimFromHighGround;
     public int bonusAimFromLowGround;
     public int bonusAimFromNoneGround;
+
+    public float timeAfterShooting;
 
     public GunTypeConfig[] typeGun;
 }
