@@ -117,6 +117,37 @@ public class TerritroyReaded
         float.Parse(index.Split(ReadingMap.SPLITTER)[2]));
 
     public override string ToString() => $"({Index})";
+}
+[System.Serializable]
+public class GunTypeConfig
+{
+    public string name;
+    public int distanceValue;
+    public int baseValue;
+    public int minHitValue;
+    public int maxHitValue;
+    public int countBullets;
+    public float minTimeBetweenShooting;
+    public float maxTimeBetweenShooting;
+}
+[System.Serializable]
+public class CharacterData
+{
+    public float characterSpeed;
+    public int characterMoveDistance;
+    public float characterVisionDistance;
+    public int characterBaseAim;
+    public int characterBaseHealth;
 
+    public int bonusAimFromFullCover;
+    public int bonusAimFromHalfCover;
+    public int bonusAimFromNoneCover; //hm
 
+    public int bonusAimFromHighGround;
+    public int bonusAimFromLowGround;
+    public int bonusAimFromNoneGround;
+
+    public float timeAfterShooting;
+
+    public GunTypeConfig[] typeGun;
 }

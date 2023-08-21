@@ -19,16 +19,6 @@ public class DeReadingMap : MonoBehaviour
     [SerializeField]
     private bool path2;
 
-    private void Start()
-    {
-        // if (path2 == true)
-        //     _path = _path2;
-
-        // DeSerelizete();
-
-    }
-
-
     public void DeSerelizete(string nameFile)
     {
         TextAsset json = Resources.Load<TextAsset>(nameFile);
