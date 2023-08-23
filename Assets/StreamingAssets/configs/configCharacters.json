@@ -1,0 +1,20 @@
+{
+    "characters": [
+        {
+            "characterName": "Vasya",
+            "characterSpeed": 5.0,
+            "characterMoveDistance": 8,
+            "characterVisionDistance": 10.0,
+            "characterBaseAim": 50,
+            "characterBaseHealth": 5
+        },
+        {
+            "characterName": "Mykata",
+            "characterSpeed": 5.0,
+            "characterMoveDistance": 5,
+            "characterVisionDistance": 10.0,
+            "characterBaseAim": 55,
+            "characterBaseHealth": 6
+        }
+    ]
+}

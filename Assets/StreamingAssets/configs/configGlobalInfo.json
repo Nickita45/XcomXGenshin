@@ -1,10 +1,4 @@
 {
-  "characterSpeed": 5.0,
-  "characterMoveDistance": 8,
-  "characterVisionDistance": 10.0,
-  "characterBaseAim": 60,
-  "characterBaseHealth": 5,
-
   "bonusAimFromFullCover": -40,
   "bonusAimFromHalfCover": -20,
   "bonusAimFromNoneCover": 0,

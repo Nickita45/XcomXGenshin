@@ -22,7 +22,7 @@ public class CharacterVisibility : MonoBehaviour
     void Start()
     {
         //Config
-        _maxVisionDistance = ConfigurationManager.Instance.CharacterData.characterVisionDistance;
+        _maxVisionDistance = ConfigurationManager.Instance.CharactersData.characters[0].characterVisionDistance;
     }
 
     // Updates the set of enemies visible by the selected character
