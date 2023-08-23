@@ -30,21 +30,24 @@ public class ConfigurationManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        LoadConfig();
+        _globalDataJson = LoadConfig<GlobalDataJson>(PATH_GLOBAL_INFO);
+        _charactersData = LoadConfig<CharactersData>(PATH_CHARACTERS); 
+
         _instance = this;
     }
 
-    private void LoadConfig()
+    private T LoadConfig<T>(string filePath)
     {
-        // TODO change it in future
-        if (File.Exists(PATH_GLOBAL_INFO) && File.Exists(PATH_CHARACTERS)) //works like a file 
+        if (File.Exists(filePath))
         {
-            _charactersData = JsonUtility.FromJson<CharactersData>(File.ReadAllText(PATH_CHARACTERS));
-            _globalDataJson = JsonUtility.FromJson<GlobalDataJson>(File.ReadAllText(PATH_GLOBAL_INFO));
+            string jsonContent = File.ReadAllText(filePath);
+            T data = JsonUtility.FromJson<T>(jsonContent);
+            return data;
         }
         else
         {
-            Debug.LogError("Config file not found!");
+            Debug.LogError($"Config file with path {filePath} not found!");
+            return default;
         }
         
     }
