@@ -40,7 +40,6 @@ public class ConfigurationManager : MonoBehaviour
         if (File.Exists(PATH_GLOBAL_INFO) && File.Exists(PATH_CHARACTERS)) //works like a file 
         {
             _charactersData = JsonUtility.FromJson<CharactersData>(File.ReadAllText(PATH_CHARACTERS));
-            Debug.Log(_charactersData);
             _globalDataJson = JsonUtility.FromJson<GlobalDataJson>(File.ReadAllText(PATH_GLOBAL_INFO));
         }
         else
