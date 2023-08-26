@@ -16,7 +16,7 @@ public class ShootController : MonoBehaviour
 
         int randomGenerate = UnityEngine.Random.Range(0, 101); // [0;101)
 
-        for (int i = 0; i < ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].countBullets; i++)
+        for (int i = 0; i < ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].countBullets; i++)
         {
             Vector3 addShootRange = GenereteCordinatesFromResult(randomGenerate > procent);
 
@@ -29,17 +29,17 @@ public class ShootController : MonoBehaviour
                 bullet.transform.forward = directionToTarget + addShootRange;
             }
 
-            yield return new WaitForSeconds(UnityEngine.Random.Range(ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].minTimeBetweenShooting,
-                ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].maxTimeBetweenShooting));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].minTimeBetweenShooting,
+                ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].maxTimeBetweenShooting));
         }
 
         if (randomGenerate > procent)
             StartCoroutine(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelMiss, 4));
         else
             StartCoroutine(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelHit(
-                UnityEngine.Random.Range(ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].minHitValue, ConfigurationManager.Instance.CharacterData.typeGun[(int)actualGun].maxHitValue + 1)), 4));
+                UnityEngine.Random.Range(ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].minHitValue, ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].maxHitValue + 1)), 4));
 
-        yield return new WaitForSeconds(ConfigurationManager.Instance.CharacterData.timeAfterShooting);
+        yield return new WaitForSeconds(ConfigurationManager.Instance.GlobalDataJson.timeAfterShooting);
         onFinish();
     }
 

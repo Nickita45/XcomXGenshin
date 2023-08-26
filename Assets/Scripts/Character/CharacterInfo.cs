@@ -62,7 +62,7 @@ public class CharacterInfo : MonoBehaviour
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
 
         //Config
-        _basicAimCharacter = ConfigurationManager.Instance.CharacterData.characterBaseAim;
+        _basicAimCharacter = ConfigurationManager.Instance.CharactersData.characters[0].characterBaseAim;
     }
 
 
