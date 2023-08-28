@@ -5,19 +5,20 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyCanvasController : MonoBehaviour
+public class EnemyCanvasController : MonoBehaviour //change for Enemy and Character
 {
+    [Header("Basic")]
     [SerializeField]
     private GameObject _panelMiss, _panelHit;
 
     [SerializeField]
     private TextMeshProUGUI textHit;
 
-    private Camera _actualCamera;
+    protected Camera _actualCamera;
 
-    private Camera _fixedCamera, _freeCamera;
+    protected Camera _fixedCamera, _freeCamera;
 
-    private GameObject _canvasToMove;
+    protected GameObject _canvasToMove;
 
     public GameObject PanelMiss => _panelMiss;
     public GameObject PanelHit(int dmg)
@@ -27,12 +28,14 @@ public class EnemyCanvasController : MonoBehaviour
     }
 
     public GameObject CanvasToMove => _canvasToMove;
-    private void Start()
+    protected virtual void Start()
     {
         _fixedCamera = FindObjectOfType<FixedCameraController>().gameObject.GetComponent<Camera>();
         _freeCamera = FindObjectOfType<FreeCameraController>().gameObject.GetComponent<Camera>();
         _canvasToMove = transform.GetComponentInChildren<Canvas>().gameObject;
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
+        
+        _actualCamera = _freeCamera;
     }
 
     // Update is called once per frame
@@ -44,7 +47,7 @@ public class EnemyCanvasController : MonoBehaviour
             _canvasToMove.transform.localRotation = _freeCamera.transform.localRotation;
     }
 
-    private void OnStatusChange(HashSet<Permissions> permissions)
+    protected virtual void OnStatusChange(HashSet<Permissions> permissions)
     {
         if (permissions.Count == 0)
         {

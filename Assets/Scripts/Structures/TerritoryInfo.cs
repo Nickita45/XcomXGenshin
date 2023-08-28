@@ -77,6 +77,7 @@ public enum TerritoryType
     Boarder,
     Enemy,
     Decor,
+    Character,
     MapObject,//didnt work
 
 }

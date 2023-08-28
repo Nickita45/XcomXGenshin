@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.TextCore.Text;
 
 public class CharacterInfo : MonoBehaviour
 {
@@ -38,8 +39,20 @@ public class CharacterInfo : MonoBehaviour
     public Action<CharacterInfo> OnSelected;
     public Action OnDeselected;
 
+    private int _countActions;
+    public int CountActions { 
+        get => _countActions;
+        set {
+            _countActions = value;
+
+            CanvasController.SetCountActons(value);
+            if (_countActions <= 0)
+                GameManagerMap.Instance.TurnController.CharacterEndHisTurn(this);
+        } 
+    }
     public TerritroyReaded ActualTerritory { get; set; }
 
+    public CharacterCanvasController CanvasController { get; set; }
     public GameObject GunPrefab => _gunPrefab;
 
     private void Start()
@@ -50,37 +63,44 @@ public class CharacterInfo : MonoBehaviour
 
         OnSelected += Select;
         OnSelected += GameManagerMap.Instance.CharacterMovemovent.CharacterSelect;
+        OnSelected += GameManagerMap.Instance.TurnController.SetCharacter;
 
 
         OnDeselected += Disable;
         OnDeselected += GameManagerMap.Instance.CharacterMovemovent.CharacterDeselect;
 
         ActualTerritory = GameManagerMap.Instance.Map[transform.localPosition];
-
+        ActualTerritory.TerritoryInfo = TerritoryType.Character;
         SetGunByIndex((int)GameManagerMap.Instance.Gun);
 
+        CanvasController = GetComponent<CharacterCanvasController>();
+        CountActions = 2;
+
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
+        GameManagerMap.Instance.TurnController.CharacterBegining += BeginOfTurn;
 
         //Config
         _basicAimCharacter = ConfigurationManager.Instance.CharactersData.characters[0].characterBaseAim;
     }
 
+    private void BeginOfTurn() => CountActions = 2;
 
     private void OnMouseEnter()
     {
-        if (!_selected && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter))
+        if (!_selected && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter) && CountActions > 0)
             _selectItem.SetActive(true);
     }
 
     private void OnMouseExit()
     {
-        if (!_selected && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter))
+        if (!_selected && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter) && CountActions > 0)
             _selectItem.SetActive(false);
     }
 
     private void OnMouseDown()
     {
-        if (ActualTerritory != null && !EventSystem.current.IsPointerOverGameObject() && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter))
+        if (ActualTerritory != null && 
+            GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter) && CountActions > 0)
         {
             if (_selected)
                 OnDeselected();
@@ -98,6 +118,7 @@ public class CharacterInfo : MonoBehaviour
     public void SelectChanges()
     {
         SetGunByIndex((int)GameManagerMap.Instance.Gun);
+        _selectItem.SetActive(true);
 
         _selected = true;
         _selectItem.GetComponent<MeshRenderer>().material = _materialSelect;
@@ -105,9 +126,18 @@ public class CharacterInfo : MonoBehaviour
 
     public void DisableChanges()
     {
+        _selectItem.SetActive(false);
         _selected = false;
         _selectItem.GetComponent<MeshRenderer>().material = _basicMaterial;
         _mover.transform.localPosition = new Vector3(0, _mover.transform.localPosition.y, 0);
+
+        foreach (GameObject item in _shelterSize)
+        {
+            foreach (Transform item2 in item.transform)
+            {
+                item2.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void Disable()
@@ -129,6 +159,8 @@ public class CharacterInfo : MonoBehaviour
         if (permissions.Count == 0)
         {
             GameManagerMap.Instance.StatusMain.OnStatusChange -= OnStatusChange;
+            GameManagerMap.Instance.TurnController.CharacterBegining -= BeginOfTurn;
+
             return;
         }
 

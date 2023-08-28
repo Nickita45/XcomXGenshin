@@ -33,6 +33,7 @@ public class AbilityPanel : MonoBehaviour
             _icons.Add(icon);
             icon.Index = i + 1;
         }
+        gameObject.SetActive(false);
 
         GameManagerMap.Instance.CharacterVisibility.OnVisibilityUpdate += DisableAbilitiesWithoutTargets;
         GameManagerMap.Instance.CharacterMovemovent.OnStartMove += DisableAllAbilites;
@@ -180,7 +181,7 @@ public class AbilityPanel : MonoBehaviour
 
     private void OnStatusChange(HashSet<Permissions> permissions)
     {
-        if (permissions.Contains(Permissions.AnimationShooting) || permissions.Contains(Permissions.Waiting))
+        if (!permissions.Contains(Permissions.ActionSelect)) //it will be show only in status with actionSelect
         {
             gameObject.SetActive(false);
             _abilityDialog.SetActive(false);

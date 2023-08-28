@@ -65,6 +65,12 @@ public class StatusMain : MonoBehaviour
         ActualPermissions = new HashSet<Permissions> { Permissions.Waiting };
         OnStatusChange(ActualPermissions);
     }
+
+
+    private void Update() //for debug only
+    {
+      //  Debug.Log(string.Join(",", GameManagerMap.Instance.StatusMain.ActualPermissions));
+    }
 }
 
 public enum Permissions

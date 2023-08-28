@@ -28,6 +28,7 @@ public class EnemyPanel : MonoBehaviour
         GameManagerMap.Instance.OnClearMap += ClearVisibleEnemies;
         GameManagerMap.Instance.CharacterMovemovent.OnStartMove += ClearVisibleEnemies;
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
+
     }
 
     void Update()
@@ -71,7 +72,6 @@ public class EnemyPanel : MonoBehaviour
     public void SelectEnemy(EnemyIcon icon)
     {
         ClearSelection();
-
         _selectedIndex = _icons.FindIndex(i => i == icon);
         icon.Image.color = Color.red;
 
