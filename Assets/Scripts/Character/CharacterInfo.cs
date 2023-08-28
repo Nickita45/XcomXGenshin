@@ -28,6 +28,10 @@ public class CharacterInfo : MonoBehaviour
     private GameObject[] _gunGameObjects;
     [SerializeField]
     private GameObject _gunPrefab;
+    [SerializeField]
+    private GameObject _armature;
+    public GameObject Armature => _armature;
+    public int BasicAimCharacter => _basicAimCharacter;
 
     private bool _selected;
 
@@ -35,15 +39,17 @@ public class CharacterInfo : MonoBehaviour
     public Action OnDeselected;
 
     private int _countActions;
-    public int CountActions { 
+    public int CountActions
+    {
         get => _countActions;
-        set {
+        set
+        {
             _countActions = value;
 
             CanvasController.SetCountActons(value);
             if (_countActions <= 0)
                 GameManagerMap.Instance.TurnController.CharacterEndHisTurn(this);
-        } 
+        }
     }
     public TerritroyReaded ActualTerritory { get; set; }
 
@@ -65,7 +71,7 @@ public class CharacterInfo : MonoBehaviour
         Index = -1;
         _selectItem.SetActive(false);
         _mover.SetActive(false);
-        _basicMaterial = _selectItem.GetComponent<MeshRenderer>().material;
+        //_basicMaterial = _selectItem.GetComponent<MeshRenderer>().material;
 
         OnSelected += Select;
         OnSelected += GameManagerMap.Instance.CharacterMovemovent.CharacterSelect;
@@ -105,7 +111,7 @@ public class CharacterInfo : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (ActualTerritory != null && 
+        if (ActualTerritory != null &&
             GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter) && CountActions > 0)
         {
             if (_selected)

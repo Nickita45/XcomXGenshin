@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: 6a9a73c897aaffb419f03b576d9f5510
+guid: ed894cfa46ee66a44afa7680fcb064af
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Avatar_Girl_Catalyst_Barbara_Mat_Body.001
-    second: {fileID: 2100000, guid: 08bae5066292c3b49bddc14f5d81d585, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Avatar_Girl_Catalyst_Barbara_Mat_Dress.001
-    second: {fileID: 2100000, guid: a8a823c1a24ba6d4ca2adcd650eabd87, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Avatar_Girl_Catalyst_Barbara_Mat_Face.001
-    second: {fileID: 2100000, guid: 4ecc0d705ea2db8479a2555612d1f63b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Avatar_Girl_Catalyst_Barbara_Mat_Hair.001
-    second: {fileID: 2100000, guid: 84a8807749498ca48923737b7cf67196, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -36,8 +16,7 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: "Avatar creation failed:\n\tTransform 'GunPrefab' for human
-      bone 'RightHand' not found\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -955,11 +934,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 6a9a73c897aaffb419f03b576d9f5510, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0

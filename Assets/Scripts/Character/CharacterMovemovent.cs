@@ -146,8 +146,11 @@ public class CharacterMovemovent : MonoBehaviour
         _isMoving = true;
         OnStartMove();
 
+        SelectedCharacter.Armature.GetComponent<Animator>().Play("run_forward");
+
         yield return StartCoroutine(CoroutineMove(points)); //start movements
 
+        SelectedCharacter.Armature.GetComponent<Animator>().Play("idle_crouched");
         _isMoving = false;
         GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
 
@@ -184,8 +187,16 @@ public class CharacterMovemovent : MonoBehaviour
         Vector3 target = targets[++index]; //ignore first, becouse its for line
         GameManagerMap.Instance.StatusMain.OnStatusChange -= OnStatusChange;
         GameManagerMap.Instance.StatusMain.SetStatusRunning();
+
         while (true)
         {
+            // Look in the movement direction
+            Vector3 directionToTarget = target - _selectedCharacter.transform.localPosition;
+            directionToTarget.y = 0;
+
+            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+            _selectedCharacter.Armature.transform.rotation = targetRotation;
+
             while (Vector3.Distance(_selectedCharacter.gameObject.transform.localPosition, target) > 0.1f)
             {
                 _selectedCharacter.GunPrefab.transform.LookAt(target + GameManagerMap.Instance.MainParent.transform.position);
