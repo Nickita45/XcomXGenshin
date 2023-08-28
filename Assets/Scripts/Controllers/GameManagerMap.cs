@@ -29,6 +29,9 @@ public class GameManagerMap : MonoBehaviour
     [SerializeField]
     private FixedCameraController _fixedCameraController;
 
+    [SerializeField]
+    private TurnController _turnController;
+
     [Header("MainObjects")]
     [SerializeField]
     private GameObject _mainParent;
@@ -48,6 +51,7 @@ public class GameManagerMap : MonoBehaviour
     public FreeCameraController CameraController => _freeCameraController;
     public FixedCameraController FixedCameraController => _fixedCameraController;
     public CharacterVisibility CharacterVisibility => _characterVisibility;
+    public TurnController TurnController => _turnController;
     public StatusMain StatusMain => _statusMain;
     public EnemyPanel EnemyPanel => _enemyPanel;
     public GameObject MainParent => _mainParent;
@@ -93,16 +97,6 @@ public class GameManagerMap : MonoBehaviour
         Map = null;
         ObjectHelpers.DestroyAllChildrenImmediate(MainParent);
         ObjectHelpers.DestroyAllChildrenImmediate(GenereteTerritoryMove);
-
-        /* foreach(GameObject item in MainParent.transform)
-         {
-             Destroy(item);
-         }
-
-         foreach (GameObject item in GenereteTerritoryMove.transform)
-         {
-             Destroy(item);
-         }*/
     }
 
     // Enables the free camera, which allows the player to navigate around the map.
@@ -167,12 +161,20 @@ public class GameManagerMap : MonoBehaviour
     public void Attack(Action FinishAbility)
     {
         StatusMain.SetStatusShooting();
+        FinishAbility += () =>
+        {
+            EnableFreeCameraMovement();
+            Instance.CharacterMovemovent.SelectedCharacter.CountActions -= 2;
+        };
+
         StartCoroutine(CharacterMovemovent.SelectedCharacter.GetComponent<ShootController>().Shoot(_enemyPanel.EnemyObject.transform,
             Instance.Gun, _enemyPanel.SelectedEnemyProcent, FinishAbility));
+
     }
 
     public IEnumerator WaitAndFinish(Action onFinish)
     {
+        StatusMain.SetStatusWaiting();
         yield return new WaitForSeconds(2f);
         onFinish();
     }
@@ -180,14 +182,14 @@ public class GameManagerMap : MonoBehaviour
     public void Overwatch(Action onFinish)
     {
         Debug.Log("Overwatch");
-        StatusMain.SetStatusWaiting();
+        onFinish += () => { Instance.CharacterMovemovent.SelectedCharacter.CountActions -= 2; };
         StartCoroutine(WaitAndFinish(onFinish));
     }
 
     public void HunkerDown(Action onFinish)
     {
         Debug.Log("Hunker Down");
-        StatusMain.SetStatusWaiting();
+        onFinish += () => { Instance.CharacterMovemovent.SelectedCharacter.CountActions -= 2; };
         StartCoroutine(WaitAndFinish(onFinish));
     }
 }

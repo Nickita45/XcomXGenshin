@@ -18,6 +18,9 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     private TMP_Dropdown _dropDownGun;
 
+    [SerializeField]
+    private GameObject _panelEnemyTurn;
+
     private void Start()
     {
         GameManagerMap.Instance.Gun = GunType.Automatic;
@@ -70,11 +73,23 @@ public class MenuController : MonoBehaviour
         GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter?.SetGunByIndex(selectedIndex);
     }
 
+    public void SetPanelEnemy(bool set)
+    {
+        _panelEnemyTurn.SetActive(set);
+
+    }
+
     public void SetMapByName(string name)
     {
         GameManagerMap.Instance.StatusMain.SetStatusZero();
         GameManagerMap.Instance.OnClearMap();
         GameManagerMap.Instance.DeReadingMap.DeSerelizete(name);
-        GameManagerMap.Instance.StatusMain.SetStatusSelectCharacter();
+        StartCoroutine(AfterNewMap());
+    }
+
+    private IEnumerator AfterNewMap()
+    {
+        yield return new WaitForSeconds(1);
+        GameManagerMap.Instance.TurnController.BeginOfTheTurn();
     }
 }

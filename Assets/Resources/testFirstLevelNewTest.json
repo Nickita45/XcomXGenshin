@@ -1909,8 +1909,8 @@
         "7.5_0.5_-7.5"
       ],
       "Index": "8.5_0.5_-7.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
+      "PathPrefab": "Prefabs/Capsule",
+      "TerritoryInfo": 0,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -62930,8 +62930,8 @@
         "7.5_0.5_-7.5"
       ],
       "Index": "8.5_0.5_-7.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
+      "PathPrefab": "Prefabs/Capsule",
+      "TerritoryInfo": 0,
       "ShelterType": {
         "Left": 0,
         "Right": 0,

@@ -55,7 +55,6 @@ public class CharacterMovemovent : MonoBehaviour
     private void Update()
     {
         if (_selectedCharacter?.MoverActive() == true)
-        //GameManagerMap.Instance.State == GameState.FreeMovement)
         {
             SpawnMover();
         }
@@ -103,40 +102,34 @@ public class CharacterMovemovent : MonoBehaviour
 
     public void CharacterSelect(CharacterInfo character)
     {
-        //if (GameManagerMap.Instance.State == GameState.FreeMovement)
+        GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
+
+        _lineRenderer.gameObject.SetActive(true);
+
+        if (_selectedCharacter != null && _selectedCharacter != character)
         {
-            GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
-
-            _lineRenderer.gameObject.SetActive(true);
-
-            if (_selectedCharacter != null && _selectedCharacter != character)
-            {
-                _selectedCharacter.OnDeselected();//deselect other chracters
-            }
-            _selectedCharacter = character;
-            _objectsCalculated = CalculateAllPossible(_countMove); //algoritmus calculate all territories that player can move
-
-            AirPlatformsSet(true);
-
-            GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+            _selectedCharacter.OnDeselected();//deselect other chracters
         }
+        _selectedCharacter = character;
+        _objectsCalculated = CalculateAllPossible(_countMove); //algoritmus calculate all territories that player can move
+
+        AirPlatformsSet(true);
+
+        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
     }
 
     public void CharacterDeselect()
     {
-        //if (GameManagerMap.Instance.State == GameState.FreeMovement)
-        {
-            _lineRenderer.gameObject.SetActive(false);
+        _lineRenderer.positionCount = 0;
 
-            _selectedCharacter = null;
-            AirPlatformsSet(false);
+        _selectedCharacter = null;
+        AirPlatformsSet(false);
 
-            _objectsCalculated.Clear();
+        _objectsCalculated.Clear();
 
-            GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
 
-            GameManagerMap.Instance.StatusMain.SetStatusSelectCharacter();
-        }
+        GameManagerMap.Instance.StatusMain.SetStatusSelectCharacter();
     }
 
     public void AirPlatformsSet(bool result)
@@ -155,6 +148,7 @@ public class CharacterMovemovent : MonoBehaviour
     private IEnumerator CoroutineNewPositionCharacter(TerritroyReaded newTerritory, List<Vector3> points)
     {
         _selectedCharacter.MoverActive(false);//disable mover
+        _selectedCharacter.ActualTerritory.TerritoryInfo = TerritoryType.Air;
         _selectedCharacter.ActualTerritory = null;
 
         _isMoving = true;
@@ -171,14 +165,19 @@ public class CharacterMovemovent : MonoBehaviour
     private void DisableToBasic(TerritroyReaded newTerritory, CharacterInfo character)
     {
         character.ActualTerritory = newTerritory;
+        newTerritory.TerritoryInfo = TerritoryType.Character;
         _lineRenderer.positionCount = 0;
 
-        var save = character;
         character.OnDeselected();
-        save.OnSelected(save);
 
-        _selectedCharacter.SetCoordinatsToMover(newTerritory.GetCordinats()
-            + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
+        character.CountActions -= 1;
+        if (character.CountActions > 0)
+        {
+            character.OnSelected(character);
+
+            _selectedCharacter.SetCoordinatsToMover(newTerritory.GetCordinats()
+                + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
+        }
     }
 
     private IEnumerator CoroutineMove(List<Vector3> targets)
@@ -430,7 +429,9 @@ public class CharacterMovemovent : MonoBehaviour
             while (nextCalculated.Count > 0)
             {
                 (TerritroyReaded orig, TerritroyReaded previus) = nextCalculated.Pop();
-                if (orig.TerritoryInfo != TerritoryType.ShelterGround && orig.TerritoryInfo != TerritoryType.Enemy) // we cant move on shelterground element
+
+                if ((orig.TerritoryInfo != TerritoryType.Character || orig == _selectedCharacter.ActualTerritory)  && 
+                    orig.TerritoryInfo != TerritoryType.ShelterGround && orig.TerritoryInfo != TerritoryType.Enemy) // we cant move on shelterground element
                 {
                     if (objectsCalculated.ContainsKey(orig))
                     {
@@ -454,7 +455,7 @@ public class CharacterMovemovent : MonoBehaviour
 
                 foreach (var item in orig)// detect all neighbors
                 {
-                    var detectItem = GameManagerMap.Instance.Map[item];
+                    TerritroyReaded detectItem = GameManagerMap.Instance.Map[item];
 
                     if (detectItem.TerritoryInfo == TerritoryType.ShelterGround) //if we detect Shelter Ground, set detectItem as air above it 
                     {
@@ -469,7 +470,7 @@ public class CharacterMovemovent : MonoBehaviour
                         }
                         detectItem = GameManagerMap.Instance.Map[newItem];
                     }
-                    if (detectItem.TerritoryInfo == TerritoryType.Shelter || detectItem.TerritoryInfo == TerritoryType.Enemy ||
+                    if (detectItem.TerritoryInfo == TerritoryType.Shelter || detectItem.TerritoryInfo == TerritoryType.Enemy || detectItem.TerritoryInfo == TerritoryType.Character ||
                       detectItem.IndexDown.Count(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
                       GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround) == 0) // we dont select such territories
                     {
@@ -531,7 +532,8 @@ public class CharacterMovemovent : MonoBehaviour
         if (_selectedCharacter != null)
         {
             _selectedCharacter.OnDeselected();
-            _selectedCharacter = null;
         }
+        _selectedCharacter = null;
+
     }
 }
