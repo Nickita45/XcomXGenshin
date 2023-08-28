@@ -18,11 +18,18 @@ public class ConfigurationManager : MonoBehaviour
     ConfigurationManager.Instance.CharacterData.characterSpeed - return characterSpeed
     ConfigurationManager.Instance.CharacterData.typeGun[0].name - return first object name, AssultRifle for example
     */
-    public CharactersData CharactersData => _charactersData;
-    
+    public CharactersData CharactersData
+    {
+        get => _charactersData;
+        set => _charactersData = value;
+    }
     private GlobalDataJson _globalDataJson;
-
-    public GlobalDataJson GlobalDataJson => _globalDataJson;
+    
+    public GlobalDataJson GlobalDataJson
+    {
+        get => _globalDataJson;
+        set => _globalDataJson = value;
+    }
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -30,8 +37,7 @@ public class ConfigurationManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        _globalDataJson = LoadConfig<GlobalDataJson>(PATH_GLOBAL_INFO);
-        _charactersData = LoadConfig<CharactersData>(PATH_CHARACTERS); 
+        LoadAllConfigsFile();
 
         _instance = this;
     }
@@ -50,5 +56,21 @@ public class ConfigurationManager : MonoBehaviour
             return default;
         }
         
+    }
+    private void SaveConfig<T>(string filePath, T data)
+    {
+        string jsonContent = JsonUtility.ToJson(data, true); // The second parameter enables pretty-printing
+        File.WriteAllText(filePath, jsonContent);
+        Debug.Log($"Config file saved to {filePath}");
+    }
+    public void SaveAllConfigsFile()
+    {
+        SaveConfig(PATH_GLOBAL_INFO, _globalDataJson);
+        SaveConfig(PATH_CHARACTERS, _charactersData);
+    }
+    public void LoadAllConfigsFile()
+    {
+        _globalDataJson = LoadConfig<GlobalDataJson>(PATH_GLOBAL_INFO);
+        _charactersData = LoadConfig<CharactersData>(PATH_CHARACTERS); 
     }
 }
