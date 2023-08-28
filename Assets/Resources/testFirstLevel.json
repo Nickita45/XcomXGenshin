@@ -322,8 +322,8 @@
         "-6.5_0.5_7.5",
         "-6.5_0.5_8.5",
         "-6.5_0.5_9.5",
-        "-8_-0.2313_-9.54",
-        "-8.152_-0.07_-8.556",
+        "-7.5_0.5_-9.5",
+        "-7.5_0.5_-8.5",
         "-7.5_0.5_-7.5",
         "-7.5_0.5_-6.5",
         "-7.5_0.5_-5.5",
@@ -340,8 +340,9 @@
         "-7.5_0.5_7.5",
         "-7.5_0.5_8.5",
         "-7.5_0.5_9.5",
-        "-8.671_-0.07_-8.152",
-        "-8.5_0.5_-6.5",
+        "-8.5_0.5_-9.5",
+        "-8.5_0.5_-8.5",
+        "-8.574_-0.07_-7.069",
         "-8.5_0.5_-5.5",
         "-8.5_0.5_-4.5",
         "-8.5_0.5_-3.5",
@@ -358,10 +359,10 @@
         "-8.5_0.5_7.5",
         "-8.5_0.5_8.5",
         "-8.5_0.5_9.5",
-        "-9.58_-0.2311_-9.05",
+        "-9.5_0.5_-9.5",
+        "-9.5_0.5_-8.5",
         "-9.574_-0.07_-7.069",
-        "-9.5_0.5_-5.5",
-        "-9.5_0.5_-4.5",
+        "-9.574_-0.07_-5.01",
         "-9.5_0.5_-3.5",
         "-9.5_0.5_-2.5",
         "-9.5_0.5_-1.5",
@@ -1908,8 +1909,8 @@
         "7.5_0.5_-7.5"
       ],
       "Index": "8.5_0.5_-7.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
+      "PathPrefab": "Prefabs/Capsule",
+      "TerritoryInfo": 0,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -11813,7 +11814,7 @@
         "-4.5_0.5_-9.5"
       ],
       "IndexBottom": [
-        "-8_-0.2313_-9.54"
+        "-7.5_0.5_-9.5"
       ],
       "Index": "-6_-0.07_-9.59",
       "PathPrefab": "Prefabs/Level1/stone1",
@@ -12396,7 +12397,7 @@
         "-5.5_0.5_-8.5"
       ],
       "IndexBottom": [
-        "-8.152_-0.07_-8.556"
+        "-7.5_0.5_-8.5"
       ],
       "Index": "-6.5_0.5_-8.5",
       "PathPrefab": null,
@@ -13084,61 +13085,56 @@
         "Front": 0
       }
     },
-    "-8_-0.2313_-9.54": {
-      "XSize": 3.0,
-      "YSize": 4.756028,
-      "ZSize": 5.0,
-      "XPosition": -8.0,
-      "YPosition": -0.2313,
-      "ZPosition": -9.54,
+    "-7.5_0.5_-9.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -7.5,
+      "YPosition": 0.5,
+      "ZPosition": -9.5,
       "XRotation": 0.0,
-      "YRotation": -0.7071068,
+      "YRotation": 0.0,
       "ZRotation": 0.0,
-      "WRotation": 0.7071068,
+      "WRotation": 1.0,
       "IndexLeft": [],
       "IndexRight": [
-        "-8.152_-0.07_-8.556",
-        "-8.671_-0.07_-8.152",
-        "-7.5_1.5_-8.5",
-        "-8.5_1.5_-8.5"
+        "-7.5_0.5_-8.5"
       ],
       "IndexUp": [
-        "-7.5_2.5_-9.5",
-        "-8.5_2.5_-9.5"
+        "-7.5_1.5_-9.5"
       ],
       "IndexDown": [
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-6_-0.07_-9.59",
-        "-6.5_1.5_-9.5"
+        "-6_-0.07_-9.59"
       ],
       "IndexBottom": [
-        "-9.58_-0.2311_-9.05"
+        "-8.5_0.5_-9.5"
       ],
-      "Index": "-8_-0.2313_-9.54",
-      "PathPrefab": "Prefabs/Level1/stone5",
-      "TerritoryInfo": 4,
+      "Index": "-7.5_0.5_-9.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
       "ShelterType": {
-        "Left": 2,
-        "Right": 2,
-        "Bottom": 2,
-        "Front": 2
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
       }
     },
-    "-8.152_-0.07_-8.556": {
-      "XSize": 6.0,
-      "YSize": 6.0,
-      "ZSize": 6.0,
-      "XPosition": -8.152,
-      "YPosition": -0.07,
-      "ZPosition": -8.556,
-      "XRotation": 8.14603354E-08,
+    "-7.5_0.5_-8.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -7.5,
+      "YPosition": 0.5,
+      "ZPosition": -8.5,
+      "XRotation": 0.0,
       "YRotation": 0.0,
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8_-0.2313_-9.54"
+        "-7.5_0.5_-9.5"
       ],
       "IndexRight": [
         "-7.5_0.5_-7.5"
@@ -13153,16 +13149,16 @@
         "-6.5_0.5_-8.5"
       ],
       "IndexBottom": [
-        "-8.671_-0.07_-8.152"
+        "-8.5_0.5_-8.5"
       ],
-      "Index": "-8.152_-0.07_-8.556",
-      "PathPrefab": "Prefabs/Level1/stone1",
-      "TerritoryInfo": 4,
+      "Index": "-7.5_0.5_-8.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
       "ShelterType": {
-        "Left": 2,
-        "Right": 2,
-        "Bottom": 2,
-        "Front": 2
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
       }
     },
     "-7.5_0.5_-7.5": {
@@ -13177,7 +13173,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8.152_-0.07_-8.556"
+        "-7.5_0.5_-8.5"
       ],
       "IndexRight": [
         "-7.5_0.5_-6.5"
@@ -13192,7 +13188,7 @@
         "-6.5_0.5_-7.5"
       ],
       "IndexBottom": [
-        "-8.671_-0.07_-8.152"
+        "-8.574_-0.07_-7.069"
       ],
       "Index": "-7.5_0.5_-7.5",
       "PathPrefab": null,
@@ -13231,7 +13227,7 @@
         "-6.5_0.5_-6.5"
       ],
       "IndexBottom": [
-        "-8.5_0.5_-6.5"
+        "-8.574_-0.07_-7.069"
       ],
       "Index": "-7.5_0.5_-6.5",
       "PathPrefab": null,
@@ -13787,78 +13783,34 @@
         "Front": 0
       }
     },
-    "-8.671_-0.07_-8.152": {
-      "XSize": 6.0,
-      "YSize": 6.0,
-      "ZSize": 6.0,
-      "XPosition": -8.671,
-      "YPosition": -0.07,
-      "ZPosition": -8.152,
-      "XRotation": 0.0,
-      "YRotation": -0.7071068,
-      "ZRotation": 0.0,
-      "WRotation": 0.7071068,
-      "IndexLeft": [
-        "-8_-0.2313_-9.54"
-      ],
-      "IndexRight": [
-        "-8.5_0.5_-6.5"
-      ],
-      "IndexUp": [
-        "-8.5_1.5_-8.5",
-        "-8.5_1.5_-7.5"
-      ],
-      "IndexDown": [
-        "0_-0.5_0"
-      ],
-      "IndexFront": [
-        "-8.152_-0.07_-8.556",
-        "-7.5_0.5_-7.5"
-      ],
-      "IndexBottom": [
-        "-9.58_-0.2311_-9.05",
-        "-9.574_-0.07_-7.069"
-      ],
-      "Index": "-8.671_-0.07_-8.152",
-      "PathPrefab": "Prefabs/Level1/stone1",
-      "TerritoryInfo": 4,
-      "ShelterType": {
-        "Left": 2,
-        "Right": 2,
-        "Bottom": 2,
-        "Front": 2
-      }
-    },
-    "-8.5_0.5_-6.5": {
+    "-8.5_0.5_-9.5": {
       "XSize": 0.5,
       "YSize": 0.5,
       "ZSize": 0.5,
       "XPosition": -8.5,
       "YPosition": 0.5,
-      "ZPosition": -6.5,
+      "ZPosition": -9.5,
       "XRotation": 0.0,
       "YRotation": 0.0,
       "ZRotation": 0.0,
       "WRotation": 1.0,
-      "IndexLeft": [
-        "-8.671_-0.07_-8.152"
-      ],
+      "IndexLeft": [],
       "IndexRight": [
-        "-8.5_0.5_-5.5"
+        "-8.5_0.5_-8.5"
       ],
       "IndexUp": [
-        "-8.5_1.5_-6.5"
+        "-8.5_1.5_-9.5"
       ],
       "IndexDown": [
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-7.5_0.5_-6.5"
+        "-7.5_0.5_-9.5"
       ],
       "IndexBottom": [
-        "-9.574_-0.07_-7.069"
+        "-9.5_0.5_-9.5"
       ],
-      "Index": "-8.5_0.5_-6.5",
+      "Index": "-8.5_0.5_-9.5",
       "PathPrefab": null,
       "TerritoryInfo": 2,
       "ShelterType": {
@@ -13868,10 +13820,90 @@
         "Front": 0
       }
     },
+    "-8.5_0.5_-8.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -8.5,
+      "YPosition": 0.5,
+      "ZPosition": -8.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-8.5_0.5_-9.5"
+      ],
+      "IndexRight": [
+        "-8.574_-0.07_-7.069"
+      ],
+      "IndexUp": [
+        "-8.5_1.5_-8.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-7.5_0.5_-8.5"
+      ],
+      "IndexBottom": [
+        "-9.5_0.5_-8.5"
+      ],
+      "Index": "-8.5_0.5_-8.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-8.574_-0.07_-7.069": {
+      "XSize": 6.0,
+      "YSize": 6.0,
+      "ZSize": 6.0,
+      "XPosition": -8.574,
+      "YPosition": -0.07,
+      "ZPosition": -7.06900024,
+      "XRotation": 0.0,
+      "YRotation": 0.7071068,
+      "ZRotation": 0.0,
+      "WRotation": 0.7071068,
+      "IndexLeft": [
+        "-8.5_0.5_-8.5"
+      ],
+      "IndexRight": [
+        "-8.5_0.5_-5.5"
+      ],
+      "IndexUp": [
+        "-8.5_1.5_-7.5",
+        "-8.5_1.5_-6.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-7.5_0.5_-7.5",
+        "-7.5_0.5_-6.5"
+      ],
+      "IndexBottom": [
+        "-9.574_-0.07_-7.069"
+      ],
+      "Index": "-8.574_-0.07_-7.069",
+      "PathPrefab": "Prefabs/Level1/stone1",
+      "TerritoryInfo": 4,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
     "-8.5_0.5_-5.5": {
-      "XSize": 1.0,
-      "YSize": 1.0,
-      "ZSize": 1.0,
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
       "XPosition": -8.5,
       "YPosition": 0.5,
       "ZPosition": -5.5,
@@ -13880,7 +13912,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8.5_0.5_-6.5"
+        "-8.574_-0.07_-7.069"
       ],
       "IndexRight": [
         "-8.5_0.5_-4.5"
@@ -13895,16 +13927,16 @@
         "-7.5_0.5_-5.5"
       ],
       "IndexBottom": [
-        "-9.5_0.5_-5.5"
+        "-9.574_-0.07_-5.01"
       ],
       "Index": "-8.5_0.5_-5.5",
-      "PathPrefab": "Prefabs/Level1/Tree",
-      "TerritoryInfo": 3,
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
       "ShelterType": {
-        "Left": 2,
-        "Right": 2,
-        "Bottom": 2,
-        "Front": 2
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
       }
     },
     "-8.5_0.5_-4.5": {
@@ -13934,7 +13966,7 @@
         "-7.5_0.5_-4.5"
       ],
       "IndexBottom": [
-        "-9.5_0.5_-4.5"
+        "-9.574_-0.07_-5.01"
       ],
       "Index": "-8.5_0.5_-4.5",
       "PathPrefab": null,
@@ -14490,43 +14522,76 @@
         "Front": 0
       }
     },
-    "-9.58_-0.2311_-9.05": {
-      "XSize": 3.0,
-      "YSize": 4.78679752,
-      "ZSize": 5.0,
-      "XPosition": -9.58,
-      "YPosition": -0.2311,
-      "ZPosition": -9.05,
-      "XRotation": 8.14603354E-08,
+    "-9.5_0.5_-9.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -9.5,
+      "YPosition": 0.5,
+      "ZPosition": -9.5,
+      "XRotation": 0.0,
       "YRotation": 0.0,
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [],
       "IndexRight": [
-        "-9.574_-0.07_-7.069",
-        "-9.5_1.5_-7.5"
+        "-9.5_0.5_-8.5"
       ],
       "IndexUp": [
-        "-9.5_2.5_-9.5",
-        "-9.5_2.5_-8.5"
+        "-9.5_1.5_-9.5"
       ],
       "IndexDown": [
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-8_-0.2313_-9.54",
-        "-8.671_-0.07_-8.152",
-        "-8.5_1.5_-8.5"
+        "-8.5_0.5_-9.5"
       ],
       "IndexBottom": [],
-      "Index": "-9.58_-0.2311_-9.05",
-      "PathPrefab": "Prefabs/Level1/stone5",
-      "TerritoryInfo": 4,
+      "Index": "-9.5_0.5_-9.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
       "ShelterType": {
-        "Left": 2,
-        "Right": 2,
-        "Bottom": 2,
-        "Front": 2
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-9.5_0.5_-8.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -9.5,
+      "YPosition": 0.5,
+      "ZPosition": -8.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-9.5_0.5_-9.5"
+      ],
+      "IndexRight": [
+        "-9.574_-0.07_-7.069"
+      ],
+      "IndexUp": [
+        "-9.5_1.5_-8.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-8.5_0.5_-8.5"
+      ],
+      "IndexBottom": [],
+      "Index": "-9.5_0.5_-8.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
       }
     },
     "-9.574_-0.07_-7.069": {
@@ -14535,27 +14600,26 @@
       "ZSize": 6.0,
       "XPosition": -9.574,
       "YPosition": -0.07,
-      "ZPosition": -7.069,
+      "ZPosition": -7.06900024,
       "XRotation": 0.0,
       "YRotation": 0.7071068,
       "ZRotation": 0.0,
       "WRotation": 0.7071068,
       "IndexLeft": [
-        "-9.58_-0.2311_-9.05"
+        "-9.5_0.5_-8.5"
       ],
       "IndexRight": [
-        "-9.5_0.5_-5.5"
+        "-9.574_-0.07_-5.01"
       ],
       "IndexUp": [
         "-9.5_1.5_-7.5",
-        "-9.5_1.5_-6.5"
+        "-9.671_0.93_-5.902"
       ],
       "IndexDown": [
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-8.671_-0.07_-8.152",
-        "-8.5_0.5_-6.5"
+        "-8.574_-0.07_-7.069"
       ],
       "IndexBottom": [],
       "Index": "-9.574_-0.07_-7.069",
@@ -14568,78 +14632,43 @@
         "Front": 2
       }
     },
-    "-9.5_0.5_-5.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -9.5,
-      "YPosition": 0.5,
-      "ZPosition": -5.5,
+    "-9.574_-0.07_-5.01": {
+      "XSize": 6.0,
+      "YSize": 6.0,
+      "ZSize": 6.0,
+      "XPosition": -9.574,
+      "YPosition": -0.07,
+      "ZPosition": -5.01,
       "XRotation": 0.0,
-      "YRotation": 0.0,
+      "YRotation": 0.7071068,
       "ZRotation": 0.0,
-      "WRotation": 1.0,
+      "WRotation": 0.7071068,
       "IndexLeft": [
         "-9.574_-0.07_-7.069"
-      ],
-      "IndexRight": [
-        "-9.5_0.5_-4.5"
-      ],
-      "IndexUp": [
-        "-9.5_1.5_-5.5"
-      ],
-      "IndexDown": [
-        "0_-0.5_0"
-      ],
-      "IndexFront": [
-        "-8.5_0.5_-5.5"
-      ],
-      "IndexBottom": [],
-      "Index": "-9.5_0.5_-5.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
-      "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
-      }
-    },
-    "-9.5_0.5_-4.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -9.5,
-      "YPosition": 0.5,
-      "ZPosition": -4.5,
-      "XRotation": 0.0,
-      "YRotation": 0.0,
-      "ZRotation": 0.0,
-      "WRotation": 1.0,
-      "IndexLeft": [
-        "-9.5_0.5_-5.5"
       ],
       "IndexRight": [
         "-9.5_0.5_-3.5"
       ],
       "IndexUp": [
+        "-9.671_0.93_-5.902",
         "-9.5_1.5_-4.5"
       ],
       "IndexDown": [
         "0_-0.5_0"
       ],
       "IndexFront": [
+        "-8.5_0.5_-5.5",
         "-8.5_0.5_-4.5"
       ],
       "IndexBottom": [],
-      "Index": "-9.5_0.5_-4.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
+      "Index": "-9.574_-0.07_-5.01",
+      "PathPrefab": "Prefabs/Level1/stone1",
+      "TerritoryInfo": 4,
       "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
       }
     },
     "-9.5_0.5_-3.5": {
@@ -14654,7 +14683,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-9.5_0.5_-4.5"
+        "-9.574_-0.07_-5.01"
       ],
       "IndexRight": [
         "-9.5_0.5_-2.5"
@@ -27013,7 +27042,7 @@
         "-5.5_1.5_-9.5"
       ],
       "IndexBottom": [
-        "-8_-0.2313_-9.54"
+        "-7.5_1.5_-9.5"
       ],
       "Index": "-6.5_1.5_-9.5",
       "PathPrefab": null,
@@ -27686,6 +27715,43 @@
         "Front": 0
       }
     },
+    "-7.5_1.5_-9.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -7.5,
+      "YPosition": 1.5,
+      "ZPosition": -9.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [
+        "-7.5_1.5_-8.5"
+      ],
+      "IndexUp": [
+        "-7.5_2.5_-9.5"
+      ],
+      "IndexDown": [
+        "-7.5_0.5_-9.5"
+      ],
+      "IndexFront": [
+        "-6.5_1.5_-9.5"
+      ],
+      "IndexBottom": [
+        "-8.5_1.5_-9.5"
+      ],
+      "Index": "-7.5_1.5_-9.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-7.5_1.5_-8.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -27698,7 +27764,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8_-0.2313_-9.54"
+        "-7.5_1.5_-9.5"
       ],
       "IndexRight": [
         "-7.5_1.5_-7.5"
@@ -27707,7 +27773,7 @@
         "-7.5_2.5_-8.5"
       ],
       "IndexDown": [
-        "-8.152_-0.07_-8.556"
+        "-7.5_0.5_-8.5"
       ],
       "IndexFront": [
         "-6.5_1.5_-8.5"
@@ -28347,6 +28413,43 @@
         "Front": 0
       }
     },
+    "-8.5_1.5_-9.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -8.5,
+      "YPosition": 1.5,
+      "ZPosition": -9.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [
+        "-8.5_1.5_-8.5"
+      ],
+      "IndexUp": [
+        "-8.5_2.5_-9.5"
+      ],
+      "IndexDown": [
+        "-8.5_0.5_-9.5"
+      ],
+      "IndexFront": [
+        "-7.5_1.5_-9.5"
+      ],
+      "IndexBottom": [
+        "-9.5_1.5_-9.5"
+      ],
+      "Index": "-8.5_1.5_-9.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-8.5_1.5_-8.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -28359,7 +28462,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8_-0.2313_-9.54"
+        "-8.5_1.5_-9.5"
       ],
       "IndexRight": [
         "-8.5_1.5_-7.5"
@@ -28368,13 +28471,13 @@
         "-8.5_2.5_-8.5"
       ],
       "IndexDown": [
-        "-8.671_-0.07_-8.152"
+        "-8.5_0.5_-8.5"
       ],
       "IndexFront": [
         "-7.5_1.5_-8.5"
       ],
       "IndexBottom": [
-        "-9.58_-0.2311_-9.05"
+        "-9.5_1.5_-8.5"
       ],
       "Index": "-8.5_1.5_-8.5",
       "PathPrefab": null,
@@ -28407,7 +28510,7 @@
         "-8.5_2.5_-7.5"
       ],
       "IndexDown": [
-        "-8.671_-0.07_-8.152"
+        "-8.574_-0.07_-7.069"
       ],
       "IndexFront": [
         "-7.5_1.5_-7.5"
@@ -28446,13 +28549,13 @@
         "-8.5_2.5_-6.5"
       ],
       "IndexDown": [
-        "-8.5_0.5_-6.5"
+        "-8.574_-0.07_-7.069"
       ],
       "IndexFront": [
         "-7.5_1.5_-6.5"
       ],
       "IndexBottom": [
-        "-9.5_1.5_-6.5"
+        "-9.671_0.93_-5.902"
       ],
       "Index": "-8.5_1.5_-6.5",
       "PathPrefab": null,
@@ -28491,7 +28594,7 @@
         "-7.5_1.5_-5.5"
       ],
       "IndexBottom": [
-        "-9.5_1.5_-5.5"
+        "-9.671_0.93_-5.902"
       ],
       "Index": "-8.5_1.5_-5.5",
       "PathPrefab": null,
@@ -29086,6 +29189,78 @@
         "Front": 0
       }
     },
+    "-9.5_1.5_-9.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -9.5,
+      "YPosition": 1.5,
+      "ZPosition": -9.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [
+        "-9.5_1.5_-8.5"
+      ],
+      "IndexUp": [
+        "-9.5_2.5_-9.5"
+      ],
+      "IndexDown": [
+        "-9.5_0.5_-9.5"
+      ],
+      "IndexFront": [
+        "-8.5_1.5_-9.5"
+      ],
+      "IndexBottom": [],
+      "Index": "-9.5_1.5_-9.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-9.5_1.5_-8.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -9.5,
+      "YPosition": 1.5,
+      "ZPosition": -8.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-9.5_1.5_-9.5"
+      ],
+      "IndexRight": [
+        "-9.5_1.5_-7.5"
+      ],
+      "IndexUp": [
+        "-9.5_2.5_-8.5"
+      ],
+      "IndexDown": [
+        "-9.5_0.5_-8.5"
+      ],
+      "IndexFront": [
+        "-8.5_1.5_-8.5"
+      ],
+      "IndexBottom": [],
+      "Index": "-9.5_1.5_-8.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-9.5_1.5_-7.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -29098,10 +29273,10 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-9.58_-0.2311_-9.05"
+        "-9.5_1.5_-8.5"
       ],
       "IndexRight": [
-        "-9.5_1.5_-6.5"
+        "-9.671_0.93_-5.902"
       ],
       "IndexUp": [
         "-9.5_2.5_-7.5"
@@ -29123,78 +29298,44 @@
         "Front": 0
       }
     },
-    "-9.5_1.5_-6.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -9.5,
-      "YPosition": 1.5,
-      "ZPosition": -6.5,
+    "-9.671_0.93_-5.902": {
+      "XSize": 6.0,
+      "YSize": 6.0,
+      "ZSize": 6.0,
+      "XPosition": -9.671,
+      "YPosition": 0.93,
+      "ZPosition": -5.90200043,
       "XRotation": 0.0,
-      "YRotation": 0.0,
+      "YRotation": -0.7071068,
       "ZRotation": 0.0,
-      "WRotation": 1.0,
+      "WRotation": 0.7071068,
       "IndexLeft": [
         "-9.5_1.5_-7.5"
-      ],
-      "IndexRight": [
-        "-9.5_1.5_-5.5"
-      ],
-      "IndexUp": [
-        "-9.5_2.5_-6.5"
-      ],
-      "IndexDown": [
-        "-9.574_-0.07_-7.069"
-      ],
-      "IndexFront": [
-        "-8.5_1.5_-6.5"
-      ],
-      "IndexBottom": [],
-      "Index": "-9.5_1.5_-6.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
-      "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
-      }
-    },
-    "-9.5_1.5_-5.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -9.5,
-      "YPosition": 1.5,
-      "ZPosition": -5.5,
-      "XRotation": 0.0,
-      "YRotation": 0.0,
-      "ZRotation": 0.0,
-      "WRotation": 1.0,
-      "IndexLeft": [
-        "-9.5_1.5_-6.5"
       ],
       "IndexRight": [
         "-9.5_1.5_-4.5"
       ],
       "IndexUp": [
+        "-9.5_2.5_-6.5",
         "-9.5_2.5_-5.5"
       ],
       "IndexDown": [
-        "-9.5_0.5_-5.5"
+        "-9.574_-0.07_-7.069",
+        "-9.574_-0.07_-5.01"
       ],
       "IndexFront": [
+        "-8.5_1.5_-6.5",
         "-8.5_1.5_-5.5"
       ],
       "IndexBottom": [],
-      "Index": "-9.5_1.5_-5.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
+      "Index": "-9.671_0.93_-5.902",
+      "PathPrefab": "Prefabs/Level1/stone1",
+      "TerritoryInfo": 4,
       "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
       }
     },
     "-9.5_1.5_-4.5": {
@@ -29209,7 +29350,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-9.5_1.5_-5.5"
+        "-9.671_0.93_-5.902"
       ],
       "IndexRight": [
         "-9.5_1.5_-3.5"
@@ -29218,7 +29359,7 @@
         "-9.5_2.5_-4.5"
       ],
       "IndexDown": [
-        "-9.5_0.5_-4.5"
+        "-9.574_-0.07_-5.01"
       ],
       "IndexFront": [
         "-8.5_1.5_-4.5"
@@ -42633,7 +42774,7 @@
         "-7.5_3.5_-9.5"
       ],
       "IndexDown": [
-        "-8_-0.2313_-9.54"
+        "-7.5_1.5_-9.5"
       ],
       "IndexFront": [
         "-6.5_2.5_-9.5"
@@ -43409,7 +43550,7 @@
         "-8.5_3.5_-9.5"
       ],
       "IndexDown": [
-        "-8_-0.2313_-9.54"
+        "-8.5_1.5_-9.5"
       ],
       "IndexFront": [
         "-7.5_2.5_-9.5"
@@ -44185,15 +44326,15 @@
         "-9.5_3.5_-9.5"
       ],
       "IndexDown": [
-        "-9.58_-0.2311_-9.05"
+        "-9.5_1.5_-9.5"
       ],
       "IndexFront": [
         "-8.5_2.5_-9.5"
       ],
       "IndexBottom": [],
       "Index": "-9.5_2.5_-9.5",
-      "PathPrefab": "Prefabs/Level1/EnemySpawn",
-      "TerritoryInfo": 6,
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -44222,7 +44363,7 @@
         "-9.5_3.5_-8.5"
       ],
       "IndexDown": [
-        "-9.58_-0.2311_-9.05"
+        "-9.5_1.5_-8.5"
       ],
       "IndexFront": [
         "-8.5_2.5_-8.5"
@@ -44296,7 +44437,7 @@
         "-9.5_3.5_-6.5"
       ],
       "IndexDown": [
-        "-9.5_1.5_-6.5"
+        "-9.671_0.93_-5.902"
       ],
       "IndexFront": [
         "-8.5_2.5_-6.5"
@@ -44333,7 +44474,7 @@
         "-9.5_3.5_-5.5"
       ],
       "IndexDown": [
-        "-9.5_1.5_-5.5"
+        "-9.671_0.93_-5.902"
       ],
       "IndexFront": [
         "-8.5_2.5_-5.5"
@@ -61202,8 +61343,8 @@
         "-6.5_0.5_7.5",
         "-6.5_0.5_8.5",
         "-6.5_0.5_9.5",
-        "-8_-0.2313_-9.54",
-        "-8.152_-0.07_-8.556",
+        "-7.5_0.5_-9.5",
+        "-7.5_0.5_-8.5",
         "-7.5_0.5_-7.5",
         "-7.5_0.5_-6.5",
         "-7.5_0.5_-5.5",
@@ -61220,8 +61361,9 @@
         "-7.5_0.5_7.5",
         "-7.5_0.5_8.5",
         "-7.5_0.5_9.5",
-        "-8.671_-0.07_-8.152",
-        "-8.5_0.5_-6.5",
+        "-8.5_0.5_-9.5",
+        "-8.5_0.5_-8.5",
+        "-8.574_-0.07_-7.069",
         "-8.5_0.5_-5.5",
         "-8.5_0.5_-4.5",
         "-8.5_0.5_-3.5",
@@ -61238,10 +61380,10 @@
         "-8.5_0.5_7.5",
         "-8.5_0.5_8.5",
         "-8.5_0.5_9.5",
-        "-9.58_-0.2311_-9.05",
+        "-9.5_0.5_-9.5",
+        "-9.5_0.5_-8.5",
         "-9.574_-0.07_-7.069",
-        "-9.5_0.5_-5.5",
-        "-9.5_0.5_-4.5",
+        "-9.574_-0.07_-5.01",
         "-9.5_0.5_-3.5",
         "-9.5_0.5_-2.5",
         "-9.5_0.5_-1.5",
@@ -62788,8 +62930,8 @@
         "7.5_0.5_-7.5"
       ],
       "Index": "8.5_0.5_-7.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
+      "PathPrefab": "Prefabs/Capsule",
+      "TerritoryInfo": 0,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -72693,7 +72835,7 @@
         "-4.5_0.5_-9.5"
       ],
       "IndexBottom": [
-        "-8_-0.2313_-9.54"
+        "-7.5_0.5_-9.5"
       ],
       "Index": "-6_-0.07_-9.59",
       "PathPrefab": "Prefabs/Level1/stone1",
@@ -73276,7 +73418,7 @@
         "-5.5_0.5_-8.5"
       ],
       "IndexBottom": [
-        "-8.152_-0.07_-8.556"
+        "-7.5_0.5_-8.5"
       ],
       "Index": "-6.5_0.5_-8.5",
       "PathPrefab": null,
@@ -73964,61 +74106,56 @@
         "Front": 0
       }
     },
-    "-8_-0.2313_-9.54": {
-      "XSize": 3.0,
-      "YSize": 4.756028,
-      "ZSize": 5.0,
-      "XPosition": -8.0,
-      "YPosition": -0.2313,
-      "ZPosition": -9.54,
+    "-7.5_0.5_-9.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -7.5,
+      "YPosition": 0.5,
+      "ZPosition": -9.5,
       "XRotation": 0.0,
-      "YRotation": -0.7071068,
+      "YRotation": 0.0,
       "ZRotation": 0.0,
-      "WRotation": 0.7071068,
+      "WRotation": 1.0,
       "IndexLeft": [],
       "IndexRight": [
-        "-8.152_-0.07_-8.556",
-        "-8.671_-0.07_-8.152",
-        "-7.5_1.5_-8.5",
-        "-8.5_1.5_-8.5"
+        "-7.5_0.5_-8.5"
       ],
       "IndexUp": [
-        "-7.5_2.5_-9.5",
-        "-8.5_2.5_-9.5"
+        "-7.5_1.5_-9.5"
       ],
       "IndexDown": [
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-6_-0.07_-9.59",
-        "-6.5_1.5_-9.5"
+        "-6_-0.07_-9.59"
       ],
       "IndexBottom": [
-        "-9.58_-0.2311_-9.05"
+        "-8.5_0.5_-9.5"
       ],
-      "Index": "-8_-0.2313_-9.54",
-      "PathPrefab": "Prefabs/Level1/stone5",
-      "TerritoryInfo": 4,
+      "Index": "-7.5_0.5_-9.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
       "ShelterType": {
-        "Left": 2,
-        "Right": 2,
-        "Bottom": 2,
-        "Front": 2
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
       }
     },
-    "-8.152_-0.07_-8.556": {
-      "XSize": 6.0,
-      "YSize": 6.0,
-      "ZSize": 6.0,
-      "XPosition": -8.152,
-      "YPosition": -0.07,
-      "ZPosition": -8.556,
-      "XRotation": 8.14603354E-08,
+    "-7.5_0.5_-8.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -7.5,
+      "YPosition": 0.5,
+      "ZPosition": -8.5,
+      "XRotation": 0.0,
       "YRotation": 0.0,
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8_-0.2313_-9.54"
+        "-7.5_0.5_-9.5"
       ],
       "IndexRight": [
         "-7.5_0.5_-7.5"
@@ -74033,16 +74170,16 @@
         "-6.5_0.5_-8.5"
       ],
       "IndexBottom": [
-        "-8.671_-0.07_-8.152"
+        "-8.5_0.5_-8.5"
       ],
-      "Index": "-8.152_-0.07_-8.556",
-      "PathPrefab": "Prefabs/Level1/stone1",
-      "TerritoryInfo": 4,
+      "Index": "-7.5_0.5_-8.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
       "ShelterType": {
-        "Left": 2,
-        "Right": 2,
-        "Bottom": 2,
-        "Front": 2
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
       }
     },
     "-7.5_0.5_-7.5": {
@@ -74057,7 +74194,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8.152_-0.07_-8.556"
+        "-7.5_0.5_-8.5"
       ],
       "IndexRight": [
         "-7.5_0.5_-6.5"
@@ -74072,7 +74209,7 @@
         "-6.5_0.5_-7.5"
       ],
       "IndexBottom": [
-        "-8.671_-0.07_-8.152"
+        "-8.574_-0.07_-7.069"
       ],
       "Index": "-7.5_0.5_-7.5",
       "PathPrefab": null,
@@ -74111,7 +74248,7 @@
         "-6.5_0.5_-6.5"
       ],
       "IndexBottom": [
-        "-8.5_0.5_-6.5"
+        "-8.574_-0.07_-7.069"
       ],
       "Index": "-7.5_0.5_-6.5",
       "PathPrefab": null,
@@ -74667,78 +74804,34 @@
         "Front": 0
       }
     },
-    "-8.671_-0.07_-8.152": {
-      "XSize": 6.0,
-      "YSize": 6.0,
-      "ZSize": 6.0,
-      "XPosition": -8.671,
-      "YPosition": -0.07,
-      "ZPosition": -8.152,
-      "XRotation": 0.0,
-      "YRotation": -0.7071068,
-      "ZRotation": 0.0,
-      "WRotation": 0.7071068,
-      "IndexLeft": [
-        "-8_-0.2313_-9.54"
-      ],
-      "IndexRight": [
-        "-8.5_0.5_-6.5"
-      ],
-      "IndexUp": [
-        "-8.5_1.5_-8.5",
-        "-8.5_1.5_-7.5"
-      ],
-      "IndexDown": [
-        "0_-0.5_0"
-      ],
-      "IndexFront": [
-        "-8.152_-0.07_-8.556",
-        "-7.5_0.5_-7.5"
-      ],
-      "IndexBottom": [
-        "-9.58_-0.2311_-9.05",
-        "-9.574_-0.07_-7.069"
-      ],
-      "Index": "-8.671_-0.07_-8.152",
-      "PathPrefab": "Prefabs/Level1/stone1",
-      "TerritoryInfo": 4,
-      "ShelterType": {
-        "Left": 2,
-        "Right": 2,
-        "Bottom": 2,
-        "Front": 2
-      }
-    },
-    "-8.5_0.5_-6.5": {
+    "-8.5_0.5_-9.5": {
       "XSize": 0.5,
       "YSize": 0.5,
       "ZSize": 0.5,
       "XPosition": -8.5,
       "YPosition": 0.5,
-      "ZPosition": -6.5,
+      "ZPosition": -9.5,
       "XRotation": 0.0,
       "YRotation": 0.0,
       "ZRotation": 0.0,
       "WRotation": 1.0,
-      "IndexLeft": [
-        "-8.671_-0.07_-8.152"
-      ],
+      "IndexLeft": [],
       "IndexRight": [
-        "-8.5_0.5_-5.5"
+        "-8.5_0.5_-8.5"
       ],
       "IndexUp": [
-        "-8.5_1.5_-6.5"
+        "-8.5_1.5_-9.5"
       ],
       "IndexDown": [
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-7.5_0.5_-6.5"
+        "-7.5_0.5_-9.5"
       ],
       "IndexBottom": [
-        "-9.574_-0.07_-7.069"
+        "-9.5_0.5_-9.5"
       ],
-      "Index": "-8.5_0.5_-6.5",
+      "Index": "-8.5_0.5_-9.5",
       "PathPrefab": null,
       "TerritoryInfo": 2,
       "ShelterType": {
@@ -74748,10 +74841,90 @@
         "Front": 0
       }
     },
+    "-8.5_0.5_-8.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -8.5,
+      "YPosition": 0.5,
+      "ZPosition": -8.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-8.5_0.5_-9.5"
+      ],
+      "IndexRight": [
+        "-8.574_-0.07_-7.069"
+      ],
+      "IndexUp": [
+        "-8.5_1.5_-8.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-7.5_0.5_-8.5"
+      ],
+      "IndexBottom": [
+        "-9.5_0.5_-8.5"
+      ],
+      "Index": "-8.5_0.5_-8.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-8.574_-0.07_-7.069": {
+      "XSize": 6.0,
+      "YSize": 6.0,
+      "ZSize": 6.0,
+      "XPosition": -8.574,
+      "YPosition": -0.07,
+      "ZPosition": -7.06900024,
+      "XRotation": 0.0,
+      "YRotation": 0.7071068,
+      "ZRotation": 0.0,
+      "WRotation": 0.7071068,
+      "IndexLeft": [
+        "-8.5_0.5_-8.5"
+      ],
+      "IndexRight": [
+        "-8.5_0.5_-5.5"
+      ],
+      "IndexUp": [
+        "-8.5_1.5_-7.5",
+        "-8.5_1.5_-6.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-7.5_0.5_-7.5",
+        "-7.5_0.5_-6.5"
+      ],
+      "IndexBottom": [
+        "-9.574_-0.07_-7.069"
+      ],
+      "Index": "-8.574_-0.07_-7.069",
+      "PathPrefab": "Prefabs/Level1/stone1",
+      "TerritoryInfo": 4,
+      "ShelterType": {
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
+      }
+    },
     "-8.5_0.5_-5.5": {
-      "XSize": 1.0,
-      "YSize": 1.0,
-      "ZSize": 1.0,
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
       "XPosition": -8.5,
       "YPosition": 0.5,
       "ZPosition": -5.5,
@@ -74760,7 +74933,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8.5_0.5_-6.5"
+        "-8.574_-0.07_-7.069"
       ],
       "IndexRight": [
         "-8.5_0.5_-4.5"
@@ -74775,16 +74948,16 @@
         "-7.5_0.5_-5.5"
       ],
       "IndexBottom": [
-        "-9.5_0.5_-5.5"
+        "-9.574_-0.07_-5.01"
       ],
       "Index": "-8.5_0.5_-5.5",
-      "PathPrefab": "Prefabs/Level1/Tree",
-      "TerritoryInfo": 3,
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
       "ShelterType": {
-        "Left": 2,
-        "Right": 2,
-        "Bottom": 2,
-        "Front": 2
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
       }
     },
     "-8.5_0.5_-4.5": {
@@ -74814,7 +74987,7 @@
         "-7.5_0.5_-4.5"
       ],
       "IndexBottom": [
-        "-9.5_0.5_-4.5"
+        "-9.574_-0.07_-5.01"
       ],
       "Index": "-8.5_0.5_-4.5",
       "PathPrefab": null,
@@ -75370,43 +75543,76 @@
         "Front": 0
       }
     },
-    "-9.58_-0.2311_-9.05": {
-      "XSize": 3.0,
-      "YSize": 4.78679752,
-      "ZSize": 5.0,
-      "XPosition": -9.58,
-      "YPosition": -0.2311,
-      "ZPosition": -9.05,
-      "XRotation": 8.14603354E-08,
+    "-9.5_0.5_-9.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -9.5,
+      "YPosition": 0.5,
+      "ZPosition": -9.5,
+      "XRotation": 0.0,
       "YRotation": 0.0,
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [],
       "IndexRight": [
-        "-9.574_-0.07_-7.069",
-        "-9.5_1.5_-7.5"
+        "-9.5_0.5_-8.5"
       ],
       "IndexUp": [
-        "-9.5_2.5_-9.5",
-        "-9.5_2.5_-8.5"
+        "-9.5_1.5_-9.5"
       ],
       "IndexDown": [
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-8_-0.2313_-9.54",
-        "-8.671_-0.07_-8.152",
-        "-8.5_1.5_-8.5"
+        "-8.5_0.5_-9.5"
       ],
       "IndexBottom": [],
-      "Index": "-9.58_-0.2311_-9.05",
-      "PathPrefab": "Prefabs/Level1/stone5",
-      "TerritoryInfo": 4,
+      "Index": "-9.5_0.5_-9.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
       "ShelterType": {
-        "Left": 2,
-        "Right": 2,
-        "Bottom": 2,
-        "Front": 2
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-9.5_0.5_-8.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -9.5,
+      "YPosition": 0.5,
+      "ZPosition": -8.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-9.5_0.5_-9.5"
+      ],
+      "IndexRight": [
+        "-9.574_-0.07_-7.069"
+      ],
+      "IndexUp": [
+        "-9.5_1.5_-8.5"
+      ],
+      "IndexDown": [
+        "0_-0.5_0"
+      ],
+      "IndexFront": [
+        "-8.5_0.5_-8.5"
+      ],
+      "IndexBottom": [],
+      "Index": "-9.5_0.5_-8.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
       }
     },
     "-9.574_-0.07_-7.069": {
@@ -75415,27 +75621,26 @@
       "ZSize": 6.0,
       "XPosition": -9.574,
       "YPosition": -0.07,
-      "ZPosition": -7.069,
+      "ZPosition": -7.06900024,
       "XRotation": 0.0,
       "YRotation": 0.7071068,
       "ZRotation": 0.0,
       "WRotation": 0.7071068,
       "IndexLeft": [
-        "-9.58_-0.2311_-9.05"
+        "-9.5_0.5_-8.5"
       ],
       "IndexRight": [
-        "-9.5_0.5_-5.5"
+        "-9.574_-0.07_-5.01"
       ],
       "IndexUp": [
         "-9.5_1.5_-7.5",
-        "-9.5_1.5_-6.5"
+        "-9.671_0.93_-5.902"
       ],
       "IndexDown": [
         "0_-0.5_0"
       ],
       "IndexFront": [
-        "-8.671_-0.07_-8.152",
-        "-8.5_0.5_-6.5"
+        "-8.574_-0.07_-7.069"
       ],
       "IndexBottom": [],
       "Index": "-9.574_-0.07_-7.069",
@@ -75448,78 +75653,43 @@
         "Front": 2
       }
     },
-    "-9.5_0.5_-5.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -9.5,
-      "YPosition": 0.5,
-      "ZPosition": -5.5,
+    "-9.574_-0.07_-5.01": {
+      "XSize": 6.0,
+      "YSize": 6.0,
+      "ZSize": 6.0,
+      "XPosition": -9.574,
+      "YPosition": -0.07,
+      "ZPosition": -5.01,
       "XRotation": 0.0,
-      "YRotation": 0.0,
+      "YRotation": 0.7071068,
       "ZRotation": 0.0,
-      "WRotation": 1.0,
+      "WRotation": 0.7071068,
       "IndexLeft": [
         "-9.574_-0.07_-7.069"
-      ],
-      "IndexRight": [
-        "-9.5_0.5_-4.5"
-      ],
-      "IndexUp": [
-        "-9.5_1.5_-5.5"
-      ],
-      "IndexDown": [
-        "0_-0.5_0"
-      ],
-      "IndexFront": [
-        "-8.5_0.5_-5.5"
-      ],
-      "IndexBottom": [],
-      "Index": "-9.5_0.5_-5.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
-      "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
-      }
-    },
-    "-9.5_0.5_-4.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -9.5,
-      "YPosition": 0.5,
-      "ZPosition": -4.5,
-      "XRotation": 0.0,
-      "YRotation": 0.0,
-      "ZRotation": 0.0,
-      "WRotation": 1.0,
-      "IndexLeft": [
-        "-9.5_0.5_-5.5"
       ],
       "IndexRight": [
         "-9.5_0.5_-3.5"
       ],
       "IndexUp": [
+        "-9.671_0.93_-5.902",
         "-9.5_1.5_-4.5"
       ],
       "IndexDown": [
         "0_-0.5_0"
       ],
       "IndexFront": [
+        "-8.5_0.5_-5.5",
         "-8.5_0.5_-4.5"
       ],
       "IndexBottom": [],
-      "Index": "-9.5_0.5_-4.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
+      "Index": "-9.574_-0.07_-5.01",
+      "PathPrefab": "Prefabs/Level1/stone1",
+      "TerritoryInfo": 4,
       "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
       }
     },
     "-9.5_0.5_-3.5": {
@@ -75534,7 +75704,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-9.5_0.5_-4.5"
+        "-9.574_-0.07_-5.01"
       ],
       "IndexRight": [
         "-9.5_0.5_-2.5"
@@ -87893,7 +88063,7 @@
         "-5.5_1.5_-9.5"
       ],
       "IndexBottom": [
-        "-8_-0.2313_-9.54"
+        "-7.5_1.5_-9.5"
       ],
       "Index": "-6.5_1.5_-9.5",
       "PathPrefab": null,
@@ -88566,6 +88736,43 @@
         "Front": 0
       }
     },
+    "-7.5_1.5_-9.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -7.5,
+      "YPosition": 1.5,
+      "ZPosition": -9.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [
+        "-7.5_1.5_-8.5"
+      ],
+      "IndexUp": [
+        "-7.5_2.5_-9.5"
+      ],
+      "IndexDown": [
+        "-7.5_0.5_-9.5"
+      ],
+      "IndexFront": [
+        "-6.5_1.5_-9.5"
+      ],
+      "IndexBottom": [
+        "-8.5_1.5_-9.5"
+      ],
+      "Index": "-7.5_1.5_-9.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-7.5_1.5_-8.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -88578,7 +88785,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8_-0.2313_-9.54"
+        "-7.5_1.5_-9.5"
       ],
       "IndexRight": [
         "-7.5_1.5_-7.5"
@@ -88587,7 +88794,7 @@
         "-7.5_2.5_-8.5"
       ],
       "IndexDown": [
-        "-8.152_-0.07_-8.556"
+        "-7.5_0.5_-8.5"
       ],
       "IndexFront": [
         "-6.5_1.5_-8.5"
@@ -89227,6 +89434,43 @@
         "Front": 0
       }
     },
+    "-8.5_1.5_-9.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -8.5,
+      "YPosition": 1.5,
+      "ZPosition": -9.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [
+        "-8.5_1.5_-8.5"
+      ],
+      "IndexUp": [
+        "-8.5_2.5_-9.5"
+      ],
+      "IndexDown": [
+        "-8.5_0.5_-9.5"
+      ],
+      "IndexFront": [
+        "-7.5_1.5_-9.5"
+      ],
+      "IndexBottom": [
+        "-9.5_1.5_-9.5"
+      ],
+      "Index": "-8.5_1.5_-9.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-8.5_1.5_-8.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -89239,7 +89483,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8_-0.2313_-9.54"
+        "-8.5_1.5_-9.5"
       ],
       "IndexRight": [
         "-8.5_1.5_-7.5"
@@ -89248,13 +89492,13 @@
         "-8.5_2.5_-8.5"
       ],
       "IndexDown": [
-        "-8.671_-0.07_-8.152"
+        "-8.5_0.5_-8.5"
       ],
       "IndexFront": [
         "-7.5_1.5_-8.5"
       ],
       "IndexBottom": [
-        "-9.58_-0.2311_-9.05"
+        "-9.5_1.5_-8.5"
       ],
       "Index": "-8.5_1.5_-8.5",
       "PathPrefab": null,
@@ -89287,7 +89531,7 @@
         "-8.5_2.5_-7.5"
       ],
       "IndexDown": [
-        "-8.671_-0.07_-8.152"
+        "-8.574_-0.07_-7.069"
       ],
       "IndexFront": [
         "-7.5_1.5_-7.5"
@@ -89326,13 +89570,13 @@
         "-8.5_2.5_-6.5"
       ],
       "IndexDown": [
-        "-8.5_0.5_-6.5"
+        "-8.574_-0.07_-7.069"
       ],
       "IndexFront": [
         "-7.5_1.5_-6.5"
       ],
       "IndexBottom": [
-        "-9.5_1.5_-6.5"
+        "-9.671_0.93_-5.902"
       ],
       "Index": "-8.5_1.5_-6.5",
       "PathPrefab": null,
@@ -89371,7 +89615,7 @@
         "-7.5_1.5_-5.5"
       ],
       "IndexBottom": [
-        "-9.5_1.5_-5.5"
+        "-9.671_0.93_-5.902"
       ],
       "Index": "-8.5_1.5_-5.5",
       "PathPrefab": null,
@@ -89966,6 +90210,78 @@
         "Front": 0
       }
     },
+    "-9.5_1.5_-9.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -9.5,
+      "YPosition": 1.5,
+      "ZPosition": -9.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [
+        "-9.5_1.5_-8.5"
+      ],
+      "IndexUp": [
+        "-9.5_2.5_-9.5"
+      ],
+      "IndexDown": [
+        "-9.5_0.5_-9.5"
+      ],
+      "IndexFront": [
+        "-8.5_1.5_-9.5"
+      ],
+      "IndexBottom": [],
+      "Index": "-9.5_1.5_-9.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
+    "-9.5_1.5_-8.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -9.5,
+      "YPosition": 1.5,
+      "ZPosition": -8.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-9.5_1.5_-9.5"
+      ],
+      "IndexRight": [
+        "-9.5_1.5_-7.5"
+      ],
+      "IndexUp": [
+        "-9.5_2.5_-8.5"
+      ],
+      "IndexDown": [
+        "-9.5_0.5_-8.5"
+      ],
+      "IndexFront": [
+        "-8.5_1.5_-8.5"
+      ],
+      "IndexBottom": [],
+      "Index": "-9.5_1.5_-8.5",
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-9.5_1.5_-7.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -89978,10 +90294,10 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-9.58_-0.2311_-9.05"
+        "-9.5_1.5_-8.5"
       ],
       "IndexRight": [
-        "-9.5_1.5_-6.5"
+        "-9.671_0.93_-5.902"
       ],
       "IndexUp": [
         "-9.5_2.5_-7.5"
@@ -90003,78 +90319,44 @@
         "Front": 0
       }
     },
-    "-9.5_1.5_-6.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -9.5,
-      "YPosition": 1.5,
-      "ZPosition": -6.5,
+    "-9.671_0.93_-5.902": {
+      "XSize": 6.0,
+      "YSize": 6.0,
+      "ZSize": 6.0,
+      "XPosition": -9.671,
+      "YPosition": 0.93,
+      "ZPosition": -5.90200043,
       "XRotation": 0.0,
-      "YRotation": 0.0,
+      "YRotation": -0.7071068,
       "ZRotation": 0.0,
-      "WRotation": 1.0,
+      "WRotation": 0.7071068,
       "IndexLeft": [
         "-9.5_1.5_-7.5"
-      ],
-      "IndexRight": [
-        "-9.5_1.5_-5.5"
-      ],
-      "IndexUp": [
-        "-9.5_2.5_-6.5"
-      ],
-      "IndexDown": [
-        "-9.574_-0.07_-7.069"
-      ],
-      "IndexFront": [
-        "-8.5_1.5_-6.5"
-      ],
-      "IndexBottom": [],
-      "Index": "-9.5_1.5_-6.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
-      "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
-      }
-    },
-    "-9.5_1.5_-5.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -9.5,
-      "YPosition": 1.5,
-      "ZPosition": -5.5,
-      "XRotation": 0.0,
-      "YRotation": 0.0,
-      "ZRotation": 0.0,
-      "WRotation": 1.0,
-      "IndexLeft": [
-        "-9.5_1.5_-6.5"
       ],
       "IndexRight": [
         "-9.5_1.5_-4.5"
       ],
       "IndexUp": [
+        "-9.5_2.5_-6.5",
         "-9.5_2.5_-5.5"
       ],
       "IndexDown": [
-        "-9.5_0.5_-5.5"
+        "-9.574_-0.07_-7.069",
+        "-9.574_-0.07_-5.01"
       ],
       "IndexFront": [
+        "-8.5_1.5_-6.5",
         "-8.5_1.5_-5.5"
       ],
       "IndexBottom": [],
-      "Index": "-9.5_1.5_-5.5",
-      "PathPrefab": null,
-      "TerritoryInfo": 2,
+      "Index": "-9.671_0.93_-5.902",
+      "PathPrefab": "Prefabs/Level1/stone1",
+      "TerritoryInfo": 4,
       "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
+        "Left": 2,
+        "Right": 2,
+        "Bottom": 2,
+        "Front": 2
       }
     },
     "-9.5_1.5_-4.5": {
@@ -90089,7 +90371,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-9.5_1.5_-5.5"
+        "-9.671_0.93_-5.902"
       ],
       "IndexRight": [
         "-9.5_1.5_-3.5"
@@ -90098,7 +90380,7 @@
         "-9.5_2.5_-4.5"
       ],
       "IndexDown": [
-        "-9.5_0.5_-4.5"
+        "-9.574_-0.07_-5.01"
       ],
       "IndexFront": [
         "-8.5_1.5_-4.5"
@@ -103513,7 +103795,7 @@
         "-7.5_3.5_-9.5"
       ],
       "IndexDown": [
-        "-8_-0.2313_-9.54"
+        "-7.5_1.5_-9.5"
       ],
       "IndexFront": [
         "-6.5_2.5_-9.5"
@@ -104289,7 +104571,7 @@
         "-8.5_3.5_-9.5"
       ],
       "IndexDown": [
-        "-8_-0.2313_-9.54"
+        "-8.5_1.5_-9.5"
       ],
       "IndexFront": [
         "-7.5_2.5_-9.5"
@@ -105065,15 +105347,15 @@
         "-9.5_3.5_-9.5"
       ],
       "IndexDown": [
-        "-9.58_-0.2311_-9.05"
+        "-9.5_1.5_-9.5"
       ],
       "IndexFront": [
         "-8.5_2.5_-9.5"
       ],
       "IndexBottom": [],
       "Index": "-9.5_2.5_-9.5",
-      "PathPrefab": "Prefabs/Level1/EnemySpawn",
-      "TerritoryInfo": 6,
+      "PathPrefab": null,
+      "TerritoryInfo": 2,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -105102,7 +105384,7 @@
         "-9.5_3.5_-8.5"
       ],
       "IndexDown": [
-        "-9.58_-0.2311_-9.05"
+        "-9.5_1.5_-8.5"
       ],
       "IndexFront": [
         "-8.5_2.5_-8.5"
@@ -105176,7 +105458,7 @@
         "-9.5_3.5_-6.5"
       ],
       "IndexDown": [
-        "-9.5_1.5_-6.5"
+        "-9.671_0.93_-5.902"
       ],
       "IndexFront": [
         "-8.5_2.5_-6.5"
@@ -105213,7 +105495,7 @@
         "-9.5_3.5_-5.5"
       ],
       "IndexDown": [
-        "-9.5_1.5_-5.5"
+        "-9.671_0.93_-5.902"
       ],
       "IndexFront": [
         "-8.5_2.5_-5.5"

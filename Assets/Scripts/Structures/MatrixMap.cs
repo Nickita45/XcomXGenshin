@@ -27,6 +27,19 @@ public class MatrixMap
         return obj;
     }
 
+    public TerritroyReaded RemoveFromVertex(Vector3 vector)
+    {
+        var ter = this[vector];
+        _vertex.Remove(ter.Index);
+        return ter;
+    }
+
+    public TerritroyReaded RemoveFromVertex(TerritroyReaded ter)
+    {
+        _vertex.Remove(ter.Index);
+        return ter;
+    }
+
     public List<GameObject> Enemy => _enemy;
     public Dictionary<string, TerritroyReaded> Decors => _decors;
     public Dictionary<string, TerritroyReaded> Vertex => _vertex;
