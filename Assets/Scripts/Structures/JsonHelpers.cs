@@ -131,14 +131,8 @@ public class GunTypeConfig
     public float maxTimeBetweenShooting;
 }
 [System.Serializable]
-public class CharacterData
+public class GlobalDataJson
 {
-    public float characterSpeed;
-    public int characterMoveDistance;
-    public float characterVisionDistance;
-    public int characterBaseAim;
-    public int characterBaseHealth;
-
     public int bonusAimFromFullCover;
     public int bonusAimFromHalfCover;
     public int bonusAimFromNoneCover; //hm
@@ -150,4 +144,19 @@ public class CharacterData
     public float timeAfterShooting;
 
     public GunTypeConfig[] typeGun;
+}
+[System.Serializable]
+public class CharacterData
+{
+    public string characterName;
+    public float characterSpeed;
+    public int characterMoveDistance;
+    public float characterVisionDistance;
+    public int characterBaseAim;
+    public int characterBaseHealth;
+}
+[System.Serializable]
+public class CharactersData
+{
+    public CharacterData[] characters;
 }

@@ -10,10 +10,10 @@ public class AimCalculater : MonoBehaviour
     private void Start()
     {
         //Config
-        FULLGROUNDPROCENT = ConfigurationManager.Instance.CharacterData.bonusAimFromFullCover;
-        SEMIGROUNDPROCENT = ConfigurationManager.Instance.CharacterData.bonusAimFromHalfCover;
-        LOWGRONTPROCENT = ConfigurationManager.Instance.CharacterData.bonusAimFromHighGround;
-        HIGHGROUNDPROCENT = ConfigurationManager.Instance.CharacterData.bonusAimFromLowGround;
+        FULLGROUNDPROCENT = ConfigurationManager.Instance.GlobalDataJson.bonusAimFromFullCover;
+        SEMIGROUNDPROCENT = ConfigurationManager.Instance.GlobalDataJson.bonusAimFromHalfCover;
+        LOWGRONTPROCENT = ConfigurationManager.Instance.GlobalDataJson.bonusAimFromHighGround;
+        HIGHGROUNDPROCENT = ConfigurationManager.Instance.GlobalDataJson.bonusAimFromLowGround;
 
     }
 
@@ -102,8 +102,8 @@ public class AimCalculater : MonoBehaviour
                  return 3 * distance - 15;
          }
      */
-        return ConfigurationManager.Instance.CharacterData.typeGun[(int)gunType].baseValue +
-            ConfigurationManager.Instance.CharacterData.typeGun[(int)gunType].distanceValue * distance;
+        return ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)gunType].baseValue +
+            ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)gunType].distanceValue * distance;
     }
 }
 

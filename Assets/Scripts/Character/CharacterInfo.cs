@@ -79,10 +79,8 @@ public class CharacterInfo : MonoBehaviour
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
         GameManagerMap.Instance.TurnController.CharacterBegining += BeginOfTurn;
 
-         //Config
-        _basicAimCharacter = ConfigurationManager.Instance.CharacterData.characterBaseAim;
-
-
+        //Config
+        _basicAimCharacter = ConfigurationManager.Instance.CharactersData.characters[0].characterBaseAim;
     }
 
     private void BeginOfTurn() => CountActions = 2;
