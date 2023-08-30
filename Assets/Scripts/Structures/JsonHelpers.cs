@@ -143,6 +143,15 @@ public class GlobalDataJson
 
     public float timeAfterShooting;
 
+    public float cameraSpeed;
+    public float cameraSpeedRotation;
+    public float cameraSpeedZoom;
+    public float cameraZoomMin;
+    public float cameraZoomMax;
+
+    public float secondsEndTurn;
+    public float secondsTimerTurnCharacter;
+
     public GunTypeConfig[] typeGun;
 }
 [System.Serializable]

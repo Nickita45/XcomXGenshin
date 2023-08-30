@@ -14,10 +14,13 @@ public class TurnController : MonoBehaviour
     private int _iterator = 0;
 
     public Action CharacterBegining;
+    private float _secondsEndTurn = 3f;
 
     private void Start()
     {
         GameManagerMap.Instance.OnClearMap += Clear;
+
+        _secondsEndTurn = ConfigurationManager.Instance.GlobalDataJson.secondsEndTurn;
     }
 
     public void BeginOfTheTurn()
@@ -50,7 +53,7 @@ public class TurnController : MonoBehaviour
         Debug.Log("End turn");
         GameManagerMap.Instance.StatusMain.SetStatusWaiting();
         menuController.SetPanelEnemy(true);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(_secondsEndTurn);
         GameManagerMap.Instance.StatusMain.SetStatusSelectCharacter();
         Debug.Log("New turn");
         BeginOfTheTurn();

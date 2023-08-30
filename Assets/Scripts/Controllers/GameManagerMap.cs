@@ -67,6 +67,7 @@ public class GameManagerMap : MonoBehaviour
 
     public GunType Gun { get; set; } //in feature we need to move it to character
 
+    private float _secondsTimerTurnCharacter = 2f;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -82,6 +83,8 @@ public class GameManagerMap : MonoBehaviour
     {
         OnClearMap += ClearMap;
         Instance.CharacterVisibility.OnVisibilityUpdate += UpdateEnemyOutlines;
+
+        _secondsTimerTurnCharacter = ConfigurationManager.Instance.GlobalDataJson.secondsTimerTurnCharacter;
     }
 
     public GameObject CreatePlatformMovement(TerritroyReaded item)
@@ -175,7 +178,7 @@ public class GameManagerMap : MonoBehaviour
     public IEnumerator WaitAndFinish(Action onFinish)
     {
         StatusMain.SetStatusWaiting();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(_secondsTimerTurnCharacter);
         onFinish();
     }
 

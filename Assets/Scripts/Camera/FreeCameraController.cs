@@ -30,6 +30,13 @@ public class FreeCameraController : MonoBehaviour
     {
         _camera = GetComponent<Camera>();
         _targetRotation = transform.rotation;
+
+        _speed = ConfigurationManager.Instance.GlobalDataJson.cameraSpeed;
+        _speedRotation = ConfigurationManager.Instance.GlobalDataJson.cameraSpeedRotation;
+        _speedZoom = ConfigurationManager.Instance.GlobalDataJson.cameraSpeedZoom;
+        _zoomMin = ConfigurationManager.Instance.GlobalDataJson.cameraZoomMin;
+        _zoomMax = ConfigurationManager.Instance.GlobalDataJson.cameraZoomMax;
+        
     }
 
     private void Update()
