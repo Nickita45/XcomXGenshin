@@ -70,7 +70,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/[Aa]ssets/[Ss]treamingAssets/logs/*
+/[Aa]ssets/[Ss]treamingAssets/logs.meta
 
 # Temporary package asset for grass
 /[Aa]ssets/IL3DN/*
 /[Aa]ssets/IL3DN.meta
+

@@ -75,7 +75,7 @@ public class UIConfigInput : MonoBehaviour
             switch (propertyType.ToString())
             {
                 case "System.Int32":
-                    inputFieldComponent.contentType = TMP_InputField.ContentType.Alphanumeric;
+                    inputFieldComponent.contentType = TMP_InputField.ContentType.IntegerNumber;
                     break;
                 case "System.Single":
                     inputFieldComponent.contentType = TMP_InputField.ContentType.DecimalNumber;
