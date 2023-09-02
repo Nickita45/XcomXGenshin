@@ -15,6 +15,7 @@
     "cameraZoomMax": 20.8,
     "secondsEndTurn": 3.0,
     "secondsTimerTurnCharacter": 2.0,
+  
     "typeGun": [
         {
             "name": "AssultRifle",

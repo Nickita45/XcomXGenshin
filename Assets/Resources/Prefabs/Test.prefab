@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6576560327185935536}
   - component: {fileID: 5351659985839903113}
   - component: {fileID: 7266211030117088}
+  - component: {fileID: 7332246529202951763}
   m_Layer: 0
   m_Name: Test
   m_TagString: PanelMovement
@@ -97,3 +98,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7332246529202951763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367235445393243085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a42943422992f2246a85c450fa12a9e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usualMat: {fileID: 2100000, guid: 4157de2dac1bc774da858d720f2f6d6e, type: 2}
+  chargeMat: {fileID: 2100000, guid: 0288283fea5d61b45b7c91d281fd0e3b, type: 2}

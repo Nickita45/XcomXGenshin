@@ -15,6 +15,7 @@ public class EnemyPanel : MonoBehaviour
     public GameObject EnemyObject => _icons[_selectedIndex.Value].Enemy;
     public GameObject CanvasEnemyObject => EnemyObject.GetComponent<EnemyCanvasController>().CanvasToMove;
     public EnemyCanvasController EnemyCanvasController => EnemyObject.GetComponent<EnemyCanvasController>();
+    public EnemyInfo EnemyInfo => EnemyObject.GetComponent<EnemyInfo>();
     public int SelectedEnemyProcent => _icons[_selectedIndex.Value].Procent;
 
     [SerializeField]

@@ -23,16 +23,11 @@ public class CharacterInfo : MonoBehaviour
     private GameObject[] _shelterSize;//on indexes SidesShelter in ShelterDetecter
     public GameObject this[int index] => _shelterSize[index];
 
-    [Header("Characters Paramenters")]
-    [SerializeField]
-    private int _basicAimCharacter = 90;
-
     [Header("Other")]
     [SerializeField]
     private GameObject[] _gunGameObjects;
     [SerializeField]
     private GameObject _gunPrefab;
-    public int BasicAimCharacter => _basicAimCharacter;
 
     private bool _selected;
 
@@ -55,8 +50,19 @@ public class CharacterInfo : MonoBehaviour
     public CharacterCanvasController CanvasController { get; set; }
     public GameObject GunPrefab => _gunPrefab;
 
+
+    //Config atributes
+    public int Index { get; set; }
+    public string NameCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterName;
+    public float SpeedCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterSpeed;
+    public int MoveDistanceCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterMoveDistance;
+    public float VisibilityCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterVisionDistance;
+    public int BaseAimCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterBaseAim;
+    public int MaxHealthCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterBaseHealth;
+
     private void Start()
     {
+        Index = -1;
         _selectItem.SetActive(false);
         _mover.SetActive(false);
         _basicMaterial = _selectItem.GetComponent<MeshRenderer>().material;
@@ -79,9 +85,9 @@ public class CharacterInfo : MonoBehaviour
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
         GameManagerMap.Instance.TurnController.CharacterBegining += BeginOfTurn;
 
-        //Config
-        _basicAimCharacter = ConfigurationManager.Instance.CharactersData.characters[0].characterBaseAim;
     }
+
+    public void OnIndexSet() => CanvasController.SetStartHealth(MaxHealthCharacter);
 
     private void BeginOfTurn() => CountActions = 2;
 

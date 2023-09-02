@@ -11,18 +11,18 @@ public class CharacterVisibility : MonoBehaviour
     private readonly HashSet<GameObject> _visibleEnemies = new();
     public HashSet<GameObject> VisibleEnemies => _visibleEnemies;
 
-    [SerializeField]
-    private float _maxVisionDistance = 10.0f;
+    //[SerializeField]
+   // private float _maxVisionDistance = 10.0f;
 
     public Action<HashSet<GameObject>> OnVisibilityUpdate;
 
-    public float MaxVisionDistance { get => _maxVisionDistance; set => _maxVisionDistance = value; }
+    //public float MaxVisionDistance { get => _maxVisionDistance; set => _maxVisionDistance = value; }
 
     // Start is called before the first frame update
     void Start()
     {
         //Config
-        _maxVisionDistance = ConfigurationManager.Instance.CharactersData.characters[0].characterVisionDistance;
+        //_maxVisionDistance = ConfigurationManager.Instance.CharactersData.characters[0].characterVisionDistance;
     }
 
     // Updates the set of enemies visible by the selected character
@@ -38,7 +38,7 @@ public class CharacterVisibility : MonoBehaviour
 
             foreach (TerritoryInfo enemy in GameManagerMap.Instance.Map.Enemy
                 .Select(obj => obj.GetComponent<TerritoryInfo>())
-                .Where(e => Vector3.Distance(e.transform.position, character.transform.position) < _maxVisionDistance)
+                .Where(e => Vector3.Distance(e.transform.position, character.transform.position) < character.VisibilityCharacter)
                 .Where(e => IsEnemyVisible(character, e)))
             {
                 // Add visible enemies to set

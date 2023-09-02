@@ -29,6 +29,15 @@ public class TurnController : MonoBehaviour
         menuController.SetPanelEnemy(false);
         _characters.AddRange(FindObjectsOfType<CharacterInfo>());
 
+        if (_characters.First().Index == -1)
+        {
+            for (int i = 0; i < _characters.Count; i++)
+            {
+                _characters[i].Index = i;
+                _characters[i].OnIndexSet();
+            }
+        } 
+
         IteratorPlusOne();
     }
 

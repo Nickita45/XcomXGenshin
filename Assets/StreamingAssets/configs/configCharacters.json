@@ -3,18 +3,26 @@
         {
             "characterName": "Vasya",
             "characterSpeed": 5.0,
-            "characterMoveDistance": 8,
+            "characterMoveDistance": 4,
             "characterVisionDistance": 10.0,
             "characterBaseAim": 50,
             "characterBaseHealth": 5
         },
         {
-            "characterName": "Mykata",
-            "characterSpeed": 5.0,
-            "characterMoveDistance": 5,
-            "characterVisionDistance": 10.0,
-            "characterBaseAim": 55,
-            "characterBaseHealth": 6
+          "characterName": "Mykata",
+          "characterSpeed": 5.0,
+          "characterMoveDistance": 5,
+          "characterVisionDistance": 10.0,
+          "characterBaseAim": 55,
+          "characterBaseHealth": 6
+        },
+        {
+          "characterName": "Dmitrii Vitechin",
+          "characterSpeed": 7.0,
+          "characterMoveDistance": 3,
+          "characterVisionDistance": 12.0,
+          "characterBaseAim": 70,
+          "characterBaseHealth": 8
         }
     ]
 }
