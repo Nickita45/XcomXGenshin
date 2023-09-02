@@ -69,7 +69,7 @@ public class StatusMain : MonoBehaviour
 
     private void Update() //for debug only
     {
-      //  Debug.Log(string.Join(",", GameManagerMap.Instance.StatusMain.ActualPermissions));
+       // Debug.Log(string.Join(",", GameManagerMap.Instance.StatusMain.ActualPermissions));
     }
 }
 

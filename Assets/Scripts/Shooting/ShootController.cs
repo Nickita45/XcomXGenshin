@@ -34,11 +34,16 @@ public class ShootController : MonoBehaviour
         }
 
         if (randomGenerate > procent)
+        {
             StartCoroutine(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelMiss, 4));
+        }
         else
-            StartCoroutine(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelHit(
-                UnityEngine.Random.Range(ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].minHitValue, ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].maxHitValue + 1)), 4));
+        {
+            int dmg = UnityEngine.Random.Range(ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].minHitValue, ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].maxHitValue + 1);
+            StartCoroutine(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelHit(dmg), 4));
+            GameManagerMap.Instance.EnemyPanel.EnemyInfo.MakeHit(dmg);
 
+        }
         yield return new WaitForSeconds(ConfigurationManager.Instance.GlobalDataJson.timeAfterShooting);
         onFinish();
     }

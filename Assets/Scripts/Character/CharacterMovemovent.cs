@@ -10,12 +10,6 @@ public class CharacterMovemovent : MonoBehaviour
     public static readonly Vector3 BIGVECTOR = new(int.MaxValue, int.MaxValue, int.MaxValue);
     public static readonly Vector3 POSITIONFORSPAWN = new(0, 0.5f, 0);
 
-    [Header("Consts Test")]
-    [SerializeField]
-    private int _countMove = 5;
-    [SerializeField]
-    private float _speed = 1f;
-
     [Header("Script Objects")]
 
     [SerializeField]
@@ -26,9 +20,6 @@ public class CharacterMovemovent : MonoBehaviour
     private (TerritroyReaded aktualTerritoryReaded, List<Vector3> path) _aktualTerritory;
 
     private Dictionary<TerritroyReaded, TerritroyReaded> _objectsCalculated; //orig, previous
-
-    public int CountMoveCharacter { get => _countMove; set => _countMove = value; }
-    public float SpeedCharacter { get => _speed; set => _speed = value; }
 
     public CharacterInfo SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
 
@@ -47,10 +38,6 @@ public class CharacterMovemovent : MonoBehaviour
 
         OnEndMoveToNewTerritory += DisableToBasic;
         OnSelectNewTerritory += SelectNewTerritory;
-
-        //Config
-        _speed = ConfigurationManager.Instance.CharactersData.characters[0].characterSpeed;
-        _countMove = ConfigurationManager.Instance.CharactersData.characters[0].characterMoveDistance;
     }
     private void Update()
     {
@@ -102,7 +89,6 @@ public class CharacterMovemovent : MonoBehaviour
 
     public void CharacterSelect(CharacterInfo character)
     {
-        GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
 
         _lineRenderer.gameObject.SetActive(true);
 
@@ -111,11 +97,14 @@ public class CharacterMovemovent : MonoBehaviour
             _selectedCharacter.OnDeselected();//deselect other chracters
         }
         _selectedCharacter = character;
-        _objectsCalculated = CalculateAllPossible(_countMove); //algoritmus calculate all territories that player can move
+        _objectsCalculated = CalculateAllPossible(character.MoveDistanceCharacter); //algoritmus calculate all territories that player can move
 
         AirPlatformsSet(true);
 
         GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+
+        GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
+
     }
 
     public void CharacterDeselect()
@@ -137,6 +126,9 @@ public class CharacterMovemovent : MonoBehaviour
         foreach (var item in _objectsCalculated.Keys)
         {
             GameManagerMap.Instance.Map.GetAirPlatform(item)?.SetActive(result);
+            
+            //if(!result)
+             //   GameManagerMap.Instance.Map.GetAirPlatform(item).GetComponent<PlateMoving>().SetCharge(result);
         }
     }
 
@@ -170,7 +162,12 @@ public class CharacterMovemovent : MonoBehaviour
 
         character.OnDeselected();
 
-        character.CountActions -= 1;
+        if (GameManagerMap.Instance.Map.GetAirPlatform(newTerritory).GetComponent<PlateMoving>().IsCharge)
+            character.CountActions -= 2;
+        else
+            character.CountActions -= 1;
+
+
         if (character.CountActions > 0)
         {
             character.OnSelected(character);
@@ -192,7 +189,7 @@ public class CharacterMovemovent : MonoBehaviour
             while (Vector3.Distance(_selectedCharacter.gameObject.transform.localPosition, target) > 0.1f)
             {
                 _selectedCharacter.GunPrefab.transform.LookAt(target + GameManagerMap.Instance.MainParent.transform.position);
-                elapsedTime = Time.deltaTime * _speed;
+                elapsedTime = Time.deltaTime * _selectedCharacter.SpeedCharacter;
                 _selectedCharacter.gameObject.transform.localPosition = Vector3.MoveTowards(_selectedCharacter.gameObject.transform.localPosition, target, elapsedTime);
                 yield return null;
             }
@@ -419,7 +416,13 @@ public class CharacterMovemovent : MonoBehaviour
         nextCalculated.Push((_selectedCharacter.ActualTerritory, null));//first element
         HashSet<TerritroyReaded> already = new(); //save all territries that we dont need to detect
 
-        HashSet<TerritroyReaded> territoriesBan = new();
+        int startValueMove = 0;
+        if (_selectedCharacter.CountActions > 1)
+        {
+            startValueMove = countMove;
+            countMove *= 2;
+        }
+
         for (int i = 0; i <= countMove; i++)
         {
             int calcs = 0;
@@ -444,12 +447,16 @@ public class CharacterMovemovent : MonoBehaviour
                             {
                                 objectsCalculated.Remove(orig);
                                 objectsCalculated.Add(orig, previus);
+
+                                GameManagerMap.Instance.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetCharge(i > startValueMove);
                             }
                         }
                     }
                     else
                     {
                         objectsCalculated.Add(orig, previus);
+
+                        GameManagerMap.Instance.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetCharge(i > startValueMove);
                     }
                 }
 
@@ -506,7 +513,7 @@ public class CharacterMovemovent : MonoBehaviour
             {
                 SelectedCharacter.SelectChanges();
                 _lineRenderer.gameObject.SetActive(true);
-                _objectsCalculated = CalculateAllPossible(_countMove);
+                _objectsCalculated = CalculateAllPossible(SelectedCharacter.MoveDistanceCharacter);
                 SelectedCharacter.MoverActive(true);
                 AirPlatformsSet(true);
             }

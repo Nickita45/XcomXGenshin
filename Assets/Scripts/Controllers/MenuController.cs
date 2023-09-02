@@ -19,13 +19,17 @@ public class MenuController : MonoBehaviour
     private TMP_Dropdown _dropDownGun;
 
     [SerializeField]
-    private GameObject _panelEnemyTurn;
+    private GameObject _panelEnemyTurn, _panelCharaterName;
+
+    [SerializeField]
+    private TextMeshProUGUI _textCharacter;
 
     private void Start()
     {
         GameManagerMap.Instance.Gun = GunType.Automatic;
+        GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
 
-        _inputCharacterMove.text = GameManagerMap.Instance.CharacterMovemovent.CountMoveCharacter.ToString();
+        /*_inputCharacterMove.text = GameManagerMap.Instance.CharacterMovemovent.CountMoveCharacter.ToString();
         _inputCharacterSpeed.text = GameManagerMap.Instance.CharacterMovemovent.SpeedCharacter.ToString();
         _inputVisibilityDistance.text = GameManagerMap.Instance.CharacterVisibility.MaxVisionDistance.ToString();
 
@@ -46,6 +50,7 @@ public class MenuController : MonoBehaviour
             float.TryParse(n, out float result);
             GameManagerMap.Instance.CharacterVisibility.MaxVisionDistance = result;
         });
+        */
 
         var gunTypeOptions = new List<string>();
         foreach (GunType gunType in Enum.GetValues(typeof(GunType)))
@@ -91,5 +96,16 @@ public class MenuController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         GameManagerMap.Instance.TurnController.BeginOfTheTurn();
+    }
+
+    private void OnStatusChange(HashSet<Permissions> permissions)
+    {
+        if ((permissions.Contains(Permissions.SelectCharacter) || permissions.Contains(Permissions.SelectEnemy)) && GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null)
+        {
+            _textCharacter.text = GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.NameCharacter;
+            _panelCharaterName.gameObject.SetActive(true);
+        }
+        else
+            _panelCharaterName.gameObject.SetActive(false);
     }
 }

@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyCanvasController : MonoBehaviour //change for Enemy and Character
+public class EnemyCanvasController : MonoBehaviour //change for Enemy and Character, maybe can be renamed
 {
     [Header("Basic")]
     [SerializeField]
@@ -13,6 +13,15 @@ public class EnemyCanvasController : MonoBehaviour //change for Enemy and Charac
 
     [SerializeField]
     private TextMeshProUGUI textHit;
+
+    [SerializeField]
+    private GameObject _panelHealthBar, _hpPrefab;
+
+    [SerializeField]
+    private List<GameObject> _listDidntRotateObjects; //need to be HashSet
+    private HashSet<GameObject> _objectCantBeRotated;
+
+
 
     protected Camera _actualCamera;
 
@@ -34,11 +43,12 @@ public class EnemyCanvasController : MonoBehaviour //change for Enemy and Charac
         _freeCamera = FindObjectOfType<FreeCameraController>().gameObject.GetComponent<Camera>();
         _canvasToMove = transform.GetComponentInChildren<Canvas>().gameObject;
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
-        
+
+        _objectCantBeRotated = new HashSet<GameObject>(_listDidntRotateObjects);
+
         _actualCamera = _freeCamera;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (_actualCamera == _fixedCamera)
@@ -65,14 +75,36 @@ public class EnemyCanvasController : MonoBehaviour //change for Enemy and Charac
 
 
             foreach (Transform child in _canvasToMove.transform)
-                child.localEulerAngles = new Vector3(0, 180, 0);
+            {
+                if(!_objectCantBeRotated.Contains(child.gameObject))
+                    child.localEulerAngles = new Vector3(0, 180, 0);
+            }
         }
         else
         {
+            _canvasToMove.gameObject.SetActive(true);
+            
             _actualCamera = _freeCamera;
 
             foreach (Transform child in _canvasToMove.transform)
-                child.localEulerAngles = new Vector3(0, 0, 0);
+            {
+                if (!_objectCantBeRotated.Contains(child.gameObject))
+                    child.localEulerAngles = new Vector3(0, 0, 0);
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        GameManagerMap.Instance.StatusMain.OnStatusChange -= OnStatusChange;
+    }
+
+    public void DisableAll()
+    {
+        foreach (Transform child in _canvasToMove.transform)
+        {
+            if (child.gameObject != _panelHit && child.gameObject != _panelMiss)
+                child.gameObject.SetActive(false);
         }
     }
 
@@ -82,6 +114,21 @@ public class EnemyCanvasController : MonoBehaviour //change for Enemy and Charac
         yield return new WaitForSeconds(timerBeforeDisable);
         yield return StartCoroutine(PanelAnimation(panel: panel, speed: -0.5f, toNumberEverything: 0, toNumberPanel: 0, timeFinish: 2));
         panel.SetActive(false);
+    }
+
+    public void SetStartHealth(int count)
+    {
+        int childCount = _panelHealthBar.transform.childCount;
+        if (count > childCount)
+        {
+            for (int i = 0; i < count - childCount; i++)
+                Instantiate(_hpPrefab, _panelHealthBar.transform);
+        }
+        else if (count < childCount)
+        {
+            for (int i = 0; i < childCount - count; i++)
+                Destroy(_panelHealthBar.transform.GetChild(childCount - i - 1).gameObject);
+        }
     }
 
 
