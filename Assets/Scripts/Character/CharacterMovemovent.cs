@@ -126,9 +126,9 @@ public class CharacterMovemovent : MonoBehaviour
         foreach (var item in _objectsCalculated.Keys)
         {
             GameManagerMap.Instance.Map.GetAirPlatform(item)?.SetActive(result);
-            
+
             //if(!result)
-             //   GameManagerMap.Instance.Map.GetAirPlatform(item).GetComponent<PlateMoving>().SetCharge(result);
+            //   GameManagerMap.Instance.Map.GetAirPlatform(item).GetComponent<PlateMoving>().SetCharge(result);
         }
     }
 
@@ -444,7 +444,7 @@ public class CharacterMovemovent : MonoBehaviour
             {
                 (TerritroyReaded orig, TerritroyReaded previus) = nextCalculated.Pop();
 
-                if ((orig.TerritoryInfo != TerritoryType.Character || orig == _selectedCharacter.ActualTerritory)  && 
+                if ((orig.TerritoryInfo != TerritoryType.Character || orig == _selectedCharacter.ActualTerritory) &&
                     orig.TerritoryInfo != TerritoryType.ShelterGround && orig.TerritoryInfo != TerritoryType.Enemy) // we cant move on shelterground element
                 {
                     if (objectsCalculated.ContainsKey(orig))
