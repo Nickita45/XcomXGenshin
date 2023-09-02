@@ -9,7 +9,7 @@ public class ConfigurationManager : MonoBehaviour
     private readonly string PATH_CHARACTERS = Application.streamingAssetsPath + "/configs/configCharacters.json"; //ask aplication for folder than didnt build
 
 
-    public static ConfigurationManager _instance;
+    private static ConfigurationManager _instance;
     public static ConfigurationManager Instance => _instance;
 
     private CharactersData _charactersData;
