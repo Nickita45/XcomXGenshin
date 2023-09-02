@@ -17,9 +17,7 @@ public class GunModel : MonoBehaviour
         Vector3 direction = _leftHand.transform.position - _rightHand.transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
 
-        // Apply damping factor for smooth movement
-        float smoothness = 0.1f;
-        transform.position = Vector3.Lerp(transform.position, position, smoothness);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, smoothness);
+        transform.position = position;
+        transform.rotation = rotation;
     }
 }

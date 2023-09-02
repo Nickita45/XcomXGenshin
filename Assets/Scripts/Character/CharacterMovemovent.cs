@@ -146,11 +146,13 @@ public class CharacterMovemovent : MonoBehaviour
         _isMoving = true;
         OnStartMove();
 
-        SelectedCharacter.Armature.GetComponent<Animator>().Play("run_forward");
+        yield return SelectedCharacter.Animation.CrouchedToStanding();
+        SelectedCharacter.Animation.RunForward();
 
         yield return StartCoroutine(CoroutineMove(points)); //start movements
 
-        SelectedCharacter.Armature.GetComponent<Animator>().Play("idle_crouched");
+        yield return SelectedCharacter.Animation.StandingToCrouched();
+
         _isMoving = false;
         GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
 
@@ -195,7 +197,7 @@ public class CharacterMovemovent : MonoBehaviour
             directionToTarget.y = 0;
 
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
-            _selectedCharacter.Armature.transform.rotation = targetRotation;
+            _selectedCharacter.Animation.transform.rotation = targetRotation;
 
             while (Vector3.Distance(_selectedCharacter.gameObject.transform.localPosition, target) > 0.1f)
             {

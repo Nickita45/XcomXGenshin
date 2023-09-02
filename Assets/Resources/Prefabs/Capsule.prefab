@@ -2705,6 +2705,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1618183338579747374}
   - component: {fileID: 4653588375440046164}
+  - component: {fileID: 7055965399571928160}
   m_Layer: 0
   m_Name: Barbara
   m_TagString: Untagged
@@ -2755,6 +2756,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7055965399571928160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107439988016691348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc13a64798af9fe429cd9c9ec070b749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 4653588375440046164}
 --- !u!1 &2146641540786631140
 GameObject:
   m_ObjectHideFlags: 0
@@ -5501,7 +5515,7 @@ MonoBehaviour:
   - {fileID: 1883848245566334000}
   - {fileID: 6968720043355437035}
   _gunPrefab: {fileID: 4332863957969416643}
-  _armature: {fileID: 2107439988016691348}
+  _animation: {fileID: 7055965399571928160}
 --- !u!114 &3727150175493353867
 MonoBehaviour:
   m_ObjectHideFlags: 0
