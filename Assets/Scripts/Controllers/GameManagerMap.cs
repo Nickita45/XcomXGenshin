@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class GameManagerMap : MonoBehaviour
 {
@@ -56,6 +54,7 @@ public class GameManagerMap : MonoBehaviour
     public EnemyPanel EnemyPanel => _enemyPanel;
     public GameObject MainParent => _mainParent;
     public GameObject GenereteTerritoryMove => _genereteTerritoryMove;
+    public UIIcons UIIcons => _uiIcons;
 
     public MatrixMap Map { get => _map; set => _map = value; }
 
@@ -65,9 +64,13 @@ public class GameManagerMap : MonoBehaviour
     [SerializeField]
     private EnemyPanel _enemyPanel;
 
-    public GunType Gun { get; set; } //in feature we need to move it to character
-
+    public GunType Gun { get; set; } //in future we need to move it to character
+    
+    [Header("UI icons")]
+    [SerializeField]
+    private UIIcons _uiIcons;
     private float _secondsTimerTurnCharacter = 2f;
+    
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -186,6 +189,7 @@ public class GameManagerMap : MonoBehaviour
     {
         Debug.Log("Overwatch");
         onFinish += () => { Instance.CharacterMovemovent.SelectedCharacter.CountActions -= 2; };
+        StartCoroutine(Instance.CharacterMovemovent.SelectedCharacter.CanvasController.PanelShow(Instance.CharacterMovemovent.SelectedCharacter.CanvasController.PanelActionInfo("Overwatch"), 4));
         StartCoroutine(WaitAndFinish(onFinish));
     }
 
@@ -193,6 +197,7 @@ public class GameManagerMap : MonoBehaviour
     {
         Debug.Log("Hunker Down");
         onFinish += () => { Instance.CharacterMovemovent.SelectedCharacter.CountActions -= 2; };
+        StartCoroutine(Instance.CharacterMovemovent.SelectedCharacter.CanvasController.PanelShow(Instance.CharacterMovemovent.SelectedCharacter.CanvasController.PanelActionInfo("Hunker Down"), 4));
         StartCoroutine(WaitAndFinish(onFinish));
     }
 }

@@ -7,15 +7,6 @@ using System;
 public class MenuController : MonoBehaviour
 {
     [SerializeField]
-    private TMP_InputField _inputCharacterSpeed;
-
-    [SerializeField]
-    private TMP_InputField _inputCharacterMove;
-
-    [SerializeField]
-    private TMP_InputField _inputVisibilityDistance;
-
-    [SerializeField]
     private TMP_Dropdown _dropDownGun;
 
     [SerializeField]
