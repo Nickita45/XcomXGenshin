@@ -3,18 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIIcons : MonoBehaviour
 {
-    [SerializeField]
-    private Sprite[] _sprites;
-    public Dictionary<string, Sprite> dictSprites = new();
-    void Start()
+    [Serializable]
+    public class IconObject{
+        public string name;
+        public Sprite sprite;
+    };
+    public List<IconObject> iconObjects;
+
+    public IconObject GetIconByName(string iconName)
     {
-        foreach(Sprite sprite in _sprites)
-        {
-            //Add parser in future
-            dictSprites.Add(sprite.name,sprite);
-        }
-    }
+        return iconObjects.FirstOrDefault(icon => icon.name == iconName);
+    } 
 }

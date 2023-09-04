@@ -7742,9 +7742,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbdde7672f03ca4e83ab5deb892469b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sprites:
-  - {fileID: 21300000, guid: 12d5c9e0292939741b3bd392118e0cfe, type: 3}
-  - {fileID: 21300000, guid: 441a3dfaa37970041bcbe08062115a53, type: 3}
+  iconObjects:
+  - name: Overwatch
+    sprite: {fileID: 21300000, guid: 12d5c9e0292939741b3bd392118e0cfe, type: 3}
+  - name: Hunker Down
+    sprite: {fileID: 21300000, guid: 441a3dfaa37970041bcbe08062115a53, type: 3}
 --- !u!1 &1775152536
 GameObject:
   m_ObjectHideFlags: 0

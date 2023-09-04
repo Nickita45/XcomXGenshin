@@ -41,7 +41,7 @@ public class EnemyCanvasController : MonoBehaviour //change for Enemy and Charac
     public GameObject PanelActionInfo(string action)
     {
         _textAction.text = action;
-        _actionIconPopUp.sprite = GameManagerMap.Instance.UIIcons.dictSprites[action];
+        _actionIconPopUp.sprite = GameManagerMap.Instance.UIIcons.GetIconByName(action).sprite;
         return _panelAction;
     }
 
