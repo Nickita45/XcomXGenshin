@@ -28,7 +28,6 @@ public class CharacterInfo : MonoBehaviour
     private GameObject[] _gunGameObjects;
     [SerializeField]
     private GameObject _gunPrefab;
-    public int BasicAimCharacter => _basicAimCharacter;
 
     private bool _selected;
 
@@ -38,13 +37,10 @@ public class CharacterInfo : MonoBehaviour
     private int _countActions;
     public int CountActions
     {
-    public int CountActions
-    {
         get => _countActions;
         set
         {
-            set
-        {
+            {
                 _countActions = value;
 
                 CanvasController.SetCountActons(value);
@@ -61,16 +57,6 @@ public class CharacterInfo : MonoBehaviour
     [SerializeField]
     private CharacterAnimation _animation;
     public CharacterAnimation Animation => _animation;
-
-
-    //Config atributes
-    public int Index { get; set; }
-    public string NameCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterName;
-    public float SpeedCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterSpeed;
-    public int MoveDistanceCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterMoveDistance;
-    public float VisibilityCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterVisionDistance;
-    public int BaseAimCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterBaseAim;
-    public int MaxHealthCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterBaseHealth;
 
 
     //Config atributes

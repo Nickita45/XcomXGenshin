@@ -10,15 +10,26 @@ public class ShelterDetecter : MonoBehaviour
 {
     private void Start()
     {
-        GameManagerMap.Instance.CharacterMovemovent.OnSelectNewTerritory += DetectShelters;
-        GameManagerMap.Instance.CharacterMovemovent.OnEndMoveToNewTerritory += DisableAll;
+        GameManagerMap.Instance.CharacterMovemovent.OnSelectNewTerritory += ShowHideShelters;
+        GameManagerMap.Instance.CharacterMovemovent.OnEndMoveToNewTerritory += DisableAllShelters;
     }
 
-    public void DetectShelters((TerritroyReaded aktualTerritoryReaded, List<Vector3> path) territory, CharacterInfo character)
+    private void ShowHideShelters((TerritroyReaded, List<Vector3>) territory, CharacterInfo character)
     {
-        SidesShelter[] sides = { SidesShelter.Left, SidesShelter.Right, SidesShelter.Front, SidesShelter.Bottom };
+        ShelterType[] shelters = DetectShelters(territory, character);
+        SetActiveShelters(shelters, character);
+    }
 
-        foreach (SidesShelter side in sides)
+    private void DisableAllShelters(TerritroyReaded territory, CharacterInfo character)
+    {
+        SetActiveShelters(NO_SHELTERS, character);
+    }
+
+    public ShelterType[] DetectShelters((TerritroyReaded aktualTerritoryReaded, List<Vector3> path) territory, CharacterInfo character)
+    {
+        ShelterType[] shelters = NO_SHELTERS;
+
+        foreach (SidesShelter side in SIDES)
         {
             HashSet<string> indexSet = null;
 
@@ -63,34 +74,39 @@ public class ShelterDetecter : MonoBehaviour
                     }
                 }
 
-                // Call the DetecterAndSeter method with the corresponding ShelterType
-                DetecterAndSeter(side, shelterType, character);
-            }
-            else
-            {
-                // If the index set is empty, call DetecterAndSeter with ShelterType.Nope
-                DetecterAndSeter(side, ShelterType.Nope, character);
+                shelters[(int)side] = shelterType;
             }
         }
+
+        return shelters;
     }
-    public void DisableAll(TerritroyReaded territory, CharacterInfo character)
+
+    private void SetActiveShelters(ShelterType[] shelters, CharacterInfo character)
     {
-        foreach (SidesShelter side in Enum.GetValues(typeof(SidesShelter)))
+        foreach (SidesShelter side in SIDES)
         {
-            DetecterAndSeter(side, ShelterType.Nope, character);
+            //0 is full, 1 is semi
+            character[(int)side].transform.GetChild(0).gameObject.SetActive(shelters[(int)side] == ShelterType.Full);
+            character[(int)side].transform.GetChild(1).gameObject.SetActive(shelters[(int)side] == ShelterType.Semi);
         }
     }
 
-    private void DetecterAndSeter(SidesShelter side, ShelterType type, CharacterInfo character)
+    enum SidesShelter
     {
-        //0 is full, 1 is semi
-        character[(int)side].transform.GetChild(0).gameObject.SetActive(type == ShelterType.Full);
-        character[(int)side].transform.GetChild(1).gameObject.SetActive(type == ShelterType.Semi);
-
+        Left = 0, Right = 1, Front = 2, Bottom = 3
     }
-}
 
-enum SidesShelter
-{
-    Left = 0, Right = 1, Front = 2, Bottom = 3
+    private static readonly SidesShelter[] SIDES = {
+        SidesShelter.Left,
+        SidesShelter.Right,
+        SidesShelter.Front,
+        SidesShelter.Bottom
+    };
+
+    private static readonly ShelterType[] NO_SHELTERS = {
+        ShelterType.Nope,
+        ShelterType.Nope,
+        ShelterType.Nope,
+        ShelterType.Nope
+    };
 }
