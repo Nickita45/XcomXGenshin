@@ -3363,7 +3363,7 @@ MonoBehaviour:
   _panelMiss: {fileID: 5517708447447025122}
   _panelHit: {fileID: 4379593412204156433}
   _panelAction: {fileID: 5416964318787518357}
-  _textHit: {fileID: 0}
+  _textHit: {fileID: 6426277035917018635}
   _textAction: {fileID: 3322888814025581795}
   _panelHealthBar: {fileID: 7215851533263954496}
   _hpPrefab: {fileID: 1747020183082109769, guid: adc79686ce0a5d448ba0da3abd04d877, type: 3}
