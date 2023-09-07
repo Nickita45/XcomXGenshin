@@ -36,19 +36,19 @@ public class TurnController : MonoBehaviour
                 _characters[i].Index = i;
                 _characters[i].OnIndexSet();
             }
-        } 
+        }
 
         IteratorPlusOne();
     }
 
     public void CharacterEndHisTurn(CharacterInfo character)
     {
-        if (character == GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter)
+        if (character == GameManagerMap.Instance.CharacterMovement.SelectedCharacter)
             character.OnDeselected();
 
         if (_characters.Count > 1)
         {
-             IteratorPlusOne();
+            IteratorPlusOne();
         }
 
         _characters.Remove(character);
@@ -74,11 +74,11 @@ public class TurnController : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab) && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter) &&
-            GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null && _characters.Count > 1) 
+        if (Input.GetKeyDown(KeyCode.Tab) && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter) &&
+            GameManagerMap.Instance.CharacterMovement.SelectedCharacter != null && _characters.Count > 1)
         {
             IteratorPlusOne();
-        }   
+        }
     }
 
     private void IteratorPlusOne()

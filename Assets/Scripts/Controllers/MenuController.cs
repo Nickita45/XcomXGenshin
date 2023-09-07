@@ -75,7 +75,7 @@ public class MenuController : MonoBehaviour
             icon.SetPercent();
         }
 
-        GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter?.SetGunByIndex(selectedIndex);
+        GameManagerMap.Instance.CharacterMovement.SelectedCharacter?.SetGunByIndex(selectedIndex);
     }
 
     public void SetPanelEnemy(bool set)
@@ -100,9 +100,9 @@ public class MenuController : MonoBehaviour
 
     private void OnStatusChange(HashSet<Permissions> permissions)
     {
-        if ((permissions.Contains(Permissions.SelectCharacter) || permissions.Contains(Permissions.SelectEnemy)) && GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null)
+        if ((permissions.Contains(Permissions.SelectCharacter) || permissions.Contains(Permissions.SelectEnemy)) && GameManagerMap.Instance.CharacterMovement.SelectedCharacter != null)
         {
-            _textCharacter.text = GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.NameCharacter;
+            _textCharacter.text = GameManagerMap.Instance.CharacterMovement.SelectedCharacter.NameCharacter;
             _panelCharaterName.gameObject.SetActive(true);
         }
         else

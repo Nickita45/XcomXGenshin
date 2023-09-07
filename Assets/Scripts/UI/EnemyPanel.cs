@@ -16,7 +16,7 @@ public class EnemyPanel : MonoBehaviour
     public GameObject CanvasEnemyObject => EnemyObject.GetComponent<EnemyCanvasController>().CanvasToMove;
     public EnemyCanvasController EnemyCanvasController => EnemyObject.GetComponent<EnemyCanvasController>();
     public EnemyInfo EnemyInfo => EnemyObject.GetComponent<EnemyInfo>();
-    public int SelectedEnemyProcent => _icons[_selectedIndex.Value].Procent;
+    public int SelectedEnemyPercent => _icons[_selectedIndex.Value].Percent;
 
     [SerializeField]
     private AbilityPanel _abilityPanel;
@@ -27,7 +27,7 @@ public class EnemyPanel : MonoBehaviour
     void Start()
     {
         GameManagerMap.Instance.OnClearMap += ClearVisibleEnemies;
-        GameManagerMap.Instance.CharacterMovemovent.OnStartMove += ClearVisibleEnemies;
+        GameManagerMap.Instance.CharacterMovement.OnStartMove += ClearVisibleEnemies;
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
 
     }

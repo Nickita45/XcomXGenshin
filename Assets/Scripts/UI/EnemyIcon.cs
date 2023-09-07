@@ -19,7 +19,7 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     [SerializeField]
     private TextMeshProUGUI _textPercent;
 
-    public int Procent { get; set; }
+    public int Percent { get; set; }
 
     void Start()
     {
@@ -72,14 +72,14 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public void SetPercent()
     {
         var resultCaclulations = AimCalculater.CalculateShelterPercent(defender: GameManagerMap.Instance.Map[_enemy.transform.localPosition],
-                                    shooter: GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.ActualTerritory,
+                                    shooter: GameManagerMap.Instance.CharacterMovement.SelectedCharacter.ActualTerritory,
                                     gun: GameManagerMap.Instance.Gun,
-                                    0, GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.BaseAimCharacter);
+                                    0, GameManagerMap.Instance.CharacterMovement.SelectedCharacter.BaseAimCharacter);
 
-        Procent = resultCaclulations.procent;
+        Percent = resultCaclulations.procent;
         _textPercent.text = resultCaclulations.procent.ToString() + "%";
 
-        if (resultCaclulations.status == ShelterType.Nope)
+        if (resultCaclulations.status == ShelterType.None)
             _textPercent.color = Color.yellow;
         else
             _textPercent.color = Color.red;

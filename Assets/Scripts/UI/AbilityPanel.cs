@@ -36,8 +36,8 @@ public class AbilityPanel : MonoBehaviour
         gameObject.SetActive(false);
 
         GameManagerMap.Instance.CharacterVisibility.OnVisibilityUpdate += DisableAbilitiesWithoutTargets;
-        GameManagerMap.Instance.CharacterMovemovent.OnStartMove += DisableAllAbilites;
-        GameManagerMap.Instance.CharacterMovemovent.OnEndMoveToNewTerritory += (territory, info) => UpdateConfirmButton();
+        GameManagerMap.Instance.CharacterMovement.OnStartMove += DisableAllAbilites;
+        GameManagerMap.Instance.CharacterMovement.OnEndMoveToNewTerritory += (territory, info) => UpdateConfirmButton();
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
     }
 

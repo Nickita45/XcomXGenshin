@@ -24,7 +24,6 @@ public class CharacterCanvasController : EnemyCanvasController
             return;
         }
 
-
         if (permissions.Contains(Permissions.SelectEnemy) || permissions.Contains(Permissions.AnimationShooting))
             _canvasToMove.gameObject.SetActive(false);
         else

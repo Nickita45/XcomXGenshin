@@ -9,7 +9,7 @@ public class EnemyClickHandler : MonoBehaviour
     private void Update()
     {
         if (GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.ActionSelect)//(GameManagerMap.Instance.State == GameState.FreeMovement
-            && GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null
+            && GameManagerMap.Instance.CharacterMovement.SelectedCharacter != null
             && Input.GetMouseButtonDown(0))
         {
             Camera camera = Camera.main;

@@ -4,44 +4,79 @@ using UnityEngine;
 
 public class CharacterAnimation : MonoBehaviour
 {
-
     [SerializeField]
+    private RuntimeAnimatorController _animatorController;
+
+    private GameObject _avatar;
+    public GameObject Avatar => _avatar;
+
     private Animator _animator;
 
-    void Start()
+    public void Init(string avatarPath)
     {
-        _animator.SetFloat("Blend", 1f);
+        Object prefab = Resources.Load("Models/" + avatarPath);
+        _avatar = (GameObject)Instantiate(prefab, transform);
+
+        _avatar.transform.localPosition = new(0, -0.88f, 0);
+        _avatar.transform.localScale = new(2f, 2f, 2f);
+
+        _animator = _avatar.GetComponent<Animator>();
+        _animator.runtimeAnimatorController = _animatorController;
+        _animator.applyRootMotion = false;
     }
 
-    public void RunForward()
+    public IEnumerator Run()
     {
-        _animator.Play("run_forward");
+        _animator.SetBool("isRunning", true);
+        yield return null;
     }
 
-    public IEnumerator CrouchedToStanding()
+    public IEnumerator StopRunning()
     {
-        _animator.Play("idle_to_crouched_idle");
-        yield return StartCoroutine(BlendValueChange(0.15f, 1f, 0f));
+        _animator.SetBool("isRunning", false);
+        yield return null;
     }
 
-    public IEnumerator StandingToCrouched()
+    public IEnumerator CrouchRotate(Quaternion target)
     {
-        _animator.Play("idle_to_crouched_idle");
-        yield return StartCoroutine(BlendValueChange(0.15f, 0f, 1f));
-    }
-
-    private IEnumerator BlendValueChange(float duration, float startValue, float endValue)
-    {
-        float elapsedTime = 0f;
-        while (elapsedTime < duration)
+        if (Quaternion.Angle(_avatar.transform.rotation, target) >= 15)
         {
-            float blendValue = Mathf.Lerp(startValue, endValue, elapsedTime / duration);
-            _animator.SetFloat("Blend", blendValue);
+            _animator.SetBool("isRotating", true);
+            yield return new WaitForEndOfFrame();
 
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            yield return StartCoroutine(ObjectHelpers.RotateTransform(_avatar.transform, target, 0.5f));
+
+            _animator.SetBool("isRotating", false);
+            yield return new WaitForEndOfFrame();
+            while (_animator.IsInTransition(0)) yield return null;
         }
+    }
 
-        _animator.SetFloat("Blend", endValue);
+    public IEnumerator Shoot()
+    {
+        _animator.SetBool("isShooting", true);
+        yield return new WaitForEndOfFrame();
+        while (_animator.IsInTransition(0)) yield return null;
+    }
+
+    public IEnumerator StopShooting()
+    {
+        _animator.SetBool("isShooting", false);
+        yield return new WaitForEndOfFrame();
+        while (_animator.IsInTransition(0)) yield return null;
+    }
+
+    public IEnumerator Crouch()
+    {
+        _animator.SetBool("isCrouched", true);
+        yield return new WaitForEndOfFrame();
+        while (_animator.IsInTransition(0)) yield return null;
+    }
+
+    public IEnumerator StopCrouching()
+    {
+        _animator.SetBool("isCrouched", false);
+        yield return new WaitForEndOfFrame();
+        while (_animator.IsInTransition(0)) yield return null;
     }
 }

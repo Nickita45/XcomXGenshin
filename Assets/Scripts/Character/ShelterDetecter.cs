@@ -10,43 +10,44 @@ public class ShelterDetecter : MonoBehaviour
 {
     private void Start()
     {
-        GameManagerMap.Instance.CharacterMovemovent.OnSelectNewTerritory += ShowHideShelters;
-        GameManagerMap.Instance.CharacterMovemovent.OnEndMoveToNewTerritory += DisableAllShelters;
+        GameManagerMap.Instance.CharacterMovement.OnSelectNewTerritory +=
+            (territory, character) => ShowHideShelters(territory.aktualTerritoryReaded, character);
+        GameManagerMap.Instance.CharacterMovement.OnEndMoveToNewTerritory += DisableAllShelters;
     }
 
-    private void ShowHideShelters((TerritroyReaded, List<Vector3>) territory, CharacterInfo character)
+    private void ShowHideShelters(TerritroyReaded territory, CharacterInfo character)
     {
-        ShelterType[] shelters = DetectShelters(territory, character);
+        Dictionary<ShelterSide, ShelterType> shelters = DetectShelters(territory);
         SetActiveShelters(shelters, character);
     }
 
     private void DisableAllShelters(TerritroyReaded territory, CharacterInfo character)
     {
-        SetActiveShelters(NO_SHELTERS, character);
+        SetActiveShelters(ShelterInfo.EMPTY.ToDictionary(), character);
     }
 
-    public ShelterType[] DetectShelters((TerritroyReaded aktualTerritoryReaded, List<Vector3> path) territory, CharacterInfo character)
+    public static Dictionary<ShelterSide, ShelterType> DetectShelters(TerritroyReaded territory)
     {
-        ShelterType[] shelters = NO_SHELTERS;
+        Dictionary<ShelterSide, ShelterType> shelters = ShelterInfo.EMPTY.ToDictionary();
 
-        foreach (SidesShelter side in SIDES)
+        foreach (ShelterSide side in shelters.Keys.ToList())
         {
             HashSet<string> indexSet = null;
 
             // Choose the corresponding index set based on the side
             switch (side)
             {
-                case SidesShelter.Left:
-                    indexSet = territory.aktualTerritoryReaded.IndexLeft;
+                case ShelterSide.Left:
+                    indexSet = territory.IndexLeft;
                     break;
-                case SidesShelter.Right:
-                    indexSet = territory.aktualTerritoryReaded.IndexRight;
+                case ShelterSide.Right:
+                    indexSet = territory.IndexRight;
                     break;
-                case SidesShelter.Front:
-                    indexSet = territory.aktualTerritoryReaded.IndexFront;
+                case ShelterSide.Front:
+                    indexSet = territory.IndexFront;
                     break;
-                case SidesShelter.Bottom:
-                    indexSet = territory.aktualTerritoryReaded.IndexBottom;
+                case ShelterSide.Back:
+                    indexSet = territory.IndexBottom;
                     break;
             }
 
@@ -54,59 +55,37 @@ public class ShelterDetecter : MonoBehaviour
             if (indexSet?.Count > 0)
             {
                 // Access the corresponding ShelterType from the GameManagerMap
-                ShelterType shelterType = ShelterType.Nope;
+                ShelterType shelterType = ShelterType.None;
                 if (GameManagerMap.Instance.Map.ContainsVertexByPox(TerritroyReaded.MakeVectorFromIndex(indexSet.First()), out var territoryReaded))
                 {
-                    switch (side)
-                    {
-                        case SidesShelter.Left:
-                            shelterType = territoryReaded.ShelterType.Right;
-                            break;
-                        case SidesShelter.Right:
-                            shelterType = territoryReaded.ShelterType.Left;
-                            break;
-                        case SidesShelter.Front:
-                            shelterType = territoryReaded.ShelterType.Bottom;
-                            break;
-                        case SidesShelter.Bottom:
-                            shelterType = territoryReaded.ShelterType.Front;
-                            break;
-                    }
+                    shelterType = territoryReaded.ShelterType.ToDictionary()[side];
                 }
 
-                shelters[(int)side] = shelterType;
+                shelters[side] = shelterType;
             }
         }
 
         return shelters;
     }
 
-    private void SetActiveShelters(ShelterType[] shelters, CharacterInfo character)
+    private void SetActiveShelters(Dictionary<ShelterSide, ShelterType> shelters, CharacterInfo character)
     {
-        foreach (SidesShelter side in SIDES)
+        foreach (ShelterSide side in shelters.Keys.ToList())
         {
             //0 is full, 1 is semi
-            character[(int)side].transform.GetChild(0).gameObject.SetActive(shelters[(int)side] == ShelterType.Full);
-            character[(int)side].transform.GetChild(1).gameObject.SetActive(shelters[(int)side] == ShelterType.Semi);
+            character[(int)side].transform.GetChild(0).gameObject.SetActive(shelters[side] == ShelterType.Full);
+            character[(int)side].transform.GetChild(1).gameObject.SetActive(shelters[side] == ShelterType.Semi);
         }
     }
 
-    enum SidesShelter
+    public static Vector3 ShelterSideToDirectionVector(ShelterSide side)
     {
-        Left = 0, Right = 1, Front = 2, Bottom = 3
+        Vector3[] directions = new[] {
+            Vector3.forward,
+            Vector3.back,
+            Vector3.left,
+            Vector3.right
+        };
+        return directions[(int)side];
     }
-
-    private static readonly SidesShelter[] SIDES = {
-        SidesShelter.Left,
-        SidesShelter.Right,
-        SidesShelter.Front,
-        SidesShelter.Bottom
-    };
-
-    private static readonly ShelterType[] NO_SHELTERS = {
-        ShelterType.Nope,
-        ShelterType.Nope,
-        ShelterType.Nope,
-        ShelterType.Nope
-    };
 }

@@ -10,7 +10,7 @@ public class ShootController : MonoBehaviour
     [SerializeField]
     private string _nameBulletSpawner = "BulletSpawner";
 
-    public IEnumerator Shoot(Transform target, GunType actualGun, int procent, Action onFinish)
+    public IEnumerator Shoot(Transform target, GunType actualGun, int procent)
     {
         Transform firePoint = GetComponent<CharacterInfo>().GunPrefab.transform.GetChild((int)GameManagerMap.Instance.Gun).Find(_nameBulletSpawner);
 
@@ -45,7 +45,6 @@ public class ShootController : MonoBehaviour
 
         }
         yield return new WaitForSeconds(ConfigurationManager.Instance.GlobalDataJson.timeAfterShooting);
-        onFinish();
     }
 
     private Vector3 GenereteCordinatesFromResult(bool miss)
