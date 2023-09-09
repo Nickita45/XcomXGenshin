@@ -3,7 +3,12 @@ guid: 37a1ba7d029e0a74fbb69524a63a4ff8
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Area_Ly_Stone_CSPY_Ground_L_01
+    second: {fileID: -670884406973293415, guid: 494d81db557acea479dbb643d1134e1c, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

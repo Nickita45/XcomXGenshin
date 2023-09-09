@@ -3,7 +3,12 @@ guid: b9b54253dc04f09478eeab81dbd0ffd4
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Area_Ly_Stone_CSPY_Full_L_04_Lod0
+    second: {fileID: -670884406973293415, guid: 494d81db557acea479dbb643d1134e1c, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
