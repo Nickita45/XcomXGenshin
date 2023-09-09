@@ -158,7 +158,7 @@ public class ReadingMap : MonoBehaviour
                 newItem = _matrixMap.AddVertex(new TerritroyReaded(_objectDetect.transform)
                 {
                     TerritoryInfo = TerritoryType.Air,
-                    ShelterType = new ShelterInfo(),
+                    ShelterType = ShelterInfo.EMPTY,
                 }, _matrixMap.Vertex);
             }
         }
@@ -185,7 +185,7 @@ public class ReadingMap : MonoBehaviour
                     newItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject)
                     {
                         TerritoryInfo = TerritoryType.Air,
-                        ShelterType = new ShelterInfo(),
+                        ShelterType = ShelterInfo.EMPTY,
                     }, _matrixMap.Vertex);
                     var decorItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject)
                     {

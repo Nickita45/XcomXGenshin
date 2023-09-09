@@ -36,13 +36,13 @@ public class FreeCameraController : MonoBehaviour
         _speedZoom = ConfigurationManager.Instance.GlobalDataJson.cameraSpeedZoom;
         _zoomMin = ConfigurationManager.Instance.GlobalDataJson.cameraZoomMin;
         _zoomMax = ConfigurationManager.Instance.GlobalDataJson.cameraZoomMax;
-        
+
     }
 
     private void Update()
     {
-        if (GameManagerMap.Instance.Map == null || 
-            (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.CameraMovements) && 
+        if (GameManagerMap.Instance.Map == null ||
+            (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.CameraMovements) &&
             !GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.Waiting)))
             return;
 
@@ -248,13 +248,13 @@ public class FreeCameraController : MonoBehaviour
 
     public void MoveToSelectedCharacter()
     {
-        CharacterInfo selectedCharacter = GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter;
+        CharacterInfo selectedCharacter = GameManagerMap.Instance.CharacterMovement.SelectedCharacter;
         if (selectedCharacter) MoveTo(selectedCharacter.gameObject);
     }
 
     public void TeleportToSelectedCharacter()
     {
-        CharacterInfo selectedCharacter = GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter;
+        CharacterInfo selectedCharacter = GameManagerMap.Instance.CharacterMovement.SelectedCharacter;
         if (selectedCharacter)
         {
             Vector3 position = selectedCharacter.transform.position - transform.forward;
