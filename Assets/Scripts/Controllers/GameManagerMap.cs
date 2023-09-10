@@ -16,7 +16,7 @@ public class GameManagerMap : MonoBehaviour
     private MatrixMap _map;
 
     [SerializeField]
-    private CharacterMovemovent _characterMovemovent;
+    private CharacterMovement _characterMovemovent;
 
     [SerializeField]
     private CharacterVisibility _characterVisibility;
@@ -45,7 +45,7 @@ public class GameManagerMap : MonoBehaviour
     private static GameManagerMap _instance;
     public static GameManagerMap Instance => _instance;
 
-    public CharacterMovemovent CharacterMovemovent => _characterMovemovent;
+    public CharacterMovement CharacterMovement => _characterMovemovent;
     public FreeCameraController CameraController => _freeCameraController;
     public FixedCameraController FixedCameraController => _fixedCameraController;
     public CharacterVisibility CharacterVisibility => _characterVisibility;
@@ -93,7 +93,7 @@ public class GameManagerMap : MonoBehaviour
     public GameObject CreatePlatformMovement(TerritroyReaded item)
     {
         var obj = Instantiate(_prefabPossibleTerritory, Instance.GenereteTerritoryMove.transform);
-        obj.transform.localPosition = item.GetCordinats() - CharacterMovemovent.POSITIONFORSPAWN;
+        obj.transform.localPosition = item.GetCordinats() - CharacterMovement.POSITIONFORSPAWN;
         obj.SetActive(false);
         return obj;
     }
@@ -139,9 +139,7 @@ public class GameManagerMap : MonoBehaviour
         if (StatusMain.ActualPermissions.Contains(Permissions.ActionSelect))//(!Instance.CharacterMovemovent.IsMoving)
         {
             _fixedCameraController.ClearListHide();
-            CharacterInfo selectedCharacter = Instance.CharacterMovemovent.SelectedCharacter;
-
-            selectedCharacter.GunPrefab.transform.LookAt(icon.Enemy.transform); //gun look to enemy
+            CharacterInfo selectedCharacter = Instance.CharacterMovement.SelectedCharacter;
 
             (Vector3 position, Quaternion rotation) = CameraUtils.CalculateEnemyView(selectedCharacter.gameObject, icon.Enemy);
             _fixedCameraController.InitAsMainCamera(position, rotation, 0.5f);
@@ -164,18 +162,43 @@ public class GameManagerMap : MonoBehaviour
         }
     }
 
-    public void Attack(Action FinishAbility)
+    public void Attack(Action onFinish)
     {
         StatusMain.SetStatusShooting();
-        FinishAbility += () =>
+        onFinish += () =>
         {
             EnableFreeCameraMovement();
-            Instance.CharacterMovemovent.SelectedCharacter.CountActions -= 2;
+            Instance.CharacterMovement.SelectedCharacter.CountActions -= 2;
         };
 
-        StartCoroutine(CharacterMovemovent.SelectedCharacter.GetComponent<ShootController>().Shoot(_enemyPanel.EnemyObject.transform,
-            Instance.Gun, _enemyPanel.SelectedEnemyProcent, FinishAbility));
+        StartCoroutine(AttackCoroutine(onFinish));
+    }
 
+    public IEnumerator AttackCoroutine(Action onFinish)
+    {
+        Vector3 directionToTarget = _enemyPanel.EnemyObject.transform.position - CharacterMovement.SelectedCharacter.transform.position;
+        directionToTarget.y = 0;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+
+        CharacterAnimation animation = CharacterMovement.SelectedCharacter.Animation;
+        ShootController shootController = CharacterMovement.SelectedCharacter.GetComponent<ShootController>();
+
+        // Setup shooting animation
+        yield return StartCoroutine(animation.CrouchRotate(targetRotation));
+        yield return StartCoroutine(animation.StopCrouching());
+        yield return StartCoroutine(animation.Shoot());
+
+        // Shoot
+        yield return StartCoroutine(shootController.Shoot(
+            _enemyPanel.EnemyObject.transform, Instance.Gun, _enemyPanel.SelectedEnemyPercent
+        ));
+
+        // Setup idle crouching animation
+        yield return StartCoroutine(animation.StopShooting());
+        yield return StartCoroutine(animation.Crouch());
+        yield return StartCoroutine(CharacterMovement.CrouchRotateCharacterNearShelter());
+
+        onFinish();
     }
 
     public IEnumerator WaitAndFinish(Action onFinish)
@@ -188,16 +211,16 @@ public class GameManagerMap : MonoBehaviour
     public void Overwatch(Action onFinish)
     {
         Debug.Log("Overwatch");
-        onFinish += () => { Instance.CharacterMovemovent.SelectedCharacter.CountActions -= 2; };
-        StartCoroutine(Instance.CharacterMovemovent.SelectedCharacter.CanvasController.PanelShow(Instance.CharacterMovemovent.SelectedCharacter.CanvasController.PanelActionInfo("Overwatch"), 4));
+        onFinish += () => { Instance.CharacterMovement.SelectedCharacter.CountActions -= 2; };
+        StartCoroutine(Instance.CharacterMovement.SelectedCharacter.CanvasController.PanelShow(Instance.CharacterMovement.SelectedCharacter.CanvasController.PanelActionInfo("Overwatch"), 4));
         StartCoroutine(WaitAndFinish(onFinish));
     }
 
     public void HunkerDown(Action onFinish)
     {
         Debug.Log("Hunker Down");
-        onFinish += () => { Instance.CharacterMovemovent.SelectedCharacter.CountActions -= 2; };
-        StartCoroutine(Instance.CharacterMovemovent.SelectedCharacter.CanvasController.PanelShow(Instance.CharacterMovemovent.SelectedCharacter.CanvasController.PanelActionInfo("Hunker Down"), 4));
+        onFinish += () => { Instance.CharacterMovement.SelectedCharacter.CountActions -= 2; };
+        StartCoroutine(Instance.CharacterMovement.SelectedCharacter.CanvasController.PanelShow(Instance.CharacterMovement.SelectedCharacter.CanvasController.PanelActionInfo("Hunker Down"), 4));
         StartCoroutine(WaitAndFinish(onFinish));
     }
 }

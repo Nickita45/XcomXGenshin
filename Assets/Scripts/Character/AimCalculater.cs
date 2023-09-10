@@ -55,7 +55,7 @@ public class AimCalculater : MonoBehaviour
         ShelterType maxValue = (ShelterType)Mathf.Max((int)GetShelterTypeByCordinateSide(defender, xSide), (int)GetShelterTypeByCordinateSide(defender, zSide));
         int result = (parameters.Sum() + GetProcentByType(maxValue) + groundProcent + GetProcentFromGunType(gun, (int)Mathf.Round(Vector3.Distance(defender.GetCordinats(), shooter.GetCordinats()))));
         //Debug.Log($"{parameters.Sum()}, {GetProcentByType(maxValue)}, {groundProcent}, {GetProcentFromGunType(gun, (int)Mathf.Round(Vector3.Distance(defender.GetCordinats(), shooter.GetCordinats())))}");
-        return (Mathf.Min(Mathf.Max(result, 1),100), maxValue);
+        return (Mathf.Min(Mathf.Max(result, 1), 100), maxValue);
 
     }
 
@@ -72,7 +72,7 @@ public class AimCalculater : MonoBehaviour
             case CordinatesSide.Front:
                 return GameManagerMap.Instance.Map[teritory.IndexFront.First()].ShelterType.Bottom;
             default:
-                return ShelterType.Nope;
+                return ShelterType.None;
         }
     }
 
@@ -80,7 +80,7 @@ public class AimCalculater : MonoBehaviour
     {
         switch (shelterType)
         {
-            case ShelterType.Nope:
+            case ShelterType.None:
                 return 0;
             case ShelterType.Semi:
                 return SEMIGROUNDPROCENT;

@@ -35,21 +35,26 @@ public class CharacterInfo : MonoBehaviour
     public Action OnDeselected;
 
     private int _countActions;
-    public int CountActions { 
+    public int CountActions
+    {
         get => _countActions;
-        set {
+        set
+        {
             _countActions = value;
 
             CanvasController.SetCountActons(value);
             if (_countActions <= 0)
                 GameManagerMap.Instance.TurnController.CharacterEndHisTurn(this);
-        } 
+        }
     }
     public TerritroyReaded ActualTerritory { get; set; }
 
     public CharacterCanvasController CanvasController { get; set; }
     public GameObject GunPrefab => _gunPrefab;
 
+    [SerializeField]
+    private CharacterAnimation _animation;
+    public CharacterAnimation Animation => _animation;
 
     //Config atributes
     public int Index { get; set; }
@@ -68,12 +73,11 @@ public class CharacterInfo : MonoBehaviour
         _basicMaterial = _selectItem.GetComponent<MeshRenderer>().material;
 
         OnSelected += Select;
-        OnSelected += GameManagerMap.Instance.CharacterMovemovent.CharacterSelect;
+        OnSelected += GameManagerMap.Instance.CharacterMovement.CharacterSelect;
         OnSelected += GameManagerMap.Instance.TurnController.SetCharacter;
 
-
         OnDeselected += Disable;
-        OnDeselected += GameManagerMap.Instance.CharacterMovemovent.CharacterDeselect;
+        OnDeselected += GameManagerMap.Instance.CharacterMovement.CharacterDeselect;
 
         ActualTerritory = GameManagerMap.Instance.Map[transform.localPosition];
         ActualTerritory.TerritoryInfo = TerritoryType.Character;
@@ -82,12 +86,17 @@ public class CharacterInfo : MonoBehaviour
         CanvasController = GetComponent<CharacterCanvasController>();
         CountActions = 2;
 
+
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
         GameManagerMap.Instance.TurnController.CharacterBegining += BeginOfTurn;
-
     }
 
-    public void OnIndexSet() => CanvasController.SetStartHealth(MaxHealthCharacter);
+    public void OnIndexSet()
+    {
+        CanvasController.SetStartHealth(MaxHealthCharacter);
+        _animation.Init(ConfigurationManager.Instance.CharactersData.characters[Index].characterAvatarPath);
+        _animation.GetComponentInChildren<GunModel>().Init();
+    }
 
     private void BeginOfTurn() => CountActions = 2;
 
@@ -105,7 +114,7 @@ public class CharacterInfo : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (ActualTerritory != null && 
+        if (ActualTerritory != null &&
             GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter) && CountActions > 0)
         {
             if (_selected)
@@ -172,12 +181,12 @@ public class CharacterInfo : MonoBehaviour
 
         if (permissions.Contains(Permissions.ActionSelect) && !permissions.Contains(Permissions.SelectEnemy))
         {
-            if (GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter == this && GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null)
+            if (GameManagerMap.Instance.CharacterMovement.SelectedCharacter == this && GameManagerMap.Instance.CharacterMovement.SelectedCharacter != null)
                 SetSelecter(true);
         }
         else if (permissions.Contains(Permissions.SelectEnemy))
         {
-            if (GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter == this && GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null)
+            if (GameManagerMap.Instance.CharacterMovement.SelectedCharacter == this && GameManagerMap.Instance.CharacterMovement.SelectedCharacter != null)
             {
                 _selectItem.GetComponent<MeshRenderer>().material = _basicMaterial;
                 SetSelecter(false);

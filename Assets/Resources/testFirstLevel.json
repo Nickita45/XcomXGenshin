@@ -1909,7 +1909,7 @@
         "7.5_0.5_-7.5"
       ],
       "Index": "8.5_0.5_-7.5",
-      "PathPrefab": "Prefabs/Capsule",
+      "PathPrefab": "Prefabs/Character",
       "TerritoryInfo": 0,
       "ShelterType": {
         "Left": 0,
@@ -2646,7 +2646,7 @@
         "6.5_0.5_-8.5"
       ],
       "Index": "7.5_0.5_-8.5",
-      "PathPrefab": "Prefabs/Capsule",
+      "PathPrefab": "Prefabs/Character",
       "TerritoryInfo": 0,
       "ShelterType": {
         "Left": 0,
@@ -62930,7 +62930,7 @@
         "7.5_0.5_-7.5"
       ],
       "Index": "8.5_0.5_-7.5",
-      "PathPrefab": "Prefabs/Capsule",
+      "PathPrefab": "Prefabs/Character",
       "TerritoryInfo": 0,
       "ShelterType": {
         "Left": 0,
@@ -63667,7 +63667,7 @@
         "6.5_0.5_-8.5"
       ],
       "Index": "7.5_0.5_-8.5",
-      "PathPrefab": "Prefabs/Capsule",
+      "PathPrefab": "Prefabs/Character",
       "TerritoryInfo": 0,
       "ShelterType": {
         "Left": 0,
