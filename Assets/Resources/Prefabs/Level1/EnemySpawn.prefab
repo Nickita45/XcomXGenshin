@@ -1255,9 +1255,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _panelMiss: {fileID: 5871550606478345110}
   _panelHit: {fileID: 4499545758778465954}
-  textHit: {fileID: 5876378650046703130}
+  _panelAction: {fileID: 4499545758778465954}
+  _textHit: {fileID: 5876378650046703130}
+  _textAction: {fileID: 0}
   _panelHealthBar: {fileID: 1324868383614218367}
   _hpPrefab: {fileID: 1747020183082109769, guid: 85f89cb203e598e448d230bd615567f8, type: 3}
+  _actionIconPopUp: {fileID: 0}
   _listDidntRotateObjects:
   - {fileID: 6654509893336421984}
   - {fileID: 1324868383614218367}

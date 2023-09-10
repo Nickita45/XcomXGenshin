@@ -9,18 +9,20 @@ public class EnemyCanvasController : MonoBehaviour //change for Enemy and Charac
 {
     [Header("Basic")]
     [SerializeField]
-    private GameObject _panelMiss, _panelHit;
+    private GameObject _panelMiss, _panelHit, _panelAction;
 
     [SerializeField]
-    private TextMeshProUGUI textHit;
+    private TextMeshProUGUI _textHit, _textAction;
 
     [SerializeField]
     private GameObject _panelHealthBar, _hpPrefab;
 
     [SerializeField]
+    private Image _actionIconPopUp;
+
+    [SerializeField]
     private List<GameObject> _listDidntRotateObjects; //need to be HashSet
     private HashSet<GameObject> _objectCantBeRotated;
-
 
 
     protected Camera _actualCamera;
@@ -30,10 +32,17 @@ public class EnemyCanvasController : MonoBehaviour //change for Enemy and Charac
     protected GameObject _canvasToMove;
 
     public GameObject PanelMiss => _panelMiss;
+    public GameObject PanelAction => _panelAction;
     public GameObject PanelHit(int dmg)
     {
-        textHit.text = dmg.ToString();
+        _textHit.text = dmg.ToString();
         return _panelHit;
+    }
+    public GameObject PanelActionInfo(string action)
+    {
+        _textAction.text = action;
+        _actionIconPopUp.sprite = GameManagerMap.Instance.UIIcons.GetIconByName(action).sprite;
+        return _panelAction;
     }
 
     public GameObject CanvasToMove => _canvasToMove;

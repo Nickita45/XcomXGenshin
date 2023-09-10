@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5749,6 +5749,7 @@ GameObject:
   - component: {fileID: 1752232543}
   - component: {fileID: 1752232545}
   - component: {fileID: 1752232544}
+  - component: {fileID: 1752232546}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5866,9 +5867,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef51e6e6d17edf34195604cfaab2b8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputCharacterSpeed: {fileID: 1347658931}
-  _inputCharacterMove: {fileID: 584023430}
-  _inputVisibilityDistance: {fileID: 756412568}
   _dropDownGun: {fileID: 441371914}
   _panelEnemyTurn: {fileID: 1242409030}
   _panelCharaterName: {fileID: 1930463059}
@@ -5897,6 +5895,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f91522cb2a5bd41a7617fb5ae9bb0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1752232546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752232538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbdde7672f03ca4e83ab5deb892469b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconObjects:
+  - name: Overwatch
+    sprite: {fileID: 21300000, guid: 12d5c9e0292939741b3bd392118e0cfe, type: 3}
+  - name: Hunker Down
+    sprite: {fileID: 21300000, guid: 441a3dfaa37970041bcbe08062115a53, type: 3}
 --- !u!1 &1775152536
 GameObject:
   m_ObjectHideFlags: 0
@@ -5949,6 +5964,7 @@ MonoBehaviour:
   _statusMain: {fileID: 1775152546}
   _prefabPossibleTerritory: {fileID: 367235445393243085, guid: 5350567c8f01e904098f662ca01a15f1, type: 3}
   _enemyPanel: {fileID: 617639192}
+  _uiIcons: {fileID: 1752232546}
 --- !u!4 &1775152538
 Transform:
   m_ObjectHideFlags: 0
@@ -7108,7 +7124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847466041890388356, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.4844513
+      value: 7.484436
       objectReference: {fileID: 0}
     - target: {fileID: 1847466041901179330, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -7116,11 +7132,11 @@ PrefabInstance:
       objectReference: {fileID: 1985511946}
     - target: {fileID: 1847466042658135927, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.983963
+      value: 7.9839478
       objectReference: {fileID: 0}
     - target: {fileID: 1847466042736940890, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.5474243
+      value: -1.5474548
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
