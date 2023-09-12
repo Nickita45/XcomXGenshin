@@ -41,7 +41,7 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy)
             && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectPlaceToMovement))//(GameManagerMap.Instance.State == GameState.FreeMovement)
         {
-            Vector3 position = CameraUtils.CalculateCameraLookAt(_enemy, Camera.main);
+            Vector3 position = CameraHelpers.CalculateCameraLookAt(_enemy, Camera.main);
             GameManagerMap.Instance.FixedCameraController
                 .InitAsMainCamera(position, GameManagerMap.Instance.FreeCameraController.TargetRotation, 0.5f);
         }
