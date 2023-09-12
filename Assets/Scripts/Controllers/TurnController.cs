@@ -134,15 +134,7 @@ public class TurnController : MonoBehaviour
     {
         GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
         _characters[_iterator].OnSelected(_characters[_iterator]);
-        GameManagerMap.Instance.CameraController.MoveToSelectedCharacter();
-    }
-    private void IteratorPlusOne()
-    {
-        _iterator++;
-        if (_iterator >= _characters.Count)
-            _iterator = 0;
-
-        SetActualCharacter();
+        GameManagerMap.Instance.FreeCameraController.MoveToSelectedCharacter();
     }
 
     public void SetActualCharacter()
@@ -165,6 +157,16 @@ public class TurnController : MonoBehaviour
         }
     }
 
+    private void IteratorPlusOne()
+    {
+        _iterator++;
+        if (_iterator >= _characters.Count)
+            _iterator = 0;
+
+        _characters[_iterator].OnSelected(_characters[_iterator]);
+        GameManagerMap.Instance.FreeCameraController.MoveToSelectedCharacter();
+        GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
+    }
 
     private void Clear()
     {

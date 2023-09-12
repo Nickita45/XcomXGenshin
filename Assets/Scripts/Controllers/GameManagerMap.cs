@@ -46,7 +46,7 @@ public class GameManagerMap : MonoBehaviour
     public static GameManagerMap Instance => _instance;
 
     public CharacterMovement CharacterMovement => _characterMovement;
-    public FreeCameraController CameraController => _freeCameraController;
+    public FreeCameraController FreeCameraController => _freeCameraController;
     public FixedCameraController FixedCameraController => _fixedCameraController;
     public CharacterVisibility CharacterVisibility => _characterVisibility;
     public TurnController TurnController => _turnController;
@@ -63,6 +63,8 @@ public class GameManagerMap : MonoBehaviour
     [Header("UI")]
     [SerializeField]
     private EnemyPanel _enemyPanel;
+
+    public GunType Gun { get; set; } //in future we need to move it to character
 
     [Header("UI icons")]
     [SerializeField]
