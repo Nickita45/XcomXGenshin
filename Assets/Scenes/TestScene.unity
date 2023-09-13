@@ -5976,7 +5976,7 @@ MonoBehaviour:
     width: 0
     height: 0
   _characterMovement: {fileID: 1775152539}
-  _characterVisibility: {fileID: 1775152542}
+  _characterTargetFinder: {fileID: 1775152542}
   _freeCameraController: {fileID: 963194230}
   _fixedCameraController: {fileID: 326296652}
   _turnController: {fileID: 1775152547}
@@ -6035,7 +6035,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1775152536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3df2cdd2484585e488c45dd9b773d580, type: 3}
+  m_Script: {fileID: 11500000, guid: bacf3b54aba81d6459b8bbbc907e571a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyPanel: {fileID: 617639192}

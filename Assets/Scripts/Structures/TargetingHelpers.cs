@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class TargetingHelpers
 {
-    // Determines whether the entity A can target entity B with their abilities, and vice versa.
+    // Determines whether the entity A can target entity B with their ranged abilities.
     // This works with both characters and enemies, as long as the correct maxDistance is supplied.
     //
     // This means the entities can see each other, are at an appropriate distance from one another,
@@ -18,35 +20,64 @@ public static class TargetingHelpers
         // to account for being able to see through corners
         foreach (Vector3 direction in DIRECTIONS)
         {
-
-            Vector3 origin = entityA.position;
-            Vector3 target = entityB.position + direction;
+            Vector3 origin = entityA.position + direction;
+            Vector3 target = entityB.position;
 
             // Find difference vector between target and the origin
             Vector3 delta = target - origin;
 
-            // Create a raycast from the entity A to the target tile
-            RaycastHit[] hits = Physics.RaycastAll(origin, delta.normalized, delta.magnitude);
-            bool anyShelter = false;
+            // Create a raycast from the target to the origin tile and
+            // detect all territories along the ray.
+            // 
+            // The ray is done in inverse direction because it is more reliable
+            // at detecting colliders at the end of the ray.
+            RaycastHit[] hits = Physics.RaycastAll(target, -delta.normalized, delta.magnitude);
+
+            bool blocked = false;
+
+            // Find out which sides of the shelter are targeted
+            List<ShelterSide> sides = new();
+
+            if (delta.z < 0) sides.Add(ShelterSide.Front);
+            else if (delta.z < 0) sides.Add(ShelterSide.Back);
+
+            if (delta.x > 0) sides.Add(ShelterSide.Right);
+            else if (delta.x < 0) sides.Add(ShelterSide.Left);
 
             foreach (RaycastHit hit in hits)
             {
-                // Check if any hit is a full shelter
                 TerritoryInfo info = hit.transform.GetComponent<TerritoryInfo>();
-                if (info && info.Type == TerritoryType.Shelter && info.ShelterType.Left == ShelterType.Full &&
-                    info.ShelterType.Right == ShelterType.Full && info.ShelterType.Bottom == ShelterType.Full
-                        && info.ShelterType.Front == ShelterType.Full)
+
+                // Check if the hit is blocking
+                if (info && IsBlocking(info, sides))
                 {
-                    //Debug.DrawRay(info.gameObject.transform.position, Vector3.up * 100f, Color.blue, 60f);
-                    anyShelter = true;
+                    blocked = true;
                     break;
                 }
             }
 
-            // If there weren't any full shelters, the entities can target each other
-            if (!anyShelter) return true;
+            Color color = (blocked) ? Color.blue : Color.red;
+            Debug.DrawRay(origin, delta, color, 60f);
+
+            // If the ray wasn't blocked, targeting is possible
+            if (!blocked) return true;
         }
 
+        // If all rays are blocked, targeting is impossible
+        return false;
+    }
+
+    // Detects whether a TerritoryInfo blocks the target ray.
+    private static bool IsBlocking(TerritoryInfo info, List<ShelterSide> sides)
+    {
+        // 1. Block through the ground
+        if (info.Type == TerritoryType.ShelterGround) return true;
+
+        // 2. Block through full shelters on the targeted sides
+        Dictionary<ShelterSide, ShelterType> shelters = info.ShelterType.ToDictionary();
+        if (sides.Any(side => shelters[side] == ShelterType.Full)) return true;
+
+        // Other territories do not block targeting
         return false;
     }
 
