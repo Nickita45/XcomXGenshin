@@ -1,24 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ConfigInfoPanelDisplay : MonoBehaviour
 {
-    public GameObject _openButton;
-    public GameObject _exitButton;
-    public void Show()
-    {
-        gameObject.SetActive(true);
-        _openButton.SetActive(false);
-        _exitButton.SetActive(true);
-        GameManagerMap.Instance.FreeCameraController.enabled = false;
-    }
+    [SerializeField]
+    private GameObject _openButton;
 
-    public void Hide()
+    private bool _enabled = false;
+
+    public void Toggle()
     {
-        gameObject.SetActive(false);
-        _exitButton.SetActive(false);
-        _openButton.SetActive(true);
-        GameManagerMap.Instance.FreeCameraController.enabled = true;
+        _enabled = !_enabled;
+
+        gameObject.SetActive(_enabled);
+        _openButton.SetActive(!_enabled);
+        GameManagerMap.Instance.FreeCameraController.enabled = !_enabled;
     }
 }

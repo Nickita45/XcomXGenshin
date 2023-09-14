@@ -7060,7 +7060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1594586895183914244, guid: 62eced83523c34a4eb096516b2a5bac7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Show
+      value: Toggle
       objectReference: {fileID: 0}
     - target: {fileID: 1594586895183914244, guid: 62eced83523c34a4eb096516b2a5bac7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -7169,7 +7169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847466041890388356, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.4843903
+      value: 7.484436
       objectReference: {fileID: 0}
     - target: {fileID: 1847466041901179330, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -7193,7 +7193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847466041901179330, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Hide
+      value: Toggle
       objectReference: {fileID: 0}
     - target: {fileID: 1847466041901179330, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -7205,7 +7205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847466042658135927, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.983902
+      value: 7.9839478
       objectReference: {fileID: 0}
     - target: {fileID: 1847466042736940890, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_AnchoredPosition.y
