@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,6 +157,7 @@ MonoBehaviour:
   _fileName: 
   _matrixMap:
     _enemy: []
+    _characters: []
     width: 0
     height: 0
 --- !u!4 &10235203
@@ -5952,9 +5953,10 @@ MonoBehaviour:
   _deReadingMap: {fileID: 1025817882}
   _map:
     _enemy: []
+    _characters: []
     width: 0
     height: 0
-  _characterMovemovent: {fileID: 1775152539}
+  _characterMovement: {fileID: 1775152539}
   _characterVisibility: {fileID: 1775152542}
   _freeCameraController: {fileID: 963194230}
   _fixedCameraController: {fileID: 326296652}
@@ -7124,7 +7126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847466041890388356, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.484436
+      value: 7.4843903
       objectReference: {fileID: 0}
     - target: {fileID: 1847466041901179330, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -7132,7 +7134,7 @@ PrefabInstance:
       objectReference: {fileID: 1985511946}
     - target: {fileID: 1847466042658135927, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.9839478
+      value: 7.983902
       objectReference: {fileID: 0}
     - target: {fileID: 1847466042736940890, guid: d437f694a25c8314e99ed743b0dabadb, type: 3}
       propertyPath: m_AnchoredPosition.y

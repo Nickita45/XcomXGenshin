@@ -72,9 +72,9 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public void SetPercent()
     {
         var resultCaclulations = AimCalculater.CalculateShelterPercent(defender: GameManagerMap.Instance.Map[_enemy.transform.localPosition],
-                                    shooter: GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.ActualTerritory,
-                                    gun: GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.WeaponCharacter,
-                                    0, GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.BaseAimCharacter);
+                                    shooter: GameManagerMap.Instance.CharacterMovement.SelectedCharacter.ActualTerritory,
+                                    gun: GameManagerMap.Instance.CharacterMovement.SelectedCharacter.WeaponCharacter,
+                                    0, GameManagerMap.Instance.CharacterMovement.SelectedCharacter.BaseAimCharacter);
 
         Percent = resultCaclulations.procent;
         _textPercent.text = resultCaclulations.procent.ToString() + "%";

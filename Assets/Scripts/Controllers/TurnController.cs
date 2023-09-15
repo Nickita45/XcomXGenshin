@@ -159,7 +159,7 @@ public class TurnController : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab) && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter) &&
-            GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null && _characters.Count > 1)
+            GameManagerMap.Instance.CharacterMovement.SelectedCharacter != null && _characters.Count > 1)
         {
             IteratorPlusOne();
         }

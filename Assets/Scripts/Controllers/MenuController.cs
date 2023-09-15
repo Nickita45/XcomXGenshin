@@ -20,20 +20,20 @@ public class MenuController : MonoBehaviour
         //GameManagerMap.Instance.Gun = GunType.Automatic;
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
 
-        /*_inputCharacterMove.text = GameManagerMap.Instance.CharacterMovemovent.CountMoveCharacter.ToString();
-        _inputCharacterSpeed.text = GameManagerMap.Instance.CharacterMovemovent.SpeedCharacter.ToString();
+        /*_inputCharacterMove.text = GameManagerMap.Instance.CharacterMovement.CountMoveCharacter.ToString();
+        _inputCharacterSpeed.text = GameManagerMap.Instance.CharacterMovement.SpeedCharacter.ToString();
         _inputVisibilityDistance.text = GameManagerMap.Instance.CharacterVisibility.MaxVisionDistance.ToString();
 
         _inputCharacterMove.onValueChanged.AddListener(n =>
         {
             int.TryParse(n, out int result);
-            GameManagerMap.Instance.CharacterMovemovent.CountMoveCharacter = result;
+            GameManagerMap.Instance.CharacterMovement.CountMoveCharacter = result;
         });
 
         _inputCharacterSpeed.onValueChanged.AddListener(n =>
         {
             float.TryParse(n, out float result);
-            GameManagerMap.Instance.CharacterMovemovent.SpeedCharacter = result;
+            GameManagerMap.Instance.CharacterMovement.SpeedCharacter = result;
         });
 
         _inputVisibilityDistance.onValueChanged.AddListener(n =>
@@ -94,7 +94,7 @@ public class MenuController : MonoBehaviour
     {
         if ((permissions.Contains(Permissions.SelectCharacter) || permissions.Contains(Permissions.SelectEnemy)) && GameManagerMap.Instance.CharacterMovement.SelectedCharacter != null)
         {
-            _textCharacter.text = GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.NameCharacter();
+            _textCharacter.text = GameManagerMap.Instance.CharacterMovement.SelectedCharacter.NameCharacter();
             _panelCharaterName.gameObject.SetActive(true);
         }
         else

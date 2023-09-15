@@ -16,7 +16,7 @@ public class GameManagerMap : MonoBehaviour
     private MatrixMap _map;
 
     [SerializeField]
-    private CharacterMovement _characterMovemovent;
+    private CharacterMovement _characterMovement;
 
     [SerializeField]
     private CharacterVisibility _characterVisibility;
@@ -45,7 +45,7 @@ public class GameManagerMap : MonoBehaviour
     private static GameManagerMap _instance;
     public static GameManagerMap Instance => _instance;
 
-    public CharacterMovement CharacterMovement => _characterMovemovent;
+    public CharacterMovement CharacterMovement => _characterMovement;
     public FreeCameraController CameraController => _freeCameraController;
     public FixedCameraController FixedCameraController => _fixedCameraController;
     public CharacterVisibility CharacterVisibility => _characterVisibility;
@@ -135,7 +135,7 @@ public class GameManagerMap : MonoBehaviour
     // Used while selecting the enemy target for an ability.
     public void FixCameraOnEnemy(EnemyIcon icon)
     {
-        if (StatusMain.ActualPermissions.Contains(Permissions.ActionSelect))//(!Instance.CharacterMovemovent.IsMoving)
+        if (StatusMain.ActualPermissions.Contains(Permissions.ActionSelect))//(!Instance.CharacterMovement.IsMoving)
         {
             _fixedCameraController.ClearListHide();
             CharacterInfo selectedCharacter = Instance.CharacterMovement.SelectedCharacter;
@@ -189,12 +189,12 @@ public class GameManagerMap : MonoBehaviour
 
         // Shoot
         yield return StartCoroutine(shootController.Shoot(_enemyPanel.EnemyObject.transform,
-            Instance.CharacterMovemovent.SelectedCharacter.WeaponCharacter, _enemyPanel.SelectedEnemyProcent, FinishAbility));
+            Instance.CharacterMovement.SelectedCharacter.WeaponCharacter, _enemyPanel.SelectedEnemyPercent));
 
         // Setup idle crouching animation
         yield return StartCoroutine(animation.StopShooting());
         yield return StartCoroutine(animation.Crouch());
-        yield return StartCoroutine(CharacterMovement.CrouchRotateCharacterNearShelter());
+        yield return StartCoroutine(CharacterMovement.CrouchRotateCharacterNearShelter(Instance.CharacterMovement.SelectedCharacter));
 
         onFinish();
     }
@@ -210,7 +210,7 @@ public class GameManagerMap : MonoBehaviour
     {
         Debug.Log("Overwatch");
         onFinish += () => { Instance.CharacterMovement.SelectedCharacter.CountActions -= 2; };
-        StartCoroutine(Instance.CharacterMovement.SelectedCharacter.CanvasController.PanelShow(Instance.CharacterMovement.SelectedCharacter.CanvasController.PanelActionInfo("Overwatch"), 4));
+        StartCoroutine(Instance.CharacterMovement.SelectedCharacter.CanvasController().PanelShow(Instance.CharacterMovement.SelectedCharacter.CanvasController().PanelActionInfo("Overwatch"), 4));
         StartCoroutine(WaitAndFinish(onFinish));
     }
 
@@ -218,7 +218,7 @@ public class GameManagerMap : MonoBehaviour
     {
         Debug.Log("Hunker Down");
         onFinish += () => { Instance.CharacterMovement.SelectedCharacter.CountActions -= 2; };
-        StartCoroutine(Instance.CharacterMovement.SelectedCharacter.CanvasController.PanelShow(Instance.CharacterMovement.SelectedCharacter.CanvasController.PanelActionInfo("Hunker Down"), 4));
+        StartCoroutine(Instance.CharacterMovement.SelectedCharacter.CanvasController().PanelShow(Instance.CharacterMovement.SelectedCharacter.CanvasController().PanelActionInfo("Hunker Down"), 4));
         StartCoroutine(WaitAndFinish(onFinish));
     }
 }

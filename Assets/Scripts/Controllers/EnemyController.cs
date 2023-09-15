@@ -71,7 +71,8 @@ public class EnemyController : MonoBehaviour
 
         if (finalAction == null)
         {
-            finalAction = () => {
+            finalAction = () =>
+            {
                 GameManagerMap.Instance.StatusMain.SetStatusWaiting();
                 if (_enemyInfo.CountActions > 0)
                     MakeAction(finalAction);
@@ -85,10 +86,11 @@ public class EnemyController : MonoBehaviour
             _enemyInfo.CountActions -= 2;
             StartCoroutine(MakeAttack(finalAction, person));
         }
-        else {
+        else
+        {
             _enemyInfo.CountActions -= 1;
 
-            
+
             StartCoroutine(MoveEnemy(finalAction, findTerritoryMoveTo: findTerritoryToCharacter));
         }
     }
@@ -97,7 +99,7 @@ public class EnemyController : MonoBehaviour
     {
         var character = _enemyInfo.GetFirstPerson();
 
-        yield return StartCoroutine(GameManagerMap.Instance.CharacterMovemovent.MoveEnemyToTerritory(_enemyInfo, findTerritoryMoveTo));
+        yield return StartCoroutine(GameManagerMap.Instance.CharacterMovement.MoveEnemyToTerritory(_enemyInfo, findTerritoryMoveTo));
 
         if (character != null)
             _enemyInfo.ObjectModel.transform.LookAt(character.transform);
@@ -117,8 +119,8 @@ public class EnemyController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2);
-        
-        if(UnityEngine.Random.Range(0,1 + 1) > 0)
+
+        if (UnityEngine.Random.Range(0, 1 + 1) > 0)
         {
             yield return StartCoroutine(MoveEnemy(null, findTerritoryMoveTo: findTerritoryTheFarFromCharacter));
         }
