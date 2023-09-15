@@ -22,7 +22,6 @@ public class EnemyCanvasController : MonoBehaviour //change for Enemy and Charac
     private HashSet<GameObject> _objectCantBeRotated;
 
 
-
     protected Camera _actualCamera;
 
     protected Camera _fixedCamera, _freeCamera;

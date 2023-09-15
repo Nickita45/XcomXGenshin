@@ -65,7 +65,7 @@ public class GameManagerMap : MonoBehaviour
     [SerializeField]
     private EnemyPanel _enemyPanel;
 
-    public GunType Gun { get; set; } //in feature we need to move it to character
+   // public GunType Gun { get; set; } //in feature we need to move it to character
 
     private float _secondsTimerTurnCharacter = 2f;
     private void Awake()
@@ -171,7 +171,7 @@ public class GameManagerMap : MonoBehaviour
         };
 
         StartCoroutine(CharacterMovemovent.SelectedCharacter.GetComponent<ShootController>().Shoot(_enemyPanel.EnemyObject.transform,
-            Instance.Gun, _enemyPanel.SelectedEnemyProcent, FinishAbility));
+            Instance.CharacterMovemovent.SelectedCharacter.WeaponCharacter, _enemyPanel.SelectedEnemyProcent, FinishAbility));
 
     }
 

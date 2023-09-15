@@ -163,6 +163,7 @@ public class CharacterData
     public float characterVisionDistance;
     public int characterBaseAim;
     public int characterBaseHealth;
+    public int characterWeapon;
 }
 [System.Serializable]
 public class CharactersData

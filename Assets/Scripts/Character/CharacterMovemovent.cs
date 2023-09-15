@@ -82,7 +82,7 @@ public class CharacterMovemovent : MonoBehaviour
         _selectedCharacter.SetCoordinatsToMover(territory.aktualTerritoryReaded.GetCordinats()
             + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
 
-        _aktualTerritory.path = CalculateAllPath(territory.aktualTerritoryReaded); //actual path to selected territory
+        _aktualTerritory.path = CalculateAllPath(territory.aktualTerritoryReaded, character, _objectsCalculated); //actual path to selected territory
 
         DrawLine(_aktualTerritory.path); //draw the line
     }
@@ -97,7 +97,10 @@ public class CharacterMovemovent : MonoBehaviour
             _selectedCharacter.OnDeselected();//deselect other chracters
         }
         _selectedCharacter = character;
-        _objectsCalculated = CalculateAllPossible(character.MoveDistanceCharacter); //algoritmus calculate all territories that player can move
+        _objectsCalculated = CalculateAllPossible(character.MoveDistanceCharacter(), character); //algoritmus calculate all territories that player can move
+
+        _selectedCharacter.SetCoordinatsToMover(character.ActualTerritory.GetCordinats()
+              + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
 
         AirPlatformsSet(true);
 
@@ -146,7 +149,7 @@ public class CharacterMovemovent : MonoBehaviour
         _isMoving = true;
         OnStartMove();
 
-        yield return StartCoroutine(CoroutineMove(points)); //start movements
+        yield return StartCoroutine(CoroutineMove(points, _selectedCharacter)); //start movements
 
         _isMoving = false;
         GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
@@ -168,16 +171,16 @@ public class CharacterMovemovent : MonoBehaviour
             character.CountActions -= 1;
 
 
-        if (character.CountActions > 0)
+      /*  if (character.CountActions > 0)
         {
             character.OnSelected(character);
 
             _selectedCharacter.SetCoordinatsToMover(newTerritory.GetCordinats()
                 + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
-        }
+        }*/
     }
 
-    private IEnumerator CoroutineMove(List<Vector3> targets)
+    public IEnumerator CoroutineMove(List<Vector3> targets, PersonInfo character)
     {
         float elapsedTime = 0f;
         int index = 0;
@@ -186,14 +189,19 @@ public class CharacterMovemovent : MonoBehaviour
         GameManagerMap.Instance.StatusMain.SetStatusRunning();
         while (true)
         {
-            while (Vector3.Distance(_selectedCharacter.gameObject.transform.localPosition, target) > 0.1f)
+            while (Vector3.Distance(character.transform.localPosition, target) > 0.1f)
             {
-                _selectedCharacter.GunPrefab.transform.LookAt(target + GameManagerMap.Instance.MainParent.transform.position);
-                elapsedTime = Time.deltaTime * _selectedCharacter.SpeedCharacter;
-                _selectedCharacter.gameObject.transform.localPosition = Vector3.MoveTowards(_selectedCharacter.gameObject.transform.localPosition, target, elapsedTime);
+                if(character is CharacterInfo)
+                    ((CharacterInfo)character).GunPrefab.transform.LookAt(target + GameManagerMap.Instance.MainParent.transform.position);
+                else if (character is  EnemyInfo)
+                    ((EnemyInfo)character).ObjectModel.transform.LookAt(target + GameManagerMap.Instance.MainParent.transform.position);
+
+
+                elapsedTime = Time.deltaTime * character.SpeedCharacter();
+                character.transform.localPosition = Vector3.MoveTowards(character.transform.localPosition, target, elapsedTime);
                 yield return null;
             }
-            _selectedCharacter.gameObject.transform.localPosition = target;
+            character.transform.localPosition = target;
 
             if (target == targets[^1]) //last
             {
@@ -216,11 +224,11 @@ public class CharacterMovemovent : MonoBehaviour
         }
     }
 
-    public List<Vector3> CalculateAllPath(TerritroyReaded starter)
+    public List<Vector3> CalculateAllPath(TerritroyReaded starter, PersonInfo character, Dictionary<TerritroyReaded, TerritroyReaded> objectsCaclucated)
     {
         List<Vector3> path = new()
         {
-            _selectedCharacter.transform.localPosition,
+            character.transform.localPosition,
             starter.GetCordinats()
         };
 
@@ -232,7 +240,7 @@ public class CharacterMovemovent : MonoBehaviour
             for (int i = 0; i < path.Count - 1; i++) //in this, we detect, if the between points exist shelters
 
             {
-                var iList = CalculatePoints(GameManagerMap.Instance.Map[path[i + 1]], path[i]);
+                var iList = CalculatePoints(GameManagerMap.Instance.Map[path[i + 1]], path[i], objectsCaclucated);
                 newPath.AddRange(iList.paths);//if yes, we add them to list
                 foreach (var item in iList.airPaths)
                 {
@@ -247,7 +255,7 @@ public class CharacterMovemovent : MonoBehaviour
             path = new List<Vector3>(newPath);
         }
 
-        var basicPaths = FindPathBack(starter); //detect all path from begin to end
+        var basicPaths = FindPathBack(starter, objectsCaclucated); //detect all path from begin to end
         int indexes = basicPaths.Count + 1;
         Vector3[] finalCordinats = new Vector3[indexes + airPaths.Count]; //create array to make consistent path
         Array.Fill(finalCordinats, BIGVECTOR);
@@ -275,9 +283,9 @@ public class CharacterMovemovent : MonoBehaviour
         return endList;
     }
 
-    public (List<Vector3> paths, Dictionary<Vector3, Vector3> airPaths) CalculatePoints(TerritroyReaded starter, Vector3 firstVector)
+    public (List<Vector3> paths, Dictionary<Vector3, Vector3> airPaths) CalculatePoints(TerritroyReaded starter, Vector3 firstVector, Dictionary<TerritroyReaded, TerritroyReaded> objectsCaclucated)
     {
-        Dictionary<Vector3, int> paths = FindPathBack(starter); //find all path from starter to aktual player (path is territories with their numeration)
+        Dictionary<Vector3, int> paths = FindPathBack(starter, objectsCaclucated); //find all path from starter to aktual player (path is territories with their numeration)
         int indexes = paths.Count + 1;//spesial indexer for future sort path
 
         Vector3 targetPosition = starter.GetCordinats() - firstVector;
@@ -292,7 +300,7 @@ public class CharacterMovemovent : MonoBehaviour
         foreach (var item in paths) //in this cycle we detect all air points (only for shelter ground)
         {
             var aktualItem = GameManagerMap.Instance.Map[item.Key];
-            var beforeItem = _objectsCalculated[aktualItem];
+            var beforeItem = objectsCaclucated[aktualItem];
 
             if (beforeItem == null || aktualItem == null)
                 continue;
@@ -394,7 +402,7 @@ public class CharacterMovemovent : MonoBehaviour
         return (endList, airPaths);
     }
 
-    public Dictionary<Vector3, int> FindPathBack(TerritroyReaded starter, TerritroyReaded begin = null)
+    public Dictionary<Vector3, int> FindPathBack(TerritroyReaded starter, Dictionary<TerritroyReaded, TerritroyReaded> objectsCaclucated,  TerritroyReaded begin = null)
     {
         Dictionary<Vector3, int> paths = new(); //index from high to below
         TerritroyReaded aktual = starter;
@@ -403,24 +411,27 @@ public class CharacterMovemovent : MonoBehaviour
         {
             paths.Add(aktual.GetCordinats(), indexes++);
 
-            aktual = _objectsCalculated[aktual];
+            aktual = objectsCaclucated[aktual];
         }
         return paths;
     }
 
-    public Dictionary<TerritroyReaded, TerritroyReaded> CalculateAllPossible(int countMove)
+    public Dictionary<TerritroyReaded, TerritroyReaded> CalculateAllPossible(int countMove, PersonInfo character)
     {
         Dictionary<TerritroyReaded, TerritroyReaded> objectsCalculated = new();//the final version of list of territories
 
         Stack<(TerritroyReaded orig, TerritroyReaded previus)> nextCalculated = new();//need to calculate territories
-        nextCalculated.Push((_selectedCharacter.ActualTerritory, null));//first element
+        nextCalculated.Push((character.ActualTerritory, null));//first element
         HashSet<TerritroyReaded> already = new(); //save all territries that we dont need to detect
 
         int startValueMove = 0;
-        if (_selectedCharacter.CountActions > 1)
+        if (character is CharacterInfo)
         {
-            startValueMove = countMove;
-            countMove *= 2;
+            if (character.CountActions > 1)
+            {
+                startValueMove = countMove;
+                countMove *= 2;
+            }
         }
 
         for (int i = 0; i <= countMove; i++)
@@ -433,7 +444,7 @@ public class CharacterMovemovent : MonoBehaviour
             {
                 (TerritroyReaded orig, TerritroyReaded previus) = nextCalculated.Pop();
 
-                if ((orig.TerritoryInfo != TerritoryType.Character || orig == _selectedCharacter.ActualTerritory)  && 
+                if ((orig.TerritoryInfo != TerritoryType.Character || orig == character.ActualTerritory)  && 
                     orig.TerritoryInfo != TerritoryType.ShelterGround && orig.TerritoryInfo != TerritoryType.Enemy) // we cant move on shelterground element
                 {
                     if (objectsCalculated.ContainsKey(orig))
@@ -443,12 +454,13 @@ public class CharacterMovemovent : MonoBehaviour
                         {
                             if ((oldItem.YPosition != orig.YPosition && previus.YPosition == orig.YPosition) ||
                                 (oldItem.YPosition != orig.YPosition && previus.YPosition != orig.YPosition &&
-                                   Vector3.Distance(_selectedCharacter.transform.localPosition, previus.GetCordinats()) < Vector3.Distance(_selectedCharacter.transform.localPosition, oldItem.GetCordinats()))) //||
+                                   Vector3.Distance(character.transform.localPosition, previus.GetCordinats()) < Vector3.Distance(character.transform.localPosition, oldItem.GetCordinats()))) //||
                             {
                                 objectsCalculated.Remove(orig);
                                 objectsCalculated.Add(orig, previus);
 
-                                GameManagerMap.Instance.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetCharge(i > startValueMove);
+                                if (character is CharacterInfo)
+                                    GameManagerMap.Instance.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetCharge(i > startValueMove);
                             }
                         }
                     }
@@ -456,7 +468,8 @@ public class CharacterMovemovent : MonoBehaviour
                     {
                         objectsCalculated.Add(orig, previus);
 
-                        GameManagerMap.Instance.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetCharge(i > startValueMove);
+                        if (character is CharacterInfo)
+                            GameManagerMap.Instance.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetCharge(i > startValueMove);
                     }
                 }
 
@@ -477,7 +490,8 @@ public class CharacterMovemovent : MonoBehaviour
                         }
                         detectItem = GameManagerMap.Instance.Map[newItem];
                     }
-                    if (detectItem.TerritoryInfo == TerritoryType.Shelter || detectItem.TerritoryInfo == TerritoryType.Enemy || detectItem.TerritoryInfo == TerritoryType.Character ||
+                    if (detectItem.TerritoryInfo == TerritoryType.Shelter || detectItem.TerritoryInfo == TerritoryType.ShelterGround
+                        || detectItem.TerritoryInfo == TerritoryType.Enemy || detectItem.TerritoryInfo == TerritoryType.Character ||
                       detectItem.IndexDown.Count(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
                       GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround) == 0) // we dont select such territories
                     {
@@ -490,8 +504,9 @@ public class CharacterMovemovent : MonoBehaviour
                     }
 
                     if (already.Contains(detectItem) && (!detectItem.IsNearIsGround() || detectItem.InACenterOfGronds()))
+                    {
                         continue;
-
+                    }
                     notCalculatedYet.Push((detectItem, orig));
 
                     if (!already.Contains(detectItem))
@@ -500,9 +515,25 @@ public class CharacterMovemovent : MonoBehaviour
             }
 
             nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>(notCalculatedYet);
-            //  Debug.Log(calcs);
         }
         return objectsCalculated;
+    }
+
+
+    public IEnumerator MoveEnemyToTerritory(EnemyInfo enemyInfo, Func<Dictionary<TerritroyReaded, TerritroyReaded>, TerritroyReaded> findTerritoryMoveTo)
+    { 
+        var allPaths = GameManagerMap.Instance.CharacterMovemovent.CalculateAllPossible(enemyInfo.MoveDistanceCharacter(), enemyInfo);
+        
+        var character = enemyInfo.GetFirstPerson();
+
+        TerritroyReaded findTerritory = findTerritoryMoveTo(allPaths);
+
+        var aktualPath = GameManagerMap.Instance.CharacterMovemovent.CalculateAllPath(findTerritory, enemyInfo, allPaths);
+        enemyInfo.ActualTerritory.TerritoryInfo = TerritoryType.Air;
+
+        yield return GameManagerMap.Instance.CharacterMovemovent.StartCoroutine(CoroutineMove(aktualPath, enemyInfo));
+        enemyInfo.ActualTerritory = findTerritory;
+        findTerritory.TerritoryInfo = TerritoryType.Character;
     }
 
     private void OnStatusChange(HashSet<Permissions> permissions)
@@ -513,7 +544,7 @@ public class CharacterMovemovent : MonoBehaviour
             {
                 SelectedCharacter.SelectChanges();
                 _lineRenderer.gameObject.SetActive(true);
-                _objectsCalculated = CalculateAllPossible(SelectedCharacter.MoveDistanceCharacter);
+                _objectsCalculated = CalculateAllPossible(SelectedCharacter.MoveDistanceCharacter(), _selectedCharacter);
                 SelectedCharacter.MoverActive(true);
                 AirPlatformsSet(true);
             }

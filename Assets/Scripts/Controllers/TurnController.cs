@@ -11,6 +11,8 @@ public class TurnController : MonoBehaviour
     private MenuController menuController;
 
     private List<CharacterInfo> _characters = new List<CharacterInfo>();
+    private List<EnemyInfo> _enemiesTriggered = new List<EnemyInfo>();
+    private List<EnemyInfo> _enemiesMakesTurn = new List<EnemyInfo>();
     private int _iterator = 0;
 
     public Action CharacterBegining;
@@ -25,9 +27,14 @@ public class TurnController : MonoBehaviour
 
     public void BeginOfTheTurn()
     {
+        
         CharacterBegining?.Invoke();
         menuController.SetPanelEnemy(false);
-        _characters.AddRange(FindObjectsOfType<CharacterInfo>());
+        if (GameManagerMap.Instance.Map.Characters.Count == 0)
+            return;
+        
+        _characters.AddRange(GameManagerMap.Instance.Map.Characters.Select(n => n.GetComponent<CharacterInfo>()));
+
 
         if (_characters.First().Index == -1)
         {
@@ -41,20 +48,31 @@ public class TurnController : MonoBehaviour
         IteratorPlusOne();
     }
 
+    public void AddEnemyToTriggerList(EnemyInfo enemy) => _enemiesTriggered.Add(enemy);
     public void CharacterEndHisTurn(CharacterInfo character)
     {
         if (character == GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter)
             character.OnDeselected();
 
-        if (_characters.Count > 1)
+        _characters.Remove(character);
+
+        if (_enemiesMakesTurn.Count != 0)
+            return;
+
+        if (_characters.Count > 0)
         {
              IteratorPlusOne();
         }
 
-        _characters.Remove(character);
 
         if (_characters.Count == 0)
-            StartCoroutine(EndTurn());
+        {
+            if(_enemiesTriggered.Count > 0)
+            {
+                OnTriggerEndMakeAction(null);
+            } else 
+                StartCoroutine(EndTurn());
+        }
     }
 
     private IEnumerator EndTurn()
@@ -63,35 +81,89 @@ public class TurnController : MonoBehaviour
         GameManagerMap.Instance.StatusMain.SetStatusWaiting();
         menuController.SetPanelEnemy(true);
         yield return new WaitForSeconds(_secondsEndTurn);
-        GameManagerMap.Instance.StatusMain.SetStatusSelectCharacter();
-        Debug.Log("New turn");
-        BeginOfTheTurn();
+        BeginOfTheEnemyTurn();
     }
 
     public void SetCharacter(CharacterInfo characterInfo)
     {
         _iterator = _characters.IndexOf(characterInfo);
     }
-    private void Update()
+  
+    private void BeginOfTheEnemyTurn()
     {
-        if(Input.GetKeyDown(KeyCode.Tab) && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter) &&
-            GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null && _characters.Count > 1) 
-        {
-            IteratorPlusOne();
-        }   
+        _enemiesMakesTurn = GameManagerMap.Instance.Map.Enemy.Select(n => n.GetComponent<EnemyInfo>()).Where(n => n.IsTriggered).ToList();
+        _enemiesMakesTurn.ForEach(n => n.CountActions = 2);
+        OnEnemyEndMakeAction(null);
     }
 
+    public void OnEnemyEndMakeAction(EnemyInfo enemy)
+    {
+        if (_enemiesMakesTurn != null)
+            _enemiesMakesTurn.Remove(enemy);
+
+        if (_characters.Count != 0)
+            return;
+
+        if (_enemiesMakesTurn.Count > 0)
+            _enemiesMakesTurn.First().EnemyController.MakeAction(null);
+        else
+        {
+            GameManagerMap.Instance.StatusMain.SetStatusSelectCharacter();
+            Debug.Log("New turn");
+            BeginOfTheTurn();
+        }
+    }
+    public void OnTriggerEndMakeAction(EnemyInfo enemy)
+    {
+        if (_enemiesTriggered != null)
+            _enemiesTriggered.Remove(enemy);
+
+        if (_enemiesTriggered.Count > 0)
+            _enemiesTriggered.First().EnemyController.OnTriggerMakeAction();
+        else
+        {
+            if(_characters.Count > 0) 
+                IteratorPlusOne();
+            else 
+                StartCoroutine(EndTurn());
+        }
+    }
+
+    private void SetNexCharacter()
+    {
+        GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
+        _characters[_iterator].OnSelected(_characters[_iterator]);
+        GameManagerMap.Instance.CameraController.MoveToSelectedCharacter();
+    }
     private void IteratorPlusOne()
     {
         _iterator++;
         if (_iterator >= _characters.Count)
             _iterator = 0;
 
-        _characters[_iterator].OnSelected(_characters[_iterator]);
-        GameManagerMap.Instance.CameraController.MoveToSelectedCharacter();
-        GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
-
+        SetActualCharacter();
     }
+
+    public void SetActualCharacter()
+    {
+        if (_characters.Count == 0)
+            return;
+
+        if (_enemiesTriggered.Count == 0)
+            SetNexCharacter();
+        else
+            OnTriggerEndMakeAction(null);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab) && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectCharacter) &&
+            GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter != null && _characters.Count > 1)
+        {
+            IteratorPlusOne();
+        }
+    }
+
 
     private void Clear()
     {

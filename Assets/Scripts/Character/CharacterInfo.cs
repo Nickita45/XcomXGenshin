@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.TextCore.Text;
 
-public class CharacterInfo : MonoBehaviour
+public class CharacterInfo : PersonInfo
 {
     [Header("Selector")]
     [SerializeField]
@@ -35,30 +35,34 @@ public class CharacterInfo : MonoBehaviour
     public Action OnDeselected;
 
     private int _countActions;
-    public int CountActions { 
+    public override int CountActions { 
         get => _countActions;
         set {
             _countActions = value;
 
-            CanvasController.SetCountActons(value);
+            ((CharacterCanvasController)CanvasController()).SetCountActons(value);
             if (_countActions <= 0)
                 GameManagerMap.Instance.TurnController.CharacterEndHisTurn(this);
-        } 
+            else
+                GameManagerMap.Instance.TurnController.SetActualCharacter();
+        }
     }
-    public TerritroyReaded ActualTerritory { get; set; }
+    public override TerritroyReaded ActualTerritory { get; set; }
 
-    public CharacterCanvasController CanvasController { get; set; }
+    private EnemyCanvasController _canvasController;
+    public override EnemyCanvasController CanvasController() => _canvasController;
     public GameObject GunPrefab => _gunPrefab;
 
 
     //Config atributes
     public int Index { get; set; }
-    public string NameCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterName;
-    public float SpeedCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterSpeed;
-    public int MoveDistanceCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterMoveDistance;
-    public float VisibilityCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterVisionDistance;
+    public string NameCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterName;
+    public override float SpeedCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterSpeed;
+    public override int MoveDistanceCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterMoveDistance;
+    public override float VisibilityCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterVisionDistance;
     public int BaseAimCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterBaseAim;
     public int MaxHealthCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterBaseHealth;
+    public GunType WeaponCharacter => (GunType)ConfigurationManager.Instance.CharactersData.characters[Index].characterWeapon;
 
     private void Start()
     {
@@ -77,9 +81,8 @@ public class CharacterInfo : MonoBehaviour
 
         ActualTerritory = GameManagerMap.Instance.Map[transform.localPosition];
         ActualTerritory.TerritoryInfo = TerritoryType.Character;
-        SetGunByIndex((int)GameManagerMap.Instance.Gun);
 
-        CanvasController = GetComponent<CharacterCanvasController>();
+        _canvasController = GetComponent<CharacterCanvasController>();
         CountActions = 2;
 
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
@@ -87,7 +90,13 @@ public class CharacterInfo : MonoBehaviour
 
     }
 
-    public void OnIndexSet() => CanvasController.SetStartHealth(MaxHealthCharacter);
+    public void OnIndexSet()
+    {
+        CanvasController().SetStartHealth(MaxHealthCharacter);
+        SetGunByIndex((int)WeaponCharacter);
+        _countHp = MaxHealthCharacter;
+
+    }
 
     private void BeginOfTurn() => CountActions = 2;
 
@@ -123,7 +132,7 @@ public class CharacterInfo : MonoBehaviour
 
     public void SelectChanges()
     {
-        SetGunByIndex((int)GameManagerMap.Instance.Gun);
+        SetGunByIndex((int)WeaponCharacter);
         _selectItem.SetActive(true);
 
         _selected = true;
@@ -164,6 +173,7 @@ public class CharacterInfo : MonoBehaviour
     {
         if (permissions.Count == 0)
         {
+            GameManagerMap.Instance.Map.Characters.Remove(gameObject);
             GameManagerMap.Instance.StatusMain.OnStatusChange -= OnStatusChange;
             GameManagerMap.Instance.TurnController.CharacterBegining -= BeginOfTurn;
 
@@ -197,4 +207,16 @@ public class CharacterInfo : MonoBehaviour
     public void SetCoordinatsToMover(Vector3 vector) => _mover.transform.position = vector;
 
     public bool IsActualTerritory(TerritroyReaded territory) => territory == ActualTerritory;
+
+    protected override void KillPerson()
+    {
+        GameManagerMap.Instance.Map.Characters.Remove(gameObject);
+        GameManagerMap.Instance.TurnController.CharacterEndHisTurn(this);
+        GameManagerMap.Instance.CharacterVisibility.OnVisibilityEnemyUpdate();
+        _canvasController.DisableAll();
+        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<CharacterInfo>().GunPrefab.SetActive(false);
+        GetComponent<CapsuleCollider>().enabled = false;
+        ActualTerritory.TerritoryInfo = TerritoryType.Air;
+    }
 }

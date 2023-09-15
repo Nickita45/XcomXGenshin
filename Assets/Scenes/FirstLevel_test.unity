@@ -1304,6 +1304,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3289057931935045274, guid: 35a42e542f9d1ab40898e558c5188b1c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3763318184769548721, guid: 35a42e542f9d1ab40898e558c5188b1c, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1959,7 +1963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Level1/EnemySpawn
+  _pathPrefab: Prefabs/Level1/EnemySlime
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -3628,6 +3632,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3289057931935045274, guid: 35a42e542f9d1ab40898e558c5188b1c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3763318184769548721, guid: 35a42e542f9d1ab40898e558c5188b1c, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3787,6 +3795,7 @@ MonoBehaviour:
   _fileName: /testFirstLevel.json
   _matrixMap:
     _enemy: []
+    _characters: []
     width: 0
     height: 0
 --- !u!4 &875391877
@@ -10512,7 +10521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Level1/EnemySpawn
+  _pathPrefab: Prefabs/Level1/EnemySlime
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

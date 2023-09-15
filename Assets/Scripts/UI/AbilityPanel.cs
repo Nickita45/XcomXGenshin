@@ -191,5 +191,9 @@ public class AbilityPanel : MonoBehaviour
             gameObject.SetActive(true);
             _abilityDialog.SetActive(_selected != null);
         }
+
+        if(permissions.Contains(Permissions.AnimationRunning))
+            UnselectAbility();
+
     }
 }
