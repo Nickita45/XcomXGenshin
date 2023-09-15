@@ -17,7 +17,7 @@ public class MenuController : MonoBehaviour
 
     private void Start()
     {
-        GameManagerMap.Instance.Gun = GunType.Automatic;
+        //GameManagerMap.Instance.Gun = GunType.Automatic;
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
 
         /*_inputCharacterMove.text = GameManagerMap.Instance.CharacterMovemovent.CountMoveCharacter.ToString();
@@ -43,32 +43,33 @@ public class MenuController : MonoBehaviour
         });
         */
 
-        var gunTypeOptions = new List<string>();
-        foreach (GunType gunType in Enum.GetValues(typeof(GunType)))
-        {
-            gunTypeOptions.Add(gunType.ToString());
-        }
-        _dropDownGun.AddOptions(gunTypeOptions);
-        _dropDownGun.onValueChanged.AddListener(OnGunTypeDropdownValueChanged);
+        /* var gunTypeOptions = new List<string>();
+         foreach (GunType gunType in Enum.GetValues(typeof(GunType)))
+         {
+             gunTypeOptions.Add(gunType.ToString());
+         }
+         _dropDownGun.AddOptions(gunTypeOptions);
+         _dropDownGun.onValueChanged.AddListener(OnGunTypeDropdownValueChanged);
+     */
     }
 
-    private void OnGunTypeDropdownValueChanged(int selectedIndex)
-    {
-        string selectedGunTypeText = _dropDownGun.options[selectedIndex].text;
+    /*  private void OnGunTypeDropdownValueChanged(int selectedIndex)
+      {
+          string selectedGunTypeText = _dropDownGun.options[selectedIndex].text;
 
-        if (Enum.TryParse(selectedGunTypeText, out GunType selectedGunType))
-        {
-            GameManagerMap.Instance.Gun = selectedGunType;
-        }
+          if (Enum.TryParse(selectedGunTypeText, out GunType selectedGunType))
+          {
+              GameManagerMap.Instance.Gun = selectedGunType;
+          }
 
-        foreach (var icon in FindObjectsOfType<EnemyIcon>())
-        {
-            icon.SetPercent();
-        }
+          foreach (var icon in FindObjectsOfType<EnemyIcon>())
+          {
+              icon.SetPercent();
+          }
 
-        GameManagerMap.Instance.CharacterMovement.SelectedCharacter?.SetGunByIndex(selectedIndex);
-    }
-
+          GameManagerMap.Instance.CharacterMovement.SelectedCharacter?.SetGunByIndex(selectedIndex);
+      }
+    */
     public void SetPanelEnemy(bool set)
     {
         _panelEnemyTurn.SetActive(set);
@@ -93,7 +94,7 @@ public class MenuController : MonoBehaviour
     {
         if ((permissions.Contains(Permissions.SelectCharacter) || permissions.Contains(Permissions.SelectEnemy)) && GameManagerMap.Instance.CharacterMovement.SelectedCharacter != null)
         {
-            _textCharacter.text = GameManagerMap.Instance.CharacterMovement.SelectedCharacter.NameCharacter;
+            _textCharacter.text = GameManagerMap.Instance.CharacterMovemovent.SelectedCharacter.NameCharacter();
             _panelCharaterName.gameObject.SetActive(true);
         }
         else

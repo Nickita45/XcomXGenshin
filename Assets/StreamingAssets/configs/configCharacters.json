@@ -7,7 +7,8 @@
       "characterVisionDistance": 10.0,
       "characterBaseAim": 50,
       "characterBaseHealth": 5,
-      "characterAvatarPath": "Characters/Barbara/Barbara"
+      "characterAvatarPath": "Characters/Barbara/Barbara",
+      "characterWeapon": 0
     },
     {
       "characterName": "Diluc",
@@ -16,7 +17,8 @@
       "characterVisionDistance": 10.0,
       "characterBaseAim": 55,
       "characterBaseHealth": 6,
-      "characterAvatarPath": "Characters/Diluc/Diluc"
+      "characterAvatarPath": "Characters/Diluc/Diluc",
+      "characterWeapon": 2
     },
     {
       "characterName": "Albedo",
@@ -25,7 +27,8 @@
       "characterVisionDistance": 12.0,
       "characterBaseAim": 70,
       "characterBaseHealth": 8,
-      "characterAvatarPath": "Characters/Albedo/Albedo"
+      "characterAvatarPath": "Characters/Albedo/Albedo",
+      "characterWeapon": 1
     }
   ]
 }

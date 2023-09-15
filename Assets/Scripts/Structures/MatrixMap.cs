@@ -8,6 +8,7 @@ public class MatrixMap
     public Dictionary<string, TerritroyReaded> _decors = new();
     public Dictionary<string, GameObject> _planeToMovement = new();
     public List<GameObject> _enemy = new();
+    public List<GameObject> _characters = new();
     public int width, height;
 
     public TerritroyReaded AddVertex(TerritroyReaded ter, Dictionary<string, TerritroyReaded> collection)
@@ -41,6 +42,7 @@ public class MatrixMap
     }
 
     public List<GameObject> Enemy => _enemy;
+    public List<GameObject> Characters => _characters;
     public Dictionary<string, TerritroyReaded> Decors => _decors;
     public Dictionary<string, TerritroyReaded> Vertex => _vertex;
 

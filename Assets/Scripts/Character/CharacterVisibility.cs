@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class CharacterVisibility : MonoBehaviour
 {
@@ -11,19 +12,8 @@ public class CharacterVisibility : MonoBehaviour
     private readonly HashSet<GameObject> _visibleEnemies = new();
     public HashSet<GameObject> VisibleEnemies => _visibleEnemies;
 
-    //[SerializeField]
-   // private float _maxVisionDistance = 10.0f;
-
     public Action<HashSet<GameObject>> OnVisibilityUpdate;
-
-    //public float MaxVisionDistance { get => _maxVisionDistance; set => _maxVisionDistance = value; }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Config
-        //_maxVisionDistance = ConfigurationManager.Instance.CharactersData.characters[0].characterVisionDistance;
-    }
+    public Action OnVisibilityEnemyUpdate;
 
     // Updates the set of enemies visible by the selected character
     // and adjusts UI accordingly.
@@ -38,23 +28,29 @@ public class CharacterVisibility : MonoBehaviour
 
             foreach (TerritoryInfo enemy in GameManagerMap.Instance.Map.Enemy
                 .Select(obj => obj.GetComponent<TerritoryInfo>())
-                .Where(e => Vector3.Distance(e.transform.position, character.transform.position) < character.VisibilityCharacter)
+                .Where(e => Vector3.Distance(e.transform.position, (character).transform.position) < character.VisibilityCharacter())
                 .Where(e => IsEnemyVisible(character, e)))
             {
                 // Add visible enemies to set
                 _visibleEnemies.Add(enemy.gameObject);
             }
-
         }
-
         // We have to update the enemies before any other visibility update,
         // as some systems rely on using the enemy icons.
         _enemyPanel.UpdateVisibleEnemies(_visibleEnemies);
 
         OnVisibilityUpdate(_visibleEnemies);
+        OnVisibilityEnemyUpdate();
     }
 
-    private bool IsEnemyVisible(CharacterInfo character, TerritoryInfo enemy)
+    public List<CharacterInfo> UpdateVisibilityForEnemy(EnemyInfo enemyInfo)
+    {
+        return GameManagerMap.Instance.Map.Characters.Select(obj => obj.GetComponent<CharacterInfo>())
+            .Where(e => Vector3.Distance(e.transform.position, (enemyInfo).transform.position) < enemyInfo.VisibilityCharacter())
+            .Where(e => IsEnemyVisible(enemyInfo, e.GetComponent<TerritoryInfo>())).ToList();
+    }
+
+    private bool IsEnemyVisible(PersonInfo character, TerritoryInfo enemy)
     {
         // Try out all tiles around the character,
         // to account for being able to see through corners

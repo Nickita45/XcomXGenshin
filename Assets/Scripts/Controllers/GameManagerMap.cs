@@ -64,13 +64,12 @@ public class GameManagerMap : MonoBehaviour
     [SerializeField]
     private EnemyPanel _enemyPanel;
 
-    public GunType Gun { get; set; } //in future we need to move it to character
-    
     [Header("UI icons")]
     [SerializeField]
     private UIIcons _uiIcons;
+
     private float _secondsTimerTurnCharacter = 2f;
-    
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -189,9 +188,8 @@ public class GameManagerMap : MonoBehaviour
         yield return StartCoroutine(animation.Shoot());
 
         // Shoot
-        yield return StartCoroutine(shootController.Shoot(
-            _enemyPanel.EnemyObject.transform, Instance.Gun, _enemyPanel.SelectedEnemyPercent
-        ));
+        yield return StartCoroutine(shootController.Shoot(_enemyPanel.EnemyObject.transform,
+            Instance.CharacterMovemovent.SelectedCharacter.WeaponCharacter, _enemyPanel.SelectedEnemyProcent, FinishAbility));
 
         // Setup idle crouching animation
         yield return StartCoroutine(animation.StopShooting());
