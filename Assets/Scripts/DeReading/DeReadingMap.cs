@@ -45,6 +45,9 @@ public class DeReadingMap : MonoBehaviour
 
             if (item.TerritoryInfo == TerritoryType.Enemy)
                 _matrixMap.Enemy.Add(objMap);
+
+            if (item.TerritoryInfo == TerritoryType.Undefined) //Characters now
+                _matrixMap.Characters.Add(objMap);
         }
 
         GameManagerMap.Instance.Map = _matrixMap;
