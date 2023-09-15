@@ -164,6 +164,7 @@ public class CharacterData
     public int characterBaseAim;
     public int characterBaseHealth;
     public string characterAvatarPath;
+    public string element;
 }
 [System.Serializable]
 public class CharactersData
