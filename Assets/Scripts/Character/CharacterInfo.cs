@@ -220,8 +220,8 @@ public class CharacterInfo : PersonInfo
         GameManagerMap.Instance.TurnController.CharacterEndHisTurn(this);
         GameManagerMap.Instance.CharacterVisibility.OnVisibilityEnemyUpdate();
         _canvasController.DisableAll();
-        GetComponent<MeshRenderer>().enabled = false;
         GetComponent<CharacterInfo>().GunPrefab.SetActive(false);
+        GetComponent<CharacterInfo>().Animation.Avatar.SetActive(false);
         GetComponent<CapsuleCollider>().enabled = false;
         ActualTerritory.TerritoryInfo = TerritoryType.Air;
     }

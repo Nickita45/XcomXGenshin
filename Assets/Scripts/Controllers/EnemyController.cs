@@ -36,9 +36,6 @@ public class EnemyController : MonoBehaviour
         {
             var character = _enemyInfo.GetFirstPerson();
 
-            if (character == null)
-                Debug.Log("Kek");
-
             Debug.Log("RUUUNN");
             return allPaths.Keys.OrderBy(n => Vector3.Distance(character.transform.localPosition, n.GetCordinats())).Where(n => n != _enemyInfo.ActualTerritory).Last();
         };

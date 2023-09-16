@@ -160,6 +160,8 @@ public class CharacterMovement : MonoBehaviour
 
         // Setup idle crouching animation
         yield return StartCoroutine(animation.StopRunning());
+        _lineRenderer.positionCount = 0; //disable line
+
         yield return StartCoroutine(animation.Crouch());
 
         yield return StartCoroutine(CrouchRotateCharacterNearShelter(_selectedCharacter));
@@ -168,6 +170,7 @@ public class CharacterMovement : MonoBehaviour
         GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
 
         OnEndMoveToNewTerritory(newTerritory, _selectedCharacter);
+
     }
 
     public IEnumerator CrouchRotateCharacterNearShelter(CharacterInfo character)
@@ -189,15 +192,6 @@ public class CharacterMovement : MonoBehaviour
             character.CountActions -= 2;
         else
             character.CountActions -= 1;
-
-
-        /*  if (character.CountActions > 0)
-          {
-              character.OnSelected(character);
-
-              _selectedCharacter.SetCoordinatsToMover(newTerritory.GetCordinats()
-                  + GameManagerMap.Instance.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
-          }*/
     }
 
     public IEnumerator CoroutineMove(List<Vector3> targets, PersonInfo character)
