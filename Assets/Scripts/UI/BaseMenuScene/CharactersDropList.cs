@@ -9,7 +9,7 @@ public class CharactersDropList : MonoBehaviour
     public int pickedCharacter = 0;
     private Color _defaultColor;
     [SerializeField]
-    private UIPoolController uIPool;
+    private UIPoolController _uIPool;
 
     void Start()
     {
@@ -23,9 +23,9 @@ public class CharactersDropList : MonoBehaviour
             CharacterData item = ConfigurationManager.Instance.CharactersData.characters[i];
             GameObject gameObject = Instantiate(_prefab, transform);
 
-            Sprite desiredSpriteCharacterIcon = uIPool.spritesCharacterIcons.FirstOrDefault(sprite => sprite.name == item.characterName.ToLower() + "-icon");
+            Sprite desiredSpriteCharacterIcon = _uIPool.spritesCharacterIcons.FirstOrDefault(sprite => sprite.name == item.characterName.ToLower() + "-icon");
 
-            Sprite desiredSpriteElement = uIPool.spritesElementIcons.FirstOrDefault(sprite => sprite.name == "icon_element_" + item.element.ToLower());
+            Sprite desiredSpriteElement = _uIPool.spritesElementIcons.FirstOrDefault(sprite => sprite.name == "icon_element_" + item.element.ToLower());
 
             gameObject.GetComponentsInChildren<Image>()[1].sprite = desiredSpriteCharacterIcon;
             gameObject.GetComponentsInChildren<Image>()[2].sprite = desiredSpriteElement;
@@ -40,7 +40,7 @@ public class CharactersDropList : MonoBehaviour
     }
     private void OnClickButton(int characterID)
     {
-        if (uIPool.IsIDCharacterInArray(characterID))
+        if (_uIPool.IsIDCharacterInArray(characterID))
         {
             Debug.Log("Is already in array");
         }
@@ -48,12 +48,12 @@ public class CharactersDropList : MonoBehaviour
         {
             pickedCharacter = characterID;
             UpdateCharacterListColor(); // maybe needs to be removed
-            uIPool.UpdateInfoCharacter(pickedCharacter);
+            _uIPool.UpdateInfoCharacter(pickedCharacter);
         }
     }
     public void OnClickRemoveCharacter()
     {
-        uIPool.RemovedCharacter();
+        _uIPool.RemovedCharacter();
     }
     public void UpdateCharacterListColor()
     {
@@ -69,7 +69,7 @@ public class CharactersDropList : MonoBehaviour
                 {
                     images[0].color = Color.red;
                 }
-                else if(uIPool.IsIDCharacterInArray(i))
+                else if(_uIPool.IsIDCharacterInArray(i))
                 {
                     images[0].color = Color.yellow;
                 }

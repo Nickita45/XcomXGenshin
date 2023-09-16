@@ -29,10 +29,8 @@ public class CharacterDescription : MonoBehaviour
         Object prefab = Resources.Load("Models/" + character.characterAvatarPath);
         GameObject _avatar = (GameObject)Instantiate(prefab, _uIPool.descriptionMain.transform);
 
-        // Установите позицию _avatar так, чтобы он находился на том же уровне, что и charactersModels[_characterPoolID].
         _avatar.transform.position = _uIPool.descriptionMain.GetComponentInChildren<Animator>().transform.position;
 
-        // Установите угол поворота _avatar так, чтобы он соответствовал charactersModels[_characterPoolID].
         _avatar.transform.eulerAngles = new(0, 180, 0);
         _avatar.transform.localScale = _uIPool.descriptionMain.GetComponentInChildren<Animator>().transform.localScale;
 
