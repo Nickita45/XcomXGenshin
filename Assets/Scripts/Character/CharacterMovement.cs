@@ -104,7 +104,7 @@ public class CharacterMovement : MonoBehaviour
 
         AirPlatformsSet(true);
 
-        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+        GameManagerMap.Instance.CharacterTargetFinder.UpdateAvailableTargets(_selectedCharacter);
 
         GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
 
@@ -119,7 +119,7 @@ public class CharacterMovement : MonoBehaviour
 
         _objectsCalculated.Clear();
 
-        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+        GameManagerMap.Instance.CharacterTargetFinder.UpdateAvailableTargets(_selectedCharacter);
 
         GameManagerMap.Instance.StatusMain.SetStatusSelectCharacter();
     }
@@ -165,7 +165,7 @@ public class CharacterMovement : MonoBehaviour
         yield return StartCoroutine(CrouchRotateCharacterNearShelter(_selectedCharacter));
 
         _isMoving = false;
-        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+        GameManagerMap.Instance.CharacterTargetFinder.UpdateAvailableTargets(_selectedCharacter);
 
         OnEndMoveToNewTerritory(newTerritory, _selectedCharacter);
     }

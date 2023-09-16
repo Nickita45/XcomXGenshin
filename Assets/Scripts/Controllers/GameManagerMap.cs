@@ -19,7 +19,7 @@ public class GameManagerMap : MonoBehaviour
     private CharacterMovement _characterMovement;
 
     [SerializeField]
-    private CharacterVisibility _characterVisibility;
+    private CharacterTargetFinder _characterTargetFinder;
 
     [SerializeField]
     private FreeCameraController _freeCameraController;
@@ -46,9 +46,9 @@ public class GameManagerMap : MonoBehaviour
     public static GameManagerMap Instance => _instance;
 
     public CharacterMovement CharacterMovement => _characterMovement;
-    public FreeCameraController CameraController => _freeCameraController;
+    public FreeCameraController FreeCameraController => _freeCameraController;
     public FixedCameraController FixedCameraController => _fixedCameraController;
-    public CharacterVisibility CharacterVisibility => _characterVisibility;
+    public CharacterTargetFinder CharacterTargetFinder => _characterTargetFinder;
     public TurnController TurnController => _turnController;
     public StatusMain StatusMain => _statusMain;
     public EnemyPanel EnemyPanel => _enemyPanel;
@@ -63,6 +63,8 @@ public class GameManagerMap : MonoBehaviour
     [Header("UI")]
     [SerializeField]
     private EnemyPanel _enemyPanel;
+
+    public GunType Gun { get; set; } //in future we need to move it to character
 
     [Header("UI icons")]
     [SerializeField]
@@ -84,7 +86,7 @@ public class GameManagerMap : MonoBehaviour
     private void Start()
     {
         OnClearMap += ClearMap;
-        Instance.CharacterVisibility.OnVisibilityUpdate += UpdateEnemyOutlines;
+        Instance.CharacterTargetFinder.OnUpdate += UpdateEnemyOutlines;
 
         _secondsTimerTurnCharacter = ConfigurationManager.Instance.GlobalDataJson.secondsTimerTurnCharacter;
     }
@@ -107,7 +109,7 @@ public class GameManagerMap : MonoBehaviour
     // Enables the free camera, which allows the player to navigate around the map.
     public void EnableFreeCameraMovement()
     {
-        UpdateEnemyOutlines(Instance.CharacterVisibility.VisibleEnemies);
+        UpdateEnemyOutlines(Instance.CharacterTargetFinder.AvailableTargets);
         _freeCameraController.InitAsMainCamera();
 
         // If coming from enemy selection or shooting, perform additional setup
@@ -140,7 +142,7 @@ public class GameManagerMap : MonoBehaviour
             _fixedCameraController.ClearListHide();
             CharacterInfo selectedCharacter = Instance.CharacterMovement.SelectedCharacter;
 
-            (Vector3 position, Quaternion rotation) = CameraUtils.CalculateEnemyView(selectedCharacter.gameObject, icon.Enemy);
+            (Vector3 position, Quaternion rotation) = CameraHelpers.CalculateEnemyView(selectedCharacter.gameObject, icon.Enemy);
             _fixedCameraController.InitAsMainCamera(position, rotation, 0.5f);
 
             foreach (GameObject e in Instance.Map.Enemy)

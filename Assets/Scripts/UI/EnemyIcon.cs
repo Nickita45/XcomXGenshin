@@ -41,9 +41,9 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy)
             && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectPlaceToMovement))//(GameManagerMap.Instance.State == GameState.FreeMovement)
         {
-            Vector3 position = CameraUtils.CalculateCameraLookAt(_enemy, Camera.main);
+            Vector3 position = CameraHelpers.CalculateCameraLookAt(_enemy, Camera.main);
             GameManagerMap.Instance.FixedCameraController
-                .InitAsMainCamera(position, GameManagerMap.Instance.CameraController.TargetRotation, 0.5f);
+                .InitAsMainCamera(position, GameManagerMap.Instance.FreeCameraController.TargetRotation, 0.5f);
         }
     }
 
@@ -56,10 +56,10 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy)
             && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectPlaceToMovement))//(GameManagerMap.Instance.State == GameState.FreeMovement)
             GameManagerMap.Instance.FixedCameraController.InitAsMainCamera(
-                GameManagerMap.Instance.CameraController.transform.position,
-                GameManagerMap.Instance.CameraController.transform.rotation,
+                GameManagerMap.Instance.FreeCameraController.transform.position,
+                GameManagerMap.Instance.FreeCameraController.transform.rotation,
                 0.5f,
-                GameManagerMap.Instance.CameraController.InitAsMainCamera
+                GameManagerMap.Instance.FreeCameraController.InitAsMainCamera
             );
         //GameManagerMap.Instance.FixedCameraController.ClearListHide();
     }

@@ -160,7 +160,7 @@ public class CharacterData
     public string characterName;
     public float characterSpeed;
     public int characterMoveDistance;
-    public float characterVisionDistance;
+    public float characterRangedTargetDistance;
     public int characterBaseAim;
     public int characterBaseHealth;
     public int characterWeapon;

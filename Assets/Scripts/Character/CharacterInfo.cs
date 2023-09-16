@@ -64,7 +64,7 @@ public class CharacterInfo : PersonInfo
     public string NameCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterName;
     public override float SpeedCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterSpeed;
     public override int MoveDistanceCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterMoveDistance;
-    public override float VisibilityCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterVisionDistance;
+    public override float VisibilityCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterRangedTargetDistance;
     public int BaseAimCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterBaseAim;
     public int MaxHealthCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterBaseHealth;
     public GunType WeaponCharacter => (GunType)ConfigurationManager.Instance.CharactersData.characters[Index].characterWeapon;
@@ -218,7 +218,7 @@ public class CharacterInfo : PersonInfo
     {
         GameManagerMap.Instance.Map.Characters.Remove(gameObject);
         GameManagerMap.Instance.TurnController.CharacterEndHisTurn(this);
-        GameManagerMap.Instance.CharacterVisibility.OnVisibilityEnemyUpdate();
+        GameManagerMap.Instance.CharacterTargetFinder.OnEnemyUpdate();
         _canvasController.DisableAll();
 
         Animation.Avatar.SetActive(false);
