@@ -48,7 +48,7 @@ public class EnemyInfo : PersonInfo
         ActualTerritory = GameManagerMap.Instance.Map[transform.localPosition];
         ActualTerritory.TerritoryInfo = TerritoryType.Character;
 
-        GameManagerMap.Instance.CharacterTargetFinder.OnVisibilityEnemyUpdate += UpdateVisibility;
+        GameManagerMap.Instance.CharacterTargetFinder.OnEnemyUpdate += UpdateVisibility;
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
 
     }
@@ -72,7 +72,7 @@ public class EnemyInfo : PersonInfo
         if (permissions.Count == 0)
         {
             GameManagerMap.Instance.StatusMain.OnStatusChange -= OnStatusChange;
-            GameManagerMap.Instance.CharacterTargetFinder.OnVisibilityEnemyUpdate -= UpdateVisibility;
+            GameManagerMap.Instance.CharacterTargetFinder.OnEnemyUpdate -= UpdateVisibility;
 
             return;
         }

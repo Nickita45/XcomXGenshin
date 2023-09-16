@@ -12,7 +12,7 @@ public class CharacterTargetFinder : MonoBehaviour
     public HashSet<GameObject> AvailableTargets => _availableTargets;
 
     public Action<HashSet<GameObject>> OnUpdate;
-    public Action OnVisibilityEnemyUpdate;
+    public Action OnEnemyUpdate = () => { };
 
     // Updates the set of enemies that can be targeted by the selected character's attacks,
     // adjusts UI accordingly.
@@ -39,7 +39,7 @@ public class CharacterTargetFinder : MonoBehaviour
         _enemyPanel.UpdateVisibleEnemies(_availableTargets);
 
         OnUpdate(_availableTargets);
-        OnVisibilityEnemyUpdate();
+        OnEnemyUpdate();
     }
 
     public List<CharacterInfo> UpdateVisibilityForEnemy(EnemyInfo enemyInfo)
