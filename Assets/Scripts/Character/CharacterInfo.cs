@@ -218,7 +218,7 @@ public class CharacterInfo : PersonInfo
     {
         GameManagerMap.Instance.Map.Characters.Remove(gameObject);
         GameManagerMap.Instance.TurnController.CharacterEndHisTurn(this);
-        GameManagerMap.Instance.CharacterVisibility.OnVisibilityEnemyUpdate();
+        GameManagerMap.Instance.CharacterTargetFinder.OnVisibilityEnemyUpdate();
         _canvasController.DisableAll();
 
         Animation.Avatar.SetActive(false);

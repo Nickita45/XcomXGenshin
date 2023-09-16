@@ -48,7 +48,7 @@ public class EnemyInfo : PersonInfo
         ActualTerritory = GameManagerMap.Instance.Map[transform.localPosition];
         ActualTerritory.TerritoryInfo = TerritoryType.Character;
 
-        GameManagerMap.Instance.CharacterVisibility.OnVisibilityEnemyUpdate += UpdateVisibility;
+        GameManagerMap.Instance.CharacterTargetFinder.OnVisibilityEnemyUpdate += UpdateVisibility;
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
 
     }
@@ -56,14 +56,14 @@ public class EnemyInfo : PersonInfo
     private void UpdateVisibility()
     {
         _characterInfos.Clear();
-        _characterInfos = GameManagerMap.Instance.CharacterVisibility.UpdateVisibilityForEnemy(this);
+        _characterInfos = GameManagerMap.Instance.CharacterTargetFinder.UpdateVisibilityForEnemy(this);
 
         if (_characterInfos.Count > 0 && !IsTriggered)
         {
             _enemyController.OnTriggerCharacter();
 
             if (GetComponent<TerritoryInfo>().Path.Contains("Slime")) //for test :)
-                    IsTriggered = true;
+                IsTriggered = true;
         }
     }
 
@@ -72,7 +72,7 @@ public class EnemyInfo : PersonInfo
         if (permissions.Count == 0)
         {
             GameManagerMap.Instance.StatusMain.OnStatusChange -= OnStatusChange;
-            GameManagerMap.Instance.CharacterVisibility.OnVisibilityEnemyUpdate -= UpdateVisibility;
+            GameManagerMap.Instance.CharacterTargetFinder.OnVisibilityEnemyUpdate -= UpdateVisibility;
 
             return;
         }

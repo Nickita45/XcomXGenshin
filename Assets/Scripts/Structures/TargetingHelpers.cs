@@ -56,8 +56,8 @@ public static class TargetingHelpers
                 }
             }
 
-            Color color = (blocked) ? Color.blue : Color.red;
-            Debug.DrawRay(origin, delta, color, 60f);
+            //Color color = blocked ? Color.blue : Color.red;
+            //Debug.DrawRay(origin, delta, color, 60f);
 
             // If the ray wasn't blocked, targeting is possible
             if (!blocked) return true;
