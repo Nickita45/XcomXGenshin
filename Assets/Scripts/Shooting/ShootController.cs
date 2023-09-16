@@ -12,7 +12,7 @@ public class ShootController : MonoBehaviour
 
     public IEnumerator Shoot(Transform target, GunType actualGun, int procent)
     {
-        Transform firePoint = GetComponent<CharacterInfo>().GunPrefab.transform.GetChild((int)GameManagerMap.Instance.Gun).Find(_nameBulletSpawner);
+        Transform firePoint = GetComponent<CharacterInfo>().GunPrefab.transform.GetChild((int)actualGun).Find(_nameBulletSpawner);
 
         int randomGenerate = UnityEngine.Random.Range(0, 101); // [0;101)
 

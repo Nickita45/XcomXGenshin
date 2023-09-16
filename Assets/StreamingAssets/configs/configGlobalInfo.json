@@ -2,11 +2,9 @@
     "bonusAimFromFullCover": -40,
     "bonusAimFromHalfCover": -20,
     "bonusAimFromNoneCover": 0,
-
     "bonusAimFromHighGround": 30,
     "bonusAimFromLowGround": -20,
     "bonusAimFromNoneGround": 0,
-
     "timeAfterShooting": 3.0,
     "cameraSpeed": 5.0,
     "cameraSpeedRotation": 150.0,
@@ -15,7 +13,6 @@
     "cameraZoomMax": 20.8,
     "secondsEndTurn": 3.0,
     "secondsTimerTurnCharacter": 2.0,
-  
     "typeGun": [
         {
             "name": "AssultRifle",

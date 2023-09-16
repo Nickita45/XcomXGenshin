@@ -134,6 +134,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3391053378008989068, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923084164569473205, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: _pathPrefab
+      value: Prefabs/Level1/EnemySlime
+      objectReference: {fileID: 0}
     - target: {fileID: 6654390615234965878, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -2936,6 +2944,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3391053378008989068, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923084164569473205, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: _pathPrefab
+      value: Prefabs/Level1/EnemySlime
+      objectReference: {fileID: 0}
     - target: {fileID: 6654390615234965878, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4715,6 +4731,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3391053378008989068, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923084164569473205, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: _pathPrefab
+      value: Prefabs/Level1/EnemySlime
+      objectReference: {fileID: 0}
     - target: {fileID: 6654390615234965878, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -6132,6 +6156,7 @@ MonoBehaviour:
   _fileName: /SecondLevel2.json
   _matrixMap:
     _enemy: []
+    _characters: []
     width: 0
     height: 0
 --- !u!4 &875391877
@@ -6409,7 +6434,7 @@ PrefabInstance:
     - target: {fileID: 8501538861971258099, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 7243661944954768586, guid: c811595c1e488ed47b90bf0fde223ebe, type: 3}
+      objectReference: {fileID: -670884406973293415, guid: 494d81db557acea479dbb643d1134e1c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
 --- !u!4 &920294432 stripped
@@ -7938,7 +7963,7 @@ PrefabInstance:
     - target: {fileID: 8501538861971258099, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 7243661944954768586, guid: c811595c1e488ed47b90bf0fde223ebe, type: 3}
+      objectReference: {fileID: -670884406973293415, guid: 494d81db557acea479dbb643d1134e1c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
 --- !u!4 &1130729731 stripped
@@ -8780,6 +8805,14 @@ PrefabInstance:
     - target: {fileID: 558280408510619974, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391053378008989068, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923084164569473205, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: _pathPrefab
+      value: Prefabs/Level1/EnemySlime
       objectReference: {fileID: 0}
     - target: {fileID: 6654390615234965878, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
       propertyPath: m_RootOrder
@@ -9717,6 +9750,14 @@ PrefabInstance:
     - target: {fileID: 558280408510619974, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391053378008989068, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923084164569473205, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: _pathPrefab
+      value: Prefabs/Level1/EnemySlime
       objectReference: {fileID: 0}
     - target: {fileID: 6654390615234965878, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
       propertyPath: m_RootOrder
@@ -10698,6 +10739,14 @@ PrefabInstance:
     - target: {fileID: 558280408510619974, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391053378008989068, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923084164569473205, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: _pathPrefab
+      value: Prefabs/Level1/EnemySlime
       objectReference: {fileID: 0}
     - target: {fileID: 6654390615234965878, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
       propertyPath: m_RootOrder
@@ -14461,6 +14510,14 @@ PrefabInstance:
     - target: {fileID: 558280408510619974, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391053378008989068, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923084164569473205, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
+      propertyPath: _pathPrefab
+      value: Prefabs/Level1/EnemySlime
       objectReference: {fileID: 0}
     - target: {fileID: 6654390615234965878, guid: 4eeadbc9da49b5c41ad1f1c9f6de454b, type: 3}
       propertyPath: m_RootOrder
