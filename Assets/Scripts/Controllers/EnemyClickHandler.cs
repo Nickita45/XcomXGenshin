@@ -30,7 +30,7 @@ public class EnemyClickHandler : MonoBehaviour
                 }
             }
 
-            if (closestEnemy && GameManagerMap.Instance.CharacterVisibility.VisibleEnemies.Contains(closestEnemy))
+            if (closestEnemy && GameManagerMap.Instance.CharacterTargetFinder.AvailableTargets.Contains(closestEnemy))
             {
                 _enemyPanel.SelectEnemy(_enemyPanel.GetIconForEnemy(closestEnemy));
             }
