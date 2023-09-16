@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.TextCore.Text;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -104,7 +105,7 @@ public class CharacterMovement : MonoBehaviour
 
         AirPlatformsSet(true);
 
-        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+        GameManagerMap.Instance.CharacterTargetFinder.UpdateAvailableTargets(_selectedCharacter);
 
         GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
 
@@ -119,7 +120,7 @@ public class CharacterMovement : MonoBehaviour
 
         _objectsCalculated.Clear();
 
-        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
+        GameManagerMap.Instance.CharacterTargetFinder.UpdateAvailableTargets(_selectedCharacter);
 
         GameManagerMap.Instance.StatusMain.SetStatusSelectCharacter();
     }
@@ -151,6 +152,8 @@ public class CharacterMovement : MonoBehaviour
 
         CharacterAnimation animation = SelectedCharacter.Animation;
 
+        GameManagerMap.Instance.StatusMain.OnStatusChange -= OnStatusChange;
+        GameManagerMap.Instance.StatusMain.SetStatusRunning();
         // Setup run animation
         yield return StartCoroutine(animation.StopCrouching());
         yield return StartCoroutine(animation.Run());
@@ -160,16 +163,20 @@ public class CharacterMovement : MonoBehaviour
 
         // Setup idle crouching animation
         yield return StartCoroutine(animation.StopRunning());
-        _lineRenderer.positionCount = 0; //disable line
+
+        var saveCharacter = _selectedCharacter; //save character to future
+
+        GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
+        GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
+
+        _isMoving = false;
+        GameManagerMap.Instance.CharacterTargetFinder.UpdateAvailableTargets(_selectedCharacter);
+
+        OnEndMoveToNewTerritory(newTerritory, _selectedCharacter);
 
         yield return StartCoroutine(animation.Crouch());
 
-        yield return StartCoroutine(CrouchRotateCharacterNearShelter(_selectedCharacter));
-
-        _isMoving = false;
-        GameManagerMap.Instance.CharacterVisibility.UpdateVisibility(_selectedCharacter);
-
-        OnEndMoveToNewTerritory(newTerritory, _selectedCharacter);
+        yield return StartCoroutine(CrouchRotateCharacterNearShelter(saveCharacter));
 
     }
 
@@ -177,7 +184,7 @@ public class CharacterMovement : MonoBehaviour
     {
         TerritroyReaded territoryReaded = GameManagerMap.Instance.Map[character.transform.localPosition];
         Dictionary<ShelterSide, ShelterType> shelters = ShelterDetecter.DetectShelters(territoryReaded);
-        yield return StartCoroutine(CoroutineRotateToShelter(shelters));
+        yield return StartCoroutine(CoroutineRotateToShelter(shelters, character));
     }
 
     private void DisableToBasic(TerritroyReaded newTerritory, CharacterInfo character)
@@ -199,8 +206,7 @@ public class CharacterMovement : MonoBehaviour
         float elapsedTime = 0f;
         int index = 0;
         Vector3 target = targets[++index]; //ignore first, becouse its for line
-        GameManagerMap.Instance.StatusMain.OnStatusChange -= OnStatusChange;
-        GameManagerMap.Instance.StatusMain.SetStatusRunning();
+
         while (true)
         {
             if (character is CharacterInfo)
@@ -234,11 +240,10 @@ public class CharacterMovement : MonoBehaviour
             target = targets[++index];
             yield return null;
         }
-        GameManagerMap.Instance.StatusMain.SetStatusSelectAction();
-        GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
+        
     }
 
-    private IEnumerator CoroutineRotateToShelter(Dictionary<ShelterSide, ShelterType> shelters)
+    private IEnumerator CoroutineRotateToShelter(Dictionary<ShelterSide, ShelterType> shelters, PersonInfo character)
     {
         // Select sides of all non empty shelters
         List<ShelterSide> nonEmptyShelterSides = shelters
@@ -264,12 +269,12 @@ public class CharacterMovement : MonoBehaviour
         //
         // In other words, if the character was facing slightly in one direction,
         // they would fully rotate in that direction.
-        float dotProduct = Vector3.Dot(rotationDirection, _selectedCharacter.Animation.Avatar.transform.forward);
+        float dotProduct = Vector3.Dot(rotationDirection, ((CharacterInfo)character).Animation.Avatar.transform.forward);
         if (dotProduct < 0) rotationDirection = -rotationDirection;
 
         // Rotate the object to match its rotation to the rotationDirection
         Quaternion target = Quaternion.LookRotation(rotationDirection, Vector3.up);
-        yield return StartCoroutine(_selectedCharacter.Animation.CrouchRotate(target));
+        yield return StartCoroutine(((CharacterInfo)character).Animation.CrouchRotate(target));
     }
 
     private void DrawLine(List<Vector3> points)

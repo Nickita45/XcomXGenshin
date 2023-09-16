@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public static class CameraUtils
+public static class CameraHelpers
 {
     // Find the best position and rotation for the camera when choosing the enemy target.
     public static (Vector3, Quaternion) CalculateEnemyView(GameObject character, GameObject enemy)

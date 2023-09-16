@@ -1,34 +1,34 @@
 {
-  "characters": [
-    {
-      "characterName": "Barbara",
-      "characterSpeed": 5.0,
-      "characterMoveDistance": 4,
-      "characterVisionDistance": 10.0,
-      "characterBaseAim": 50,
-      "characterBaseHealth": 5,
-      "characterAvatarPath": "Characters/Barbara/Barbara",
-      "characterWeapon": 0
-    },
-    {
-      "characterName": "Diluc",
-      "characterSpeed": 5.0,
-      "characterMoveDistance": 5,
-      "characterVisionDistance": 10.0,
-      "characterBaseAim": 55,
-      "characterBaseHealth": 6,
-      "characterAvatarPath": "Characters/Diluc/Diluc",
-      "characterWeapon": 2
-    },
-    {
-      "characterName": "Albedo",
-      "characterSpeed": 7.0,
-      "characterMoveDistance": 3,
-      "characterVisionDistance": 12.0,
-      "characterBaseAim": 70,
-      "characterBaseHealth": 8,
-      "characterAvatarPath": "Characters/Albedo/Albedo",
-      "characterWeapon": 1
-    }
-  ]
+    "characters": [
+        {
+            "characterName": "Barbara",
+            "characterSpeed": 5.0,
+            "characterMoveDistance": 4,
+            "characterRangedTargetDistance": 10.0,
+            "characterBaseAim": 50,
+            "characterBaseHealth": 5,
+            "characterWeapon": 0,
+            "characterAvatarPath": "Characters/Barbara/Barbara"
+        },
+        {
+            "characterName": "Diluc",
+            "characterSpeed": 5.0,
+            "characterMoveDistance": 5,
+            "characterRangedTargetDistance": 10.0,
+            "characterBaseAim": 55,
+            "characterBaseHealth": 6,
+            "characterWeapon": 2,
+            "characterAvatarPath": "Characters/Diluc/Diluc"
+        },
+        {
+            "characterName": "Albedo",
+            "characterSpeed": 7.0,
+            "characterMoveDistance": 3,
+            "characterRangedTargetDistance": 12.0,
+            "characterBaseAim": 70,
+            "characterBaseHealth": 8,
+            "characterWeapon": 1,
+            "characterAvatarPath": "Characters/Albedo/Albedo"
+        }
+    ]
 }

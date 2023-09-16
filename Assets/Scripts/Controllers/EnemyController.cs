@@ -35,7 +35,6 @@ public class EnemyController : MonoBehaviour
         findTerritoryTheFarFromCharacter = (allPaths) =>
         {
             var character = _enemyInfo.GetFirstPerson();
-
             Debug.Log("RUUUNN");
             return allPaths.Keys.OrderBy(n => Vector3.Distance(character.transform.localPosition, n.GetCordinats())).Where(n => n != _enemyInfo.ActualTerritory).Last();
         };
