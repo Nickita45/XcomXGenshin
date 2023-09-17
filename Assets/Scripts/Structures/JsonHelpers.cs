@@ -165,6 +165,7 @@ public class CharacterData
     public int characterBaseHealth;
     public int characterWeapon;
     public string characterAvatarPath;
+    public string element;
 }
 [System.Serializable]
 public class CharactersData

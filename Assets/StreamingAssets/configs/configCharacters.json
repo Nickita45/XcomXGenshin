@@ -1,31 +1,70 @@
 {
-  "characters": [
-    {
-      "characterName": "Barbara",
-      "characterSpeed": 5.0,
-      "characterMoveDistance": 4,
-      "characterRangedTargetDistance": 10.0,
-      "characterBaseAim": 50,
-      "characterBaseHealth": 5,
-      "characterAvatarPath": "Characters/Barbara/Barbara"
-    },
-    {
-      "characterName": "Diluc",
-      "characterSpeed": 5.0,
-      "characterMoveDistance": 5,
-      "characterRangedTargetDistance": 10.0,
-      "characterBaseAim": 55,
-      "characterBaseHealth": 6,
-      "characterAvatarPath": "Characters/Diluc/Diluc"
-    },
-    {
-      "characterName": "Albedo",
-      "characterSpeed": 7.0,
-      "characterMoveDistance": 3,
-      "characterRangedTargetDistance": 12.0,
-      "characterBaseAim": 70,
-      "characterBaseHealth": 8,
-      "characterAvatarPath": "Characters/Albedo/Albedo"
-    }
-  ]
+    "characters": [
+        {
+            "characterName": "Rosaria",
+            "characterSpeed": 3.0,
+            "characterMoveDistance": 40,
+            "characterVisionDistance": 10.0,
+            "characterBaseAim": 50,
+            "characterBaseHealth": 5,
+            "characterWeapon": 0,
+            "characterAvatarPath": "Characters/Rosaria/Rosaria",
+            "element": "Cryo"
+        },
+        {
+            "characterName": "Diluc",
+            "characterSpeed": 3.0,
+            "characterMoveDistance": 5,
+            "characterVisionDistance": 10.0,
+            "characterBaseAim": 55,
+            "characterBaseHealth": 6,
+            "characterWeapon": 2,
+            "characterAvatarPath": "Characters/Diluc/Diluc",
+            "element": "Pyro"
+        },
+        {
+            "characterName": "Albedo",
+            "characterSpeed": 2.0,
+            "characterMoveDistance": 3,
+            "characterVisionDistance": 12.0,
+            "characterBaseAim": 70,
+            "characterBaseHealth": 8,
+            "characterWeapon": 0,
+            "characterAvatarPath": "Characters/Albedo/Albedo",
+            "element": "Geo"
+        },
+        {
+            "characterName": "Fischl",
+            "characterSpeed": 2.0,
+            "characterMoveDistance": 3,
+            "characterVisionDistance": 12.0,
+            "characterBaseAim": 70,
+            "characterBaseHealth": 8,
+            "characterWeapon": 0,
+            "characterAvatarPath": "Characters/Fischl/Fischl",
+            "element": "Electro"
+        },
+        {
+            "characterName": "Sucrose",
+            "characterSpeed": 2.0,
+            "characterMoveDistance": 3,
+            "characterVisionDistance": 12.0,
+            "characterBaseAim": 70,
+            "characterBaseHealth": 8,
+            "characterWeapon": 0,
+            "characterAvatarPath": "Characters/Sucrose/Sucrose",
+            "element": "Anemo"
+        },
+        {
+            "characterName": "Barbara",
+            "characterSpeed": 2.0,
+            "characterMoveDistance": 3,
+            "characterVisionDistance": 12.0,
+            "characterBaseAim": 70,
+            "characterBaseHealth": 8,
+            "characterWeapon": 1,
+            "characterAvatarPath": "Characters/Barbara/Barbara",
+            "element": "Hydro"
+        }
+    ]
 }
