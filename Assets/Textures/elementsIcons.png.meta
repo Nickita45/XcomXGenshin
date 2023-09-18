@@ -1,0 +1,620 @@
+fileFormatVersion: 2
+guid: cae535d331bf87f4cb6c7a84d81abfbc
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: icon_element_pyro
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 940
+        width: 314
+        height: 381
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78b1b52463b8b314b918c42633e4782f
+      internalID: -1930446503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_hydro
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 952
+        width: 362
+        height: 357
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 981d7e5f4ed730c4fb5ead19f9758bfe
+      internalID: 539102053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_electro
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 936
+        width: 388
+        height: 389
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21c92f1c6d5b3664d8dd7573e93b0a8e
+      internalID: -1892578925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_dendro
+      rect:
+        serializedVersion: 2
+        x: 2108
+        y: 952
+        width: 379
+        height: 360
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33d6a47fb227b8c4caea06a092654564
+      internalID: -1983495415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_cryo
+      rect:
+        serializedVersion: 2
+        x: 2651
+        y: 935
+        width: 341
+        height: 391
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9166a7a5cb3ad043b57c8fa65e06a36
+      internalID: -126311707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_geo
+      rect:
+        serializedVersion: 2
+        x: 3152
+        y: 919
+        width: 388
+        height: 413
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c40306fd9d05c946935980644b99a85
+      internalID: -139145821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_pyro_w
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 490
+        width: 314
+        height: 381
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a158224f8c54af94e84d9a2916e64b26
+      internalID: 1531714253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_hydro_w
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 503
+        width: 359
+        height: 357
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b8c7a995d0f6ff4699b257ee7e08fe7
+      internalID: 992438958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_electro_w
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 485
+        width: 388
+        height: 389
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50601fa2a94f815418ceb580267b9dc5
+      internalID: 1727161444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_dendro_w
+      rect:
+        serializedVersion: 2
+        x: 2108
+        y: 503
+        width: 379
+        height: 357
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04aa9e713b3b2d8428f8e3ce50831e93
+      internalID: -1554394924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_cryo_w
+      rect:
+        serializedVersion: 2
+        x: 2651
+        y: 484
+        width: 341
+        height: 393
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2819f71ac1a4f8b42aec3258673c1e0c
+      internalID: -885019894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_geo_w
+      rect:
+        serializedVersion: 2
+        x: 3152
+        y: 469
+        width: 382
+        height: 408
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b76af38f96f36af4b90b8a74cc351f3e
+      internalID: 935028429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_pyro_b
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 39
+        width: 314
+        height: 382
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b327e0eaeb18fb04b92cdd21b1e81a31
+      internalID: 350874309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_hydro_b
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 51
+        width: 357
+        height: 357
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 593c14f0029f8614a9ca7b1a44de3242
+      internalID: -756024065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_electro_b
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 36
+        width: 388
+        height: 388
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1f0f57aa169b4a499b3b2e6e56e65b1
+      internalID: -1624652637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_dendro_b
+      rect:
+        serializedVersion: 2
+        x: 2108
+        y: 52
+        width: 379
+        height: 358
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb1aa11b1e530064a843c3f52f571554
+      internalID: -1419721515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_cryo_b
+      rect:
+        serializedVersion: 2
+        x: 2651
+        y: 34
+        width: 341
+        height: 393
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5ac2c748ed5f674ba3e0b5377a94980
+      internalID: 1312429102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_geo_b
+      rect:
+        serializedVersion: 2
+        x: 3152
+        y: 19
+        width: 381
+        height: 407
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d32696e916b8134a8d46a7af7b57b14
+      internalID: 1680049471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_anemo
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 940
+        width: 399
+        height: 384
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55baa2d1e8dea2a4989b88cb0743457b
+      internalID: -1689743006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_anemo_w
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 495
+        width: 399
+        height: 384
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64354f44dcc29754c8979d78284b199c
+      internalID: 147351661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_element_anemo_b
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 39
+        width: 399
+        height: 384
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef591d17046e18845bcef36624fb4d0b
+      internalID: -127287331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      dbycshw2uiw51_10: -343849670
+      dbycshw2uiw51_11: -935120961
+      dbycshw2uiw51_12: 633683264
+      dbycshw2uiw51_16: -1961290526
+      dbycshw2uiw51_17: -2143254513
+      dbycshw2uiw51_18: 651147097
+      dbycshw2uiw51_21: 615919970
+      dbycshw2uiw51_23: -754528706
+      dbycshw2uiw51_24: 250652335
+      dbycshw2uiw51_25: -598021791
+      dbycshw2uiw51_26: 705887595
+      dbycshw2uiw51_3: -735996095
+      dbycshw2uiw51_30: -1165799245
+      dbycshw2uiw51_31: -4197812
+      dbycshw2uiw51_32: 1306273311
+      dbycshw2uiw51_35: 166334696
+      dbycshw2uiw51_37: 1108655685
+      dbycshw2uiw51_38: 39555940
+      dbycshw2uiw51_39: 541709882
+      dbycshw2uiw51_4: 1393325340
+      dbycshw2uiw51_40: 669048016
+      dbycshw2uiw51_7: -131968294
+      dbycshw2uiw51_9: -475746006
+      icon_element_anemo: -1689743006
+      icon_element_anemo_b: -127287331
+      icon_element_anemo_w: 147351661
+      icon_element_cryo: -126311707
+      icon_element_cryo_b: 1312429102
+      icon_element_cryo_w: -885019894
+      icon_element_dendro: -1983495415
+      icon_element_dendro_b: -1419721515
+      icon_element_dendro_w: -1554394924
+      icon_element_electro: -1892578925
+      icon_element_electro_b: -1624652637
+      icon_element_electro_w: 1727161444
+      icon_element_geo: -139145821
+      icon_element_geo_b: 1680049471
+      icon_element_geo_w: 935028429
+      icon_element_hydro: 539102053
+      icon_element_hydro_b: -756024065
+      icon_element_hydro_w: 992438958
+      icon_element_pyro: -1930446503
+      icon_element_pyro_b: 350874309
+      icon_element_pyro_w: 1531714253
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

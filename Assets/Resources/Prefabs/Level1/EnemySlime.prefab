@@ -1912,6 +1912,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster_Slime_02_Model001 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3877658567366799050, guid: bf14dbfbb8fdc274796e4f8cc61ddd28, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 493d58f8ea9a9e1419f864ad50972ed6, type: 2}
+    - target: {fileID: 8103443237895470782, guid: bf14dbfbb8fdc274796e4f8cc61ddd28, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f5cccc4a076412e49b828c2009ee0ab6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf14dbfbb8fdc274796e4f8cc61ddd28, type: 3}
 --- !u!4 &7308024990804176678 stripped
@@ -1919,3 +1927,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bf14dbfbb8fdc274796e4f8cc61ddd28, type: 3}
   m_PrefabInstance: {fileID: 7125235016374814925}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7935486231159190940 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bf14dbfbb8fdc274796e4f8cc61ddd28, type: 3}
+  m_PrefabInstance: {fileID: 7125235016374814925}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6777320740680495013
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7935486231159190940}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f6166fc5a82eb5141aaa2d1aa31c8fbe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
