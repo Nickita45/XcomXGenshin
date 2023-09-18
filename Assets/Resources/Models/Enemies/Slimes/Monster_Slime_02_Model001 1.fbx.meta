@@ -13,12 +13,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Monster_Slime_01_Fire_RightEye_Mat.002
-    second: {fileID: 2100000, guid: 2035713f06d13ce40bf7030fe6f77e6b, type: 2}
+    second: {fileID: 2100000, guid: f5cccc4a076412e49b828c2009ee0ab6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Monster_Slime_02_Fire_Large_Horn_Mat.002
-    second: {fileID: 2100000, guid: e3f39c7272cd06d43975fd129a2a8774, type: 2}
+    second: {fileID: 2100000, guid: 493d58f8ea9a9e1419f864ad50972ed6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

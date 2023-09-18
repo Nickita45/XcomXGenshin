@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -36,13 +36,13 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -51,9 +51,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -115,18 +115,370 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_0
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 820
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ed255626b642fb489b6dd20661bd4ca
+      internalID: 133723112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_1
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 867
+        width: 117
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03fc6150ac466304c8f8ac6c62f151c0
+      internalID: 1530619072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_2
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 820
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b6f5bbc6afd0094dad0f450163ad323
+      internalID: -1517465621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_3
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 820
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e47dcbae331e9d49881b44534a800f9
+      internalID: 27746021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_4
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 540
+        width: 92
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac0b4e31038671a45b8c638d65090830
+      internalID: 1700652453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_5
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 608
+        width: 116
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a8759c85a69b394fbdedeb26f40535b
+      internalID: -1064215544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_6
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 603
+        width: 103
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fdf52ddedd26e2468474ed0220fa2b2
+      internalID: 187698037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_7
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 602
+        width: 103
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 128394f93b7ccc14984f1d5714b1b3b2
+      internalID: -259545726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_8
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 284
+        width: 92
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1e2983b5077f954c8525312c0f78192
+      internalID: 455406156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_9
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 308
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3564d8896e84224097b67e42cdb9a3b
+      internalID: -423004735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_10
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 356
+        width: 121
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab772615fd8bdee47bbba90166784d23
+      internalID: 829089408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_11
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 356
+        width: 121
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 271bbecc79d48834d9290f235ce5c429
+      internalID: -1781127535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_12
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 12
+        width: 84
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fef9b6c00857e7b4ea309ddc2cc6702a
+      internalID: -2062227817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_13
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 12
+        width: 84
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97e4b0fefda382e498e8c97db4d48b11
+      internalID: 1694086836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_14
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 16
+        width: 88
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0114dda35fd34a4997b735105a7b811
+      internalID: -41209116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_Slime_Eye_Red_Tex_Diffuse_15
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 16
+        width: 88
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18dd2132644b0654f9ff2c75120debf9
+      internalID: -283441999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4a078136d3f46614894d556fc2da97cc
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Monster_Slime_Eye_Red_Tex_Diffuse_0: 133723112
+      Monster_Slime_Eye_Red_Tex_Diffuse_1: 1530619072
+      Monster_Slime_Eye_Red_Tex_Diffuse_10: 829089408
+      Monster_Slime_Eye_Red_Tex_Diffuse_11: -1781127535
+      Monster_Slime_Eye_Red_Tex_Diffuse_12: -2062227817
+      Monster_Slime_Eye_Red_Tex_Diffuse_13: 1694086836
+      Monster_Slime_Eye_Red_Tex_Diffuse_14: -41209116
+      Monster_Slime_Eye_Red_Tex_Diffuse_15: -283441999
+      Monster_Slime_Eye_Red_Tex_Diffuse_2: -1517465621
+      Monster_Slime_Eye_Red_Tex_Diffuse_3: 27746021
+      Monster_Slime_Eye_Red_Tex_Diffuse_4: 1700652453
+      Monster_Slime_Eye_Red_Tex_Diffuse_5: -1064215544
+      Monster_Slime_Eye_Red_Tex_Diffuse_6: 187698037
+      Monster_Slime_Eye_Red_Tex_Diffuse_7: -259545726
+      Monster_Slime_Eye_Red_Tex_Diffuse_8: 455406156
+      Monster_Slime_Eye_Red_Tex_Diffuse_9: -423004735
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
