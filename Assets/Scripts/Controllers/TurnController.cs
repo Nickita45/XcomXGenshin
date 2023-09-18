@@ -59,20 +59,19 @@ public class TurnController : MonoBehaviour
         if (_enemiesMakesTurn.Count != 0)
             return;
 
+        if (_enemiesTriggered.Count > 0)
+        {
+            OnTriggerEndMakeAction(null);
+            return;
+        }
+
         if (_characters.Count > 0)
         {
             IteratorPlusOne();
         }
-
-
         if (_characters.Count == 0)
         {
-            if (_enemiesTriggered.Count > 0)
-            {
-                OnTriggerEndMakeAction(null);
-            }
-            else
-                StartCoroutine(EndTurn());
+            StartCoroutine(EndTurn());
         }
     }
 
@@ -84,7 +83,6 @@ public class TurnController : MonoBehaviour
         yield return new WaitForSeconds(_secondsEndTurn);
         BeginOfTheEnemyTurn();
     }
-
     public void SetCharacter(CharacterInfo characterInfo)
     {
         _iterator = _characters.IndexOf(characterInfo);
