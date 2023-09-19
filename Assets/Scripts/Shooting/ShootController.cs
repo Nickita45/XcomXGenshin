@@ -10,7 +10,7 @@ public class ShootController : MonoBehaviour
     [SerializeField]
     private string _nameBulletSpawner = "BulletSpawner";
 
-    public IEnumerator Shoot(Transform target, GunType actualGun, int procent)
+    public IEnumerator Shoot(Transform target, GunType actualGun, int procent, IEnumerator afterShootingBullets)
     {
         Transform firePoint = GetComponent<CharacterInfo>().GunPrefab.transform.GetChild((int)actualGun).Find(_nameBulletSpawner);
 
@@ -32,6 +32,8 @@ public class ShootController : MonoBehaviour
             yield return new WaitForSeconds(UnityEngine.Random.Range(ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].minTimeBetweenShooting,
                 ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].maxTimeBetweenShooting));
         }
+        //Here stop animation shooting
+        yield return StartCoroutine(afterShootingBullets);
 
         if (randomGenerate > procent)
         {

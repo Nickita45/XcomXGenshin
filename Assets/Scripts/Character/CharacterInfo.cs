@@ -220,6 +220,8 @@ public class CharacterInfo : PersonInfo
         GameManagerMap.Instance.TurnController.CharacterEndHisTurn(this);
         GameManagerMap.Instance.CharacterTargetFinder.OnEnemyUpdate();
         _canvasController.DisableAll();
+        GetComponent<CharacterInfo>().GunPrefab.SetActive(false);
+        GetComponent<CharacterInfo>().Animation.Avatar.SetActive(false);
 
         Animation.Avatar.SetActive(false);
         GunPrefab.SetActive(false);
