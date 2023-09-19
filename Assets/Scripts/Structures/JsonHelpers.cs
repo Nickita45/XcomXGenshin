@@ -74,22 +74,10 @@ public class TerritroyReaded
                                            && GameManagerMap.Instance.Map[GameManagerMap.Instance.Map[n].IndexUp.OrderBy(i => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(i), TerritroyReaded.MakeVectorFromIndex(n))).First()].TerritoryInfo == TerritoryType.Air,
                                     1, true, IndexBottom, IndexFront, IndexRight, IndexLeft) ||
                                     DetectSomeBooleans(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround, 1, true, IndexDown);
-    //IndexBottom.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0 ||
-    //IndexFront.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0 ||
-    //IndexRight.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0 ||
-    //IndexLeft.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0 ||
-    //IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0;
-
     public bool InACenterOfGronds() => DetectSomeBooleans(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air
                                                             && GameManagerMap.Instance.Map[n].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 1,
                                     1, false, IndexBottom, IndexFront, IndexRight, IndexLeft);
 
-
-    /*        IndexBottom.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0 &&
-                                           IndexFront.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0 &&
-                                           IndexRight.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0 &&
-                                           IndexLeft.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0;
-    */
     public static bool DetectSomeBooleans(Func<string, bool> predicate, int count, bool IsOr, params HashSet<string>[] sides)
     {
         bool and = true;

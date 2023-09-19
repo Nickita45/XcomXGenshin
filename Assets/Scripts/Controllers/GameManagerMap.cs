@@ -184,6 +184,13 @@ public class GameManagerMap : MonoBehaviour
         CharacterAnimation animation = CharacterMovement.SelectedCharacter.Animation;
         ShootController shootController = CharacterMovement.SelectedCharacter.GetComponent<ShootController>();
 
+        IEnumerator IEnumeratorActionMethod()
+        {
+            yield return StartCoroutine(animation.StopShooting());
+            yield return StartCoroutine(animation.Crouch());
+            yield return StartCoroutine(CharacterMovement.CrouchRotateCharacterNearShelter(Instance.CharacterMovement.SelectedCharacter));
+        }
+
         // Setup shooting animation
         yield return StartCoroutine(animation.CrouchRotate(targetRotation));
         yield return StartCoroutine(animation.StopCrouching());
@@ -191,13 +198,10 @@ public class GameManagerMap : MonoBehaviour
 
         // Shoot
         yield return StartCoroutine(shootController.Shoot(_enemyPanel.EnemyObject.transform,
-            Instance.CharacterMovement.SelectedCharacter.WeaponCharacter, _enemyPanel.SelectedEnemyPercent));
+            Instance.CharacterMovement.SelectedCharacter.WeaponCharacter, _enemyPanel.SelectedEnemyPercent, IEnumeratorActionMethod()));
 
         // Setup idle crouching animation
-        yield return StartCoroutine(animation.StopShooting());
-        yield return StartCoroutine(animation.Crouch());
-        yield return StartCoroutine(CharacterMovement.CrouchRotateCharacterNearShelter(Instance.CharacterMovement.SelectedCharacter));
-
+        
         onFinish();
     }
 

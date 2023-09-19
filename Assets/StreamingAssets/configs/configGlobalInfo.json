@@ -9,8 +9,8 @@
     "cameraSpeed": 5.0,
     "cameraSpeedRotation": 150.0,
     "cameraSpeedZoom": 60.0,
-    "cameraZoomMin": 2.27,
-    "cameraZoomMax": 20.8,
+    "cameraZoomMin": 2.2699999809265138,
+    "cameraZoomMax": 20.799999237060548,
     "secondsEndTurn": 3.0,
     "secondsTimerTurnCharacter": 2.0,
     "typeGun": [
@@ -21,7 +21,7 @@
             "minHitValue": 3,
             "maxHitValue": 5,
             "countBullets": 5,
-            "minTimeBetweenShooting": 0.15,
+            "minTimeBetweenShooting": 0.15000000596046449,
             "maxTimeBetweenShooting": 0.25
         },
         {
