@@ -3,6 +3,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class UIPoolController : MonoBehaviour
 {
@@ -19,21 +20,21 @@ public class UIPoolController : MonoBehaviour
     [SerializeField]
     private RuntimeAnimatorController _animatorController;
     [SerializeField]
-    private int[] _charactersPoolID = new int[4] { 0, 1, 2, 3 }; // -1 skip
 
-    [SerializeField]
     private GameObject _characterPoolMain, _characterPoolUI;
 
     public GameObject descriptionMain, descriptionUI;
+    [SerializeField]
+    private Button _buttonStartGame;
     void Start()
     {
         _poolCharacters = _gameObjectPoolCharacters.GetComponentInChildren<CharactersDropList>();
         spritesElementIcons = Resources.LoadAll<Sprite>("Textures/elementsIcons");
         spritesCharacterIcons = Resources.LoadAll<Sprite>("Textures/CharactersIcon");
 
-        for (int i = 0; i < _charactersPoolID.Length; i++)
+        for (int i = 0; i < HubData.Instance.charactersPoolID.Length; i++)
         {
-            UpdateInfoCharacter(_charactersPoolID[i]);
+            UpdateInfoCharacter(HubData.Instance.charactersPoolID[i]);
             _characterPoolID++;
         }
     }
@@ -48,14 +49,14 @@ public class UIPoolController : MonoBehaviour
             _characterPoolID = id;
             _gameObjectPoolCharacters.SetActive(true);
 
-            _poolCharacters.pickedCharacter = _charactersPoolID[id];
+            _poolCharacters.pickedCharacter = HubData.Instance.charactersPoolID[id];
             _poolCharacters.UpdateCharacterListColor();
         }
     }
     public void SelectInfoCharacter(int id)
     {
         // this equal should be changed
-        if (_charactersPoolID[id] != -1)
+        if (HubData.Instance.charactersPoolID[id] != -1)
         {
             // todo: need to change object active and deactive
             _characterPoolMain.SetActive(false);
@@ -64,7 +65,7 @@ public class UIPoolController : MonoBehaviour
             descriptionMain.SetActive(true);
             descriptionUI.SetActive(true);
 
-            _characterDescription.UpdateCharacterDescription(_charactersPoolID[id]);
+            _characterDescription.UpdateCharacterDescription(HubData.Instance.charactersPoolID[id]);
         }
     }
     public void SetPoolCharacter()
@@ -79,7 +80,7 @@ public class UIPoolController : MonoBehaviour
     }
     public void UpdateInfoCharacter(int pickedCharacter)
     {
-        _charactersPoolID[_characterPoolID] = pickedCharacter;
+        HubData.Instance.charactersPoolID[_characterPoolID] = pickedCharacter;
         _gameObjectPoolCharacters.SetActive(false);
         _charactersModels[_characterPoolID].SetActive(true);
 
@@ -101,15 +102,28 @@ public class UIPoolController : MonoBehaviour
 
         Animator _animator = _avatar.GetComponent<Animator>();
         _animator.runtimeAnimatorController = _animatorController;
+        SetButtonSceneIfEmptyPool();
     }
     public void RemovedCharacter()
     {
         _gameObjectPoolCharacters.SetActive(false);
         _charactersModels[_characterPoolID].SetActive(false);
-        _charactersPoolID[_characterPoolID] = -1;
+        HubData.Instance.charactersPoolID[_characterPoolID] = -1;
+        SetButtonSceneIfEmptyPool();
+            
+    }
+    private void SetButtonSceneIfEmptyPool()
+    {
+        bool isAllNegative = HubData.Instance.charactersPoolID.All(x => x == -1);
+        _buttonStartGame.gameObject.SetActive(!isAllNegative);
     }
     public bool IsIDCharacterInArray(int id)
     {
-        return _charactersPoolID.Contains(id);
+        return HubData.Instance.charactersPoolID.Contains(id);
+    }
+    // TODO: MOVE TO ANOTHER SCRIPT AND MAKE A CHECK IF ANY CHAEACTER PICKED
+    public void SceneLoad(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }

@@ -38,10 +38,18 @@ public class TurnController : MonoBehaviour
 
         if (_characters.First().Index == -1)
         {
+            HubData.Instance.charactersPoolID = HubData.Instance.charactersPoolID.OrderBy(x => x == -1).ToArray();
             for (int i = 0; i < _characters.Count; i++)
             {
-                _characters[i].Index = i;
+
+                // TODO: Add character remove and take from list another if possible
+                _characters[i].Index = (HubData.Instance.charactersPoolID[i] == -1) ? 0 : HubData.Instance.charactersPoolID[i];
                 _characters[i].OnIndexSet();
+                if (HubData.Instance.charactersPoolID[i] == -1)
+                {
+                    _characters[i].MakeHit(99);
+                }
+
             }
         }
 
