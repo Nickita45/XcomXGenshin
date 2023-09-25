@@ -1600,9 +1600,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78c5df9bd1427d84ba967feecbc97d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _countHp: 5
+  _countHp: 3
   _objectModelParent: {fileID: 5834032658343930422}
-  _enemyController: {fileID: -2926375938907696075}
+  _bulletSpawner: {fileID: 0}
+  _speedCharacter: 3
+  _visiblityCharacter: 10
+  _distanceToMove: 5
+  _minDmg: 1
+  _maxDmg: 3
 --- !u!114 &-2926375938907696075
 MonoBehaviour:
   m_ObjectHideFlags: 0

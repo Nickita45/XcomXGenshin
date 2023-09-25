@@ -1103,7 +1103,6 @@ GameObject:
   - component: {fileID: 5222193431258469811}
   - component: {fileID: 9049764960556308401}
   - component: {fileID: 558280408510619974}
-  - component: {fileID: 3391053378008989068}
   m_Layer: 0
   m_Name: EnemySpawn
   m_TagString: Untagged
@@ -1277,21 +1276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78c5df9bd1427d84ba967feecbc97d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectModelParent: {fileID: 0}
   _countHp: 5
-  _enemyController: {fileID: 3391053378008989068}
---- !u!114 &3391053378008989068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6654390615234965879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 712c2e3a2fd74164a8a3d2ae58f72e00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _objectModelParent: {fileID: 0}
 --- !u!1 &6654509893336421984
 GameObject:
   m_ObjectHideFlags: 0

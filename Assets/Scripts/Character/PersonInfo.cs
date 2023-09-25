@@ -14,6 +14,7 @@ public abstract class PersonInfo : MonoBehaviour
     protected abstract void KillPerson();
     public abstract EnemyCanvasController CanvasController();
 
+    public abstract Transform GetBulletSpawner(string name);
     public void MakeHit(int hit)
     {
         _countHp -= hit;
