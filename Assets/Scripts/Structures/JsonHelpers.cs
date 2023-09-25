@@ -78,6 +78,9 @@ public class TerritroyReaded
                                                             && GameManagerMap.Instance.Map[n].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 1,
                                     1, false, IndexBottom, IndexFront, IndexRight, IndexLeft);
 
+    public bool IsNearShelter() => DetectSomeBooleans(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Shelter
+        || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround, 1, true, IndexBottom, IndexFront, IndexRight, IndexLeft); //mb is slow???
+
     public static bool DetectSomeBooleans(Func<string, bool> predicate, int count, bool IsOr, params HashSet<string>[] sides)
     {
         bool and = true;

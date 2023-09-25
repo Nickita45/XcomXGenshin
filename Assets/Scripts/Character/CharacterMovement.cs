@@ -587,8 +587,6 @@ public class CharacterMovement : MonoBehaviour
     {
         var allPaths = GameManagerMap.Instance.CharacterMovement.CalculateAllPossible(enemyInfo.MoveDistanceCharacter(), enemyInfo);
 
-        var character = enemyInfo.GetFirstPerson();
-
         TerritroyReaded findTerritory = findTerritoryMoveTo(allPaths);
 
         var aktualPath = GameManagerMap.Instance.CharacterMovement.CalculateAllPath(findTerritory, enemyInfo, allPaths);

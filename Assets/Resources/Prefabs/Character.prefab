@@ -3943,7 +3943,6 @@ GameObject:
   - component: {fileID: 3720216858969371197}
   - component: {fileID: 8148511125751528512}
   - component: {fileID: 6574580558388666161}
-  - component: {fileID: 3727150175493353867}
   - component: {fileID: 767113258584801334}
   - component: {fileID: 3601942764597059093}
   m_Layer: 0
@@ -4034,20 +4033,6 @@ MonoBehaviour:
   - {fileID: 6968720043355437035}
   _gunPrefab: {fileID: 4332863957969416643}
   _animation: {fileID: 3601942764597059093}
---- !u!114 &3727150175493353867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5040088768253021677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cb52a0cd4e3a0e4a911ded34707393c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 5783682952171341627, guid: f23e581095bc1a947b55e7b46c58a4e7, type: 3}
-  _nameBulletSpawner: BulletSpawner
 --- !u!114 &767113258584801334
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3117,7 +3117,7 @@
         "6.5_0.5_5.5"
       ],
       "Index": "7.5_0.5_5.5",
-      "PathPrefab": "Prefabs/Level1/EnemySlime",
+      "PathPrefab": "Prefabs/Level1/EnemyHilichurlRanger",
       "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,
@@ -8918,7 +8918,7 @@
         "-3.59_0.479_0.59"
       ],
       "Index": "-0.5_0.5_1.5",
-      "PathPrefab": "Prefabs/Level1/EnemySlime",
+      "PathPrefab": "Prefabs/Level1/EnemyHilichurlRanger",
       "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,
@@ -64140,7 +64140,7 @@
         "6.5_0.5_5.5"
       ],
       "Index": "7.5_0.5_5.5",
-      "PathPrefab": "Prefabs/Level1/EnemySlime",
+      "PathPrefab": "Prefabs/Level1/EnemyHilichurlRanger",
       "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,

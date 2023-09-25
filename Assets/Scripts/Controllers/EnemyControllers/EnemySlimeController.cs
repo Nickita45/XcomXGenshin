@@ -6,21 +6,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-public class EnemyController : MonoBehaviour
+public class EnemySlimeController : EnemyController, IEnemyController
 {
-    private EnemyInfo _enemyInfo;
-
-
     private Func<Dictionary<TerritroyReaded, TerritroyReaded>, TerritroyReaded> findTerritoryToCharacter;
     private Func<Dictionary<TerritroyReaded, TerritroyReaded>, TerritroyReaded> findTerritoryTheFarFromCharacter;
 
-    private void Start()
+    protected override void Start()
     {
-        _enemyInfo = GetComponent<EnemyInfo>();
+        base.Start();
 
         findTerritoryToCharacter = (allPaths) =>
         {
-            var character = _enemyInfo.GetFirstPerson();
+            var character = GetFirstPerson();
 
             if (character != null)
                 return allPaths.Keys.OrderBy(n => Vector3.Distance(character.transform.localPosition, n.GetCordinats())).Where(n => n != _enemyInfo.ActualTerritory).First();
@@ -34,17 +31,15 @@ public class EnemyController : MonoBehaviour
 
         findTerritoryTheFarFromCharacter = (allPaths) =>
         {
-            var character = _enemyInfo.GetFirstPerson();
+            var character = GetFirstPerson();
             Debug.Log("RUUUNN");
-            return allPaths.Keys.OrderBy(n => Vector3.Distance(character.transform.localPosition, n.GetCordinats())).Where(n => n != _enemyInfo.ActualTerritory).Last();
+            return allPaths.Keys.OrderBy(n => Vector3.Distance(character.transform.localPosition, n.GetCordinats())).Last(n => n != _enemyInfo.ActualTerritory);
         };
     }
 
     public void OnTriggerCharacter()
     {
-        if (!GetComponent<TerritoryInfo>().Path.Contains("Slime")) //for test
-            return;
-        _enemyInfo.ObjectModel.transform.LookAt(_enemyInfo.GetFirstPerson().transform);
+        _enemyInfo.ObjectModel.transform.LookAt(GetFirstPerson().transform);
         GameManagerMap.Instance.TurnController.AddEnemyToTriggerList(_enemyInfo);
     }
 
@@ -59,9 +54,6 @@ public class EnemyController : MonoBehaviour
 
     public void MakeAction(Action finalAction)
     {
-        if (!GetComponent<TerritoryInfo>().Path.Contains("Slime")) //for test
-            return;
-
         if (_enemyInfo.IsTriggered == false)
             return;
 
@@ -76,7 +68,7 @@ public class EnemyController : MonoBehaviour
                     GameManagerMap.Instance.TurnController.OnEnemyEndMakeAction(_enemyInfo);
             };
         }
-        var person = _enemyInfo.GetFirstPerson();
+        var person = GetFirstPerson();
         if (person != null && Vector3.Distance(person.transform.localPosition, gameObject.transform.localPosition) < 2)
         {
             _enemyInfo.CountActions -= 2;
@@ -91,19 +83,19 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private IEnumerator MoveEnemy(Action finalAction, Func<Dictionary<TerritroyReaded, TerritroyReaded>, TerritroyReaded> findTerritoryMoveTo)
+    public IEnumerator MoveEnemy(Action finalAction, Func<Dictionary<TerritroyReaded, TerritroyReaded>, TerritroyReaded> findTerritoryMoveTo)
     {
-        var character = _enemyInfo.GetFirstPerson();
+        var character = GetFirstPerson();
 
         yield return StartCoroutine(GameManagerMap.Instance.CharacterMovement.MoveEnemyToTerritory(_enemyInfo, findTerritoryMoveTo));
 
         if (character != null)
             _enemyInfo.ObjectModel.transform.LookAt(character.transform);
-
+        GameManagerMap.Instance.CharacterTargetFinder.OnEnemyUpdate();
         finalAction?.Invoke();
     }
 
-    private IEnumerator MakeAttack(Action finalAction, CharacterInfo character)
+    public IEnumerator MakeAttack(Action finalAction, CharacterInfo character)
     {
         if (UnityEngine.Random.Range(1, 100 + 1) > 50)
             StartCoroutine(character.CanvasController().PanelShow(character.CanvasController().PanelMiss));
@@ -122,10 +114,5 @@ public class EnemyController : MonoBehaviour
         }
 
         finalAction();
-    }
-
-    private void OnDestroy()
-    {
-        StopAllCoroutines();
     }
 }

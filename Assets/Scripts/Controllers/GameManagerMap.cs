@@ -17,6 +17,8 @@ public class GameManagerMap : MonoBehaviour
 
     [SerializeField]
     private CharacterMovement _characterMovement;
+    [SerializeField]
+    private ShootController _shootController;
 
     [SerializeField]
     private CharacterTargetFinder _characterTargetFinder;
@@ -49,6 +51,7 @@ public class GameManagerMap : MonoBehaviour
     public FreeCameraController FreeCameraController => _freeCameraController;
     public FixedCameraController FixedCameraController => _fixedCameraController;
     public CharacterTargetFinder CharacterTargetFinder => _characterTargetFinder;
+    public ShootController ShootController => _shootController;
     public TurnController TurnController => _turnController;
     public StatusMain StatusMain => _statusMain;
     public EnemyPanel EnemyPanel => _enemyPanel;
@@ -182,7 +185,6 @@ public class GameManagerMap : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
 
         CharacterAnimation animation = CharacterMovement.SelectedCharacter.Animation;
-        ShootController shootController = CharacterMovement.SelectedCharacter.GetComponent<ShootController>();
 
         IEnumerator IEnumeratorActionMethod()
         {
@@ -197,8 +199,9 @@ public class GameManagerMap : MonoBehaviour
         yield return StartCoroutine(animation.Shoot());
 
         // Shoot
-        yield return StartCoroutine(shootController.Shoot(_enemyPanel.EnemyObject.transform,
-            Instance.CharacterMovement.SelectedCharacter.WeaponCharacter, _enemyPanel.SelectedEnemyPercent, IEnumeratorActionMethod()));
+        yield return StartCoroutine(ShootController.Shoot(_enemyPanel.EnemyInfo,
+            Instance.CharacterMovement.SelectedCharacter.WeaponCharacter, _enemyPanel.SelectedEnemyPercent, IEnumeratorActionMethod(),
+            Instance.CharacterMovement.SelectedCharacter));
 
         // Setup idle crouching animation
         

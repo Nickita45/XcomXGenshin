@@ -10,9 +10,9 @@ public class ShootController : MonoBehaviour
     [SerializeField]
     private string _nameBulletSpawner = "BulletSpawner";
 
-    public IEnumerator Shoot(Transform target, GunType actualGun, int procent, IEnumerator afterShootingBullets)
+    public IEnumerator Shoot(PersonInfo target, GunType actualGun, int procent, IEnumerator afterShootingBullets, PersonInfo character)
     {
-        Transform firePoint = GetComponent<CharacterInfo>().GunPrefab.transform.GetChild((int)actualGun).Find(_nameBulletSpawner);
+        Transform firePoint = character.GetBulletSpawner(_nameBulletSpawner);
 
         int randomGenerate = UnityEngine.Random.Range(0, 101); // [0;101)
 
@@ -25,7 +25,7 @@ public class ShootController : MonoBehaviour
 
             if (bulletScript != null && target != null)
             {
-                Vector3 directionToTarget = (target.position - firePoint.position);
+                Vector3 directionToTarget = (target.transform.position - firePoint.position);
                 bullet.transform.forward = directionToTarget + addShootRange;
             }
 
@@ -33,17 +33,18 @@ public class ShootController : MonoBehaviour
                 ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].maxTimeBetweenShooting));
         }
         //Here stop animation shooting
-        yield return StartCoroutine(afterShootingBullets);
+        if(afterShootingBullets != null)
+            yield return StartCoroutine(afterShootingBullets);
 
         if (randomGenerate > procent)
         {
-            StartCoroutine(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelMiss, 4));
+            StartCoroutine(target.CanvasController().PanelShow(target.CanvasController().PanelMiss, 4));
         }
         else
         {
             int dmg = UnityEngine.Random.Range(ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].minHitValue, ConfigurationManager.Instance.GlobalDataJson.typeGun[(int)actualGun].maxHitValue + 1);
-            StartCoroutine(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelShow(GameManagerMap.Instance.EnemyPanel.EnemyCanvasController.PanelHit(dmg), 4));
-            GameManagerMap.Instance.EnemyPanel.EnemyInfo.MakeHit(dmg);
+            StartCoroutine(target.CanvasController().PanelShow(target.CanvasController().PanelHit(dmg), 4));
+            target.MakeHit(dmg);
 
         }
         yield return new WaitForSeconds(ConfigurationManager.Instance.GlobalDataJson.timeAfterShooting);

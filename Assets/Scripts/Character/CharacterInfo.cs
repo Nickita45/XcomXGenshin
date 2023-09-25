@@ -59,6 +59,8 @@ public class CharacterInfo : PersonInfo
     private CharacterAnimation _animation;
     public CharacterAnimation Animation => _animation;
 
+    public override Transform GetBulletSpawner(string name) => GetComponent<CharacterInfo>().GunPrefab.transform.GetChild((int)WeaponCharacter).Find(name);
+
     //Config atributes
     public int Index { get; set; }
     public string NameCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterName;
@@ -220,8 +222,8 @@ public class CharacterInfo : PersonInfo
         GameManagerMap.Instance.TurnController.CharacterEndHisTurn(this);
         GameManagerMap.Instance.CharacterTargetFinder.OnEnemyUpdate();
         _canvasController.DisableAll();
-        GetComponent<CharacterInfo>().GunPrefab.SetActive(false);
-        GetComponent<CharacterInfo>().Animation.Avatar.SetActive(false);
+        //GetComponent<CharacterInfo>().GunPrefab.SetActive(false);
+        //GetComponent<CharacterInfo>().Animation.Avatar.SetActive(false);
 
         Animation.Avatar.SetActive(false);
         GunPrefab.SetActive(false);

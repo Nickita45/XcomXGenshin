@@ -5938,6 +5938,7 @@ GameObject:
   - component: {fileID: 1775152543}
   - component: {fileID: 1775152537}
   - component: {fileID: 1775152539}
+  - component: {fileID: 1775152548}
   - component: {fileID: 1775152541}
   - component: {fileID: 1775152542}
   - component: {fileID: 1775152544}
@@ -5970,6 +5971,7 @@ MonoBehaviour:
     width: 0
     height: 0
   _characterMovement: {fileID: 1775152539}
+  _shootController: {fileID: 1775152548}
   _characterTargetFinder: {fileID: 1775152542}
   _freeCameraController: {fileID: 963194230}
   _fixedCameraController: {fileID: 326296652}
@@ -6095,6 +6097,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuController: {fileID: 1752232543}
+--- !u!114 &1775152548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775152536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb52a0cd4e3a0e4a911ded34707393c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 5783682952171341627, guid: f23e581095bc1a947b55e7b46c58a4e7, type: 3}
+  _nameBulletSpawner: BulletSpawner
 --- !u!1 &1788984701
 GameObject:
   m_ObjectHideFlags: 0

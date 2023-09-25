@@ -17,7 +17,23 @@ public class AimCalculater : MonoBehaviour
 
     }
 
-    public static (int procent, ShelterType status) CalculateShelterPercent(TerritroyReaded defender, TerritroyReaded shooter, GunType gun, params int[] parameters)
+    public static (int percent, ShelterType status) CalculateShelterPercent(TerritroyReaded defender, TerritroyReaded shooter, GunType gun, params int[] parameters)
+    {
+        (CordinatesSide xSide, CordinatesSide zSide) side = GetSidesFromDefenderAndShooter(defender, shooter);
+
+        int groundProcent = 0;
+        if (shooter.YPosition - defender.YPosition < 0)
+            groundProcent = HIGHGROUNDPROCENT;
+        else if (shooter.YPosition - defender.YPosition > 0)
+            groundProcent = LOWGRONTPROCENT;
+
+        ShelterType maxValue = (ShelterType)Mathf.Max((int)GetShelterTypeByCordinateSide(defender, side.xSide), (int)GetShelterTypeByCordinateSide(defender, side.zSide));
+        int result = (parameters.Sum() + GetProcentByType(maxValue) + groundProcent + GetProcentFromGunType(gun, (int)Mathf.Round(Vector3.Distance(defender.GetCordinats(), shooter.GetCordinats()))));
+        return (Mathf.Min(Mathf.Max(result, 1), 100), maxValue);
+
+    }
+
+    public static (CordinatesSide xSide, CordinatesSide zSide) GetSidesFromDefenderAndShooter(TerritroyReaded defender, TerritroyReaded shooter)
     {
         CordinatesSide xSide, zSide;
         if (shooter.ZPosition - defender.ZPosition < 0 && shooter.ZPosition - defender.ZPosition != -1)
@@ -45,18 +61,7 @@ public class AimCalculater : MonoBehaviour
         {
             zSide = CordinatesSide.Nope;
         }
-
-        int groundProcent = 0;
-        if (shooter.YPosition - defender.YPosition < 0)
-            groundProcent = HIGHGROUNDPROCENT;
-        else if (shooter.YPosition - defender.YPosition > 0)
-            groundProcent = LOWGRONTPROCENT;
-
-        ShelterType maxValue = (ShelterType)Mathf.Max((int)GetShelterTypeByCordinateSide(defender, xSide), (int)GetShelterTypeByCordinateSide(defender, zSide));
-        int result = (parameters.Sum() + GetProcentByType(maxValue) + groundProcent + GetProcentFromGunType(gun, (int)Mathf.Round(Vector3.Distance(defender.GetCordinats(), shooter.GetCordinats()))));
-        //Debug.Log($"{parameters.Sum()}, {GetProcentByType(maxValue)}, {groundProcent}, {GetProcentFromGunType(gun, (int)Mathf.Round(Vector3.Distance(defender.GetCordinats(), shooter.GetCordinats())))}");
-        return (Mathf.Min(Mathf.Max(result, 1), 100), maxValue);
-
+        return (xSide, zSide);
     }
 
     private static ShelterType GetShelterTypeByCordinateSide(TerritroyReaded teritory, CordinatesSide cordinatesSide)
@@ -107,7 +112,7 @@ public class AimCalculater : MonoBehaviour
     }
 }
 
-enum CordinatesSide
+public enum CordinatesSide
 {
     Nope,
     Left,
