@@ -12,7 +12,7 @@ public class HubData : MonoBehaviour
     {
         if (_instance != null && _instance != this)
         {
-            Destroy(this);
+            Destroy(this); 
             return;
         }
         _instance = this;

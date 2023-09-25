@@ -24,6 +24,8 @@ public class UIPoolController : MonoBehaviour
     private GameObject _characterPoolMain, _characterPoolUI;
 
     public GameObject descriptionMain, descriptionUI;
+    [SerializeField]
+    private Button _buttonStartGame;
     void Start()
     {
         _poolCharacters = _gameObjectPoolCharacters.GetComponentInChildren<CharactersDropList>();
@@ -100,12 +102,20 @@ public class UIPoolController : MonoBehaviour
 
         Animator _animator = _avatar.GetComponent<Animator>();
         _animator.runtimeAnimatorController = _animatorController;
+        SetButtonSceneIfEmptyPool();
     }
     public void RemovedCharacter()
     {
         _gameObjectPoolCharacters.SetActive(false);
         _charactersModels[_characterPoolID].SetActive(false);
         HubData.Instance.charactersPoolID[_characterPoolID] = -1;
+        SetButtonSceneIfEmptyPool();
+            
+    }
+    private void SetButtonSceneIfEmptyPool()
+    {
+        bool isAllNegative = HubData.Instance.charactersPoolID.All(x => x == -1);
+        _buttonStartGame.gameObject.SetActive(!isAllNegative);
     }
     public bool IsIDCharacterInArray(int id)
     {

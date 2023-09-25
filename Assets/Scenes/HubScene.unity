@@ -4878,7 +4878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653f8c08e5056ac4bbc7382bff990625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _charactersPoolID: 00000000010000000200000003000000
+  charactersPoolID: 00000000010000000200000003000000
 --- !u!1 &1591048338
 GameObject:
   m_ObjectHideFlags: 0
@@ -6330,6 +6330,7 @@ MonoBehaviour:
   _characterPoolUI: {fileID: 1099455374}
   descriptionMain: {fileID: 1058786776}
   descriptionUI: {fileID: 273855385}
+  _buttonStartGame: {fileID: 1347202049}
 --- !u!1 &2068301476
 GameObject:
   m_ObjectHideFlags: 0
