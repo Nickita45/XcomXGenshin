@@ -63,13 +63,13 @@ public class CharacterInfo : PersonInfo
 
     //Config atributes
     public int Index { get; set; }
-    public string NameCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterName;
-    public override float SpeedCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterSpeed;
-    public override int MoveDistanceCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterMoveDistance;
-    public override float VisibilityCharacter() => ConfigurationManager.Instance.CharactersData.characters[Index].characterRangedTargetDistance;
-    public int BaseAimCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterBaseAim;
-    public int MaxHealthCharacter => ConfigurationManager.Instance.CharactersData.characters[Index].characterBaseHealth;
-    public GunType WeaponCharacter => (GunType)ConfigurationManager.Instance.CharactersData.characters[Index].characterWeapon;
+    public string NameCharacter() => ConfigurationManager.Instance.CharactersData[Index].characterName;
+    public override float SpeedCharacter() => ConfigurationManager.Instance.CharactersData[Index].characterSpeed;
+    public override int MoveDistanceCharacter() => ConfigurationManager.Instance.CharactersData[Index].characterMoveDistance;
+    public override float VisibilityCharacter() => ConfigurationManager.Instance.CharactersData[Index].characterRangedTargetDistance;
+    public int BaseAimCharacter => ConfigurationManager.Instance.CharactersData[Index].characterBaseAim;
+    public int MaxHealthCharacter => ConfigurationManager.Instance.CharactersData[Index].characterBaseHealth;
+    public GunType WeaponCharacter => (GunType)ConfigurationManager.Instance.CharactersData[Index].characterWeapon;
 
     private void Start()
     {
@@ -102,7 +102,7 @@ public class CharacterInfo : PersonInfo
         SetGunByIndex((int)WeaponCharacter);
         _countHp = MaxHealthCharacter;
 
-        _animation.Init(ConfigurationManager.Instance.CharactersData.characters[Index].characterAvatarPath);
+        _animation.Init(ConfigurationManager.Instance.CharactersData[Index].characterAvatarPath);
         _animation.GetComponentInChildren<GunModel>().Init();
     }
 

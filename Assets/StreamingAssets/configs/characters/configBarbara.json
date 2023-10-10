@@ -1,0 +1,11 @@
+{
+    "characterName": "Barbara",
+    "characterSpeed": 2.0,
+    "characterMoveDistance": 3,
+    "characterRangedTargetDistance": 12.0,
+    "characterBaseAim": 70,
+    "characterBaseHealth": 8,
+    "characterWeapon": 1,
+    "characterAvatarPath": "Characters/Barbara/Barbara",
+    "element": "Hydro"
+}

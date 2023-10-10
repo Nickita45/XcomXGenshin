@@ -1,0 +1,11 @@
+{
+    "characterName": "Rosaria",
+    "characterSpeed": 3.0,
+    "characterMoveDistance": 4,
+    "characterRangedTargetDistance": 10.0,
+    "characterBaseAim": 50,
+    "characterBaseHealth": 5,
+    "characterWeapon": 0,
+    "characterAvatarPath": "Characters/Rosaria/Rosaria",
+    "element": "Cryo"
+}

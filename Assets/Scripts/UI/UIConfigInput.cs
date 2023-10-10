@@ -11,13 +11,15 @@ public class UIConfigInput : MonoBehaviour
     public GameObject characterUIPrefab;
 
     public Transform parentTransform;
-    private CharactersData _characterList;
+    private CharacterData[] _characterList;
     private GlobalDataJson _globalData;
+    private EnemyData[] _enemyData;
     private int _statusConfig = 0; // 0 - GlobalDataJson, 1 - CharactersData
     private void Start()
     {
         _characterList = ConfigurationManager.Instance.CharactersData;
         _globalData = ConfigurationManager.Instance.GlobalDataJson;
+        _enemyData = ConfigurationManager.Instance.EnemiesDataJson;
         GenerateContentByStatus(0);
     }
     // Removed all previous items in content. Generate content value inside scroll by status value.
@@ -40,12 +42,19 @@ public class UIConfigInput : MonoBehaviour
             // Fillter for array type
             // ChaRacters
             case 1:
-                foreach (CharacterData character in _characterList.characters)
+                foreach (CharacterData character in _characterList)
                 {
+                    /*
                     GameObject characterUI = Instantiate(characterUIPrefab, parentTransform);
                     characterUI.GetComponentInChildren<TextMeshProUGUI>().text = $"{character.characterName}:";
-                    characterUI.GetComponentInChildren<TMP_InputField>().gameObject.SetActive(false);
+                    characterUI.GetComponentInChildren<TMP_InputField>().gameObject.SetActive(false);*/
                     FillValuesUI(character);
+                }
+                break;
+            case 2:
+                foreach (EnemyData enemy in _enemyData)
+                {
+                    FillValuesUI(enemy);
                 }
                 break;
         }
@@ -80,6 +89,9 @@ public class UIConfigInput : MonoBehaviour
                 case "System.Single":
                     inputFieldComponent.contentType = TMP_InputField.ContentType.DecimalNumber;
                     break;
+                case "System.Boolean":
+                    inputFieldComponent.contentType = TMP_InputField.ContentType.Standard;
+                    break;
             }
             inputFieldComponent.name = $"InputField:{propertyName}:{propertyType}";
             inputFieldComponent.text = $"{propertyValue}";
@@ -104,16 +116,24 @@ public class UIConfigInput : MonoBehaviour
                 }
                 break;
             case 1:
-                for (int i = 0; i < _characterList.characters.Length; i++)
+                for (int i = 0; i < _characterList.Length; i++)
                 {
-                    TMP_InputField[] tMP_InputsSubset = GetSubsetOfInputs(tMP_Inputs, i, _characterList.characters[i]);
-                    UpdateArrayValues(_characterList.characters[i], tMP_InputsSubset);
+                    TMP_InputField[] tMP_InputsSubset = GetSubsetOfInputs(tMP_Inputs, i, _characterList[i]);
+                    UpdateArrayValues(_characterList[i], tMP_InputsSubset);
+                }
+                break;
+            case 2:
+                for (int i = 0; i < _enemyData.Length; i++)
+                {
+                    TMP_InputField[] tMP_InputsSubset = GetSubsetOfInputs(tMP_Inputs, i, _enemyData[i]);
+                    UpdateArrayValues(_enemyData[i], tMP_InputsSubset);
                 }
                 break;
         }
         // Updating singleton data and parameters
         ConfigurationManager.Instance.CharactersData = _characterList;
         ConfigurationManager.Instance.GlobalDataJson = _globalData;
+        ConfigurationManager.Instance.EnemiesDataJson = _enemyData;
 
         ConfigurationManager.Instance.SaveAllConfigsFile();
         ConfigurationManager.Instance.LoadAllConfigsFile();
@@ -130,7 +150,6 @@ public class UIConfigInput : MonoBehaviour
             string[] splittedName = tMP_Inputs[j].name.Split(':');
 
             var fieldValue = ParseFieldValue(splittedName[2], tMP_Inputs[j].text);
-
             fields[j].SetValue(data, fieldValue);
         }
     }
@@ -180,6 +199,8 @@ public class UIConfigInput : MonoBehaviour
                 return int.Parse(textValue);
             case "System.Single":
                 return float.Parse(textValue);
+            case "System.Boolean":
+                return bool.Parse(textValue);
             default:
                 return textValue;
         }

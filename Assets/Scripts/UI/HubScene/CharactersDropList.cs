@@ -18,9 +18,9 @@ public class CharactersDropList : MonoBehaviour
 
     public void InitCharacterList()
     {
-        for (int i = 0; i < ConfigurationManager.Instance.CharactersData.characters.Count(); i++)
+        for (int i = 0; i < ConfigurationManager.Instance.CharactersData.Count(); i++)
         {
-            CharacterData item = ConfigurationManager.Instance.CharactersData.characters[i];
+            CharacterData item = ConfigurationManager.Instance.CharactersData[i];
             GameObject gameObject = Instantiate(_prefab, transform);
 
             Sprite desiredSpriteCharacterIcon = _uIPool.spritesCharacterIcons.FirstOrDefault(sprite => sprite.name == item.characterName.ToLower() + "-icon");
