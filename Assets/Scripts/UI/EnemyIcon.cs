@@ -1,16 +1,14 @@
 using TMPro;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Collections;
 
 public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private EnemyPanel _enemyPanel;
+    private EnemyTargetPanel _panel;
 
-    private GameObject _enemy;
-    public GameObject Enemy => _enemy;
+    private Enemy _enemy;
+    public Enemy Enemy => _enemy;
 
     [SerializeField]
     private Image _image;
@@ -19,17 +17,16 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     [SerializeField]
     private TextMeshProUGUI _textPercent;
 
-    public int Percent { get; set; }
-
     void Start()
     {
-        _enemyPanel = transform.parent.GetComponent<EnemyPanel>();
+        _panel = transform.parent.GetComponent<EnemyTargetPanel>();
         SetPercent();
     }
 
     public void OnPointerClick(PointerEventData data)
     {
-        _enemyPanel.SelectEnemy(this);
+        Manager.AbilityPanel.SelectShootAbility();
+        _panel.SelectEnemy(this);
     }
 
     public void OnPointerEnter(PointerEventData data)
@@ -38,12 +35,12 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         tempColor.a = 0.5f;
         _image.color = tempColor;
 
-        if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy)
-            && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectPlaceToMovement))//(GameManagerMap.Instance.State == GameState.FreeMovement)
+        if (!Manager.HasPermission(Permissions.SelectEnemy)
+            && Manager.HasPermission(Permissions.SelectPlaceToMovement))
         {
-            Vector3 position = CameraHelpers.CalculateCameraLookAt(_enemy, Camera.main);
-            GameManagerMap.Instance.FixedCameraController
-                .InitAsMainCamera(position, GameManagerMap.Instance.FreeCameraController.TargetRotation, 0.5f);
+            Vector3 position = CameraUtils.CalculateCameraLookAt(_enemy.gameObject, Camera.main);
+            Manager.CameraManager.FixedCamera
+                .InitAsMainCamera(position, Manager.CameraManager.FreeCamera.TargetRotation, 0.5f);
         }
     }
 
@@ -53,36 +50,42 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         tempColor.a = 1f;
         _image.color = tempColor;
 
-        if (!GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectEnemy)
-            && GameManagerMap.Instance.StatusMain.ActualPermissions.Contains(Permissions.SelectPlaceToMovement))//(GameManagerMap.Instance.State == GameState.FreeMovement)
-            GameManagerMap.Instance.FixedCameraController.InitAsMainCamera(
-                GameManagerMap.Instance.FreeCameraController.transform.position,
-                GameManagerMap.Instance.FreeCameraController.transform.rotation,
+        if (!Manager.HasPermission(Permissions.SelectEnemy)
+            && Manager.HasPermission(Permissions.SelectPlaceToMovement))
+        {
+            FreeCamera freeCamera = Manager.CameraManager.FreeCamera;
+            Manager.CameraManager.FixedCamera.InitAsMainCamera(
+                freeCamera.transform.position,
+                freeCamera.transform.rotation,
                 0.5f,
-                GameManagerMap.Instance.FreeCameraController.InitAsMainCamera
+                freeCamera.InitAsMainCamera
             );
-        //GameManagerMap.Instance.FixedCameraController.ClearListHide();
+        }
     }
 
-    public void SetEnemy(GameObject enemy)
+    public void SetEnemy(Enemy enemy)
     {
         _enemy = enemy;
+        _image.sprite = enemy.Icon;
     }
 
     public void SetPercent()
     {
-        var resultCaclulations = AimCalculater.CalculateShelterPercent(defender: GameManagerMap.Instance.Map[_enemy.transform.localPosition],
-                                    shooter: GameManagerMap.Instance.CharacterMovement.SelectedCharacter.ActualTerritory,
-                                    gun: GameManagerMap.Instance.CharacterMovement.SelectedCharacter.WeaponCharacter,
-                                    GameManagerMap.Instance.CharacterMovement.SelectedCharacter.BaseAimCharacter);
+        Character character = Manager.TurnManager.SelectedCharacter;
 
-        Percent = resultCaclulations.percent;
-        _textPercent.text = resultCaclulations.percent.ToString() + "%";
+        (int percent, ShelterType status) =
+            AimUtils.CalculateHitChance(
+                character.ActualTerritory,
+                _enemy.ActualTerritory,
+                character.Stats.Weapon,
+                character.Stats.BaseAimCharacter
+            );
 
-        if (resultCaclulations.status == ShelterType.None)
+        _textPercent.text = percent.ToString() + "%";
+
+        if (status == ShelterType.None)
             _textPercent.color = Color.yellow;
         else
             _textPercent.color = Color.red;
     }
-
 }

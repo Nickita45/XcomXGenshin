@@ -7,8 +7,8 @@ public class MatrixMap
     public Dictionary<string, TerritroyReaded> _vertex = new();
     public Dictionary<string, TerritroyReaded> _decors = new();
     public Dictionary<string, GameObject> _planeToMovement = new();
-    public List<GameObject> _enemy = new();
-    public List<GameObject> _characters = new();
+    public List<Enemy> _enemy = new();
+    public List<Character> _characters = new();
     public int width, height;
 
     public TerritroyReaded AddVertex(TerritroyReaded ter, Dictionary<string, TerritroyReaded> collection)
@@ -41,12 +41,12 @@ public class MatrixMap
         return ter;
     }
 
-    public List<GameObject> Enemy => _enemy;
-    public List<GameObject> Characters => _characters;
+    public List<Enemy> Enemies => _enemy;
+    public List<Character> Characters => _characters;
     public Dictionary<string, TerritroyReaded> Decors => _decors;
     public Dictionary<string, TerritroyReaded> Vertex => _vertex;
 
-    public void AirPlanfromRemove(TerritroyReaded ter) => _planeToMovement.Remove(ter.Index);
+    public void AirPlatformRemove(TerritroyReaded ter) => _planeToMovement.Remove(ter.Index);
 
     public TerritroyReaded this[string index] => _vertex[index];
     public TerritroyReaded this[Vector3 cordinats] => _vertex[MakeFromVector3ToIndex(cordinats)];

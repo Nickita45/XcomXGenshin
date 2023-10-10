@@ -1,11 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Manages the UI panel related to the character abilities.
 public class AbilityPanel : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _iconPrefab;
+
     [SerializeField]
     private GameObject _abilityDialog;
 
@@ -24,7 +27,7 @@ public class AbilityPanel : MonoBehaviour
 
     void Start()
     {
-        GameManagerMap.Instance.OnClearMap += UnselectAbility;
+        Manager.Instance.OnClearMap += () => UnselectAbility(false);
         _confirm.onClick.AddListener(ActivateAbility);
 
         for (int i = 0; i < transform.childCount; i++)
@@ -33,12 +36,8 @@ public class AbilityPanel : MonoBehaviour
             _icons.Add(icon);
             icon.Index = i + 1;
         }
-        gameObject.SetActive(false);
 
-        GameManagerMap.Instance.CharacterTargetFinder.OnUpdate += DisableAbilitiesWithoutTargets;
-        GameManagerMap.Instance.CharacterMovement.OnStartMove += DisableAllAbilites;
-        GameManagerMap.Instance.CharacterMovement.OnEndMoveToNewTerritory += (territory, info) => UpdateConfirmButton();
-        GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
+        Manager.StatusMain.OnStatusChange += OnStatusChange;
     }
 
     void Update()
@@ -63,7 +62,7 @@ public class AbilityPanel : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            UnselectAbility();
+            UnselectAbility(false);
         }
     }
 
@@ -75,7 +74,7 @@ public class AbilityPanel : MonoBehaviour
         }
         else
         {
-            UnselectAbility();
+            UnselectAbility(false);
         }
     }
 
@@ -89,20 +88,35 @@ public class AbilityPanel : MonoBehaviour
         tmpColor.a = icon.Image.color.a;
         icon.Image.color = tmpColor;
 
-        _titleText.text = icon.Title;
-        _descriptionText.text = icon.Description;
+        _titleText.text = icon.Ability.AbilityName;
+        _descriptionText.text = icon.Ability.Description;
         _abilityDialog.SetActive(true);
-        _confirm.interactable = icon.AbilityEnabled;
+        _confirm.interactable = icon.AnyAvailableTargets;
 
         _selected = icon;
-        if (icon.AbilityEnabled) icon.SetupCameraForTargetEnter();
+        if (icon.AnyAvailableTargets) icon.EnterTargetMode();
+    }
+
+    public void SelectShootAbility()
+    {
+        if (!_selected || _selected.Ability.AbilityName != "Shoot")
+        {
+            foreach (AbilityIcon icon in _icons)
+            {
+                if (icon.Ability.AbilityName == "Shoot")
+                {
+                    SelectAbility(icon);
+                    return;
+                }
+            }
+        }
     }
 
     // Clears the selection, as well as performs the camera exit transition.
-    public void UnselectAbility()
+    public void UnselectAbility(bool keepTargetMode)
     {
-        AbilityIcon wasSelected = ClearSelection();
-        if (wasSelected != null) wasSelected.SetupCameraForTargetExit();
+        AbilityIcon oldSelected = ClearSelection();
+        if (oldSelected != null && !keepTargetMode) oldSelected.ExitTargetMode();
     }
 
     // Clears the selection. If any ability was selected, returns it.
@@ -127,9 +141,11 @@ public class AbilityPanel : MonoBehaviour
 
     public void ActivateAbility()
     {
-        if (_selected && _selected.AbilityEnabled)
+        if (_selected && _selected.AnyAvailableTargets)
         {
-            _selected.Event.Invoke(UnselectAbility);
+            AbilityIcon icon = _selected;
+            Manager.Instance.CharacterActivateAbility(icon);
+            UnselectAbility(true);
         }
     }
 
@@ -138,24 +154,23 @@ public class AbilityPanel : MonoBehaviour
     //
     // If the selected ability has changed from disabled to enabled, performs the
     // camera enter transition.
-    private void DisableAbilitiesWithoutTargets(HashSet<GameObject> visibleEnemies)
+    private void DisableAbilitiesWithoutTargets(HashSet<Enemy> visibleEnemies)
     {
-        bool enabled = visibleEnemies.Count > 0;
-
         foreach (AbilityIcon icon in _icons)
         {
-            if (icon.TargetType == AbilityTargetType.Enemy)
+            switch (icon.Ability.TargetType)
             {
-                if (_selected == icon && !icon.AbilityEnabled && enabled)
-                {
-                    icon.SetupCameraForTargetEnter();
-                }
-
-                icon.AbilityEnabled = enabled;
+                case TargetType.Enemy:
+                    icon.AnyAvailableTargets = visibleEnemies.Count > 0;
+                    break;
+                case TargetType.Self:
+                    icon.AnyAvailableTargets = true;
+                    break;
             }
-            else
+
+            if (_selected == icon && icon.AnyAvailableTargets)
             {
-                icon.AbilityEnabled = true;
+                icon.EnterTargetMode();
             }
         }
 
@@ -166,7 +181,7 @@ public class AbilityPanel : MonoBehaviour
     {
         foreach (AbilityIcon icon in _icons)
         {
-            icon.AbilityEnabled = false;
+            icon.AnyAvailableTargets = false;
         }
 
         UpdateConfirmButton();
@@ -176,24 +191,68 @@ public class AbilityPanel : MonoBehaviour
     // otherwise disable interactions.
     private void UpdateConfirmButton()
     {
-        if (_selected) _confirm.interactable = _selected.AbilityEnabled;
+        if (_selected) _confirm.interactable = _selected.AnyAvailableTargets;
     }
 
     private void OnStatusChange(HashSet<Permissions> permissions)
     {
-        if (!permissions.Contains(Permissions.ActionSelect)) //it will be show only in status with actionSelect
+        Manager.StatusMain.OnStatusChange -= OnStatusChange;
+        if (!permissions.Contains(Permissions.ActionSelect))
         {
             gameObject.SetActive(false);
             _abilityDialog.SetActive(false);
+            DisableAllAbilites();
         }
         else
         {
             gameObject.SetActive(true);
             _abilityDialog.SetActive(_selected != null);
+            DisableAbilitiesWithoutTargets(TargetUtils.GetAvailableTargets(Manager.TurnManager.SelectedCharacter));
         }
 
-        if(permissions.Contains(Permissions.AnimationRunning))
-            UnselectAbility();
+        if (permissions.Contains(Permissions.AnimationRunning))
+            UnselectAbility(false);
 
+        Manager.StatusMain.OnStatusChange += OnStatusChange;
+    }
+
+    public void SetCharacter(Character character)
+    {
+        UpdateAbilities(character.Abilities);
+    }
+
+    public void UpdateAbilities(List<Ability> abilities)
+    {
+        Ability previouslySelectedAbility = _selected?.Ability;
+        ClearAbilities();
+
+        for (int i = 0; i < abilities.Count; i++)
+        {
+            AbilityIcon icon = Instantiate(_iconPrefab, transform).GetComponent<AbilityIcon>();
+            icon.SetAbility(i, abilities[i]);
+
+            _icons.Add(icon);
+        }
+
+        if (previouslySelectedAbility != null)
+        {
+            foreach (AbilityIcon icon in _icons)
+            {
+                if (previouslySelectedAbility.GetType() == icon.Ability.GetType())
+                {
+                    SelectAbility(icon);
+                }
+            }
+        }
+
+        DisableAbilitiesWithoutTargets(TargetUtils.GetAvailableTargets(Manager.TurnManager.SelectedCharacter));
+    }
+
+    public void ClearAbilities()
+    {
+        _icons.Clear();
+        _selected = null;
+
+        ObjectUtils.DestroyAllChildren(gameObject);
     }
 }

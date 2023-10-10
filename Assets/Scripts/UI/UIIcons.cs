@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class UIIcons : MonoBehaviour
 {
     [Serializable]
-    public class IconObject{
+    public class IconObject
+    {
         public string name;
         public Sprite sprite;
     };
@@ -17,5 +18,5 @@ public class UIIcons : MonoBehaviour
     public IconObject GetIconByName(string iconName)
     {
         return iconObjects.FirstOrDefault(icon => icon.name == iconName);
-    } 
+    }
 }

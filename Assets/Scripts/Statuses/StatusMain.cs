@@ -62,14 +62,14 @@ public class StatusMain : MonoBehaviour
 
     public void SetStatusWaiting()
     {
-        ActualPermissions = new HashSet<Permissions> { Permissions.Waiting };
+        ActualPermissions = new HashSet<Permissions> { Permissions.CameraMovements, Permissions.Waiting };
         OnStatusChange(ActualPermissions);
     }
 
 
     private void Update() //for debug only
     {
-       // Debug.Log(string.Join(",", GameManagerMap.Instance.StatusMain.ActualPermissions));
+        // Debug.Log(string.Join(",", Manager.StatusMain.ActualPermissions));
     }
 }
 
@@ -84,11 +84,3 @@ public enum Permissions
     AnimationRunning,
     Waiting,
 }
-
-//Status:
-//0) For clearing Map - Zero Status
-//1) Character status
-//2) Action status
-//3) Enemy Status
-//4) Shooting Status 
-//5) Running Status 

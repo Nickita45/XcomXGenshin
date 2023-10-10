@@ -70,16 +70,29 @@ public class TerritroyReaded
 
     }
 
-    public bool IsNearIsGround() => DetectSomeBooleans(n => (GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround)
-                                           && GameManagerMap.Instance.Map[GameManagerMap.Instance.Map[n].IndexUp.OrderBy(i => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(i), TerritroyReaded.MakeVectorFromIndex(n))).First()].TerritoryInfo == TerritoryType.Air,
+    public bool IsNearIsGround() => DetectSomeBooleans(n => (Manager.Map[n].TerritoryInfo == TerritoryType.Ground || Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround)
+                                           && Manager.Map[Manager.Map[n].IndexUp.OrderBy(i => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(i), TerritroyReaded.MakeVectorFromIndex(n))).First()].TerritoryInfo == TerritoryType.Air,
                                     1, true, IndexBottom, IndexFront, IndexRight, IndexLeft) ||
-                                    DetectSomeBooleans(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround, 1, true, IndexDown);
-    public bool InACenterOfGronds() => DetectSomeBooleans(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Air
-                                                            && GameManagerMap.Instance.Map[n].IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 1,
+                                    DetectSomeBooleans(n => Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround, 1, true, IndexDown);
+    //IndexBottom.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground || Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0 ||
+    //IndexFront.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground || Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0 ||
+    //IndexRight.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground || Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0 ||
+    //IndexLeft.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground || Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0 ||
+    //IndexDown.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0;
+
+    public bool InACenterOfGronds() => DetectSomeBooleans(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air
+                                                            && Manager.Map[n].IndexDown.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 1,
                                     1, false, IndexBottom, IndexFront, IndexRight, IndexLeft);
 
-    public bool IsNearShelter() => DetectSomeBooleans(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Shelter
-        || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround, 1, true, IndexBottom, IndexFront, IndexRight, IndexLeft); //mb is slow???
+
+    /*        IndexBottom.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground || Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0 &&
+                                           IndexFront.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground || Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0 &&
+                                           IndexRight.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground || Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0 &&
+                                           IndexLeft.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground || Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() == 0;
+    */
+
+    public bool IsNearShelter() => DetectSomeBooleans(n => Manager.Map[n].TerritoryInfo == TerritoryType.Shelter
+        || Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround, 1, true, IndexBottom, IndexFront, IndexRight, IndexLeft); //mb is slow???
 
     public static bool DetectSomeBooleans(Func<string, bool> predicate, int count, bool IsOr, params HashSet<string>[] sides)
     {
@@ -99,9 +112,8 @@ public class TerritroyReaded
         return and;
     }
 
-
-    public bool HasGround() => this.IndexDown.Where(n => GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground ||
-                GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0;
+    public bool HasGround() => this.IndexDown.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground ||
+                Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround).Count() > 0;
 
     public static Vector3 MakeVectorFromIndex(string index) => new Vector3(float.Parse(index.Split(ReadingMap.SPLITTER)[0]),
         float.Parse(index.Split(ReadingMap.SPLITTER)[1]),
@@ -142,6 +154,12 @@ public class GlobalDataJson
 
     public float secondsEndTurn;
     public float secondsTimerTurnCharacter;
+
+    public string outlineEnemyColor;
+    public string outlineEnemyTargetColor;
+    public string outlineCharacterColor;
+    public string outlineCharacterTargetColor;
+    public float outlineWidth;
 
     public GunTypeConfig[] typeGun;
 }

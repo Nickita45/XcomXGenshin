@@ -813,7 +813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Level1/EnemySpawn
+  _pathPrefab: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -1739,7 +1739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Level1/EnemySlime
+  _pathPrefab: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -2632,7 +2632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Level1/EnemySpawn
+  _pathPrefab: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -2911,8 +2911,8 @@ Transform:
   - {fileID: 2045855389}
   - {fileID: 1662942397}
   - {fileID: 5672897994559476753}
-  - {fileID: 543450653253664521}
   - {fileID: 5672897994066465637}
+  - {fileID: 543450653253664521}
   - {fileID: 793666750}
   - {fileID: 543450652199975095}
   - {fileID: 1149923720}
@@ -2925,6 +2925,7 @@ Transform:
   - {fileID: 1070347762}
   - {fileID: 49737430}
   - {fileID: 543450651848287905}
+  - {fileID: 1195635471}
   - {fileID: 1179316436}
   - {fileID: 1412502}
   - {fileID: 1028475761}
@@ -2936,10 +2937,9 @@ Transform:
   - {fileID: 1165601453}
   - {fileID: 1613400424}
   - {fileID: 1226857507}
-  - {fileID: 1195635471}
+  - {fileID: 1347593931}
   - {fileID: 1521474221}
   - {fileID: 447438525}
-  - {fileID: 1347593931}
   - {fileID: 951067982}
   - {fileID: 1401230002}
   m_Father: {fileID: 0}
@@ -3288,7 +3288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Level1/EnemySpawn
+  _pathPrefab: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -3457,7 +3457,7 @@ GameObject:
   - component: {fileID: 875391876}
   - component: {fileID: 875391878}
   m_Layer: 0
-  m_Name: Controller
+  m_Name: Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3507,7 +3507,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 875391875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b4123556cc0e8b4599e32011575bdf5, type: 3}
+  m_Script: {fileID: 11500000, guid: a27324ee507193b4bb3accb60d023119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &889196054
@@ -4787,7 +4787,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 760121607}
-  m_RootOrder: 76
+  m_RootOrder: 65
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1195635472
 BoxCollider:
@@ -5192,7 +5192,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 760121607}
-  m_RootOrder: 79
+  m_RootOrder: 77
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1347593932
 BoxCollider:
@@ -6008,7 +6008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Level1/EnemySpawn
+  _pathPrefab: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -6301,8 +6301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 3
-  _pathPrefab: 
+  _type: 6
+  _pathPrefab: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -8503,7 +8503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Level1/EnemySpawn
+  _pathPrefab: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -8909,7 +8909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Level1/EnemySpawn
+  _pathPrefab: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -9214,7 +9214,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 760121607}
-  m_RootOrder: 51
+  m_RootOrder: 52
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &543450653253664522
 BoxCollider:
@@ -9990,7 +9990,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 760121607}
-  m_RootOrder: 52
+  m_RootOrder: 51
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5672897994559476753
 Transform:
@@ -10304,7 +10304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Level1/EnemySlime
+  _pathPrefab: Prefabs/Enemies/SlimePyro
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
