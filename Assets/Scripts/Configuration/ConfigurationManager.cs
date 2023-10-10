@@ -15,20 +15,20 @@ public class ConfigurationManager : MonoBehaviour
     private CharactersData _charactersData;
     /*
     Example of using: 
-    ConfigurationManager.Instance.CharacterData.characterSpeed - return characterSpeed
-    ConfigurationManager.Instance.CharacterData.typeGun[0].name - return first object name, AssultRifle for example
+    ConfigurationManager.CharacterData.characterSpeed - return characterSpeed
+    ConfigurationManager.CharacterData.typeGun[0].name - return first object name, AssultRifle for example
     */
-    public CharactersData CharactersData
+    public static CharactersData CharactersData
     {
-        get => _charactersData;
-        set => _charactersData = value;
+        get => Instance._charactersData;
+        set => Instance._charactersData = value;
     }
     private GlobalDataJson _globalDataJson;
-    
-    public GlobalDataJson GlobalDataJson
+
+    public static GlobalDataJson GlobalDataJson
     {
-        get => _globalDataJson;
-        set => _globalDataJson = value;
+        get => Instance._globalDataJson;
+        set => Instance._globalDataJson = value;
     }
     void Awake()
     {
@@ -55,7 +55,7 @@ public class ConfigurationManager : MonoBehaviour
             Debug.LogError($"Config file with path {filePath} not found!");
             return default;
         }
-        
+
     }
     private void SaveConfig<T>(string filePath, T data)
     {
@@ -71,6 +71,6 @@ public class ConfigurationManager : MonoBehaviour
     public void LoadAllConfigsFile()
     {
         _globalDataJson = LoadConfig<GlobalDataJson>(PATH_GLOBAL_INFO);
-        _charactersData = LoadConfig<CharactersData>(PATH_CHARACTERS); 
+        _charactersData = LoadConfig<CharactersData>(PATH_CHARACTERS);
     }
 }

@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class CameraObjectTransparency : MonoBehaviour
 {
-
     private List<RenderData> _renderers = new();
 
     // Cached data about the renderer
@@ -48,7 +47,7 @@ public class CameraObjectTransparency : MonoBehaviour
             {
                 foreach (var rend in rends) //serch all of them
                 {
-                    // Save the renderer either if there is not territory info or info type is Shelter
+                    // Save the renderer either if there is no territory info or info type is Shelter
                     if (info)
                     {
                         if (info.Type == TerritoryType.Shelter)
@@ -62,6 +61,7 @@ public class CameraObjectTransparency : MonoBehaviour
                     }
                     else
                     {
+                        // TODO: bug this doesn't work well with an outline
                         newRenderers.Add(
                                 new(rend,
                                 rend.materials.Select(material => material.shader).ToList(),

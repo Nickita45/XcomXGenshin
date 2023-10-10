@@ -1,20 +1,10 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class AbilityIcon : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField]
-    private string _title;
-    public string Title => _title;
-
-    [SerializeField]
-    private string _description;
-    public string Description => _description;
-
     [SerializeField]
     private Image _image;
     public Image Image => _image;
@@ -30,7 +20,7 @@ public class AbilityIcon : MonoBehaviour, IPointerClickHandler
     }
 
     public bool _abilityEnabled;
-    public bool AbilityEnabled
+    public bool AnyAvailableTargets
     {
         get { return _abilityEnabled; }
         set
@@ -38,24 +28,29 @@ public class AbilityIcon : MonoBehaviour, IPointerClickHandler
             _abilityEnabled = value;
 
             Color tmp = _image.color;
-            tmp.a = _abilityEnabled ? 1.0f : 0.5f;
+            tmp.a = _abilityEnabled ? 1.0f : 0.3f;
             _image.color = tmp;
         }
     }
 
     private AbilityPanel _panel;
 
-    [SerializeField]
-    private UnityEvent<Action> _event;
-    public UnityEvent<Action> Event => _event;
+    private Ability _ability;
+    public Ability Ability => _ability;
 
-    [SerializeField]
-    private AbilityTargetType _targetType;
-    public AbilityTargetType TargetType => _targetType;
+    private object _target;
+    public object Target => _target;
 
     void Start()
     {
         _panel = transform.parent.GetComponent<AbilityPanel>();
+    }
+
+    public void SetAbility(int index, Ability ability)
+    {
+        Index = index + 1;
+        _image.sprite = Manager.UIIcons.GetIconByName(ability.Icon)?.sprite;
+        _ability = ability;
     }
 
     public void OnPointerClick(PointerEventData data)
@@ -70,21 +65,25 @@ public class AbilityIcon : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void SetupCameraForTargetEnter()
+    // Enters the target mode to allow the player to select the target for an ability.
+    public void EnterTargetMode()
     {
-        switch (_targetType)
+        switch (_ability.TargetType)
         {
-            case AbilityTargetType.Enemy:
-                GameManagerMap.Instance.FixCameraOnSelectedEnemy();
+            case TargetType.Enemy:
+                Manager.TargetSelectManager.TargetEnemy(enemy => _target = enemy);
                 break;
-            case AbilityTargetType.None:
-                GameManagerMap.Instance.EnableFreeCameraMovement();
+            case TargetType.Self:
+                Manager.TargetSelectManager.TargetSelf(_ => { });
                 break;
         }
     }
 
-    public void SetupCameraForTargetExit()
+    // Exits the target mode, returning to free movement.
+    public void ExitTargetMode()
     {
-        GameManagerMap.Instance.EnableFreeCameraMovement();
+        Manager.CameraManager.EnableFreeCameraMovement();
+        Manager.OutlineManager.ClearTargets();
+        Manager.StatusMain.SetStatusSelectAction();
     }
 }
