@@ -60,7 +60,7 @@ public class Enemy : Unit
                 ObjectUtils.LookAtXZ(Animator.Model.transform, character.transform.position);
 
                 StartCoroutine(Canvas.PanelShow(Canvas.PanelActionInfo("Triggered!"), 2));
-                yield return StartCoroutine(MoveEnemy(_enemyAI.FindTerritoryToCharacter));
+                yield return StartCoroutine(MoveEnemy(_enemyAI.TriggerEnemy));
             }
         }
     }

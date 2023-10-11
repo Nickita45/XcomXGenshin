@@ -40,4 +40,8 @@ public class SlimeAI : EnemyAI
         yield return _attack.Activate(_enemy, character);
         yield return new WaitForSeconds(2);
     }
+    public override TerritroyReaded TriggerEnemy(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
+    {
+        return FindTerritoryToCharacter(allPaths);
+    }
 }
