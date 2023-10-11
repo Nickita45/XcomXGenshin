@@ -77,4 +77,8 @@ public class RangedHilichurlAI : EnemyAI
         yield return _shoot.Activate(_enemy, character);
         yield return new WaitForSeconds(2);
     }
+    public override TerritroyReaded TriggerEnemy(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
+    {
+        return FindSaveTerritory(allPaths);
+    }
 }
