@@ -6,6 +6,7 @@
     "enemyBaseAim": 55,
     "enemyBaseHealth": 5,
     "enemyWeapon": 1,
+    "isMeleeAttack": false,
     "enemyMinAttackValue": 2,
     "enemyMaxAttackValue": 4,
     "enemyAvatarPath": "Characters/Hillichul",

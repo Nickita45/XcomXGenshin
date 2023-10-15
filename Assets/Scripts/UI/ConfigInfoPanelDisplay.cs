@@ -11,6 +11,6 @@ public class ConfigInfoPanelDisplay : MonoBehaviour
 
         gameObject.SetActive(enabled);
         _openButton.SetActive(!enabled);
-        GameManagerMap.Instance.FreeCameraController.enabled = !enabled;
+        Manager.CameraManager.FreeCamera.enabled = !enabled;
     }
 }

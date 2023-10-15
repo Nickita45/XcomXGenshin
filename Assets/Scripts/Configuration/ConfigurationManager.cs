@@ -16,28 +16,28 @@ public class ConfigurationManager : MonoBehaviour
     private CharacterData[] _charactersData;
     /*
     Example of using: 
-    ConfigurationManager.Instance.CharacterData.characterSpeed - return characterSpeed
-    ConfigurationManager.Instance.CharacterData.typeGun[0].name - return first object name, AssultRifle for example
+    ConfigurationManager.CharacterData.characterSpeed - return characterSpeed
+    ConfigurationManager.CharacterData.typeGun[0].name - return first object name, AssultRifle for example
     */
-    public CharacterData[] CharactersData
+    public static CharacterData[] CharactersData
     {
-        get => _charactersData;
-        set => _charactersData = value;
+        get => Instance._charactersData;
+        set => Instance._charactersData = value;
     }
     private GlobalDataJson _globalDataJson;
 
-    public GlobalDataJson GlobalDataJson
+    public static GlobalDataJson GlobalDataJson
     {
-        get => _globalDataJson;
-        set => _globalDataJson = value;
+        get => Instance._globalDataJson;
+        set => Instance._globalDataJson = value;
     }
 
     private EnemyData[] _enemiesDataJson;
 
-    public EnemyData[] EnemiesDataJson
+    public static EnemyData[] EnemiesDataJson
     {
-        get => _enemiesDataJson;
-        set => _enemiesDataJson = value;
+        get => Instance._enemiesDataJson;
+        set => Instance._enemiesDataJson = value;
     }
     void Awake()
     {

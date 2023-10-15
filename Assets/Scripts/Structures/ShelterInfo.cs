@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Stores the information about the shelters at a particular tile on the map.
 [System.Serializable]
 public class ShelterInfo
 {

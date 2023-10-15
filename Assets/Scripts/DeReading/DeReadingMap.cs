@@ -30,7 +30,7 @@ public class DeReadingMap : MonoBehaviour
         {
             if (item.TerritoryInfo == TerritoryType.Air || item.TerritoryInfo == TerritoryType.Undefined || item.TerritoryInfo == TerritoryType.Enemy)
             {
-                var obj = GameManagerMap.Instance.CreatePlatformMovement(item);
+                var obj = Manager.Instance.CreatePlatformMovement(item);
                 _matrixMap.AddAirPlane(item, obj);
 
             }
@@ -44,14 +44,14 @@ public class DeReadingMap : MonoBehaviour
                 objMap.GetComponent<BoxCollider>().enabled = false;
 
             if (item.TerritoryInfo == TerritoryType.Enemy)
-                _matrixMap.Enemy.Add(objMap);
+                _matrixMap.Enemies.Add(objMap.GetComponent<Enemy>());
 
             if (item.TerritoryInfo == TerritoryType.Undefined) //Characters now
-                _matrixMap.Characters.Add(objMap);
+                _matrixMap.Characters.Add(objMap.GetComponent<Character>());
         }
 
-        GameManagerMap.Instance.Map = _matrixMap;
-        GameManagerMap.Instance.EnableFreeCameraMovement();
+        Manager.Map = _matrixMap;
+        Manager.CameraManager.EnableFreeCameraMovement();
     }
 
     public GameObject CreateMapObject(TerritroyReaded item)

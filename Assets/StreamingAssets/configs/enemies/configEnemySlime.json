@@ -6,6 +6,7 @@
     "enemyBaseAim": 50,
     "enemyBaseHealth": 5,
     "enemyWeapon": -1,
+    "isMeleeAttack": true,
     "enemyMinAttackValue": 1,
     "enemyMaxAttackValue": 3,
     "enemyAvatarPath": "Characters/Slime",

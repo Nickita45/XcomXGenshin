@@ -17,9 +17,9 @@ public class UIConfigInput : MonoBehaviour
     private int _statusConfig = 0; // 0 - GlobalDataJson, 1 - CharactersData
     private void Start()
     {
-        _characterList = ConfigurationManager.Instance.CharactersData;
-        _globalData = ConfigurationManager.Instance.GlobalDataJson;
-        _enemyData = ConfigurationManager.Instance.EnemiesDataJson;
+        _characterList = ConfigurationManager.CharactersData;
+        _globalData = ConfigurationManager.GlobalDataJson;
+        _enemyData = ConfigurationManager.EnemiesDataJson;
         GenerateContentByStatus(0);
     }
     // Removed all previous items in content. Generate content value inside scroll by status value.
@@ -28,7 +28,7 @@ public class UIConfigInput : MonoBehaviour
     public void GenerateContentByStatus(int status)
     {
         _statusConfig = status;
-        ObjectHelpers.DestroyAllChildren(parentTransform.gameObject);
+        ObjectUtils.DestroyAllChildren(parentTransform.gameObject);
         switch (_statusConfig)
         {
             // Global Info
@@ -131,9 +131,9 @@ public class UIConfigInput : MonoBehaviour
                 break;
         }
         // Updating singleton data and parameters
-        ConfigurationManager.Instance.CharactersData = _characterList;
-        ConfigurationManager.Instance.GlobalDataJson = _globalData;
-        ConfigurationManager.Instance.EnemiesDataJson = _enemyData;
+        ConfigurationManager.CharactersData = _characterList;
+        ConfigurationManager.GlobalDataJson = _globalData;
+        ConfigurationManager.EnemiesDataJson = _enemyData;
 
         ConfigurationManager.Instance.SaveAllConfigsFile();
         ConfigurationManager.Instance.LoadAllConfigsFile();
