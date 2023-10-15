@@ -1,7 +1,6 @@
 using UnityEngine;
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using System.IO;
+using Newtonsoft.Json;
 
 public class ConfigurationManager : MonoBehaviour
 {
@@ -88,7 +87,12 @@ public class ConfigurationManager : MonoBehaviour
     }
     private void SaveConfig<T>(string filePath, T data)
     {
-        string jsonContent = JsonUtility.ToJson(data, true); // The second parameter enables pretty-printing
+        string jsonContent = JsonConvert.SerializeObject(data, new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented,
+            FloatFormatHandling = FloatFormatHandling.String
+        });
+        
         File.WriteAllText(filePath, jsonContent);
         Debug.Log($"Config file saved to {filePath}");
     }
