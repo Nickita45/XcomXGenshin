@@ -2,7 +2,7 @@
     "characterName": "Fischl",
     "characterSpeed": 2.0,
     "characterMoveDistance": 3,
-    "characterRangedTargetDistance": 12.0,
+    "characterRangedTargetDistance": 10.0,
     "characterBaseAim": 70,
     "characterBaseHealth": 8,
     "characterWeapon": 0,
