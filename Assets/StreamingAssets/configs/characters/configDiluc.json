@@ -1,0 +1,11 @@
+{
+    "characterName": "Diluc",
+    "characterSpeed": 3.0,
+    "characterMoveDistance": 5,
+    "characterRangedTargetDistance": 10.0,
+    "characterBaseAim": 55,
+    "characterBaseHealth": 6,
+    "characterWeapon": 2,
+    "characterAvatarPath": "Characters/Diluc/Diluc",
+    "element": "Pyro"
+}

@@ -177,7 +177,18 @@ public class CharacterData
     public string element;
 }
 [System.Serializable]
-public class CharactersData
+public class EnemyData
 {
-    public CharacterData[] characters;
+    public string enemyName;
+    public float enemySpeed;
+    public int enemyMoveDistance;
+    public float enemyRangedTargetDistance;
+    public int enemyBaseAim;
+    public int enemyBaseHealth;
+    public int enemyWeapon;
+    public bool isMeleeAttack;
+    public int enemyMinAttackValue;
+    public int enemyMaxAttackValue;
+    public string enemyAvatarPath;
+    public string enemyElement;
 }

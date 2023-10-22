@@ -99,7 +99,7 @@ public class Character : Unit
             new AbilityElementalSkill(Stats.Element)
         };
 
-        Animator.InitCharacter(ConfigurationManager.CharactersData.characters[Stats.Index].characterAvatarPath);
+        Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath);
         Animator.GetComponentInChildren<GunModel>().Init();
     }
 

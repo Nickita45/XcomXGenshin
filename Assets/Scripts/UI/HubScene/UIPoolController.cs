@@ -84,7 +84,7 @@ public class UIPoolController : MonoBehaviour
         _gameObjectPoolCharacters.SetActive(false);
         _charactersModels[_characterPoolID].SetActive(true);
 
-        CharacterData character = ConfigurationManager.CharactersData.characters[pickedCharacter];
+        CharacterData character = ConfigurationManager.CharactersData[pickedCharacter];
         _charactersModels[_characterPoolID].GetComponentInChildren<TextMeshProUGUI>().text = character.characterName;
 
         Sprite desiredSpriteElement = spritesElementIcons.FirstOrDefault(sprite => sprite.name == "icon_element_" + character.element.ToLower());

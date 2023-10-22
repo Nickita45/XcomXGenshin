@@ -2,19 +2,17 @@ using UnityEngine;
 
 public class EnemyStats : UnitStats
 {
+    // Need to be automate in future
     [SerializeField]
-    private float _speed, _visionDistance;
+    private int _index;
 
-    [SerializeField]
-    private int _movementDistance, _minDmg, _maxDmg;
+    public int MinDamage => ConfigurationManager.EnemiesDataJson[_index].enemyMinAttackValue;
+    public int MaxDamage => ConfigurationManager.EnemiesDataJson[_index].enemyMaxAttackValue;
 
-    public int MinDamage => _minDmg;
-    public int MaxDamage => _maxDmg;
-
-    public override int MaxHP() => 5;
-    public override int BaseAimPercent() => 50;
+    public override int MaxHP() => ConfigurationManager.EnemiesDataJson[_index].enemyBaseHealth;
+    public override int BaseAimPercent() => ConfigurationManager.EnemiesDataJson[_index].enemyBaseAim;
     public override int BaseActions() => 2;
-    public override float Speed() => _speed;
-    public override int MovementDistance() => _movementDistance;
-    public override float VisionDistance() => _visionDistance;
+    public override float Speed() => ConfigurationManager.EnemiesDataJson[_index].enemySpeed;
+    public override int MovementDistance() => ConfigurationManager.EnemiesDataJson[_index].enemyMoveDistance;
+    public override float VisionDistance() => ConfigurationManager.EnemiesDataJson[_index].enemyRangedTargetDistance;
 }
