@@ -7,7 +7,7 @@ using UnityEngine;
 public class CameraObjectTransparency : MonoBehaviour
 {
     // Cached data about the renderer
-    private class RenderData
+    public class RenderData
     {
         public RenderData(Renderer renderer, List<Shader> shaders, List<Color> colors)
         {
@@ -23,11 +23,17 @@ public class CameraObjectTransparency : MonoBehaviour
 
     private List<RenderData> _renderers = new();
 
-    void Update()
+    public void HideObjectsInLine(Vector3 origin, Vector3 target)
     {
-        // Hit all colliders from a position slightly behind of the camera
-        RaycastHit[] hits = Physics.RaycastAll(transform.position - transform.forward * 3f, transform.forward, 4.5f);
+        Vector3 diff = target - origin;
+        RaycastHit[] hits = Physics.RaycastAll(origin - diff.normalized * 0.5f, diff.normalized, diff.magnitude + 1f);
+        //Debug.DrawRay(origin, diff, Color.blue, 15f);
 
+        SetNewRenderersFromHits(hits);
+    }
+
+    public void SetNewRenderersFromHits(RaycastHit[] hits)
+    {
         List<RenderData> newRenderers = new();
 
         for (int i = 0; i < hits.Length; i++)
@@ -64,7 +70,7 @@ public class CameraObjectTransparency : MonoBehaviour
                 {
                     material.shader = Shader.Find("Transparent/Diffuse");
                     Color tempColor = material.color;
-                    tempColor.a = 0.3F;
+                    tempColor.a = 0.4F;
                     material.color = tempColor;
                 }
             }
@@ -90,5 +96,18 @@ public class CameraObjectTransparency : MonoBehaviour
         }
 
         _renderers = newRenderers;
+    }
+
+    void Update()
+    {
+        FreeCamera freeCamera = Manager.CameraManager.FreeCamera;
+        if (freeCamera.IsMainCamera())
+        {
+            // Hit all colliders from a position slightly behind of the camera
+            RaycastHit[] hits = Physics.RaycastAll(freeCamera.transform.position - freeCamera.transform.forward * 3f, freeCamera.transform.forward, 4.5f);
+
+            Debug.Log(hits.Length);
+            SetNewRenderersFromHits(hits);
+        }
     }
 }

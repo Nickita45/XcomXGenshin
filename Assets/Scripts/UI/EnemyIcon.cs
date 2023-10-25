@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -40,7 +41,7 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         {
             Vector3 position = CameraUtils.CalculateCameraLookAt(_enemy.gameObject, Camera.main);
             Manager.CameraManager.FixedCamera
-                .InitAsMainCamera(position, Manager.CameraManager.FreeCamera.TargetRotation, 0.5f);
+                .InitAsMainCamera(position, Manager.CameraManager.FreeCamera.TargetRotation, _enemy.gameObject, 0.5f);
         }
     }
 
@@ -57,6 +58,7 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
             Manager.CameraManager.FixedCamera.InitAsMainCamera(
                 freeCamera.transform.position,
                 freeCamera.transform.rotation,
+                null,
                 0.5f,
                 freeCamera.InitAsMainCamera
             );

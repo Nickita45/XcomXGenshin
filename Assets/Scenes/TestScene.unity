@@ -3141,7 +3141,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: FreeMovement
@@ -3216,18 +3215,6 @@ Transform:
   m_Father: {fileID: 720876761}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: -90, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fb8c9c6fd214fd4abddceb1d043a02d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5476,6 +5463,7 @@ GameObject:
   - component: {fileID: 1775152540}
   - component: {fileID: 1775152539}
   - component: {fileID: 1775152550}
+  - component: {fileID: 1775152551}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -5572,6 +5560,7 @@ MonoBehaviour:
   _targetSelectManager: {fileID: 1775152541}
   _shootManager: {fileID: 1775152539}
   _cameraManager: {fileID: 1775152550}
+  _cameraObjectTransparency: {fileID: 1775152551}
   _turnManager: {fileID: 1775152542}
   _outlineManager: {fileID: 1775152540}
   _mainParent: {fileID: 1775152536}
@@ -5656,6 +5645,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _freeCamera: {fileID: 963194230}
   _fixedCamera: {fileID: 326296652}
+--- !u!114 &1775152551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775152536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb8c9c6fd214fd4abddceb1d043a02d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1788984701
 GameObject:
   m_ObjectHideFlags: 0

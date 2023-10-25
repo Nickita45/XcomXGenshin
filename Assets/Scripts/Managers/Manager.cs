@@ -37,6 +37,10 @@ public class Manager : MonoBehaviour
     public static CameraManager CameraManager => Instance._cameraManager;
 
     [SerializeField]
+    private CameraObjectTransparency _cameraObjectTransparency;
+    public static CameraObjectTransparency CameraObjectTransparency => Instance._cameraObjectTransparency;
+
+    [SerializeField]
     private TurnManager _turnManager;
     public static TurnManager TurnManager => Instance._turnManager;
 

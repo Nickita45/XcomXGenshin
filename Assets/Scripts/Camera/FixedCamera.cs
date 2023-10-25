@@ -5,6 +5,7 @@ using UnityEngine;
 public class FixedCamera : MonoBehaviour
 {
     private Camera _camera;
+    //private CameraObjectTransparency _cameraTransparentObjects;
 
     private Vector3 _startPosition;
     private Vector3 _targetPosition;
@@ -24,7 +25,7 @@ public class FixedCamera : MonoBehaviour
     private void Start()
     {
         _camera = GetComponent<Camera>();
-
+        //_cameraTransparentObjects = GetComponent<CameraObjectTransparency>();
     }
 
     private void Update()
@@ -46,14 +47,14 @@ public class FixedCamera : MonoBehaviour
     }
 
     // Switches the game to this camera. Creates a smooth transition to the given position and rotation of the camera.
-    public void InitAsMainCamera(Vector3 targetPosition, Quaternion targetRotation, float transitionDuration)
+    public void InitAsMainCamera(Vector3 targetPosition, Quaternion targetRotation, GameObject focus, float transitionDuration)
     {
-        InitAsMainCamera(targetPosition, targetRotation, transitionDuration, null);
+        InitAsMainCamera(targetPosition, targetRotation, focus, transitionDuration, null);
     }
 
     // Switches the game to this camera. Creates a smooth transition to the given position and rotation of the camera.
     // Performs an action when the transition ends.
-    public void InitAsMainCamera(Vector3 targetPosition, Quaternion targetRotation, float transitionDuration, Action onFinish)
+    public void InitAsMainCamera(Vector3 targetPosition, Quaternion targetRotation, GameObject focus, float transitionDuration, Action onFinish)
     {
         // Do not init camera if the target is the same.
         // This prevents unnecessary resetting of the timer.
@@ -77,6 +78,12 @@ public class FixedCamera : MonoBehaviour
 
         _finished = false;
         _onFinish = onFinish;
+
+        // Make all hidable objects from the target position to the focus transparent
+        if (focus != null)
+        {
+            Manager.CameraObjectTransparency.HideObjectsInLine(_targetPosition, focus.transform.position);
+        }
 
         // Update camera to setup starting position in the same frame
         Update();
