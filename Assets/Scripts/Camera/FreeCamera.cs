@@ -19,6 +19,9 @@ public class FreeCamera : MonoBehaviour
     [SerializeField]
     private float _zoomMax = 20.8f;
 
+    [SerializeField]
+    private float _edgeDistance = 22.5f;
+
     private bool _isRotating = false;
     private Quaternion _targetRotation;
     public Quaternion TargetRotation => _targetRotation;
@@ -84,6 +87,27 @@ public class FreeCamera : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+
+        Vector3 mousePosition = Input.mousePosition;
+
+        // Check if the mouse is near the screen edges
+        if (mousePosition.x < _edgeDistance)
+        {
+            horizontalInput = -1;
+        }
+        else if (mousePosition.x > Screen.width - _edgeDistance)
+        {
+            horizontalInput = 1;
+        }
+
+        if (mousePosition.y < _edgeDistance)
+        {
+            verticalInput = -1;
+        }
+        else if (mousePosition.y > Screen.height - _edgeDistance)
+        {
+            verticalInput = 1;
+        }
 
         // Get the movement vectors
         Vector3 cameraForward = transform.forward;
