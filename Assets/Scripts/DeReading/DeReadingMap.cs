@@ -70,9 +70,13 @@ public class DeReadingMap : MonoBehaviour
 
         territoryInfo.Type = item.TerritoryInfo;
         territoryInfo.ShelterType = item.ShelterType;
+
+        if (territoryInfo.Type == TerritoryType.Shelter)
+        {
+            obj.AddComponent<CanBeHiddenByCamera>();
+        }
+
         return obj;
-
-
     }
 
 }

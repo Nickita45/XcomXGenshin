@@ -2,17 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraObjectTransparency : MonoBehaviour
 {
-    private List<RenderData> _renderers = new();
-
     // Cached data about the renderer
     private class RenderData
     {
-
         public RenderData(Renderer renderer, List<Shader> shaders, List<Color> colors)
         {
             Renderer = renderer;
@@ -25,10 +21,12 @@ public class CameraObjectTransparency : MonoBehaviour
         public List<Color> Colors;
     }
 
+    private List<RenderData> _renderers = new();
+
     void Update()
     {
         // Hit all colliders from a position slightly behind of the camera
-        RaycastHit[] hits = Physics.RaycastAll(transform.position - transform.forward * 3f, transform.forward, 4.5F);
+        RaycastHit[] hits = Physics.RaycastAll(transform.position - transform.forward * 3f, transform.forward, 4.5f, LayerMask.GetMask("Default"));
 
         List<RenderData> newRenderers = new();
 
@@ -36,38 +34,22 @@ public class CameraObjectTransparency : MonoBehaviour
         {
             RaycastHit hit = hits[i];
 
-            TerritoryInfo info = hit.transform.GetComponent<TerritoryInfo>();
-            List<Renderer> rends = hit.transform.GetComponentsInChildren<Renderer>().ToList(); //change this because some objects has TerritoryInfo in children
-            rends.AddRange(hit.transform.GetComponentsInParent<Renderer>().ToList()); // or in parents
-
-            if (hit.transform.GetComponent<Renderer>())
-                rends.Add(hit.transform.GetComponent<Renderer>()); //add himself
-
-            if (rends.Count > 0)
+            // If the component or its parent can be hidden
+            if (hit.transform.GetComponent<CanBeHiddenByCamera>() != null ||
+                hit.transform.parent?.GetComponent<CanBeHiddenByCamera>() != null)
             {
-                foreach (var rend in rends) //serch all of them
+                // Get list of renderers on the game object, all of its children and its parent
+                List<Renderer> rends = hit.transform.GetComponentsInChildren<Renderer>().ToList();
+                Renderer parentRenderer = hit.transform.GetComponentInParent<Renderer>();
+                if (parentRenderer) rends.Add(parentRenderer);
+
+                foreach (var rend in rends)
                 {
-                    // Save the renderer either if there is no territory info or info type is Shelter
-                    if (info)
-                    {
-                        if (info.Type == TerritoryType.Shelter)
-                        {
-                            newRenderers.Add(
-                                new(rend,
-                                rend.materials.Select(material => material.shader).ToList(),
-                                rend.materials.Select(material => material.color).ToList())
-                            );
-                        }
-                    }
-                    else
-                    {
-                        // TODO: bug this doesn't work well with an outline
-                        newRenderers.Add(
-                                new(rend,
-                                rend.materials.Select(material => material.shader).ToList(),
-                                rend.materials.Select(material => material.color).ToList())
-                            );
-                    }
+                    newRenderers.Add(
+                        new(rend,
+                            rend.materials.Select(material => material.shader).ToList(),
+                            rend.materials.Select(material => material.color).ToList())
+                    );
                 }
             }
         }
