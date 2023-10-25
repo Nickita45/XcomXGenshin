@@ -26,7 +26,7 @@ public class CameraObjectTransparency : MonoBehaviour
     void Update()
     {
         // Hit all colliders from a position slightly behind of the camera
-        RaycastHit[] hits = Physics.RaycastAll(transform.position - transform.forward * 3f, transform.forward, 4.5f, LayerMask.GetMask("Default"));
+        RaycastHit[] hits = Physics.RaycastAll(transform.position - transform.forward * 3f, transform.forward, 4.5f);
 
         List<RenderData> newRenderers = new();
 

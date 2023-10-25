@@ -8918,7 +8918,7 @@
         "-3.59_0.479_0.59"
       ],
       "Index": "-0.5_0.5_1.5",
-      "PathPrefab": "Prefabs/Enemies/HilichurlRanger",
+      "PathPrefab": "Prefabs/Enemies/SlimePyro",
       "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,
@@ -69904,7 +69904,7 @@
         "-3.59_0.479_0.59"
       ],
       "Index": "-0.5_0.5_1.5",
-      "PathPrefab": "Prefabs/Enemies/HilichurlRanger",
+      "PathPrefab": "Prefabs/Enemies/SlimePyro",
       "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,

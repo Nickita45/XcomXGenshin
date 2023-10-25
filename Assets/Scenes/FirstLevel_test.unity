@@ -1739,7 +1739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/HilichurlRanger
+  _pathPrefab: Prefabs/Enemies/SlimePyro
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
