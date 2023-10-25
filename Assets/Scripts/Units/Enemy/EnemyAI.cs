@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -13,35 +14,76 @@ public abstract class EnemyAI : MonoBehaviour
         _enemy = enemy;
     }
 
-    // Get closer to the closest character
+    // Gets a random territory from all the paths,
+    // excluding the territory corressponding to the enemy position.
+    //
+    // Returns null if there's no possible paths.
+    public TerritroyReaded FindTerritoryRandom(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
+    {
+        Debug.Log("Random move");
+        List<TerritroyReaded> possibleTerritories = allPaths.Keys
+            .Where(n => n != _enemy.ActualTerritory).ToList();
+
+        if (possibleTerritories.Count == 0) return null;
+        return possibleTerritories[UnityEngine.Random.Range(0, possibleTerritories.Count())];
+    }
+
+    // Gets a random territory from all the paths,
+    // excluding the territory corressponding to the enemy position.
+    // Always tries to get to behind a shelter if possible.
+    // 
+    // Returns null if there's no possible paths.
+    public TerritroyReaded FindTerritoryRandomShelter(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
+    {
+        List<TerritroyReaded> possibleTerritories = allPaths.Keys
+            .Where(n => n != _enemy.ActualTerritory && n.IsNearShelter()).ToList();
+
+        if (possibleTerritories.Count == 0) return FindTerritoryRandom(allPaths);
+
+        Debug.Log("Random move to shelter");
+        return possibleTerritories[UnityEngine.Random.Range(0, possibleTerritories.Count())];
+    }
+
+    // Get closer to the closest character.
+    //
+    // Returns null if there's no possible paths.
     public TerritroyReaded FindTerritoryToCharacter(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
     {
         var character = _enemy.GetClosestCharacter();
         if (character != null)
-            return allPaths.Keys.OrderBy(n => Vector3.Distance(character.transform.localPosition, n.GetCordinats())).Where(n => n != _enemy.ActualTerritory).First();
-        else
         {
-            List<TerritroyReaded> keysList = new List<TerritroyReaded>(allPaths.Keys.Where(n => n != _enemy.ActualTerritory));
-            Debug.Log("Random move");
-            return keysList[UnityEngine.Random.Range(0, keysList.Count())];
+            Debug.Log("Run to character");
+            List<TerritroyReaded> possibleTerritories = allPaths.Keys
+                .OrderBy(n => Vector3.Distance(character.transform.localPosition, n.GetCordinats()))
+                .Where(n => n != _enemy.ActualTerritory).ToList();
+
+            if (possibleTerritories.Count == 0) return null;
+            return possibleTerritories.First();
         }
+
+        return FindTerritoryRandom(allPaths);
     }
 
-    // Run away from the closest character
+    // Run away from the closest character.
+    //
+    // Returns null if there's no possible paths.
     public TerritroyReaded FindTerritoryFromCharacter(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
     {
         var character = _enemy.GetClosestCharacter();
         if (character != null)
         {
-            Debug.Log("RUUUNN");
-            return allPaths.Keys.OrderBy(n => Vector3.Distance(character.transform.localPosition, n.GetCordinats())).Where(n => n != _enemy.ActualTerritory).Last();
+            Debug.Log("Run away from character");
+            List<TerritroyReaded> possibleTerritories = allPaths
+               .Keys
+               .OrderBy(n => Vector3.Distance(character.transform.localPosition, n.GetCordinats()))
+               .Where(n => n != _enemy.ActualTerritory)
+               .ToList();
+
+            if (possibleTerritories.Count == 0) return null;
+            return possibleTerritories.Last();
         }
-        else
-        {
-            List<TerritroyReaded> keysList = new List<TerritroyReaded>(allPaths.Keys.Where(n => n != _enemy.ActualTerritory));
-            Debug.Log("Random move");
-            return keysList[UnityEngine.Random.Range(0, keysList.Count())];
-        }
+
+        return FindTerritoryRandom(allPaths);
     }
 
     public abstract IEnumerator MakeTurn();
