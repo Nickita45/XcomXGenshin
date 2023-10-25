@@ -153,7 +153,7 @@ public class ReadingMap : MonoBehaviour
         TerritroyReaded newItem;
         if (_aktualGameObject == null)
         {
-            if (!_matrixMap.ContainsVertexByPox(_objectDetect.transform.position, out newItem))
+            if (!_matrixMap.ContainsVertexByPos(_objectDetect.transform.position, out newItem))
             {
                 newItem = _matrixMap.AddVertex(new TerritroyReaded(_objectDetect.transform)
                 {
@@ -178,7 +178,7 @@ public class ReadingMap : MonoBehaviour
                 transforObject = _objectDetect.transform;
             }
 
-            if (!_matrixMap.ContainsVertexByPox(transforObject.position, out newItem))
+            if (!_matrixMap.ContainsVertexByPos(transforObject.position, out newItem))
             {
                 if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Decor)
                 {

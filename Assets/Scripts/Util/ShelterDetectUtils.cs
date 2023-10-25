@@ -45,7 +45,7 @@ public static class ShelterDetectUtils
             {
                 // Access the corresponding ShelterType from the Manager
                 ShelterType shelterType = ShelterType.None;
-                if (Manager.Map.ContainsVertexByPox(TerritroyReaded.MakeVectorFromIndex(indexSet.First()), out var territoryReaded))
+                if (Manager.Map.ContainsVertexByPos(TerritroyReaded.MakeVectorFromIndex(indexSet.First()), out var territoryReaded))
                 {
                     shelterType = territoryReaded.ShelterType.ToDictionary()[side];
                 }
@@ -62,7 +62,6 @@ public static class ShelterDetectUtils
         foreach (ShelterSide side in shelters.Keys.ToList())
         {
             //0 is full, 1 is semi
-            // TODO is this right?
             Transform shelter = character.Mover.transform.GetChild((int)side).transform;
             shelter.GetChild(0).gameObject.SetActive(shelters[side] == ShelterType.Full);
             shelter.GetChild(1).gameObject.SetActive(shelters[side] == ShelterType.Semi);

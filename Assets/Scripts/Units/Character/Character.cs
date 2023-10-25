@@ -62,7 +62,6 @@ public class Character : Unit
         _mover.SetActive(false);
         _basicMaterial = _selectItem.GetComponent<MeshRenderer>().material;
 
-        // TODO: invoke this on character click or tab, too
         OnSelected += Select;
         OnSelected += Manager.MovementManager.OnCharacterSelect;
         OnSelected += Manager.EnemyPanel.OnCharacterSelect;

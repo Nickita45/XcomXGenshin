@@ -73,7 +73,7 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     {
         Character character = Manager.TurnManager.SelectedCharacter;
 
-        (int percent, ShelterType status) =
+        (int percent, ShelterType shelter) =
             AimUtils.CalculateHitChance(
                 character.ActualTerritory,
                 _enemy.ActualTerritory,
@@ -83,7 +83,7 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
         _textPercent.text = percent.ToString() + "%";
 
-        if (status == ShelterType.None)
+        if (shelter == ShelterType.None)
             _textPercent.color = Color.yellow;
         else
             _textPercent.color = Color.red;
