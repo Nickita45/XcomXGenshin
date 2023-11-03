@@ -86,6 +86,8 @@ public class Character : Unit
 
     public void OnIndexSet()
     {
+        gameObject.name = Stats.CharacterName();
+
         _countHp = Stats.MaxHP();
         Canvas.SetStartHealth(Stats.MaxHP());
 

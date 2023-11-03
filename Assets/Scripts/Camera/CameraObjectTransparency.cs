@@ -7,7 +7,7 @@ using UnityEngine;
 public class CameraObjectTransparency : MonoBehaviour
 {
     // Cached data about the renderer
-    public class RenderData
+    private class RenderData
     {
         public RenderData(Renderer renderer, List<Shader> shaders, List<Color> colors)
         {
@@ -106,7 +106,6 @@ public class CameraObjectTransparency : MonoBehaviour
             // Hit all colliders from a position slightly behind of the camera
             RaycastHit[] hits = Physics.RaycastAll(freeCamera.transform.position - freeCamera.transform.forward * 3f, freeCamera.transform.forward, 4.5f);
 
-            Debug.Log(hits.Length);
             SetNewRenderersFromHits(hits);
         }
     }
