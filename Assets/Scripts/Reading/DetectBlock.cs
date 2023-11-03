@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DetectBlock : MonoBehaviour
 {
-    public event Action<GameObject> OnDetectItem;
+    public  Action<GameObject> OnDetectItem;
 
 
     private void OnTriggerExit(Collider other)

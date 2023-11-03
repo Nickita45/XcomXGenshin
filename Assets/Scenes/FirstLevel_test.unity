@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -226,6 +226,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 2
 --- !u!65 &49737433
 BoxCollider:
@@ -454,6 +455,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1001 &143529650
 PrefabInstance:
@@ -645,6 +647,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &214930501
 GameObject:
@@ -763,6 +766,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &231742904
 GameObject:
@@ -819,6 +823,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!136 &231742907
 CapsuleCollider:
@@ -1092,6 +1097,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 2
 --- !u!65 &264067160
 BoxCollider:
@@ -1320,6 +1326,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &415340882
 GameObject:
@@ -1548,6 +1555,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 2
 --- !u!65 &447438527
 BoxCollider:
@@ -1684,6 +1692,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 10
   _setOnStartToEveryone: 0
 --- !u!4 &513222637 stripped
 Transform:
@@ -1745,6 +1754,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!136 &561469244
 CapsuleCollider:
@@ -1940,6 +1950,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &578499615
 GameObject:
@@ -2155,6 +2166,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!4 &585500615 stripped
 Transform:
@@ -2292,6 +2304,7 @@ MonoBehaviour:
     _shelterInfoRight: 1
     _shelterInfoBottom: 1
     _shelterInfoFront: 1
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &654117451
 GameObject:
@@ -2410,6 +2423,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1001 &656529253
 PrefabInstance:
@@ -2638,6 +2652,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!136 &753972252
 CapsuleCollider:
@@ -2818,6 +2833,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 2
 --- !u!65 &756310213
 BoxCollider:
@@ -2911,8 +2927,8 @@ Transform:
   - {fileID: 2045855389}
   - {fileID: 1662942397}
   - {fileID: 5672897994559476753}
-  - {fileID: 543450653253664521}
   - {fileID: 5672897994066465637}
+  - {fileID: 543450653253664521}
   - {fileID: 793666750}
   - {fileID: 543450652199975095}
   - {fileID: 1149923720}
@@ -2925,6 +2941,7 @@ Transform:
   - {fileID: 1070347762}
   - {fileID: 49737430}
   - {fileID: 543450651848287905}
+  - {fileID: 1195635471}
   - {fileID: 1179316436}
   - {fileID: 1412502}
   - {fileID: 1028475761}
@@ -2936,10 +2953,9 @@ Transform:
   - {fileID: 1165601453}
   - {fileID: 1613400424}
   - {fileID: 1226857507}
-  - {fileID: 1195635471}
+  - {fileID: 1347593931}
   - {fileID: 1521474221}
   - {fileID: 447438525}
-  - {fileID: 1347593931}
   - {fileID: 951067982}
   - {fileID: 1401230002}
   m_Father: {fileID: 0}
@@ -3062,6 +3078,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1001 &793666749
 PrefabInstance:
@@ -3161,6 +3178,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!65 &793666753
 BoxCollider:
@@ -3294,6 +3312,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!65 &802276767
 BoxCollider:
@@ -3627,6 +3646,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &917033008
 GameObject:
@@ -3745,6 +3765,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &926583413
 GameObject:
@@ -3960,6 +3981,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &963194225
 GameObject:
@@ -4225,6 +4247,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 2
 --- !u!65 &1070347765
 BoxCollider:
@@ -4580,6 +4603,7 @@ MonoBehaviour:
     _shelterInfoRight: 1
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!65 &1149923723
 BoxCollider:
@@ -4787,7 +4811,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 760121607}
-  m_RootOrder: 76
+  m_RootOrder: 65
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1195635472
 BoxCollider:
@@ -4871,6 +4895,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!4 &1226857507 stripped
 Transform:
@@ -5048,6 +5073,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!65 &1295488175
 BoxCollider:
@@ -5192,7 +5218,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 760121607}
-  m_RootOrder: 79
+  m_RootOrder: 77
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1347593932
 BoxCollider:
@@ -5276,6 +5302,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &1361388961
 GameObject:
@@ -5588,6 +5615,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &1401230001
 GameObject:
@@ -6014,6 +6042,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!65 &1489692352
 BoxCollider:
@@ -6057,6 +6086,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 2
 --- !u!65 &1521474223
 BoxCollider:
@@ -6188,6 +6218,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &1556743749
 GameObject:
@@ -6308,6 +6339,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!65 &1556743755
 BoxCollider:
@@ -6444,6 +6476,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1001 &1654581403
 PrefabInstance:
@@ -6616,6 +6649,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!65 &1662942400
 BoxCollider:
@@ -6747,6 +6781,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1001 &1690234855
 PrefabInstance:
@@ -7137,6 +7172,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &1823842263
 GameObject:
@@ -7352,6 +7388,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &1850632769
 GameObject:
@@ -7892,6 +7929,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 2
 --- !u!65 &1940496636
 BoxCollider:
@@ -8023,6 +8061,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &1968359832
 GameObject:
@@ -8509,6 +8548,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!136 &2014288389
 CapsuleCollider:
@@ -8795,6 +8835,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1 &2075955636
 GameObject:
@@ -8915,6 +8956,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!65 &2075955642
 BoxCollider:
@@ -9040,6 +9082,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!1001 &91240188191317806
 PrefabInstance:
@@ -9214,7 +9257,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 760121607}
-  m_RootOrder: 51
+  m_RootOrder: 52
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &543450653253664522
 BoxCollider:
@@ -9248,6 +9291,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 2
 --- !u!23 &543450653253664524
 MeshRenderer:
@@ -9418,6 +9462,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!4 &1067383636557967983 stripped
 Transform:
@@ -9990,7 +10035,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 760121607}
-  m_RootOrder: 52
+  m_RootOrder: 51
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5672897994559476753
 Transform:
@@ -10232,6 +10277,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8459694684947633348, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
+      propertyPath: m_Size.y
+      value: 0.41081738
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459694684947633348, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0072326423
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459694684947633348, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
+      propertyPath: m_Center.y
+      value: 0.25447938
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459694684947633348, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
+      propertyPath: m_Center.z
+      value: 0.0042560934
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
 --- !u!1001 &7206422048678332526
@@ -10304,12 +10365,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Level1/EnemySlime
+  _pathPrefab: Prefabs/Level1/EnemyHilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!65 &7649572054699329681
 BoxCollider:
@@ -10343,6 +10405,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!23 &8148511124958967923
 MeshRenderer:
@@ -10413,6 +10476,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!23 &8148511125447294727
 MeshRenderer:
@@ -10483,6 +10547,7 @@ MonoBehaviour:
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _countHp: 0
   _setOnStartToEveryone: 0
 --- !u!4 &8901904351461044035 stripped
 Transform:

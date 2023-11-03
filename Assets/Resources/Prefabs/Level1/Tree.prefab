@@ -112,4 +112,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 0
   _pathPrefab: Prefabs/Level1/Tree
-  _shelterType: 0
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _countHp: 10
+  _setOnStartToEveryone: 0

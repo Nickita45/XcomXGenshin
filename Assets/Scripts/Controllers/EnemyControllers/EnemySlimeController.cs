@@ -33,7 +33,10 @@ public class EnemySlimeController : EnemyController, IEnemyController
         {
             var character = GetFirstPerson();
             Debug.Log("RUUUNN");
-            return allPaths.Keys.OrderBy(n => Vector3.Distance(character.transform.localPosition, n.GetCordinats())).Last(n => n != _enemyInfo.ActualTerritory);
+            if (character != null)
+                return allPaths.Keys.OrderBy(n => Vector3.Distance(character.transform.localPosition, n.GetCordinats())).Last(n => n != _enemyInfo.ActualTerritory);
+            else
+                return allPaths.Keys.First();
         };
     }
 

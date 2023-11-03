@@ -2,8 +2,8 @@
     "characters": [
         {
             "characterName": "Rosaria",
-            "characterSpeed": 3.0,
-            "characterMoveDistance": 4,
+            "characterSpeed": 10.0,
+            "characterMoveDistance": 10,
             "characterRangedTargetDistance": 10.0,
             "characterBaseAim": 50,
             "characterBaseHealth": 5,
@@ -13,8 +13,8 @@
         },
         {
             "characterName": "Diluc",
-            "characterSpeed": 3.0,
-            "characterMoveDistance": 5,
+            "characterSpeed": 10.0,
+            "characterMoveDistance": 10,
             "characterRangedTargetDistance": 10.0,
             "characterBaseAim": 55,
             "characterBaseHealth": 6,

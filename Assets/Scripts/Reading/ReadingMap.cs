@@ -159,7 +159,7 @@ public class ReadingMap : MonoBehaviour
                 {
                     TerritoryInfo = TerritoryType.Air,
                     ShelterType = ShelterInfo.EMPTY,
-                }, _matrixMap.Vertex);
+                }, _matrixMap._vertex);
             }
         }
         else
@@ -186,12 +186,12 @@ public class ReadingMap : MonoBehaviour
                     {
                         TerritoryInfo = TerritoryType.Air,
                         ShelterType = ShelterInfo.EMPTY,
-                    }, _matrixMap.Vertex);
+                    }, _matrixMap._vertex);
                     var decorItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject)
                     {
                         TerritoryInfo = TerritoryType.Decor,
                         PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
-                    }, _matrixMap.Decors);
+                    }, _matrixMap._decors);
                     decorItem.SetNewPosition(_aktualGameObject.transform);
                 }
                 else
@@ -200,8 +200,30 @@ public class ReadingMap : MonoBehaviour
                     {
                         TerritoryInfo = _aktualGameObject.GetComponent<TerritoryInfo>().Type,
                         ShelterType = _aktualGameObject.GetComponent<TerritoryInfo>().ShelterType,
-                        PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
-                    }, _matrixMap.Vertex);
+                        PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path,
+                        CountHp = _aktualGameObject.GetComponent<TerritoryInfo>().SetHp
+                    }, _matrixMap._vertex);
+
+                    if (!newItem.TerritoriesInside.ContainsKey(MatrixMap.MakeFromVector3ToIndex(_objectDetect.transform.position)))
+                    {
+                        newItem.TerritoriesInside.Add(MatrixMap.MakeFromVector3ToIndex(_objectDetect.transform.position),
+                            new TerritroyReaded(_objectDetect.transform)
+                            {
+                                TerritoryInfo = TerritoryType.Air,
+                                ShelterType = ShelterInfo.EMPTY,
+                            });
+                    }
+                }
+            } else
+            {
+                if (!newItem.TerritoriesInside.ContainsKey(MatrixMap.MakeFromVector3ToIndex(_objectDetect.transform.position)))
+                {
+                    newItem.TerritoriesInside.Add(MatrixMap.MakeFromVector3ToIndex(_objectDetect.transform.position),
+                        new TerritroyReaded(_objectDetect.transform)
+                        {
+                            TerritoryInfo = TerritoryType.Air,
+                            ShelterType = ShelterInfo.EMPTY,
+                        });
                 }
             }
         }

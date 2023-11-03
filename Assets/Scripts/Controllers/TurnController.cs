@@ -39,16 +39,17 @@ public class TurnController : MonoBehaviour
         if (_characters.First().Index == -1)
         {
             HubData.Instance.charactersPoolID = HubData.Instance.charactersPoolID.OrderBy(x => x == -1).ToArray();
-            for (int i = 0; i < _characters.Count; i++)
+            var saveCharacters = new List<CharacterInfo>(_characters);
+            for (int i = 0; i < saveCharacters.Count; i++)
             {
 
                 // TODO: Add character remove and take from list another if possible
-                _characters[i].Index = (HubData.Instance.charactersPoolID[i] == -1) ? 0 : HubData.Instance.charactersPoolID[i];
-                _characters[i].OnIndexSet();
+                saveCharacters[i].Index = (HubData.Instance.charactersPoolID[i] == -1) ? 0 : HubData.Instance.charactersPoolID[i];
+                saveCharacters[i].OnIndexSet();
                 if (HubData.Instance.charactersPoolID[i] == -1)
                 {
-                    _characters[i].MakeHit(99);
-                }
+                    saveCharacters[i].MakeHit(99);
+                } 
 
             }
         }
@@ -168,6 +169,9 @@ public class TurnController : MonoBehaviour
         _iterator++;
         if (_iterator >= _characters.Count)
             _iterator = 0;
+
+        if (_characters[_iterator].Index == -1)
+            return;
 
         _characters[_iterator].OnSelected(_characters[_iterator]);
         GameManagerMap.Instance.FreeCameraController.MoveToSelectedCharacter();

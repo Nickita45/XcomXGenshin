@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class GameManagerMap : MonoBehaviour
 {
@@ -43,9 +45,13 @@ public class GameManagerMap : MonoBehaviour
     [Header("Plane to movement")]
     [SerializeField]
     private GameObject _prefabPossibleTerritory;
+    [SerializeField]
+    private GameObject _prefabToDetectTerritories;
 
     private static GameManagerMap _instance;
     public static GameManagerMap Instance => _instance;
+
+    public GameObject PrefabToDetectTerritories => _prefabToDetectTerritories;
 
     public CharacterMovement CharacterMovement => _characterMovement;
     public FreeCameraController FreeCameraController => _freeCameraController;
@@ -229,5 +235,16 @@ public class GameManagerMap : MonoBehaviour
         onFinish += () => { Instance.CharacterMovement.SelectedCharacter.CountActions -= 2; };
         StartCoroutine(Instance.CharacterMovement.SelectedCharacter.CanvasController().PanelShow(Instance.CharacterMovement.SelectedCharacter.CanvasController().PanelActionInfo("Hunker Down"), 4));
         StartCoroutine(WaitAndFinish(onFinish));
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            var item = Map["7.5_0.5_-5.5"];
+            Debug.Log(Map["7.5_0.5_-5.5"]);
+            Debug.Log(item.IndexRight.First() + " (" + item.IndexRight.Count() + ") " + " " + GameManagerMap.Instance.Map[item.IndexRight.First()].IndexLeft.First());
+
+        }
     }
 }

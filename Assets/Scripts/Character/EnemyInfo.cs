@@ -60,6 +60,8 @@ public class EnemyInfo : PersonInfo
         GameManagerMap.Instance.CharacterTargetFinder.OnEnemyUpdate += UpdateVisibility;
         GameManagerMap.Instance.StatusMain.OnStatusChange += OnStatusChange;
 
+        GetComponent<CapsuleCollider>().enabled = true;
+
     }
 
     private void UpdateVisibility()

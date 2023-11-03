@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class TerritroyReaded
@@ -9,6 +10,7 @@ public class TerritroyReaded
     public string Index { get; set; }
     public string PathPrefab { get; set; }
     public TerritoryType TerritoryInfo { get; set; }
+    public int CountHp { get; set; }
 
     [SerializeField]
     public ShelterInfo ShelterType { get; set; }
@@ -19,6 +21,8 @@ public class TerritroyReaded
 
     public HashSet<string> IndexLeft = new HashSet<string>(), IndexRight = new HashSet<string>(), IndexUp = new HashSet<string>(),
         IndexDown = new HashSet<string>(), IndexFront = new HashSet<string>(), IndexBottom = new HashSet<string>();
+
+    public Dictionary<string, TerritroyReaded> TerritoriesInside = new Dictionary<string, TerritroyReaded>();
 
     public TerritroyReaded() { }
 
@@ -70,6 +74,81 @@ public class TerritroyReaded
 
     }
 
+    public Dictionary<string, TerritroyReaded> MakeNewBranches()
+    {
+        List<HashSet<string>> allSides = new List<HashSet<string>>(){ IndexLeft, IndexRight, IndexUp, IndexDown, IndexBottom, IndexFront };
+        foreach(TerritroyReaded item in TerritoriesInside.Values)
+        {
+            //Left
+            if (IndexLeft.Count() > 0)
+            {
+                var leftItem = GameManagerMap.Instance.Map[IndexLeft.OrderBy(n => Vector3.Distance(GameManagerMap.Instance.Map[n].GetCordinats(), item.GetCordinats())).First()];
+                if (Vector3.Distance(item.GetCordinats(), leftItem.GetCordinats()) > 1)
+                {
+                    leftItem = TerritoriesInside[MatrixMap.MakeFromVector3ToIndex(item.GetCordinats() + new Vector3(0, 0, -1))];
+                }
+                item.IndexLeft.Add(leftItem.Index);
+                leftItem.IndexRight.Remove(Index);
+                leftItem.IndexRight.Add(item.Index);
+                Debug.Log(leftItem + " " + leftItem.IndexRight.First());
+            }
+            //right
+            if (IndexRight.Count() > 0)
+            {
+                var rightItem = GameManagerMap.Instance.Map[IndexRight.OrderBy(n => Vector3.Distance(GameManagerMap.Instance.Map[n].GetCordinats(), item.GetCordinats())).First()];
+                if (Vector3.Distance(item.GetCordinats(), rightItem.GetCordinats()) > 1)
+                {
+                    rightItem = TerritoriesInside[MatrixMap.MakeFromVector3ToIndex(item.GetCordinats() + new Vector3(0, 0, 1))];
+                }
+                item.IndexRight.Add(rightItem.Index);
+                rightItem.IndexLeft.Remove(Index);
+                rightItem.IndexLeft.Add(item.Index);
+                Debug.Log(rightItem + " " + rightItem.IndexLeft.First());
+            }
+            //bottom
+            var bottomItem = GameManagerMap.Instance.Map[IndexBottom.OrderBy(n => Vector3.Distance(GameManagerMap.Instance.Map[n].GetCordinats(), item.GetCordinats())).First()];
+            if (Vector3.Distance(item.GetCordinats(), bottomItem.GetCordinats()) > 1)
+            {
+                bottomItem = TerritoriesInside[MatrixMap.MakeFromVector3ToIndex(item.GetCordinats() + new Vector3(-1, 0, 0))];
+            }
+            item.IndexBottom.Add(bottomItem.Index);
+            bottomItem.IndexFront.Remove(Index);
+            bottomItem.IndexFront.Add(item.Index);
+
+
+            //front
+            var frontItem = GameManagerMap.Instance.Map[IndexFront.OrderBy(n => Vector3.Distance(GameManagerMap.Instance.Map[n].GetCordinats(), item.GetCordinats())).First()];
+            if (Vector3.Distance(item.GetCordinats(), frontItem.GetCordinats()) > 1)
+            {
+                frontItem = TerritoriesInside[MatrixMap.MakeFromVector3ToIndex(item.GetCordinats() + new Vector3(1, 0, 0))];
+            }
+            item.IndexFront.Add(frontItem.Index);
+            frontItem.IndexBottom.Remove(Index);
+            frontItem.IndexBottom.Add(item.Index);
+
+            //down
+           /* var downItem = GameManagerMap.Instance.Map[IndexDown.OrderBy(n => Vector3.Distance(GameManagerMap.Instance.Map[n].GetCordinats(), item.GetCordinats())).First()];
+            if (Vector3.Distance(item.GetCordinats(), downItem.GetCordinats()) > 1 && )
+            {
+                downItem = TerritoriesInside[MatrixMap.MakeFromVector3ToIndex(item.GetCordinats() + new Vector3(0, -1, 0))];
+            }
+            item.IndexDown.Add(downItem.Index);
+            downItem.IndexUp.Remove(Index);
+            downItem.IndexUp.Add(item.Index);
+           */
+            //up
+            var upItem = GameManagerMap.Instance.Map[IndexUp.OrderBy(n => Vector3.Distance(GameManagerMap.Instance.Map[n].GetCordinats(), item.GetCordinats())).First()];
+            if (Vector3.Distance(item.GetCordinats(), upItem.GetCordinats()) > 1)
+            {
+                upItem = TerritoriesInside[MatrixMap.MakeFromVector3ToIndex(item.GetCordinats() + new Vector3(0, 1, 0))];
+            }
+            item.IndexUp.Add(upItem.Index);
+            upItem.IndexDown.Remove(Index);
+            upItem.IndexDown.Add(item.Index);
+        }
+        return TerritoriesInside;
+    }
+ 
     public bool IsNearIsGround() => DetectSomeBooleans(n => (GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.Ground || GameManagerMap.Instance.Map[n].TerritoryInfo == TerritoryType.ShelterGround)
                                            && GameManagerMap.Instance.Map[GameManagerMap.Instance.Map[n].IndexUp.OrderBy(i => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(i), TerritroyReaded.MakeVectorFromIndex(n))).First()].TerritoryInfo == TerritoryType.Air,
                                     1, true, IndexBottom, IndexFront, IndexRight, IndexLeft) ||

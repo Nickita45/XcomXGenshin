@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -43,9 +45,6 @@ public class MatrixMap
 
     public List<GameObject> Enemy => _enemy;
     public List<GameObject> Characters => _characters;
-    public Dictionary<string, TerritroyReaded> Decors => _decors;
-    public Dictionary<string, TerritroyReaded> Vertex => _vertex;
-
     public void AirPlanfromRemove(TerritroyReaded ter) => _planeToMovement.Remove(ter.Index);
 
     public TerritroyReaded this[string index] => _vertex[index];
@@ -86,6 +85,28 @@ public class MatrixMap
         {
             yield return item.Value;
         }
+    }
+
+    public void ReleaseSpace(TerritroyReaded territory)
+    {
+       // _vertex.AddRange(territory.TerritoriesInside);
+
+       // foreach(var item in territory.TerritoriesInside)
+      //  {
+      //      GameObject detecter = Instantiate(GameManagerMap.Instance.PrefabToDetectTerritories, GameManagerMap.Instance.MainParent);
+      //  }
+
+
+       /* _vertex.Remove(territory.Index);
+
+        foreach (var item in territory.MakeNewBranches())
+        {
+            _vertex.Add(item.Key, item.Value);
+            var obj = GameManagerMap.Instance.CreatePlatformMovement(item.Value);
+            AddAirPlane(item.Value, obj);
+            Debug.Log(item.Value.IndexRight.First() + " (" + item.Value.IndexRight.Count() + ") "+ " " + GameManagerMap.Instance.Map[item.Value.IndexRight.First()].IndexLeft.First());
+            Debug.Log(_planeToMovement[item.Key].transform.localPosition);
+        }*/
     }
 
     public static string MakeFromVector3ToIndex(Vector3 vector) => (vector.x + ReadingMap.SPLITTER + vector.y + ReadingMap.SPLITTER + vector.z);

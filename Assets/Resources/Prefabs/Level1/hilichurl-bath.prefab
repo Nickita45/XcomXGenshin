@@ -104,6 +104,7 @@ MonoBehaviour:
     _shelterInfoRight: 0
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
+  _countHp: 10
   _setOnStartToEveryone: 0
 --- !u!65 &7370904295286568203
 BoxCollider:
