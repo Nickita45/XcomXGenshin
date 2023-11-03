@@ -41,8 +41,8 @@ public class CameraObjectTransparency : MonoBehaviour
             RaycastHit hit = hits[i];
 
             // If the component or its parent can be hidden
-            if (hit.transform.GetComponent<CanBeHiddenByCamera>() != null ||
-                hit.transform.parent?.GetComponent<CanBeHiddenByCamera>() != null)
+            if (hit.transform.GetComponent<TerritoryInfo>()?.CanBeHiddenByCamera() == true ||
+                hit.transform.parent?.GetComponent<TerritoryInfo>()?.CanBeHiddenByCamera() == true)
             {
                 // Get list of renderers on the game object, all of its children and its parent
                 List<Renderer> rends = hit.transform.GetComponentsInChildren<Renderer>().ToList();

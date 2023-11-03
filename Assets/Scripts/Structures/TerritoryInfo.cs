@@ -25,6 +25,11 @@ public class TerritoryInfo : MonoBehaviour
         }
     }
 
+    public bool CanBeHiddenByCamera()
+    {
+        return _type == TerritoryType.Shelter;
+    }
+
 }
 
 public enum TerritoryType
