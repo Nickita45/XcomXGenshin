@@ -1,0 +1,10 @@
+{
+    "name": "Snipergun",
+    "distanceValue": 3,
+    "baseValue": -15,
+    "minHitValue": 2,
+    "maxHitValue": 5,
+    "countBullets": 1,
+    "minTimeBetweenShooting": 0.0,
+    "maxTimeBetweenShooting": 0.0
+  }
