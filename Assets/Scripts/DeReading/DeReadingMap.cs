@@ -70,9 +70,8 @@ public class DeReadingMap : MonoBehaviour
 
         territoryInfo.Type = item.TerritoryInfo;
         territoryInfo.ShelterType = item.ShelterType;
+
         return obj;
-
-
     }
 
 }

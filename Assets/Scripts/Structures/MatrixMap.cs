@@ -51,7 +51,7 @@ public class MatrixMap
     public TerritroyReaded this[string index] => _vertex[index];
     public TerritroyReaded this[Vector3 cordinats] => _vertex[MakeFromVector3ToIndex(cordinats)];
 
-    public bool ContainsVertexByPox(Vector3 vector, out TerritroyReaded game)
+    public bool ContainsVertexByPos(Vector3 vector, out TerritroyReaded game)
     {
         string index = vector.x + ReadingMap.SPLITTER + vector.y + ReadingMap.SPLITTER + vector.z;
 

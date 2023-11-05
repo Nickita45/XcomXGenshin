@@ -464,12 +464,21 @@ public class MovementManager : MonoBehaviour
         var allPaths = Manager.MovementManager.CalculateAllPossible(enemy.Stats.MovementDistance(), enemy);
 
         TerritroyReaded findTerritory = findTerritoryMoveTo(allPaths);
-        var aktualPath = Manager.MovementManager.CalculateAllPath(findTerritory, enemy, allPaths);
 
-        enemy.ActualTerritory.TerritoryInfo = TerritoryType.Air;
-        yield return Manager.MovementManager.StartCoroutine(enemy.Move(aktualPath));
-        enemy.ActualTerritory = findTerritory;
-        enemy.ActualTerritory.TerritoryInfo = TerritoryType.Character;
+        // Only move if there's an available territory
+        if (findTerritory != null)
+        {
+            List<Vector3> aktualPath = Manager.MovementManager.CalculateAllPath(findTerritory, enemy, allPaths);
+
+            // Only move if the path exists and contains at least 1 point
+            if (aktualPath?.Count > 0)
+            {
+                enemy.ActualTerritory.TerritoryInfo = TerritoryType.Air;
+                yield return Manager.MovementManager.StartCoroutine(enemy.Move(aktualPath));
+                enemy.ActualTerritory = findTerritory;
+                enemy.ActualTerritory.TerritoryInfo = TerritoryType.Character;
+            }
+        }
     }
 
     private void OnStatusChange(HashSet<Permissions> permissions)

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class RangedHilichurlAI : EnemyAI
 {
-    private TerritroyReaded FindSaveTerritory(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
+    private TerritroyReaded FindBestTerritoryForRangedAttack(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
     {
         List<Character> characters = _enemy.GetVisibleCharacters();
         (TerritroyReaded territory, float percent) minimum = (null, Int32.MinValue);
@@ -16,18 +16,12 @@ public class RangedHilichurlAI : EnemyAI
             int procMakeHit = characters.Sum(ch => AimUtils.CalculateHitChance(ch.ActualTerritory, item.Key, GunType.Automatic, 50).percent); //???
             float proc = (2f * (100 - procGetHit) + 0.4f * procMakeHit) / (2f + 0.4f);
             if (proc > minimum.percent)
+            {
                 minimum = (item.Key, proc);
+            }
             //Debug.Log($"get hit procnet: {procGetHit}; make hit proc:{procMakeHit}; proc:{proc}; ter {item.Key}; count vis {string.Join(",", _enemyInfo.VisibleCharacters.Select(n => n.NameCharacter()))}");
         }
-        //Debug.Log(minimum.percent + " " + allPaths.Count());
         return minimum.territory;
-    }
-
-    private TerritroyReaded FindNewRandomPosition(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
-    {
-        List<TerritroyReaded> keysList = new List<TerritroyReaded>(allPaths.Keys.Where(n => n != _enemy.ActualTerritory && n.IsNearShelter()));
-        Debug.Log("Random move " + GetType().Name);
-        return keysList[UnityEngine.Random.Range(0, keysList.Count())];
     }
 
     private AbilityShoot _shoot = new();
@@ -44,7 +38,7 @@ public class RangedHilichurlAI : EnemyAI
                         AimUtils.CalculateHitChance(_enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, _enemy.Stats.BaseAimPercent()).percent).Max() > 50)
             {
                 _enemy.ActionsLeft -= 1;
-                yield return StartCoroutine(_enemy.MoveEnemy(FindSaveTerritory));
+                yield return StartCoroutine(_enemy.MoveEnemy(FindBestTerritoryForRangedAttack));
             }
             else
             {
@@ -59,7 +53,7 @@ public class RangedHilichurlAI : EnemyAI
             if (_enemy.ActionsLeft == 0 && UnityEngine.Random.Range(1, 100 + 1) > 75)
                 yield return StartCoroutine(_overwatch.Activate(_enemy, null));
             else
-                yield return StartCoroutine(_enemy.MoveEnemy(FindNewRandomPosition));
+                yield return StartCoroutine(_enemy.MoveEnemy(FindTerritoryRandomShelter));
         }
     }
 
@@ -79,6 +73,6 @@ public class RangedHilichurlAI : EnemyAI
     }
     public override TerritroyReaded TriggerEnemy(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
     {
-        return FindSaveTerritory(allPaths);
+        return FindBestTerritoryForRangedAttack(allPaths);
     }
 }

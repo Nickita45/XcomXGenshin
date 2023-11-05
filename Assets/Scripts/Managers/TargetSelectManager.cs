@@ -30,6 +30,7 @@ public class TargetSelectManager : MonoBehaviour
     {
         Manager.OutlineManager.TargetCharacter(Manager.TurnManager.SelectedCharacter.Animator.Outline);
         Manager.CameraManager.EnableFreeCameraMovement();
+        Manager.StatusMain.SetStatusSelectAction();
     }
 
     private void Update()

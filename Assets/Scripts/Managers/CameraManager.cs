@@ -46,7 +46,7 @@ public class CameraManager : MonoBehaviour
 
             (Vector3 position, Quaternion rotation)
                 = CameraUtils.CalculateEnemyView(Manager.TurnManager.SelectedCharacter.gameObject, icon.Enemy.gameObject);
-            _fixedCamera.InitAsMainCamera(position, rotation, 0.5f);
+            _fixedCamera.InitAsMainCamera(position, rotation, icon.Enemy.gameObject, 0.5f);
         }
     }
 }
