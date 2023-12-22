@@ -9,6 +9,7 @@ public class RangedHilichurlAI : EnemyAI
     private TerritroyReaded FindBestTerritoryForRangedAttack(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
     {
         List<Character> characters = _enemy.GetVisibleCharacters();
+    
         (TerritroyReaded territory, float percent) minimum = (null, Int32.MinValue);
         foreach (var item in allPaths)
         {
@@ -19,8 +20,9 @@ public class RangedHilichurlAI : EnemyAI
             {
                 minimum = (item.Key, proc);
             }
-            //Debug.Log($"get hit procnet: {procGetHit}; make hit proc:{procMakeHit}; proc:{proc}; ter {item.Key}; count vis {string.Join(",", _enemyInfo.VisibleCharacters.Select(n => n.NameCharacter()))}");
+            // Debug.Log($"get hit procnet: {procGetHit}; make hit proc:{procMakeHit}; proc:{proc}; ter {item.Key}; count vis {string.Join(",", characters.Select(n => n.Stats.CharacterName()))}");
         }
+        Debug.Log(minimum.percent + " " + allPaths.Count());
         return minimum.territory;
     }
 

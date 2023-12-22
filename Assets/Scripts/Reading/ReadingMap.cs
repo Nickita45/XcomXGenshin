@@ -70,7 +70,7 @@ public class ReadingMap : MonoBehaviour
                     countHeightOrWeight++;
                     AlgoritmusRowMove(wayRow, ref isDetectSomething);
 
-                    yield return new WaitForSeconds(TIMEWAITREADING);
+                    yield return new WaitForFixedUpdate();//new WaitForSeconds(TIMEWAITREADING);
                     AddNewTerritory(vector);
                 }
 
@@ -86,7 +86,7 @@ public class ReadingMap : MonoBehaviour
                     beforeObj = _aktualGameObject;
                     AlgoritmusRowMove(wayRow, ref isDetectSomething);
 
-                    yield return new WaitForSeconds(TIMEWAITREADING);
+                    yield return new WaitForFixedUpdate();//WaitForSeconds(TIMEWAITREADING);
 
                     AddNewTerritory(vector);
                     countUp++;
@@ -144,7 +144,7 @@ public class ReadingMap : MonoBehaviour
         _objectDetect.transform.position = vectorMove;
         _lastReadedTerritory = null;
 
-        yield return new WaitForSeconds(TIMEWAITREADING);
+        yield return new WaitForFixedUpdate();//WaitForSeconds(TIMEWAITREADING);
         AddNewTerritory(vector);
     }
 
