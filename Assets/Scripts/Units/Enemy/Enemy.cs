@@ -35,11 +35,11 @@ public class Enemy : Unit
 
     public override void Start()
     {
-        _countHp = _stats.MaxHP();
+        _countHp = _stats.MaxHP();//set maximum hp
         base.Start();
 
-        ActualTerritory = Manager.Map[transform.localPosition];
-        ActualTerritory.TerritoryInfo = TerritoryType.Character;
+        ActualTerritory = Manager.Map[transform.localPosition]; //set actual block
+        ActualTerritory.TerritoryInfo = TerritoryType.Character; //set actual block type on character tyoe
 
         Manager.StatusMain.OnStatusChange += OnStatusChange;
 
@@ -80,13 +80,13 @@ public class Enemy : Unit
 
     public override void Kill()
     {
-        Manager.Map.Enemies.Remove(this);
-        _canvas.DisableAll();
+        Manager.Map.Enemies.Remove(this); //remove form list of enemies
+        _canvas.DisableAll(); //disable all elements from canvas
 
-        _animator.Model.SetActive(false);
+        _animator.Model.SetActive(false); //disable animator
 
-        GetComponent<BoxCollider>().enabled = false;
-        ActualTerritory.TerritoryInfo = TerritoryType.Air;
+        GetComponent<BoxCollider>().enabled = false; //disable collider
+        ActualTerritory.TerritoryInfo = TerritoryType.Air; //set his block type on air
     }
 
     private void OnDestroy()

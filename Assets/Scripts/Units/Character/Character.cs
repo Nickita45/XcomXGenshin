@@ -14,27 +14,27 @@ public class Character : Unit
     [Header("Selector")]
     [SerializeField]
     private GameObject _selectItem;
-    public GameObject SelectItem => _selectItem;
+    public GameObject SelectItem => _selectItem; //circle under the character
 
     [SerializeField]
-    private Material _materialSelect;
-    private Material _basicMaterial;
+    private Material _materialSelect; //when character is selected
+    private Material _basicMaterial; //when character is non selected
 
     [Header("Mover")]
     [SerializeField]
-    private GameObject _mover;
+    private GameObject _mover; //circle on the selected block
     public GameObject Mover => _mover;
 
     [Header("Shelters")]
     [SerializeField]
-    private GameObject[] _shelterSize; // on indexes SidesShelter in ShelterDetecter
-    public GameObject this[int index] => _shelterSize[index];
+    private GameObject[] _shelterSize; // on indexes SidesShelter in ShelterDetecter //???
+    public GameObject this[int index] => _shelterSize[index]; //???
 
     [Header("Other")]
     [SerializeField]
-    private GameObject[] _gunGameObjects;
+    private GameObject[] _gunGameObjects; //guns on model
     [SerializeField]
-    private GameObject _gunPrefab;
+    private GameObject _gunPrefab; //the parant of all guns models
 
     private bool _selected;
 
@@ -43,7 +43,7 @@ public class Character : Unit
 
     public GameObject GunPrefab => _gunPrefab;
 
-    private int _actionsLeft;
+    private int _actionsLeft; 
     public override int ActionsLeft
     {
         get => _actionsLeft;
@@ -86,22 +86,22 @@ public class Character : Unit
 
     public void OnIndexSet()
     {
-        gameObject.name = Stats.CharacterName();
+        gameObject.name = Stats.CharacterName(); //set name
 
-        _countHp = Stats.MaxHP();
-        Canvas.SetStartHealth(Stats.MaxHP());
+        _countHp = Stats.MaxHP(); //set max hp
+        Canvas.SetStartHealth(Stats.MaxHP()); 
 
-        SetGunByIndex((int)Stats.Weapon);
+        SetGunByIndex((int)Stats.Weapon); //set gun
 
         _abilities = new() {
             new AbilityShoot(),
             new AbilityOverwatch(),
             new AbilityHunkerDown(),
             new AbilityElementalSkill(Stats.Element)
-        };
+        }; //set abilities
 
-        Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath);
-        Animator.GetComponentInChildren<GunModel>().Init();
+        Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath); //
+        Animator.GetComponentInChildren<GunModel>().Init(); //
     }
 
     private void BeginOfTurn() => ActionsLeft = 2;
@@ -142,17 +142,17 @@ public class Character : Unit
         _selectItem.SetActive(true);
 
         _selected = true;
-        _selectItem.GetComponent<MeshRenderer>().material = _materialSelect;
+        _selectItem.GetComponent<MeshRenderer>().material = _materialSelect; //set material to matrial for selecting
     }
 
     public void DisableChanges()
     {
         _selectItem.SetActive(false);
         _selected = false;
-        _selectItem.GetComponent<MeshRenderer>().material = _basicMaterial;
-        _mover.transform.localPosition = new Vector3(0, _mover.transform.localPosition.y, 0);
+        _selectItem.GetComponent<MeshRenderer>().material = _basicMaterial; //set matetial to basic material
+        _mover.transform.localPosition = new Vector3(0, _mover.transform.localPosition.y, 0); //change position for mover to under the character
 
-        foreach (GameObject item in _shelterSize)
+        foreach (GameObject item in _shelterSize) //??? ebu
         {
             foreach (Transform item2 in item.transform)
             {
@@ -189,15 +189,15 @@ public class Character : Unit
 
     public override void Kill()
     {
-        Manager.Map.Characters.Remove(this);
-        Manager.TurnManager.EndCharacterTurn(this);
-        _canvas.DisableAll();
+        Manager.Map.Characters.Remove(this); //remove from map character list
+        Manager.TurnManager.EndCharacterTurn(this); //end of the character turn
+        _canvas.DisableAll(); //disable canvas elements
 
-        Animator.Model.SetActive(false);
-        GunPrefab.SetActive(false);
+        Animator.Model.SetActive(false); //disable animator
+        GunPrefab.SetActive(false); //disable gun
 
-        GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false; //disable collider
 
-        ActualTerritory.TerritoryInfo = TerritoryType.Air;
+        ActualTerritory.TerritoryInfo = TerritoryType.Air; //set character's block to air
     }
 }

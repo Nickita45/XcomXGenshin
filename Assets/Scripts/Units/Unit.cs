@@ -30,7 +30,7 @@ public abstract class Unit : MonoBehaviour
     public virtual void Start()
     {
         _countHp = Stats.MaxHP();
-        Canvas.SetStartHealth(Stats.MaxHP());
+        Canvas.SetStartHealth(Stats.MaxHP()); //update visual hp of unit
     }
 
     public void MakeHit(int hit)
@@ -39,7 +39,7 @@ public abstract class Unit : MonoBehaviour
         if (_countHp <= 0)
             Kill();
         else
-            _canvas.SetStartHealth(_countHp);
+            Canvas.SetStartHealth(_countHp);  //update visual hp of unit
     }
 
     // Moves the unit through the list of points on the map. 

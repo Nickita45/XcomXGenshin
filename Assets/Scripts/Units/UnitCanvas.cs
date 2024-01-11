@@ -54,15 +54,15 @@ public abstract class UnitCanvas : MonoBehaviour
 
     public void SetStartHealth(int hp)
     {
-        int childCount = _panelHealthBar.transform.childCount;
+        int childCount = _panelHealthBar.transform.childCount; //get actual count of hp unit
         if (hp > childCount)
         {
-            for (int i = 0; i < hp - childCount; i++)
+            for (int i = 0; i < hp - childCount; i++) //its healing
                 Instantiate(_hpPrefab, _panelHealthBar.transform);
         }
         else if (hp < childCount)
         {
-            for (int i = 0; i < childCount - hp; i++)
+            for (int i = 0; i < childCount - hp; i++) //its dmging
                 Destroy(_panelHealthBar.transform.GetChild(childCount - i - 1).gameObject);
         }
     }
@@ -99,13 +99,13 @@ public abstract class UnitCanvas : MonoBehaviour
     public IEnumerator PanelAnimation(GameObject panel, float speed, float toNumberEverything, float toNumberPanel, float timeFinish)
     {
 
-        List<Image> colors = panel.GetComponentsInChildren<Image>().ToList(); //can be array?
-        List<TextMeshProUGUI> texts = panel.GetComponentsInChildren<TextMeshProUGUI>().ToList();
+        List<Image> colors = panel.GetComponentsInChildren<Image>().ToList(); //get all images of panel  //can be array?
+        List<TextMeshProUGUI> texts = panel.GetComponentsInChildren<TextMeshProUGUI>().ToList(); //get all textes of panel
 
         Image panelColor = panel.GetComponent<Image>();
-        float gValuePanelColor = panelColor.color.a;
+        float gValuePanelColor = panelColor.color.a; //save actual alpha of colour of panel
 
-        if (toNumberEverything != 0)
+        if (toNumberEverything != 0) //if it is appear, set all objects on invisible
         {
             panelColor.color = new Color(panelColor.color.r, panelColor.color.g, panelColor.color.b, 0);
             colors.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 0));
@@ -115,24 +115,24 @@ public abstract class UnitCanvas : MonoBehaviour
         panel.SetActive(true);
         while ((panelColor.color.a < toNumberPanel && toNumberPanel != 0) || (panelColor.color.a > toNumberPanel && toNumberPanel == 0)
             || (colors.First().color.a < toNumberEverything && toNumberEverything != 0) || (colors.First().color.a > toNumberEverything && toNumberEverything == 0))
-        {
+        { //cycle until the alpha values for the colours of the objects have the required values
             if ((panelColor.color.a < toNumberPanel && toNumberPanel != 0) || (panelColor.color.a > toNumberPanel && toNumberPanel == 0))
-                panelColor.color = new Color(panelColor.color.r, panelColor.color.g, panelColor.color.b, panelColor.color.a + speed * Time.deltaTime);
+                panelColor.color = new Color(panelColor.color.r, panelColor.color.g, panelColor.color.b, panelColor.color.a + speed * Time.deltaTime);//add speed value to colour of panel
 
             if (colors.First().color.a != toNumberEverything)
             {
-                colors.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, panelColor.color.a + speed * Time.deltaTime));
-                texts.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, panelColor.color.a + speed * Time.deltaTime));
+                colors.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, panelColor.color.a + speed * Time.deltaTime)); //add speed value to colours of images
+                texts.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, panelColor.color.a + speed * Time.deltaTime));//add speed value to colours of texts
             }
             yield return null;
         }
 
         yield return new WaitForSeconds(timeFinish);
 
-        panelColor.color = new Color(panelColor.color.r, panelColor.color.g, panelColor.color.b, gValuePanelColor);
-
-        colors.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 1));
-        texts.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 1));
+        panelColor.color = new Color(panelColor.color.r, panelColor.color.g, panelColor.color.b, gValuePanelColor); //set saved alpha parameter to color of panel
+        
+        colors.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 1)); //set all colours of images alpha value to 1
+        texts.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 1));//set all colours of images alpha value to 1
     }
 
     public void DisableAll()

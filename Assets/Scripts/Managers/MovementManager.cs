@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 // Manages UI and game elements related to the movement of the selected character.
 public class MovementManager : MonoBehaviour
 {
-    public static readonly Vector3 BIGVECTOR = new(int.MaxValue, int.MaxValue, int.MaxValue);
-    public static readonly Vector3 POSITIONFORSPAWN = new(0, 0.5f, 0);
+    public static readonly Vector3 BIGVECTOR = new(int.MaxValue, int.MaxValue, int.MaxValue);// vector with max value of Integer
+    public static readonly Vector3 POSITIONFORSPAWN = new(0, 0.5f, 0); //position for spawn air platforms
 
     [Header("Script Objects")]
 
@@ -70,7 +70,7 @@ public class MovementManager : MonoBehaviour
             {
                 _aktualTerritory.aktualTerritoryReaded = detectTerritory;
 
-                OnSelectNewTerritory(_aktualTerritory, Manager.TurnManager.SelectedCharacter);
+                OnSelectNewTerritory(_aktualTerritory, Manager.TurnManager.SelectedCharacter); //we choose new territory
             }
 
             if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && !Manager.TurnManager.SelectedCharacter.IsActualTerritory(_aktualTerritory.aktualTerritoryReaded))
@@ -83,9 +83,9 @@ public class MovementManager : MonoBehaviour
     private void SelectNewTerritory((TerritroyReaded aktualTerritoryReaded, List<Vector3> path) territory, Character character)
     {
         Manager.TurnManager.SelectedCharacter.SetCoordinatsToMover(territory.aktualTerritoryReaded.GetCordinats()
-            + Manager.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
+            + Manager.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover of selectet character
 
-        _aktualTerritory.path = CalculateAllPath(territory.aktualTerritoryReaded, character, _objectsCalculated); //actual path to selected territory
+        _aktualTerritory.path = CalculateAllPath(territory.aktualTerritoryReaded, character, _objectsCalculated); //calculate actual path to selected territory
 
         DrawLine(_aktualTerritory.path); //draw the line
     }
@@ -109,7 +109,7 @@ public class MovementManager : MonoBehaviour
     {
         foreach (var item in _objectsCalculated.Keys)
         {
-            Manager.Map.GetAirPlatform(item)?.SetActive(result);
+            Manager.Map.GetAirPlatform(item)?.SetActive(result); 
 
             //if(!result)
             //   Manager.Map.GetAirPlatform(item).GetComponent<PlateMoving>().SetCharge(result);
@@ -120,18 +120,18 @@ public class MovementManager : MonoBehaviour
 
     private IEnumerator MoveSelectedCharacter(TerritroyReaded newTerritory, List<Vector3> points)
     {
-        Character character = Manager.TurnManager.SelectedCharacter;
+        Character character = Manager.TurnManager.SelectedCharacter; //get selected character
         character.MoverActive(false); // disable mover
-        character.ActualTerritory.TerritoryInfo = TerritoryType.Air;
-        character.ActualTerritory = null;
-        character.SelectItem.SetActive(false);
+        character.ActualTerritory.TerritoryInfo = TerritoryType.Air; //set block where he was on air
+        character.ActualTerritory = null; 
+        character.SelectItem.SetActive(false); //disable hi selecter
 
         _isMoving = true;
         OnStartMove();
 
         Manager.StatusMain.SetStatusWaiting();
 
-        yield return StartCoroutine(character.Move(points));
+        yield return StartCoroutine(character.Move(points)); //??????????
 
         _isMoving = false;
         OnEndMove(newTerritory, character);
@@ -141,11 +141,11 @@ public class MovementManager : MonoBehaviour
 
     private void DisableToBasic(TerritroyReaded newTerritory, Character character)
     {
-        character.ActualTerritory = newTerritory;
-        newTerritory.TerritoryInfo = TerritoryType.Character;
+        character.ActualTerritory = newTerritory; //set new block to character
+        newTerritory.TerritoryInfo = TerritoryType.Character; //change block type
         _lineRenderer.positionCount = 0;
 
-        if (Manager.Map.GetAirPlatform(newTerritory).GetComponent<PlateMoving>().IsCharge)
+        if (Manager.Map.GetAirPlatform(newTerritory).GetComponent<PlateMoving>().IsCharge) //minus actions
             character.ActionsLeft -= 2;
         else
             character.ActionsLeft -= 1;
@@ -163,37 +163,37 @@ public class MovementManager : MonoBehaviour
 
     public List<Vector3> CalculateAllPath(TerritroyReaded starter, Unit unit, Dictionary<TerritroyReaded, TerritroyReaded> objectsCaclucated)
     {
-        List<Vector3> path = new()
+        List<Vector3> path = new() //list of all point "breaks"
         {
-            unit.transform.localPosition,
-            starter.GetCordinats()
+            unit.transform.localPosition, //first point is unit location
+            starter.GetCordinats() //selected block
         };
 
-        Dictionary<Vector3, Vector3> airPaths = new();
+        Dictionary<Vector3, Vector3> airPaths = new(); //list of points of ascents and descents(air)
 
-        while (true) //in this cyklus we will find points in which ones must line gone
+        while (true) //in this cyklus we will find all points "breaks"
         {
-            List<Vector3> newPath = new();
-            for (int i = 0; i < path.Count - 1; i++) //in this, we detect, if the between points exist shelters
+            List<Vector3> newPath = new(); //create new list of points
+            for (int i = 0; i < path.Count - 1; i++) //we detect, if the between points exist shelters
 
             {
                 var iList = CalculatePoints(Manager.Map[path[i + 1]], path[i], objectsCaclucated);
                 newPath.AddRange(iList.paths);//if yes, we add them to list
-                foreach (var item in iList.airPaths)
+                foreach (var item in iList.airPaths) // and add air points
                 {
                     airPaths.TryAdd(item.Key, item.Value);
                 }
             }
 
             newPath = newPath.Distinct().ToList();//delete all same pieces
-            if (newPath.Count == path.Count)//if old path and new path has same count, it means that we cant find new territories to stop
+            if (newPath.Count == path.Count)//if old path and new path has same count, it means that we cant find new brakes
                 break;
 
             path = new List<Vector3>(newPath);
         }
 
-        var basicPaths = FindPathBack(starter, objectsCaclucated); //detect all path from begin to end
-        int indexes = basicPaths.Count + 1;
+        var basicPaths = FindPathBack(starter, objectsCaclucated); //detect all path from begin to end with their indexes
+        int indexes = basicPaths.Count + 1; //to first one
         Vector3[] finalCordinats = new Vector3[indexes + airPaths.Count]; //create array to make consistent path
         Array.Fill(finalCordinats, BIGVECTOR);
 
@@ -230,22 +230,22 @@ public class MovementManager : MonoBehaviour
 
         Debug.DrawRay(firstVector + Manager.MainParent.transform.position, targetPosition, Color.red);
 
-        Dictionary<Vector3, int> nextPaths = new(); //the points where we need to make stops for line
+        Dictionary<Vector3, int> nextPaths = new(); //the points where we need to make break for line
 
         Dictionary<Vector3, Vector3> airPaths = new(); //the points with air paths
 
-        foreach (var item in paths) //in this cycle we detect all air points (only for shelter ground)
+        foreach (var item in paths) //in this cycle we detect all air breaks (only for shelter ground)
         {
             var aktualItem = Manager.Map[item.Key];
-            var beforeItem = objectsCaclucated[aktualItem];
+            var beforeItem = objectsCaclucated[aktualItem]; //get previus block
 
-            if (beforeItem == null || aktualItem == null)
+            if (beforeItem == null || aktualItem == null) //if we in the beggining (cant find previous or next block)
                 continue;
 
             if (beforeItem.YPosition != aktualItem.YPosition && beforeItem.HasGround() && aktualItem.HasGround())
-            {
+            { //if it is true => we find air break
                 TerritroyReaded newAir = null;//detected Air territory
-                if (beforeItem.YPosition < aktualItem.YPosition) //get correct territory
+                if (beforeItem.YPosition < aktualItem.YPosition) //up or down air break
                 {
                     newAir = Manager.Map[beforeItem.IndexUp.First()];
                 }
@@ -255,7 +255,7 @@ public class MovementManager : MonoBehaviour
                 }
 
                 if (newAir != null)
-                {
+                { //if we find new air break, add it to our air breaks
                     nextPaths.TryAdd(item.Key, item.Value);
                     nextPaths.TryAdd(beforeItem.GetCordinats(), paths[beforeItem.GetCordinats()]);
                     airPaths.TryAdd(aktualItem.GetCordinats(), newAir.GetCordinats());
@@ -273,23 +273,22 @@ public class MovementManager : MonoBehaviour
                 hitObject = hitObject.transform.parent.gameObject;
 
             TerritroyReaded finded = Manager.Map[hitObject.transform.localPosition];//find hit territory
-            Stack<TerritroyReaded> territoryes = new(); //Stack for new territories, which we must detect
+            Queue<TerritroyReaded> territoryes = new(); //Queue for new territories, which we must detect
             HashSet<TerritroyReaded> alreadyFinded = new(); //This hashSet we use to optimation our future calculations
-            territoryes.Push(finded); // first territory
+            territoryes.Enqueue(finded); // first territory
 
             bool doesFindSomething = false; // stop boolean
             while (true) // in this cycle we search from hit for any territory which is in our path and
             {
-                Stack<TerritroyReaded> newTerritoryes = new(); //future territories which we must detect after one cycle
                 do
                 {
-                    TerritroyReaded newFinded = territoryes.Pop();
+                    TerritroyReaded newFinded = territoryes.Dequeue();
                     alreadyFinded.Add(newFinded);
 
                     foreach (var item in newFinded) //analyze all neighbors
                     {
                         TerritroyReaded detectItem = Manager.Map[item];
-                        if (alreadyFinded.Contains(detectItem) || newTerritoryes.Contains(detectItem))//IT CAN BE MAKED FASTER O(n)!!!! newTerritoryes is a stack and contains is O(n) operation
+                        if (alreadyFinded.Contains(detectItem) || territoryes.Contains(detectItem))//IT CAN BE MAKED FASTER O(n)!!!! territoryes is a queue and contains is O(n) operation
                             continue;
 
                         if (paths.ContainsKey(detectItem.GetCordinats()))
@@ -310,7 +309,7 @@ public class MovementManager : MonoBehaviour
                         }
                         else
                         {
-                            newTerritoryes.Push(detectItem);
+                            territoryes.Enqueue(detectItem);
                         }
                     }
                 }
@@ -318,8 +317,6 @@ public class MovementManager : MonoBehaviour
 
                 if (doesFindSomething)
                     break;
-
-                territoryes = new Stack<TerritroyReaded>(newTerritoryes); //add all newTerritoryes to territoryes for detect other terriotories
             }
         }
 
@@ -350,16 +347,16 @@ public class MovementManager : MonoBehaviour
 
             aktual = objectsCaclucated[aktual];
         }
-        return paths;
+        return paths; //paths is a dictionary with a way from starter to begin with indexers
     }
 
     public Dictionary<TerritroyReaded, TerritroyReaded> CalculateAllPossible(int countMove, Unit unit)
     {
         Dictionary<TerritroyReaded, TerritroyReaded> objectsCalculated = new();//the final version of list of territories
 
-        Stack<(TerritroyReaded orig, TerritroyReaded previus)> nextCalculated = new();//need to calculate territories
-        nextCalculated.Push((unit.ActualTerritory, null));//first element
-        HashSet<TerritroyReaded> already = new(); //save all territries that we dont need to detect
+        Queue<(TerritroyReaded orig, TerritroyReaded previus)> nextCalculated = new();//stack for bottom up calculations
+        nextCalculated.Enqueue((unit.ActualTerritory, null));//first element
+        HashSet<TerritroyReaded> already = new(); //save all blocks that we already detect
 
         int startValueMove = 0;
 
@@ -375,30 +372,26 @@ public class MovementManager : MonoBehaviour
 
         for (int i = 0; i <= countMove; i++)
         {
-            int calcs = 0;
-
-            Stack<(TerritroyReaded orig, TerritroyReaded previus)> notCalculatedYet = new(); //the elements which we need to detect in next cycle
-            calcs = nextCalculated.Count;
-            while (nextCalculated.Count > 0)
+            while (nextCalculated.Count > 0) //while exists block that we do not detect
             {
-                (TerritroyReaded orig, TerritroyReaded previus) = nextCalculated.Pop();
+                (TerritroyReaded orig, TerritroyReaded previus) = nextCalculated.Dequeue();
 
                 if ((orig.TerritoryInfo != TerritoryType.Character || orig == unit.ActualTerritory) &&
-                    orig.TerritoryInfo != TerritoryType.ShelterGround && orig.TerritoryInfo != TerritoryType.Enemy) // we cant move on shelterground element
+                    orig.TerritoryInfo != TerritoryType.ShelterGround && orig.TerritoryInfo != TerritoryType.Enemy) //detect only block which we can move on
                 {
                     if (objectsCalculated.ContainsKey(orig))
                     {
-                        var oldItem = objectsCalculated[orig];
+                        var oldItem = objectsCalculated[orig]; // this part of the code makes it more human
                         if (oldItem != null)
                         {
                             if ((oldItem.YPosition != orig.YPosition && previus.YPosition == orig.YPosition) ||
                                 (oldItem.YPosition != orig.YPosition && previus.YPosition != orig.YPosition &&
-                                   Vector3.Distance(unit.transform.localPosition, previus.GetCordinats()) < Vector3.Distance(unit.transform.localPosition, oldItem.GetCordinats()))) //||
-                            {
+                                   Vector3.Distance(unit.transform.localPosition, previus.GetCordinats()) < Vector3.Distance(unit.transform.localPosition, oldItem.GetCordinats())))
+                            { //solves the problem with not nessary jumps
                                 objectsCalculated.Remove(orig);
                                 objectsCalculated.Add(orig, previus);
 
-                                if (unit is Character)
+                                if (unit is Character) //change color if it is charge block
                                     Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetCharge(i > startValueMove);
                             }
                         }
@@ -407,7 +400,7 @@ public class MovementManager : MonoBehaviour
                     {
                         objectsCalculated.Add(orig, previus);
 
-                        if (unit is Character)
+                        if (unit is Character) //change color if it is charge block
                             Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetCharge(i > startValueMove);
                     }
                 }
@@ -420,11 +413,11 @@ public class MovementManager : MonoBehaviour
                     {
                         detectItem = Manager.Map[detectItem.IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(orig.Index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault()];
                     }
-                    if (detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air) == 1)//for down air
+                    if (detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air) == 1)//if there's air under the block, it's going down.
                     {
                         var newItem = detectItem.IndexDown.FirstOrDefault(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air);
                         while (Manager.Map[newItem].IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air) == 1)
-                        {
+                        { //select the bottommost block
                             newItem = Manager.Map[newItem].IndexDown.FirstOrDefault(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air);
                         }
                         detectItem = Manager.Map[newItem];
@@ -432,28 +425,27 @@ public class MovementManager : MonoBehaviour
                     if (detectItem.TerritoryInfo == TerritoryType.Shelter || detectItem.TerritoryInfo == TerritoryType.ShelterGround
                         || detectItem.TerritoryInfo == TerritoryType.Enemy || detectItem.TerritoryInfo == TerritoryType.Character ||
                       detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground ||
-                      Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround) == 0) // we dont select such territories
+                      Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround) == 0) // we dont select such blocks with such rules
                     {
                         continue;
                     }
 
                     if (objectsCalculated.ContainsKey(detectItem))
-                    {
+                    { //already detected block
                         continue;
                     }
 
                     if (already.Contains(detectItem) && (!detectItem.IsNearIsGround() || detectItem.InACenterOfGronds()))
-                    {
+                    { //optimization
                         continue;
                     }
-                    notCalculatedYet.Push((detectItem, orig));
+                    nextCalculated.Enqueue((detectItem, orig));
 
                     if (!already.Contains(detectItem))
                         already.Add(detectItem);
                 }
             }
 
-            nextCalculated = new Stack<(TerritroyReaded orig, TerritroyReaded previus)>(notCalculatedYet);
         }
         return objectsCalculated;
     }
@@ -461,21 +453,21 @@ public class MovementManager : MonoBehaviour
 
     public IEnumerator MoveEnemyToTerritory(Enemy enemy, Func<Dictionary<TerritroyReaded, TerritroyReaded>, TerritroyReaded> findTerritoryMoveTo)
     {
-        var allPaths = Manager.MovementManager.CalculateAllPossible(enemy.Stats.MovementDistance(), enemy);
+        var allPaths = Manager.MovementManager.CalculateAllPossible(enemy.Stats.MovementDistance(), enemy); // get enemie's objectsCalculated
 
-        TerritroyReaded findTerritory = findTerritoryMoveTo(allPaths);
+        TerritroyReaded findTerritory = findTerritoryMoveTo(allPaths); //get target block
 
         // Only move if there's an available territory
-        if (findTerritory != null)
+        if (findTerritory != null) //????? may be problem in future/can be in AI then cant find territory
         {
-            List<Vector3> aktualPath = Manager.MovementManager.CalculateAllPath(findTerritory, enemy, allPaths);
+            List<Vector3> aktualPath = Manager.MovementManager.CalculateAllPath(findTerritory, enemy, allPaths); //get path with breaks for enemy
 
             // Only move if the path exists and contains at least 1 point
             if (aktualPath?.Count > 0)
             {
-                enemy.ActualTerritory.TerritoryInfo = TerritoryType.Air;
-                yield return Manager.MovementManager.StartCoroutine(enemy.Move(aktualPath));
-                enemy.ActualTerritory = findTerritory;
+                enemy.ActualTerritory.TerritoryInfo = TerritoryType.Air; //actualization block type
+                yield return Manager.MovementManager.StartCoroutine(enemy.Move(aktualPath)); //?????? maybe better this method in this class
+                enemy.ActualTerritory = findTerritory; //actualization enemy block
                 enemy.ActualTerritory.TerritoryInfo = TerritoryType.Character;
             }
         }
@@ -510,7 +502,7 @@ public class MovementManager : MonoBehaviour
     private void Clear()
     {
         StopAllCoroutines();
-        _lineRenderer.gameObject.SetActive(false);
+        _lineRenderer.gameObject.SetActive(false); //clear the line render
         _lineRenderer.positionCount = 0;
 
         Manager.TurnManager.DeselectCharacter();

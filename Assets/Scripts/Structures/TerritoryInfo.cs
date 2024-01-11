@@ -12,7 +12,7 @@ public class TerritoryInfo : MonoBehaviour
     [SerializeField]
     private ShelterInfo _shelterInfo;
     [SerializeField]
-    private ShelterType _setOnStartToEveryone;//exept "Nope"
+    private ShelterType _setOnStartToEveryone;//Automatically set all sides of _shelterInfo to this value on the start of scene, but exept is "Nope"
     public string Path => _pathPrefab;
     public TerritoryType Type { get => _type; set => _type = value; }
     public ShelterInfo ShelterType { get => _shelterInfo; set => _shelterInfo = value; }
@@ -21,7 +21,7 @@ public class TerritoryInfo : MonoBehaviour
     {
         if (_setOnStartToEveryone == global::ShelterType.Full || _setOnStartToEveryone == global::ShelterType.Semi)
         {
-            _shelterInfo.SetForEvery(_setOnStartToEveryone);
+            _shelterInfo.SetForEvery(_setOnStartToEveryone); //set all sides of _shelterInfo to value of _setOnStartToEveryone
         }
     }
 

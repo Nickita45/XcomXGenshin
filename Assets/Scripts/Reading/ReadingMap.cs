@@ -7,24 +7,24 @@ using UnityEngine;
 
 public class ReadingMap : MonoBehaviour
 {
-    public static readonly string SPLITTER = "_";
+    public static readonly string SPLITTER = "_"; //The symbol that will divide the values in the file
 
-    private const float TIMEWAITREADING = 0.02f;//optimal is 0.05f
+    private const float TIMEWAITREADING = 0.02f;//Optimal timer
 
 
     [Header("DETECTER")]
     [SerializeField]
-    private GameObject _objectDetecterPrefab;
+    private GameObject _objectDetecterPrefab;//Prefab
     [SerializeField]
-    private Transform _startTransform;
+    private Transform _startTransform;//Start position for block detecter
     [SerializeField]
-    private string _fileName;
+    private string _fileName;//Future file name
 
-    private GameObject _objectDetect;
-    private GameObject _aktualGameObject;
-    private Vector3 _startPosition;
+    private GameObject _objectDetect; //Actual block detecter
+    private GameObject _aktualGameObject; //An actual shelter that is reading
+    private Vector3 _startPosition; //Position of the block before moving
 
-    private TerritroyReaded _lastReadedTerritory;
+    private TerritroyReaded _lastReadedTerritory; //The previous block, before the new reading
 
     [Header("Map")]
     [SerializeField]
@@ -46,32 +46,32 @@ public class ReadingMap : MonoBehaviour
 
     private IEnumerator AlgoritmusReadingMapOneWay(Vector3 wayRow, (int x, int y, int z) koefRow, (int x, int y, int z) koefColumn, DetecterVector vector)
     {
-        _aktualGameObject = null;
+        _aktualGameObject = null; //initialisation  
         _lastReadedTerritory = null;
 
-        _objectDetect = Instantiate(_objectDetecterPrefab, _startTransform.position, Quaternion.identity);
+        _objectDetect = Instantiate(_objectDetecterPrefab, _startTransform.position, Quaternion.identity); // Create detecter block
         _objectDetect.GetComponent<DetectBlock>().OnDetectItem += OnBlockDetect;
         _startPosition = _objectDetect.transform.position;
 
-        int row = 0;
-        int column = 0;
+        int row = 0; // row counter
+        int column = 0; //column counter
         bool isDetectSomething = false;
         yield return new WaitForSeconds(TIMEWAITREADING);
-        AddNewTerritory(vector);
+        AddNewTerritory(vector); //added first territory
 
-        while (true)
+        while (true) //infinity cyklus
         {
-            int countHeightOrWeight = 0;
-            if (vector != DetecterVector.UpDown)
+            int countHeightOrWeight = 0; //count columns
+            if (vector != DetecterVector.UpDown) //algoritmus 
             {
                 while (_aktualGameObject == null ||
                     (_aktualGameObject.GetComponent<TerritoryInfo>() && _aktualGameObject.GetComponent<TerritoryInfo>().Type != TerritoryType.Boarder))
                 {
                     countHeightOrWeight++;
-                    AlgoritmusRowMove(wayRow, ref isDetectSomething);
+                    AlgoritmusRowMove(wayRow, ref isDetectSomething); // move as in row
 
-                    yield return new WaitForFixedUpdate();//new WaitForSeconds(TIMEWAITREADING);
-                    AddNewTerritory(vector);
+                    yield return new WaitForFixedUpdate();
+                    AddNewTerritory(vector); //create new territory
                 }
 
                 if (countHeightOrWeight > _matrixMap.width)
@@ -80,27 +80,27 @@ public class ReadingMap : MonoBehaviour
             else
             {
                 GameObject beforeObj = null;
-                int countUp = 0;
+                int countUp = 0; //memorise the number of times we climb to the top
                 do
                 {
                     beforeObj = _aktualGameObject;
-                    AlgoritmusRowMove(wayRow, ref isDetectSomething);
+                    AlgoritmusRowMove(wayRow, ref isDetectSomething); // move as in row for up/down movement
 
-                    yield return new WaitForFixedUpdate();//WaitForSeconds(TIMEWAITREADING);
+                    yield return new WaitForFixedUpdate();
 
                     AddNewTerritory(vector);
                     countUp++;
-                } while (countUp != _matrixMap.height);//(beforeObj != null || _aktualGameObject != null);
+                } while (countUp != _matrixMap.height); //until the detector block rises to maximum.
             }
 
             row++;
 
             yield return MoveDetecterByVector(vectorMove: new Vector3(_startPosition.x + koefRow.x * row + koefColumn.x * column,
                  _startPosition.y + koefRow.y * row + koefColumn.y * column,
-                 _startPosition.z + koefRow.z * row + koefColumn.z * column), vector: vector);
+                 _startPosition.z + koefRow.z * row + koefColumn.z * column), vector: vector); //moving in new row, creating a new block and/or adding connections
 
             if (_aktualGameObject?.GetComponent<TerritoryInfo>() &&
-                _aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder)
+                _aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder) //detecting on colliding with boarders
             {
                 if (!isDetectSomething)
                 {
@@ -109,15 +109,15 @@ public class ReadingMap : MonoBehaviour
 
                     break;
                 }
-                isDetectSomething = false;
+                isDetectSomething = false; //is used to end the algorithm
                 column++;
                 row = 0;
 
                 yield return MoveDetecterByVector(vectorMove: new Vector3(_startPosition.x + koefRow.x * row + koefColumn.x * column,
                   _startPosition.y + koefRow.y * row + koefColumn.y * column,
-                  _startPosition.z + koefRow.z * row + koefColumn.z * column), vector: vector);
+                  _startPosition.z + koefRow.z * row + koefColumn.z * column), vector: vector); //moving in new column, creating a new block and/or adding connections
 
-                if (_aktualGameObject != null && _aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder)
+                if (_aktualGameObject != null && _aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder)// if true, algoritmus is end
                 {
                     if (vector == DetecterVector.Vertical)
                         _matrixMap.height = column;
@@ -126,7 +126,7 @@ public class ReadingMap : MonoBehaviour
                 }
             }
         }
-        _objectDetect.GetComponent<BoxCollider>().enabled = false;
+        _objectDetect.GetComponent<BoxCollider>().enabled = false; //disabling for avoidances errors
     }
 
     private void AlgoritmusRowMove(Vector3 wayRow, ref bool isDetect)
@@ -144,18 +144,18 @@ public class ReadingMap : MonoBehaviour
         _objectDetect.transform.position = vectorMove;
         _lastReadedTerritory = null;
 
-        yield return new WaitForFixedUpdate();//WaitForSeconds(TIMEWAITREADING);
+        yield return new WaitForFixedUpdate();
         AddNewTerritory(vector);
     }
 
     private void AddNewTerritory(DetecterVector vector)
     {
-        TerritroyReaded newItem;
-        if (_aktualGameObject == null)
+        TerritroyReaded newItem; //future terrioty block
+        if (_aktualGameObject == null) // if _aktualGameObject == null it seams that we on the block of AIR
         {
-            if (!_matrixMap.ContainsVertexByPos(_objectDetect.transform.position, out newItem))
+            if (!_matrixMap.ContainsVertexByPos(_objectDetect.transform.position, out newItem)) //creating if not exists
             {
-                newItem = _matrixMap.AddVertex(new TerritroyReaded(_objectDetect.transform)
+                newItem = _matrixMap.AddVertex(new TerritroyReaded(_objectDetect.transform) // creating AIR
                 {
                     TerritoryInfo = TerritoryType.Air,
                     ShelterType = ShelterInfo.EMPTY,
@@ -164,7 +164,7 @@ public class ReadingMap : MonoBehaviour
         }
         else
         {
-            if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder)
+            if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder) //if it is boarder
             {
                 return;
             }
@@ -173,21 +173,21 @@ public class ReadingMap : MonoBehaviour
             {
                 transforObject = _aktualGameObject.transform.parent;
             }
-            else if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Decor)
+            else if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Decor) //if the block is a decoration, we create it on the basis of our block detecter
             {
                 transforObject = _objectDetect.transform;
             }
 
-            if (!_matrixMap.ContainsVertexByPos(transforObject.position, out newItem))
+            if (!_matrixMap.ContainsVertexByPos(transforObject.position, out newItem)) //if such block of territory will not already added
             {
-                if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Decor)
+                if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Decor) //creating for decor type
                 {
-                    newItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject)
+                    newItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject) //creating block of air on this decor territory
                     {
                         TerritoryInfo = TerritoryType.Air,
                         ShelterType = ShelterInfo.EMPTY,
                     }, _matrixMap.Vertex);
-                    var decorItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject)
+                    var decorItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject) //create block decor in other dictionary
                     {
                         TerritoryInfo = TerritoryType.Decor,
                         PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
@@ -196,7 +196,7 @@ public class ReadingMap : MonoBehaviour
                 }
                 else
                 {
-                    newItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject)
+                    newItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject) //creating for other type
                     {
                         TerritoryInfo = _aktualGameObject.GetComponent<TerritoryInfo>().Type,
                         ShelterType = _aktualGameObject.GetComponent<TerritoryInfo>().ShelterType,
@@ -206,7 +206,7 @@ public class ReadingMap : MonoBehaviour
             }
         }
 
-        if (_lastReadedTerritory != null && newItem != _lastReadedTerritory)
+        if (_lastReadedTerritory != null && newItem != _lastReadedTerritory) //if this condition is true it means that we can create connection between _lastReadedTerritory and actual territory 
         {
             switch (vector)
             {
@@ -233,7 +233,7 @@ public class ReadingMap : MonoBehaviour
         _aktualGameObject = obj;
     }
 
-    public void SavetToJson()
+    public void SavetToJson() //save in json
     {
         _matrixMap.DebugToConsole();
         Debug.Log(CultureInfo.CurrentCulture.Name);

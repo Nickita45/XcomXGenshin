@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class MatrixMap
 {
     public Dictionary<string, TerritroyReaded> _vertex = new();
     public Dictionary<string, TerritroyReaded> _decors = new();
-    public Dictionary<string, GameObject> _planeToMovement = new();
+    private Dictionary<string, GameObject> _planeToMovement = new(); //dictionary of platforms for movement cells(actually they are air blocks)
     public List<Enemy> _enemy = new();
     public List<Character> _characters = new();
     public int width, height;
@@ -51,21 +52,21 @@ public class MatrixMap
     public TerritroyReaded this[string index] => _vertex[index];
     public TerritroyReaded this[Vector3 cordinats] => _vertex[MakeFromVector3ToIndex(cordinats)];
 
-    public bool ContainsVertexByPos(Vector3 vector, out TerritroyReaded game)
+    public bool ContainsVertexByPos(Vector3 vector, out TerritroyReaded game) 
     {
-        string index = vector.x + ReadingMap.SPLITTER + vector.y + ReadingMap.SPLITTER + vector.z;
+        string index = MatrixMap.MakeFromVector3ToIndex(vector); //make index from Vector3
 
-        if (_vertex.ContainsKey(index))
+        if (_vertex.ContainsKey(index)) //check if such index exists
         {
-            game = _vertex[index];
+            game = _vertex[index]; //return true and ref of this block
             return true;
         }
 
-        game = null;
+        game = null; //return false and null in ref
         return false;
     }
 
-    public void DebugToConsole()
+    public void DebugToConsole() 
     {
         foreach (var item in _vertex)
         {

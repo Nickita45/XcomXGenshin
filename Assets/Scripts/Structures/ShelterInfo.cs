@@ -21,7 +21,7 @@ public class ShelterInfo
 
     public ShelterInfo(ShelterType type)
     {
-        SetForEvery(type);
+        SetForEvery(type); 
     }
 
     public void SetForEvery(ShelterType type)
@@ -32,9 +32,9 @@ public class ShelterInfo
         _shelterInfoRight = type;
     }
 
-    public static readonly ShelterInfo EMPTY = new(ShelterType.None);
+    public static readonly ShelterInfo EMPTY = new(ShelterType.None); //empty parameter
 
-    public Dictionary<ShelterSide, ShelterType> ToDictionary()
+    public Dictionary<ShelterSide, ShelterType> ToDictionary() //make it to dictionary
     {
         return new() {
             { ShelterSide.Left, _shelterInfoLeft },

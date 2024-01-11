@@ -6,11 +6,9 @@ using System.IO;
 
 public class DeReadingMap : MonoBehaviour
 {
-
-
     [Header("Sctipt Settings")]
     [SerializeField]
-    private GameObject _mainObject;
+    private GameObject _mainObject;  //
 
     [SerializeField]
     private string _path;
@@ -21,24 +19,25 @@ public class DeReadingMap : MonoBehaviour
 
     public void DeSerelizete(string nameFile)
     {
-        TextAsset json = Resources.Load<TextAsset>(nameFile);
-        string filePath = json.ToString();
+        TextAsset json = Resources.Load<TextAsset>(nameFile); //get json file
+        string filePath = json.ToString(); //get path of this file
 
-        MatrixMap _matrixMap = JsonConvert.DeserializeObject<MatrixMap>(filePath);
+        MatrixMap _matrixMap = JsonConvert.DeserializeObject<MatrixMap>(filePath); //deserialization json file
 
         foreach (var item in _matrixMap)
         {
             if (item.TerritoryInfo == TerritoryType.Air || item.TerritoryInfo == TerritoryType.Undefined || item.TerritoryInfo == TerritoryType.Enemy)
-            {
-                var obj = Manager.Instance.CreatePlatformMovement(item);
+            { //if this is air or enemy, create block of air
+                var obj = Manager.Instance.CreatePlatformMovement(item); //create place for moving
                 _matrixMap.AddAirPlane(item, obj);
 
             }
-            //make switch?
+            
+            
             if (item.TerritoryInfo == TerritoryType.Air)
                 continue;
 
-            var objMap = CreateMapObject(item);
+            var objMap = CreateMapObject(item); //create block as real object
 
             if (item.TerritoryInfo == TerritoryType.Decor)
                 objMap.GetComponent<BoxCollider>().enabled = false;
