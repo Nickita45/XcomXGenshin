@@ -12,15 +12,19 @@ public static class AimUtils
     public static (int percent, ShelterType status) CalculateHitChance(TerritroyReaded shooter, TerritroyReaded defender, GunType gun, int baseAim, params int[] parameters)
     {
         (CordinatesSide xSide, CordinatesSide zSide) side =
-            GetSidesFromShooterAndDefender(shooter, defender);
+            GetSidesFromShooterAndDefender(shooter, defender); //getting data on which side the opponent is relative to the shooter
 
-        int groundPercent = 0;
+        int groundPercent = 0;  //getting data on how high the opponent is relative to the shooter
         if (shooter.YPosition - defender.YPosition < 0)
             groundPercent = HIGHGROUNDPERCENT;
         else if (shooter.YPosition - defender.YPosition > 0)
             groundPercent = LOWGROUNDPERCENT;
 
+
+        //getting the type of maximum shelter
         ShelterType maxValue = (ShelterType)Mathf.Max((int)GetShelterTypeByCordinateSide(defender, side.xSide), (int)GetShelterTypeByCordinateSide(defender, side.zSide));
+
+        //getting the result according to the formula
         int result = baseAim + parameters.Sum() + GetPercentByType(maxValue) + groundPercent + GetPercentFromGunType(gun, (int)Mathf.Round(Vector3.Distance(defender.GetCordinats(), shooter.GetCordinats())));
         return (Mathf.Min(Mathf.Max(result, 1), 100), maxValue);
     }
@@ -38,7 +42,7 @@ public static class AimUtils
         }
         else
         {
-            xSide = CordinatesSide.Nope;
+            xSide = CordinatesSide.Nope; //flank
         }
 
         if (shooter.XPosition - defender.XPosition < 0 && shooter.XPosition - defender.XPosition != -1)
@@ -51,7 +55,7 @@ public static class AimUtils
         }
         else
         {
-            zSide = CordinatesSide.Nope;
+            zSide = CordinatesSide.Nope; //flank
         }
 
         return (xSide, zSide);
@@ -70,7 +74,7 @@ public static class AimUtils
             case CordinatesSide.Front:
                 return Manager.Map[teritory.IndexFront.First()].ShelterType.Bottom;
             default:
-                return ShelterType.None;
+                return ShelterType.None; // if it is a flank
         }
     }
 

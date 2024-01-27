@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 // Manages selecting characters, game turns, enemy triggers etc.
@@ -93,19 +92,19 @@ public class TurnManager : MonoBehaviour
         if (Manager.Map.Characters.Count == 0)
             return;
 
-        _characters.AddRange(Manager.Map.Characters);
+        _characters.AddRange(Manager.Map.Characters); //actualization list of characters
 
-        if (_characters.First().Stats.Index == -1)
+        if (_characters.First().Stats.Index == -1) //set basic parameters to characters
         {
             // This requires to start the game using the Hub Scene
             HubData.Instance.charactersPoolID = HubData.Instance.charactersPoolID.OrderBy(x => x == -1).ToArray();
             for (int i = 0; i < _characters.Count; i++)
             {
-                _characters[i].Stats.Index = (HubData.Instance.charactersPoolID[i] == -1) ? 0 : HubData.Instance.charactersPoolID[i];
+                _characters[i].Stats.Index = (HubData.Instance.charactersPoolID[i] == -1) ? 0 : HubData.Instance.charactersPoolID[i]; //set index
                 _characters[i].OnIndexSet();
                 if (HubData.Instance.charactersPoolID[i] == -1)
                 {
-                    _characters[i].Kill();
+                    _characters[i].Kill(); //if such index character does not exist, removing him
                 }
             }
         }

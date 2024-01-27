@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         Vector3 moveDirection = transform.forward * _speed * Time.deltaTime;
-        transform.Translate(moveDirection, Space.World);
+        transform.Translate(moveDirection, Space.World); //moving
         Destroy(gameObject, _lifetime);
     }
 

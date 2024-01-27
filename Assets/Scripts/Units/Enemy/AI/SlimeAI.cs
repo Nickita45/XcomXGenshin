@@ -12,8 +12,8 @@ public class SlimeAI : EnemyAI
 
     public override IEnumerator MakeTurn()
     {
-        var character = _enemy.GetClosestVisibleCharacter();
-        if (character != null && Vector3.Distance(character.transform.localPosition, _enemy.transform.localPosition) < 2)
+        var character = _enemy.GetClosestVisibleCharacter(); 
+        if (character != null && Vector3.Distance(character.transform.localPosition, _enemy.transform.localPosition) < 2) //if enemy is on neighbourhood block 
         {
             _enemy.ActionsLeft -= 2;
             yield return StartCoroutine(Attack(character));
