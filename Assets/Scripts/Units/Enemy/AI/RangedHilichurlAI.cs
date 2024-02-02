@@ -13,16 +13,16 @@ public class RangedHilichurlAI : EnemyAI
         (TerritroyReaded territory, float percent) minimum = (null, Int32.MinValue); //the optimal territory with itss procent optimational
         foreach (var item in allPaths) //calculations
         {
-            int procGetHit = characters.Sum(ch => AimUtils.CalculateHitChance(item.Key, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimCharacter).percent);
-            int procMakeHit = characters.Sum(ch => AimUtils.CalculateHitChance(ch.ActualTerritory, item.Key, GunType.Automatic, 50).percent); //???
+            int procMakeHit = characters.Sum(ch => AimUtils.CalculateHitChance(item.Key, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimCharacter).percent);
+            int procGetHit  = characters.Sum(ch => AimUtils.CalculateHitChance(ch.ActualTerritory, item.Key, GunType.Automatic, 50).percent); //???
             float proc = (2f * (100 - procGetHit) + 0.4f * procMakeHit) / (2f + 0.4f);
             if (proc > minimum.percent)
             {
                 minimum = (item.Key, proc);
             }
-            // Debug.Log($"get hit procnet: {procGetHit}; make hit proc:{procMakeHit}; proc:{proc}; ter {item.Key}; count vis {string.Join(",", characters.Select(n => n.Stats.CharacterName()))}");
+             Debug.Log($"get hit procnet: {procGetHit}; make hit proc:{procMakeHit}; proc:{proc}; ter {item.Key}; count vis {string.Join(",", characters.Select(n => n.Stats.CharacterName()))}");
         }
-        Debug.Log(minimum.percent + " " + allPaths.Count());
+        Debug.Log(minimum.percent + " " + minimum.territory);
         return minimum.territory;
     }
 
@@ -78,6 +78,7 @@ public class RangedHilichurlAI : EnemyAI
     }
     public override TerritroyReaded TriggerEnemy(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
     {
+        Debug.Log(allPaths.Count);
         return FindBestTerritoryForRangedAttack(allPaths);
     }
 }

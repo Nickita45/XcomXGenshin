@@ -23,7 +23,7 @@ public static class AimUtils
 
         //getting the type of maximum shelter
         ShelterType maxValue = (ShelterType)Mathf.Max((int)GetShelterTypeByCordinateSide(defender, side.xSide), (int)GetShelterTypeByCordinateSide(defender, side.zSide));
-
+       
         //getting the result according to the formula
         int result = baseAim + parameters.Sum() + GetPercentByType(maxValue) + groundPercent + GetPercentFromGunType(gun, (int)Mathf.Round(Vector3.Distance(defender.GetCordinats(), shooter.GetCordinats())));
         return (Mathf.Min(Mathf.Max(result, 1), 100), maxValue);

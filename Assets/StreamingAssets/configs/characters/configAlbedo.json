@@ -1,8 +1,8 @@
 {
     "characterName": "Albedo",
     "characterSpeed": 2.0,
-    "characterMoveDistance": 3,
-    "characterRangedTargetDistance": 10.0,
+    "characterMoveDistance": 20,
+    "characterRangedTargetDistance": 30.0,
     "characterBaseAim": 70,
     "characterBaseHealth": 8,
     "characterWeapon": 0,
