@@ -37,7 +37,6 @@ public class ShootManager : MonoBehaviour
                 Vector3 directionToTarget = defender.transform.position - firePoint.position; //setting the direction
                 bullet.transform.forward = directionToTarget + addShootRange;
             }
-
             yield return new WaitForSeconds(UnityEngine.Random.Range(ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].minTimeBetweenShooting,
                 ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].maxTimeBetweenShooting));
         }

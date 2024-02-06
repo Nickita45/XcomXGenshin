@@ -40,7 +40,9 @@ public class DeReadingMap : MonoBehaviour
             var objMap = CreateMapObject(item); //create block as real object
 
             if (item.TerritoryInfo == TerritoryType.Decor)
+            {
                 objMap.GetComponent<BoxCollider>().enabled = false;
+            }
 
             if (item.TerritoryInfo == TerritoryType.Enemy)
                 _matrixMap.Enemies.Add(objMap.GetComponent<Enemy>());
@@ -55,7 +57,12 @@ public class DeReadingMap : MonoBehaviour
 
     public GameObject CreateMapObject(TerritroyReaded item)
     {
-        GameObject prefab = Resources.Load<GameObject>(item.PathPrefab);
+
+        string pathPrefab = item.PathPrefab;
+        if(pathPrefab == "RANDOM_ENEMY")
+            pathPrefab = HubData.Instance.GetRandomEnemyPath();
+
+        GameObject prefab = Resources.Load<GameObject>(pathPrefab);
         var obj = Instantiate(prefab, _mainObject.transform);
         obj.transform.localPosition = new Vector3(item.XPosition, item.YPosition, item.ZPosition);
         obj.transform.localRotation = new Quaternion(item.XRotation, item.YRotation, item.ZRotation, item.WRotation);

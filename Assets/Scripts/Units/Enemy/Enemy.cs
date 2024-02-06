@@ -75,7 +75,11 @@ public class Enemy : Unit
     public IEnumerator MakeTurn()
     {
         // Only triggered enemies make turns
-        if (!_triggered) yield break;
+        if (!_triggered)
+        {
+            ActionsLeft = 0;
+            yield break;
+        }
         yield return StartCoroutine(_enemyAI.MakeTurn());
     }
 

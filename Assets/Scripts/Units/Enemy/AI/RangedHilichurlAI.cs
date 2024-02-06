@@ -20,7 +20,7 @@ public class RangedHilichurlAI : EnemyAI
             {
                 minimum = (item.Key, proc);
             }
-             Debug.Log($"get hit procnet: {procGetHit}; make hit proc:{procMakeHit}; proc:{proc}; ter {item.Key}; count vis {string.Join(",", characters.Select(n => n.Stats.CharacterName()))}");
+             //Debug.Log($"get hit procnet: {procGetHit}; make hit proc:{procMakeHit}; proc:{proc}; ter {item.Key}; count vis {string.Join(",", characters.Select(n => n.Stats.CharacterName()))}");
         }
         Debug.Log(minimum.percent + " " + minimum.territory);
         return minimum.territory;
@@ -33,11 +33,12 @@ public class RangedHilichurlAI : EnemyAI
     {
         var characters = _enemy.GetVisibleCharacters();
         var character = _enemy.GetClosestVisibleCharacter();
-
+        Debug.Log(characters.Count);
+        Debug.Log(character);
         if (character != null)
         {
             if (_enemy.ActionsLeft == 2 && characters.Select(ch =>
-                        AimUtils.CalculateHitChance(_enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, _enemy.Stats.BaseAimPercent()).percent).Max() > 50)
+                        AimUtils.CalculateHitChance( _enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, _enemy.Stats.BaseAimPercent()).percent).Max() < 50)
             {
                 //make movement if has hit chance less then 50
                 _enemy.ActionsLeft -= 1;
@@ -55,8 +56,10 @@ public class RangedHilichurlAI : EnemyAI
             _enemy.ActionsLeft -= 1;
 
 
-            if (_enemy.ActionsLeft == 0 && UnityEngine.Random.Range(1, 100 + 1) > 75) //make overwatch in 75 percent chance
+            if (_enemy.ActionsLeft == 0 && UnityEngine.Random.Range(1, 100 + 1) > 75) { //make overwatch in 75 percent chance
+                _enemy.ActionsLeft = 0;
                 yield return StartCoroutine(_overwatch.Activate(_enemy, null));
+            }
             else
                 yield return StartCoroutine(_enemy.MoveEnemy(FindTerritoryRandomShelter));
         }

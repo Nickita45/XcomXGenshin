@@ -132,7 +132,11 @@ public class TurnManager : MonoBehaviour
         foreach (Enemy enemy in Manager.Map.Enemies)
         {
             enemy.ActionsLeft = enemy.Stats.BaseActions();
-            yield return StartCoroutine(enemy.MakeTurn());
+            while(enemy.ActionsLeft > 0)
+            {
+                Debug.Log("huh");
+                yield return StartCoroutine(enemy.MakeTurn());
+            }
         }
 
         BeginOfTheTurn();
