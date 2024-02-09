@@ -8,7 +8,7 @@ using UnityEngine.TextCore.Text;
 
 public class SlimeAI : EnemyAI
 {
-    private AbilityMeleeAttack _attack = new();
+    private AbilityMeleeAttack _attack = new(Element.Pyro);
 
     public override IEnumerator MakeTurn()
     {

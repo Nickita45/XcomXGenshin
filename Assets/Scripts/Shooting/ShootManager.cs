@@ -14,6 +14,7 @@ public class ShootManager : MonoBehaviour
         Unit shooter,
         Unit defender,
         GunType actualGun,
+        Element? element,
         IEnumerator afterShootingBullets
     )
     {
@@ -61,7 +62,7 @@ public class ShootManager : MonoBehaviour
             }
 
             StartCoroutine(defender.Canvas.PanelShow(defender.Canvas.PanelHit(dmg), 4));//show panel hit
-            defender.MakeHit(dmg); //making damage
+            defender.MakeHit(dmg, element); //making damage
         }
         yield return new WaitForSeconds(ConfigurationManager.GlobalDataJson.timeAfterShooting);
     }

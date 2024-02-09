@@ -18,7 +18,7 @@ public class CharacterDescription : MonoBehaviour
     {
         CharacterData character = ConfigurationManager.CharactersData[characterID];
 
-        _spriteElement.sprite = _uIPool.spritesElementIcons.FirstOrDefault(sprite => sprite.name == "icon_element_" + character.element.ToLower());
+        _spriteElement.sprite = _uIPool.spritesElementIcons.FirstOrDefault(sprite => sprite.name == "icon_element_" + character.element.ToString().ToLower());
 
         _characterName.text = character.element + " / " + character.characterName;
 

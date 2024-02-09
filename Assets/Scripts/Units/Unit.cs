@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // The base class that manages the unit.
@@ -18,6 +20,7 @@ public abstract class Unit : MonoBehaviour
     public virtual UnitAnimator Animator => _animator;
 
     protected int _countHp;
+    protected ModifierSet _modifiers = new();
 
     // The amount of action points, which can be used for moving (dashing) and abilities.
     public abstract int ActionsLeft { get; set; }
@@ -30,16 +33,31 @@ public abstract class Unit : MonoBehaviour
     public virtual void Start()
     {
         _countHp = Stats.MaxHP();
-        Canvas.SetStartHealth(Stats.MaxHP()); //update visual hp of unit
+        Canvas.UpdateHealthUI(Stats.MaxHP()); //update visual hp of unit
+
+        _modifiers.ApplyElement(Element.Pyro);
+        Canvas.UpdateModifiersUI(_modifiers);
     }
 
-    public void MakeHit(int hit)
+    public void MakeHit(int hit, Element? element)
     {
         _countHp -= hit;
         if (_countHp <= 0)
             Kill();
         else
-            Canvas.SetStartHealth(_countHp);  //update visual hp of unit
+            Canvas.UpdateHealthUI(_countHp);  //update visual hp of unit
+
+        if (element.HasValue)
+        {
+            List<ElementalReaction> reactions = _modifiers.ApplyElement(element.Value);
+            Canvas.UpdateModifiersUI(_modifiers);
+            Canvas.ShowReactions(reactions);
+
+            foreach (ElementalReaction reaction in reactions)
+            {
+                Debug.Log(reaction);
+            }
+        }
     }
 
     public bool IsKilled => _countHp <= 0;

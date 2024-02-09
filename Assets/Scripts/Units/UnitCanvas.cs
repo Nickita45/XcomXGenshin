@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,9 @@ public abstract class UnitCanvas : MonoBehaviour
 
     [SerializeField]
     protected GameObject _panelHealthBar, _hpPrefab;
+
+    [SerializeField]
+    protected GameObject _panelModifiers, _modifierPrefab, _elementalReactionPrefab;
 
     [SerializeField]
     protected Image _actionIconPopUp;
@@ -53,7 +57,7 @@ public abstract class UnitCanvas : MonoBehaviour
 
     public abstract void OnStatusChange(HashSet<Permissions> permissions);
 
-    public void SetStartHealth(int hp)
+    public void UpdateHealthUI(int hp)
     {
         int childCount = _panelHealthBar.transform.childCount; //get actual count of hp unit
         if (hp > childCount)
@@ -66,6 +70,69 @@ public abstract class UnitCanvas : MonoBehaviour
             for (int i = 0; i < childCount - hp; i++) //its dmging
                 Destroy(_panelHealthBar.transform.GetChild(childCount - i - 1).gameObject);
         }
+    }
+
+    public void UpdateModifiersUI(ModifierSet modifiers)
+    {
+        ObjectUtils.DestroyAllChildren(_panelModifiers);
+
+        foreach (Element element in modifiers.AppliedElements)
+        {
+            GameObject modifierObject = Instantiate(_modifierPrefab, _panelModifiers.transform);
+            string title = element.ToString();
+            string description = "todo";
+            string iconName = element.ToString();
+            modifierObject.GetComponent<ModifierUI>().Init(title, description, iconName);
+        }
+
+        foreach (Modifier modifier in modifiers.Modifiers)
+        {
+            GameObject modifierObject = Instantiate(_modifierPrefab, _panelModifiers.transform);
+            modifierObject.GetComponent<ModifierUI>().Init(modifier.Title(), modifier.Description(), modifier.IconName());
+        }
+    }
+
+    public void ShowReactions(List<ElementalReaction> reactions)
+    {
+        // TODO: if multiple reactions, show them with an offset?
+        for (int i = 0; i < reactions.Count; i++)
+        {
+            ElementalReaction reaction = reactions[i];
+            GameObject reactionObject = Instantiate(_elementalReactionPrefab, _canvas.transform);
+
+            RectTransform transform = reactionObject.GetComponent<RectTransform>();
+            Vector2 currentPosition = transform.anchoredPosition;
+            currentPosition.y += 100f * i;
+            transform.anchoredPosition = currentPosition;
+
+            reactionObject.GetComponent<ElementalReactionUI>().Init(reaction);
+            TextMeshProUGUI text = reactionObject.GetComponent<TextMeshProUGUI>();
+            StartCoroutine(AnimateReactionText(text));
+        }
+    }
+
+    IEnumerator AnimateReactionText(TextMeshProUGUI textMeshProUGUI)
+    {
+        Color originalColor = textMeshProUGUI.color;
+        float timer = 0f;
+        const float fadeDuration = 4f;
+        const float moveSpeed = 0.15f;
+
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+            float alpha = Mathf.Lerp(1.25f, 0f, timer / fadeDuration);
+            textMeshProUGUI.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+
+            // Move the text slightly in the direction of top right
+            Vector3 moveDirection = Vector3.up + Vector3.right;
+            textMeshProUGUI.rectTransform.position += moveDirection * Time.deltaTime * moveSpeed;
+
+            yield return null;
+        }
+
+        // Ensure text is completely faded out
+        textMeshProUGUI.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
     }
 
     public GameObject PanelHit(int dmg)
@@ -141,7 +208,7 @@ public abstract class UnitCanvas : MonoBehaviour
         yield return new WaitForSeconds(timeFinish);
 
         panelColor.color = new Color(panelColor.color.r, panelColor.color.g, panelColor.color.b, gValuePanelColor); //set saved alpha parameter to color of panel
-        
+
         colors.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 1)); //set all colours of images alpha value to 1
         texts.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 1));//set all colours of images alpha value to 1
     }

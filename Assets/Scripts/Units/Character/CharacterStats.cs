@@ -14,5 +14,5 @@ public class CharacterStats : UnitStats
     public override int BaseAimPercent() => 50;
     public GunType Weapon => (GunType)ConfigurationManager.CharactersData[Index].characterWeapon;
     public override int BaseActions() => 2;
-    public string Element => ConfigurationManager.CharactersData[Index].element;
+    public Element Element => (Element)Enum.Parse(typeof(Element), ConfigurationManager.CharactersData[Index].element);
 }

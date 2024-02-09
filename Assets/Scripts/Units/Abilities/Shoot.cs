@@ -2,10 +2,21 @@ using System.Collections;
 
 public class AbilityShoot : Ability
 {
-    public override string AbilityName => "Shoot";
-    public override string Description => "Shoot Description";
+    public override string AbilityName => (_element == null) ?
+        "Shoot" :
+        string.Format("Shoot ({0})", _element.ToString());
+    public override string Description => (_element == null) ?
+        "Shoot an enemy." :
+        string.Format("Shoot an enemy and apply [{0}] on hit", _element.ToString());
+    public override string Icon => "Shoot";
     public override int ActionCost => 2;
     public override TargetType TargetType => TargetType.Enemy;
+
+    private Element? _element = null;
+
+    public AbilityShoot() { }
+    public AbilityShoot(Element element) { _element = element; }
+
     public override IEnumerator Activate(Unit unit, object target)
     {
         UnitAnimator animator = unit.Animator;
@@ -25,13 +36,14 @@ public class AbilityShoot : Ability
         // Shoot
 
         GunType gunUsedInShooting = GunType.Automatic;
-        if(unit is Character)
+        if (unit is Character)
             gunUsedInShooting = ((Character)unit).Stats.Weapon;
-        
+
         yield return unit.StartCoroutine(Manager.ShootManager.Shoot(
             unit,
             targetUnit,
             gunUsedInShooting,
+            _element,
             IEnumeratorActionMethod()
         ));
     }

@@ -43,7 +43,7 @@ public class Character : Unit
 
     public GameObject GunPrefab => _gunPrefab;
 
-    private int _actionsLeft; 
+    private int _actionsLeft;
     public override int ActionsLeft
     {
         get => _actionsLeft;
@@ -89,12 +89,12 @@ public class Character : Unit
         gameObject.name = Stats.CharacterName(); //set name
 
         _countHp = Stats.MaxHP(); //set max hp
-        Canvas.SetStartHealth(Stats.MaxHP()); 
+        Canvas.UpdateHealthUI(Stats.MaxHP());
 
         SetGunByIndex((int)Stats.Weapon); //set gun
 
         _abilities = new() {
-            new AbilityShoot(),
+            new AbilityShoot(Stats.Element), // TODO: only apply element for catalyst characters
             new AbilityOverwatch(),
             new AbilityHunkerDown(),
             new AbilityElementalSkill(Stats.Element)
