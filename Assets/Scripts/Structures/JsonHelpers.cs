@@ -9,7 +9,8 @@ using Newtonsoft.Json.Converters;
 public class TerritroyReaded
 {
     public string Index { get; set; }
-    public string PathPrefab { get; set; }
+    public string PathPrefabBase { get; set; }
+    public string PathPrefabAdditional { get; set; }
     public TerritoryType TerritoryInfo { get; set; }
 
     [SerializeField]

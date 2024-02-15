@@ -220,7 +220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone1
+  _pathPrefabBase: Prefabs/Level1/stone1
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -448,7 +449,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -639,7 +641,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 5
-  _pathPrefab: 
+  _pathPrefabBase: 
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -757,7 +760,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -813,7 +817,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabBase: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -1086,7 +1091,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone1
+  _pathPrefabBase: Prefabs/Level1/stone1
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -1314,7 +1320,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -1542,7 +1549,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone1
+  _pathPrefabBase: Prefabs/Level1/stone1
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -1678,7 +1686,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -1739,7 +1748,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/SlimePyro
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: Prefabs/Enemies/SlimePyro
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -1934,7 +1944,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -2149,7 +2160,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -2286,7 +2298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/hilichurl-dummy
+  _pathPrefabBase: Prefabs/Level1/hilichurl-dummy
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 1
     _shelterInfoRight: 1
@@ -2404,7 +2417,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -2576,7 +2590,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!4 &709027049 stripped
 Transform:
@@ -2632,7 +2646,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -2812,7 +2827,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone1
+  _pathPrefabBase: Prefabs/Level1/stone1
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -2943,7 +2959,7 @@ Transform:
   - {fileID: 951067982}
   - {fileID: 1401230002}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &783644616
 GameObject:
@@ -3056,7 +3072,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 5
-  _pathPrefab: 
+  _pathPrefabBase: 
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -3155,7 +3172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/hilichurl-tower-alternate
+  _pathPrefabBase: Prefabs/Level1/hilichurl-tower-alternate
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -3288,7 +3306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -3496,7 +3515,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &875391878
 MonoBehaviour:
@@ -3621,7 +3640,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -3739,7 +3759,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -3954,97 +3975,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
   _setOnStartToEveryone: 0
---- !u!1 &963194225
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 963194228}
-  - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &963194226
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
---- !u!20 &963194227
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &963194228
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1015487052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4219,7 +4157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone5
+  _pathPrefabBase: Prefabs/Level1/stone5
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -4574,7 +4513,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/hilichurl-target
+  _pathPrefabBase: Prefabs/Level1/hilichurl-target
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 1
@@ -4865,7 +4805,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -5042,7 +4983,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone1
+  _pathPrefabBase: Prefabs/Level1/stone1
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -5270,7 +5212,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -5582,7 +5525,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -6008,7 +5952,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -6051,7 +5996,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone1
+  _pathPrefabBase: Prefabs/Level1/stone1
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -6182,7 +6128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -6302,7 +6249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabBase: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -6438,7 +6386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 5
-  _pathPrefab: 
+  _pathPrefabBase: 
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -6610,7 +6559,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/hilichurl-tower-alternate
+  _pathPrefabBase: Prefabs/Level1/hilichurl-tower-alternate
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -6741,7 +6691,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 5
-  _pathPrefab: 
+  _pathPrefabBase: 
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -7131,7 +7082,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -7346,7 +7298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -7886,7 +7839,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone1
+  _pathPrefabBase: Prefabs/Level1/stone1
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -8017,7 +7971,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -8355,7 +8310,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2012693611
 GameObject:
@@ -8503,7 +8458,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -8789,7 +8745,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/hilichurl-barricade
+  _pathPrefabBase: Prefabs/Level1/hilichurl-barricade
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -8909,7 +8866,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -9034,7 +8992,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -9242,7 +9201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/hilichurl-house
+  _pathPrefabBase: Prefabs/Level1/hilichurl-house
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -9412,7 +9372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/Tree
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -10304,7 +10265,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/SlimePyro
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: Prefabs/Enemies/SlimePyro
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -10337,7 +10299,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _pathPrefab: Prefabs/Character
+  _pathPrefabBase: Prefabs/Character
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -10407,7 +10370,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _pathPrefab: Prefabs/Character
+  _pathPrefabBase: Prefabs/Character
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -10477,7 +10441,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2

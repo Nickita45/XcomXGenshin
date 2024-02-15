@@ -84,6 +84,11 @@ public class UnitOutline : MonoBehaviour
         _modelOutline.OutlineColor = color;
         if (_gunOutline) _gunOutline.OutlineColor = color;
     }
+
+    public void SetOutlineColor(OutlineColor outlineColor)
+    {
+        this.outlineColor = outlineColor;
+    }
 }
 
 public enum OutlineColor

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -215,7 +215,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -463,7 +464,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -1200,7 +1202,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -1667,7 +1670,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 5
-  _pathPrefab: 
+  _pathPrefabBase: 
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -3254,7 +3258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -3522,7 +3527,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -4187,7 +4193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -5601,7 +5608,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -7437,7 +7445,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -7600,7 +7609,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -7786,7 +7796,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -9290,7 +9301,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 5
-  _pathPrefab: 
+  _pathPrefabBase: 
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -9503,7 +9515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -9759,7 +9772,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -10107,7 +10121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -10402,7 +10417,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -10946,7 +10962,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _pathPrefab: Prefabs/Character
+  _pathPrefabBase: Prefabs/Character
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -11015,7 +11032,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -11632,7 +11650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -11751,7 +11769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -12466,7 +12484,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -12578,7 +12597,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -13850,7 +13870,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -14586,7 +14607,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -15106,7 +15128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -15317,7 +15340,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -17614,7 +17638,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -17777,7 +17802,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/hilichurl-target
+  _pathPrefabBase: Prefabs/Level1/hilichurl-target
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 1
@@ -17979,7 +18005,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -18455,7 +18482,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -18663,7 +18691,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -19293,7 +19322,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 5
-  _pathPrefab: 
+  _pathPrefabBase: 
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -19564,7 +19594,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -19958,7 +19989,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 5
-  _pathPrefab: 
+  _pathPrefabBase: 
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -20595,7 +20627,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _pathPrefab: Prefabs/Character
+  _pathPrefabBase: Prefabs/Character
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -20664,7 +20697,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -21455,7 +21489,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _pathPrefab: Prefabs/Character
+  _pathPrefabBase: Prefabs/Character
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -23141,7 +23176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: RANDOM_ENEMY
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -23480,7 +23516,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
@@ -24132,7 +24169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 6
-  _pathPrefab: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabBase: Prefabs/Enemies/EnemyBase
+  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -24152,7 +24190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _pathPrefab: Prefabs/Character
+  _pathPrefabBase: Prefabs/Character
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -24222,7 +24261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _pathPrefab: Prefabs/Character
+  _pathPrefabBase: Prefabs/Character
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -24292,7 +24332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _pathPrefab: Prefabs/Character
+  _pathPrefabBase: Prefabs/Character
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

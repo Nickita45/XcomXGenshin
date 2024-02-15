@@ -27,6 +27,16 @@ public abstract class UnitAnimator : MonoBehaviour
     // Set to true if the animator contains "isCrouched" parameter.
     protected bool _canCrouch;
 
+    public void SetOutline(UnitOutline outline)
+    {
+        _outline = outline;
+    }
+
+    public void SetAnimator(Animator animator)
+    {
+        _animator = animator;
+    }
+
     private float _basicSpeed; //used to save speed. To reset slow effect animation
 
     public void Init(Animator animator)
