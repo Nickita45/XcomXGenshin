@@ -1383,6 +1383,7 @@ GameObject:
   - component: {fileID: 6654390615234965873}
   - component: {fileID: 5261544623458098670}
   - component: {fileID: 3923084164569473205}
+  - component: {fileID: -1340898745121493489}
   - component: {fileID: 8254332665326490105}
   m_Layer: 0
   m_Name: EnemyBase
@@ -1455,6 +1456,24 @@ MonoBehaviour:
     _shelterInfoBottom: 0
     _shelterInfoFront: 0
   _setOnStartToEveryone: 0
+--- !u!114 &-1340898745121493489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6654390615234965879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffdf43a6fabd44a47a44d0ff8168130f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 0}
+  _canvas: {fileID: 8254332665326490105}
+  _animator: {fileID: 0}
+  _bulletSpawner: {fileID: 0}
+  _icon: {fileID: 0}
+  _enemyAI: {fileID: 0}
 --- !u!114 &8254332665326490105
 MonoBehaviour:
   m_ObjectHideFlags: 0

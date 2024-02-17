@@ -2,10 +2,10 @@ using System.Collections;
 
 public class AbilityMeleeAttack : Ability
 {
-    public override string AbilityName => (_element == null) ?
+    public override string AbilityName => (_element == Element.Physical) ?
         "Melee Attack" :
         string.Format("Melee Attack ({0})", _element.ToString());
-    public override string Description => (_element == null) ?
+    public override string Description => (_element == Element.Physical) ?
         "Attack an adjancent enemy." :
         string.Format("Attack an adjancent enemy and apply [{0}] on hit", _element.ToString());
     public override string Icon => "Melee Attack";
@@ -14,9 +14,9 @@ public class AbilityMeleeAttack : Ability
 
     private float HitChance = 0.5f;
 
-    private Element? _element = null;
+    private Element _element;
 
-    public AbilityMeleeAttack() { }
+    public AbilityMeleeAttack() { _element = Element.Physical; }
     public AbilityMeleeAttack(Element element) { _element = element; }
 
     public override IEnumerator Activate(Unit unit, object target)

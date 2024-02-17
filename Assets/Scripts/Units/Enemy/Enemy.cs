@@ -20,15 +20,26 @@ public class Enemy : Unit
     private GameObject _bulletSpawner;
 
     [SerializeField]
-    private Sprite _icon;
-    public Sprite Icon => _icon;
-
-    [SerializeField]
     private EnemyAI _enemyAI;
     public EnemyAI AI => _enemyAI;
 
     private bool _triggered;
     public bool Triggered => _triggered;
+
+    public void SetStats(EnemyStats stats)
+    {
+        _stats = stats;
+    }
+
+    public void SetAI(EnemyAI ai)
+    {
+        _enemyAI = ai;
+    }
+
+    public void SetBulletSpawner(GameObject spawner)
+    {
+        _bulletSpawner = spawner;
+    }
 
     public void SetCanvas(EnemyCanvas canvas)
     {
@@ -49,12 +60,14 @@ public class Enemy : Unit
         _countHp = _stats.MaxHP();//set maximum hp
         base.Start();
 
-        ActualTerritory = Manager.Map[transform.parent.localPosition]; //set actual block
+        // TODO ?
+        ActualTerritory = Manager.Map[transform.localPosition]; //set actual block
         ActualTerritory.TerritoryInfo = TerritoryType.Character; //set actual block type on character tyoe
 
         Manager.StatusMain.OnStatusChange += OnStatusChange;
 
         _enemyAI.Init(this);
+        _enemyAI.OnSpawn();
     }
 
     // Trigger the enemy if all conditions are met.

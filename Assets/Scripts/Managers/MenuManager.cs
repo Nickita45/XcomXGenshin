@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using System.IO;
 
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
-    private TMP_Dropdown _dropDownGun;
+    private TMP_Dropdown _dropdownLevel;
 
     [SerializeField]
     private GameObject _panelEnemyTurn, _panelCharaterName;
@@ -17,59 +18,25 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        //Manager.Gun = GunType.Automatic;
         Manager.StatusMain.OnStatusChange += OnStatusChange;
 
-        /*_inputCharacterMove.text = Manager.CharacterMovement.CountMoveCharacter.ToString();
-        _inputCharacterSpeed.text = Manager.CharacterMovement.SpeedCharacter.ToString();
-        _inputVisibilityDistance.text = Manager.CharacterVisibility.MaxVisionDistance.ToString();
-
-        _inputCharacterMove.onValueChanged.AddListener(n =>
+        // Scan levels folder and add levels to dropdown
+        string[] files = Directory.GetFiles("Assets/Resources/Levels");
+        foreach (string file in files)
         {
-            int.TryParse(n, out int result);
-            Manager.CharacterMovement.CountMoveCharacter = result;
-        });
-
-        _inputCharacterSpeed.onValueChanged.AddListener(n =>
-        {
-            float.TryParse(n, out float result);
-            Manager.CharacterMovement.SpeedCharacter = result;
-        });
-
-        _inputVisibilityDistance.onValueChanged.AddListener(n =>
-        {
-            float.TryParse(n, out float result);
-            Manager.CharacterVisibility.MaxVisionDistance = result;
-        });
-        */
-
-        /* var gunTypeOptions = new List<string>();
-         foreach (GunType gunType in Enum.GetValues(typeof(GunType)))
-         {
-             gunTypeOptions.Add(gunType.ToString());
-         }
-         _dropDownGun.AddOptions(gunTypeOptions);
-         _dropDownGun.onValueChanged.AddListener(OnGunTypeDropdownValueChanged);
-     */
+            if (Path.GetExtension(file) == ".json")
+            {
+                string level = Path.GetFileNameWithoutExtension(file);
+                _dropdownLevel.options.Add(new TMP_Dropdown.OptionData(level));
+            }
+        }
     }
 
-    /*  private void OnGunTypeDropdownValueChanged(int selectedIndex)
-      {
-          string selectedGunTypeText = _dropDownGun.options[selectedIndex].text;
+    public void OnLevelDropdownValueChanged()
+    {
+        SetMapByName("Levels/" + _dropdownLevel.options[_dropdownLevel.value].text);
+    }
 
-          if (Enum.TryParse(selectedGunTypeText, out GunType selectedGunType))
-          {
-              Manager.Gun = selectedGunType;
-          }
-
-          foreach (var icon in FindObjectsOfType<EnemyIcon>())
-          {
-              icon.SetPercent();
-          }
-
-          Manager.CharacterMovement.SelectedCharacter?.SetGunByIndex(selectedIndex);
-      }
-    */
     public void SetPanelEnemy(bool set)
     {
         _panelEnemyTurn.SetActive(set);

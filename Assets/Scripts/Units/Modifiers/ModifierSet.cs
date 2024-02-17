@@ -72,7 +72,7 @@ public class ModifierSet
             _appliedElements.Remove(other);
         }
 
-        if (reactions.Count == 0) _appliedElements.Add(element);
+        if (reactions.Count == 0 && element != Element.Physical) _appliedElements.Add(element);
         return reactions;
     }
 

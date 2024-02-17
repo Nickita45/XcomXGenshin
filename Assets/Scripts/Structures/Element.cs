@@ -9,5 +9,6 @@ public enum Element
     Electro,
     Anemo,
     Geo,
-    Dendro
+    Dendro,
+    Physical // for simplicity, we treat physical damage as an element
 }

@@ -2,19 +2,19 @@ using System.Collections;
 
 public class AbilityShoot : Ability
 {
-    public override string AbilityName => (_element == null) ?
+    public override string AbilityName => (_element == Element.Physical) ?
         "Shoot" :
         string.Format("Shoot ({0})", _element.ToString());
-    public override string Description => (_element == null) ?
+    public override string Description => (_element == Element.Physical) ?
         "Shoot an enemy." :
         string.Format("Shoot an enemy and apply [{0}] on hit", _element.ToString());
     public override string Icon => "Shoot";
     public override int ActionCost => 2;
     public override TargetType TargetType => TargetType.Enemy;
 
-    private Element? _element = null;
+    private Element _element;
 
-    public AbilityShoot() { }
+    public AbilityShoot() { _element = Element.Physical; }
     public AbilityShoot(Element element) { _element = element; }
 
     public override IEnumerator Activate(Unit unit, object target)

@@ -86,6 +86,8 @@ public abstract class EnemyAI : MonoBehaviour
         return FindTerritoryRandom(allPaths);
     }
 
+
+    public virtual void OnSpawn() { }
     public abstract IEnumerator MakeTurn();
     public abstract IEnumerator Attack(Character character);
     public abstract TerritroyReaded TriggerEnemy(Dictionary<TerritroyReaded, TerritroyReaded> allPaths);

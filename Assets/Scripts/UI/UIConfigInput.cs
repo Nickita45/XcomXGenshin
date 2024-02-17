@@ -13,7 +13,7 @@ public class UIConfigInput : MonoBehaviour
     public Transform parentTransform;
     private CharacterData[] _characterList;
     private GlobalDataJson _globalData;
-    private EnemyData[] _enemyData;
+    private Dictionary<string, EnemyData> _enemyData;
     private int _statusConfig = 0; // 0 - GlobalDataJson, 1 - CharactersData
     private void Start()
     {
@@ -52,7 +52,7 @@ public class UIConfigInput : MonoBehaviour
                 }
                 break;
             case 2:
-                foreach (EnemyData enemy in _enemyData)
+                foreach (EnemyData enemy in _enemyData.Values)
                 {
                     FillValuesUI(enemy);
                 }
@@ -123,10 +123,10 @@ public class UIConfigInput : MonoBehaviour
                 }
                 break;
             case 2:
-                for (int i = 0; i < _enemyData.Length; i++)
+                foreach (string key in _enemyData.Keys)
                 {
-                    TMP_InputField[] tMP_InputsSubset = GetSubsetOfInputs(tMP_Inputs, i, _enemyData[i]);
-                    UpdateArrayValues(_enemyData[i], tMP_InputsSubset);
+                    // TODO TMP_InputField[] tMP_InputsSubset = GetSubsetOfInputs(tMP_Inputs, i, _enemyData[i]);
+                    // UpdateArrayValues(_enemyData[key], tMP_InputsSubset);
                 }
                 break;
         }

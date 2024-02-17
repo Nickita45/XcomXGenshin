@@ -14,7 +14,7 @@ public class ShootManager : MonoBehaviour
         Unit shooter,
         Unit defender,
         GunType actualGun,
-        Element? element,
+        Element element,
         IEnumerator afterShootingBullets
     )
     {

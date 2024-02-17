@@ -21,6 +21,7 @@ public abstract class Unit : MonoBehaviour
 
     protected int _countHp;
     protected ModifierSet _modifiers = new();
+    public virtual ModifierSet Modifiers => _modifiers;
 
     // The amount of action points, which can be used for moving (dashing) and abilities.
     public abstract int ActionsLeft { get; set; }
@@ -34,12 +35,9 @@ public abstract class Unit : MonoBehaviour
     {
         _countHp = Stats.MaxHP();
         Canvas.UpdateHealthUI(Stats.MaxHP()); //update visual hp of unit
-
-        _modifiers.ApplyElement(Element.Pyro);
-        Canvas.UpdateModifiersUI(_modifiers);
     }
 
-    public void MakeHit(int hit, Element? element)
+    public void MakeHit(int hit, Element element)
     {
         _countHp -= hit;
         if (_countHp <= 0)
@@ -47,16 +45,13 @@ public abstract class Unit : MonoBehaviour
         else
             Canvas.UpdateHealthUI(_countHp);  //update visual hp of unit
 
-        if (element.HasValue)
-        {
-            List<ElementalReaction> reactions = _modifiers.ApplyElement(element.Value);
-            Canvas.UpdateModifiersUI(_modifiers);
-            Canvas.ShowReactions(reactions);
+        List<ElementalReaction> reactions = _modifiers.ApplyElement(element);
+        Canvas.UpdateModifiersUI(_modifiers);
+        Canvas.ShowReactions(reactions);
 
-            foreach (ElementalReaction reaction in reactions)
-            {
-                Debug.Log(reaction);
-            }
+        foreach (ElementalReaction reaction in reactions)
+        {
+            Debug.Log(reaction);
         }
     }
 

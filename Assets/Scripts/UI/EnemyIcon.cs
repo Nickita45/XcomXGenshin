@@ -68,7 +68,7 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public void SetEnemy(Enemy enemy)
     {
         _enemy = enemy;
-        _image.sprite = enemy.Icon;
+        _image.sprite = enemy.Stats.Icon;
     }
 
     public void SetPercent()

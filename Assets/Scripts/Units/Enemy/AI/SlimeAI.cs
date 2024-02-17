@@ -8,11 +8,36 @@ using UnityEngine.TextCore.Text;
 
 public class SlimeAI : EnemyAI
 {
-    private AbilityMeleeAttack _attack = new(Element.Pyro);
+    [SerializeField]
+    private Element _element;
+
+    private AbilityMeleeAttack _attack;
+
+    void Start()
+    {
+        _attack = new AbilityMeleeAttack(_element);
+    }
+
+    // The slime's element is applied to it every turn
+    private void ApplyElementToSelf()
+    {
+
+        // TODO: implement reactions here
+        List<ElementalReaction> reactions = _enemy.Modifiers.ApplyElement(_element);
+        _enemy.Canvas.UpdateModifiersUI(_enemy.Modifiers);
+        _enemy.Canvas.ShowReactions(reactions);
+    }
+
+    public override void OnSpawn()
+    {
+        ApplyElementToSelf();
+    }
 
     public override IEnumerator MakeTurn()
     {
-        var character = _enemy.GetClosestVisibleCharacter(); 
+        ApplyElementToSelf();
+
+        var character = _enemy.GetClosestVisibleCharacter();
         if (character != null && Vector3.Distance(character.transform.localPosition, _enemy.transform.localPosition) < 2) //if enemy is on neighbourhood block 
         {
             _enemy.ActionsLeft -= 2;

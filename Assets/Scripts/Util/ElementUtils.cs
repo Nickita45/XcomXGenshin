@@ -15,6 +15,7 @@ public class ElementUtils : MonoBehaviour
             Element.Anemo => new Color(0.72f, 0.93f, 0.81f),
             Element.Geo => new Color(0.85f, 0.79f, 0.49f),
             Element.Dendro => new Color(0.69f, 0.91f, 0.18f),
+            Element.Physical => new Color(0.25f, 0.25f, 0.25f),
             _ => Color.black,
         };
     }
