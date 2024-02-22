@@ -62,6 +62,7 @@ public class DeReadingMap : MonoBehaviour
         if(pathPrefab == "RANDOM_ENEMY")
             pathPrefab = HubData.Instance.GetRandomEnemyPath();
 
+        Debug.Log(pathPrefab + " " + item);
         GameObject prefab = Resources.Load<GameObject>(pathPrefab);
         var obj = Instantiate(prefab, _mainObject.transform);
         obj.transform.localPosition = new Vector3(item.XPosition, item.YPosition, item.ZPosition);

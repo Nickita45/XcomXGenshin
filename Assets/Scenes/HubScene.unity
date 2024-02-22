@@ -4880,7 +4880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactersPoolID: 00000000010000000200000003000000
   enemiesPaths:
-  - 'Prefabs/Enemies/HilichurlRanger '
+  - Prefabs/Enemies/HilichurlRanger
   - Prefabs/Enemies/SlimePyro
 --- !u!1 &1591048338
 GameObject:

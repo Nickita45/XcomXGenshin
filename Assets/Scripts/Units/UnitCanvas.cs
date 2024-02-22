@@ -26,9 +26,6 @@ public abstract class UnitCanvas : MonoBehaviour
     protected Image _actionIconPopUp;
 
     public GameObject PanelMiss => CreateObjectPanel(_panelMiss);
-    //public GameObject PanelAction() {
-    //    return Instantiate(_panelAction);
-    //}
 
     public virtual void Start()
     {
