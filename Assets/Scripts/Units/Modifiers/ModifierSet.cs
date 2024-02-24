@@ -7,9 +7,6 @@ using UnityEngine;
 
 public class ModifierSet
 {
-    private HashSet<Element> _appliedElements = new();
-    public HashSet<Element> AppliedElements => _appliedElements;
-
     private HashSet<Modifier> _modifiers = new();
     public HashSet<Modifier> Modifiers => _modifiers;
 
@@ -52,12 +49,58 @@ public class ModifierSet
             { (Element.Electro, Element.Geo), ElementalReaction.Crystallize },
         };
 
+    // Get a HashSet of currently applied elements
+    public HashSet<Element> GetElements()
+    {
+        HashSet<Element> elements = new();
+
+        foreach (Modifier modifier in _modifiers)
+        {
+            if (modifier is ElementModifier m)
+            {
+                elements.Add(m.Element);
+            }
+        }
+        return elements;
+    }
+
+    // Add an element modifier.
+    // 
+    // This is a private function. For public use, there is an ApplyElement function.
+    private void AddElement(Element element)
+    {
+        foreach (Modifier modifier in _modifiers)
+        {
+            if (modifier is ElementModifier m && m.Element == element)
+            {
+                // If a modifier with this elements exists, ignore
+                return;
+            }
+        }
+
+        // Otherwise, create a new modifier
+        _modifiers.Add(new ElementModifier(element));
+    }
+
+    // Remove an element modifier.
+    private void RemoveElement(Element element)
+    {
+        foreach (Modifier modifier in _modifiers)
+        {
+            if (modifier is ElementModifier m && m.Element == element)
+            {
+                _modifiers.Remove(modifier);
+                return;
+            }
+        }
+    }
+
     public List<ElementalReaction> ApplyElement(Element element)
     {
         List<ElementalReaction> reactions = new();
 
         List<Element> toRemove = new();
-        foreach (Element other in _appliedElements)
+        foreach (Element other in GetElements())
         {
             (Element, Element) key = (element, other);
             if (ELEMENTAL_REACTIONS.ContainsKey(key))
@@ -69,10 +112,10 @@ public class ModifierSet
 
         foreach (Element other in toRemove)
         {
-            _appliedElements.Remove(other);
+            RemoveElement(other);
         }
 
-        if (reactions.Count == 0 && element != Element.Physical) _appliedElements.Add(element);
+        if (reactions.Count == 0 && element != Element.Physical) AddElement(element);
         return reactions;
     }
 

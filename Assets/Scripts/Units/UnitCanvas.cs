@@ -76,19 +76,10 @@ public abstract class UnitCanvas : MonoBehaviour
     {
         ObjectUtils.DestroyAllChildren(_panelModifiers);
 
-        foreach (Element element in modifiers.AppliedElements)
-        {
-            GameObject modifierObject = Instantiate(_modifierPrefab, _panelModifiers.transform);
-            string title = element.ToString();
-            string description = "todo";
-            string iconName = element.ToString();
-            modifierObject.GetComponent<ModifierUI>().Init(title, description, iconName);
-        }
-
         foreach (Modifier modifier in modifiers.Modifiers)
         {
             GameObject modifierObject = Instantiate(_modifierPrefab, _panelModifiers.transform);
-            modifierObject.GetComponent<ModifierUI>().Init(modifier.Title(), modifier.Description(), modifier.IconName());
+            modifierObject.GetComponent<ModifierUI>().Init(modifier);
         }
     }
 
