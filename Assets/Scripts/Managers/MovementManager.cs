@@ -117,7 +117,7 @@ public class MovementManager : MonoBehaviour
     {
         foreach (var item in _objectsCalculated.Keys)
         {
-            Manager.Map.GetAirPlatform(item)?.SetActive(result); 
+            Manager.Map.GetAirPlatform(item)?.SetActive(result);
 
             //if(!result)
             //   Manager.Map.GetAirPlatform(item).GetComponent<PlateMoving>().SetCharge(result);
