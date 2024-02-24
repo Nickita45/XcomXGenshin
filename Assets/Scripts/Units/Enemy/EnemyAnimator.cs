@@ -21,7 +21,7 @@ public class EnemyAnimator : UnitAnimator
 
         if (!_canCrouch)
         {
-            Enemy enemy = transform.parent.parent.GetComponent<Enemy>(); //maybe better save reference?
+            Enemy enemy = transform.parent.GetComponent<Enemy>(); //maybe better save reference?
             Character closestCharacter = enemy.GetClosestVisibleCharacter();
 
             if (closestCharacter)

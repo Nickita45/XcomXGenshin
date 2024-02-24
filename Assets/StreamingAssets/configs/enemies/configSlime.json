@@ -8,7 +8,5 @@
     "enemyWeapon": -1,
     "isMeleeAttack": true,
     "enemyMinAttackValue": 1,
-    "enemyMaxAttackValue": 3,
-    "enemyAvatarPath": "Characters/Slime",
-    "enemyElement": "Pyro"
+    "enemyMaxAttackValue": 3
 }

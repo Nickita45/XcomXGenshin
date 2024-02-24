@@ -76,14 +76,13 @@ public class DeReadingMap : MonoBehaviour
                 enemy.SetStats(additionalObj.GetComponent<EnemyStats>());
 
                 // Add outline
-                GameObject model = additionalObj.transform.GetChild(0).gameObject;
-                UnitOutline outline = model.AddComponent<UnitOutline>();
+                UnitOutline outline = additionalObj.AddComponent<UnitOutline>();
                 outline.SetOutlineColor(OutlineColor.Enemy);
 
                 // Add animation
-                EnemyAnimator animator = model.AddComponent<EnemyAnimator>();
+                EnemyAnimator animator = additionalObj.AddComponent<EnemyAnimator>();
                 animator.SetOutline(outline);
-                animator.SetAnimator(model.transform.GetChild(0).GetComponent<Animator>());
+                animator.SetAnimator(additionalObj.transform.GetChild(0).GetComponent<Animator>());
                 enemy.SetAnimator(animator);
 
                 // 

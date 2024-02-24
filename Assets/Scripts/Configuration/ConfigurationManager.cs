@@ -137,12 +137,23 @@ public class ConfigurationManager : MonoBehaviour
         Debug.Log($"Config array saved to {fileDirectory}");
     }
 
+    private void SaveConfigDictionary<T>(string fileDirectory, Dictionary<string, T> dataDictionary)
+    {
+        foreach (string key in dataDictionary.Keys)
+        {
+            string jsonContent = JsonUtility.ToJson(dataDictionary[key], true);
+            string filePath = Path.Combine(fileDirectory, "config" + key + ".json");
+            File.WriteAllText(filePath, jsonContent);
+        }
+
+        Debug.Log($"Config dictionary saved to {fileDirectory}");
+    }
+
     public void SaveAllConfigsFile()
     {
         SaveConfig(PATH_GLOBAL_INFO, _globalDataJson);
         SaveConfigArray(PATH_CHARACTERS, _charactersData);
-
-        // TODO SaveConfigDictionary(PATH_ENEMIES, _enemiesDataJson);
+        SaveConfigDictionary(PATH_ENEMIES, _enemiesDataJson);
     }
     public void LoadAllConfigsFile()
     {

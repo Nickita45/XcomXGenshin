@@ -192,6 +192,4 @@ public class EnemyData
     public bool isMeleeAttack;
     public int enemyMinAttackValue;
     public int enemyMaxAttackValue;
-    public string enemyAvatarPath;
-    public string enemyElement;
 }
