@@ -66,7 +66,7 @@ public abstract class EnemyAI : MonoBehaviour
 
     // Run away from the closest character.
     //
-    // Returns null if there's no possible paths.
+    // Returns null if there's no possible paths. (Maybe can be only in Slime AI?)
     public TerritroyReaded FindTerritoryFromCharacter(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
     {
         var character = _enemy.GetClosestCharacter();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,10 @@ using UnityEngine;
 [System.Serializable]
 public class MatrixMap
 {
-    public Dictionary<string, TerritroyReaded> _vertex = new();
-    public Dictionary<string, TerritroyReaded> _decors = new();
+    private Dictionary<string, TerritroyReaded> _vertex = new();
+
+    private Dictionary<string, TerritroyReaded> _decors = new();
+
     private Dictionary<string, GameObject> _planeToMovement = new(); //dictionary of platforms for movement cells(actually they are air blocks)
     public List<Enemy> _enemy = new();
     public List<Character> _characters = new();
@@ -44,27 +47,38 @@ public class MatrixMap
 
     public List<Enemy> Enemies => _enemy;
     public List<Character> Characters => _characters;
-    public Dictionary<string, TerritroyReaded> Decors => _decors;
-    public Dictionary<string, TerritroyReaded> Vertex => _vertex;
+    public Dictionary<string, TerritroyReaded> Decors { get { return _decors; } }
+    public Dictionary<string, TerritroyReaded> Vertex { get { return _vertex; } }
 
     public void AirPlatformRemove(TerritroyReaded ter) => _planeToMovement.Remove(ter.Index);
 
     public TerritroyReaded this[string index] => _vertex[index];
     public TerritroyReaded this[Vector3 cordinats] => _vertex[MakeFromVector3ToIndex(cordinats)];
 
-    public bool ContainsVertexByPos(Vector3 vector, out TerritroyReaded game) 
+    public bool ContainsVertexByPos(Vector3 vector, out TerritroyReaded game, bool isDecor = false) 
     {
         string index = MatrixMap.MakeFromVector3ToIndex(vector); //make index from Vector3
 
-        if (_vertex.ContainsKey(index)) //check if such index exists
+        if (!isDecor) 
         {
-            game = _vertex[index]; //return true and ref of this block
-            return true;
+            if (_vertex.ContainsKey(index)) //check if such index exists
+            {
+                game = _vertex[index]; //return true and ref of this block
+                return true;
+            }
+        } else //find in decor dictionary
+        {
+            if (_decors.ContainsKey(index)) //check if such index exists
+            {
+                game = _decors[index]; //return true and ref of this block
+                return true;
+            }
         }
 
         game = null; //return false and null in ref
         return false;
     }
+
 
     public void DebugToConsole() 
     {

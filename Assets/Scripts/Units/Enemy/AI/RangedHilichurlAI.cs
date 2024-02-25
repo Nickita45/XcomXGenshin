@@ -10,19 +10,19 @@ public class RangedHilichurlAI : EnemyAI
     {
         List<Character> characters = _enemy.GetVisibleCharacters();
     
-        (TerritroyReaded territory, float percent) minimum = (null, Int32.MinValue);
-        foreach (var item in allPaths)
+        (TerritroyReaded territory, float percent) minimum = (null, Int32.MinValue); //the optimal territory with itss procent optimational
+        foreach (var item in allPaths) //calculations
         {
-            int procGetHit = characters.Sum(ch => AimUtils.CalculateHitChance(item.Key, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimCharacter).percent);
-            int procMakeHit = characters.Sum(ch => AimUtils.CalculateHitChance(ch.ActualTerritory, item.Key, GunType.Automatic, 50).percent); //???
+            int procMakeHit = characters.Sum(ch => AimUtils.CalculateHitChance(item.Key, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimCharacter).percent);
+            int procGetHit  = characters.Sum(ch => AimUtils.CalculateHitChance(ch.ActualTerritory, item.Key, GunType.Automatic, 50).percent); //???
             float proc = (2f * (100 - procGetHit) + 0.4f * procMakeHit) / (2f + 0.4f);
             if (proc > minimum.percent)
             {
                 minimum = (item.Key, proc);
             }
-            // Debug.Log($"get hit procnet: {procGetHit}; make hit proc:{procMakeHit}; proc:{proc}; ter {item.Key}; count vis {string.Join(",", characters.Select(n => n.Stats.CharacterName()))}");
+             //Debug.Log($"get hit procnet: {procGetHit}; make hit proc:{procMakeHit}; proc:{proc}; ter {item.Key}; count vis {string.Join(",", characters.Select(n => n.Stats.CharacterName()))}");
         }
-        Debug.Log(minimum.percent + " " + allPaths.Count());
+        Debug.Log(minimum.percent + " " + minimum.territory);
         return minimum.territory;
     }
 
@@ -33,17 +33,20 @@ public class RangedHilichurlAI : EnemyAI
     {
         var characters = _enemy.GetVisibleCharacters();
         var character = _enemy.GetClosestVisibleCharacter();
-
+        Debug.Log(characters.Count);
+        Debug.Log(character);
         if (character != null)
         {
             if (_enemy.ActionsLeft == 2 && characters.Select(ch =>
-                        AimUtils.CalculateHitChance(_enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, _enemy.Stats.BaseAimPercent()).percent).Max() > 50)
+                        AimUtils.CalculateHitChance( _enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, _enemy.Stats.BaseAimPercent()).percent).Max() < 50)
             {
+                //make movement if has hit chance less then 50
                 _enemy.ActionsLeft -= 1;
                 yield return StartCoroutine(_enemy.MoveEnemy(FindBestTerritoryForRangedAttack));
             }
             else
             {
+                //make shoot if it is above 50 percent chance
                 _enemy.ActionsLeft -= 2;
                 yield return StartCoroutine(Attack(character));
             }
@@ -52,8 +55,11 @@ public class RangedHilichurlAI : EnemyAI
         {
             _enemy.ActionsLeft -= 1;
 
-            if (_enemy.ActionsLeft == 0 && UnityEngine.Random.Range(1, 100 + 1) > 75)
+
+            if (_enemy.ActionsLeft == 0 && UnityEngine.Random.Range(1, 100 + 1) > 75) { //make overwatch in 75 percent chance
+                _enemy.ActionsLeft = 0;
                 yield return StartCoroutine(_overwatch.Activate(_enemy, null));
+            }
             else
                 yield return StartCoroutine(_enemy.MoveEnemy(FindTerritoryRandomShelter));
         }
@@ -75,6 +81,7 @@ public class RangedHilichurlAI : EnemyAI
     }
     public override TerritroyReaded TriggerEnemy(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
     {
+        Debug.Log(allPaths.Count);
         return FindBestTerritoryForRangedAttack(allPaths);
     }
 }

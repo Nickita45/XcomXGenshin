@@ -17,7 +17,7 @@ public static class ShelterDetectUtils
 
     public static Dictionary<ShelterSide, ShelterType> DetectShelters(TerritroyReaded territory)
     {
-        Dictionary<ShelterSide, ShelterType> shelters = ShelterInfo.EMPTY.ToDictionary();
+        Dictionary<ShelterSide, ShelterType> shelters = ShelterInfo.EMPTY.ToDictionary(); //get template for all sidesa
 
         foreach (ShelterSide side in shelters.Keys.ToList())
         {
@@ -45,9 +45,9 @@ public static class ShelterDetectUtils
             {
                 // Access the corresponding ShelterType from the Manager
                 ShelterType shelterType = ShelterType.None;
-                if (Manager.Map.ContainsVertexByPos(TerritroyReaded.MakeVectorFromIndex(indexSet.First()), out var territoryReaded))
+                if (Manager.Map.ContainsVertexByPos(TerritroyReaded.MakeVectorFromIndex(indexSet.First()), out var territoryReaded)) //get if such exists
                 {
-                    shelterType = territoryReaded.ShelterType.ToDictionary()[side];
+                    shelterType = territoryReaded.ShelterType.ToDictionary()[side]; //set shelter type
                 }
 
                 shelters[side] = shelterType;

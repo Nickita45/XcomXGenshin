@@ -370,10 +370,13 @@ public class MovementManager : MonoBehaviour
             }
         }
 
+
         for (int i = 0; i <= countMove; i++)
         {
-            while (nextCalculated.Count > 0) //while exists block that we do not detect
+            int countNeedToBeAnalyzed = nextCalculated.Count(); //get count blocks we need to detect
+            while (countNeedToBeAnalyzed > 0) //while exists block that we do not detect
             {
+                --countNeedToBeAnalyzed;
                 (TerritroyReaded orig, TerritroyReaded previus) = nextCalculated.Dequeue();
 
                 if ((orig.TerritoryInfo != TerritoryType.Character || orig == unit.ActualTerritory) &&
@@ -456,9 +459,8 @@ public class MovementManager : MonoBehaviour
         var allPaths = Manager.MovementManager.CalculateAllPossible(enemy.Stats.MovementDistance(), enemy); // get enemie's objectsCalculated
 
         TerritroyReaded findTerritory = findTerritoryMoveTo(allPaths); //get target block
-
         // Only move if there's an available territory
-        if (findTerritory != null) //????? may be problem in future/can be in AI then cant find territory
+        //if (findTerritory != null) //????? may be problem in future/can be in AI then cant find territory
         {
             List<Vector3> aktualPath = Manager.MovementManager.CalculateAllPath(findTerritory, enemy, allPaths); //get path with breaks for enemy
 

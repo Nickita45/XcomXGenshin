@@ -23,10 +23,15 @@ public class AbilityShoot : Ability
         }
 
         // Shoot
+
+        GunType gunUsedInShooting = GunType.Automatic;
+        if(unit is Character)
+            gunUsedInShooting = ((Character)unit).Stats.Weapon;
+        
         yield return unit.StartCoroutine(Manager.ShootManager.Shoot(
             unit,
             targetUnit,
-            GunType.Automatic,
+            gunUsedInShooting,
             IEnumeratorActionMethod()
         ));
     }

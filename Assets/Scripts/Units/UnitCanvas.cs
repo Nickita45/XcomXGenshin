@@ -25,8 +25,7 @@ public abstract class UnitCanvas : MonoBehaviour
     [SerializeField]
     protected Image _actionIconPopUp;
 
-    public GameObject PanelMiss => _panelMiss;
-    public GameObject PanelAction => _panelAction;
+    public GameObject PanelMiss => CreateObjectPanel(_panelMiss);
 
     public virtual void Start()
     {
@@ -70,7 +69,8 @@ public abstract class UnitCanvas : MonoBehaviour
     public GameObject PanelHit(int dmg)
     {
         _textHit.text = dmg.ToString();
-        return _panelHit;
+
+        return CreateObjectPanel(_panelHit);
     }
 
 
@@ -80,7 +80,14 @@ public abstract class UnitCanvas : MonoBehaviour
     {
         _textAction.text = action;
         _actionIconPopUp.sprite = Manager.UIIcons.GetIconByName(iconName)?.sprite;
-        return _panelAction;
+        return CreateObjectPanel(_panelAction);
+    }
+
+    private GameObject CreateObjectPanel(GameObject _panel)
+    {
+        GameObject obj = Instantiate(_panel, _canvas.transform);
+        Destroy(obj, 15);
+        return obj;
     }
 
     public IEnumerator PanelShow(GameObject panel, float timerBeforeDisable = 0)

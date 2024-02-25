@@ -187,12 +187,16 @@ public class ReadingMap : MonoBehaviour
                         TerritoryInfo = TerritoryType.Air,
                         ShelterType = ShelterInfo.EMPTY,
                     }, _matrixMap.Vertex);
-                    var decorItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject) //create block decor in other dictionary
+
+                    if (!_matrixMap.ContainsVertexByPos(_aktualGameObject.transform.position, out _, true)) 
                     {
-                        TerritoryInfo = TerritoryType.Decor,
-                        PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
-                    }, _matrixMap.Decors);
-                    decorItem.SetNewPosition(_aktualGameObject.transform);
+                        var decorItem = _matrixMap.AddVertex(new TerritroyReaded(_aktualGameObject.transform) //create block decor in other dictionary
+                        {
+                            TerritoryInfo = TerritoryType.Decor,
+                            PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
+                        }, _matrixMap.Decors);
+                        //decorItem.SetNewPosition(_aktualGameObject.transform);
+                    }
                 }
                 else
                 {
