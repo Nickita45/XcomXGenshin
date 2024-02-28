@@ -17,7 +17,7 @@ public class ElementModifier : Modifier
     public ElementModifier(Element element, int turnsLeft)
     {
         _element = element;
-        _turnsLeft = turnsLeft;
+        _turns = turnsLeft;
         _infinite = false;
     }
 

@@ -117,10 +117,25 @@ public class TurnManager : MonoBehaviour
         SelectCharacter(_characters[0]);
     }
 
-    public void EndCharacterTurn(Character character)
+    public IEnumerator EndCharacterTurn(Character character)
     {
+        List<Modifier> toDelete = new();
+        foreach (Modifier modifier in character.Modifiers.Modifiers)
+        {
+            if (modifier.TurnDecrement())
+            {
+                yield return modifier.OnEndRound(character);
+            }
+            else
+            {
+                toDelete.Add(modifier);
+            }
+        }
+        foreach (Modifier modifier in toDelete) { character.Modifiers.Modifiers.Remove(modifier); }
+
         _characters.Remove(character);
         if (_characters.Count > 0) SelectNextCharacter();
+        yield return null;
     }
 
     private IEnumerator EndTurn()

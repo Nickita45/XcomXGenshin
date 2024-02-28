@@ -7,7 +7,7 @@ public class Crystallize : Modifier
     private Element _element;
     public Crystallize()
     {
-        _turnsLeft = 2;
+        _turns = 2;
     }
 
     public override string Title()
@@ -17,11 +17,14 @@ public class Crystallize : Modifier
 
     public override string Description()
     {
-        return "Decreases incoming damage by 1.";
+        return "Decrease incoming damage by 1.";
     }
 
     public override string IconName()
     {
-        return "Geo";
+        return "Crystallize";
     }
+
+    public override IEnumerator OnStartRound(Unit unit) { yield return null; }
+    public override IEnumerator OnEndRound(Unit unit) { yield return null; }
 }

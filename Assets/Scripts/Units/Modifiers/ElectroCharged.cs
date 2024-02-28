@@ -6,7 +6,7 @@ public class ElectroCharged : Modifier
 {
     public ElectroCharged()
     {
-        _turnsLeft = 3;
+        _turns = 3;
     }
 
     public override string Title()
@@ -21,6 +21,9 @@ public class ElectroCharged : Modifier
 
     public override string IconName()
     {
-        return "Electro";
+        return "Electro-Charged";
     }
+
+    public override IEnumerator OnStartRound(Unit unit) { yield return null; }
+    public override IEnumerator OnEndRound(Unit unit) { yield return null; }
 }

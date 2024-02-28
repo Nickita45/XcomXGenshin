@@ -6,7 +6,7 @@ public class Freeze : Modifier
 {
     public Freeze()
     {
-        _turnsLeft = 1;
+        _turns = 1;
     }
 
     public override string Title()
@@ -21,6 +21,15 @@ public class Freeze : Modifier
 
     public override string IconName()
     {
-        return "Cryo";
+        return "Freeze";
     }
+
+    public override IEnumerator OnStartRound(Unit unit)
+    {
+        // TODO: Check if character has no actions left
+        unit.ActionsLeft = 0;
+        yield return null;
+    }
+
+    public override IEnumerator OnEndRound(Unit unit) { yield return null; }
 }

@@ -30,7 +30,7 @@ public class ModifierUI : MonoBehaviour
         else
         {
             _durationText.gameObject.SetActive(true);
-            _durationText.text = _modifier.TurnsLeft.ToString();
+            _durationText.text = _modifier.Turns.ToString();
         }
     }
 }
