@@ -8,6 +8,12 @@ public enum ElementalReaction
     Overloaded,
     Superconduct,
     Freeze,
-    Swirl,
-    Crystallize
+    SwirlPyro,
+    SwirlCryo,
+    SwirlHydro,
+    SwirlElectro,
+    CrystallizePyro,
+    CrystallizeCryo,
+    CrystallizeHydro,
+    CrystallizeElectro
 }

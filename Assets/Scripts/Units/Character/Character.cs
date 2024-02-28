@@ -94,7 +94,8 @@ public class Character : Unit
         SetGunByIndex((int)Stats.Weapon); //set gun
 
         _abilities = new() {
-            new AbilityShoot(Stats.Element), // TODO: only apply element for catalyst characters
+            new AbilityShoot(),
+            new AbilityShoot(Stats.Element),
             new AbilityOverwatch(),
             new AbilityHunkerDown(),
             new AbilityElementalSkill(Stats.Element)

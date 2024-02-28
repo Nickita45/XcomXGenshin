@@ -12,7 +12,7 @@ public abstract class Modifier
     protected int _turnsLeft = 0;
     public int TurnsLeft => _turnsLeft;
 
-    protected bool _infinite;
+    protected bool _infinite = false;
     public bool IsInfinite => _infinite;
 
     public Action onUpdate;

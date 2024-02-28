@@ -39,20 +39,71 @@ public abstract class Unit : MonoBehaviour
 
     public void MakeHit(int hit, Element element)
     {
+        List<ElementalReaction> reactions = _modifiers.ApplyElement(element);
+
+        foreach (ElementalReaction reaction in reactions)
+        {
+            switch (reaction)
+            {
+                case ElementalReaction.MeltStrong:
+                    hit *= 2;
+                    break;
+                case ElementalReaction.MeltWeak:
+                    hit = (int)(hit * 1.5);
+                    break;
+                case ElementalReaction.VaporizeStrong:
+                    hit *= 2;
+                    break;
+                case ElementalReaction.VaporizeWeak:
+                    hit = (int)(hit * 1.5);
+                    break;
+                case ElementalReaction.ElectroCharged:
+                    _modifiers.ApplyModifier(new ElectroCharged());
+                    break;
+                case ElementalReaction.Overloaded:
+                    // todo
+                    break;
+                case ElementalReaction.Superconduct:
+                    // todo
+                    break;
+                case ElementalReaction.Freeze:
+                    _modifiers.ApplyModifier(new Freeze());
+                    break;
+                case ElementalReaction.SwirlPyro:
+                    // todo
+                    break;
+                case ElementalReaction.SwirlCryo:
+                    // todo
+                    break;
+                case ElementalReaction.SwirlHydro:
+                    // todo
+                    break;
+                case ElementalReaction.SwirlElectro:
+                    // todo
+                    break;
+                case ElementalReaction.CrystallizePyro:
+                    _modifiers.ApplyModifier(new Crystallize());
+                    break;
+                case ElementalReaction.CrystallizeCryo:
+                    _modifiers.ApplyModifier(new Crystallize());
+                    break;
+                case ElementalReaction.CrystallizeHydro:
+                    _modifiers.ApplyModifier(new Crystallize());
+                    break;
+                case ElementalReaction.CrystallizeElectro:
+                    _modifiers.ApplyModifier(new Crystallize());
+                    break;
+            }
+        }
+
         _countHp -= hit;
         if (_countHp <= 0)
             Kill();
         else
             Canvas.UpdateHealthUI(_countHp);  //update visual hp of unit
 
-        List<ElementalReaction> reactions = _modifiers.ApplyElement(element);
         Canvas.UpdateModifiersUI(_modifiers);
         Canvas.ShowReactions(reactions);
-
-        foreach (ElementalReaction reaction in reactions)
-        {
-            Debug.Log(reaction);
-        }
     }
 
     public bool IsKilled => _countHp <= 0;

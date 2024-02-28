@@ -30,23 +30,29 @@ public class ModifierSet
             { (Element.Cryo, Element.Electro), ElementalReaction.Superconduct },
             { (Element.Electro, Element.Cryo), ElementalReaction.Superconduct },
 
-            { (Element.Anemo, Element.Pyro), ElementalReaction.Swirl },
-            { (Element.Anemo, Element.Hydro), ElementalReaction.Swirl },
-            { (Element.Anemo, Element.Cryo), ElementalReaction.Swirl },
-            { (Element.Anemo, Element.Electro), ElementalReaction.Swirl },
-            { (Element.Pyro, Element.Anemo), ElementalReaction.Swirl },
-            { (Element.Hydro, Element.Anemo), ElementalReaction.Swirl },
-            { (Element.Cryo, Element.Anemo), ElementalReaction.Swirl },
-            { (Element.Electro, Element.Anemo), ElementalReaction.Swirl },
+            { (Element.Anemo, Element.Pyro), ElementalReaction.SwirlPyro },
+            { (Element.Pyro, Element.Anemo), ElementalReaction.SwirlPyro },
 
-            { (Element.Geo, Element.Pyro), ElementalReaction.Crystallize },
-            { (Element.Geo, Element.Hydro), ElementalReaction.Crystallize },
-            { (Element.Geo, Element.Cryo), ElementalReaction.Crystallize },
-            { (Element.Geo, Element.Electro), ElementalReaction.Crystallize },
-            { (Element.Pyro, Element.Geo), ElementalReaction.Crystallize },
-            { (Element.Hydro, Element.Geo), ElementalReaction.Crystallize },
-            { (Element.Cryo, Element.Geo), ElementalReaction.Crystallize },
-            { (Element.Electro, Element.Geo), ElementalReaction.Crystallize },
+            { (Element.Anemo, Element.Cryo), ElementalReaction.SwirlCryo },
+            { (Element.Cryo, Element.Anemo), ElementalReaction.SwirlCryo },
+
+            { (Element.Anemo, Element.Hydro), ElementalReaction.SwirlHydro },
+            { (Element.Hydro, Element.Anemo), ElementalReaction.SwirlHydro },
+
+            { (Element.Anemo, Element.Electro), ElementalReaction.SwirlElectro },
+            { (Element.Electro, Element.Anemo), ElementalReaction.SwirlElectro },
+
+            { (Element.Geo, Element.Pyro), ElementalReaction.CrystallizePyro },
+            { (Element.Pyro, Element.Geo), ElementalReaction.CrystallizePyro },
+
+            { (Element.Geo, Element.Cryo), ElementalReaction.CrystallizeCryo },
+            { (Element.Cryo, Element.Geo), ElementalReaction.CrystallizeCryo },
+
+            { (Element.Geo, Element.Hydro), ElementalReaction.CrystallizeHydro },
+            { (Element.Hydro, Element.Geo), ElementalReaction.CrystallizeHydro },
+
+            { (Element.Geo, Element.Electro), ElementalReaction.CrystallizeElectro },
+            { (Element.Electro, Element.Geo), ElementalReaction.CrystallizeElectro },
         };
 
     // Get a HashSet of currently applied elements

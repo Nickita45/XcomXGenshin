@@ -32,8 +32,14 @@ public class ElementUtils : MonoBehaviour
             ElementalReaction.Overloaded => "Overloaded",
             ElementalReaction.Superconduct => "Superconduct",
             ElementalReaction.Freeze => "Freeze",
-            ElementalReaction.Swirl => "Swirl",
-            ElementalReaction.Crystallize => "Crystallize",
+            ElementalReaction.SwirlPyro => "Swirl",
+            ElementalReaction.SwirlCryo => "Swirl",
+            ElementalReaction.SwirlHydro => "Swirl",
+            ElementalReaction.SwirlElectro => "Swirl",
+            ElementalReaction.CrystallizePyro => "Crystallize",
+            ElementalReaction.CrystallizeCryo => "Crystallize",
+            ElementalReaction.CrystallizeHydro => "Crystallize",
+            ElementalReaction.CrystallizeElectro => "Crystallize",
             _ => "Unknown Reaction",
         };
     }
@@ -50,8 +56,14 @@ public class ElementUtils : MonoBehaviour
             ElementalReaction.Overloaded => ElementColor(Element.Pyro),
             ElementalReaction.Superconduct => ElementColor(Element.Cryo),
             ElementalReaction.Freeze => ElementColor(Element.Cryo),
-            ElementalReaction.Swirl => ElementColor(Element.Anemo),
-            ElementalReaction.Crystallize => ElementColor(Element.Geo),
+            ElementalReaction.SwirlPyro => ElementColor(Element.Anemo),
+            ElementalReaction.SwirlCryo => ElementColor(Element.Anemo),
+            ElementalReaction.SwirlHydro => ElementColor(Element.Anemo),
+            ElementalReaction.SwirlElectro => ElementColor(Element.Anemo),
+            ElementalReaction.CrystallizePyro => ElementColor(Element.Geo),
+            ElementalReaction.CrystallizeCryo => ElementColor(Element.Geo),
+            ElementalReaction.CrystallizeHydro => ElementColor(Element.Geo),
+            ElementalReaction.CrystallizeElectro => ElementColor(Element.Geo),
             _ => Color.black,
         };
     }
