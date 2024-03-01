@@ -88,7 +88,7 @@ public abstract class Unit : MonoBehaviour
                     }
                     break;
                 case ElementalReaction.Superconduct:
-                    // todo
+                    _modifiers.ApplyModifier(new Superconduct());
                     break;
                 case ElementalReaction.Freeze:
                     ActionsLeft = 0;

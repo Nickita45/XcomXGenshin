@@ -3584,6 +3584,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 17635c92c17d79a4ea3d3000883bb35c, type: 3}
   - name: Freeze
     sprite: {fileID: 21300000, guid: 6e0f08d6980a2d149bb055f057f379c0, type: 3}
+  - name: Superconduct
+    sprite: {fileID: 21300000, guid: 268d594338d80b64e83d492cbcf077ea, type: 3}
 --- !u!1 &1775152536
 GameObject:
   m_ObjectHideFlags: 0
