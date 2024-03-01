@@ -44,6 +44,8 @@ public abstract class Unit : MonoBehaviour
     // Right now it can either be a Unit, a Modifier, or a null (other).
     public void MakeHit(int hit, Element element, object damageSource)
     {
+        if (hit <= 0) return; // Do not do anything if the attack deals no damage
+
         List<ElementalReaction> reactions = _modifiers.ApplyElement(element);
 
         foreach (ElementalReaction reaction in reactions)
@@ -66,7 +68,24 @@ public abstract class Unit : MonoBehaviour
                     _modifiers.ApplyModifier(new ElectroCharged());
                     break;
                 case ElementalReaction.Overloaded:
-                    // todo
+                    Vector3 coordinats = ActualTerritory.GetCordinats();
+
+                    // Iterate over all allies 
+                    foreach (Unit ally in GetAllies())
+                    {
+                        Vector3 otherCoordinats = ally.ActualTerritory.GetCordinats();
+                        // Find if any are within 1 square from the unit
+                        if (
+                            Mathf.Abs(coordinats.x - otherCoordinats.x) <= 1 &&
+                            Mathf.Abs(coordinats.y - otherCoordinats.y) <= 1 &&
+                            Mathf.Abs(coordinats.z - otherCoordinats.z) <= 1
+                        )
+                        {
+                            Debug.Log(ally);
+                            if (ally == this) ally.MakeHit((int)(hit * 1.5), Element.Physical, this);
+                            else { ally.MakeHit((int)(hit * 0.5), Element.Physical, this); }
+                        }
+                    }
                     break;
                 case ElementalReaction.Superconduct:
                     // todo

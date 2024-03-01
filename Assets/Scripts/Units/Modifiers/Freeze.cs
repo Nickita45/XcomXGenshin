@@ -27,7 +27,6 @@ public class Freeze : Modifier
     public override IEnumerator OnBeginRound(Unit unit)
     {
         unit.ActionsLeft = 0;
-        Debug.Log(unit);
         yield return null;
     }
 
