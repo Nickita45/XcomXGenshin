@@ -10,6 +10,9 @@ public abstract class Modifier
     public abstract string Description();
     public abstract string IconName();
 
+    // Check if the modifier can react to a certain element.
+    public abstract ElementalReaction? CheckReaction(Element element);
+
     public abstract IEnumerator OnBeginRound(Unit unit);
     public abstract IEnumerator OnEndRound(Unit unit);
     public abstract int OnHit(Unit unit, int hit, Element element);

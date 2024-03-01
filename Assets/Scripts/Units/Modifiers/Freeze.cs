@@ -24,6 +24,19 @@ public class Freeze : Modifier
         return "Freeze";
     }
 
+    public override ElementalReaction? CheckReaction(Element element)
+    {
+        if (element == Element.Geo || element == Element.Physical)
+        {
+            return ElementalReaction.Shatter;
+        }
+        else if (element == Element.Pyro)
+        {
+            return ElementalReaction.MeltStrong;
+        }
+        return null;
+    }
+
     public override IEnumerator OnBeginRound(Unit unit)
     {
         unit.ActionsLeft = 0;

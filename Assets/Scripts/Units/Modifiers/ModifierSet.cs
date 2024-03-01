@@ -10,51 +10,6 @@ public class ModifierSet
     private HashSet<Modifier> _modifiers = new();
     public HashSet<Modifier> Modifiers => _modifiers;
 
-    public static Dictionary<(Element, Element), ElementalReaction> ELEMENTAL_REACTIONS = new()
-        {
-            { (Element.Pyro, Element.Hydro), ElementalReaction.VaporizeWeak },
-            { (Element.Hydro, Element.Pyro), ElementalReaction.VaporizeStrong },
-
-            { (Element.Pyro, Element.Cryo), ElementalReaction.MeltStrong },
-            { (Element.Cryo, Element.Pyro), ElementalReaction.MeltWeak },
-
-            { (Element.Hydro, Element.Cryo), ElementalReaction.Freeze },
-            { (Element.Cryo, Element.Hydro), ElementalReaction.Freeze },
-
-            { (Element.Pyro, Element.Electro), ElementalReaction.Overloaded },
-            { (Element.Electro, Element.Pyro), ElementalReaction.Overloaded },
-
-            { (Element.Hydro, Element.Electro), ElementalReaction.ElectroCharged },
-            { (Element.Electro, Element.Hydro), ElementalReaction.ElectroCharged },
-
-            { (Element.Cryo, Element.Electro), ElementalReaction.Superconduct },
-            { (Element.Electro, Element.Cryo), ElementalReaction.Superconduct },
-
-            { (Element.Anemo, Element.Pyro), ElementalReaction.SwirlPyro },
-            { (Element.Pyro, Element.Anemo), ElementalReaction.SwirlPyro },
-
-            { (Element.Anemo, Element.Cryo), ElementalReaction.SwirlCryo },
-            { (Element.Cryo, Element.Anemo), ElementalReaction.SwirlCryo },
-
-            { (Element.Anemo, Element.Hydro), ElementalReaction.SwirlHydro },
-            { (Element.Hydro, Element.Anemo), ElementalReaction.SwirlHydro },
-
-            { (Element.Anemo, Element.Electro), ElementalReaction.SwirlElectro },
-            { (Element.Electro, Element.Anemo), ElementalReaction.SwirlElectro },
-
-            { (Element.Geo, Element.Pyro), ElementalReaction.CrystallizePyro },
-            { (Element.Pyro, Element.Geo), ElementalReaction.CrystallizePyro },
-
-            { (Element.Geo, Element.Cryo), ElementalReaction.CrystallizeCryo },
-            { (Element.Cryo, Element.Geo), ElementalReaction.CrystallizeCryo },
-
-            { (Element.Geo, Element.Hydro), ElementalReaction.CrystallizeHydro },
-            { (Element.Hydro, Element.Geo), ElementalReaction.CrystallizeHydro },
-
-            { (Element.Geo, Element.Electro), ElementalReaction.CrystallizeElectro },
-            { (Element.Electro, Element.Geo), ElementalReaction.CrystallizeElectro },
-        };
-
     // TODO: implement without the unit parameter
     public IEnumerator OnBeginRound(Unit unit)
     {
@@ -141,20 +96,20 @@ public class ModifierSet
     {
         List<ElementalReaction> reactions = new();
 
-        List<Element> toRemove = new();
-        foreach (Element other in GetElements())
+        List<Modifier> toRemove = new();
+        foreach (Modifier modifier in _modifiers)
         {
-            (Element, Element) key = (element, other);
-            if (ELEMENTAL_REACTIONS.ContainsKey(key))
+            ElementalReaction? reaction = modifier.CheckReaction(element);
+            if (reaction.HasValue)
             {
-                reactions.Add(ELEMENTAL_REACTIONS[key]);
-                toRemove.Add(other);
+                reactions.Add(reaction.Value);
+                toRemove.Add(modifier);
             }
         }
 
-        foreach (Element other in toRemove)
+        foreach (Modifier m in toRemove)
         {
-            RemoveElement(other);
+            Modifiers.Remove(m);
         }
 
         if (reactions.Count == 0 && element != Element.Physical) AddElement(element);

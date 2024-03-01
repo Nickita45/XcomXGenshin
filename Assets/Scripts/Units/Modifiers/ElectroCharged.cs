@@ -26,6 +26,8 @@ public class ElectroCharged : Modifier
         return "Electro-Charged";
     }
 
+    public override ElementalReaction? CheckReaction(Element element)
+    { return null; }
     public override IEnumerator OnBeginRound(Unit unit) { yield return null; }
     public override IEnumerator OnEndRound(Unit unit)
     {
