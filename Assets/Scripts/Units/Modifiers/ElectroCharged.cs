@@ -29,25 +29,14 @@ public class ElectroCharged : Modifier
     public override IEnumerator OnBeginRound(Unit unit) { yield return null; }
     public override IEnumerator OnEndRound(Unit unit)
     {
-        Vector3 coordinats = unit.ActualTerritory.GetCordinats();
-
-        // Iterate over all allies 
-        foreach (Unit ally in unit.GetAllies())
+        // Iterate over all allies within 1 square 
+        foreach (Unit ally in unit.GetAdjancentAllies(1))
         {
-            Vector3 otherCoordinats = ally.ActualTerritory.GetCordinats();
-            // Find if any are within 1 square from the unit
-            if (
-                Mathf.Abs(coordinats.x - otherCoordinats.x) <= 1 &&
-                Mathf.Abs(coordinats.y - otherCoordinats.y) <= 1 &&
-                Mathf.Abs(coordinats.z - otherCoordinats.z) <= 1
-            )
+            // Should have either hydro or electro-charged
+            if (ally.Modifiers.GetElements().Contains(Element.Hydro) ||
+            ally.Modifiers.Modifiers.Any(m => m is ElectroCharged))
             {
-                // If it has either hydro or electro-charged
-                if (ally.Modifiers.GetElements().Contains(Element.Hydro) ||
-                ally.Modifiers.Modifiers.Any(m => m is ElectroCharged))
-                {
-                    ally.MakeHit(1, Element.Electro, this);
-                }
+                ally.MakeHit(1, Element.Electro, this);
             }
         }
         yield return null;

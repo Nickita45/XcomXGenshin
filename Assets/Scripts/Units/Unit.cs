@@ -58,54 +58,80 @@ public abstract class Unit : MonoBehaviour
                 case ElementalReaction.MeltWeak:
                     hit = (int)(hit * 1.5);
                     break;
+
                 case ElementalReaction.VaporizeStrong:
                     hit *= 2;
                     break;
                 case ElementalReaction.VaporizeWeak:
                     hit = (int)(hit * 1.5);
                     break;
+
                 case ElementalReaction.ElectroCharged:
                     _modifiers.ApplyModifier(new ElectroCharged());
                     break;
-                case ElementalReaction.Overloaded:
-                    Vector3 coordinats = ActualTerritory.GetCordinats();
 
-                    // Iterate over all allies 
-                    foreach (Unit ally in GetAllies())
+                case ElementalReaction.Overloaded:
+                    foreach (Unit ally in GetAdjancentAllies(1))
                     {
-                        Vector3 otherCoordinats = ally.ActualTerritory.GetCordinats();
-                        // Find if any are within 1 square from the unit
-                        if (
-                            Mathf.Abs(coordinats.x - otherCoordinats.x) <= 1 &&
-                            Mathf.Abs(coordinats.y - otherCoordinats.y) <= 1 &&
-                            Mathf.Abs(coordinats.z - otherCoordinats.z) <= 1
-                        )
-                        {
-                            Debug.Log(ally);
-                            if (ally == this) ally.MakeHit((int)(hit * 1.5), Element.Physical, this);
-                            else { ally.MakeHit((int)(hit * 0.5), Element.Physical, this); }
-                        }
+                        if (ally == this) ally.MakeHit((int)(hit * 1.5), Element.Physical, this);
+                        else { ally.MakeHit((int)(hit * 0.5), Element.Physical, this); }
                     }
                     break;
+
                 case ElementalReaction.Superconduct:
                     _modifiers.ApplyModifier(new Superconduct());
                     break;
+
                 case ElementalReaction.Freeze:
                     ActionsLeft = 0;
                     _modifiers.ApplyModifier(new Freeze());
                     break;
+
                 case ElementalReaction.SwirlPyro:
-                    // todo
+                    foreach (Unit ally in GetAdjancentAllies(1))
+                    {
+                        if (ally == this) hit += 1;
+                        else
+                        {
+                            ally.MakeHit(1, Element.Pyro, this);
+                            ally.Canvas.UpdateModifiersUI(ally.Modifiers);
+                        }
+                    }
                     break;
                 case ElementalReaction.SwirlCryo:
-                    // todo
+                    foreach (Unit ally in GetAdjancentAllies(1))
+                    {
+                        if (ally == this) hit += 1;
+                        else
+                        {
+                            ally.MakeHit(1, Element.Cryo, this);
+                            ally.Canvas.UpdateModifiersUI(ally.Modifiers);
+                        }
+                    }
                     break;
                 case ElementalReaction.SwirlHydro:
-                    // todo
+                    foreach (Unit ally in GetAdjancentAllies(1))
+                    {
+                        if (ally == this) hit += 1;
+                        else
+                        {
+                            ally.MakeHit(1, Element.Hydro, this);
+                            ally.Canvas.UpdateModifiersUI(ally.Modifiers);
+                        }
+                    }
                     break;
                 case ElementalReaction.SwirlElectro:
-                    // todo
+                    foreach (Unit ally in GetAdjancentAllies(1))
+                    {
+                        if (ally == this) hit += 1;
+                        else
+                        {
+                            ally.MakeHit(1, Element.Electro, this);
+                            ally.Canvas.UpdateModifiersUI(ally.Modifiers);
+                        }
+                    }
                     break;
+
                 case ElementalReaction.CrystallizePyro:
                     if (damageSource is Unit attacker)
                     {
@@ -239,5 +265,21 @@ public abstract class Unit : MonoBehaviour
         {
             return new();
         }
+    }
+
+    // Get a list of allies of the unit within n squares from them (including the unit themselves)
+    public List<Unit> GetAdjancentAllies(int n)
+    {
+        Vector3 coordinats = ActualTerritory.GetCordinats();
+
+        return GetAllies().Where(ally =>
+        {
+            Vector3 otherCoordinats = ally.ActualTerritory.GetCordinats();
+            // Find if any are within 1 square from the unit
+            return
+                Mathf.Abs(coordinats.x - otherCoordinats.x) <= n &&
+                Mathf.Abs(coordinats.y - otherCoordinats.y) <= n &&
+                Mathf.Abs(coordinats.z - otherCoordinats.z) <= n;
+        }).ToList();
     }
 }
