@@ -74,4 +74,8 @@ public class ElementModifier : Modifier
     {
         return _element.ToString();
     }
+
+    public override IEnumerator OnBeginRound(Unit unit) { yield return null; }
+    public override IEnumerator OnEndRound(Unit unit) { yield return null; }
+    public override int OnHit(Unit unit, int hit, Element element) { return hit; }
 }

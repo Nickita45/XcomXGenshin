@@ -55,18 +55,19 @@ public class MatrixMap
     public TerritroyReaded this[string index] => _vertex[index];
     public TerritroyReaded this[Vector3 cordinats] => _vertex[MakeFromVector3ToIndex(cordinats)];
 
-    public bool ContainsVertexByPos(Vector3 vector, out TerritroyReaded game, bool isDecor = false) 
+    public bool ContainsVertexByPos(Vector3 vector, out TerritroyReaded game, bool isDecor = false)
     {
         string index = MatrixMap.MakeFromVector3ToIndex(vector); //make index from Vector3
 
-        if (!isDecor) 
+        if (!isDecor)
         {
             if (_vertex.ContainsKey(index)) //check if such index exists
             {
                 game = _vertex[index]; //return true and ref of this block
                 return true;
             }
-        } else //find in decor dictionary
+        }
+        else //find in decor dictionary
         {
             if (_decors.ContainsKey(index)) //check if such index exists
             {
@@ -80,7 +81,7 @@ public class MatrixMap
     }
 
 
-    public void DebugToConsole() 
+    public void DebugToConsole()
     {
         foreach (var item in _vertex)
         {

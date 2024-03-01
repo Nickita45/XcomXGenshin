@@ -24,12 +24,12 @@ public class Freeze : Modifier
         return "Freeze";
     }
 
-    public override IEnumerator OnStartRound(Unit unit)
+    public override IEnumerator OnBeginRound(Unit unit)
     {
-        // TODO: Check if character has no actions left
         unit.ActionsLeft = 0;
         yield return null;
     }
 
     public override IEnumerator OnEndRound(Unit unit) { yield return null; }
+    public override int OnHit(Unit unit, int hit, Element element) { return hit; }
 }

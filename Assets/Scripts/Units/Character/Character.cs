@@ -51,6 +51,7 @@ public class Character : Unit
         {
             _actionsLeft = value;
             Canvas.SetCountActions(value);
+            Manager.TurnManager.AfterCharacterAction();
         }
     }
 
@@ -73,15 +74,6 @@ public class Character : Unit
 
         ActualTerritory = Manager.Map[transform.localPosition];
         ActualTerritory.TerritoryInfo = TerritoryType.Character;
-
-        ActionsLeft = 2;
-
-        Manager.TurnManager.onBeginTurn += BeginOfTurn;
-    }
-
-    private void OnDestroy()
-    {
-        Manager.TurnManager.onBeginTurn -= BeginOfTurn;
     }
 
     public void OnIndexSet()
@@ -104,8 +96,6 @@ public class Character : Unit
         Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath); //
         Animator.GetComponentInChildren<GunModel>().Init(); //
     }
-
-    private void BeginOfTurn() => ActionsLeft = 2;
 
     private void OnMouseEnter()
     {
@@ -191,7 +181,7 @@ public class Character : Unit
     public override void Kill()
     {
         Manager.Map.Characters.Remove(this); //remove from map character list
-        //Manager.TurnManager.EndCharacterTurn(this); //end of the character turn
+        Manager.TurnManager.OutOfActions(this);
         _canvas.DisableAll(); //disable canvas elements
 
         Animator.Model.SetActive(false); //disable animator

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using UnityEngine;
 
@@ -37,7 +38,11 @@ public abstract class Unit : MonoBehaviour
         Canvas.UpdateHealthUI(Stats.MaxHP()); //update visual hp of unit
     }
 
-    public void MakeHit(int hit, Element element)
+    // Deal a set amount of elemental damage to the unit.
+    // 
+    // damageSource is an object that caused the damage.
+    // Right now it can either be a Unit, a Modifier, or a null (other).
+    public void MakeHit(int hit, Element element, object damageSource)
     {
         List<ElementalReaction> reactions = _modifiers.ApplyElement(element);
 
@@ -82,19 +87,38 @@ public abstract class Unit : MonoBehaviour
                     // todo
                     break;
                 case ElementalReaction.CrystallizePyro:
-                    _modifiers.ApplyModifier(new Crystallize());
+                    if (damageSource is Unit attacker)
+                    {
+                        attacker.Modifiers.ApplyModifier(new Crystallize());
+                        attacker.Canvas.UpdateModifiersUI(attacker.Modifiers);
+                    }
                     break;
                 case ElementalReaction.CrystallizeCryo:
-                    _modifiers.ApplyModifier(new Crystallize());
+                    if (damageSource is Unit attacker1)
+                    {
+                        attacker1.Modifiers.ApplyModifier(new Crystallize());
+                        attacker1.Canvas.UpdateModifiersUI(attacker1.Modifiers);
+                    }
                     break;
                 case ElementalReaction.CrystallizeHydro:
-                    _modifiers.ApplyModifier(new Crystallize());
+                    if (damageSource is Unit attacker2)
+                    {
+                        attacker2.Modifiers.ApplyModifier(new Crystallize());
+                        attacker2.Canvas.UpdateModifiersUI(attacker2.Modifiers);
+                    }
                     break;
                 case ElementalReaction.CrystallizeElectro:
-                    _modifiers.ApplyModifier(new Crystallize());
+                    if (damageSource is Unit attacker3)
+                    {
+                        attacker3.Modifiers.ApplyModifier(new Crystallize());
+                        attacker3.Canvas.UpdateModifiersUI(attacker3.Modifiers);
+                    }
                     break;
             }
         }
+
+        hit = _modifiers.OnHit(this, hit, element);
+        StartCoroutine(Canvas.PanelShow(Canvas.PanelHit(hit), 4));
 
         _countHp -= hit;
         if (_countHp <= 0)
@@ -177,6 +201,23 @@ public abstract class Unit : MonoBehaviour
             yield return StartCoroutine(Animator.StopRunning());
             yield return StartCoroutine(Animator.StartCrouching());
             yield return StartCoroutine(Animator.CrouchRotateHideBehindShelter(transform.localPosition));
+        }
+    }
+
+    // Get a list of all allies of the unit (including the unit themselves)
+    public List<Unit> GetAllies()
+    {
+        if (this is Character)
+        {
+            return Manager.Map.Characters.Select(c => (Unit)c).ToList();
+        }
+        else if (this is Enemy)
+        {
+            return Manager.Map.Enemies.Select(e => (Unit)e).ToList();
+        }
+        else
+        {
+            return new();
         }
     }
 }

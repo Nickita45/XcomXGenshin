@@ -98,12 +98,9 @@ public class Enemy : Unit
     public IEnumerator MakeTurn()
     {
         // Only triggered enemies make turns
-        if (!_triggered)
-        {
-            ActionsLeft = 0;
-            yield break;
-        }
-        yield return StartCoroutine(_enemyAI.MakeTurn());
+        if (!_triggered) yield break;
+
+        if (_actionsLeft > 0) yield return StartCoroutine(_enemyAI.MakeTurn());
     }
 
     public override void Kill()

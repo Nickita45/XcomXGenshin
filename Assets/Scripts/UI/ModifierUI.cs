@@ -17,7 +17,12 @@ public class ModifierUI : MonoBehaviour
         _modifier = modifier;
 
         UpdateUI();
-        modifier.onUpdate += UpdateUI;
+        _modifier.onUpdate += UpdateUI;
+    }
+
+    public void OnDestroy()
+    {
+        _modifier.onUpdate -= UpdateUI;
     }
 
     public void UpdateUI()

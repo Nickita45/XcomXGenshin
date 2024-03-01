@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ElectroCharged : Modifier
@@ -16,7 +18,7 @@ public class ElectroCharged : Modifier
 
     public override string Description()
     {
-        return "At the end of turn, deals 1 [Electro] damage to this unit and [Hydro]-afflicted allies within 1 square.";
+        return "At the end of round, deals 1 [Electro] damage to this unit and [Hydro]-afflicted allies within 1 square.";
     }
 
     public override string IconName()
@@ -24,6 +26,31 @@ public class ElectroCharged : Modifier
         return "Electro-Charged";
     }
 
-    public override IEnumerator OnStartRound(Unit unit) { yield return null; }
-    public override IEnumerator OnEndRound(Unit unit) { yield return null; }
+    public override IEnumerator OnBeginRound(Unit unit) { yield return null; }
+    public override IEnumerator OnEndRound(Unit unit)
+    {
+        Vector3 coordinats = unit.ActualTerritory.GetCordinats();
+
+        // Iterate over all allies 
+        foreach (Unit ally in unit.GetAllies())
+        {
+            Vector3 otherCoordinats = ally.ActualTerritory.GetCordinats();
+            // Find if any are within 1 square from the unit
+            if (
+                Mathf.Abs(coordinats.x - otherCoordinats.x) <= 1 &&
+                Mathf.Abs(coordinats.y - otherCoordinats.y) <= 1 &&
+                Mathf.Abs(coordinats.z - otherCoordinats.z) <= 1
+            )
+            {
+                // If it has either hydro or electro-charged
+                if (ally.Modifiers.GetElements().Contains(Element.Hydro) ||
+                ally.Modifiers.Modifiers.Any(m => m is ElectroCharged))
+                {
+                    ally.MakeHit(1, Element.Electro, this);
+                }
+            }
+        }
+        yield return null;
+    }
+    public override int OnHit(Unit unit, int hit, Element element) { return hit; }
 }

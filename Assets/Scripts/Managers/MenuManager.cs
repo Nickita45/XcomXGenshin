@@ -53,7 +53,8 @@ public class MenuManager : MonoBehaviour
     private IEnumerator AfterNewMap()
     {
         yield return new WaitForSeconds(1);
-        Manager.TurnManager.BeginOfTheTurn();
+        Manager.TurnManager.LoadCharacterData();
+        yield return StartCoroutine(Manager.TurnManager.BeginRound());
     }
 
     private void OnStatusChange(HashSet<Permissions> permissions)

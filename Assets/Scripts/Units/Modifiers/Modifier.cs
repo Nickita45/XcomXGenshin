@@ -3,14 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: make virtual instead of abstract?
 public abstract class Modifier
 {
     public abstract string Title();
     public abstract string Description();
     public abstract string IconName();
 
-    public abstract IEnumerator OnStartRound(Unit unit);
+    public abstract IEnumerator OnBeginRound(Unit unit);
     public abstract IEnumerator OnEndRound(Unit unit);
+    public abstract int OnHit(Unit unit, int hit, Element element);
 
     protected int _turns = 0;
     public int Turns => _turns;

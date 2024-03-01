@@ -34,7 +34,7 @@ public class AbilityMeleeAttack : Ability
         {
             int dmg = UnityEngine.Random.Range(((Enemy)unit).Stats.MinDamage, ((Enemy)unit).Stats.MaxDamage + 1);
             targetUnit.StartCoroutine(targetUnit.Canvas.PanelShow(targetUnit.Canvas.PanelHit(dmg)));
-            targetUnit.MakeHit(dmg, _element);
+            targetUnit.MakeHit(dmg, _element, unit);
         }
 
         yield return unit.StartCoroutine(animator.StartCrouching());

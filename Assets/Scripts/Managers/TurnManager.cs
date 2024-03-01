@@ -10,6 +10,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     private MenuManager _menuManager;
 
+    // List of all characters that have unspent actions left
     private List<Character> _characters = new();
 
     // We store the character as an object, not as an index.
@@ -20,12 +21,11 @@ public class TurnManager : MonoBehaviour
 
     public List<Unit> UnitOverwatched { get; private set; }
 
-    public Action onBeginTurn;
     private float _secondsEndTurn = 3f;
 
     private void Start()
     {
-        Manager.Instance.OnClearMap += Clear;
+        Manager.Instance.OnClearMap += ClearCharacters;
         _secondsEndTurn = ConfigurationManager.GlobalDataJson.secondsEndTurn;
         UnitOverwatched = new List<Unit>();
     }
@@ -79,154 +79,170 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    private void Clear()
+    private void ClearCharacters()
     {
         _characters.Clear();
         _selectedCharacter = null;
     }
 
-    public void BeginOfTheTurn()
+    public void LoadCharacterData()
     {
-        Debug.Log("New turn");
-
-
-        onBeginTurn?.Invoke();
-        _menuManager.SetPanelEnemy(false);
-
         if (Manager.Map.Characters.Count == 0)
             return;
 
-        UnitOverwatched.RemoveAll(unit => unit is Character);
-        _characters.AddRange(Manager.Map.Characters); //actualization list of characters
+        List<Character> characters = Manager.Map.Characters; //actualization list of characters
 
-        if (_characters.First().Stats.Index == -1) //set basic parameters to characters
+        if (characters.First().Stats.Index == -1)  //set basic parameters to characters
         {
             // This requires to start the game using the Hub Scene
             HubData.Instance.charactersPoolID = HubData.Instance.charactersPoolID.OrderBy(x => x == -1).ToArray();
-            for (int i = 0; i < _characters.Count; i++)
+            for (int i = 0; i < characters.Count; i++)
             {
-                _characters[i].Stats.Index = (HubData.Instance.charactersPoolID[i] == -1) ? 0 : HubData.Instance.charactersPoolID[i]; //set index
-                _characters[i].OnIndexSet();
+                characters[i].Stats.Index = (HubData.Instance.charactersPoolID[i] == -1) ? 0 : HubData.Instance.charactersPoolID[i];
+                characters[i].OnIndexSet();
                 if (HubData.Instance.charactersPoolID[i] == -1)
                 {
-                    _characters[i].Kill(); //if such index character does not exist, removing him
+                    characters[i].Kill(); //if such index character does not exist, removing him
                 }
             }
         }
 
-        SelectCharacter(_characters[0]);
-    }
-
-    public IEnumerator EndCharacterTurn(Character character)
-    {
-        List<Modifier> toDelete = new();
-        foreach (Modifier modifier in character.Modifiers.Modifiers)
+        public IEnumerator BeginRound()
         {
-            if (modifier.TurnDecrement())
+            // Remove overwatch from all characters
+            UnitOverwatched.RemoveAll(unit => unit is Character);
+
+            // Restore actions
+            foreach (Character character in Manager.Map.Characters) { character.ActionsLeft = 2; }
+            foreach (Enemy enemy in Manager.Map.Enemies) { enemy.ActionsLeft = enemy.Stats.BaseActions(); }
+
+            // Trigger modifiers on begin round
+            foreach (Unit unit in Manager.Map.Enemies.Select(e => (Unit)e)
+                        .Concat(Manager.Map.Characters.Select(c => (Unit)c)))
             {
-                yield return modifier.OnEndRound(character);
+                yield return StartCoroutine(unit.Modifiers.OnBeginRound(unit));
+                unit.Canvas.UpdateModifiersUI(unit.Modifiers);
             }
+
+            BeginPlayerTurn();
+        }
+
+        public void BeginPlayerTurn()
+        {
+            Debug.Log("Begin turn");
+
+            _characters.AddRange(Manager.Map.Characters);
+            SelectCharacter(_characters[0]);
+        }
+
+        public IEnumerator AfterCharacterAction()
+        {
+            Manager.StatusMain.SetStatusWaiting();
+
+            // Trigger all possible enemies
+            //foreach (Enemy enemy in Manager.Map.Enemies)
+            for (int i = Manager.Map.Enemies.Count - 1; i >= 0; i--) //make from bottom to up to savly removing killed enemies
+            {
+                yield return StartCoroutine(Manager.Map.Enemies[i].ConditionalTrigger());
+            }
+
+            // If the character still has some actions left, reselect them. 
+            if (_selectedCharacter?.ActionsLeft > 0)
+            {
+                SelectCharacter(_selectedCharacter);
+            }
+            // Otherwise, remove them from the list.
             else
             {
-                toDelete.Add(modifier);
+                OutOfActions(_selectedCharacter);
+
+                if (_characters.Count == 0)
+                {
+                    yield return StartCoroutine(EndPlayerTurn());
+                }
             }
         }
-        foreach (Modifier modifier in toDelete) { character.Modifiers.Modifiers.Remove(modifier); }
 
-        _characters.Remove(character);
-        if (_characters.Count > 0) SelectNextCharacter();
-        yield return null;
-    }
-
-    private IEnumerator EndTurn()
-    {
-        Debug.Log("End turn");
-        yield return new WaitForSeconds(_secondsEndTurn);
-        yield return StartCoroutine(EnemyTurn());
-    }
-
-    private IEnumerator EnemyTurn()
-    {
-        _menuManager.SetPanelEnemy(true);
-        UnitOverwatched.RemoveAll(unit => unit is Enemy);
-
-        for (int i = Manager.Map.Enemies.Count - 1; i >= 0; i--) //make from bottom to up to savly removing killed enemies
+        public void OutOfActions(Character character)
         {
-            Enemy enemy = Manager.Map.Enemies[i];
-            enemy.ActionsLeft = enemy.Stats.BaseActions();
-            while (enemy.ActionsLeft > 0)
-            {
-                yield return StartCoroutine(enemy.MakeTurn());
-            }
+            _characters.Remove(character);
 
-        }
-
-        BeginOfTheTurn();
-        yield return null;
-    }
-
-    // Actions that happen right after the character made an action (or moved)
-    public IEnumerator AfterCharacterAction()
-    {
-        Manager.StatusMain.SetStatusWaiting();
-
-        // Trigger all possible enemies
-        //foreach (Enemy enemy in Manager.Map.Enemies)
-        for (int i = Manager.Map.Enemies.Count - 1; i >= 0; i--) //make from bottom to up to savly removing killed enemies
-        {
-            yield return StartCoroutine(Manager.Map.Enemies[i].ConditionalTrigger());
-        }
-
-        // If the character still has some actions left,
-        // reselect it. Otherwise, end their turn. 
-        if (_selectedCharacter?.ActionsLeft <= 0)
-        {
-            EndCharacterTurn(_selectedCharacter);
-        }
-        else
-        {
-            SelectCharacter(_selectedCharacter);
-        }
-
-        if (_characters.Count == 0)
-            yield return StartCoroutine(EndTurn());
-    }
-
-    public IEnumerable<Unit> CheckOverwatchMake(Unit unit)
-    {
-        List<Unit> mustBeDeleted = new List<Unit>();
-        foreach (var unitOvewatch in UnitOverwatched)
-        {
-            if (unitOvewatch is Character && unit is Character || unitOvewatch is Enemy && unit is Enemy)
-                continue;
-
-            if (TargetUtils.CanSee(unit, unitOvewatch))
-            {
-                mustBeDeleted.Add(unitOvewatch);
-                yield return unitOvewatch;
-
-                if (unit.IsKilled)
-                    break;
-            }
-        }
-        foreach (var delete in mustBeDeleted)
-        {
-            UnitOverwatched.Remove(delete);
-        }
-    }
-
-    private void Update()
-    {
-        if (Manager.HasPermission(Permissions.SelectCharacter) && _characters.Count > 1)
-        {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            // Select the next character, if possible.
+            if (_characters.Count > 0)
             {
                 SelectNextCharacter();
             }
-            else if (Input.GetKeyDown(KeyCode.LeftShift))
+        }
+
+        private IEnumerator EndPlayerTurn()
+        {
+            Debug.Log("End turn");
+
+            yield return new WaitForSeconds(_secondsEndTurn);
+            yield return StartCoroutine(MakeEnemyTurn());
+        }
+
+        private IEnumerator MakeEnemyTurn()
+        {
+            _menuManager.SetPanelEnemy(true);
+            foreach (Enemy enemy in Manager.Map.Enemies)
             {
-                SelectPreviousCharacter();
+                yield return StartCoroutine(enemy.MakeTurn());
+            }
+            _menuManager.SetPanelEnemy(false);
+
+            yield return StartCoroutine(EndRound());
+        }
+
+        private IEnumerator EndRound()
+        {
+            // Trigger modifiers on end round
+            foreach (Unit unit in Manager.Map.Enemies.Select(e => (Unit)e)
+                        .Concat(Manager.Map.Characters.Select(c => (Unit)c)))
+            {
+                yield return StartCoroutine(unit.Modifiers.OnEndRound(unit));
+                unit.Canvas.UpdateModifiersUI(unit.Modifiers);
+            }
+
+            // Start next round
+            yield return StartCoroutine(BeginRound());
+        }
+
+        public IEnumerable<Unit> CheckOverwatchMake(Unit unit)
+        {
+            List<Unit> mustBeDeleted = new List<Unit>();
+            foreach (var unitOvewatch in UnitOverwatched)
+            {
+                if (unitOvewatch is Character && unit is Character || unitOvewatch is Enemy && unit is Enemy)
+                    continue;
+
+                if (TargetUtils.CanSee(unit, unitOvewatch))
+                {
+                    mustBeDeleted.Add(unitOvewatch);
+                    yield return unitOvewatch;
+
+                    if (unit.IsKilled)
+                        break;
+                }
+            }
+            foreach (var delete in mustBeDeleted)
+            {
+                UnitOverwatched.Remove(delete);
+            }
+        }
+
+        private void Update()
+        {
+            if (Manager.HasPermission(Permissions.SelectCharacter) && _characters.Count > 1)
+            {
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    SelectNextCharacter();
+                }
+                else if (Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    SelectPreviousCharacter();
+                }
             }
         }
     }
-}

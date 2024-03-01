@@ -55,6 +55,42 @@ public class ModifierSet
             { (Element.Electro, Element.Geo), ElementalReaction.CrystallizeElectro },
         };
 
+    // TODO: implement without the unit parameter
+    public IEnumerator OnBeginRound(Unit unit)
+    {
+        foreach (Modifier modifier in Modifiers)
+        {
+            yield return modifier.OnBeginRound(unit);
+        }
+    }
+
+    // TODO: implement without the unit parameter
+    public IEnumerator OnEndRound(Unit unit)
+    {
+        List<Modifier> toDelete = new();
+        foreach (Modifier modifier in Modifiers)
+        {
+            if (modifier.TurnDecrement())
+            {
+                yield return modifier.OnEndRound(unit);
+            }
+            else
+            {
+                toDelete.Add(modifier);
+            }
+        }
+        foreach (Modifier modifier in toDelete) { Modifiers.Remove(modifier); }
+    }
+
+    public int OnHit(Unit unit, int hit, Element element)
+    {
+        foreach (Modifier modifier in Modifiers)
+        {
+            hit = modifier.OnHit(unit, hit, element);
+        }
+        return hit;
+    }
+
     // Get a HashSet of currently applied elements
     public HashSet<Element> GetElements()
     {

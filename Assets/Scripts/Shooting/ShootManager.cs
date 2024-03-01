@@ -61,8 +61,7 @@ public class ShootManager : MonoBehaviour
                 dmg = UnityEngine.Random.Range(ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].minHitValue, ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].maxHitValue + 1);
             }
 
-            StartCoroutine(defender.Canvas.PanelShow(defender.Canvas.PanelHit(dmg), 4));//show panel hit
-            defender.MakeHit(dmg, element); //making damage
+            defender.MakeHit(dmg, element, shooter);
         }
         yield return new WaitForSeconds(ConfigurationManager.GlobalDataJson.timeAfterShooting);
     }
