@@ -72,6 +72,7 @@ public abstract class Unit : MonoBehaviour
                     // todo
                     break;
                 case ElementalReaction.Freeze:
+                    ActionsLeft = 0;
                     _modifiers.ApplyModifier(new Freeze());
                     break;
                 case ElementalReaction.SwirlPyro:

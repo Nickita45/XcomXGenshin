@@ -60,7 +60,7 @@ public class ModifierSet
     {
         foreach (Modifier modifier in Modifiers)
         {
-            yield return modifier.OnBeginRound(unit);
+            yield return unit.StartCoroutine(modifier.OnBeginRound(unit));
         }
     }
 
@@ -72,7 +72,7 @@ public class ModifierSet
         {
             if (modifier.TurnDecrement())
             {
-                yield return modifier.OnEndRound(unit);
+                yield return unit.StartCoroutine(modifier.OnEndRound(unit));
             }
             else
             {
