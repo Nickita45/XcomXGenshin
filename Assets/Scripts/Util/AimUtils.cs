@@ -66,13 +66,13 @@ public static class AimUtils
         switch (cordinatesSide)
         {
             case CordinatesSide.Left:
-                return Manager.Map[teritory.IndexLeft.First()].ShelterType.Right;
+                return teritory.IndexLeft.Count > 0 ? Manager.Map[teritory.IndexLeft.First()].ShelterType.Right : ShelterType.None;
             case CordinatesSide.Right:
-                return Manager.Map[teritory.IndexRight.First()].ShelterType.Left;
+                return teritory.IndexRight.Count > 0 ? Manager.Map[teritory.IndexRight.First()].ShelterType.Left : ShelterType.None;
             case CordinatesSide.Bottom:
-                return Manager.Map[teritory.IndexBottom.First()].ShelterType.Front;
+                return teritory.IndexBottom.Count > 0 ? Manager.Map[teritory.IndexBottom.First()].ShelterType.Front : ShelterType.None;
             case CordinatesSide.Front:
-                return Manager.Map[teritory.IndexFront.First()].ShelterType.Bottom;
+                return teritory.IndexFront.Count > 0 ? Manager.Map[teritory.IndexFront.First()].ShelterType.Bottom : ShelterType.None;
             default:
                 return ShelterType.None; // if it is a flank
         }

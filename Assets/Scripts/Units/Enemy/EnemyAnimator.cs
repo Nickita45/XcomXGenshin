@@ -21,14 +21,18 @@ public class EnemyAnimator : UnitAnimator
 
         if (!_canCrouch)
         {
-            Enemy enemy = transform.parent.GetComponent<Enemy>();
+            Enemy enemy = transform.parent.GetComponent<Enemy>(); //maybe better save reference?
             Character closestCharacter = enemy.GetClosestVisibleCharacter();
 
             if (closestCharacter)
             {
                 yield return StartCoroutine(RotateLookAt(closestCharacter.transform.localPosition));
-                TerritroyReaded territoryReaded = Manager.Map[position];
-                Dictionary<ShelterSide, ShelterType> shelters = ShelterDetectUtils.DetectShelters(territoryReaded);
+
+                if (!enemy.IsKilled)
+                {
+                    TerritroyReaded territoryReaded = Manager.Map[position];
+                    Dictionary<ShelterSide, ShelterType> shelters = ShelterDetectUtils.DetectShelters(territoryReaded);
+                }
             }
         }
     }

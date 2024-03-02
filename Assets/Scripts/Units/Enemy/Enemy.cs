@@ -87,6 +87,7 @@ public class Enemy : Unit
     {
         Manager.Map.Enemies.Remove(this); //remove form list of enemies
         _canvas.DisableAll(); //disable all elements from canvas
+        _actionsLeft = 0;
 
         _animator.Model.SetActive(false); //disable animator
 

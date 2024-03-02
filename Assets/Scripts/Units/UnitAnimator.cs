@@ -6,6 +6,8 @@ using UnityEngine;
 // The base class for the unit animations
 public abstract class UnitAnimator : MonoBehaviour
 {
+    private const float KOEFSLOW = 0.25f;
+
     private Animator _animator;
 
     [Tooltip("The gun model the unit is wielding. Leave this empty if the unit does not wield a gun.")]
@@ -25,6 +27,8 @@ public abstract class UnitAnimator : MonoBehaviour
     // Set to true if the animator contains "isCrouched" parameter.
     protected bool _canCrouch;
 
+    private float _basicSpeed; //used to save speed. To reset slow effect animation
+
     public void Init(Animator animator)
     {
         if (_gun) _outline.Init(Model, _gun.gameObject);
@@ -38,6 +42,15 @@ public abstract class UnitAnimator : MonoBehaviour
         }
 
         _canCrouch = _animator.parameters.Any(param => param.name == "isCrouched");
+        _basicSpeed = _animator.speed;
+    }
+
+    public void SetSpeedAnimatorSlow(bool active)
+    {
+        if (active)
+            _animator.speed = _basicSpeed * KOEFSLOW;
+        else
+            _animator.speed = _basicSpeed;
     }
 
     public IEnumerator StartRunning()

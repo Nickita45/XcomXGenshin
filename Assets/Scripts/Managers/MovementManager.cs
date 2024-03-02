@@ -123,7 +123,7 @@ public class MovementManager : MonoBehaviour
         Character character = Manager.TurnManager.SelectedCharacter; //get selected character
         character.MoverActive(false); // disable mover
         character.ActualTerritory.TerritoryInfo = TerritoryType.Air; //set block where he was on air
-        character.ActualTerritory = null; 
+        character.ActualTerritory = null;
         character.SelectItem.SetActive(false); //disable hi selecter
 
         _isMoving = true;
@@ -134,9 +134,15 @@ public class MovementManager : MonoBehaviour
         yield return StartCoroutine(character.Move(points)); //??????????
 
         _isMoving = false;
-        OnEndMove(newTerritory, character);
-
-        yield return Manager.TurnManager.AfterCharacterAction();
+        
+        if (!character.IsKilled)
+        {
+            OnEndMove(newTerritory, character);
+            yield return Manager.TurnManager.AfterCharacterAction();
+        } else
+        {
+            Manager.TurnManager.EndCharacterTurn(character);
+        }
     }
 
     private void DisableToBasic(TerritroyReaded newTerritory, Character character)
@@ -469,8 +475,13 @@ public class MovementManager : MonoBehaviour
             {
                 enemy.ActualTerritory.TerritoryInfo = TerritoryType.Air; //actualization block type
                 yield return Manager.MovementManager.StartCoroutine(enemy.Move(aktualPath)); //?????? maybe better this method in this class
-                enemy.ActualTerritory = findTerritory; //actualization enemy block
-                enemy.ActualTerritory.TerritoryInfo = TerritoryType.Character;
+
+                
+                if (!enemy.IsKilled)
+                {
+                    enemy.ActualTerritory = findTerritory; //actualization enemy block
+                    enemy.ActualTerritory.TerritoryInfo = TerritoryType.Character;
+                }
             }
         }
     }
