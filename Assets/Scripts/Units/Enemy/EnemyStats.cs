@@ -18,4 +18,6 @@ public class EnemyStats : UnitStats
     public override float Speed() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemySpeed;
     public override int MovementDistance() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMoveDistance;
     public override float VisionDistance() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyRangedTargetDistance;
+    public override string Name() => _configEnemyName;
+    public override string Description() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyDescription;
 }

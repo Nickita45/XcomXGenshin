@@ -4,7 +4,8 @@ public class CharacterStats : UnitStats
 {
     //Config atributes
     public int Index { get; set; }
-    public string CharacterName() => ConfigurationManager.CharactersData[Index].characterName;
+    public override string Name() => ConfigurationManager.CharactersData[Index].characterName;
+    public override string Description() => "Here will be character description.";
     public override float Speed() => ConfigurationManager.CharactersData[Index].characterSpeed;
     public override int MovementDistance() => ConfigurationManager.CharactersData[Index].characterMoveDistance;
     public override float VisionDistance() => 10f; // might change when the vision system is fully implemented

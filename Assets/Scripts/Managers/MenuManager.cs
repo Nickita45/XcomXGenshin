@@ -61,7 +61,7 @@ public class MenuManager : MonoBehaviour
     {
         if (permissions.Contains(Permissions.ActionSelect) || permissions.Contains(Permissions.SelectEnemy))
         {
-            _textCharacter.text = Manager.TurnManager.SelectedCharacter.Stats.CharacterName();
+            _textCharacter.text = Manager.TurnManager.SelectedCharacter.Stats.Name();
             _panelCharaterName.gameObject.SetActive(true);
         }
         else

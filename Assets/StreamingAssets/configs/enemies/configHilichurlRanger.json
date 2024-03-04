@@ -1,5 +1,6 @@
 {
     "enemyName": "Hillichul Archer",
+    "enemyDescription": "Description",
     "enemySpeed": 3.0,
     "enemyMoveDistance": 5,
     "enemyRangedTargetDistance": 10.0,

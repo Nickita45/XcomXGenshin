@@ -183,6 +183,7 @@ public class CharacterData
 public class EnemyData
 {
     public string enemyName;
+    public string enemyDescription;
     public float enemySpeed;
     public int enemyMoveDistance;
     public float enemyRangedTargetDistance;

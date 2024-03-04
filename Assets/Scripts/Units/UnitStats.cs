@@ -15,4 +15,7 @@ public abstract class UnitStats : MonoBehaviour
 
     // movement speed (doesn't affect gameplay)
     public abstract float Speed();
+
+    public abstract string Name();
+    public abstract string Description();
 }
