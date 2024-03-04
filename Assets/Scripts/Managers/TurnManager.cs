@@ -120,7 +120,7 @@ public class TurnManager : MonoBehaviour
             foreach (Unit unit in Manager.Map.Enemies.Select(e => (Unit)e)
                         .Concat(Manager.Map.Characters.Select(c => (Unit)c)))
             {
-                yield return StartCoroutine(unit.Modifiers.OnBeginRound(unit));
+                yield return StartCoroutine(unit.Modifiers.OnBeginRound());
                 unit.Canvas.UpdateModifiersUI(unit.Modifiers);
             }
 
@@ -200,7 +200,7 @@ public class TurnManager : MonoBehaviour
             foreach (Unit unit in Manager.Map.Enemies.Select(e => (Unit)e)
                         .Concat(Manager.Map.Characters.Select(c => (Unit)c)))
             {
-                yield return StartCoroutine(unit.Modifiers.OnEndRound(unit));
+                yield return StartCoroutine(unit.Modifiers.OnEndRound());
                 unit.Canvas.UpdateModifiersUI(unit.Modifiers);
             }
 

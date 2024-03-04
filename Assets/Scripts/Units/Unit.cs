@@ -21,7 +21,9 @@ public abstract class Unit : MonoBehaviour
     public virtual UnitAnimator Animator => _animator;
 
     protected int _countHp;
-    protected ModifierList _modifiers = new();
+
+    [SerializeField]
+    protected ModifierList _modifiers;
     public virtual ModifierList Modifiers => _modifiers;
 
     // The amount of action points, which can be used for moving (dashing) and abilities.
@@ -46,7 +48,7 @@ public abstract class Unit : MonoBehaviour
     {
         if (hit <= 0) return; // Do not do anything if the attack deals no damage
 
-        List<ElementalReaction> reactions = _modifiers.AddElement(this, element);
+        List<ElementalReaction> reactions = _modifiers.AddElement(element);
 
         foreach (ElementalReaction reaction in reactions)
         {
@@ -67,7 +69,7 @@ public abstract class Unit : MonoBehaviour
                     break;
 
                 case ElementalReaction.ElectroCharged:
-                    _modifiers.AddModifier(this, new ElectroCharged());
+                    _modifiers.AddModifier(new ElectroCharged());
                     break;
 
                 case ElementalReaction.Overloaded:
@@ -79,7 +81,7 @@ public abstract class Unit : MonoBehaviour
                     break;
 
                 case ElementalReaction.Superconduct:
-                    _modifiers.AddModifier(this, new Superconduct());
+                    _modifiers.AddModifier(new Superconduct());
                     break;
                 case ElementalReaction.SuperconductActivate:
                     hit = (int)(hit * 1.5);
@@ -87,7 +89,7 @@ public abstract class Unit : MonoBehaviour
 
                 case ElementalReaction.Freeze:
                     ActionsLeft = 0;
-                    _modifiers.AddModifier(this, new Freeze());
+                    _modifiers.AddModifier(new Freeze());
                     break;
                 case ElementalReaction.Shatter:
                     hit += UnityEngine.Random.Range(1, 2);
@@ -141,35 +143,35 @@ public abstract class Unit : MonoBehaviour
                 case ElementalReaction.CrystallizePyro:
                     if (damageSource is Unit attacker)
                     {
-                        attacker.Modifiers.AddModifier(this, new Crystallize());
+                        attacker.Modifiers.AddModifier(new Crystallize());
                         attacker.Canvas.UpdateModifiersUI(attacker.Modifiers);
                     }
                     break;
                 case ElementalReaction.CrystallizeCryo:
                     if (damageSource is Unit attacker1)
                     {
-                        attacker1.Modifiers.AddModifier(this, new Crystallize());
+                        attacker1.Modifiers.AddModifier(new Crystallize());
                         attacker1.Canvas.UpdateModifiersUI(attacker1.Modifiers);
                     }
                     break;
                 case ElementalReaction.CrystallizeHydro:
                     if (damageSource is Unit attacker2)
                     {
-                        attacker2.Modifiers.AddModifier(this, new Crystallize());
+                        attacker2.Modifiers.AddModifier(new Crystallize());
                         attacker2.Canvas.UpdateModifiersUI(attacker2.Modifiers);
                     }
                     break;
                 case ElementalReaction.CrystallizeElectro:
                     if (damageSource is Unit attacker3)
                     {
-                        attacker3.Modifiers.AddModifier(this, new Crystallize());
+                        attacker3.Modifiers.AddModifier(new Crystallize());
                         attacker3.Canvas.UpdateModifiersUI(attacker3.Modifiers);
                     }
                     break;
             }
         }
 
-        hit = _modifiers.OnHit(this, hit, element);
+        hit = _modifiers.OnHit(hit, element);
         StartCoroutine(Canvas.PanelShow(Canvas.PanelHit(hit, element), 4));
 
         _countHp -= hit;

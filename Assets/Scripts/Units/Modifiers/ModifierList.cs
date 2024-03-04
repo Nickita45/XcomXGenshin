@@ -5,43 +5,49 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ModifierList
+public class ModifierList : MonoBehaviour
 {
     private List<Modifier> _modifiers = new();
     public List<Modifier> Modifiers => _modifiers;
 
-    // TODO: implement without the unit parameter, make it monobehavior?
-    public IEnumerator OnBeginRound(Unit unit)
+    private Unit _unit;
+
+    private void Start()
+    {
+        _unit = GetComponent<Unit>();
+    }
+
+    public IEnumerator OnBeginRound()
     {
         foreach (Modifier modifier in Modifiers)
         {
-            yield return unit.StartCoroutine(modifier.OnBeginRound(unit));
+            yield return StartCoroutine(modifier.OnBeginRound(_unit));
         }
     }
 
     // TODO: implement without the unit parameter
-    public IEnumerator OnEndRound(Unit unit)
+    public IEnumerator OnEndRound()
     {
         List<Modifier> toDelete = new();
         foreach (Modifier modifier in Modifiers)
         {
             if (modifier.TurnDecrement())
             {
-                yield return unit.StartCoroutine(modifier.OnEndRound(unit));
+                yield return StartCoroutine(modifier.OnEndRound(_unit));
             }
             else
             {
                 toDelete.Add(modifier);
             }
         }
-        foreach (Modifier modifier in toDelete) { RemoveModifier(unit, modifier); }
+        foreach (Modifier modifier in toDelete) { RemoveModifier(modifier); }
     }
 
-    public int OnHit(Unit unit, int hit, Element element)
+    public int OnHit(int hit, Element element)
     {
         foreach (Modifier modifier in Modifiers)
         {
-            hit = modifier.OnHit(unit, hit, element);
+            hit = modifier.OnHit(_unit, hit, element);
         }
         return hit;
     }
@@ -61,7 +67,7 @@ public class ModifierList
         return elements;
     }
 
-    public List<ElementalReaction> AddElement(Unit unit, Element element)
+    public List<ElementalReaction> AddElement(Element element)
     {
         List<ElementalReaction> reactions = new();
 
@@ -78,7 +84,7 @@ public class ModifierList
 
         foreach (Modifier m in toRemove)
         {
-            RemoveModifier(unit, m);
+            RemoveModifier(m);
         }
 
         if (reactions.Count == 0 && element != Element.Physical)
@@ -93,12 +99,12 @@ public class ModifierList
             }
 
             // Otherwise, create a new modifier
-            AddModifier(unit, new ElementModifier(element));
+            AddModifier(new ElementModifier(element));
         }
         return reactions;
     }
 
-    public void AddModifier(Unit unit, Modifier modifier)
+    public void AddModifier(Modifier modifier)
     {
         // Check if any existing modifiers of the same type stack with this one
         Modifier m = _modifiers.Find(m => m.GetType() == modifier.GetType() &&
@@ -113,13 +119,13 @@ public class ModifierList
         else
         {
             _modifiers.Add(modifier);
-            modifier.SpawnModel(unit);
+            modifier.SpawnModel(_unit);
         }
     }
 
-    public void RemoveModifier(Unit unit, Modifier modifier)
+    public void RemoveModifier(Modifier modifier)
     {
         _modifiers.Remove(modifier);
-        modifier.DestroyModel(unit);
+        modifier.DestroyModel(_unit);
     }
 }
