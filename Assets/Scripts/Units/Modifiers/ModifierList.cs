@@ -5,7 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ModifierSet
+public class ModifierList
 {
     private List<Modifier> _modifiers = new();
     public List<Modifier> Modifiers => _modifiers;

@@ -21,8 +21,8 @@ public abstract class Unit : MonoBehaviour
     public virtual UnitAnimator Animator => _animator;
 
     protected int _countHp;
-    protected ModifierSet _modifiers = new();
-    public virtual ModifierSet Modifiers => _modifiers;
+    protected ModifierList _modifiers = new();
+    public virtual ModifierList Modifiers => _modifiers;
 
     // The amount of action points, which can be used for moving (dashing) and abilities.
     public abstract int ActionsLeft { get; set; }
