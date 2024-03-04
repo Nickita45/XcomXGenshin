@@ -24,6 +24,11 @@ public class Freeze : Modifier
         return "Freeze";
     }
 
+    public override ModifierStackBehavior HandleDuplicate(Modifier other)
+    {
+        return ModifierStackBehavior.Stack;
+    }
+
     public override ElementalReaction? CheckReaction(Element element)
     {
         if (element == Element.Geo || element == Element.Physical)
@@ -45,4 +50,16 @@ public class Freeze : Modifier
 
     public override IEnumerator OnEndRound(Unit unit) { yield return null; }
     public override int OnHit(Unit unit, int hit, Element element) { return hit; }
+
+    GameObject model;
+
+    public override void SpawnModel(Unit unit)
+    {
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/Modifiers/Freeze");
+        model = GameObject.Instantiate(prefab, unit.transform);
+    }
+    public override void DestroyModel(Unit unit)
+    {
+        GameObject.Destroy(model);
+    }
 }

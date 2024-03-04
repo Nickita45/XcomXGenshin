@@ -7,10 +7,10 @@ using UnityEngine;
 
 public class ModifierSet
 {
-    private HashSet<Modifier> _modifiers = new();
-    public HashSet<Modifier> Modifiers => _modifiers;
+    private List<Modifier> _modifiers = new();
+    public List<Modifier> Modifiers => _modifiers;
 
-    // TODO: implement without the unit parameter
+    // TODO: implement without the unit parameter, make it monobehavior?
     public IEnumerator OnBeginRound(Unit unit)
     {
         foreach (Modifier modifier in Modifiers)
@@ -34,7 +34,7 @@ public class ModifierSet
                 toDelete.Add(modifier);
             }
         }
-        foreach (Modifier modifier in toDelete) { Modifiers.Remove(modifier); }
+        foreach (Modifier modifier in toDelete) { RemoveModifier(unit, modifier); }
     }
 
     public int OnHit(Unit unit, int hit, Element element)
@@ -61,38 +61,7 @@ public class ModifierSet
         return elements;
     }
 
-    // Add an element modifier.
-    // 
-    // This is a private function. For public use, there is an ApplyElement function.
-    private void AddElement(Element element)
-    {
-        foreach (Modifier modifier in _modifiers)
-        {
-            if (modifier is ElementModifier m && m.Element == element)
-            {
-                // If a modifier with this elements exists, ignore
-                return;
-            }
-        }
-
-        // Otherwise, create a new modifier
-        _modifiers.Add(new ElementModifier(element));
-    }
-
-    // Remove an element modifier.
-    private void RemoveElement(Element element)
-    {
-        foreach (Modifier modifier in _modifiers)
-        {
-            if (modifier is ElementModifier m && m.Element == element)
-            {
-                _modifiers.Remove(modifier);
-                return;
-            }
-        }
-    }
-
-    public List<ElementalReaction> ApplyElement(Element element)
+    public List<ElementalReaction> AddElement(Unit unit, Element element)
     {
         List<ElementalReaction> reactions = new();
 
@@ -109,15 +78,48 @@ public class ModifierSet
 
         foreach (Modifier m in toRemove)
         {
-            Modifiers.Remove(m);
+            RemoveModifier(unit, m);
         }
 
-        if (reactions.Count == 0 && element != Element.Physical) AddElement(element);
+        if (reactions.Count == 0 && element != Element.Physical)
+        {
+            foreach (Modifier modifier in _modifiers)
+            {
+                if (modifier is ElementModifier m && m.Element == element)
+                {
+                    // If a modifier with this element exists, ignore
+                    continue;
+                }
+            }
+
+            // Otherwise, create a new modifier
+            AddModifier(unit, new ElementModifier(element));
+        }
         return reactions;
     }
 
-    public void ApplyModifier(Modifier modifier)
+    public void AddModifier(Unit unit, Modifier modifier)
     {
-        _modifiers.Add(modifier);
+        // Check if any existing modifiers of the same type stack with this one
+        Modifier m = _modifiers.Find(m => m.GetType() == modifier.GetType() &&
+            modifier.HandleDuplicate(m) == ModifierStackBehavior.Stack);
+
+        // Extend the existing modifier instead of creating a new one
+        if (m != null)
+        {
+            m.ExtendDuration(modifier.Turns);
+        }
+        // Or create a new modifier along with a respective 3d effect
+        else
+        {
+            _modifiers.Add(modifier);
+            modifier.SpawnModel(unit);
+        }
+    }
+
+    public void RemoveModifier(Unit unit, Modifier modifier)
+    {
+        _modifiers.Remove(modifier);
+        modifier.DestroyModel(unit);
     }
 }

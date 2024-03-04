@@ -75,6 +75,12 @@ public class ElementModifier : Modifier
         return _element.ToString();
     }
 
+    public override ModifierStackBehavior HandleDuplicate(Modifier other)
+    {
+        if (other is ElementModifier em && em.Element == _element) return ModifierStackBehavior.Stack;
+        else return ModifierStackBehavior.Duplicate;
+    }
+
     public static Dictionary<(Element, Element), ElementalReaction> ELEMENTAL_REACTIONS = new()
         {
             { (Element.Pyro, Element.Hydro), ElementalReaction.VaporizeWeak },
@@ -133,4 +139,6 @@ public class ElementModifier : Modifier
     public override IEnumerator OnBeginRound(Unit unit) { yield return null; }
     public override IEnumerator OnEndRound(Unit unit) { yield return null; }
     public override int OnHit(Unit unit, int hit, Element element) { return hit; }
+    public override void SpawnModel(Unit unit) { }
+    public override void DestroyModel(Unit unit) { }
 }

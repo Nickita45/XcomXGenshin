@@ -23,7 +23,7 @@ public class SlimeAI : EnemyAI
     {
 
         // TODO: implement reactions here
-        List<ElementalReaction> reactions = _enemy.Modifiers.ApplyElement(_element);
+        List<ElementalReaction> reactions = _enemy.Modifiers.AddElement(_enemy, _element);
         _enemy.Canvas.UpdateModifiersUI(_enemy.Modifiers);
         _enemy.Canvas.ShowReactions(reactions);
     }
