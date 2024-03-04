@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Crystallize : Modifier
 {
-    private Element _element;
     public Crystallize()
     {
         _turns = 2;

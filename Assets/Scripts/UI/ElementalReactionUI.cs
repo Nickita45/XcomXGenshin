@@ -9,7 +9,7 @@ public class ElementalReactionUI : MonoBehaviour
     private TextMeshProUGUI reactionText;
     public void Init(ElementalReaction reaction)
     {
-        reactionText.text = reaction.ToString();
+        reactionText.text = ElementUtils.ReactionName(reaction);
         reactionText.color = ElementUtils.ReactionColor(reaction);
     }
 }

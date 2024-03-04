@@ -127,9 +127,10 @@ public abstract class UnitCanvas : MonoBehaviour
         textMeshProUGUI.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
     }
 
-    public GameObject PanelHit(int dmg)
+    public GameObject PanelHit(int dmg, Element element)
     {
         _textHit.text = dmg.ToString();
+        _textHit.color = ElementUtils.ElementColor(element);
 
         return CreateObjectPanel(_panelHit);
     }

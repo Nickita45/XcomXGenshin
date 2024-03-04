@@ -170,7 +170,7 @@ public abstract class Unit : MonoBehaviour
         }
 
         hit = _modifiers.OnHit(this, hit, element);
-        StartCoroutine(Canvas.PanelShow(Canvas.PanelHit(hit), 4));
+        StartCoroutine(Canvas.PanelShow(Canvas.PanelHit(hit, element), 4));
 
         _countHp -= hit;
         if (_countHp <= 0)
