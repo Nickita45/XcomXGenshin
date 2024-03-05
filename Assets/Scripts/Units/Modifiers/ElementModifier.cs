@@ -39,7 +39,7 @@ public class ElementModifier : Modifier
             case Element.Hydro:
                 description += "\n\n- Apply [Pyro] to trigger [Vaporize].";
                 description += "\n\n- Apply [Electro] to trigger [Electro-Charged].";
-                description += "\n\n- Apply [Cryo] to trigger [Frozen].";
+                description += "\n\n- Apply [Cryo] to trigger [Freeze].";
                 description += "\n\n- Apply [Anemo] to trigger [Swirl].";
                 description += "\n\n- Apply [Geo] to trigger [Crystallize].";
                 break;
@@ -52,7 +52,7 @@ public class ElementModifier : Modifier
                 break;
             case Element.Cryo:
                 description += "\n\n- Apply [Pyro] to trigger [Melt].";
-                description += "\n\n- Apply [Hydro] to trigger [Frozen].";
+                description += "\n\n- Apply [Hydro] to trigger [Freeze].";
                 description += "\n\n- Apply [Electro] to trigger [Superconduct].";
                 description += "\n\n- Apply [Anemo] to trigger [Swirl].";
                 description += "\n\n- Apply [Geo] to trigger [Crystallize].";

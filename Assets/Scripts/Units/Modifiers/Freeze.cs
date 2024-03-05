@@ -16,7 +16,7 @@ public class Freeze : Modifier
 
     public override string Description()
     {
-        return "This unit is frozen and can't act.";
+        return "This unit is frozen and can't act. \n\n- Apply [Physical] or [Geo] to break the ice and trigger [Shatter].\n\n- Apply [Pyro] to trigger [Melt].";
     }
 
     public override string IconName()

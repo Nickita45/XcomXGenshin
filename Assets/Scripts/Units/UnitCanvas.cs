@@ -86,7 +86,6 @@ public abstract class UnitCanvas : MonoBehaviour
 
     public void ShowReactions(List<ElementalReaction> reactions)
     {
-        // TODO: if multiple reactions, show them with an offset?
         for (int i = 0; i < reactions.Count; i++)
         {
             ElementalReaction reaction = reactions[i];
@@ -97,34 +96,40 @@ public abstract class UnitCanvas : MonoBehaviour
             currentPosition.y += 100f * i;
             transform.anchoredPosition = currentPosition;
 
-            reactionObject.GetComponent<ElementalReactionUI>().Init(reaction);
-            TextMeshProUGUI text = reactionObject.GetComponent<TextMeshProUGUI>();
-            StartCoroutine(AnimateReactionText(text));
+            ElementalReactionUI reactionUI = reactionObject.GetComponent<ElementalReactionUI>();
+            reactionUI.Init(reaction);
+            StartCoroutine(AnimateReactionText(reactionUI));
         }
     }
 
-    IEnumerator AnimateReactionText(TextMeshProUGUI textMeshProUGUI)
+    IEnumerator AnimateReactionText(ElementalReactionUI reactionUI)
     {
-        Color originalColor = textMeshProUGUI.color;
+        TextMeshProUGUI text = reactionUI.Text;
+        Color originalColor1 = text.color;
+
+        Image image = reactionUI.GetComponent<Image>();
+        Color originalColor2 = image.color;
         float timer = 0f;
-        const float fadeDuration = 4f;
-        const float moveSpeed = 0.15f;
+        const float fadeDuration = 5f;
+        const float moveSpeed = 0.10f;
 
         while (timer < fadeDuration)
         {
             timer += Time.deltaTime;
-            float alpha = Mathf.Lerp(1.25f, 0f, timer / fadeDuration);
-            textMeshProUGUI.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            float alpha1 = Mathf.Lerp(1.25f, 0f, timer / fadeDuration);
+            text.color = new Color(originalColor1.r, originalColor1.g, originalColor1.b, alpha1);
+
+            float alpha2 = Mathf.Lerp(0.5882353f, 0f, timer / fadeDuration);
+            image.color = new Color(originalColor2.r, originalColor2.g, originalColor2.b, alpha2);
 
             // Move the text slightly in the direction of top right
             Vector3 moveDirection = Vector3.up + Vector3.right;
-            textMeshProUGUI.rectTransform.position += moveDirection * Time.deltaTime * moveSpeed;
+            image.rectTransform.position += moveDirection * Time.deltaTime * moveSpeed;
 
             yield return null;
         }
 
-        // Ensure text is completely faded out
-        textMeshProUGUI.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
+        Destroy(reactionUI.gameObject);
     }
 
     public GameObject PanelHit(int dmg, Element element)

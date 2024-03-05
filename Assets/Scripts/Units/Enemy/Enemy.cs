@@ -41,14 +41,9 @@ public class Enemy : Unit
         _bulletSpawner = spawner;
     }
 
-    public void SetCanvas(EnemyCanvas canvas)
+    public void SetAnimator(Animator animator)
     {
-        _canvas = canvas;
-    }
-
-    public void SetAnimator(EnemyAnimator animator)
-    {
-        _animator = animator;
+        _animator.Init(animator);
     }
 
     public override Transform GetBulletSpawner(string name) => _bulletSpawner.transform;
@@ -60,7 +55,6 @@ public class Enemy : Unit
         _countHp = _stats.MaxHP();//set maximum hp
         base.Start();
 
-        // TODO ?
         ActualTerritory = Manager.Map[transform.localPosition]; //set actual block
         ActualTerritory.TerritoryInfo = TerritoryType.Character; //set actual block type on character tyoe
 

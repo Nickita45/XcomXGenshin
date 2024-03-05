@@ -75,20 +75,12 @@ public class DeReadingMap : MonoBehaviour
                 Enemy enemy = obj.GetComponent<Enemy>();
                 enemy.SetStats(additionalObj.GetComponent<EnemyStats>());
 
-                // Add outline
-                UnitOutline outline = additionalObj.AddComponent<UnitOutline>();
-                outline.SetOutlineColor(OutlineColor.Enemy);
-
-                // Add animation
-                EnemyAnimator animator = additionalObj.AddComponent<EnemyAnimator>();
-                animator.SetOutline(outline);
-                animator.SetAnimator(additionalObj.transform.GetChild(0).GetComponent<Animator>());
-                enemy.SetAnimator(animator);
-
-                // 
-                enemy.SetBulletSpawner(ObjectUtils.FindDescendantByName(additionalObj.transform, "BulletSpawner"));
+                // Connect AI
                 enemy.SetAI(additionalObj.GetComponent<EnemyAI>());
-                // TODO: clean this up
+
+                // Connect animation
+                enemy.SetAnimator(additionalObj.transform.GetChild(0).GetComponent<Animator>());
+                enemy.SetBulletSpawner(ObjectUtils.FindDescendantByName(additionalObj.transform, "BulletSpawner"));
             }
             else
             {

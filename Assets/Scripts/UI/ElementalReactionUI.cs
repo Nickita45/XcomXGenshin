@@ -6,10 +6,12 @@ using UnityEngine;
 public class ElementalReactionUI : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI reactionText;
+    private TextMeshProUGUI _reactionText;
+    public TextMeshProUGUI Text => _reactionText;
+
     public void Init(ElementalReaction reaction)
     {
-        reactionText.text = ElementUtils.ReactionName(reaction);
-        reactionText.color = ElementUtils.ReactionColor(reaction);
+        _reactionText.text = ElementUtils.ReactionName(reaction);
+        _reactionText.color = ElementUtils.ReactionColor(reaction);
     }
 }

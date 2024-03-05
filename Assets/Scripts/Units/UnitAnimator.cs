@@ -8,6 +8,7 @@ public abstract class UnitAnimator : MonoBehaviour
 {
     private const float KOEFSLOW = 0.25f;
 
+    [SerializeField]
     private Animator _animator;
 
     [Tooltip("The gun model the unit is wielding. Leave this empty if the unit does not wield a gun.")]
@@ -26,16 +27,6 @@ public abstract class UnitAnimator : MonoBehaviour
     // 
     // Set to true if the animator contains "isCrouched" parameter.
     protected bool _canCrouch;
-
-    public void SetOutline(UnitOutline outline)
-    {
-        _outline = outline;
-    }
-
-    public void SetAnimator(Animator animator)
-    {
-        _animator = animator;
-    }
 
     private float _basicSpeed; //used to save speed. To reset slow effect animation
 
@@ -103,7 +94,7 @@ public abstract class UnitAnimator : MonoBehaviour
 
     public IEnumerator RotateLookAt(Vector3 target)
     {
-        Vector3 rotationDirection = target - transform.parent.localPosition;
+        Vector3 rotationDirection = target - Model.transform.parent.parent.localPosition;
         Quaternion? targetRotation = ObjectUtils.LookRotationXZ(rotationDirection);
         if (targetRotation.HasValue) yield return Rotate(targetRotation.Value);
         else yield return null;
@@ -111,7 +102,7 @@ public abstract class UnitAnimator : MonoBehaviour
 
     public void RotateLookAtImmediate(Vector3 target)
     {
-        Vector3 rotationDirection = target - transform.parent.localPosition;
+        Vector3 rotationDirection = target - Model.transform.parent.parent.localPosition;
         Quaternion? targetRotation = ObjectUtils.LookRotationXZ(rotationDirection);
         if (targetRotation.HasValue) Model.transform.rotation = targetRotation.Value;
     }
