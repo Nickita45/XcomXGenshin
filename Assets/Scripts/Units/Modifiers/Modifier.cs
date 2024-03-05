@@ -50,6 +50,11 @@ public abstract class Modifier
         return _turns > 0;
     }
 
+    public bool IsActive()
+    {
+        return _infinite || _turns > 0;
+    }
+
     // Spawn visual effects
     public abstract void SpawnModel(Unit unit);
 

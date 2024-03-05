@@ -28,7 +28,6 @@ public class ModifierList : MonoBehaviour
         _unit?.Canvas.UpdateModifiersUI(this);
     }
 
-    // TODO: implement without the unit parameter
     public IEnumerator OnEndRound()
     {
         List<Modifier> toDelete = new();
@@ -50,10 +49,16 @@ public class ModifierList : MonoBehaviour
 
     public int OnHit(int hit, Element element)
     {
+        List<Modifier> toDelete = new();
         foreach (Modifier modifier in Modifiers)
         {
             hit = modifier.OnHit(_unit, hit, element);
+            if (!modifier.IsActive()) toDelete.Add(modifier);
         }
+        foreach (Modifier modifier in toDelete) { RemoveModifier(modifier); }
+
+        _unit?.Canvas.UpdateModifiersUI(this);
+
         return hit;
     }
 

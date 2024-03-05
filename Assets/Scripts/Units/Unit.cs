@@ -83,9 +83,6 @@ public abstract class Unit : MonoBehaviour
                 case ElementalReaction.Superconduct:
                     _modifiers.AddModifier(new Superconduct());
                     break;
-                case ElementalReaction.SuperconductActivate:
-                    hit = (int)(hit * 1.5);
-                    break;
 
                 case ElementalReaction.Freeze:
                     ActionsLeft = 0;

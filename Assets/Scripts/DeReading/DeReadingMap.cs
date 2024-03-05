@@ -79,7 +79,10 @@ public class DeReadingMap : MonoBehaviour
                 enemy.SetAI(additionalObj.GetComponent<EnemyAI>());
 
                 // Connect animation
-                enemy.SetAnimator(additionalObj.transform.GetChild(0).GetComponent<Animator>());
+                Transform avatar = additionalObj.transform.GetChild(0);
+                Animator animator = avatar.GetComponent<Animator>();
+                if (!animator) animator = avatar.gameObject.AddComponent<Animator>();
+                enemy.SetAnimator(animator);
                 enemy.SetBulletSpawner(ObjectUtils.FindDescendantByName(additionalObj.transform, "BulletSpawner"));
             }
             else

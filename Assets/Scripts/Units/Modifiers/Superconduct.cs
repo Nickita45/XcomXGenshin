@@ -29,18 +29,21 @@ public class Superconduct : Modifier
         return ModifierStackBehavior.Stack;
     }
 
-    public override ElementalReaction? CheckReaction(Element element)
-    {
-        if (element == Element.Physical)
-        {
-            return ElementalReaction.SuperconductActivate;
-        }
-        return null;
-    }
+    public override ElementalReaction? CheckReaction(Element element) { return null; }
 
     public override IEnumerator OnBeginRound(Unit unit) { yield return null; }
     public override IEnumerator OnEndRound(Unit unit) { yield return null; }
-    public override int OnHit(Unit unit, int hit, Element element) { return hit; }
+    public override int OnHit(Unit unit, int hit, Element element)
+    {
+        if (element == Element.Physical)
+        {
+            _turns = 0;
+            return (int)(hit * 1.5);
+        }
+
+        return hit;
+    }
+
     GameObject model;
 
     public override void SpawnModel(Unit unit)

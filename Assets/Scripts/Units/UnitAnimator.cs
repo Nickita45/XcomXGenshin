@@ -19,7 +19,7 @@ public abstract class UnitAnimator : MonoBehaviour
     private UnitOutline _outline;
     public UnitOutline Outline => _outline;
 
-    public GameObject Model => _animator ? _animator.gameObject : gameObject;
+    public GameObject Model => _animator.gameObject;
     protected bool _hasAnimation = true;
 
     // Whether the unit crouches or not (e.g. hilichurl crouches to hide better,
@@ -32,11 +32,12 @@ public abstract class UnitAnimator : MonoBehaviour
 
     public void Init(Animator animator)
     {
+        _animator = animator;
+
         if (_gun) _outline.Init(Model, _gun.gameObject);
         else _outline.Init(Model);
 
-        _animator = animator;
-        if (!animator || !animator.runtimeAnimatorController)
+        if (!animator.runtimeAnimatorController)
         {
             _hasAnimation = false;
             return;
@@ -94,7 +95,7 @@ public abstract class UnitAnimator : MonoBehaviour
 
     public IEnumerator RotateLookAt(Vector3 target)
     {
-        Vector3 rotationDirection = target - Model.transform.parent.parent.localPosition;
+        Vector3 rotationDirection = target - transform.localPosition;
         Quaternion? targetRotation = ObjectUtils.LookRotationXZ(rotationDirection);
         if (targetRotation.HasValue) yield return Rotate(targetRotation.Value);
         else yield return null;
@@ -102,7 +103,7 @@ public abstract class UnitAnimator : MonoBehaviour
 
     public void RotateLookAtImmediate(Vector3 target)
     {
-        Vector3 rotationDirection = target - Model.transform.parent.parent.localPosition;
+        Vector3 rotationDirection = target - transform.localPosition;
         Quaternion? targetRotation = ObjectUtils.LookRotationXZ(rotationDirection);
         if (targetRotation.HasValue) Model.transform.rotation = targetRotation.Value;
     }
