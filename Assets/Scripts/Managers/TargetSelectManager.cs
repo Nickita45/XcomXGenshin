@@ -20,7 +20,14 @@ public class TargetSelectManager : MonoBehaviour
         _enemyPanel.OnSelect(onTargetSelect);
 
         EnemyIcon selected = _enemyPanel.Selected;
-        if (!selected) _enemyPanel.SelectLast();
+        if (!selected)
+        {
+            _enemyPanel.SelectLast();
+        }
+        else
+        {
+            onTargetSelect(selected.Enemy);
+        }
         Manager.StatusMain.SetStatusSelectEnemy();
     }
 
