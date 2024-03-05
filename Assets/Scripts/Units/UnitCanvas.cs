@@ -72,7 +72,6 @@ public abstract class UnitCanvas : MonoBehaviour
         }
     }
 
-    // TODO: update modifiers automatically
     public void UpdateModifiersUI(ModifierList modifiers)
     {
         ObjectUtils.DestroyAllChildren(_panelModifiers);

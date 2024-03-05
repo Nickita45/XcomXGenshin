@@ -102,7 +102,6 @@ public abstract class Unit : MonoBehaviour
                         else
                         {
                             ally.MakeHit(1, Element.Pyro, this);
-                            ally.Canvas.UpdateModifiersUI(ally.Modifiers);
                         }
                     }
                     break;
@@ -113,7 +112,6 @@ public abstract class Unit : MonoBehaviour
                         else
                         {
                             ally.MakeHit(1, Element.Cryo, this);
-                            ally.Canvas.UpdateModifiersUI(ally.Modifiers);
                         }
                     }
                     break;
@@ -124,7 +122,6 @@ public abstract class Unit : MonoBehaviour
                         else
                         {
                             ally.MakeHit(1, Element.Hydro, this);
-                            ally.Canvas.UpdateModifiersUI(ally.Modifiers);
                         }
                     }
                     break;
@@ -135,7 +132,6 @@ public abstract class Unit : MonoBehaviour
                         else
                         {
                             ally.MakeHit(1, Element.Electro, this);
-                            ally.Canvas.UpdateModifiersUI(ally.Modifiers);
                         }
                     }
                     break;
@@ -144,28 +140,24 @@ public abstract class Unit : MonoBehaviour
                     if (damageSource is Unit attacker)
                     {
                         attacker.Modifiers.AddModifier(new Crystallize());
-                        attacker.Canvas.UpdateModifiersUI(attacker.Modifiers);
                     }
                     break;
                 case ElementalReaction.CrystallizeCryo:
                     if (damageSource is Unit attacker1)
                     {
                         attacker1.Modifiers.AddModifier(new Crystallize());
-                        attacker1.Canvas.UpdateModifiersUI(attacker1.Modifiers);
                     }
                     break;
                 case ElementalReaction.CrystallizeHydro:
                     if (damageSource is Unit attacker2)
                     {
                         attacker2.Modifiers.AddModifier(new Crystallize());
-                        attacker2.Canvas.UpdateModifiersUI(attacker2.Modifiers);
                     }
                     break;
                 case ElementalReaction.CrystallizeElectro:
                     if (damageSource is Unit attacker3)
                     {
-                        attacker3.Modifiers.AddModifier(new Crystallize());
-                        attacker3.Canvas.UpdateModifiersUI(attacker3.Modifiers);
+                        attacker3.Modifiers.AddModifier(new Crystallize()); ;
                     }
                     break;
             }

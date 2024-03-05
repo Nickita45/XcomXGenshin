@@ -261,7 +261,6 @@ public class TurnManager : MonoBehaviour
                     .Concat(Manager.Map.Characters.Select(c => (Unit)c)))
         {
             yield return StartCoroutine(unit.Modifiers.OnBeginRound());
-            unit.Canvas.UpdateModifiersUI(unit.Modifiers);
         }
 
         BeginPlayerTurn();
@@ -340,7 +339,6 @@ public class TurnManager : MonoBehaviour
                     .Concat(Manager.Map.Characters.Select(c => (Unit)c)))
         {
             yield return StartCoroutine(unit.Modifiers.OnEndRound());
-            unit.Canvas.UpdateModifiersUI(unit.Modifiers);
         }
 
         // Start next round

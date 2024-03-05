@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,8 @@ public class ModifierList : MonoBehaviour
         {
             yield return StartCoroutine(modifier.OnBeginRound(_unit));
         }
+
+        _unit?.Canvas.UpdateModifiersUI(this);
     }
 
     // TODO: implement without the unit parameter
@@ -41,6 +44,8 @@ public class ModifierList : MonoBehaviour
             }
         }
         foreach (Modifier modifier in toDelete) { RemoveModifier(modifier); }
+
+        _unit?.Canvas.UpdateModifiersUI(this);
     }
 
     public int OnHit(int hit, Element element)
@@ -121,11 +126,15 @@ public class ModifierList : MonoBehaviour
             _modifiers.Add(modifier);
             modifier.SpawnModel(_unit);
         }
+
+        _unit?.Canvas.UpdateModifiersUI(this);
     }
 
     public void RemoveModifier(Modifier modifier)
     {
         _modifiers.Remove(modifier);
         modifier.DestroyModel(_unit);
+
+        _unit?.Canvas.UpdateModifiersUI(this);
     }
 }
