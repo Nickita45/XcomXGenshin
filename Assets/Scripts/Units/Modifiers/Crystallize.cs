@@ -25,15 +25,6 @@ public class Crystallize : Modifier
         return "Crystallize";
     }
 
-    public override ModifierStackBehavior HandleDuplicate(Modifier other)
-    {
-        return ModifierStackBehavior.Stack;
-    }
-
-    public override ElementalReaction? CheckReaction(Element element)
-    { return null; }
-    public override IEnumerator OnBeginRound(Unit unit) { yield return null; }
-    public override IEnumerator OnEndRound(Unit unit) { yield return null; }
     public override int OnHit(Unit unit, int hit, Element element) { return hit - 1; }
 
     GameObject model;
@@ -43,6 +34,7 @@ public class Crystallize : Modifier
         GameObject prefab = Resources.Load<GameObject>("Prefabs/Modifiers/Crystallize");
         model = GameObject.Instantiate(prefab, unit.transform);
     }
+
     public override void DestroyModel(Unit unit)
     {
         GameObject.Destroy(model);

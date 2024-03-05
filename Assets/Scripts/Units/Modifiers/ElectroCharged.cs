@@ -26,14 +26,6 @@ public class ElectroCharged : Modifier
         return "Electro-Charged";
     }
 
-    public override ModifierStackBehavior HandleDuplicate(Modifier other)
-    {
-        return ModifierStackBehavior.Stack;
-    }
-
-    public override ElementalReaction? CheckReaction(Element element)
-    { return null; }
-    public override IEnumerator OnBeginRound(Unit unit) { yield return null; }
     public override IEnumerator OnEndRound(Unit unit)
     {
         // Iterate over all allies within 1 square 
@@ -50,7 +42,6 @@ public class ElectroCharged : Modifier
         }
         yield return null;
     }
-    public override int OnHit(Unit unit, int hit, Element element) { return hit; }
 
     GameObject model;
 
@@ -59,6 +50,7 @@ public class ElectroCharged : Modifier
         GameObject prefab = Resources.Load<GameObject>("Prefabs/Modifiers/Electro-Charged");
         model = GameObject.Instantiate(prefab, unit.transform);
     }
+
     public override void DestroyModel(Unit unit)
     {
         GameObject.Destroy(model);

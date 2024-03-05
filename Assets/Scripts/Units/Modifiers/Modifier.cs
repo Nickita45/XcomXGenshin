@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: make virtual instead of abstract?
 public abstract class Modifier
 {
     public abstract string Title();
@@ -11,15 +10,15 @@ public abstract class Modifier
     public abstract string IconName();
 
     // Checks if the modifier can react to a certain element.
-    public abstract ElementalReaction? CheckReaction(Element element);
+    public virtual ElementalReaction? CheckReaction(Element element) { return null; }
 
     // Checks what behavior to expect when we try to add another
     // modifier of the same type
-    public abstract ModifierStackBehavior HandleDuplicate(Modifier other);
+    public virtual ModifierStackBehavior HandleDuplicate(Modifier other) { return ModifierStackBehavior.Stack; }
 
-    public abstract IEnumerator OnBeginRound(Unit unit);
-    public abstract IEnumerator OnEndRound(Unit unit);
-    public abstract int OnHit(Unit unit, int hit, Element element);
+    public virtual IEnumerator OnBeginRound(Unit unit) { yield return null; }
+    public virtual IEnumerator OnEndRound(Unit unit) { yield return null; }
+    public virtual int OnHit(Unit unit, int hit, Element element) { return hit; }
 
     protected int _turns = 0;
     public int Turns => _turns;
@@ -56,10 +55,10 @@ public abstract class Modifier
     }
 
     // Spawn visual effects
-    public abstract void SpawnModel(Unit unit);
+    public virtual void SpawnModel(Unit unit) { }
 
     // Destroy visual effects
-    public abstract void DestroyModel(Unit unit);
+    public virtual void DestroyModel(Unit unit) { }
 }
 
 public enum ModifierStackBehavior
