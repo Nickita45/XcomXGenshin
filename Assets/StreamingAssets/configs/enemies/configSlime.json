@@ -5,7 +5,7 @@
     "enemyMoveDistance": 5,
     "enemyRangedTargetDistance": 10.0,
     "enemyBaseAim": 50,
-    "enemyBaseHealth": 15,
+    "enemyBaseHealth": 5,
     "enemyWeapon": -1,
     "isMeleeAttack": true,
     "enemyMinAttackValue": 1,
