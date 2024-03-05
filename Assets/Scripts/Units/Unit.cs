@@ -46,7 +46,7 @@ public abstract class Unit : MonoBehaviour
     // Right now it can either be a Unit, a Modifier, or a null (other).
     public void MakeHit(int hit, Element element, object damageSource)
     {
-        if (hit <= 0) return; // Do not do anything if the attack deals no damage
+        if ((Unit)damageSource != this && hit <= 0) return; // Unless is the source is the unit themselves, do not do anything if the attack deals no damage
 
         List<ElementalReaction> reactions = _modifiers.AddElement(element);
 
@@ -161,7 +161,7 @@ public abstract class Unit : MonoBehaviour
         }
 
         hit = _modifiers.OnHit(hit, element);
-        StartCoroutine(Canvas.PanelShow(Canvas.PanelHit(hit, element), 4));
+        if (hit > 0) StartCoroutine(Canvas.PanelShow(Canvas.PanelHit(hit, element), 4));
 
         _countHp -= hit;
         if (_countHp <= 0)

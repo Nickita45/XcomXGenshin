@@ -21,10 +21,7 @@ public class SlimeAI : EnemyAI
     // The slime's element is applied to it every turn
     private void ApplyElementToSelf()
     {
-
-        // TODO: implement reactions here
-        List<ElementalReaction> reactions = _enemy.Modifiers.AddElement(_element);
-        _enemy.Canvas.ShowReactions(reactions);
+        _enemy.MakeHit(0, _element, _enemy);
     }
 
     public override void OnSpawn()
@@ -34,7 +31,8 @@ public class SlimeAI : EnemyAI
 
     public override IEnumerator MakeTurn()
     {
-        ApplyElementToSelf();
+        // Only apply element at the start of the turn (when actions are full)
+        if (_enemy.ActionsLeft == _enemy.Stats.BaseActions()) ApplyElementToSelf();
 
         var character = _enemy.GetClosestVisibleCharacter();
         if (character != null && Vector3.Distance(character.transform.localPosition, _enemy.transform.localPosition) < 2) //if enemy is on neighbourhood block 
