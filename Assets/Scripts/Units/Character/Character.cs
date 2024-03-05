@@ -181,6 +181,7 @@ public class Character : Unit
     public override void Kill()
     {
         Manager.Map.Characters.Remove(this); //remove from map character list
+        foreach (Modifier m in _modifiers.Modifiers) m.DestroyModel(this);
         Manager.TurnManager.OutOfActions(this);
         _canvas.DisableAll(); //disable canvas elements
 
