@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class RangedHilichurlAI : EnemyAI
 {
@@ -32,37 +33,41 @@ public class RangedHilichurlAI : EnemyAI
     public override IEnumerator MakeTurn()
     {
         var characters = _enemy.GetVisibleCharacters();
-        var character = _enemy.GetClosestVisibleCharacter();
-        Debug.Log(characters.Count);
-        Debug.Log(character);
-        if (character != null)
-        {
-            if (_enemy.ActionsLeft == 2 && characters.Select(ch =>
-                        AimUtils.CalculateHitChance( _enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, _enemy.Stats.BaseAimPercent()).percent).Max() < 50)
-            {
-                //make movement if has hit chance less then 50
-                _enemy.ActionsLeft -= 1;
-                yield return StartCoroutine(_enemy.MoveEnemy(FindBestTerritoryForRangedAttack));
-            }
-            else
-            {
-                //make shoot if it is above 50 percent chance
-                _enemy.ActionsLeft -= 2;
-                yield return StartCoroutine(Attack(character));
-            }
-        }
-        else
-        {
-            _enemy.ActionsLeft -= 1;
+       // _enemy.ActionsLeft = 0;
+        //StartCoroutine(_enemy.Canvas.PanelShow(_enemy.Canvas.PanelActionInfo(_overwatch.AbilityName, "Overwatch"), 2));
+      //  yield return StartCoroutine(_overwatch.Activate(_enemy, null));
+
+        //var character = _enemy.GetClosestVisibleCharacter();
+         if (characters.Count > 0) //!= null)
+         {
+             if (_enemy.ActionsLeft == 2 && characters.Select(ch =>
+                         AimUtils.CalculateHitChance( _enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, _enemy.Stats.BaseAimPercent()).percent).Max() < 50)
+             {
+                 //make movement if has hit chance less then 50
+                 _enemy.ActionsLeft -= 1;
+                 yield return StartCoroutine(_enemy.MoveEnemy(FindBestTerritoryForRangedAttack));
+             }
+             else
+             {
+                 //make shoot if it is above 50 percent chance
+                 _enemy.ActionsLeft -= 2;
+                 yield return StartCoroutine(Attack(characters.OrderByDescending(ch => 
+                 AimUtils.CalculateHitChance(_enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimCharacter).percent).First())); //slow?
+             }
+         }
+         else
+         {
+             _enemy.ActionsLeft -= 1;
 
 
-            if (_enemy.ActionsLeft == 0 && UnityEngine.Random.Range(1, 100 + 1) > 75) { //make overwatch in 75 percent chance
-                _enemy.ActionsLeft = 0;
-                yield return StartCoroutine(_overwatch.Activate(_enemy, null));
-            }
-            else
-                yield return StartCoroutine(_enemy.MoveEnemy(FindTerritoryRandomShelter));
-        }
+             if (_enemy.ActionsLeft == 0 && UnityEngine.Random.Range(1, 100 + 1) > 75) { //make overwatch in 75 percent chance
+                 _enemy.ActionsLeft = 0;
+                 StartCoroutine(_enemy.Canvas.PanelShow(_enemy.Canvas.PanelActionInfo(_overwatch.AbilityName, "Overwatch"), 2));
+                 yield return StartCoroutine(_overwatch.Activate(_enemy, null));
+             }
+             else
+                 yield return StartCoroutine(_enemy.MoveEnemy(FindTerritoryRandomShelter));
+         }
     }
 
     public IEnumerator MakeOverwatch(Enemy enemy, Action onFinish)

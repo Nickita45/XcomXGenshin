@@ -10,7 +10,9 @@ public class AbilityOverwatch : Ability
     public override IEnumerator Activate(Unit unit, object target)
     {
         Debug.Log("Overwatch");
+        Manager.TurnManager.UnitOverwatched.Add(unit);
         yield return new WaitForSeconds(0.5f);
         yield return null;
     }
+
 }

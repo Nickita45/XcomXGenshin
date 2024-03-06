@@ -42,6 +42,8 @@ public abstract class Unit : MonoBehaviour
             Canvas.SetStartHealth(_countHp);  //update visual hp of unit
     }
 
+    public bool IsKilled => _countHp <= 0;
+
     // Moves the unit through the list of points on the map. 
     // To find the list of points, use the approppriate functions
     // in the MovementManager (CalculateAllPossible / CalculateAllPath).
@@ -66,8 +68,35 @@ public abstract class Unit : MonoBehaviour
             {
                 float elapsedTime = Time.deltaTime * Stats.Speed();
                 transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, elapsedTime);
+
+
+                foreach (var unitOverwatched in Manager.TurnManager.CheckOverwatchMake(this))
+                {
+                    _animator.SetSpeedAnimatorSlow(true);
+                    this.ActualTerritory = new TerritroyReaded(transform);
+
+                    Time.timeScale = 0.5f;
+                    if (unitOverwatched is Character)
+                    {
+                        yield return StartCoroutine(((Character)unitOverwatched).Abilities[0].Activate(unitOverwatched, this));
+                    }
+                    else if (unitOverwatched is Enemy)
+                    {
+                        yield return StartCoroutine(((Enemy)unitOverwatched).AI.Attack((Character)this));
+                    }
+                    Time.timeScale = 1f;
+                    _animator.SetSpeedAnimatorSlow(false);
+                }
+
+                if (this.IsKilled)
+                    break;
+
                 yield return null;
             }
+
+            if (this.IsKilled)
+                break;
+
             transform.localPosition = target;
 
             if (target == targets[^1]) //last
@@ -78,9 +107,12 @@ public abstract class Unit : MonoBehaviour
             yield return null;
         }
 
-        // Setup idle crouching animation
-        yield return StartCoroutine(Animator.StopRunning());
-        yield return StartCoroutine(Animator.StartCrouching());
-        yield return StartCoroutine(Animator.CrouchRotateHideBehindShelter(transform.localPosition));
+        if (!this.IsKilled)
+        {
+            // Setup idle crouching animation
+            yield return StartCoroutine(Animator.StopRunning());
+            yield return StartCoroutine(Animator.StartCrouching());
+            yield return StartCoroutine(Animator.CrouchRotateHideBehindShelter(transform.localPosition));
+        }
     }
 }

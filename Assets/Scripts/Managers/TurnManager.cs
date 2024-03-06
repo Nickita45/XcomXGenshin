@@ -18,6 +18,8 @@ public class TurnManager : MonoBehaviour
     private Character _selectedCharacter;
     public Character SelectedCharacter => _selectedCharacter;
 
+    public List<Unit> UnitOverwatched { get; private set; }
+
     public Action onBeginTurn;
     private float _secondsEndTurn = 3f;
 
@@ -25,6 +27,7 @@ public class TurnManager : MonoBehaviour
     {
         Manager.Instance.OnClearMap += Clear;
         _secondsEndTurn = ConfigurationManager.GlobalDataJson.secondsEndTurn;
+        UnitOverwatched = new List<Unit>();
     }
 
     public void SelectCharacter(Character character)
@@ -86,12 +89,14 @@ public class TurnManager : MonoBehaviour
     {
         Debug.Log("New turn");
 
+
         onBeginTurn?.Invoke();
         _menuManager.SetPanelEnemy(false);
 
         if (Manager.Map.Characters.Count == 0)
             return;
 
+        UnitOverwatched.RemoveAll(unit => unit is Character);
         _characters.AddRange(Manager.Map.Characters); //actualization list of characters
 
         if (_characters.First().Stats.Index == -1) //set basic parameters to characters
@@ -128,15 +133,17 @@ public class TurnManager : MonoBehaviour
     private IEnumerator EnemyTurn()
     {
         _menuManager.SetPanelEnemy(true);
+        UnitOverwatched.RemoveAll(unit => unit is Enemy);
 
-        foreach (Enemy enemy in Manager.Map.Enemies)
+        for (int i = Manager.Map.Enemies.Count - 1; i >= 0; i--) //make from bottom to up to savly removing killed enemies
         {
+            Enemy enemy = Manager.Map.Enemies[i];
             enemy.ActionsLeft = enemy.Stats.BaseActions();
-            while(enemy.ActionsLeft > 0)
+            while (enemy.ActionsLeft > 0)
             {
-                Debug.Log("huh");
                 yield return StartCoroutine(enemy.MakeTurn());
             }
+
         }
 
         BeginOfTheTurn();
@@ -149,9 +156,10 @@ public class TurnManager : MonoBehaviour
         Manager.StatusMain.SetStatusWaiting();
 
         // Trigger all possible enemies
-        foreach (Enemy enemy in Manager.Map.Enemies)
+        //foreach (Enemy enemy in Manager.Map.Enemies)
+        for (int i = Manager.Map.Enemies.Count - 1; i >= 0; i--) //make from bottom to up to savly removing killed enemies
         {
-            yield return StartCoroutine(enemy.ConditionalTrigger());
+            yield return StartCoroutine(Manager.Map.Enemies[i].ConditionalTrigger());
         }
 
         // If the character still has some actions left,
@@ -167,6 +175,29 @@ public class TurnManager : MonoBehaviour
 
         if (_characters.Count == 0)
             yield return StartCoroutine(EndTurn());
+    }
+
+    public IEnumerable<Unit> CheckOverwatchMake(Unit unit)
+    {
+        List<Unit> mustBeDeleted = new List<Unit>();
+        foreach (var unitOvewatch in UnitOverwatched)
+        {
+            if (unitOvewatch is Character && unit is Character || unitOvewatch is Enemy && unit is Enemy)
+                continue;
+
+            if (TargetUtils.CanSee(unit, unitOvewatch))
+            {
+                mustBeDeleted.Add(unitOvewatch);
+                yield return unitOvewatch;
+
+                if (unit.IsKilled)
+                    break;
+            }
+        }
+        foreach (var delete in mustBeDeleted)
+        {
+            UnitOverwatched.Remove(delete);
+        }
     }
 
     private void Update()

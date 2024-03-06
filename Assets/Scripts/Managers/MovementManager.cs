@@ -27,6 +27,7 @@ public class MovementManager : MonoBehaviour
     private bool _isMoving;
     public bool IsMoving => _isMoving;
 
+    public float _timerCanBeSeleced = 0.5f; //resolves problem with automove if character selected by mouse
     private void Start()
     {
         _lineRenderer.gameObject.SetActive(false);
@@ -46,6 +47,12 @@ public class MovementManager : MonoBehaviour
     {
         if (Manager.TurnManager.SelectedCharacter?.MoverActive() == true)
         {
+            if (_timerCanBeSeleced > 0)
+            {
+                _timerCanBeSeleced -= Time.deltaTime;
+                return;
+            }
+
             SpawnMover();
         }
     }
@@ -55,7 +62,6 @@ public class MovementManager : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray); //RayCast from Mouse
-
         if (hits.Length > 0)
         {
             var neededHits = hits.Where(n => n.collider.gameObject.tag == "PanelMovement"); //Detect hits only from Territory than can be moved to
@@ -73,7 +79,8 @@ public class MovementManager : MonoBehaviour
                 OnSelectNewTerritory(_aktualTerritory, Manager.TurnManager.SelectedCharacter); //we choose new territory
             }
 
-            if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && !Manager.TurnManager.SelectedCharacter.IsActualTerritory(_aktualTerritory.aktualTerritoryReaded))
+            if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0)
+                && !Manager.TurnManager.SelectedCharacter.IsActualTerritory(_aktualTerritory.aktualTerritoryReaded))
             {
                 StartCoroutine(MoveSelectedCharacter(_aktualTerritory.aktualTerritoryReaded, _aktualTerritory.path)); //make movement to person
             }
@@ -98,6 +105,7 @@ public class MovementManager : MonoBehaviour
 
     public void OnCharacterDeselect()
     {
+        _timerCanBeSeleced = 0.5f;
         _lineRenderer.positionCount = 0;
 
         AirPlatformsSet(false);
@@ -123,7 +131,7 @@ public class MovementManager : MonoBehaviour
         Character character = Manager.TurnManager.SelectedCharacter; //get selected character
         character.MoverActive(false); // disable mover
         character.ActualTerritory.TerritoryInfo = TerritoryType.Air; //set block where he was on air
-        character.ActualTerritory = null; 
+        character.ActualTerritory = null;
         character.SelectItem.SetActive(false); //disable hi selecter
 
         _isMoving = true;
@@ -134,9 +142,15 @@ public class MovementManager : MonoBehaviour
         yield return StartCoroutine(character.Move(points)); //??????????
 
         _isMoving = false;
-        OnEndMove(newTerritory, character);
-
-        yield return Manager.TurnManager.AfterCharacterAction();
+        
+        if (!character.IsKilled)
+        {
+            OnEndMove(newTerritory, character);
+            yield return Manager.TurnManager.AfterCharacterAction();
+        } else
+        {
+            Manager.TurnManager.EndCharacterTurn(character);
+        }
     }
 
     private void DisableToBasic(TerritroyReaded newTerritory, Character character)
@@ -469,8 +483,13 @@ public class MovementManager : MonoBehaviour
             {
                 enemy.ActualTerritory.TerritoryInfo = TerritoryType.Air; //actualization block type
                 yield return Manager.MovementManager.StartCoroutine(enemy.Move(aktualPath)); //?????? maybe better this method in this class
-                enemy.ActualTerritory = findTerritory; //actualization enemy block
-                enemy.ActualTerritory.TerritoryInfo = TerritoryType.Character;
+
+                
+                if (!enemy.IsKilled)
+                {
+                    enemy.ActualTerritory = findTerritory; //actualization enemy block
+                    enemy.ActualTerritory.TerritoryInfo = TerritoryType.Character;
+                }
             }
         }
     }

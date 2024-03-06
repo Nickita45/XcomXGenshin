@@ -190,7 +190,7 @@ public class Character : Unit
     public override void Kill()
     {
         Manager.Map.Characters.Remove(this); //remove from map character list
-        Manager.TurnManager.EndCharacterTurn(this); //end of the character turn
+        //Manager.TurnManager.EndCharacterTurn(this); //end of the character turn
         _canvas.DisableAll(); //disable canvas elements
 
         Animator.Model.SetActive(false); //disable animator

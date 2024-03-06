@@ -9,6 +9,8 @@ using UnityEngine.UI;
 // useful info such as their health.
 public abstract class UnitCanvas : MonoBehaviour
 {
+    private readonly Vector2 KOEFRANGEFORCREATINGCANVAS = new Vector2(50, 50);
+
     [SerializeField]
     protected GameObject _canvas;
 
@@ -86,6 +88,8 @@ public abstract class UnitCanvas : MonoBehaviour
     private GameObject CreateObjectPanel(GameObject _panel)
     {
         GameObject obj = Instantiate(_panel, _canvas.transform);
+        obj.transform.localPosition += new Vector3(Random.Range(0, KOEFRANGEFORCREATINGCANVAS.x), Random.Range(0, KOEFRANGEFORCREATINGCANVAS.y));
+        obj.name = _panel.name;
         Destroy(obj, 15);
         return obj;
     }
@@ -146,7 +150,7 @@ public abstract class UnitCanvas : MonoBehaviour
     {
         foreach (Transform child in _canvas.transform)
         {
-            if (child.gameObject != _panelHit && child.gameObject != _panelMiss)
+            if (child.gameObject.name != _panelHit.name && child.gameObject.name != _panelMiss.name)
                 child.gameObject.SetActive(false);
         }
     }

@@ -40,7 +40,7 @@ public class AbilityIcon : MonoBehaviour, IPointerClickHandler
 
     private object _target;
     public object Target => _target;
-
+    
     void Start()
     {
         _panel = transform.parent.GetComponent<AbilityPanel>();
