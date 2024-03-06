@@ -69,10 +69,12 @@ public abstract class Unit : MonoBehaviour
                 float elapsedTime = Time.deltaTime * Stats.Speed();
                 transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, elapsedTime);
 
+
                 foreach (var unitOverwatched in Manager.TurnManager.CheckOverwatchMake(this))
                 {
                     _animator.SetSpeedAnimatorSlow(true);
                     this.ActualTerritory = new TerritroyReaded(transform);
+
                     Time.timeScale = 0.5f;
                     if (unitOverwatched is Character)
                     {

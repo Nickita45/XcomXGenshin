@@ -27,6 +27,7 @@ public class MovementManager : MonoBehaviour
     private bool _isMoving;
     public bool IsMoving => _isMoving;
 
+    public float _timerCanBeSeleced = 0.5f; //resolves problem with automove if character selected by mouse
     private void Start()
     {
         _lineRenderer.gameObject.SetActive(false);
@@ -46,6 +47,12 @@ public class MovementManager : MonoBehaviour
     {
         if (Manager.TurnManager.SelectedCharacter?.MoverActive() == true)
         {
+            if (_timerCanBeSeleced > 0)
+            {
+                _timerCanBeSeleced -= Time.deltaTime;
+                return;
+            }
+
             SpawnMover();
         }
     }
@@ -55,7 +62,6 @@ public class MovementManager : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray); //RayCast from Mouse
-
         if (hits.Length > 0)
         {
             var neededHits = hits.Where(n => n.collider.gameObject.tag == "PanelMovement"); //Detect hits only from Territory than can be moved to
@@ -73,7 +79,8 @@ public class MovementManager : MonoBehaviour
                 OnSelectNewTerritory(_aktualTerritory, Manager.TurnManager.SelectedCharacter); //we choose new territory
             }
 
-            if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && !Manager.TurnManager.SelectedCharacter.IsActualTerritory(_aktualTerritory.aktualTerritoryReaded))
+            if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0)
+                && !Manager.TurnManager.SelectedCharacter.IsActualTerritory(_aktualTerritory.aktualTerritoryReaded))
             {
                 StartCoroutine(MoveSelectedCharacter(_aktualTerritory.aktualTerritoryReaded, _aktualTerritory.path)); //make movement to person
             }
@@ -98,6 +105,7 @@ public class MovementManager : MonoBehaviour
 
     public void OnCharacterDeselect()
     {
+        _timerCanBeSeleced = 0.5f;
         _lineRenderer.positionCount = 0;
 
         AirPlatformsSet(false);
