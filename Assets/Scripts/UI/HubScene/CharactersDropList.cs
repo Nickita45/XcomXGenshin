@@ -25,7 +25,7 @@ public class CharactersDropList : MonoBehaviour
 
             Sprite desiredSpriteCharacterIcon = _uIPool.spritesCharacterIcons.FirstOrDefault(sprite => sprite.name == item.characterName.ToLower() + "-icon");
 
-            Sprite desiredSpriteElement = _uIPool.spritesElementIcons.FirstOrDefault(sprite => sprite.name == "icon_element_" + item.element.ToLower());
+            Sprite desiredSpriteElement = _uIPool.spritesElementIcons.FirstOrDefault(sprite => sprite.name == "icon_element_" + item.element.ToString().ToLower());
 
             gameObject.GetComponentsInChildren<Image>()[1].sprite = desiredSpriteCharacterIcon;
             gameObject.GetComponentsInChildren<Image>()[2].sprite = desiredSpriteElement;

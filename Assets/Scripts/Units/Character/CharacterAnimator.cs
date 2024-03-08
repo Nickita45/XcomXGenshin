@@ -10,7 +10,7 @@ public class CharacterAnimator : UnitAnimator
     public void InitCharacter(string avatarPath)
     {
         Object prefab = Resources.Load("Models/" + avatarPath);
-        GameObject avatar = (GameObject)Instantiate(prefab, transform);
+        GameObject avatar = (GameObject)Instantiate(prefab, transform.GetChild(0));
 
         avatar.transform.localPosition = new(0, -0.88f, 0);
         avatar.transform.localScale = new(2f, 2f, 2f);

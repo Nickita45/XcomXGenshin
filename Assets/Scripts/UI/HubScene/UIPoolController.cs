@@ -87,7 +87,7 @@ public class UIPoolController : MonoBehaviour
         CharacterData character = ConfigurationManager.CharactersData[pickedCharacter];
         _charactersModels[_characterPoolID].GetComponentInChildren<TextMeshProUGUI>().text = character.characterName;
 
-        Sprite desiredSpriteElement = spritesElementIcons.FirstOrDefault(sprite => sprite.name == "icon_element_" + character.element.ToLower());
+        Sprite desiredSpriteElement = spritesElementIcons.FirstOrDefault(sprite => sprite.name == "icon_element_" + character.element.ToString().ToLower());
         _charactersModels[_characterPoolID].GetComponentInChildren<Image>().sprite = desiredSpriteElement;
 
         Object prefab = Resources.Load("Models/" + character.characterAvatarPath);

@@ -20,15 +20,31 @@ public class Enemy : Unit
     private GameObject _bulletSpawner;
 
     [SerializeField]
-    private Sprite _icon;
-    public Sprite Icon => _icon;
-
-    [SerializeField]
     private EnemyAI _enemyAI;
     public EnemyAI AI => _enemyAI;
 
     private bool _triggered;
     public bool Triggered => _triggered;
+
+    public void SetStats(EnemyStats stats)
+    {
+        _stats = stats;
+    }
+
+    public void SetAI(EnemyAI ai)
+    {
+        _enemyAI = ai;
+    }
+
+    public void SetBulletSpawner(GameObject spawner)
+    {
+        _bulletSpawner = spawner;
+    }
+
+    public void SetAnimator(Animator animator)
+    {
+        _animator.Init(animator);
+    }
 
     public override Transform GetBulletSpawner(string name) => _bulletSpawner.transform;
 
@@ -45,6 +61,7 @@ public class Enemy : Unit
         Manager.StatusMain.OnStatusChange += OnStatusChange;
 
         _enemyAI.Init(this);
+        _enemyAI.OnSpawn();
     }
 
     // Trigger the enemy if all conditions are met.
@@ -75,17 +92,15 @@ public class Enemy : Unit
     public IEnumerator MakeTurn()
     {
         // Only triggered enemies make turns
-        if (!_triggered)
-        {
-            ActionsLeft = 0;
-            yield break;
-        }
-        yield return StartCoroutine(_enemyAI.MakeTurn());
+        if (!_triggered) yield break;
+
+        if (_actionsLeft > 0) yield return StartCoroutine(_enemyAI.MakeTurn());
     }
 
     public override void Kill()
     {
         Manager.Map.Enemies.Remove(this); //remove form list of enemies
+        foreach (Modifier m in _modifiers.Modifiers) m.DestroyModel(this);
         _canvas.DisableAll(); //disable all elements from canvas
         _actionsLeft = 0;
 

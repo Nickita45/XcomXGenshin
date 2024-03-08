@@ -75,6 +75,10 @@ public class Manager : MonoBehaviour
     public static AbilityPanel AbilityPanel => Instance._abilityPanel;
 
     [SerializeField]
+    private UnitInfoDialog _unitInfoDialog;
+    public static UnitInfoDialog UnitInfoDialog => Instance._unitInfoDialog;
+
+    [SerializeField]
     private UIIcons _uiIcons;
     public static UIIcons UIIcons => Instance._uiIcons;
 

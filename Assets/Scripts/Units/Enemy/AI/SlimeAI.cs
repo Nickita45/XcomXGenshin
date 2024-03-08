@@ -8,11 +8,33 @@ using UnityEngine.TextCore.Text;
 
 public class SlimeAI : EnemyAI
 {
-    private AbilityMeleeAttack _attack = new();
+    [SerializeField]
+    private Element _element;
+
+    private AbilityMeleeAttack _attack;
+
+    void Start()
+    {
+        _attack = new AbilityMeleeAttack(_element);
+    }
+
+    // The slime's element is applied to it every turn
+    private void ApplyElementToSelf()
+    {
+        _enemy.MakeHit(0, _element, _enemy);
+    }
+
+    public override void OnSpawn()
+    {
+        ApplyElementToSelf();
+    }
 
     public override IEnumerator MakeTurn()
     {
-        var character = _enemy.GetClosestVisibleCharacter(); 
+        // Only apply element at the start of the turn (when actions are full)
+        if (_enemy.ActionsLeft == _enemy.Stats.BaseActions()) ApplyElementToSelf();
+
+        var character = _enemy.GetClosestVisibleCharacter();
         if (character != null && Vector3.Distance(character.transform.localPosition, _enemy.transform.localPosition) < 2) //if enemy is on neighbourhood block 
         {
             _enemy.ActionsLeft -= 2;

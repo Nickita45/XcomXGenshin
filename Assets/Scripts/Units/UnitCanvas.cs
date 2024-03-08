@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,9 @@ public abstract class UnitCanvas : MonoBehaviour
 
     [SerializeField]
     protected GameObject _panelHealthBar, _hpPrefab;
+
+    [SerializeField]
+    protected GameObject _panelModifiers, _modifierPrefab, _elementalReactionPrefab;
 
     [SerializeField]
     protected Image _actionIconPopUp;
@@ -53,7 +57,7 @@ public abstract class UnitCanvas : MonoBehaviour
 
     public abstract void OnStatusChange(HashSet<Permissions> permissions);
 
-    public void SetStartHealth(int hp)
+    public void UpdateHealthUI(int hp)
     {
         int childCount = _panelHealthBar.transform.childCount; //get actual count of hp unit
         if (hp > childCount)
@@ -68,9 +72,69 @@ public abstract class UnitCanvas : MonoBehaviour
         }
     }
 
-    public GameObject PanelHit(int dmg)
+    public void UpdateModifiersUI(ModifierList modifiers)
+    {
+        ObjectUtils.DestroyAllChildren(_panelModifiers);
+
+        foreach (Modifier modifier in modifiers.Modifiers)
+        {
+            GameObject modifierObject = Instantiate(_modifierPrefab, _panelModifiers.transform);
+            modifierObject.GetComponent<ModifierUI>().Init(modifier);
+        }
+    }
+
+    public void ShowReactions(List<ElementalReaction> reactions)
+    {
+        for (int i = 0; i < reactions.Count; i++)
+        {
+            ElementalReaction reaction = reactions[i];
+            GameObject reactionObject = Instantiate(_elementalReactionPrefab, _canvas.transform);
+
+            RectTransform transform = reactionObject.GetComponent<RectTransform>();
+            Vector2 currentPosition = transform.anchoredPosition;
+            currentPosition.y += 100f * i;
+            transform.anchoredPosition = currentPosition;
+
+            ElementalReactionUI reactionUI = reactionObject.GetComponent<ElementalReactionUI>();
+            reactionUI.Init(reaction);
+            StartCoroutine(AnimateReactionText(reactionUI));
+        }
+    }
+
+    IEnumerator AnimateReactionText(ElementalReactionUI reactionUI)
+    {
+        TextMeshProUGUI text = reactionUI.Text;
+        Color originalColor1 = text.color;
+
+        Image image = reactionUI.GetComponent<Image>();
+        Color originalColor2 = image.color;
+        float timer = 0f;
+        const float fadeDuration = 5f;
+        const float moveSpeed = 0.10f;
+
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+            float alpha1 = Mathf.Lerp(1.25f, 0f, timer / fadeDuration);
+            text.color = new Color(originalColor1.r, originalColor1.g, originalColor1.b, alpha1);
+
+            float alpha2 = Mathf.Lerp(0.5882353f, 0f, timer / fadeDuration);
+            image.color = new Color(originalColor2.r, originalColor2.g, originalColor2.b, alpha2);
+
+            // Move the text slightly in the direction of top right
+            Vector3 moveDirection = Vector3.up + Vector3.right;
+            image.rectTransform.position += moveDirection * Time.deltaTime * moveSpeed;
+
+            yield return null;
+        }
+
+        Destroy(reactionUI.gameObject);
+    }
+
+    public GameObject PanelHit(int dmg, Element element)
     {
         _textHit.text = dmg.ToString();
+        _textHit.color = ElementUtils.ElementColor(element);
 
         return CreateObjectPanel(_panelHit);
     }
@@ -141,7 +205,7 @@ public abstract class UnitCanvas : MonoBehaviour
         yield return new WaitForSeconds(timeFinish);
 
         panelColor.color = new Color(panelColor.color.r, panelColor.color.g, panelColor.color.b, gValuePanelColor); //set saved alpha parameter to color of panel
-        
+
         colors.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 1)); //set all colours of images alpha value to 1
         texts.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 1));//set all colours of images alpha value to 1
     }

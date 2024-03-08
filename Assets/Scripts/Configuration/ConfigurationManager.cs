@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 public class ConfigurationManager : MonoBehaviour
 {
@@ -31,9 +32,9 @@ public class ConfigurationManager : MonoBehaviour
         set => Instance._globalDataJson = value;
     }
 
-    private EnemyData[] _enemiesDataJson;
+    private Dictionary<string, EnemyData> _enemiesDataJson;
 
-    public static EnemyData[] EnemiesDataJson
+    public static Dictionary<string, EnemyData> EnemiesDataJson
     {
         get => Instance._enemiesDataJson;
         set => Instance._enemiesDataJson = value;
@@ -64,6 +65,7 @@ public class ConfigurationManager : MonoBehaviour
             return default;
         }
     }
+
     private T[] LoadConfigArray<T>(string fileDirectory)
     {
         if (Directory.Exists(fileDirectory))
@@ -76,8 +78,32 @@ public class ConfigurationManager : MonoBehaviour
                 string jsonContent = File.ReadAllText(jsonFiles[i]);
                 dataArray[i] = JsonUtility.FromJson<T>(jsonContent);
             }
-            
+
             return dataArray;
+        }
+        else
+        {
+            Debug.LogError($"Config directory with path {fileDirectory} not found!");
+            return default;
+        }
+    }
+
+    private Dictionary<string, T> LoadConfigDictionary<T>(string fileDirectory)
+    {
+        if (Directory.Exists(fileDirectory))
+        {
+            string[] jsonFiles = Directory.GetFiles(fileDirectory, "*.json");
+            Dictionary<string, T> dataDictionary = new();
+
+            for (int i = 0; i < jsonFiles.Length; i++)
+            {
+                string jsonContent = File.ReadAllText(jsonFiles[i]);
+                string key = Path.GetFileNameWithoutExtension(jsonFiles[i])["config".Length..];
+
+                dataDictionary.Add(key, JsonUtility.FromJson<T>(jsonContent));
+            }
+
+            return dataDictionary;
         }
         else
         {
@@ -85,6 +111,7 @@ public class ConfigurationManager : MonoBehaviour
             return default;
         }
     }
+
     private void SaveConfig<T>(string filePath, T data)
     {
         string jsonContent = JsonConvert.SerializeObject(data, new JsonSerializerSettings
@@ -92,10 +119,11 @@ public class ConfigurationManager : MonoBehaviour
             Formatting = Formatting.Indented,
             FloatFormatHandling = FloatFormatHandling.String
         });
-        
+
         File.WriteAllText(filePath, jsonContent);
         Debug.Log($"Config file saved to {filePath}");
     }
+
     private void SaveConfigArray<T>(string fileDirectory, T[] dataArray)
     {
         string[] jsonFiles = Directory.GetFiles(fileDirectory, "*.json");
@@ -108,17 +136,29 @@ public class ConfigurationManager : MonoBehaviour
 
         Debug.Log($"Config array saved to {fileDirectory}");
     }
+
+    private void SaveConfigDictionary<T>(string fileDirectory, Dictionary<string, T> dataDictionary)
+    {
+        foreach (string key in dataDictionary.Keys)
+        {
+            string jsonContent = JsonUtility.ToJson(dataDictionary[key], true);
+            string filePath = Path.Combine(fileDirectory, "config" + key + ".json");
+            File.WriteAllText(filePath, jsonContent);
+        }
+
+        Debug.Log($"Config dictionary saved to {fileDirectory}");
+    }
+
     public void SaveAllConfigsFile()
     {
         SaveConfig(PATH_GLOBAL_INFO, _globalDataJson);
         SaveConfigArray(PATH_CHARACTERS, _charactersData);
-        
-        SaveConfigArray(PATH_ENEMIES, _enemiesDataJson);
+        SaveConfigDictionary(PATH_ENEMIES, _enemiesDataJson);
     }
     public void LoadAllConfigsFile()
     {
         _globalDataJson = LoadConfig<GlobalDataJson>(PATH_GLOBAL_INFO);
-        _enemiesDataJson = LoadConfigArray<EnemyData>(PATH_ENEMIES);
+        _enemiesDataJson = LoadConfigDictionary<EnemyData>(PATH_ENEMIES);
 
         _charactersData = LoadConfigArray<CharacterData>(PATH_CHARACTERS);
     }

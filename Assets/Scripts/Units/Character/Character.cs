@@ -43,7 +43,7 @@ public class Character : Unit
 
     public GameObject GunPrefab => _gunPrefab;
 
-    private int _actionsLeft; 
+    private int _actionsLeft;
     public override int ActionsLeft
     {
         get => _actionsLeft;
@@ -51,6 +51,7 @@ public class Character : Unit
         {
             _actionsLeft = value;
             Canvas.SetCountActions(value);
+            Manager.TurnManager.AfterCharacterAction();
         }
     }
 
@@ -73,28 +74,20 @@ public class Character : Unit
 
         ActualTerritory = Manager.Map[transform.localPosition];
         ActualTerritory.TerritoryInfo = TerritoryType.Character;
-
-        ActionsLeft = 2;
-
-        Manager.TurnManager.onBeginTurn += BeginOfTurn;
-    }
-
-    private void OnDestroy()
-    {
-        Manager.TurnManager.onBeginTurn -= BeginOfTurn;
     }
 
     public void OnIndexSet()
     {
-        gameObject.name = Stats.CharacterName(); //set name
+        gameObject.name = Stats.Name(); //set name
 
         _countHp = Stats.MaxHP(); //set max hp
-        Canvas.SetStartHealth(Stats.MaxHP()); 
+        Canvas.UpdateHealthUI(Stats.MaxHP());
 
         SetGunByIndex((int)Stats.Weapon); //set gun
 
         _abilities = new() {
             new AbilityShoot(),
+            new AbilityShoot(Stats.Element),
             new AbilityOverwatch(),
             new AbilityHunkerDown(),
             new AbilityElementalSkill(Stats.Element)
@@ -103,8 +96,6 @@ public class Character : Unit
         Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath); //
         Animator.GetComponentInChildren<GunModel>().Init(); //
     }
-
-    private void BeginOfTurn() => ActionsLeft = 2;
 
     private void OnMouseEnter()
     {
@@ -190,7 +181,8 @@ public class Character : Unit
     public override void Kill()
     {
         Manager.Map.Characters.Remove(this); //remove from map character list
-        //Manager.TurnManager.EndCharacterTurn(this); //end of the character turn
+        foreach (Modifier m in _modifiers.Modifiers) m.DestroyModel(this);
+        Manager.TurnManager.OutOfActions(this);
         _canvas.DisableAll(); //disable canvas elements
 
         Animator.Model.SetActive(false); //disable animator

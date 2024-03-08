@@ -4,7 +4,8 @@ public class CharacterStats : UnitStats
 {
     //Config atributes
     public int Index { get; set; }
-    public string CharacterName() => ConfigurationManager.CharactersData[Index].characterName;
+    public override string Name() => ConfigurationManager.CharactersData[Index].characterName;
+    public override string Description() => "Here will be character description.";
     public override float Speed() => ConfigurationManager.CharactersData[Index].characterSpeed;
     public override int MovementDistance() => ConfigurationManager.CharactersData[Index].characterMoveDistance;
     public override float VisionDistance() => 10f; // might change when the vision system is fully implemented
@@ -14,5 +15,5 @@ public class CharacterStats : UnitStats
     public override int BaseAimPercent() => 50;
     public GunType Weapon => (GunType)ConfigurationManager.CharactersData[Index].characterWeapon;
     public override int BaseActions() => 2;
-    public string Element => ConfigurationManager.CharactersData[Index].element;
+    public Element Element => (Element)Enum.Parse(typeof(Element), ConfigurationManager.CharactersData[Index].element);
 }

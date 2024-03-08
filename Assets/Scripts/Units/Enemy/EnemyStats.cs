@@ -2,17 +2,22 @@ using UnityEngine;
 
 public class EnemyStats : UnitStats
 {
-    // Need to be automate in future
     [SerializeField]
-    private int _index;
+    private string _configEnemyName;
 
-    public int MinDamage => ConfigurationManager.EnemiesDataJson[_index].enemyMinAttackValue;
-    public int MaxDamage => ConfigurationManager.EnemiesDataJson[_index].enemyMaxAttackValue;
+    [SerializeField]
+    private Sprite _icon;
+    public Sprite Icon => _icon;
 
-    public override int MaxHP() => ConfigurationManager.EnemiesDataJson[_index].enemyBaseHealth;
-    public override int BaseAimPercent() => ConfigurationManager.EnemiesDataJson[_index].enemyBaseAim;
+    public int MinDamage => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMinAttackValue;
+    public int MaxDamage => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMaxAttackValue;
+
+    public override int MaxHP() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyBaseHealth;
+    public override int BaseAimPercent() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyBaseAim;
     public override int BaseActions() => 2;
-    public override float Speed() => ConfigurationManager.EnemiesDataJson[_index].enemySpeed;
-    public override int MovementDistance() => ConfigurationManager.EnemiesDataJson[_index].enemyMoveDistance;
-    public override float VisionDistance() => ConfigurationManager.EnemiesDataJson[_index].enemyRangedTargetDistance;
+    public override float Speed() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemySpeed;
+    public override int MovementDistance() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMoveDistance;
+    public override float VisionDistance() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyRangedTargetDistance;
+    public override string Name() => _configEnemyName;
+    public override string Description() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyDescription;
 }

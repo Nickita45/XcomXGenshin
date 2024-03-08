@@ -13,7 +13,7 @@ public class UIConfigInput : MonoBehaviour
     public Transform parentTransform;
     private CharacterData[] _characterList;
     private GlobalDataJson _globalData;
-    private EnemyData[] _enemyData;
+    private Dictionary<string, EnemyData> _enemyData;
     private int _statusConfig = 0; // 0 - GlobalDataJson, 1 - CharactersData
     private void Start()
     {
@@ -52,9 +52,10 @@ public class UIConfigInput : MonoBehaviour
                 }
                 break;
             case 2:
-                foreach (EnemyData enemy in _enemyData)
+                string[] keys = _enemyData.Keys.OrderBy(s => s).ToArray(); // Get Keys in alphabetical order
+                foreach (string key in keys)
                 {
-                    FillValuesUI(enemy);
+                    FillValuesUI(_enemyData[key]);
                 }
                 break;
         }
@@ -123,10 +124,11 @@ public class UIConfigInput : MonoBehaviour
                 }
                 break;
             case 2:
-                for (int i = 0; i < _enemyData.Length; i++)
+                string[] keys = _enemyData.Keys.OrderBy(s => s).ToArray(); // Get Keys in alphabetical order
+                for (int i = 0; i < keys.Length; i++)
                 {
-                    TMP_InputField[] tMP_InputsSubset = GetSubsetOfInputs(tMP_Inputs, i, _enemyData[i]);
-                    UpdateArrayValues(_enemyData[i], tMP_InputsSubset);
+                    TMP_InputField[] tMP_InputsSubset = GetSubsetOfInputs(tMP_Inputs, i, _enemyData[keys[i]]);
+                    UpdateArrayValues(_enemyData[keys[i]], tMP_InputsSubset);
                 }
                 break;
         }
@@ -138,7 +140,8 @@ public class UIConfigInput : MonoBehaviour
         ConfigurationManager.Instance.SaveAllConfigsFile();
         ConfigurationManager.Instance.LoadAllConfigsFile();
     }
-    // Get all information from fields for entiring tmp inputs. Set the value for generic value
+
+    // Get all information from fields for entering tmp inputs. Set the value for generic value
     public void UpdateArrayValues<T>(T data, TMP_InputField[] tMP_Inputs)
     {
         FieldInfo[] fields = data.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -153,6 +156,7 @@ public class UIConfigInput : MonoBehaviour
             fields[j].SetValue(data, fieldValue);
         }
     }
+
     // Splitted object by 2 variants: scalar values and array values
     public List<List<TMP_InputField>> SplitArrayByObjectTypeArray<T>(T data, TMP_InputField[] tMP_Inputs)
     {
@@ -175,11 +179,12 @@ public class UIConfigInput : MonoBehaviour
         };
         return splitArrays;
     }
+
     // Return input fields by count of row in generic data
-    private TMP_InputField[] GetSubsetOfInputs<T>(TMP_InputField[] allInputs, int characterIndex, T data)
+    private TMP_InputField[] GetSubsetOfInputs<T>(TMP_InputField[] allInputs, int index, T data)
     {
         int fieldsPerCharacter = data.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).Length;
-        int startIndex = characterIndex * fieldsPerCharacter;
+        int startIndex = index * fieldsPerCharacter;
         int endIndex = startIndex + fieldsPerCharacter;
 
         TMP_InputField[] subsetInputs = new TMP_InputField[fieldsPerCharacter];
@@ -190,6 +195,8 @@ public class UIConfigInput : MonoBehaviour
 
         return subsetInputs;
     }
+
+
     // Parse value from object to different type from inputfield type
     private object ParseFieldValue(string fieldType, string textValue)
     {

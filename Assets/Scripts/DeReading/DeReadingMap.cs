@@ -1,25 +1,16 @@
 using Newtonsoft.Json;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
 
 public class DeReadingMap : MonoBehaviour
 {
-    [Header("Sctipt Settings")]
+    [Header("Script Settings")]
     [SerializeField]
-    private GameObject _mainObject;  //
-
-    [SerializeField]
-    private string _path;
-    [SerializeField]
-    private string _path2;
-    [SerializeField]
-    private bool path2;
+    private GameObject _mainObject;
 
     public void DeSerelizete(string nameFile)
     {
         TextAsset json = Resources.Load<TextAsset>(nameFile); //get json file
+        Debug.Log(nameFile);
         string filePath = json.ToString(); //get path of this file
 
         MatrixMap _matrixMap = JsonConvert.DeserializeObject<MatrixMap>(filePath); //deserialization json file
@@ -32,8 +23,8 @@ public class DeReadingMap : MonoBehaviour
                 _matrixMap.AddAirPlane(item, obj);
 
             }
-            
-            
+
+
             if (item.TerritoryInfo == TerritoryType.Air)
                 continue;
 
@@ -57,26 +48,48 @@ public class DeReadingMap : MonoBehaviour
 
     public GameObject CreateMapObject(TerritroyReaded item)
     {
-
-        string pathPrefab = item.PathPrefab;
-        if(pathPrefab == "RANDOM_ENEMY")
-            pathPrefab = HubData.Instance.GetRandomEnemyPath();
-
-        Debug.Log(pathPrefab + " " + item);
-        GameObject prefab = Resources.Load<GameObject>(pathPrefab);
-        var obj = Instantiate(prefab, _mainObject.transform);
+        GameObject basePrefab = Resources.Load<GameObject>(item.PathPrefabBase);
+        GameObject obj = Instantiate(basePrefab, _mainObject.transform);
         obj.transform.localPosition = new Vector3(item.XPosition, item.YPosition, item.ZPosition);
         obj.transform.localRotation = new Quaternion(item.XRotation, item.YRotation, item.ZRotation, item.WRotation);
         obj.transform.localScale = new Vector3(item.XSize, item.YSize, item.ZSize);
 
-        TerritoryInfo territoryInfo = obj.GetComponent<TerritoryInfo>();
-        if (territoryInfo == null)
-        {
-            territoryInfo = obj.GetComponentInChildren<TerritoryInfo>();
-        }
-
+        TerritoryInfo territoryInfo = obj.GetComponent<TerritoryInfo>() ?? obj.GetComponentInChildren<TerritoryInfo>();
         territoryInfo.Type = item.TerritoryInfo;
         territoryInfo.ShelterType = item.ShelterType;
+
+        // Spawn an additional prefab for enemies
+        if (territoryInfo.Type == TerritoryType.Enemy)
+        {
+            string pathPrefabAdditional = item.PathPrefabAdditional;
+            if (pathPrefabAdditional == "RANDOM_ENEMY")
+                pathPrefabAdditional = HubData.Instance.GetRandomEnemyPath();
+
+            GameObject additionalPrefab = Resources.Load<GameObject>(pathPrefabAdditional);
+
+            if (additionalPrefab != null)
+            {
+                GameObject additionalObj = Instantiate(additionalPrefab, obj.transform);
+
+                // Connect stats to enemy
+                Enemy enemy = obj.GetComponent<Enemy>();
+                enemy.SetStats(additionalObj.GetComponent<EnemyStats>());
+
+                // Connect AI
+                enemy.SetAI(additionalObj.GetComponent<EnemyAI>());
+
+                // Connect animation
+                Transform avatar = additionalObj.transform.GetChild(0);
+                Animator animator = avatar.GetComponent<Animator>();
+                if (!animator) animator = avatar.gameObject.AddComponent<Animator>();
+                enemy.SetAnimator(animator);
+                enemy.SetBulletSpawner(ObjectUtils.FindDescendantByName(additionalObj.transform, "BulletSpawner"));
+            }
+            else
+            {
+                Debug.LogError("Unknown Enemy: " + item.PathPrefabAdditional);
+            }
+        }
 
         return obj;
     }

@@ -1,19 +1,27 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TerritoryInfo : MonoBehaviour
 {
     [Header("Basic Settings")]
     [SerializeField]
     private TerritoryType _type;
+
+    [FormerlySerializedAs("_pathPrefab")]
     [SerializeField]
-    private string _pathPrefab;
+    private string _pathPrefabBase;
+
+    // An additional path, used for the prefab of a chosen enemy type
+    [SerializeField]
+    private string _pathPrefabAdditional;
 
     [Header("Shelter Settings")]
     [SerializeField]
     private ShelterInfo _shelterInfo;
     [SerializeField]
     private ShelterType _setOnStartToEveryone;//Automatically set all sides of _shelterInfo to this value on the start of scene, but exept is "Nope"
-    public string Path => _pathPrefab;
+    public string PathBase => _pathPrefabBase;
+    public string PathAdditional => _pathPrefabAdditional;
     public TerritoryType Type { get => _type; set => _type = value; }
     public ShelterInfo ShelterType { get => _shelterInfo; set => _shelterInfo = value; }
 

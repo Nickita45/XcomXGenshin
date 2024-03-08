@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class EnemyAnimator : UnitAnimator
 {
-    [SerializeField]
-    private Animator _enemyAnimator;
-
-    private void Start()
-    {
-        Init(_enemyAnimator);
-    }
-
     // To make it more visually apparent,
     // enemies that do not try to hide behind shelters will
     // always face the closest character instead.
@@ -21,7 +13,7 @@ public class EnemyAnimator : UnitAnimator
 
         if (!_canCrouch)
         {
-            Enemy enemy = transform.parent.GetComponent<Enemy>(); //maybe better save reference?
+            Enemy enemy = GetComponent<Enemy>(); //maybe better save reference?
             Character closestCharacter = enemy.GetClosestVisibleCharacter();
 
             if (closestCharacter)

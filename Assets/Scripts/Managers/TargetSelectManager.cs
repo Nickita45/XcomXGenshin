@@ -20,7 +20,14 @@ public class TargetSelectManager : MonoBehaviour
         _enemyPanel.OnSelect(onTargetSelect);
 
         EnemyIcon selected = _enemyPanel.Selected;
-        if (!selected) _enemyPanel.SelectLast();
+        if (!selected)
+        {
+            _enemyPanel.SelectLast();
+        }
+        else
+        {
+            onTargetSelect(selected.Enemy);
+        }
         Manager.StatusMain.SetStatusSelectEnemy();
     }
 
@@ -76,6 +83,33 @@ public class TargetSelectManager : MonoBehaviour
             else
             {
                 Manager.OutlineManager.ClearEnemyTargets();
+            }
+        }
+
+        // Show unit info when right-clicking a unit
+        if (Input.GetMouseButtonDown(1) && Manager.CameraManager.FreeCamera.IsMainCamera())
+        {
+            Camera camera = Camera.main;
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+
+            float closestDistance = int.MaxValue;
+            Unit closest = null;
+
+            foreach (Unit unit in Physics.RaycastAll(ray)
+                .Select(hit => hit.transform.GetComponent<Unit>())
+                .Where(info => info != null))
+            {
+                float distance = Vector3.Distance(unit.transform.position, camera.transform.position);
+                if (closest == null || distance < closestDistance)
+                {
+                    closest = unit;
+                    closestDistance = distance;
+                }
+            }
+
+            if (closest)
+            {
+                Manager.UnitInfoDialog.Open(closest);
             }
         }
     }

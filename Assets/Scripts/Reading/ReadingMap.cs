@@ -188,12 +188,12 @@ public class ReadingMap : MonoBehaviour
                         ShelterType = ShelterInfo.EMPTY,
                     }, _matrixMap.Vertex);
 
-                    if (!_matrixMap.ContainsVertexByPos(_aktualGameObject.transform.position, out _, true)) 
+                    if (!_matrixMap.ContainsVertexByPos(_aktualGameObject.transform.position, out _, true))
                     {
                         var decorItem = _matrixMap.AddVertex(new TerritroyReaded(_aktualGameObject.transform) //create block decor in other dictionary
                         {
                             TerritoryInfo = TerritoryType.Decor,
-                            PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
+                            PathPrefabBase = _aktualGameObject.GetComponent<TerritoryInfo>().PathBase
                         }, _matrixMap.Decors);
                         //decorItem.SetNewPosition(_aktualGameObject.transform);
                     }
@@ -204,7 +204,8 @@ public class ReadingMap : MonoBehaviour
                     {
                         TerritoryInfo = _aktualGameObject.GetComponent<TerritoryInfo>().Type,
                         ShelterType = _aktualGameObject.GetComponent<TerritoryInfo>().ShelterType,
-                        PathPrefab = _aktualGameObject.GetComponent<TerritoryInfo>().Path
+                        PathPrefabBase = _aktualGameObject.GetComponent<TerritoryInfo>().PathBase,
+                        PathPrefabAdditional = _aktualGameObject.GetComponent<TerritoryInfo>().PathAdditional
                     }, _matrixMap.Vertex);
                 }
             }

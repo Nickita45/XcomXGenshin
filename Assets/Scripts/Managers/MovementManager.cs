@@ -117,7 +117,7 @@ public class MovementManager : MonoBehaviour
     {
         foreach (var item in _objectsCalculated.Keys)
         {
-            Manager.Map.GetAirPlatform(item)?.SetActive(result); 
+            Manager.Map.GetAirPlatform(item)?.SetActive(result);
 
             //if(!result)
             //   Manager.Map.GetAirPlatform(item).GetComponent<PlateMoving>().SetCharge(result);
@@ -142,14 +142,15 @@ public class MovementManager : MonoBehaviour
         yield return StartCoroutine(character.Move(points)); //??????????
 
         _isMoving = false;
-        
+
         if (!character.IsKilled)
         {
             OnEndMove(newTerritory, character);
             yield return Manager.TurnManager.AfterCharacterAction();
-        } else
+        }
+        else
         {
-            Manager.TurnManager.EndCharacterTurn(character);
+            Manager.TurnManager.OutOfActions(character);
         }
     }
 
@@ -484,7 +485,7 @@ public class MovementManager : MonoBehaviour
                 enemy.ActualTerritory.TerritoryInfo = TerritoryType.Air; //actualization block type
                 yield return Manager.MovementManager.StartCoroutine(enemy.Move(aktualPath)); //?????? maybe better this method in this class
 
-                
+
                 if (!enemy.IsKilled)
                 {
                     enemy.ActualTerritory = findTerritory; //actualization enemy block

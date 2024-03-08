@@ -2,12 +2,15 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 [System.Serializable]
 public class TerritroyReaded
 {
     public string Index { get; set; }
-    public string PathPrefab { get; set; }
+    public string PathPrefabBase { get; set; }
+    public string PathPrefabAdditional { get; set; }
     public TerritoryType TerritoryInfo { get; set; }
 
     [SerializeField]
@@ -180,6 +183,7 @@ public class CharacterData
 public class EnemyData
 {
     public string enemyName;
+    public string enemyDescription;
     public float enemySpeed;
     public int enemyMoveDistance;
     public float enemyRangedTargetDistance;
@@ -189,6 +193,4 @@ public class EnemyData
     public bool isMeleeAttack;
     public int enemyMinAttackValue;
     public int enemyMaxAttackValue;
-    public string enemyAvatarPath;
-    public string enemyElement;
 }

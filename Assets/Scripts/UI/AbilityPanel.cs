@@ -99,11 +99,11 @@ public class AbilityPanel : MonoBehaviour
 
     public void SelectShootAbility()
     {
-        if (!_selected || _selected.Ability.AbilityName != "Shoot")
+        if (!_selected || _selected.Ability is not AbilityShoot)
         {
             foreach (AbilityIcon icon in _icons)
             {
-                if (icon.Ability.AbilityName == "Shoot")
+                if (icon.Ability is AbilityShoot)
                 {
                     SelectAbility(icon);
                     return;
