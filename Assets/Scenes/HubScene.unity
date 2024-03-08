@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4881,7 +4881,13 @@ MonoBehaviour:
   charactersPoolID: 00000000010000000200000003000000
   enemiesPaths:
   - Prefabs/Enemies/HilichurlRanger
+  - Prefabs/Enemies/HilichurlRangerElectro
   - Prefabs/Enemies/SlimePyro
+  - Prefabs/Enemies/SlimeCryo
+  - Prefabs/Enemies/SlimeHydro
+  - Prefabs/Enemies/SlimeElectro
+  - Prefabs/Enemies/SlimeAnemo
+  - Prefabs/Enemies/SlimeGeo
 --- !u!1 &1591048338
 GameObject:
   m_ObjectHideFlags: 0

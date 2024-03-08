@@ -41,12 +41,7 @@ public class RangedHilichurlAI : EnemyAI
     public override IEnumerator MakeTurn()
     {
         var characters = _enemy.GetVisibleCharacters();
-        // _enemy.ActionsLeft = 0;
-        //StartCoroutine(_enemy.Canvas.PanelShow(_enemy.Canvas.PanelActionInfo(_overwatch.AbilityName, "Overwatch"), 2));
-        //  yield return StartCoroutine(_overwatch.Activate(_enemy, null));
-
-        //var character = _enemy.GetClosestVisibleCharacter();
-        if (characters.Count > 0) //!= null)
+        if (characters.Count > 0)
         {
             if (_enemy.ActionsLeft == 2 && characters.Select(ch =>
                         AimUtils.CalculateHitChance(_enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, _enemy.Stats.BaseAimPercent()).percent).Max() < 50)
@@ -69,7 +64,7 @@ public class RangedHilichurlAI : EnemyAI
 
 
             if (_enemy.ActionsLeft == 0 && UnityEngine.Random.Range(1, 100 + 1) > 75)
-            { //make overwatch in 75 percent chance
+            { //make overwatch in 25 percent chance
                 _enemy.ActionsLeft = 0;
                 StartCoroutine(_enemy.Canvas.PanelShow(_enemy.Canvas.PanelActionInfo(_overwatch.AbilityName, "Overwatch"), 2));
                 yield return StartCoroutine(_overwatch.Activate(_enemy, null));
@@ -77,6 +72,8 @@ public class RangedHilichurlAI : EnemyAI
             else
                 yield return StartCoroutine(_enemy.MoveEnemy(FindTerritoryRandomShelter));
         }
+
+        if (_enemy.ActionsLeft > 0) yield return StartCoroutine(MakeTurn());
     }
 
     public IEnumerator MakeOverwatch(Enemy enemy, Action onFinish)

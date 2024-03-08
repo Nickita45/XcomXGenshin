@@ -100,6 +100,7 @@ public class Enemy : Unit
     public override void Kill()
     {
         Manager.Map.Enemies.Remove(this); //remove form list of enemies
+        foreach (Modifier m in _modifiers.Modifiers) m.DestroyModel(this);
         _canvas.DisableAll(); //disable all elements from canvas
         _actionsLeft = 0;
 

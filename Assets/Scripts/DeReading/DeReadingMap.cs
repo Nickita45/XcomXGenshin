@@ -48,11 +48,7 @@ public class DeReadingMap : MonoBehaviour
 
     public GameObject CreateMapObject(TerritroyReaded item)
     {
-        string pathPrefabBase = item.PathPrefabBase;
-        if (pathPrefabBase == "RANDOM_ENEMY")
-            pathPrefabBase = HubData.Instance.GetRandomEnemyPath();
-
-        GameObject basePrefab = Resources.Load<GameObject>(pathPrefabBase);
+        GameObject basePrefab = Resources.Load<GameObject>(item.PathPrefabBase);
         GameObject obj = Instantiate(basePrefab, _mainObject.transform);
         obj.transform.localPosition = new Vector3(item.XPosition, item.YPosition, item.ZPosition);
         obj.transform.localRotation = new Quaternion(item.XRotation, item.YRotation, item.ZRotation, item.WRotation);
@@ -65,7 +61,11 @@ public class DeReadingMap : MonoBehaviour
         // Spawn an additional prefab for enemies
         if (territoryInfo.Type == TerritoryType.Enemy)
         {
-            GameObject additionalPrefab = Resources.Load<GameObject>(item.PathPrefabAdditional);
+            string pathPrefabAdditional = item.PathPrefabAdditional;
+            if (pathPrefabAdditional == "RANDOM_ENEMY")
+                pathPrefabAdditional = HubData.Instance.GetRandomEnemyPath();
+
+            GameObject additionalPrefab = Resources.Load<GameObject>(pathPrefabAdditional);
 
             if (additionalPrefab != null)
             {

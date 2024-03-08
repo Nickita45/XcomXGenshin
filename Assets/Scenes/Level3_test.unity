@@ -465,7 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -4094,7 +4094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRangerElectro
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -7170,7 +7170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -9424,7 +9424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -9749,7 +9749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -10045,7 +10045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -10660,7 +10660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -11278,7 +11278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRangerElectro
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -11398,7 +11398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -14112,7 +14112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -14633,7 +14633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -14845,7 +14845,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRangerElectro
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -17079,7 +17079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -18096,7 +18096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -18979,7 +18979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -20070,7 +20070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRangerElectro
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -22457,7 +22457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRangerElectro
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -23352,7 +23352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: Prefabs/Enemies/HilichurlRanger
+  _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
