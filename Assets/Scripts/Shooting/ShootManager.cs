@@ -26,6 +26,7 @@ public class ShootManager : MonoBehaviour
         // Manager.map for enemy?
             AimUtils.CalculateHitChance(shooter.ActualTerritory, defender.ActualTerritory, actualGun, shooter.Stats.BaseAimPercent()); //get chance
 
+        Debug.Log($"{shooter.Stats.Name()} z percentom {percent} dostal {randomGenerate}");
         for (int i = 0; i < ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].countBullets; i++)
         {
             Vector3 addShootRange = GenerateCoordinatesFromResult(randomGenerate > percent); //getting a spread depending on the result of a hit

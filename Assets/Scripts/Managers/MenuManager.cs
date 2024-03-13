@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using System.IO;
+using System.Linq;
 
 public class MenuManager : MonoBehaviour
 {
@@ -20,18 +21,13 @@ public class MenuManager : MonoBehaviour
     {
         Manager.StatusMain.OnStatusChange += OnStatusChange;
 
-        // Scan levels folder and add levels to dropdown
-        string[] files = Directory.GetFiles("Assets/Resources/Levels");
-        foreach (string file in files)
+        string[] levelNames = Resources.LoadAll<TextAsset>("Levels").Select(level => level.name).ToArray();
+
+        foreach (string levelName in levelNames)
         {
-            if (Path.GetExtension(file) == ".json")
-            {
-                string level = Path.GetFileNameWithoutExtension(file);
-                _dropdownLevel.options.Add(new TMP_Dropdown.OptionData(level));
-            }
+           _dropdownLevel.options.Add(new TMP_Dropdown.OptionData(levelName));
         }
     }
-
     public void OnLevelDropdownValueChanged()
     {
         SetMapByName("Levels/" + _dropdownLevel.options[_dropdownLevel.value].text);

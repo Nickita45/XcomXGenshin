@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -186,12 +185,22 @@ public class TurnManager : MonoBehaviour
     private IEnumerator MakeEnemyTurn()
     {
         _menuManager.SetPanelEnemy(true);
-        foreach (Enemy enemy in Manager.Map.Enemies)
+        UnitOverwatched.RemoveAll(unit => unit is Enemy);
+
+        for (int i = Manager.Map.Enemies.Count - 1; i >= 0; i--) //make from bottom to up to savly removing killed enemies
         {
-            yield return StartCoroutine(enemy.MakeTurn());
+            Enemy enemy = Manager.Map.Enemies[i];
+            enemy.ActionsLeft = enemy.Stats.BaseActions();
+            while (enemy.ActionsLeft > 0)
+            {
+                if (!enemy.Triggered)
+                    break;
+
+                Debug.Log("wtf");
+                yield return StartCoroutine(enemy.MakeTurn());
+            }
         }
         _menuManager.SetPanelEnemy(false);
-
         yield return StartCoroutine(EndRound());
     }
 
