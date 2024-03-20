@@ -98,8 +98,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _pathPrefab: Prefabs/Level1/stone4
-  _shelterType: 0
+  _pathPrefabBase: Prefabs/Level1/stone4
+  _pathPrefabAdditional: 
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0
 --- !u!65 &8459694684947633348
 BoxCollider:
   m_ObjectHideFlags: 0
