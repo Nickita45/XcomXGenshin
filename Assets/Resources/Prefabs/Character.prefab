@@ -4064,6 +4064,7 @@ GameObject:
   - component: {fileID: 6410831071949143519}
   - component: {fileID: 1748619464968573664}
   - component: {fileID: 7363743441411340796}
+  - component: {fileID: 4303387861596680420}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -4213,9 +4214,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7de2c0b04928fc4f874bf1c69a31e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   _gun: {fileID: 1821404754684564993}
   _outline: {fileID: 5811267186328063532}
   _animatorController: {fileID: 9100000, guid: c105fdb9549174b499504e66eff20a8b, type: 2}
+--- !u!114 &4303387861596680420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5040088768253021677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9264f76ddf17074d90c9bee09541de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.7
 --- !u!1 &5093875146925982823
 GameObject:
   m_ObjectHideFlags: 0
@@ -6726,7 +6741,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7e25936913c130446a0b742f8fa0e454, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

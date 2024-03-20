@@ -68,7 +68,8 @@ public class CameraObjectTransparency : MonoBehaviour
                 // Replace shaders and colors for new renderers
                 foreach (Material material in newRenderers[i].Renderer.materials)
                 {
-                    material.shader = Shader.Find("Transparent/Diffuse");
+                    material.shader = Shader.Find("Universal Render Pipeline/Simple Lit");
+                    material.SetFloat("_Surface", 1);
                     Color tempColor = material.color;
                     tempColor.a = 0.4F;
                     material.color = tempColor;
