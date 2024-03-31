@@ -100,6 +100,8 @@ public class GrassPainterWindow : EditorWindow
         if (GUILayout.Button("Manual Update"))
         {
             grassCompute.Reset();
+            Debug.Log("kke");
+
         }
         grassObject = (GameObject)EditorGUILayout.ObjectField("Grass Compute Object", grassObject, typeof(GameObject), true);
 
@@ -540,7 +542,6 @@ public class GrassPainterWindow : EditorWindow
     {
         if (grassCompute != null)
         {
-
             SceneView.RepaintAll();
             grassCompute.Reset();
         }

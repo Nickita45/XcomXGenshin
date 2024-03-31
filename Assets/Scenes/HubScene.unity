@@ -388,7 +388,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 37a1ba7d029e0a74fbb69524a63a4ff8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -8650193797015716175, guid: d1dec207b95250f4885d44ebaef5f84c, type: 3}
+      objectReference: {fileID: -8094572344831672515, guid: f8430cf77bf679642957f6b9d8d52c5c, type: 3}
     - target: {fileID: 919132149155446097, guid: 37a1ba7d029e0a74fbb69524a63a4ff8, type: 3}
       propertyPath: m_Name
       value: stone-2
