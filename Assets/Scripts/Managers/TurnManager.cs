@@ -105,6 +105,11 @@ public class TurnManager : MonoBehaviour
                 }
             }
         }
+        Manager.Instance.StatisticsUtil.SoldierDeathCount = 0;
+        Manager.Instance.StatisticsUtil.SoldierTotalCount = characters.Count;
+        Manager.Instance.StatisticsUtil.EnemiesTotalCount = Manager.Map.Enemies.Count;
+        /*foreach (Enemy enemy in Manager.Map.Enemies)
+            Manager.Instance.StatisticsUtil.setEnemiesKilledList(enemy.Stats.Icon);*/
     }
 
     public IEnumerator BeginRound()

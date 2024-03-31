@@ -33,7 +33,6 @@ public class SlimeAI : EnemyAI
     {
         // Only apply element at the start of the turn (when actions are full)
         if (_enemy.ActionsLeft == _enemy.Stats.BaseActions()) ApplyElementToSelf();
-        Debug.Log("eke");
         var character = _enemy.GetClosestVisibleCharacter();
         if (character != null && Vector3.Distance(character.transform.localPosition, _enemy.transform.localPosition) < 2) //if enemy is on neighbourhood block 
         {
