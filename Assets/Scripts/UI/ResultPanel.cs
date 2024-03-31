@@ -39,10 +39,10 @@ public class ResultPanel : MonoBehaviour
         for (int i = 0; i < _statisticsUtil.EnemiesDeathCount && i < _scrollMaxEnemiesIcons; i++)
         {
             GameObject generatedIconEnemy = Instantiate(_prefabIconsEnemies, _objectPrefabRoot.transform);
-            generatedIconEnemy.GetComponent<Image>().sprite = Manager.Instance.StatisticsUtil.getEnemiesKilledList().ElementAt(i);
+            generatedIconEnemy.GetComponent<Image>().sprite = Manager.Instance.StatisticsUtil.GetEnemiesKilledList().ElementAt(i);
         }
 
-        _textGrade.text = _statisticsUtil.getGrade();
+        _textGrade.text = _statisticsUtil.GetGrade();
     }
 
    

@@ -12,16 +12,16 @@ public  class StatisticsUtil {
     public int SoldierDeathCount {get;set;}
     public int SoldierTotalCount {get;set;}
     private HashSet<Character> _charactersWonded = new HashSet<Character>();
-    public void setEnemiesKilledList(Sprite enemyName)
+    public void SetEnemiesKilledList(Sprite enemyName)
     {
         _enemiesKilledList.Add(enemyName);
     }
-    public IEnumerable<Sprite> getEnemiesKilledList() => _enemiesKilledList;
+    public IEnumerable<Sprite> GetEnemiesKilledList() => _enemiesKilledList;
 
-    public void addCharactersWonded(Character character) => _charactersWonded.Add(character);
+    public void AddCharactersWonded(Character character) => _charactersWonded.Add(character);
     
     public int GetCountCharacterWonded => _charactersWonded.Count;
-    public string getGrade()
+    public string GetGrade()
     {
         string grade = "F";
         if (SoldierDeathCount == 0 && GetCountCharacterWonded == 0 && EnemiesDeathCount == EnemiesTotalCount)
