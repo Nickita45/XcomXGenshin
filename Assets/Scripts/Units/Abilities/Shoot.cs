@@ -8,7 +8,10 @@ public class AbilityShoot : Ability
     public override string Description => (_element == Element.Physical) ?
         "Shoot an enemy." :
         string.Format("Shoot an enemy and apply [{0}] on hit", _element.ToString());
-    public override string Icon => "Shoot";
+    public override string Icon => (_element == Element.Physical) ? 
+        "Shoot" : 
+        string.Format("{0}Shoot", _element.ToString()); 
+        
     public override int ActionCost => 2;
     public override TargetType TargetType => TargetType.Enemy;
 

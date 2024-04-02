@@ -77,7 +77,7 @@ public class Enemy : Unit
                 Character character = GetClosestCharacter();
                 ObjectUtils.LookAtXZ(Animator.Model.transform, character.transform.position);
 
-                StartCoroutine(Canvas.PanelShow(Canvas.PanelActionInfo("Triggered!"), 2));
+                StartCoroutine(Canvas.PanelShow(Canvas.PanelActionInfo("Triggered!","TriggerEnemy"), 2));
                 yield return StartCoroutine(MoveEnemy(_enemyAI.TriggerEnemy));
             }
         }
@@ -99,6 +99,7 @@ public class Enemy : Unit
 
     public override void Kill()
     {
+        Manager.Instance.StatisticsUtil.SetEnemiesKilledList(Stats.Icon);
         Manager.Map.Enemies.Remove(this); //remove form list of enemies
         foreach (Modifier m in _modifiers.Modifiers) m.DestroyModel(this);
         _canvas.DisableAll(); //disable all elements from canvas
@@ -108,6 +109,8 @@ public class Enemy : Unit
 
         GetComponent<BoxCollider>().enabled = false; //disable collider
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set his block type on air
+
+        Manager.Instance.StatisticsUtil.EnemiesDeathCount++;
     }
 
     private void OnDestroy()

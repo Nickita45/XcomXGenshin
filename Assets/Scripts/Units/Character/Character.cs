@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Character : Unit
@@ -191,5 +192,8 @@ public class Character : Unit
         GetComponent<CapsuleCollider>().enabled = false; //disable collider
 
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set character's block to air
+
+        Manager.Instance.StatisticsUtil.SoldierDeathCount++;
+        
     }
 }

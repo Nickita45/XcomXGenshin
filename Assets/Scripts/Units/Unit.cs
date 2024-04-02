@@ -164,6 +164,9 @@ public abstract class Unit : MonoBehaviour
         if (hit > 0) StartCoroutine(Canvas.PanelShow(Canvas.PanelHit(hit, element), 4));
 
         _countHp -= hit;
+        if(this is Character character)
+            Manager.Instance.StatisticsUtil.AddCharactersWonded(character);
+            
         if (_countHp <= 0)
             Kill();
         else

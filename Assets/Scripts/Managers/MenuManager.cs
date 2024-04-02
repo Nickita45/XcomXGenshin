@@ -12,10 +12,12 @@ public class MenuManager : MonoBehaviour
     private TMP_Dropdown _dropdownLevel;
 
     [SerializeField]
-    private GameObject _panelEnemyTurn, _panelCharaterName;
+    private GameObject _panelEnemyTurn, _panelCharaterName, _panelResult;
 
     [SerializeField]
     private TextMeshProUGUI _textCharacter;
+    [SerializeField]
+    
 
     private void Start()
     {
@@ -62,5 +64,11 @@ public class MenuManager : MonoBehaviour
         }
         else
             _panelCharaterName.gameObject.SetActive(false);
+    }
+    public void SetPanelResult(bool set)
+    {
+        _panelResult.SetActive(set);
+
+        _panelResult.GetComponent<ResultPanel>().SetResultPanel();
     }
 }
