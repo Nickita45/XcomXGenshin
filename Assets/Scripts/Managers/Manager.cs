@@ -82,13 +82,14 @@ public class Manager : MonoBehaviour
     private UIIcons _uiIcons;
     public static UIIcons UIIcons => Instance._uiIcons;
 
+    private StatisticsUtil _statisticsUtil;
+    public static StatisticsUtil StatisticsUtil => Instance._statisticsUtil;
+
     public Action OnClearMap;
 
     private static Manager _instance;
     public static Manager Instance => _instance;
 
-    public StatisticsUtil StatisticsUtil {get;private set;}
-    
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -110,7 +111,7 @@ public class Manager : MonoBehaviour
         Map = null;
         ObjectUtils.DestroyAllChildrenImmediate(MainParent);
         ObjectUtils.DestroyAllChildrenImmediate(GenerateTerritoryMove);
-        StatisticsUtil = new StatisticsUtil();
+        _statisticsUtil = new StatisticsUtil();
     }
 
     public GameObject CreatePlatformMovement(TerritroyReaded item)

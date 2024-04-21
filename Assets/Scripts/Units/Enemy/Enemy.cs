@@ -99,7 +99,7 @@ public class Enemy : Unit
 
     public override void Kill()
     {
-        Manager.Instance.StatisticsUtil.SetEnemiesKilledList(Stats.Icon);
+        Manager.StatisticsUtil.SetEnemiesKilledList(Stats.Icon);
         Manager.Map.Enemies.Remove(this); //remove form list of enemies
         foreach (Modifier m in _modifiers.Modifiers) m.DestroyModel(this);
         _canvas.DisableAll(); //disable all elements from canvas
@@ -110,7 +110,7 @@ public class Enemy : Unit
         GetComponent<BoxCollider>().enabled = false; //disable collider
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set his block type on air
 
-        Manager.Instance.StatisticsUtil.EnemiesDeathCount++;
+        Manager.StatisticsUtil.EnemiesDeathCount++;
     }
 
     private void OnDestroy()

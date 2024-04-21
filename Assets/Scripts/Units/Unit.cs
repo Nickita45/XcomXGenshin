@@ -165,7 +165,7 @@ public abstract class Unit : MonoBehaviour
 
         _countHp -= hit;
         if(this is Character character)
-            Manager.Instance.StatisticsUtil.AddCharactersWonded(character);
+            Manager.StatisticsUtil.AddCharactersWonded(character);
             
         if (_countHp <= 0)
             Kill();

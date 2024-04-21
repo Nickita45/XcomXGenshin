@@ -1,11 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StatusMain : MonoBehaviour
 {
-    public HashSet<Permissions> ActualPermissions { get; private set; }
+    public HashSet<Permissions> ActualPermissions { get; private set; } //TODO: encapsulation problem
 
     public Action<HashSet<Permissions>> OnStatusChange;
 
@@ -69,7 +68,7 @@ public class StatusMain : MonoBehaviour
 
     private void Update() //for debug only
     {
-        // Debug.Log(string.Join(",", Manager.StatusMain.ActualPermissions));
+        //Debug.Log(string.Join(",", Manager.StatusMain.ActualPermissions));
     }
 }
 

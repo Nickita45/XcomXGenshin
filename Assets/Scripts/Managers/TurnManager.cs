@@ -105,9 +105,9 @@ public class TurnManager : MonoBehaviour
                 }
             }
         }
-        Manager.Instance.StatisticsUtil.SoldierDeathCount = 0;
-        Manager.Instance.StatisticsUtil.SoldierTotalCount = characters.Count;
-        Manager.Instance.StatisticsUtil.EnemiesTotalCount = Manager.Map.Enemies.Count;
+        Manager.StatisticsUtil.SoldierDeathCount = 0;
+        Manager.StatisticsUtil.SoldierTotalCount = characters.Count;
+        Manager.StatisticsUtil.EnemiesTotalCount = Manager.Map.Enemies.Count;
         /*foreach (Enemy enemy in Manager.Map.Enemies)
             Manager.Instance.StatisticsUtil.setEnemiesKilledList(enemy.Stats.Icon);*/
     }
@@ -163,6 +163,8 @@ public class TurnManager : MonoBehaviour
 
             if (_characters.Count == 0)
             {
+                _selectedCharacter.OnDeselected();
+                //DeselectCharacter();
                 yield return StartCoroutine(EndPlayerTurn());
             }
         }
@@ -201,7 +203,6 @@ public class TurnManager : MonoBehaviour
                 if (!enemy.Triggered)
                     break;
 
-                Debug.Log("wtf");
                 yield return StartCoroutine(enemy.MakeTurn());
             }
         }

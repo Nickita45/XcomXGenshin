@@ -27,7 +27,7 @@ public class EnemyCanvas : UnitCanvas
 
         if (permissions.Contains(Permissions.SelectEnemy) || permissions.Contains(Permissions.AnimationShooting))
         {
-            if (_canvas != Manager.EnemyPanel.Enemy.Canvas.gameObject)
+            if (Manager.EnemyPanel.Enemy == null || _canvas != Manager.EnemyPanel.Enemy.Canvas.CanvasGameObject)
                 _canvas.gameObject.SetActive(false);
             else
                 _canvas.gameObject.SetActive(true);
@@ -37,6 +37,13 @@ public class EnemyCanvas : UnitCanvas
             {
                 if (!_objectCantBeRotated.Contains(child.gameObject))
                     child.localEulerAngles = new Vector3(0, 180, 0);
+
+                if (permissions.Contains(Permissions.AnimationShooting))
+                {
+                    //child.LookAt(Manager.TurnManager.SelectedCharacter.gameObject.transform);
+                    child.localEulerAngles += new Vector3(0, 180, 0);
+                    child.LookAt(Manager.CameraManager.AnimatedCamera.transform.position);
+                }
             }
         }
         else

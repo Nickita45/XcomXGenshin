@@ -13,7 +13,7 @@ public class RangedHilichurlAI : EnemyAI
         (TerritroyReaded territory, float percent) minimum = (null, Int32.MinValue); //the optimal territory with itss procent optimational
         foreach (var item in allPaths) //calculations
         {
-            int procMakeHit = characters.Sum(ch => AimUtils.CalculateHitChance(item.Key, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimCharacter).percent);
+            int procMakeHit = characters.Sum(ch => AimUtils.CalculateHitChance(item.Key, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimPercent()).percent);
             int procGetHit = characters.Sum(ch => AimUtils.CalculateHitChance(ch.ActualTerritory, item.Key, GunType.Automatic, 50).percent); //???
             float proc = (2f * (100 - procGetHit) + 0.4f * procMakeHit) / (2f + 0.4f);
             if (proc > minimum.percent)
@@ -22,7 +22,6 @@ public class RangedHilichurlAI : EnemyAI
             }
             //Debug.Log($"get hit procnet: {procGetHit}; make hit proc:{procMakeHit}; proc:{proc}; ter {item.Key}; count vis {string.Join(",", characters.Select(n => n.Stats.CharacterName()))}");
         }
-        Debug.Log(minimum.percent + " " + minimum.territory);
         return minimum.territory;
     }
 
@@ -54,7 +53,7 @@ public class RangedHilichurlAI : EnemyAI
                 //make shoot if it is above 50 percent chance
                 _enemy.ActionsLeft -= 2;
                 yield return StartCoroutine(Attack(characters.OrderByDescending(ch =>
-                AimUtils.CalculateHitChance(_enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimCharacter).percent).First())); //slow?
+                AimUtils.CalculateHitChance(_enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimPercent()).percent).First())); //slow?
             }
         }
         else
@@ -91,7 +90,6 @@ public class RangedHilichurlAI : EnemyAI
     }
     public override TerritroyReaded TriggerEnemy(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
     {
-        Debug.Log(allPaths.Count);
         return FindBestTerritoryForRangedAttack(allPaths);
     }
 }
