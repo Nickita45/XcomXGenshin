@@ -40,7 +40,7 @@ public class SlimeAI : EnemyAI
             yield return StartCoroutine(Attack(character));
 
             // 50 % chance to run after attack
-            if (UnityEngine.Random.Range(0, 2) == 0)
+            if (RandomExtensions.GetChance(50))
             {
                 yield return StartCoroutine(
                     _enemy.MoveEnemy(FindTerritoryFromCharacter)

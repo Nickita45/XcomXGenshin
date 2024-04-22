@@ -61,7 +61,7 @@ public class RangedHilichurlAI : EnemyAI
             _enemy.ActionsLeft -= 1;
 
 
-            if (_enemy.ActionsLeft == 0 && UnityEngine.Random.Range(1, 100 + 1) > 75)
+            if (_enemy.ActionsLeft == 0 && RandomExtensions.GetChance(75))
             { //make overwatch in 25 percent chance
                 _enemy.ActionsLeft = 0;
                 StartCoroutine(_enemy.Canvas.PanelShow(_enemy.Canvas.PanelActionInfo(_overwatch.AbilityName, "Overwatch"), 2));
