@@ -20,7 +20,10 @@ public abstract class Unit : MonoBehaviour
     protected UnitAnimator _animator;
     public virtual UnitAnimator Animator => _animator;
 
-    protected int _countHp;
+    protected UnitHealth _health;
+    public UnitHealth Health => _health;
+
+    public int CountHp => _health.CountHp;
 
     [SerializeField]
     protected ModifierList _modifiers;
@@ -33,150 +36,17 @@ public abstract class Unit : MonoBehaviour
 
     public abstract Transform GetBulletSpawner(string name);
     public abstract void Kill();
+    public bool IsKilled => _health.IsKilled;
+    public void Resurrect() => _health = new UnitHealth(this, Stats.MaxHP(), _modifiers, _canvas);
+
 
     public virtual void Start()
     {
-        _countHp = Stats.MaxHP();
+        Resurrect();
+
         Canvas.UpdateHealthUI(Stats.MaxHP()); //update visual hp of unit
     }
 
-    // Deal a set amount of elemental damage to the unit.
-    // 
-    // damageSource is an object that caused the damage.
-    // Right now it can either be a Unit, a Modifier, or a null (other).
-    public void MakeHit(int hit, Element element, object damageSource)
-    {
-        if ((Unit)damageSource != this && hit <= 0) return; // Unless is the source is the unit themselves, do not do anything if the attack deals no damage
-
-        List<ElementalReaction> reactions = _modifiers.AddElement(element);
-
-        foreach (ElementalReaction reaction in reactions)
-        {
-            switch (reaction)
-            {
-                case ElementalReaction.MeltStrong:
-                    hit *= 2;
-                    break;
-                case ElementalReaction.MeltWeak:
-                    hit = (int)(hit * 1.5);
-                    break;
-
-                case ElementalReaction.VaporizeStrong:
-                    hit *= 2;
-                    break;
-                case ElementalReaction.VaporizeWeak:
-                    hit = (int)(hit * 1.5);
-                    break;
-
-                case ElementalReaction.ElectroCharged:
-                    _modifiers.AddModifier(new ElectroCharged());
-                    break;
-
-                case ElementalReaction.Overloaded:
-                    foreach (Unit ally in GetAdjancentAllies(1))
-                    {
-                        if (ally == this) ally.MakeHit((int)(hit * 1.5), Element.Physical, this);
-                        else { ally.MakeHit((int)(hit * 0.5), Element.Physical, this); }
-                    }
-                    break;
-
-                case ElementalReaction.Superconduct:
-                    _modifiers.AddModifier(new Superconduct());
-                    break;
-
-                case ElementalReaction.Freeze:
-                    ActionsLeft = 0;
-                    _modifiers.AddModifier(new Freeze());
-                    break;
-                case ElementalReaction.Shatter:
-                    hit += UnityEngine.Random.Range(1, 2);
-                    break;
-
-                case ElementalReaction.SwirlPyro:
-                    foreach (Unit ally in GetAdjancentAllies(1))
-                    {
-                        if (ally == this) hit += 1;
-                        else
-                        {
-                            ally.MakeHit(1, Element.Pyro, this);
-                        }
-                    }
-                    break;
-                case ElementalReaction.SwirlCryo:
-                    foreach (Unit ally in GetAdjancentAllies(1))
-                    {
-                        if (ally == this) hit += 1;
-                        else
-                        {
-                            ally.MakeHit(1, Element.Cryo, this);
-                        }
-                    }
-                    break;
-                case ElementalReaction.SwirlHydro:
-                    foreach (Unit ally in GetAdjancentAllies(1))
-                    {
-                        if (ally == this) hit += 1;
-                        else
-                        {
-                            ally.MakeHit(1, Element.Hydro, this);
-                        }
-                    }
-                    break;
-                case ElementalReaction.SwirlElectro:
-                    foreach (Unit ally in GetAdjancentAllies(1))
-                    {
-                        if (ally == this) hit += 1;
-                        else
-                        {
-                            ally.MakeHit(1, Element.Electro, this);
-                        }
-                    }
-                    break;
-
-                case ElementalReaction.CrystallizePyro:
-                    if (damageSource is Unit attacker)
-                    {
-                        attacker.Modifiers.AddModifier(new Crystallize());
-                    }
-                    break;
-                case ElementalReaction.CrystallizeCryo:
-                    if (damageSource is Unit attacker1)
-                    {
-                        attacker1.Modifiers.AddModifier(new Crystallize());
-                    }
-                    break;
-                case ElementalReaction.CrystallizeHydro:
-                    if (damageSource is Unit attacker2)
-                    {
-                        attacker2.Modifiers.AddModifier(new Crystallize());
-                    }
-                    break;
-                case ElementalReaction.CrystallizeElectro:
-                    if (damageSource is Unit attacker3)
-                    {
-                        attacker3.Modifiers.AddModifier(new Crystallize()); ;
-                    }
-                    break;
-            }
-        }
-
-        hit = _modifiers.OnHit(hit, element);
-        if (hit > 0) StartCoroutine(Canvas.PanelShow(Canvas.PanelHit(hit, element), 4));
-
-        _countHp -= hit;
-        if(this is Character character)
-            Manager.StatisticsUtil.AddCharactersWonded(character);
-            
-        if (_countHp <= 0)
-            Kill();
-        else
-            Canvas.UpdateHealthUI(_countHp);  //update visual hp of unit
-
-        Canvas.UpdateModifiersUI(_modifiers);
-        Canvas.ShowReactions(reactions);
-    }
-
-    public bool IsKilled => _countHp <= 0;
 
     // Moves the unit through the list of points on the map. 
     // To find the list of points, use the approppriate functions
@@ -222,13 +92,13 @@ public abstract class Unit : MonoBehaviour
                     _animator.SetSpeedAnimatorSlow(false);
                 }
 
-                if (this.IsKilled)
+                if (IsKilled)
                     break;
 
                 yield return null;
             }
 
-            if (this.IsKilled)
+            if (IsKilled)
                 break;
 
             transform.localPosition = target;
@@ -241,7 +111,7 @@ public abstract class Unit : MonoBehaviour
             yield return null;
         }
 
-        if (!this.IsKilled)
+        if (!IsKilled)
         {
             // Setup idle crouching animation
             yield return StartCoroutine(Animator.StopRunning());
@@ -250,36 +120,4 @@ public abstract class Unit : MonoBehaviour
         }
     }
 
-    // Get a list of all allies of the unit (including the unit themselves)
-    public List<Unit> GetAllies()
-    {
-        if (this is Character)
-        {
-            return Manager.Map.Characters.Select(c => (Unit)c).ToList();
-        }
-        else if (this is Enemy)
-        {
-            return Manager.Map.Enemies.Select(e => (Unit)e).ToList();
-        }
-        else
-        {
-            return new();
-        }
-    }
-
-    // Get a list of allies of the unit within n squares from them (including the unit themselves)
-    public List<Unit> GetAdjancentAllies(int n)
-    {
-        Vector3 coordinats = ActualTerritory.GetCordinats();
-
-        return GetAllies().Where(ally =>
-        {
-            Vector3 otherCoordinats = ally.ActualTerritory.GetCordinats();
-            // Find if any are within 1 square from the unit
-            return
-                Mathf.Abs(coordinats.x - otherCoordinats.x) <= n &&
-                Mathf.Abs(coordinats.y - otherCoordinats.y) <= n &&
-                Mathf.Abs(coordinats.z - otherCoordinats.z) <= n;
-        }).ToList();
-    }
 }

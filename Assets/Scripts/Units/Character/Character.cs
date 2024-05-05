@@ -81,7 +81,7 @@ public class Character : Unit
     {
         gameObject.name = Stats.Name(); //set name
 
-        _countHp = Stats.MaxHP(); //set max hp
+        Resurrect(); //set max hp
         Canvas.UpdateHealthUI(Stats.MaxHP());
 
         SetGunByIndex((int)Stats.Weapon); //set gun

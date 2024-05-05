@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -105,4 +106,37 @@ public class MatrixMap
     }
 
     public static string MakeFromVector3ToIndex(Vector3 vector) => (vector.x + ReadingMap.SPLITTER + vector.y + ReadingMap.SPLITTER + vector.z);
+
+    // Get a list of all allies of the unit (including the unit themselves)
+    public IEnumerable<Unit> GetAllies(Unit _target)
+    {
+        if (_target is Character)
+        {
+            return Characters.Select(c => (Unit)c);
+        }
+        else if (_target is Enemy)
+        {
+            return Enemies.Select(e => (Unit)e);
+        }
+        else
+        {
+            return new List<Unit>();
+        }
+    }
+
+    // Get a list of allies of the unit within n squares from them (including the unit themselves)
+    public IEnumerable<Unit> GetAdjancentAllies(int n, Unit _target)
+    {
+        Vector3 coordinats = _target.ActualTerritory.GetCordinats();
+
+        return Manager.Map.GetAllies(_target).Where(ally =>
+        {
+            Vector3 otherCoordinats = ally.ActualTerritory.GetCordinats();
+            // Find if any are within 1 square from the unit
+            return
+                Mathf.Abs(coordinats.x - otherCoordinats.x) <= n &&
+                Mathf.Abs(coordinats.y - otherCoordinats.y) <= n &&
+                Mathf.Abs(coordinats.z - otherCoordinats.z) <= n;
+        });
+    }
 }

@@ -30,7 +30,7 @@ public class ShootManager : MonoBehaviour
         Debug.Log($"{shooter.Stats.Name()} has next {percent} to hit and got {result}");
         for (int i = 0; i < ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].countBullets; i++)
         {
-            Vector3 addShootRange = GenerateCoordinatesFromResult(result); //getting a spread depending on the result of a hit
+            Vector3 addShootRange = GenerateCoordinatesFromResult(!result); //getting a spread depending on the result of a hit
 
             GameObject bullet = Instantiate(_bulletPrefab, firePoint.position, firePoint.rotation); //create bullet
             Bullet bulletScript = bullet.GetComponent<Bullet>();
@@ -47,7 +47,7 @@ public class ShootManager : MonoBehaviour
         if (afterShootingBullets != null)
             yield return StartCoroutine(afterShootingBullets); //callback
 
-        if (result)
+        if (!result)
             StartCoroutine(defender.Canvas.PanelShow(defender.Canvas.PanelMiss, 4)); //show panel miss
         else
         {
@@ -61,7 +61,7 @@ public class ShootManager : MonoBehaviour
                 dmg = UnityEngine.Random.Range(ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].minHitValue, ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].maxHitValue + 1);
             }
 
-            defender.MakeHit(dmg, element, shooter);
+            defender.Health.MakeHit(dmg, element, shooter);
         }
         yield return new WaitForSeconds(ConfigurationManager.GlobalDataJson.timeAfterShooting);
     }

@@ -52,7 +52,7 @@ public class Enemy : Unit
 
     public override void Start()
     {
-        _countHp = _stats.MaxHP();//set maximum hp
+        Resurrect();//set maximum hp
         base.Start();
 
         ActualTerritory = Manager.Map[transform.localPosition]; //set actual block

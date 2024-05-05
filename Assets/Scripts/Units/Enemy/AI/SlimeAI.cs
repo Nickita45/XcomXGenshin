@@ -21,12 +21,19 @@ public class SlimeAI : EnemyAI
     // The slime's element is applied to it every turn
     private void ApplyElementToSelf()
     {
-        _enemy.MakeHit(0, _element, _enemy);
+        _enemy.Health.MakeHit(0, _element, _enemy);
     }
 
     public override void OnSpawn()
     {
         ApplyElementToSelf();
+    }
+
+    public override int OnResistance(int hit, Element element)
+    {
+        if(element == _element)
+            return 0;
+        else return hit;
     }
 
     public override IEnumerator MakeTurn()
