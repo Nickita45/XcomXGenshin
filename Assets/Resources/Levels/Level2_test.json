@@ -1,10 +1,6 @@
 {
-  "_enemy": [],
-  "_characters": [],
   "width": 30,
   "height": 5,
-  "Enemies": [],
-  "Characters": [],
   "Decors": {
     "13.618_0_-13.506": {
       "XSize": 40.0,
@@ -157383,5 +157379,11 @@
         "Front": 0
       }
     }
+  },
+  "Enemies": {
+    "GetList": []
+  },
+  "Characters": {
+    "GetList": []
   }
 }

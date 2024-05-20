@@ -146,10 +146,18 @@ public class UnitHealth
         }
 
         hit = _modifiers.OnHit(hit, element);
-        hit = OnResistance(hit, element);
-        if (hit > 0) _canvas.StartCoroutine(_canvas.PanelShow(_canvas.PanelHit(hit, element), 4));
+        if (OnResistance != null)
+        {
+            int saveHit = hit; //helping to see if was any dmg 
+            hit = OnResistance(hit, element);
+
+            if(hit <= 0 && saveHit != hit) _canvas.StartCoroutine(_canvas.PanelShow(_canvas.PanelActionInfo("Immunity"), 4));
+            else if(hit > 0) _canvas.StartCoroutine(_canvas.PanelShow(_canvas.PanelHit(hit, element), 4));
+        }
         else
-            _canvas.StartCoroutine(_canvas.PanelShow(_canvas.PanelActionInfo("Immunity"), 4));
+        {
+            if (hit > 0) _canvas.StartCoroutine(_canvas.PanelShow(_canvas.PanelHit(hit, element), 4));
+        }
 
         _countHp -= hit;
         if (_mainUnit is Character character)

@@ -8,7 +8,7 @@ public abstract class Ability
     public virtual string Icon => AbilityName;
 
     // the amount of action points the ability costs
-    public abstract int ActionCost { get; }
+    public abstract int ActionCost { get; } 
     public abstract TargetType TargetType { get; }
     public abstract IEnumerator Activate(Unit unit, object target);
 }

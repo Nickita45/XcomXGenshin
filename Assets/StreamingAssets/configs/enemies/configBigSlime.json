@@ -4,7 +4,7 @@
     "enemySpeed": 3.0,
     "enemyMoveDistance": 6,
     "enemyRangedTargetDistance": 10.0,
-    "enemyBaseAim": 50,
+    "enemyBaseAim": 70,
     "enemyBaseHealth": 5,
     "enemyWeapon": -1,
     "isMeleeAttack": true,

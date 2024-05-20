@@ -12,8 +12,6 @@ public class AbilityMeleeAttack : Ability
     public override int ActionCost => 2;
     public override TargetType TargetType => TargetType.Enemy;
 
-    private float HitChance = 0.5f;
-
     private Element _element;
 
     public AbilityMeleeAttack() { _element = Element.Physical; }
@@ -28,7 +26,7 @@ public class AbilityMeleeAttack : Ability
         yield return unit.StartCoroutine(animator.StopCrouching());
         yield return unit.StartCoroutine(animator.AttackMelee());
 
-        if (UnityEngine.Random.value >= HitChance)
+        if (!RandomExtensions.GetChance(unit.Stats.BaseAimPercent()))
             targetUnit.StartCoroutine(targetUnit.Canvas.PanelShow(targetUnit.Canvas.PanelMiss));
         else
         {

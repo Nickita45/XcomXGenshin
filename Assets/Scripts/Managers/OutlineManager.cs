@@ -30,8 +30,8 @@ public class OutlineManager : MonoBehaviour
 
     private void UpdateOutlines()
     {
-        foreach (UnitOutline outline in Manager.Map.Enemies.Select(u => u.Animator.Outline)
-            .Concat(Manager.Map.Characters.Select(u => u.Animator.Outline)))
+        foreach (UnitOutline outline in Manager.Map.Enemies.GetList.Select(u => u.Animator.Outline)
+            .Concat(Manager.Map.Characters.GetList.Select(u => u.Animator.Outline)))
         {
             if (_targetEnemies.Contains(outline) || _targetCharacters.Contains(outline))
             {

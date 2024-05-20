@@ -11,9 +11,10 @@ public class MatrixMap
 
     private Dictionary<string, TerritroyReaded> _decors = new();
 
-    private Dictionary<string, GameObject> _planeToMovement = new(); //dictionary of platforms for movement cells(actually they are air blocks)
-    public List<Enemy> _enemy = new();
-    public List<Character> _characters = new();
+    //dictionary of platforms for movement cells(actually they are air blocks)
+    private Dictionary<string, GameObject> _planeToMovement = new();
+    private ListUnitsMap<Enemy> _enemy = new();
+    private ListUnitsMap<Character> _characters = new();
     public int width, height;
 
     public TerritroyReaded AddVertex(TerritroyReaded ter, Dictionary<string, TerritroyReaded> collection)
@@ -46,10 +47,11 @@ public class MatrixMap
         return ter;
     }
 
-    public List<Enemy> Enemies => _enemy;
-    public List<Character> Characters => _characters;
     public Dictionary<string, TerritroyReaded> Decors { get { return _decors; } }
     public Dictionary<string, TerritroyReaded> Vertex { get { return _vertex; } }
+
+    public ListUnitsMap<Enemy> Enemies { get => _enemy; private set => _enemy = value; }
+    public ListUnitsMap<Character> Characters { get => _characters; private set => _characters = value; }
 
     public void AirPlatformRemove(TerritroyReaded ter) => _planeToMovement.Remove(ter.Index);
 
@@ -111,17 +113,17 @@ public class MatrixMap
     public IEnumerable<Unit> GetAllies(Unit _target)
     {
         if (_target is Character)
-        {
-            return Characters.Select(c => (Unit)c);
-        }
+            return Characters.GetList.Select(c => (Unit)c);
         else if (_target is Enemy)
-        {
-            return Enemies.Select(e => (Unit)e);
-        }
+            return Enemies.GetList.Select(e => (Unit)e);
         else
-        {
             return new List<Unit>();
-        }
+    }
+
+    //Get a list of all units on the map
+    public IEnumerable<Unit> GetAllUnits()
+    {
+        return Characters.GetList.Select(c => (Unit)c).Concat(Enemies.GetList.Select(e => (Unit)e));
     }
 
     // Get a list of allies of the unit within n squares from them (including the unit themselves)
@@ -129,14 +131,38 @@ public class MatrixMap
     {
         Vector3 coordinats = _target.ActualTerritory.GetCordinats();
 
-        return Manager.Map.GetAllies(_target).Where(ally =>
-        {
-            Vector3 otherCoordinats = ally.ActualTerritory.GetCordinats();
-            // Find if any are within 1 square from the unit
-            return
-                Mathf.Abs(coordinats.x - otherCoordinats.x) <= n &&
-                Mathf.Abs(coordinats.y - otherCoordinats.y) <= n &&
-                Mathf.Abs(coordinats.z - otherCoordinats.z) <= n;
-        });
+        return Manager.Map.GetAllies(_target).Where(UnitsAdjancent(n, coordinats));
     }
+
+    private static Func<Unit, bool> UnitsAdjancent(int n, Vector3 coordinats)
+    {
+        return unit =>
+        {
+            Vector3 otherCoordinats = unit.ActualTerritory.GetCordinats();
+            // Find if any are within 1 square from the unit
+            return Math.Round(Vector3.Distance(coordinats, otherCoordinats)) <= n;   
+              //  Mathf.Abs(coordinats.x - otherCoordinats.x) <= n &&
+              //  Mathf.Abs(coordinats.y - otherCoordinats.y) <= n &&
+              //  Mathf.Abs(coordinats.z - otherCoordinats.z) <= n;
+        };
+    }
+
+    // Get a list of units of the unit within n squares from them (including the unit themselves)
+    public IEnumerable<Unit> GetAdjancentUnits(int n, Unit _target)
+    {
+        Vector3 coordinats = _target.ActualTerritory.GetCordinats();
+
+        return Manager.Map.GetAllUnits().Where(UnitsAdjancent(n, coordinats));
+    }
+}
+
+[System.Serializable]
+public class ListUnitsMap<T>
+{
+    private List<T> _units = new();
+
+    public List<T> GetList => _units.ToList();
+    public void Remove(T unit) => _units.Remove(unit);
+    public void Add(T unit) => _units.Add(unit);
+
 }
