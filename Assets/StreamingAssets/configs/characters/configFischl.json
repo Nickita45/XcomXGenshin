@@ -7,5 +7,23 @@
     "characterBaseHealth": 8,
     "characterWeapon": 0,
     "characterAvatarPath": "Characters/Fischl/Fischl",
-    "element": "Electro"
+    "element": "Electro",
+    "abilities": [
+        {
+            "name": "AbilityShoot",
+            "element": "Physical"
+        },
+        {
+            "name": "AbilityShoot",
+            "element": "Electro"
+        },
+        {
+            "name": "AbilityOverwatch",
+            "element": "Physical"
+        },
+        {
+            "name": "AbilityHunkerDown",
+            "element": "Physical"
+        }
+    ]
 }

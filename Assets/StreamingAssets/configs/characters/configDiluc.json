@@ -7,5 +7,23 @@
     "characterBaseHealth": 6,
     "characterWeapon": 2,
     "characterAvatarPath": "Characters/Diluc/Diluc",
-    "element": "Pyro"
+    "element": "Pyro",
+    "abilities": [
+        {
+            "name": "AbilityShoot",
+            "element": "Physical"
+        },
+        {
+            "name": "AbilityShoot",
+            "element": "Pyro"
+        },
+        {
+            "name": "AbilityOverwatch",
+            "element": "Physical"
+        },
+        {
+            "name": "AbilityHunkerDown",
+            "element": "Physical"
+        }
+    ]
 }

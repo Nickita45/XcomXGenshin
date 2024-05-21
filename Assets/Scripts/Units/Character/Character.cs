@@ -86,13 +86,13 @@ public class Character : Unit
 
         SetGunByIndex((int)Stats.Weapon); //set gun
 
-        _abilities = new() {
-            new AbilityShoot(),
-            new AbilityShoot(Stats.Element),
-            new AbilityOverwatch(),
-            new AbilityHunkerDown(),
-            new AbilityElementalSkill(Stats.Element)
-        }; //set abilities
+
+        _abilities = new();
+
+        foreach (AbilitiesList list in Stats.AbilitiesLists)
+        {
+            _abilities.Add(AbilitiesHelper.GetAbilityFromList(list.name, Enum.Parse<Element>(list.element)));
+        }
 
         Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath); //
         Animator.GetComponentInChildren<GunModel>().Init(); //
@@ -194,6 +194,6 @@ public class Character : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set character's block to air
 
         Manager.Instance.StatisticsUtil.SoldierDeathCount++;
-        
+
     }
 }

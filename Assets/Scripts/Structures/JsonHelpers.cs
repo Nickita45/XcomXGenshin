@@ -178,6 +178,12 @@ public class CharacterData
     public int characterWeapon;
     public string characterAvatarPath;
     public string element;
+    public AbilitiesList[] abilities;
+}
+[System.Serializable]
+public class AbilitiesList{
+    public string name; 
+    public string element; 
 }
 [System.Serializable]
 public class EnemyData
