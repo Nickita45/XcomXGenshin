@@ -52,7 +52,7 @@ public class Enemy : Unit
 
     public override void Start()
     {
-        _countHp = _stats.MaxHP();//set maximum hp
+        Resurrect();//set maximum hp
         base.Start();
 
         ActualTerritory = Manager.Map[transform.localPosition]; //set actual block
@@ -70,7 +70,7 @@ public class Enemy : Unit
         if (!_triggered)
         {
             // Trigger if any of the characters can see the enemy
-            if (Manager.Map.Characters.Any(character => TargetUtils.CanSee(character, this)))
+            if (Manager.Map.Characters.GetList.Any(character => TargetUtils.CanSee(character, this)))
             {
                 _triggered = true;
 
@@ -86,7 +86,7 @@ public class Enemy : Unit
 
     public IEnumerator MoveEnemy(Func<Dictionary<TerritroyReaded, TerritroyReaded>, TerritroyReaded> findTerritoryMoveTo)
     {
-        yield return StartCoroutine(Manager.MovementManager.MoveEnemyToTerritory(this, findTerritoryMoveTo));
+        yield return StartCoroutine(Manager.MovementManager.MoveEnemyToTerritoryFromSelected(this, findTerritoryMoveTo));
     }
 
     public IEnumerator MakeTurn()
@@ -99,8 +99,8 @@ public class Enemy : Unit
 
     public override void Kill()
     {
-        Manager.Instance.StatisticsUtil.SetEnemiesKilledList(Stats.Icon);
-        Manager.Map.Enemies.Remove(this); //remove form list of enemies
+        Manager.StatisticsUtil.SetEnemiesKilledList(Stats.Icon);
+            Manager.Map.Enemies.Remove(this); //remove form list of enemies
         foreach (Modifier m in _modifiers.Modifiers) m.DestroyModel(this);
         _canvas.DisableAll(); //disable all elements from canvas
         _actionsLeft = 0;
@@ -110,7 +110,7 @@ public class Enemy : Unit
         GetComponent<BoxCollider>().enabled = false; //disable collider
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set his block type on air
 
-        Manager.Instance.StatisticsUtil.EnemiesDeathCount++;
+        Manager.StatisticsUtil.EnemiesDeathCount++;
     }
 
     private void OnDestroy()
@@ -121,7 +121,7 @@ public class Enemy : Unit
     // Gets the character closest to the enemy.
     public Character GetClosestCharacter()
     {
-        return Manager.Map.Characters
+        return Manager.Map.Characters.GetList
                 .OrderBy(ch => Vector3.Distance(ch.transform.localPosition, transform.localPosition))
                 .FirstOrDefault();
     }
@@ -132,7 +132,7 @@ public class Enemy : Unit
         // we check whether the enemy can see the character by supplying
         // vision distance to the CanTarget function. This
         // implementation might change in future.
-        return Manager.Map.Characters
+        return Manager.Map.Characters.GetList
             .Where(character => TargetUtils.CanSee(character, this))
             .ToList();
     }

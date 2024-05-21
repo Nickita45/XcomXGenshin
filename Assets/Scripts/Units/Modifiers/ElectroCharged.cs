@@ -29,7 +29,7 @@ public class ElectroCharged : Modifier
     public override IEnumerator OnEndRound(Unit unit)
     {
         // Iterate over all allies within 1 square 
-        foreach (Unit ally in unit.GetAdjancentAllies(1))
+        foreach (Unit ally in Manager.Map.GetAdjancentAllies(1, unit))
         {
             // Should have either hydro or electro-charged
             if (ally != unit && (
@@ -37,7 +37,7 @@ public class ElectroCharged : Modifier
                 ally.Modifiers.Modifiers.Any(m => m is ElectroCharged)
             ))
             {
-                ally.MakeHit(1, Element.Electro, this);
+                ally.Health.MakeHit(1, Element.Electro, this);
             }
         }
         yield return null;

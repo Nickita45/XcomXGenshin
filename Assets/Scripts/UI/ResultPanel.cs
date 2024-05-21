@@ -20,7 +20,7 @@ public class ResultPanel : MonoBehaviour
     
     public void SetResultPanel()
     {
-        _statisticsUtil = Manager.Instance.StatisticsUtil;
+        _statisticsUtil = Manager.StatisticsUtil;
 
         if (_statisticsUtil.SoldierDeathCount == _statisticsUtil.SoldierTotalCount)
         {
@@ -39,7 +39,7 @@ public class ResultPanel : MonoBehaviour
         for (int i = 0; i < _statisticsUtil.EnemiesDeathCount && i < _scrollMaxEnemiesIcons; i++)
         {
             GameObject generatedIconEnemy = Instantiate(_prefabIconsEnemies, _objectPrefabRoot.transform);
-            generatedIconEnemy.GetComponent<Image>().sprite = Manager.Instance.StatisticsUtil.GetEnemiesKilledList().ElementAt(i);
+            generatedIconEnemy.GetComponent<Image>().sprite = _statisticsUtil.GetEnemiesKilledList().ElementAt(i);
         }
 
         _textGrade.text = _statisticsUtil.GetGrade();

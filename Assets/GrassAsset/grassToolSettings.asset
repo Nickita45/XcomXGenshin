@@ -34,7 +34,7 @@ MonoBehaviour:
   rangeR: 0.112
   rangeG: 0.267
   rangeB: 0.211
-  AdjustedColor: {r: 0.35678098, g: 0.9622642, b: 0.17611244, a: 1}
+  AdjustedColor: {r: 0.19666187, g: 0.5, b: 0.10566035, a: 1}
   paintBlockMask:
     serializedVersion: 2
     m_Bits: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   paintMask:
     serializedVersion: 2
     m_Bits: 1
-  brushSize: 0.7
+  brushSize: 1.4
   brushFalloffSize: 1
   Flow: 1.51
   density: 6.51

@@ -31,12 +31,14 @@ public class EnemyTargetPanel : MonoBehaviour
                 int newIndex = _selectedIndex.Value - 1;
                 if (newIndex == -1) newIndex = transform.childCount - 1;
                 SelectEnemy(_icons[newIndex]);
+                Manager.StatusMain.SetStatusSelectEnemy();
             }
             else if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 int newIndex = _selectedIndex.Value + 1;
                 if (newIndex == transform.childCount) newIndex = 0;
                 SelectEnemy(_icons[newIndex]);
+                Manager.StatusMain.SetStatusSelectEnemy();
             }
         }
     }

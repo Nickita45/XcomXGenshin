@@ -2,6 +2,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
@@ -80,7 +81,7 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
                 character.ActualTerritory,
                 _enemy.ActualTerritory,
                 character.Stats.Weapon,
-                character.Stats.BaseAimCharacter
+                character.Stats.BaseAimPercent()
             );
 
         _textPercent.text = percent.ToString() + "%";

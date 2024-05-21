@@ -20,6 +20,8 @@ public abstract class UnitAnimator : MonoBehaviour
     public UnitOutline Outline => _outline;
 
     public GameObject Model => _animator.gameObject;
+    public GameObject GunModel => _gun?.gameObject;
+
     protected bool _hasAnimation = true;
 
     // Whether the unit crouches or not (e.g. hilichurl crouches to hide better,
