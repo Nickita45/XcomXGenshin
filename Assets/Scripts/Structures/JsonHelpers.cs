@@ -70,7 +70,20 @@ public class TerritroyReaded
         {
             yield return item;
         }
+    }
 
+    public TerritroyReaded GetRandomTerritoryNearBy()
+    {
+        var allItems = new List<string>();
+
+        allItems.AddRange(IndexBottom.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air));
+        allItems.AddRange(IndexFront.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air));
+        allItems.AddRange(IndexLeft.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air));
+        allItems.AddRange(IndexRight.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air));
+
+        int randomIndex = UnityEngine.Random.Range(0,allItems.Count);
+
+        return Manager.Map[allItems[randomIndex]];
     }
 
     public bool IsNearIsGround() => DetectSomeBooleans(n => (Manager.Map[n].TerritoryInfo == TerritoryType.Ground || Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround)

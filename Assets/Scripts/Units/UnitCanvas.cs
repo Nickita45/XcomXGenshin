@@ -31,6 +31,8 @@ public abstract class UnitCanvas : MonoBehaviour
     [SerializeField]
     protected Image _actionIconPopUp;
 
+    public GameObject CanvasGameObject => _canvas;
+
     public GameObject PanelMiss => CreateObjectPanel(_panelMiss);
 
     public virtual void Start()

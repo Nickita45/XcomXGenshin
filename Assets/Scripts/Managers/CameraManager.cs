@@ -11,6 +11,8 @@ using UnityEngine;
 //    and for smooth camera transitions.
 public class CameraManager : MonoBehaviour
 {
+    //TODO: maybe change all cameras types to non MonoBehaiorObjects
+
     [SerializeField]
     private FreeCamera _freeCamera;
     public FreeCamera FreeCamera => _freeCamera;
@@ -19,14 +21,18 @@ public class CameraManager : MonoBehaviour
     private FixedCamera _fixedCamera;
     public FixedCamera FixedCamera => _fixedCamera;
 
-    public void EnableFreeCameraMovement()
+    [SerializeField]
+    private AnimatedCamera _animatedCamera;
+    public AnimatedCamera AnimatedCamera => _animatedCamera;
+
+    public void EnableFreeCameraMovement() //TODO: change to OnStatusChange
     {
         _freeCamera.InitAsMainCamera();
 
         // If coming from enemy selection or shooting, perform additional setup
         if (
-            Manager.HasPermission(Permissions.SelectEnemy) ||
-            Manager.HasPermission(Permissions.AnimationShooting)
+            Manager.HasPermission(Permissions.SelectEnemy) 
+           // ||Manager.HasPermission(Permissions.AnimationShooting)
         )
         {
             Manager.OutlineManager.ClearTargets();
@@ -38,7 +44,7 @@ public class CameraManager : MonoBehaviour
     // Transitions the camera to look at the given enemy.
     //
     // Used while selecting the enemy target for an ability.
-    public void FixCameraOnEnemy(EnemyIcon icon)
+    public void FixCameraOnEnemy(EnemyIcon icon) //TODO: change to OnStatusChange
     {
         if (Manager.HasPermission(Permissions.ActionSelect))
         {

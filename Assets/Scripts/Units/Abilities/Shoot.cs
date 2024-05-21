@@ -31,9 +31,12 @@ public class AbilityShoot : Ability
 
         IEnumerator IEnumeratorActionMethod()
         {
+            Manager.CameraManager.AnimatedCamera.Targets = targetUnit;
             yield return unit.StartCoroutine(animator.StopAttackRanged());
             yield return unit.StartCoroutine(animator.StartCrouching());
             yield return unit.StartCoroutine(animator.CrouchRotateHideBehindShelter(unit.transform.localPosition));
+            //Maybe here is timer...
+            Manager.StatusMain.SetStatusWaiting();
         }
 
         // Shoot
@@ -41,6 +44,10 @@ public class AbilityShoot : Ability
         GunType gunUsedInShooting = GunType.Automatic;
         if (unit is Character)
             gunUsedInShooting = ((Character)unit).Stats.Weapon;
+
+
+        Manager.CameraManager.AnimatedCamera.Targets = unit;
+        //Manager.StatusMain.SetStatusShooting();
 
         yield return unit.StartCoroutine(Manager.ShootManager.Shoot(
             unit,

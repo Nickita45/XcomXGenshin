@@ -3,11 +3,10 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEditor;
-using UnityEditor.SceneManagement;
-using UnityEditorInternal;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
+#if UNITY_EDITOR
 public class GrassPainterWindow : EditorWindow
 {
 
@@ -242,8 +241,8 @@ public class GrassPainterWindow : EditorWindow
         toolSettings.generationDensity = EditorGUILayout.Slider("Grass Place Density", toolSettings.generationDensity, 0.01f, 1f);
 
         EditorGUILayout.Separator();
-        LayerMask tempMask0 = EditorGUILayout.MaskField("Blocking Mask", InternalEditorUtility.LayerMaskToConcatenatedLayersMask(toolSettings.paintBlockMask), InternalEditorUtility.layers);
-        toolSettings.paintBlockMask = InternalEditorUtility.ConcatenatedLayersMaskToLayerMask(tempMask0);
+        LayerMask tempMask0 = EditorGUILayout.MaskField("Blocking Mask", UnityEditorInternal.InternalEditorUtility.LayerMaskToConcatenatedLayersMask(toolSettings.paintBlockMask), UnityEditorInternal.InternalEditorUtility.layers);
+        toolSettings.paintBlockMask = UnityEditorInternal.InternalEditorUtility.ConcatenatedLayersMaskToLayerMask(tempMask0);
 
 
         toolSettings.VertexColorSettings = (SO_GrassToolSettings.VertexColorSetting)EditorGUILayout.EnumPopup("Block On vertex Colors", toolSettings.VertexColorSettings);
@@ -331,10 +330,10 @@ public class GrassPainterWindow : EditorWindow
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.Separator();
         EditorGUILayout.LabelField("Hit Settings", EditorStyles.boldLabel);
-        LayerMask tempMask = EditorGUILayout.MaskField("Hit Mask", InternalEditorUtility.LayerMaskToConcatenatedLayersMask(toolSettings.hitMask), InternalEditorUtility.layers);
-        toolSettings.hitMask = InternalEditorUtility.ConcatenatedLayersMaskToLayerMask(tempMask);
-        LayerMask tempMask2 = EditorGUILayout.MaskField("Painting Mask", InternalEditorUtility.LayerMaskToConcatenatedLayersMask(toolSettings.paintMask), InternalEditorUtility.layers);
-        toolSettings.paintMask = InternalEditorUtility.ConcatenatedLayersMaskToLayerMask(tempMask2);
+        LayerMask tempMask = EditorGUILayout.MaskField("Hit Mask", UnityEditorInternal.InternalEditorUtility.LayerMaskToConcatenatedLayersMask(toolSettings.hitMask), UnityEditorInternal.InternalEditorUtility.layers);
+        toolSettings.hitMask = UnityEditorInternal.InternalEditorUtility.ConcatenatedLayersMaskToLayerMask(tempMask);
+        LayerMask tempMask2 = EditorGUILayout.MaskField("Painting Mask", UnityEditorInternal.InternalEditorUtility.LayerMaskToConcatenatedLayersMask(toolSettings.paintMask), UnityEditorInternal.InternalEditorUtility.layers);
+        toolSettings.paintMask = UnityEditorInternal.InternalEditorUtility.ConcatenatedLayersMaskToLayerMask(tempMask2);
         EditorGUILayout.Separator();
         EditorGUILayout.LabelField("Paint Status (Right-Mouse Button to paint)", EditorStyles.boldLabel);
         toolbarInt = GUILayout.Toolbar(toolbarInt, toolbarStrings);
@@ -581,7 +580,7 @@ public class GrassPainterWindow : EditorWindow
         grassData.Clear();
         grassCompute.SetGrassPaintedDataList = grassData;
         grassCompute.Reset();
-        EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+        UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
     }
 
     public void GeneratePositions(GameObject selection)
@@ -1289,7 +1288,7 @@ public class GrassPainterWindow : EditorWindow
     {
         grassAmount = grassData.Count;
         grassCompute.Reset();
-        EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+        UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
 
     }
 
@@ -1302,4 +1301,4 @@ public class GrassPainterWindow : EditorWindow
 
 #endif
 }
-
+#endif

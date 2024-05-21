@@ -12,7 +12,10 @@ public class MenuManager : MonoBehaviour
     private TMP_Dropdown _dropdownLevel;
 
     [SerializeField]
-    private GameObject _panelEnemyTurn, _panelCharaterName, _panelResult;
+    private GameObject _panelEnemyTurn, _panelCharaterName;
+
+    [SerializeField]
+    private ResultPanel _panelResult;
 
     [SerializeField]
     private TextMeshProUGUI _textCharacter;
@@ -66,10 +69,11 @@ public class MenuManager : MonoBehaviour
         else
             _panelCharaterName.gameObject.SetActive(false);
     }
-    public void SetPanelResult(bool set)
+    public void SetPanelResult()
     {
-        _panelResult.SetActive(set);
+        bool set = !_panelResult.gameObject.activeInHierarchy;
 
+        _panelResult.gameObject.SetActive(set);
         _panelResult.GetComponent<ResultPanel>().SetResultPanel();
     }
 }

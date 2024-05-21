@@ -86,10 +86,10 @@ public class TurnManager : MonoBehaviour
 
     public void LoadCharacterData()
     {
-        if (Manager.Map.Characters.Count == 0)
+        if (Manager.Map.Characters.GetList.Count == 0)
             return;
 
-        List<Character> characters = Manager.Map.Characters; //actualization list of characters
+        List<Character> characters = Manager.Map.Characters.GetList; //actualization list of characters
 
         if (characters.First().Stats.Index == -1)  //set basic parameters to characters
         {
@@ -105,9 +105,9 @@ public class TurnManager : MonoBehaviour
                 }
             }
         }
-        Manager.Instance.StatisticsUtil.SoldierDeathCount = 0;
-        Manager.Instance.StatisticsUtil.SoldierTotalCount = characters.Count;
-        Manager.Instance.StatisticsUtil.EnemiesTotalCount = Manager.Map.Enemies.Count;
+        Manager.StatisticsUtil.SoldierDeathCount = 0;
+        Manager.StatisticsUtil.SoldierTotalCount = characters.Count;
+        Manager.StatisticsUtil.EnemiesTotalCount = Manager.Map.Enemies.GetList.Count;
         /*foreach (Enemy enemy in Manager.Map.Enemies)
             Manager.Instance.StatisticsUtil.setEnemiesKilledList(enemy.Stats.Icon);*/
     }
@@ -118,12 +118,11 @@ public class TurnManager : MonoBehaviour
         UnitOverwatched.RemoveAll(unit => unit is Character);
 
         // Restore actions
-        foreach (Character character in Manager.Map.Characters) { character.ActionsLeft = 2; }
-        foreach (Enemy enemy in Manager.Map.Enemies) { enemy.ActionsLeft = enemy.Stats.BaseActions(); }
+        foreach (Character character in Manager.Map.Characters.GetList) { character.ActionsLeft = 2; }
+        foreach (Enemy enemy in Manager.Map.Enemies.GetList) { enemy.ActionsLeft = enemy.Stats.BaseActions(); }
 
         // Trigger modifiers on begin round
-        foreach (Unit unit in Manager.Map.Enemies.Select(e => (Unit)e)
-                    .Concat(Manager.Map.Characters.Select(c => (Unit)c)))
+        foreach (Unit unit in Manager.Map.GetAllUnits())
         {
             yield return StartCoroutine(unit.Modifiers.OnBeginRound());
             unit.Canvas.UpdateModifiersUI(unit.Modifiers);
@@ -136,7 +135,7 @@ public class TurnManager : MonoBehaviour
     {
         Debug.Log("Begin turn");
 
-        _characters.AddRange(Manager.Map.Characters);
+        _characters.AddRange(Manager.Map.Characters.GetList);
         if (_characters.Count > 0) SelectCharacter(_characters[0]);
     }
 
@@ -145,11 +144,11 @@ public class TurnManager : MonoBehaviour
         Manager.StatusMain.SetStatusWaiting();
 
         // Trigger all possible enemies
-        //foreach (Enemy enemy in Manager.Map.Enemies)
-        for (int i = Manager.Map.Enemies.Count - 1; i >= 0; i--) //make from bottom to up to savly removing killed enemies
+        foreach (var enemy in Manager.Map.Enemies.GetList)
         {
-            yield return StartCoroutine(Manager.Map.Enemies[i].ConditionalTrigger());
-        }
+            if(!enemy.IsKilled)
+                yield return StartCoroutine(enemy.ConditionalTrigger());
+        } 
 
         // If the character still has some actions left, reselect them. 
         if (_selectedCharacter?.ActionsLeft > 0)
@@ -163,6 +162,8 @@ public class TurnManager : MonoBehaviour
 
             if (_characters.Count == 0)
             {
+                _selectedCharacter.OnDeselected();
+                //DeselectCharacter();
                 yield return StartCoroutine(EndPlayerTurn());
             }
         }
@@ -192,16 +193,16 @@ public class TurnManager : MonoBehaviour
         _menuManager.SetPanelEnemy(true);
         UnitOverwatched.RemoveAll(unit => unit is Enemy);
 
-        for (int i = Manager.Map.Enemies.Count - 1; i >= 0; i--) //make from bottom to up to savly removing killed enemies
+        foreach (var enemy in Manager.Map.Enemies.GetList)//for (int i = Manager.Map.Enemies.Count - 1; i >= 0; i--) //make from bottom to up to savly removing killed enemies
         {
-            Enemy enemy = Manager.Map.Enemies[i];
+            if (enemy.IsKilled) continue;
+
             enemy.ActionsLeft = enemy.Stats.BaseActions();
             while (enemy.ActionsLeft > 0)
             {
                 if (!enemy.Triggered)
                     break;
 
-                Debug.Log("wtf");
                 yield return StartCoroutine(enemy.MakeTurn());
             }
         }
@@ -212,8 +213,7 @@ public class TurnManager : MonoBehaviour
     private IEnumerator EndRound()
     {
         // Trigger modifiers on end round
-        foreach (Unit unit in Manager.Map.Enemies.Select(e => (Unit)e)
-                    .Concat(Manager.Map.Characters.Select(c => (Unit)c)))
+        foreach (Unit unit in Manager.Map.GetAllUnits())
         {
             yield return StartCoroutine(unit.Modifiers.OnEndRound());
             unit.Canvas.UpdateModifiersUI(unit.Modifiers);

@@ -4913,6 +4913,7 @@ MonoBehaviour:
   - Prefabs/Enemies/SlimeElectro
   - Prefabs/Enemies/SlimeAnemo
   - Prefabs/Enemies/SlimeGeo
+  - Prefabs/Enemies/SlimeBigElectro
 --- !u!1 &1591048338
 GameObject:
   m_ObjectHideFlags: 0

@@ -92,7 +92,7 @@ public static class TargetUtils
         // If a character is selected, look for available targets
         if (character)
         {
-            foreach (Enemy enemy in Manager.Map.Enemies
+            foreach (Enemy enemy in Manager.Map.Enemies.GetList
                 .Where(e => TargetUtils.CanTarget(character.transform, e.transform, character.Stats.AttackRangedDistance())))
             {
                 // Add a suitable enemy to the set

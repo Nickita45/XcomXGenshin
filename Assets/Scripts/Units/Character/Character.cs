@@ -81,7 +81,7 @@ public class Character : Unit
     {
         gameObject.name = Stats.Name(); //set name
 
-        _countHp = Stats.MaxHP(); //set max hp
+        Resurrect(); //set max hp
         Canvas.UpdateHealthUI(Stats.MaxHP());
 
         SetGunByIndex((int)Stats.Weapon); //set gun
@@ -137,7 +137,7 @@ public class Character : Unit
         _selectItem.GetComponent<MeshRenderer>().material = _materialSelect; //set material to matrial for selecting
     }
 
-    public void DisableChanges()
+    private void DisableChanges()
     {
         _selectItem.SetActive(false);
         _selected = false;
@@ -193,7 +193,7 @@ public class Character : Unit
 
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set character's block to air
 
-        Manager.Instance.StatisticsUtil.SoldierDeathCount++;
-
+        Manager.StatisticsUtil.SoldierDeathCount++;
+        
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEngine.EventSystems.EventTrigger;
 
 // Manages UI and game elements related to the movement of the selected character.
 public class MovementManager : MonoBehaviour
@@ -469,7 +470,7 @@ public class MovementManager : MonoBehaviour
     }
 
 
-    public IEnumerator MoveEnemyToTerritory(Enemy enemy, Func<Dictionary<TerritroyReaded, TerritroyReaded>, TerritroyReaded> findTerritoryMoveTo)
+    public IEnumerator MoveEnemyToTerritoryFromSelected(Enemy enemy, Func<Dictionary<TerritroyReaded, TerritroyReaded>, TerritroyReaded> findTerritoryMoveTo)
     {
         var allPaths = Manager.MovementManager.CalculateAllPossible(enemy.Stats.MovementDistance(), enemy); // get enemie's objectsCalculated
 
@@ -482,16 +483,21 @@ public class MovementManager : MonoBehaviour
             // Only move if the path exists and contains at least 1 point
             if (aktualPath?.Count > 0)
             {
-                enemy.ActualTerritory.TerritoryInfo = TerritoryType.Air; //actualization block type
-                yield return Manager.MovementManager.StartCoroutine(enemy.Move(aktualPath)); //?????? maybe better this method in this class
-
-
-                if (!enemy.IsKilled)
-                {
-                    enemy.ActualTerritory = findTerritory; //actualization enemy block
-                    enemy.ActualTerritory.TerritoryInfo = TerritoryType.Character;
-                }
+               yield return MoveEnemyToTerritory(enemy, aktualPath, findTerritory);
             }
+        }
+    }
+
+    public IEnumerator MoveEnemyToTerritory(Enemy enemy, List<Vector3> aktualPath, TerritroyReaded findTerritory)
+    {
+        enemy.ActualTerritory.TerritoryInfo = TerritoryType.Air; //actualization block type
+        yield return Manager.MovementManager.StartCoroutine(enemy.Move(aktualPath)); //?????? maybe better this method in this class
+
+
+        if (!enemy.IsKilled)
+        {
+            enemy.ActualTerritory = findTerritory; //actualization enemy block
+            enemy.ActualTerritory.TerritoryInfo = TerritoryType.Character;
         }
     }
 

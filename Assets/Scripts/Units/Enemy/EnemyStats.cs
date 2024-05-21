@@ -15,7 +15,7 @@ public class EnemyStats : UnitStats
     public override int MaxHP() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyBaseHealth;
     public override int BaseAimPercent() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyBaseAim;
     public override int BaseActions() => 2;
-    public override float Speed() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemySpeed;
+    public override float Speed() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemySpeed + SpeedIncreaser;
     public override int MovementDistance() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMoveDistance;
     public override float VisionDistance() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyRangedTargetDistance;
     public override string Name() => _configEnemyName;

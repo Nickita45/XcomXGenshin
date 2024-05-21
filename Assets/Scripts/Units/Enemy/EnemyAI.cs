@@ -12,6 +12,7 @@ public abstract class EnemyAI : MonoBehaviour
     public virtual void Init(Enemy enemy)
     {
         _enemy = enemy;
+        _enemy.Health.OnResistance += OnResistance;
     }
 
     // Gets a random territory from all the paths,
@@ -86,7 +87,7 @@ public abstract class EnemyAI : MonoBehaviour
         return FindTerritoryRandom(allPaths);
     }
 
-
+    public virtual int OnResistance(int hit, Element element) { return hit; }
     public virtual void OnSpawn() { }
     public abstract IEnumerator MakeTurn();
     public abstract IEnumerator Attack(Character character);

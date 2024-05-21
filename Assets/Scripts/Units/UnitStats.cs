@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class UnitStats : MonoBehaviour
 {
+
+    public int SpeedIncreaser { get; set; }
     public abstract int MaxHP();
 
     // the base chance of aim for the units with ranged weapons
