@@ -11,6 +11,11 @@ public abstract class Ability
     public abstract int ActionCost { get; } 
     public abstract TargetType TargetType { get; }
     public abstract IEnumerator Activate(Unit unit, object target);
+
+    public override string ToString()
+    {
+        return AbilityName;
+    }
 }
 
 // Defines what kind of target do you need to choose to
@@ -23,5 +28,7 @@ public enum TargetType
     // targets the user (e.g. Overwatch, Hunker Down)
     Self,
     // targets a single enemy (e.g. Shoot)
-    Enemy
+    Enemy,
+    // target is placing something
+    Summon,
 }

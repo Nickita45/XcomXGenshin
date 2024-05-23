@@ -4183,6 +4183,7 @@ MonoBehaviour:
   _modifiers: {fileID: 1748619464968573664}
   _selectItem: {fileID: 7315670942795276779}
   _materialSelect: {fileID: 2100000, guid: b6054281107c63e4ba80253f44361f9e, type: 2}
+  _materialMovementSummon: {fileID: 2100000, guid: 6b88c4b7046ba7c49aa0efaa9783d77b, type: 2}
   _mover: {fileID: 5269969051388054375}
   _shelterSize: []
   _gunGameObjects:

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 // A placeholder for the elemental skills that would be added in future
-public class AbilityElementalSkill : Ability
+public class AbilityElementalSkill : Ability, IAbilitySummon
 {
     private Element _element;
 
@@ -10,16 +10,20 @@ public class AbilityElementalSkill : Ability
     {
         _element = element;
     }
-
     public override string AbilityName => string.Format("Elemental Skill ({0})", _element);
     public override string Description => "Elemental Skill Description";
     public override string Icon => _element.ToString();
     public override int ActionCost => 2;
-    public override TargetType TargetType => TargetType.Self;
+    public override TargetType TargetType => TargetType.Summon;
+    public int RangeSummon() => 5;
+    public string PathSummonedObject() => "Prefabs/Entity/AlbedoFlower";
+
     public override IEnumerator Activate(Unit unit, object target)
     {
         Debug.Log("Elemental Skill");
+        Manager.SummonUnitManager.SummonEntity(PathSummonedObject());
         yield return new WaitForSeconds(0.5f);
         yield return null;
     }
+
 }

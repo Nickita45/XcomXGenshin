@@ -9,6 +9,8 @@ using UnityEngine;
 // managers.
 public class Manager : MonoBehaviour
 {
+    private CultureSetter _cultureSetter;
+
     [Header("Serialize elements")]
     [SerializeField]
     private DeReadingMap _deReadingMap;
@@ -43,6 +45,10 @@ public class Manager : MonoBehaviour
     [SerializeField]
     private TurnManager _turnManager;
     public static TurnManager TurnManager => Instance._turnManager;
+
+    [SerializeField]
+    private SummonUnitManager _summonUnitManager;
+    public static SummonUnitManager SummonUnitManager => Instance._summonUnitManager;
 
     [SerializeField]
     private OutlineManager _outlineManager;
@@ -92,6 +98,8 @@ public class Manager : MonoBehaviour
 
     private void Awake()
     {
+        _cultureSetter = new CultureSetter();
+
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);

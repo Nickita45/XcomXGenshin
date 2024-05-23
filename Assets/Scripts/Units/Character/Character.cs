@@ -21,6 +21,11 @@ public class Character : Unit
     private Material _materialSelect; //when character is selected
     private Material _basicMaterial; //when character is non selected
 
+    [SerializeField]
+    private Material _materialMovementSummon; //when character summons something
+    private Material _basicMovementMaterial; //when character dont summons something
+
+
     [Header("Mover")]
     [SerializeField]
     private GameObject _mover; //circle on the selected block
@@ -63,6 +68,7 @@ public class Character : Unit
         _selectItem.SetActive(false);
         _mover.SetActive(false);
         _basicMaterial = _selectItem.GetComponent<MeshRenderer>().material;
+        _basicMovementMaterial = _mover.GetComponent<MeshRenderer>().material;
 
         OnSelected += Select;
         OnSelected += Manager.MovementManager.OnCharacterSelect;
@@ -75,6 +81,8 @@ public class Character : Unit
 
         ActualTerritory = Manager.Map[transform.localPosition];
         ActualTerritory.TerritoryInfo = TerritoryType.Character;
+
+        Manager.StatusMain.OnStatusChange += OnStatusChange;
     }
 
     public void OnIndexSet()
@@ -166,6 +174,14 @@ public class Character : Unit
             item.SetActive(false);
         }
         _gunGameObjects[index].SetActive(true);
+    }
+
+    private void OnStatusChange(HashSet<Permissions> permissions)
+    {
+        if(permissions.Contains(Permissions.SummonObjectOnMap))
+            _mover.GetComponent<MeshRenderer>().material = _materialMovementSummon;
+        else
+            _mover.GetComponent<MeshRenderer>().material = _basicMovementMaterial;
     }
 
     public override Transform GetBulletSpawner(string name) => GunPrefab.transform.GetChild((int)Stats.Weapon).Find(name);

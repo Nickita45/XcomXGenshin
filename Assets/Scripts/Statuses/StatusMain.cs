@@ -6,6 +6,8 @@ public class StatusMain : MonoBehaviour
 {
     public HashSet<Permissions> ActualPermissions { get; private set; } //TODO: encapsulation problem
 
+    public bool HasPermisson(Permissions permission) => ActualPermissions.Contains(permission);
+
     public Action<HashSet<Permissions>> OnStatusChange;
 
     private void Start()
@@ -55,20 +57,40 @@ public class StatusMain : MonoBehaviour
 
     public void SetStatusRunning()
     {
-        ActualPermissions = new HashSet<Permissions> { Permissions.CameraMovements, Permissions.AnimationRunning, Permissions.SelectPlaceToMovement };
+        ActualPermissions = new HashSet<Permissions>
+        {
+            Permissions.CameraMovements,
+            Permissions.AnimationRunning,
+            Permissions.SelectPlaceToMovement
+        };
         OnStatusChange(ActualPermissions);
     }
 
     public void SetStatusWaiting()
     {
-        ActualPermissions = new HashSet<Permissions> { Permissions.CameraMovements, Permissions.Waiting };
+        ActualPermissions = new HashSet<Permissions>
+        {
+            Permissions.CameraMovements,
+            Permissions.Waiting
+        };
+        OnStatusChange(ActualPermissions);
+    }
+
+    public void SetStatusSummon()
+    {
+        ActualPermissions = new HashSet<Permissions> {
+            Permissions.CameraMovements, 
+            Permissions.SummonObjectOnMap, 
+            Permissions.ActionSelect,
+            Permissions.SelectCharacter
+        };
         OnStatusChange(ActualPermissions);
     }
 
 
     private void Update() //for debug only
     {
-        //Debug.Log(string.Join(",", Manager.StatusMain.ActualPermissions));
+       // Debug.Log(string.Join(",", Manager.StatusMain.ActualPermissions));
     }
 }
 
@@ -82,4 +104,5 @@ public enum Permissions
     AnimationShooting,
     AnimationRunning,
     Waiting,
+    SummonObjectOnMap
 }

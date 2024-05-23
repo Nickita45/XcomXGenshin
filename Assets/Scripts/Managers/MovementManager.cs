@@ -19,7 +19,7 @@ public class MovementManager : MonoBehaviour
 
     private (TerritroyReaded aktualTerritoryReaded, List<Vector3> path) _aktualTerritory;
 
-    private Dictionary<TerritroyReaded, TerritroyReaded> _objectsCalculated; //orig, previous
+    private Dictionary<TerritroyReaded, TerritroyReaded> _territoriesCalculated; //orig, previous
 
     public Action<(TerritroyReaded aktualTerritoryReaded, List<Vector3> path), Character> OnSelectNewTerritory;
     public Action OnStartMove;
@@ -27,6 +27,7 @@ public class MovementManager : MonoBehaviour
 
     private bool _isMoving;
     public bool IsMoving => _isMoving;
+    public TerritroyReaded GetSelectedTerritory => _aktualTerritory.aktualTerritoryReaded;
 
     public float _timerCanBeSeleced = 0.5f; //resolves problem with automove if character selected by mouse
     private void Start()
@@ -80,10 +81,14 @@ public class MovementManager : MonoBehaviour
                 OnSelectNewTerritory(_aktualTerritory, Manager.TurnManager.SelectedCharacter); //we choose new territory
             }
 
-            if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0)
-                && !Manager.TurnManager.SelectedCharacter.IsActualTerritory(_aktualTerritory.aktualTerritoryReaded))
+            if (Manager.HasPermission(Permissions.SelectPlaceToMovement))
             {
-                StartCoroutine(MoveSelectedCharacter(_aktualTerritory.aktualTerritoryReaded, _aktualTerritory.path)); //make movement to person
+                if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0)
+                    && !Manager.TurnManager.SelectedCharacter.IsActualTerritory(_aktualTerritory.aktualTerritoryReaded))
+                {
+                    //make movement to person
+                    StartCoroutine(MoveSelectedCharacter(_aktualTerritory.aktualTerritoryReaded, _aktualTerritory.path)); 
+                }
             }
         }
     }
@@ -93,9 +98,13 @@ public class MovementManager : MonoBehaviour
         Manager.TurnManager.SelectedCharacter.SetCoordinatsToMover(territory.aktualTerritoryReaded.GetCordinats()
             + Manager.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover of selectet character
 
-        _aktualTerritory.path = CalculateAllPath(territory.aktualTerritoryReaded, character, _objectsCalculated); //calculate actual path to selected territory
 
-        DrawLine(_aktualTerritory.path); //draw the line
+        if (!Manager.HasPermission(Permissions.SummonObjectOnMap))
+        {
+            _aktualTerritory.path = CalculateAllPath(territory.aktualTerritoryReaded, character, _territoriesCalculated); //calculate actual path to selected territory
+
+            DrawLine(_aktualTerritory.path); //draw the line
+        }
     }
 
     public void OnCharacterSelect(Character character)
@@ -111,12 +120,12 @@ public class MovementManager : MonoBehaviour
 
         AirPlatformsSet(false);
 
-        _objectsCalculated?.Clear();
+        _territoriesCalculated?.Clear();
     }
 
     public void AirPlatformsSet(bool result)
     {
-        foreach (var item in _objectsCalculated.Keys)
+        foreach (var item in _territoriesCalculated.Keys)
         {
             Manager.Map.GetAirPlatform(item)?.SetActive(result);
 
@@ -161,7 +170,7 @@ public class MovementManager : MonoBehaviour
         newTerritory.TerritoryInfo = TerritoryType.Character; //change block type
         _lineRenderer.positionCount = 0;
 
-        if (Manager.Map.GetAirPlatform(newTerritory).GetComponent<PlateMoving>().IsCharge) //minus actions
+        if (Manager.Map.GetAirPlatform(newTerritory).GetComponent<PlateMoving>().GetPlateType == PlateMovingType.Charge) //minus actions
             character.ActionsLeft -= 2;
         else
             character.ActionsLeft -= 1;
@@ -377,7 +386,7 @@ public class MovementManager : MonoBehaviour
         int startValueMove = 0;
 
         // charge
-        if (unit is Character)
+        if (unit is Character && !Manager.StatusMain.HasPermisson(Permissions.SummonObjectOnMap))
         {
             if (unit.ActionsLeft > 1)
             {
@@ -410,8 +419,16 @@ public class MovementManager : MonoBehaviour
                                 objectsCalculated.Remove(orig);
                                 objectsCalculated.Add(orig, previus);
 
-                                if (unit is Character) //change color if it is charge block
-                                    Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetCharge(i > startValueMove);
+                                //change color if it is charge block or summon block
+                                //mb move to method?
+                                if (unit is Character)
+                                {
+                                    if (Manager.StatusMain.HasPermisson(Permissions.SummonObjectOnMap))
+                                        Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetType(PlateMovingType.Summon);
+                                    else
+                                        Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>()
+                                            .SetType(i > startValueMove ? PlateMovingType.Charge : PlateMovingType.Usual);
+                                }
                             }
                         }
                     }
@@ -419,8 +436,16 @@ public class MovementManager : MonoBehaviour
                     {
                         objectsCalculated.Add(orig, previus);
 
-                        if (unit is Character) //change color if it is charge block
-                            Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetCharge(i > startValueMove);
+                        //change color if it is charge block or summon block
+                        //mb move to method?
+                        if (unit is Character)
+                        {
+                            if(Manager.StatusMain.HasPermisson(Permissions.SummonObjectOnMap))
+                                Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetType(PlateMovingType.Summon);
+                            else
+                            Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>()
+                                .SetType(i > startValueMove ? PlateMovingType.Charge : PlateMovingType.Usual);
+                        }
                     }
                 }
 
@@ -469,6 +494,136 @@ public class MovementManager : MonoBehaviour
         return objectsCalculated;
     }
 
+    public Dictionary<TerritroyReaded, TerritroyReaded> CalculateAllPossibleInSquare(int countMove, Unit unit)
+    {
+        Dictionary<TerritroyReaded, TerritroyReaded> objectsCalculated = new();//the final version of list of territories
+
+        Queue<(TerritroyReaded orig, TerritroyReaded previus)> nextCalculated = new();//stack for bottom up calculations
+        nextCalculated.Enqueue((unit.ActualTerritory, null));//first element
+        HashSet<TerritroyReaded> already = new(); //save all blocks that we already detect
+
+        for (int i = 0; i <= countMove; i++)
+        {
+            int countNeedToBeAnalyzed = nextCalculated.Count(); //get count blocks we need to detect
+            while (countNeedToBeAnalyzed > 0) //while exists block that we do not detect
+            {
+                --countNeedToBeAnalyzed;
+                (TerritroyReaded orig, TerritroyReaded previus) = nextCalculated.Dequeue();
+
+                if (orig.TerritoryInfo == TerritoryType.Air)
+                    //((orig.TerritoryInfo != TerritoryType.Character || orig == unit.ActualTerritory) &&
+                   // orig.TerritoryInfo != TerritoryType.ShelterGround && orig.TerritoryInfo != TerritoryType.Enemy) //detect only block which we can move on
+                {
+                    if (!objectsCalculated.ContainsKey(orig))
+                    {
+                        objectsCalculated.Add(orig, previus);
+                        Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetType(PlateMovingType.Summon);
+                    }
+
+                }
+
+                foreach (var item in orig)// detect all neighbors
+                {
+                    TerritroyReaded detectItem = Manager.Map[item];
+
+                    if (detectItem.TerritoryInfo == TerritoryType.ShelterGround) //if we detect Shelter Ground, set detectItem as air above it 
+                    {
+                        detectItem = Manager.Map[detectItem.IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(orig.Index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault()];
+                    }
+                    if (detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air) == 1)//if there's air under the block, it's going down.
+                    {
+                        var newItem = detectItem.IndexDown.FirstOrDefault(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air);
+                        while (Manager.Map[newItem].IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air) == 1)
+                        { //select the bottommost block
+                            newItem = Manager.Map[newItem].IndexDown.FirstOrDefault(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air);
+                        }
+                        detectItem = Manager.Map[newItem];
+                    }
+                    if (
+                      detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground ||
+                      Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround) == 0) // we dont select such blocks with such rules
+                    {
+                        continue;
+                    }
+
+                    if (objectsCalculated.ContainsKey(detectItem))
+                    { //already detected block
+                        continue;
+                    }
+
+                    if (already.Contains(detectItem) && (!detectItem.IsNearIsGround() || detectItem.InACenterOfGronds()))
+                    { //optimization
+                        continue;
+                    }
+                    nextCalculated.Enqueue((detectItem, orig));
+
+                    if (!already.Contains(detectItem))
+                        already.Add(detectItem);
+                }
+            }
+
+            HashSet<TerritroyReaded> savingHash = new();
+
+            foreach((TerritroyReaded orig, TerritroyReaded previus) in nextCalculated.ToList())
+            {
+                foreach (var item in orig)// detect all neighbors
+                {
+                    TerritroyReaded detectItem = Manager.Map[item];
+                    if((orig.TerritoryInfo == TerritoryType.Shelter || orig.TerritoryInfo == TerritoryType.ShelterGround)
+                        && detectItem.TerritoryInfo == TerritoryType.Air && detectItem.IndexDown.Any(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air))
+                    {
+                        continue;
+                    }
+
+
+                    if (detectItem.TerritoryInfo == TerritoryType.ShelterGround) //if we detect Shelter Ground, set detectItem as air above it 
+                    {
+                        detectItem = Manager.Map[detectItem.IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(orig.Index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault()];
+                    }
+                    if (detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air) == 1)//if there's air under the block, it's going down.
+                    {
+                        var newItem = detectItem.IndexDown.FirstOrDefault(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air);
+                        while (Manager.Map[newItem].IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air) == 1)
+                        { //select the bottommost block
+                            newItem = Manager.Map[newItem].IndexDown.FirstOrDefault(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air);
+                        }
+
+                        detectItem = Manager.Map[newItem];
+                    }
+                    if (
+                      detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground ||
+                      Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround) == 0) // we dont select such blocks with such rules
+                    {
+                        continue;
+                    }
+
+                    if (objectsCalculated.ContainsKey(detectItem))
+                    { //already detected block
+                        continue;
+                    }
+
+                    if (already.Contains(detectItem) && (!detectItem.IsNearIsGround() || detectItem.InACenterOfGronds()))
+                    { //optimization
+                        continue;
+                    }
+
+                    if(savingHash.Contains(detectItem))
+                    {
+                        //objectsCalculated.Add(detectItem, previus);
+                        //Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetType(PlateMovingType.Summon);
+                        nextCalculated.Enqueue((detectItem, orig));
+                    } else
+                    {
+                        savingHash.Add(detectItem);
+                    }
+
+                }
+            }
+        }
+
+        return objectsCalculated;
+    }
+
 
     public IEnumerator MoveEnemyToTerritoryFromSelected(Enemy enemy, Func<Dictionary<TerritroyReaded, TerritroyReaded>, TerritroyReaded> findTerritoryMoveTo)
     {
@@ -501,7 +656,7 @@ public class MovementManager : MonoBehaviour
         }
     }
 
-    private void OnStatusChange(HashSet<Permissions> permissions)
+    private void OnStatusChange(HashSet<Permissions> permissions) //Clean by methods?
     {
         Character character = Manager.TurnManager.SelectedCharacter;
         if (permissions.Contains(Permissions.SelectPlaceToMovement))
@@ -510,10 +665,24 @@ public class MovementManager : MonoBehaviour
             {
                 Manager.TurnManager.SelectedCharacter.SelectChanges();
                 _lineRenderer.gameObject.SetActive(true);
-                _objectsCalculated = CalculateAllPossible(character.Stats.MovementDistance(), character);
+                _territoriesCalculated = CalculateAllPossible(character.Stats.MovementDistance(), character);
                 Manager.TurnManager.SelectedCharacter.MoverActive(true);
                 AirPlatformsSet(true);
             }
+        } else if(permissions.Contains(Permissions.SummonObjectOnMap))
+        {
+            character.MoverActive(false);
+            _lineRenderer.gameObject.SetActive(false);
+            AirPlatformsSet(false);
+            _territoriesCalculated.Clear();
+
+            if(Manager.AbilityPanel.Selected.Ability is IAbilitySummon abilitySummon) { 
+                _territoriesCalculated = CalculateAllPossibleInSquare(abilitySummon.RangeSummon(), character);
+            }
+
+            AirPlatformsSet(true);
+            Manager.TurnManager.SelectedCharacter.MoverActive(true);
+
         }
         else
         {
@@ -522,7 +691,7 @@ public class MovementManager : MonoBehaviour
                 character.MoverActive(false);
                 _lineRenderer.gameObject.SetActive(false);
                 AirPlatformsSet(false);
-                _objectsCalculated.Clear();
+                _territoriesCalculated.Clear();
             }
         }
     }

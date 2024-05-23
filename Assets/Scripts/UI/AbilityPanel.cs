@@ -94,6 +94,7 @@ public class AbilityPanel : MonoBehaviour
         _confirm.interactable = icon.AnyAvailableTargets;
 
         _selected = icon;
+        Manager.StatusMain.SetStatusSelectAction();
         if (icon.AnyAvailableTargets) icon.EnterTargetMode();
     }
 
@@ -165,6 +166,9 @@ public class AbilityPanel : MonoBehaviour
                     break;
                 case TargetType.Self:
                     icon.AnyAvailableTargets = true;
+                    break;
+                case TargetType.Summon:
+                    icon.AnyAvailableTargets = true; //TODO
                     break;
             }
 

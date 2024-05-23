@@ -6490,7 +6490,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1775152538}
   - component: {fileID: 1775152547}
-  - component: {fileID: 1775152546}
   - component: {fileID: 1775152545}
   - component: {fileID: 1775152544}
   - component: {fileID: 1775152543}
@@ -6501,6 +6500,7 @@ GameObject:
   - component: {fileID: 1775152539}
   - component: {fileID: 1775152550}
   - component: {fileID: 1775152551}
+  - component: {fileID: 1775152552}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -6589,8 +6589,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deReadingMap: {fileID: 1025817882}
   _map:
-    _enemy: []
-    _characters: []
     width: 0
     height: 0
   _movementManager: {fileID: 1775152548}
@@ -6599,6 +6597,7 @@ MonoBehaviour:
   _cameraManager: {fileID: 1775152550}
   _cameraObjectTransparency: {fileID: 1775152551}
   _turnManager: {fileID: 1775152542}
+  _summonUnitManager: {fileID: 1775152552}
   _outlineManager: {fileID: 1775152540}
   _mainParent: {fileID: 1775152536}
   _generateTerritoryMove: {fileID: 1878613295}
@@ -6630,18 +6629,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2ae7f38bf3472b49bfca3c77e512c21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1775152546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775152536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a27324ee507193b4bb3accb60d023119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1775152547
@@ -6695,6 +6682,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fb8c9c6fd214fd4abddceb1d043a02d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1775152552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775152536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac82503d33d107447afa8df678559744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1792711699
@@ -8049,7 +8048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1594586895183914243, guid: 62eced83523c34a4eb096516b2a5bac7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -16.1
+      value: -16.099976
       objectReference: {fileID: 0}
     - target: {fileID: 1594586895183914243, guid: 62eced83523c34a4eb096516b2a5bac7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

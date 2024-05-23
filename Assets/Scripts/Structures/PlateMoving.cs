@@ -5,17 +5,32 @@ using UnityEngine;
 public class PlateMoving : MonoBehaviour
 {
     [SerializeField]
-    private Material usualMat, chargeMat;
-    public bool IsCharge { get; private set; } //impossibly make like gameObject.GetComponent<MeshRenderer>().material == chargeMat
+    private Material usualMat, chargeMat, summmonMat;
+    public PlateMovingType GetPlateType { get; private set; } //impossibly make like gameObject.GetComponent<MeshRenderer>().material == chargeMat
                                                //because unity creates Instance of chargeMat
 
-    public void SetCharge(bool set)
+    public void SetType(PlateMovingType plate)
     {
-        if(set) 
-            gameObject.GetComponent<MeshRenderer>().material = chargeMat;
-        else
-            gameObject.GetComponent<MeshRenderer>().material = usualMat;
+        switch (plate)
+        {
+            case PlateMovingType.Charge:
+                gameObject.GetComponent<MeshRenderer>().material = chargeMat;
+                break;
+            case PlateMovingType.Usual:
+                gameObject.GetComponent<MeshRenderer>().material = usualMat;
+                break;
+            case PlateMovingType.Summon:
+                gameObject.GetComponent<MeshRenderer>().material = summmonMat;
+                break;
+        }
 
-        IsCharge = set;
+        GetPlateType = plate;
     }
+}
+
+public enum PlateMovingType
+{
+    Usual,
+    Charge,
+    Summon
 }
