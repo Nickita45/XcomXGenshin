@@ -53,7 +53,7 @@ public class MatrixMap
 
     public ListUnitsMap<Enemy> Enemies { get => _enemy; private set => _enemy = value; }
     public ListUnitsMap<Character> Characters { get => _characters; private set => _characters = value; }
-    public ListUnitsMap<Entity> Entity { get => _entity; private set => _entity = value; }
+    public ListUnitsMap<Entity> Entities { get => _entity; private set => _entity = value; }
 
     public void AirPlatformRemove(TerritroyReaded ter) => _planeToMovement.Remove(ter.Index);
 
@@ -125,7 +125,7 @@ public class MatrixMap
     //Get a list of all units on the map
     public IEnumerable<Unit> GetAllUnits()
     {
-        return Characters.GetList.Select(c => (Unit)c).Concat(Enemies.GetList.Select(e => (Unit)e));
+        return Characters.GetList.Select(c => (Unit)c).Concat(Enemies.GetList.Select(e => (Unit)e)).Concat(Entities.GetList.Select(e => (Unit)e));
     }
 
     // Get a list of allies of the unit within n squares from them (including the unit themselves)

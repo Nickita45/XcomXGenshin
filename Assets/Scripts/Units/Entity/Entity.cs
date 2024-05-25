@@ -27,12 +27,12 @@ public abstract class Entity : Unit
 
     public virtual void OnCreate(Unit creater, TerritroyReaded newPosition)
     {
-        Manager.Map.Entity.Add(this);
+        Manager.Map.Entities.Add(this);
     }
 
     public override void Kill()
     {
-        Manager.Map.Entity.Remove(this); //remove from map character list
+        Manager.Map.Entities.Remove(this); //remove from map character list
         if(_modifiers != null)
             foreach (Modifier m in _modifiers.Modifiers) m.DestroyModel(this);
 

@@ -120,7 +120,7 @@ public class TurnManager : MonoBehaviour
         // Restore actions
         foreach (Character character in Manager.Map.Characters.GetList) { character.ActionsLeft = 2; }
         foreach (Enemy enemy in Manager.Map.Enemies.GetList) { enemy.ActionsLeft = enemy.Stats.BaseActions(); }
-        foreach (Entity entity in Manager.Map.Entity.GetList) { entity.LifeTimerDecrease(); }
+        foreach (Entity entity in Manager.Map.Entities.GetList) { entity.LifeTimerDecrease(); }
 
         // Trigger modifiers on begin round
         foreach (Unit unit in Manager.Map.GetAllUnits())
@@ -137,7 +137,7 @@ public class TurnManager : MonoBehaviour
 
     public void BeginEntityTurn()
     {
-        foreach (Entity entity in Manager.Map.Entity.GetList)
+        foreach (Entity entity in Manager.Map.Entities.GetList)
         {
             entity.Activate();
         }
