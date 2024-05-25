@@ -121,25 +121,26 @@ public class UnitHealth
                 case ElementalReaction.CrystallizePyro:
                     if (damageSource is Unit attacker)
                     {
-                        attacker.Modifiers.AddModifier(new Crystallize());
+                        attacker.Modifiers?.AddModifier(new Crystallize());
                     }
                     break;
                 case ElementalReaction.CrystallizeCryo:
                     if (damageSource is Unit attacker1)
                     {
-                        attacker1.Modifiers.AddModifier(new Crystallize());
+                        attacker1.Modifiers?.AddModifier(new Crystallize());
                     }
                     break;
                 case ElementalReaction.CrystallizeHydro:
                     if (damageSource is Unit attacker2)
                     {
-                        attacker2.Modifiers.AddModifier(new Crystallize());
+                          attacker2.Modifiers?.AddModifier(new Crystallize());
                     }
                     break;
                 case ElementalReaction.CrystallizeElectro:
                     if (damageSource is Unit attacker3)
                     {
-                        attacker3.Modifiers.AddModifier(new Crystallize()); ;
+                        Debug.Log(attacker3.Modifiers);
+                          attacker3.Modifiers?.AddModifier(new Crystallize());
                     }
                     break;
             }
@@ -151,12 +152,12 @@ public class UnitHealth
             int saveHit = hit; //helping to see if was any dmg 
             hit = OnResistance(hit, element);
 
-            if(hit <= 0 && saveHit != hit) _canvas.StartCoroutine(_canvas.PanelShow(_canvas.PanelActionInfo("Immunity"), 4));
-            else if(hit > 0) _canvas.StartCoroutine(_canvas.PanelShow(_canvas.PanelHit(hit, element), 4));
+            if(hit <= 0 && saveHit != hit) _canvas?.StartCoroutine(_canvas.PanelShow(_canvas.PanelActionInfo("Immunity"), 4));
+            else if(hit > 0) _canvas?.StartCoroutine(_canvas.PanelShow(_canvas.PanelHit(hit, element), 4));
         }
         else
         {
-            if (hit > 0) _canvas.StartCoroutine(_canvas.PanelShow(_canvas.PanelHit(hit, element), 4));
+            if (hit > 0) _canvas?.StartCoroutine(_canvas.PanelShow(_canvas.PanelHit(hit, element), 4));
         }
 
         _countHp -= hit;
@@ -166,10 +167,10 @@ public class UnitHealth
         if (_countHp <= 0)
             _mainUnit.Kill();
         else
-            _canvas.UpdateHealthUI(_countHp);  //update visual hp of unit
+            _canvas?.UpdateHealthUI(_countHp);  //update visual hp of unit
 
-        _canvas.UpdateModifiersUI(_modifiers);
-        _canvas.ShowReactions(reactions);
+        _canvas?.UpdateModifiersUI(_modifiers);
+        _canvas?.ShowReactions(reactions);
     }
 
     public bool IsKilled => _countHp <= 0;

@@ -25,7 +25,6 @@ public abstract class Unit : MonoBehaviour
 
     public int CountHp => _health.CountHp;
 
-    [SerializeField]
     protected ModifierList _modifiers;
     public virtual ModifierList Modifiers => _modifiers;
 
@@ -37,14 +36,15 @@ public abstract class Unit : MonoBehaviour
     public abstract Transform GetBulletSpawner(string name);
     public abstract void Kill();
     public bool IsKilled => _health.IsKilled;
-    public void Resurrect() => _health = new UnitHealth(this, Stats.MaxHP(), _modifiers, _canvas);
+    public virtual void Resurrect() => _health = new UnitHealth(this, Stats.MaxHP(), _modifiers, _canvas);
 
 
     public virtual void Start()
     {
+        _modifiers = new ModifierList(this);
         Resurrect();
 
-        Canvas.UpdateHealthUI(Stats.MaxHP()); //update visual hp of unit
+        Canvas?.UpdateHealthUI(Stats.MaxHP()); //update visual hp of unit
     }
 
 

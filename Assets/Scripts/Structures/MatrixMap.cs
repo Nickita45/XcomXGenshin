@@ -15,6 +15,7 @@ public class MatrixMap
     private Dictionary<string, GameObject> _planeToMovement = new();
     private ListUnitsMap<Enemy> _enemy = new();
     private ListUnitsMap<Character> _characters = new();
+    private ListUnitsMap<Entity> _entity = new();
     public int width, height;
 
     public TerritroyReaded AddVertex(TerritroyReaded ter, Dictionary<string, TerritroyReaded> collection)
@@ -52,6 +53,7 @@ public class MatrixMap
 
     public ListUnitsMap<Enemy> Enemies { get => _enemy; private set => _enemy = value; }
     public ListUnitsMap<Character> Characters { get => _characters; private set => _characters = value; }
+    public ListUnitsMap<Entity> Entity { get => _entity; private set => _entity = value; }
 
     public void AirPlatformRemove(TerritroyReaded ter) => _planeToMovement.Remove(ter.Index);
 
@@ -151,6 +153,13 @@ public class MatrixMap
     public IEnumerable<Unit> GetAdjancentUnits(int n, Unit _target)
     {
         Vector3 coordinats = _target.ActualTerritory.GetCordinats();
+
+        return Manager.Map.GetAllUnits().Where(UnitsAdjancent(n, coordinats));
+    }
+
+    public IEnumerable<Unit> GetAdjancentUnits(int n, TerritroyReaded _target)
+    {
+        Vector3 coordinats = _target.GetCordinats();
 
         return Manager.Map.GetAllUnits().Where(UnitsAdjancent(n, coordinats));
     }

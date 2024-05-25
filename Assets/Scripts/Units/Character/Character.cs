@@ -210,6 +210,5 @@ public class Character : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set character's block to air
 
         Manager.StatisticsUtil.SoldierDeathCount++;
-        
     }
 }

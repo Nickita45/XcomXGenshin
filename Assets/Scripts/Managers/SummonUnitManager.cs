@@ -17,13 +17,14 @@ public class SummonUnitManager : MonoBehaviour //mb make to non monobehaviour
             Manager.AbilityPanel.ActivateAbility();
         }
     }
-    public void SummonEntity(string path)
+    public (GameObject, TerritroyReaded) SummonEntity(string path)
     {
         var selectedTerritory = Manager.MovementManager.GetSelectedTerritory;
         selectedTerritory.TerritoryInfo = TerritoryType.ShelterGround;
         GameObject basePrefab = Resources.Load<GameObject>(path);
         GameObject obj = Instantiate(basePrefab, Manager.MainParent.transform);
         obj.transform.localPosition = new Vector3(selectedTerritory.XPosition, selectedTerritory.YPosition, selectedTerritory.ZPosition);
+        return (obj, selectedTerritory);
     }
 
     private void OnStatusChange(HashSet<Permissions> permissions)

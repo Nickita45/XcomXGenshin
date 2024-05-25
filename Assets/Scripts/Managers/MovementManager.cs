@@ -423,10 +423,7 @@ public class MovementManager : MonoBehaviour
                                 //mb move to method?
                                 if (unit is Character)
                                 {
-                                    if (Manager.StatusMain.HasPermisson(Permissions.SummonObjectOnMap))
-                                        Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetType(PlateMovingType.Summon);
-                                    else
-                                        Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>()
+                                    Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>()
                                             .SetType(i > startValueMove ? PlateMovingType.Charge : PlateMovingType.Usual);
                                 }
                             }
@@ -440,9 +437,6 @@ public class MovementManager : MonoBehaviour
                         //mb move to method?
                         if (unit is Character)
                         {
-                            if(Manager.StatusMain.HasPermisson(Permissions.SummonObjectOnMap))
-                                Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetType(PlateMovingType.Summon);
-                            else
                             Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>()
                                 .SetType(i > startValueMove ? PlateMovingType.Charge : PlateMovingType.Usual);
                         }
@@ -511,8 +505,6 @@ public class MovementManager : MonoBehaviour
                 (TerritroyReaded orig, TerritroyReaded previus) = nextCalculated.Dequeue();
 
                 if (orig.TerritoryInfo == TerritoryType.Air)
-                    //((orig.TerritoryInfo != TerritoryType.Character || orig == unit.ActualTerritory) &&
-                   // orig.TerritoryInfo != TerritoryType.ShelterGround && orig.TerritoryInfo != TerritoryType.Enemy) //detect only block which we can move on
                 {
                     if (!objectsCalculated.ContainsKey(orig))
                     {
@@ -539,8 +531,7 @@ public class MovementManager : MonoBehaviour
                         }
                         detectItem = Manager.Map[newItem];
                     }
-                    if (
-                      detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground ||
+                    if (detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground ||
                       Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround) == 0) // we dont select such blocks with such rules
                     {
                         continue;
@@ -590,8 +581,7 @@ public class MovementManager : MonoBehaviour
 
                         detectItem = Manager.Map[newItem];
                     }
-                    if (
-                      detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground ||
+                    if (detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Ground ||
                       Manager.Map[n].TerritoryInfo == TerritoryType.ShelterGround) == 0) // we dont select such blocks with such rules
                     {
                         continue;
@@ -608,15 +598,9 @@ public class MovementManager : MonoBehaviour
                     }
 
                     if(savingHash.Contains(detectItem))
-                    {
-                        //objectsCalculated.Add(detectItem, previus);
-                        //Manager.Map.GetAirPlatform(orig).GetComponent<PlateMoving>().SetType(PlateMovingType.Summon);
                         nextCalculated.Enqueue((detectItem, orig));
-                    } else
-                    {
+                    else
                         savingHash.Add(detectItem);
-                    }
-
                 }
             }
         }
@@ -674,6 +658,7 @@ public class MovementManager : MonoBehaviour
             character.MoverActive(false);
             _lineRenderer.gameObject.SetActive(false);
             AirPlatformsSet(false);
+            OnCharacterSelect(Manager.TurnManager.SelectedCharacter);
             _territoriesCalculated.Clear();
 
             if(Manager.AbilityPanel.Selected.Ability is IAbilitySummon abilitySummon) { 

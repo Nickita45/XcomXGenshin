@@ -5,7 +5,7 @@ using UnityEngine;
 public class AbilityElementalSkill : Ability, IAbilitySummon
 {
     private Element _element;
-
+    private AlbedoFlowerEntity _entity;
     public AbilityElementalSkill(Element element)
     {
         _element = element;
@@ -15,13 +15,19 @@ public class AbilityElementalSkill : Ability, IAbilitySummon
     public override string Icon => _element.ToString();
     public override int ActionCost => 2;
     public override TargetType TargetType => TargetType.Summon;
-    public int RangeSummon() => 5;
+    public int RangeSummon() => 2;
     public string PathSummonedObject() => "Prefabs/Entity/AlbedoFlower";
 
     public override IEnumerator Activate(Unit unit, object target)
     {
         Debug.Log("Elemental Skill");
-        Manager.SummonUnitManager.SummonEntity(PathSummonedObject());
+        if(_entity != null && !_entity.IsKilled) {
+            _entity.Kill();
+        }
+        
+        (GameObject obj, TerritroyReaded ter) = Manager.SummonUnitManager.SummonEntity(PathSummonedObject());
+        _entity = obj.GetComponent<AlbedoFlowerEntity>();
+        _entity.OnCreate(unit, ter);
         yield return new WaitForSeconds(0.5f);
         yield return null;
     }

@@ -401,6 +401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4810636023118633210}
+  - component: {fileID: 7371077527968018357}
   m_Layer: 0
   m_Name: AlbedoFlower
   m_TagString: Untagged
@@ -437,6 +438,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7371077527968018357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4217225820346393680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede9ecb82c2787c4c9ea7341963e0bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 0}
+  _canvas: {fileID: 0}
+  _animator: {fileID: 0}
+  _modifiers: {fileID: 0}
 --- !u!1 &4324940339745160272
 GameObject:
   m_ObjectHideFlags: 0
