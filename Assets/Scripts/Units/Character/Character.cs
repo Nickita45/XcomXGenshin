@@ -176,6 +176,11 @@ public class Character : Unit
         _gunGameObjects[index].SetActive(true);
     }
 
+    public void DecreaseCooldownAbilities()
+    {
+        foreach (var item in _abilities) item.ActualCooldown--;
+    }
+
     private void OnStatusChange(HashSet<Permissions> permissions)
     {
         if(permissions.Contains(Permissions.SummonObjectOnMap))

@@ -10,7 +10,7 @@ public class AbilityIcon : MonoBehaviour, IPointerClickHandler
     public Image Image => _image;
 
     [SerializeField]
-    private TextMeshProUGUI _indexText;
+    private TextMeshProUGUI _indexText, _cooldownText;
 
     private int _index;
     public int Index
@@ -25,6 +25,7 @@ public class AbilityIcon : MonoBehaviour, IPointerClickHandler
         get { return _abilityEnabled; }
         set
         {
+            Debug.Log(Ability.AbilityName + " " + value);
             _abilityEnabled = value;
 
             Color tmp = _image.color;
@@ -51,6 +52,10 @@ public class AbilityIcon : MonoBehaviour, IPointerClickHandler
         Index = index + 1;
         _image.sprite = Manager.UIIcons.GetIconByName(ability.Icon)?.sprite;
         _ability = ability;
+        _cooldownText.text = string.Empty;
+
+        if(ability.ActualCooldown > 0)
+            _cooldownText.text = ability.ActualCooldown.ToString();
     }
 
     public void OnPointerClick(PointerEventData data)

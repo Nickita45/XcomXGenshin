@@ -168,7 +168,7 @@ public class AbilityPanel : MonoBehaviour
                     icon.AnyAvailableTargets = true;
                     break;
                 case TargetType.Summon:
-                    icon.AnyAvailableTargets = true; //TODO
+                    icon.AnyAvailableTargets = icon.Ability.IsAvailable; //mb???
                     break;
             }
 

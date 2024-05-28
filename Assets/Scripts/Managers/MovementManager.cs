@@ -622,21 +622,21 @@ public class MovementManager : MonoBehaviour
             // Only move if the path exists and contains at least 1 point
             if (aktualPath?.Count > 0)
             {
-               yield return MoveEnemyToTerritory(enemy, aktualPath, findTerritory);
+               yield return MoveUnitToTerritory(enemy, aktualPath, findTerritory);
             }
         }
     }
 
-    public IEnumerator MoveEnemyToTerritory(Enemy enemy, List<Vector3> aktualPath, TerritroyReaded findTerritory)
+    public IEnumerator MoveUnitToTerritory(Unit unit, List<Vector3> aktualPath, TerritroyReaded findTerritory)
     {
-        enemy.ActualTerritory.TerritoryInfo = TerritoryType.Air; //actualization block type
-        yield return Manager.MovementManager.StartCoroutine(enemy.Move(aktualPath)); //?????? maybe better this method in this class
+        unit.ActualTerritory.TerritoryInfo = TerritoryType.Air; //actualization block type
+        yield return Manager.MovementManager.StartCoroutine(unit.Move(aktualPath)); //?????? maybe better this method in this class
 
 
-        if (!enemy.IsKilled)
+        if (!unit.IsKilled)
         {
-            enemy.ActualTerritory = findTerritory; //actualization enemy block
-            enemy.ActualTerritory.TerritoryInfo = TerritoryType.Character;
+            unit.ActualTerritory = findTerritory; //actualization enemy block
+            unit.ActualTerritory.TerritoryInfo = TerritoryType.Character;
         }
     }
 

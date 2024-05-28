@@ -38,7 +38,8 @@ class AlbedoFlowerEntity : Entity
 
     private void StartingAnimation(TerritroyReaded territory, Character character)
     {
-        if (territory == Manager.Map[ActualTerritory.IndexUp.First()])
+        if (Manager.Map[ActualTerritory.IndexUp.First()].TerritoryInfo == TerritoryType.Character ||
+            Manager.Map[ActualTerritory.IndexUp.First()].TerritoryInfo == TerritoryType.Enemy)
             StartCoroutine(Animation(_positionAfterAnimation));
         else
             StartCoroutine(Animation(_positionBeforeAnimation));
@@ -71,5 +72,27 @@ class AlbedoFlowerEntity : Entity
     {
         base.Kill();
         Manager.MovementManager.OnEndMove -= StartingAnimation;
+        Unit unit = null;
+        TerritroyReaded territory = Manager.Map[ActualTerritory.IndexUp.First()];
+        if (territory.TerritoryInfo == TerritoryType.Character)
+            unit = Manager.Map.Characters.GetList.First(n => n.ActualTerritory == territory);
+        else if (territory.TerritoryInfo == TerritoryType.Enemy)
+            unit = Manager.Map.Enemies.GetList.First(n => n.ActualTerritory == territory);
+        else
+        {
+            unit = Manager.Map.Entities.GetList.FirstOrDefault(n => n.ActualTerritory == territory);
+            if(unit != null)
+                (unit as Entity).Kill();
+            return;
+        }
+
+
+        var list = new List<Vector3>
+        {
+            unit.ActualTerritory.GetCordinats(),
+            ActualTerritory.GetCordinats()
+        };
+
+        unit.StartCoroutine(Manager.MovementManager.MoveUnitToTerritory(unit, list, ActualTerritory));
     }
 }

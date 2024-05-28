@@ -5,7 +5,12 @@ public abstract class Ability
 {
     public abstract string AbilityName { get; }
     public abstract string Description { get; }
+    public int ActualCooldown { get; set; }
+    public abstract int MaxCooldown { get; }
+
     public virtual string Icon => AbilityName;
+
+    public bool IsAvailable => ActualCooldown <= 0;
 
     // the amount of action points the ability costs
     public abstract int ActionCost { get; } 

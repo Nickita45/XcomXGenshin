@@ -118,7 +118,10 @@ public class TurnManager : MonoBehaviour
         UnitOverwatched.RemoveAll(unit => unit is Character);
 
         // Restore actions
-        foreach (Character character in Manager.Map.Characters.GetList) { character.ActionsLeft = 2; }
+        foreach (Character character in Manager.Map.Characters.GetList) { 
+            character.ActionsLeft = 2;
+            character.DecreaseCooldownAbilities();
+        }
         foreach (Enemy enemy in Manager.Map.Enemies.GetList) { enemy.ActionsLeft = enemy.Stats.BaseActions(); }
         foreach (Entity entity in Manager.Map.Entities.GetList) { entity.LifeTimerDecrease(); }
 

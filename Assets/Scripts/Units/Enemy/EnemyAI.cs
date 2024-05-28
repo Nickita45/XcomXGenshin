@@ -90,6 +90,6 @@ public abstract class EnemyAI : MonoBehaviour
     public virtual int OnResistance(int hit, Element element) { return hit; }
     public virtual void OnSpawn() { }
     public abstract IEnumerator MakeTurn();
-    public abstract IEnumerator Attack(Character character);
+    public abstract IEnumerator Attack(Unit character);
     public abstract TerritroyReaded TriggerEnemy(Dictionary<TerritroyReaded, TerritroyReaded> allPaths);
 }

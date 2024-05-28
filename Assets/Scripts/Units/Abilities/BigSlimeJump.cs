@@ -14,10 +14,10 @@ public class AbilityBigSlimeJump : Ability
     public override TargetType TargetType => TargetType.Self;
     private Element _element;
 
-    private int _maxCooldown = 2;
-    public int Cooldown { get; private set; }
-    public bool Active => Cooldown <= 0;
     public bool InAir { get; private set; }
+
+    public override int MaxCooldown => 2;
+
     public AbilityBigSlimeJump() { _element = Element.Physical; }
     public AbilityBigSlimeJump(Element element) { _element = element; }
 
@@ -41,7 +41,7 @@ public class AbilityBigSlimeJump : Ability
             list.Add(airTerritory.GetCordinats());
         }
 
-        yield return unit.StartCoroutine(Manager.MovementManager.MoveEnemyToTerritory((Enemy)unit, list, airTerritory));
+        yield return unit.StartCoroutine(Manager.MovementManager.MoveUnitToTerritory(unit, list, airTerritory));
         InAir = true;
     }
 
@@ -69,7 +69,7 @@ public class AbilityBigSlimeJump : Ability
         };
 
         unit.Stats.SpeedIncreaser = 5; //mb to config
-        yield return unit.StartCoroutine(Manager.MovementManager.MoveEnemyToTerritory((Enemy)unit, list, findedTerritory));
+        yield return unit.StartCoroutine(Manager.MovementManager.MoveUnitToTerritory(unit, list, findedTerritory));
         unit.Stats.SpeedIncreaser = 0;
 
         Debug.Log(target);
@@ -86,11 +86,7 @@ public class AbilityBigSlimeJump : Ability
             item.Health.MakeHit(dmg, _element, unit);
         }
         InAir = false;
-        CooldownStart();
+        ActualCooldown = MaxCooldown;
     }
 
-    public void CooldownDecreaser() => Cooldown--;
-
-    public void CooldownStart() => Cooldown = _maxCooldown; //+ 1? becouse next turn 
-    
 }

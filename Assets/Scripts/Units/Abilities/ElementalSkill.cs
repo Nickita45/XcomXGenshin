@@ -15,6 +15,8 @@ public class AbilityElementalSkill : Ability, IAbilitySummon
     public override string Icon => _element.ToString();
     public override int ActionCost => 2;
     public override TargetType TargetType => TargetType.Summon;
+    public override int MaxCooldown => 2;
+    public int GetMaxCooldown() => 2;
     public int RangeSummon() => 2;
     public string PathSummonedObject() => "Prefabs/Entity/AlbedoFlower";
 
@@ -28,7 +30,8 @@ public class AbilityElementalSkill : Ability, IAbilitySummon
         (GameObject obj, TerritroyReaded ter) = Manager.SummonUnitManager.SummonEntity(PathSummonedObject());
         _entity = obj.GetComponent<AlbedoFlowerEntity>();
         _entity.OnCreate(unit, ter);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
+        ActualCooldown = GetMaxCooldown();
         yield return null;
     }
 
