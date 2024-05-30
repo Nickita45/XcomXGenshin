@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class AbilityBigSlimeJump : Ability
 {
+    private int _attackRange = 1;
+
     public override string AbilityName => "Jump";
 
     public override string Description => "Leaps into the sky and freezes overhead";
@@ -55,7 +57,7 @@ public class AbilityBigSlimeJump : Ability
         {
             for (int i = 0; i < 3; i++)
             {
-                if (findedTerritory.IndexBottom.Count == 0) continue;
+                if (findedTerritory.IndexDown.Count == 0) continue;
 
                 findedTerritory = Manager.Map[findedTerritory.IndexBottom.First()];
             }
@@ -72,11 +74,12 @@ public class AbilityBigSlimeJump : Ability
         yield return unit.StartCoroutine(Manager.MovementManager.MoveUnitToTerritory(unit, list, findedTerritory));
         unit.Stats.SpeedIncreaser = 0;
 
-        Debug.Log(target);
+        HubData.Instance.ParticleSystemFactory.CreateSlimeJump(_attackRange, findedTerritory.GetCordinats());
+
         if(target != null)
             unit.Animator.RotateLookAtImmediate((target as Unit).ActualTerritory.GetCordinats());
 
-        var adjancentAUnits = Manager.Map.GetAdjancentUnits(1, unit);
+        var adjancentAUnits = Manager.Map.GetAdjancentUnits(_attackRange, unit);
         foreach(var item in adjancentAUnits)
         {
             if (item is Enemy || item == unit)

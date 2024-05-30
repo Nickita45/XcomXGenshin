@@ -136,11 +136,14 @@ public class MatrixMap
         return Manager.Map.GetAllies(_target).Where(UnitsAdjancent(n, coordinats));
     }
 
-    private static Func<Unit, bool> UnitsAdjancent(int n, Vector3 coordinats)
+    private static Func<Unit, bool> UnitsAdjancent(int n, Vector3 coordinats, bool noY = false)
     {
         return unit =>
         {
             Vector3 otherCoordinats = unit.ActualTerritory.GetCordinats();
+            if (noY)
+                 return Mathf.Abs(coordinats.y - otherCoordinats.y) <= 2 && Math.Round(Vector3.Distance(coordinats, otherCoordinats)) <= n;
+
             // Find if any are within 1 square from the unit
             return Math.Round(Vector3.Distance(coordinats, otherCoordinats)) <= n;   
               //  Mathf.Abs(coordinats.x - otherCoordinats.x) <= n &&

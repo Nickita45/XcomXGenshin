@@ -25,7 +25,6 @@ public class AbilityIcon : MonoBehaviour, IPointerClickHandler
         get { return _abilityEnabled; }
         set
         {
-            Debug.Log(Ability.AbilityName + " " + value);
             _abilityEnabled = value;
 
             Color tmp = _image.color;

@@ -28,7 +28,7 @@ public class AbilityMeleeAttack : Ability
         yield return unit.StartCoroutine(animator.StopCrouching());
         yield return unit.StartCoroutine(animator.AttackMelee());
 
-        if (!RandomExtensions.GetChance(unit.Stats.BaseAimPercent()))
+        if (unit is not Entity && !RandomExtensions.GetChance(unit.Stats.BaseAimPercent())) //mb problems in future for new entities
             targetUnit.StartCoroutine(targetUnit.Canvas.PanelShow(targetUnit.Canvas.PanelMiss));
         else
         {

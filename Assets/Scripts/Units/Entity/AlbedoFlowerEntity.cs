@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 class AlbedoFlowerEntity : Entity
@@ -28,6 +26,7 @@ class AlbedoFlowerEntity : Entity
 
     public override void Activate()
     {
+        HubData.Instance.ParticleSystemFactory.CreateAlbedoFlower(_abilityRange, ActualTerritory.GetCordinats());
         foreach (var unit in Manager.Map.GetAdjancentUnits(_abilityRange, ActualTerritory)) {
             if(unit is Enemy enemy)
             {
@@ -66,6 +65,8 @@ class AlbedoFlowerEntity : Entity
         ActualTerritory = newPosition;
         _lifeTime = _lifeMaxCooldown;
         Manager.MovementManager.OnEndMove += StartingAnimation;
+        //if (newPosition.IndexDown.Any(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air))
+         //   Kill();
     }
 
     public override void Kill()
@@ -78,13 +79,14 @@ class AlbedoFlowerEntity : Entity
             unit = Manager.Map.Characters.GetList.First(n => n.ActualTerritory == territory);
         else if (territory.TerritoryInfo == TerritoryType.Enemy)
             unit = Manager.Map.Enemies.GetList.First(n => n.ActualTerritory == territory);
-        else
+        else if (territory.TerritoryInfo != TerritoryType.Air)
         {
             unit = Manager.Map.Entities.GetList.FirstOrDefault(n => n.ActualTerritory == territory);
-            if(unit != null)
+            if (unit != null)
                 (unit as Entity).Kill();
             return;
         }
+        else return;
 
 
         var list = new List<Vector3>
