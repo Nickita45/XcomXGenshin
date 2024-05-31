@@ -6,26 +6,26 @@ public class AbilityElementalSkill : Ability, IAbilitySummon
 {
     private Element _element;
     private AlbedoFlowerEntity _entity;
-    public AbilityElementalSkill(Element element)
+    public AbilityElementalSkill(Element element) //mb not nessary?
     {
         _element = element;
     }
     public override string AbilityName => string.Format("Elemental Skill ({0})", _element);
     public override string Description => "Elemental Skill Description";
     public override string Icon => _element.ToString();
-    public override int ActionCost => 2;
+    public override int ActionCost => 1;
     public override TargetType TargetType => TargetType.Summon;
     public override int MaxCooldown => 2;
     public int GetMaxCooldown() => 2;
     public int RangeSummon() => 2;
     public string PathSummonedObject() => "Prefabs/Entity/AlbedoFlower";
 
+    public AlbedoFlowerEntity FlowerEntity => _entity;
     public override IEnumerator Activate(Unit unit, object target)
     {
         Debug.Log("Elemental Skill");
-        if(_entity != null && !_entity.IsKilled) {
+        if(_entity != null && !_entity.IsKilled)
             _entity.Kill();
-        }
         
         (GameObject obj, TerritroyReaded ter) = Manager.SummonUnitManager.SummonEntity(PathSummonedObject());
         _entity = obj.GetComponent<AlbedoFlowerEntity>();

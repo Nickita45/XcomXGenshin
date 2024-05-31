@@ -94,12 +94,14 @@ public class Character : Unit
 
         SetGunByIndex((int)Stats.Weapon); //set gun
 
+        var abilityFirst = new AbilityElementalSkill(Stats.Element); //will changed
         _abilities = new() {
             new AbilityShoot(),
             new AbilityShoot(Stats.Element),
             new AbilityOverwatch(),
             new AbilityHunkerDown(),
-            new AbilityElementalSkill(Stats.Element)
+            abilityFirst,
+            new AbillityAlbedoUltimate(abilityFirst)
         }; //set abilities
 
         Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath); //

@@ -22,7 +22,7 @@ public class UnitHealth
     }
 
     public int CountHp => _countHp;
-
+    public void SetHpZero() => _countHp = 0; //dont use in making dmg
 
     // Deal a set amount of elemental damage to the unit.
     // 

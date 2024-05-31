@@ -4931,6 +4931,7 @@ MonoBehaviour:
   _timerLifeNonLoopingParticles: 3
   _albedoFlower: {fileID: 3484803225924301149, guid: deb1455cf1d6ef34092bbbd88913296b, type: 3}
   _slimeJump: {fileID: 8085837018956487246, guid: 35f597f385a54be468bdb5054addb553, type: 3}
+  _albedoUltimate: {fileID: 8523540387209099084, guid: eb5116aba0a70e94996450015906e1aa, type: 3}
 --- !u!1 &1591048338
 GameObject:
   m_ObjectHideFlags: 0

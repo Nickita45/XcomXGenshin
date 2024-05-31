@@ -153,18 +153,18 @@ public class MatrixMap
     }
 
     // Get a list of units of the unit within n squares from them (including the unit themselves)
-    public IEnumerable<Unit> GetAdjancentUnits(int n, Unit _target)
+    public IEnumerable<Unit> GetAdjancentUnits(int n, Unit _target, bool noY = false)
     {
         Vector3 coordinats = _target.ActualTerritory.GetCordinats();
 
-        return Manager.Map.GetAllUnits().Where(UnitsAdjancent(n, coordinats));
+        return Manager.Map.GetAllUnits().Where(UnitsAdjancent(n, coordinats, noY));
     }
 
-    public IEnumerable<Unit> GetAdjancentUnits(int n, TerritroyReaded _target)
+    public IEnumerable<Unit> GetAdjancentUnits(int n, TerritroyReaded _target, bool noY = false)
     {
         Vector3 coordinats = _target.GetCordinats();
 
-        return Manager.Map.GetAllUnits().Where(UnitsAdjancent(n, coordinats));
+        return Manager.Map.GetAllUnits().Where(UnitsAdjancent(n, coordinats, noY));
     }
 }
 

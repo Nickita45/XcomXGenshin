@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-class AlbedoFlowerEntity : Entity
+public class AlbedoFlowerEntity : Entity
 {
     private int _abilityRange = 5;
-    private int _dealDmg = 1;
+    private int _dealDmg = 1; //changed by arrmor
     private int _basicHealth = 1;
     private int _lifeMaxCooldown = 4;
     private Element _element = Element.Geo;
@@ -26,12 +26,16 @@ class AlbedoFlowerEntity : Entity
 
     public override void Activate()
     {
+        MakeDamageForAdjancentUnits(_dealDmg);
+    }
+
+    public void MakeDamageForAdjancentUnits(int dmg)
+    {
         HubData.Instance.ParticleSystemFactory.CreateAlbedoFlower(_abilityRange, ActualTerritory.GetCordinats());
-        foreach (var unit in Manager.Map.GetAdjancentUnits(_abilityRange, ActualTerritory)) {
-            if(unit is Enemy enemy)
-            {
-                enemy.Health.MakeHit(_dealDmg, _element, this);
-            }
+        foreach (var unit in Manager.Map.GetAdjancentUnits(_abilityRange, ActualTerritory, true))
+        {
+            if (unit is Enemy enemy)
+                enemy.Health.MakeHit(dmg, _element, this);
         }
     }
 
@@ -65,8 +69,8 @@ class AlbedoFlowerEntity : Entity
         ActualTerritory = newPosition;
         _lifeTime = _lifeMaxCooldown;
         Manager.MovementManager.OnEndMove += StartingAnimation;
-        //if (newPosition.IndexDown.Any(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air))
-         //   Kill();
+        if (newPosition.IndexDown.Any(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air))
+            Kill();
     }
 
     public override void Kill()
@@ -75,6 +79,7 @@ class AlbedoFlowerEntity : Entity
         Manager.MovementManager.OnEndMove -= StartingAnimation;
         Unit unit = null;
         TerritroyReaded territory = Manager.Map[ActualTerritory.IndexUp.First()];
+        Health.SetHpZero();
         if (territory.TerritoryInfo == TerritoryType.Character)
             unit = Manager.Map.Characters.GetList.First(n => n.ActualTerritory == territory);
         else if (territory.TerritoryInfo == TerritoryType.Enemy)

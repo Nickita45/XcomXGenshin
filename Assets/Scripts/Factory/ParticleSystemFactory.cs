@@ -14,6 +14,8 @@ public class ParticleSystemFactory : MonoBehaviour
     private GameObject _albedoFlower;
     [SerializeField]
     private GameObject _slimeJump;
+    [SerializeField]
+    private GameObject _albedoUltimate;
 
     public void CreateAlbedoFlower(int distance, Vector3 position)
     {
@@ -34,6 +36,12 @@ public class ParticleSystemFactory : MonoBehaviour
         ParticleSystem.Burst burst = emission.GetBurst(0);
         burst.count = 100 + 50 * distance;
         emission.SetBurst(0, burst);
+        Destroy(obj, _timerLifeNonLoopingParticles);
+    }
+
+    public void CreateAlbedoUltimate(Vector3 position) //in future add distance
+    {
+        GameObject obj = Instantiate(_albedoUltimate, position, _slimeJump.transform.rotation, Manager.MainParent.transform);
         Destroy(obj, _timerLifeNonLoopingParticles);
     }
 
