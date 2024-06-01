@@ -79,6 +79,7 @@ public class AbilityIcon : MonoBehaviour, IPointerClickHandler
                 break;
             case TargetType.Self:
                 Manager.TargetSelectManager.TargetSelf(_ => { });
+                if (_ability is IAbilityArea area) area.SummonArea();
                 break;
             case TargetType.Summon:
                 Manager.TargetSelectManager.TargetSummon();

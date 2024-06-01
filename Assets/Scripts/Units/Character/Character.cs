@@ -111,7 +111,10 @@ public class Character : Unit
     private void OnMouseEnter()
     {
         if (!_selected && Manager.HasPermission(Permissions.SelectCharacter) && ActionsLeft > 0)
+        {
             _selectItem.SetActive(true);
+            Manager.MovementManager.ResetCharacterMover();
+        }
     }
 
     private void OnMouseExit()

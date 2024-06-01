@@ -32,8 +32,9 @@ public abstract class Entity : Unit
 
     public override void Kill()
     {
-        Manager.Map.Entities.Remove(this); //remove from map character list
-        if(_modifiers != null)
+        Manager.Map.Entities.Remove(this); //remove from map entity list
+        _canvas.DisableAll(); //disable canvas elements
+        if (_modifiers != null)
             foreach (Modifier m in _modifiers.Modifiers) m.DestroyModel(this);
 
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set character's block to air

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbillityAlbedoUltimate : Ability
+public class AbillityAlbedoUltimate : Ability, IAbilityArea
 {
     private Element _element = Element.Geo;
     private int _abilityRange = 5;
@@ -25,6 +25,21 @@ public class AbillityAlbedoUltimate : Ability
     public override int ActionCost => 2;
 
     public override TargetType TargetType => TargetType.Self;
+    public int RangeArea() => 5;
+    public void SummonArea()
+    {
+        if (_albedoFlowerSkill.FlowerEntity != null && !_albedoFlowerSkill.FlowerEntity.IsKilled)
+        {
+            Manager.AbilityAreaController.AddOrEditAreas(
+                (Manager.TurnManager.SelectedCharacter.ActualTerritory.GetCordinats(), RangeArea()),
+                (_albedoFlowerSkill.FlowerEntity.ActualTerritory.GetCordinats(), _albedoFlowerSkill.RangeArea()));
+        } else
+        {
+            Debug.Log("OKE?");
+            Manager.AbilityAreaController.AddOrEditAreas((Manager.TurnManager.SelectedCharacter.ActualTerritory.GetCordinats(), RangeArea()));
+        }
+    }
+
 
     public override IEnumerator Activate(Unit unit, object target)
     {
@@ -45,4 +60,6 @@ public class AbillityAlbedoUltimate : Ability
         yield return new WaitForSeconds(2.0f);
         yield return null;
     }
+
+
 }

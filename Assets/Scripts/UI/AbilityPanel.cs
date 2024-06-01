@@ -165,7 +165,7 @@ public class AbilityPanel : MonoBehaviour
                     icon.AnyAvailableTargets = visibleEnemies.Count > 0;
                     break;
                 case TargetType.Self:
-                    icon.AnyAvailableTargets = true;
+                    icon.AnyAvailableTargets = icon.Ability.IsAvailable; //???
                     break;
                 case TargetType.Summon:
                     icon.AnyAvailableTargets = icon.Ability.IsAvailable; //mb???

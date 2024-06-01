@@ -54,6 +54,12 @@ public class Manager : MonoBehaviour
     private OutlineManager _outlineManager;
     public static OutlineManager OutlineManager => Instance._outlineManager;
 
+    [SerializeField]
+    private AbilityAreaController _abilityAreaController;
+    public static AbilityAreaController AbilityAreaController => Instance._abilityAreaController;
+
+
+
     [Header("MainObjects")]
     [SerializeField]
     private GameObject _mainParent;

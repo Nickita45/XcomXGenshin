@@ -26,6 +26,8 @@ public class AlbedoFlowerEntity : Entity
 
     public override void Activate()
     {
+        Debug.Log("what?");
+        _canvas.UpdateHealthUI(_lifeTime);
         MakeDamageForAdjancentUnits(_dealDmg);
     }
 
@@ -68,6 +70,7 @@ public class AlbedoFlowerEntity : Entity
         base.OnCreate(creater, newPosition);
         ActualTerritory = newPosition;
         _lifeTime = _lifeMaxCooldown;
+        _canvas.UpdateHealthUI(_lifeTime);
         Manager.MovementManager.OnEndMove += StartingAnimation;
         if (newPosition.IndexDown.Any(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air))
             Kill();

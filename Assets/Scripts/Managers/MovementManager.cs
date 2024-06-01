@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.TextCore.Text;
 using static UnityEngine.EventSystems.EventTrigger;
 
 // Manages UI and game elements related to the movement of the selected character.
@@ -679,6 +680,14 @@ public class MovementManager : MonoBehaviour
                 _territoriesCalculated.Clear();
             }
         }
+    }
+
+    public void ResetCharacterMover()
+    {
+        Manager.TurnManager.SelectedCharacter.SetCoordinatsToMover(Manager.TurnManager.SelectedCharacter.ActualTerritory.GetCordinats()
+              + Manager.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
+        _lineRenderer.positionCount = 0;
+        _aktualTerritory = (null, null);
     }
 
     private void Clear()

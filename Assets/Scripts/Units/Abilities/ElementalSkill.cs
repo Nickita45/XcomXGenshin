@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 // A placeholder for the elemental skills that would be added in future
-public class AbilityElementalSkill : Ability, IAbilitySummon
+public class AbilityElementalSkill : Ability, IAbilitySummon, IAbilityArea
 {
     private Element _element;
     private AlbedoFlowerEntity _entity;
@@ -19,6 +19,9 @@ public class AbilityElementalSkill : Ability, IAbilitySummon
     public int GetMaxCooldown() => 2;
     public int RangeSummon() => 2;
     public string PathSummonedObject() => "Prefabs/Entity/AlbedoFlower";
+    public int RangeArea() => 5;
+    public void SummonArea() =>
+        Manager.AbilityAreaController.AddOrEditAreas((Manager.MovementManager.GetSelectedTerritory.GetCordinats(), RangeArea()));
 
     public AlbedoFlowerEntity FlowerEntity => _entity;
     public override IEnumerator Activate(Unit unit, object target)
@@ -35,4 +38,5 @@ public class AbilityElementalSkill : Ability, IAbilitySummon
         yield return null;
     }
 
+    
 }
