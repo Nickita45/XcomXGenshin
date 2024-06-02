@@ -14,23 +14,25 @@ public class MovementManager : MonoBehaviour
     public static readonly Vector3 POSITIONFORSPAWN = new(0, 0.5f, 0); //position for spawn air platforms
 
     [Header("Script Objects")]
-
     [SerializeField]
     private LineRenderer _lineRenderer;
 
     private (TerritroyReaded aktualTerritoryReaded, List<Vector3> path) _aktualTerritory;
-
     private Dictionary<TerritroyReaded, TerritroyReaded> _territoriesCalculated; //orig, previous
+    private float _timerCanBeSeleced = 0.5f; //resolves problem with automove if character selected by mouse
+    private bool _isMoving;
 
     public Action<(TerritroyReaded aktualTerritoryReaded, List<Vector3> path), Character> OnSelectNewTerritory;
     public Action OnStartMove;
     public Action<TerritroyReaded, Character> OnEndMove;
 
-    private bool _isMoving;
     public bool IsMoving => _isMoving;
     public TerritroyReaded GetSelectedTerritory => _aktualTerritory.aktualTerritoryReaded;
+    public void LineRendererSet(bool result) => _lineRenderer.gameObject.SetActive(result);
 
-    public float _timerCanBeSeleced = 0.5f; //resolves problem with automove if character selected by mouse
+
+    #region MONO
+
     private void Start()
     {
         _lineRenderer.gameObject.SetActive(false);
@@ -58,6 +60,21 @@ public class MovementManager : MonoBehaviour
 
             SpawnMover();
         }
+    }
+
+    #endregion
+
+    public void AirPlatformsSet(bool result)
+    {
+        foreach (var item in _territoriesCalculated.Keys)
+            Manager.Map.GetAirPlatform(item)?.SetActive(result);
+    }
+    public void ResetCharacterMover()
+    {
+        Manager.TurnManager.SelectedCharacter.SetCoordinatsToMover(Manager.TurnManager.SelectedCharacter.ActualTerritory.GetCordinats()
+              + Manager.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
+        _lineRenderer.positionCount = 0;
+        _aktualTerritory = (null, null);
     }
 
     private void SpawnMover() //Detect Territory to move
@@ -108,75 +125,6 @@ public class MovementManager : MonoBehaviour
         }
     }
 
-    public void OnCharacterSelect(Character character)
-    {
-        Manager.TurnManager.SelectedCharacter.SetCoordinatsToMover(character.ActualTerritory.GetCordinats()
-              + Manager.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
-    }
-
-    public void OnCharacterDeselect()
-    {
-        _timerCanBeSeleced = 0.5f;
-        _lineRenderer.positionCount = 0;
-
-        AirPlatformsSet(false);
-
-        _territoriesCalculated?.Clear();
-    }
-
-    public void AirPlatformsSet(bool result)
-    {
-        foreach (var item in _territoriesCalculated.Keys)
-        {
-            Manager.Map.GetAirPlatform(item)?.SetActive(result);
-
-            //if(!result)
-            //   Manager.Map.GetAirPlatform(item).GetComponent<PlateMoving>().SetCharge(result);
-        }
-    }
-
-    public void LineRendererSet(bool result) => _lineRenderer.gameObject.SetActive(result);
-
-    private IEnumerator MoveSelectedCharacter(TerritroyReaded newTerritory, List<Vector3> points)
-    {
-        Character character = Manager.TurnManager.SelectedCharacter; //get selected character
-        character.MoverActive(false); // disable mover
-        character.ActualTerritory.TerritoryInfo = TerritoryType.Air; //set block where he was on air
-        character.ActualTerritory = null;
-        character.SelectItem.SetActive(false); //disable hi selecter
-
-        _isMoving = true;
-        OnStartMove();
-
-        Manager.StatusMain.SetStatusWaiting();
-
-        yield return StartCoroutine(character.Move(points)); //??????????
-
-        _isMoving = false;
-
-        if (!character.IsKilled)
-        {
-            OnEndMove(newTerritory, character);
-            yield return Manager.TurnManager.AfterCharacterAction();
-        }
-        else
-        {
-            Manager.TurnManager.OutOfActions(character);
-        }
-    }
-
-    private void DisableToBasic(TerritroyReaded newTerritory, Character character)
-    {
-        character.ActualTerritory = newTerritory; //set new block to character
-        newTerritory.TerritoryInfo = TerritoryType.Character; //change block type
-        _lineRenderer.positionCount = 0;
-
-        if (Manager.Map.GetAirPlatform(newTerritory).GetComponent<PlateMoving>().GetPlateType == PlateMovingType.Charge) //minus actions
-            character.ActionsLeft -= 2;
-        else
-            character.ActionsLeft -= 1;
-    }
-
     private void DrawLine(List<Vector3> points)
     {
         _lineRenderer.positionCount = points.Count;
@@ -187,6 +135,9 @@ public class MovementManager : MonoBehaviour
         }
     }
 
+    
+
+    #region Algoritmuses
     public List<Vector3> CalculateAllPath(TerritroyReaded starter, Unit unit, Dictionary<TerritroyReaded, TerritroyReaded> objectsCaclucated)
     {
         List<Vector3> path = new() //list of all point "breaks"
@@ -556,12 +507,12 @@ public class MovementManager : MonoBehaviour
 
             HashSet<TerritroyReaded> savingHash = new();
 
-            foreach((TerritroyReaded orig, TerritroyReaded previus) in nextCalculated.ToList())
+            foreach ((TerritroyReaded orig, TerritroyReaded previus) in nextCalculated.ToList())
             {
                 foreach (var item in orig)// detect all neighbors
                 {
                     TerritroyReaded detectItem = Manager.Map[item];
-                    if((orig.TerritoryInfo == TerritoryType.Shelter || orig.TerritoryInfo == TerritoryType.ShelterGround)
+                    if ((orig.TerritoryInfo == TerritoryType.Shelter || orig.TerritoryInfo == TerritoryType.ShelterGround)
                         && detectItem.TerritoryInfo == TerritoryType.Air && detectItem.IndexDown.Any(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air))
                     {
                         continue;
@@ -598,7 +549,7 @@ public class MovementManager : MonoBehaviour
                         continue;
                     }
 
-                    if(savingHash.Contains(detectItem))
+                    if (savingHash.Contains(detectItem))
                         nextCalculated.Enqueue((detectItem, orig));
                     else
                         savingHash.Add(detectItem);
@@ -608,7 +559,37 @@ public class MovementManager : MonoBehaviour
 
         return objectsCalculated;
     }
+    #endregion
 
+
+    #region Coroutines
+    private IEnumerator MoveSelectedCharacter(TerritroyReaded newTerritory, List<Vector3> points)
+    {
+        Character character = Manager.TurnManager.SelectedCharacter; //get selected character
+        character.MoverActive(false); // disable mover
+        character.ActualTerritory.TerritoryInfo = TerritoryType.Air; //set block where he was on air
+        character.ActualTerritory = null;
+        character.SelectItem.SetActive(false); //disable hi selecter
+
+        _isMoving = true;
+        OnStartMove();
+
+        Manager.StatusMain.SetStatusWaiting();
+
+        yield return StartCoroutine(character.Move(points)); //??????????
+
+        _isMoving = false;
+
+        if (!character.IsKilled)
+        {
+            OnEndMove(newTerritory, character);
+            yield return Manager.TurnManager.AfterCharacterAction();
+        }
+        else
+        {
+            Manager.TurnManager.OutOfActions(character);
+        }
+    }
 
     public IEnumerator MoveEnemyToTerritoryFromSelected(Enemy enemy, Func<Dictionary<TerritroyReaded, TerritroyReaded>, TerritroyReaded> findTerritoryMoveTo)
     {
@@ -623,7 +604,7 @@ public class MovementManager : MonoBehaviour
             // Only move if the path exists and contains at least 1 point
             if (aktualPath?.Count > 0)
             {
-               yield return MoveUnitToTerritory(enemy, aktualPath, findTerritory);
+                yield return MoveUnitToTerritory(enemy, aktualPath, findTerritory);
             }
         }
     }
@@ -639,6 +620,37 @@ public class MovementManager : MonoBehaviour
             unit.ActualTerritory = findTerritory; //actualization enemy block
             unit.ActualTerritory.TerritoryInfo = TerritoryType.Character;
         }
+    }
+    #endregion
+
+
+    #region Subscribers
+    public void OnCharacterSelect(Character character)
+    {
+        Manager.TurnManager.SelectedCharacter.SetCoordinatsToMover(character.ActualTerritory.GetCordinats()
+              + Manager.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
+    }
+
+    public void OnCharacterDeselect()
+    {
+        _timerCanBeSeleced = 0.5f;
+        _lineRenderer.positionCount = 0;
+
+        AirPlatformsSet(false);
+
+        _territoriesCalculated?.Clear();
+    }
+
+    private void DisableToBasic(TerritroyReaded newTerritory, Character character)
+    {
+        character.ActualTerritory = newTerritory; //set new block to character
+        newTerritory.TerritoryInfo = TerritoryType.Character; //change block type
+        _lineRenderer.positionCount = 0;
+
+        if (Manager.Map.GetAirPlatform(newTerritory).GetComponent<PlateMoving>().GetPlateType == PlateMovingType.Charge) //minus actions
+            character.ActionsLeft -= 2;
+        else
+            character.ActionsLeft -= 1;
     }
 
     private void OnStatusChange(HashSet<Permissions> permissions) //Clean by methods?
@@ -682,14 +694,6 @@ public class MovementManager : MonoBehaviour
         }
     }
 
-    public void ResetCharacterMover()
-    {
-        Manager.TurnManager.SelectedCharacter.SetCoordinatsToMover(Manager.TurnManager.SelectedCharacter.ActualTerritory.GetCordinats()
-              + Manager.MainParent.transform.position - POSITIONFORSPAWN); //set cordinats to mover
-        _lineRenderer.positionCount = 0;
-        _aktualTerritory = (null, null);
-    }
-
     private void Clear()
     {
         StopAllCoroutines();
@@ -698,4 +702,5 @@ public class MovementManager : MonoBehaviour
 
         Manager.TurnManager.DeselectCharacter();
     }
+    #endregion
 }

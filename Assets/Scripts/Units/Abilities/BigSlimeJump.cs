@@ -8,7 +8,7 @@ public class AbilityBigSlimeJump : Ability
     private int _attackRange = 1;
 
     public override string AbilityName => "Jump";
-
+    public override string Icon => "Shoot";
     public override string Description => "Leaps into the sky and freezes overhead";
 
     public override int ActionCost => 2;
@@ -33,6 +33,8 @@ public class AbilityBigSlimeJump : Ability
 
     private IEnumerator Jump(Unit unit)
     {
+        unit.StartCoroutine(unit.Canvas.PanelShow(unit.Canvas.PanelActionInfo("Jump"), 2));
+
         TerritroyReaded airTerritory = unit.ActualTerritory;
         var list = new List<Vector3> { airTerritory.GetCordinats() };
         for (int i = 0; i < 3; i++)
@@ -49,6 +51,8 @@ public class AbilityBigSlimeJump : Ability
 
     private IEnumerator Fall(Unit unit, object target)
     {
+        unit.StartCoroutine(unit.Canvas.PanelShow(unit.Canvas.PanelActionInfo("Fall"), 2));
+
         TerritroyReaded findedTerritory = unit.ActualTerritory;
         if(target != null)
         {
