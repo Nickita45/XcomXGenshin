@@ -14,7 +14,8 @@ public class AbilityShoot : Ability
         
     public override int ActionCost => 2;
     public override TargetType TargetType => TargetType.Enemy;
-
+    public override int MaxCooldown => 0;
+    
     private Element _element;
 
     public AbilityShoot() { _element = Element.Physical; }

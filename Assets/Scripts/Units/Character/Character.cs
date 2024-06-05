@@ -21,6 +21,11 @@ public class Character : Unit
     private Material _materialSelect; //when character is selected
     private Material _basicMaterial; //when character is non selected
 
+    [SerializeField]
+    private Material _materialMovementSummon; //when character summons something
+    private Material _basicMovementMaterial; //when character dont summons something
+
+
     [Header("Mover")]
     [SerializeField]
     private GameObject _mover; //circle on the selected block
@@ -63,6 +68,7 @@ public class Character : Unit
         _selectItem.SetActive(false);
         _mover.SetActive(false);
         _basicMaterial = _selectItem.GetComponent<MeshRenderer>().material;
+        _basicMovementMaterial = _mover.GetComponent<MeshRenderer>().material;
 
         OnSelected += Select;
         OnSelected += Manager.MovementManager.OnCharacterSelect;
@@ -75,6 +81,15 @@ public class Character : Unit
 
         ActualTerritory = Manager.Map[transform.localPosition];
         ActualTerritory.TerritoryInfo = TerritoryType.Character;
+
+        Manager.StatusMain.OnStatusChange += OnStatusChange;
+    }
+
+    public void GiveEnergy(int countHit, Element element)
+    {
+        foreach (var item in _abilities)
+            if (item is AbilityUltimate ultimate)
+                ultimate.GetEnergy(countHit, element);
     }
 
     public void OnIndexSet()
@@ -86,12 +101,14 @@ public class Character : Unit
 
         SetGunByIndex((int)Stats.Weapon); //set gun
 
+        var abilityFirst = new AbilityElementalSkill(Stats.Element); //will changed
         _abilities = new() {
             new AbilityShoot(),
             new AbilityShoot(Stats.Element),
             new AbilityOverwatch(),
             new AbilityHunkerDown(),
-            new AbilityElementalSkill(Stats.Element)
+            abilityFirst,
+            new AbillityAlbedoUltimate(abilityFirst)
         }; //set abilities
 
         Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath); //
@@ -101,7 +118,10 @@ public class Character : Unit
     private void OnMouseEnter()
     {
         if (!_selected && Manager.HasPermission(Permissions.SelectCharacter) && ActionsLeft > 0)
+        {
             _selectItem.SetActive(true);
+            Manager.MovementManager.ResetCharacterMover();
+        }
     }
 
     private void OnMouseExit()
@@ -168,6 +188,19 @@ public class Character : Unit
         _gunGameObjects[index].SetActive(true);
     }
 
+    public void DecreaseCooldownAbilities()
+    {
+        foreach (var item in _abilities) item.ActualCooldown--;
+    }
+
+    private void OnStatusChange(HashSet<Permissions> permissions)
+    {
+        if(permissions.Contains(Permissions.SummonObjectOnMap))
+            _mover.GetComponent<MeshRenderer>().material = _materialMovementSummon;
+        else
+            _mover.GetComponent<MeshRenderer>().material = _basicMovementMaterial;
+    }
+
     public override Transform GetBulletSpawner(string name) => GunPrefab.transform.GetChild((int)Stats.Weapon).Find(name);
 
     public void MoverActive(bool result) => _mover.SetActive(result);
@@ -194,6 +227,5 @@ public class Character : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set character's block to air
 
         Manager.StatisticsUtil.SoldierDeathCount++;
-        
     }
 }

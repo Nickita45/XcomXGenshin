@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class AbilityBigSlimeJump : Ability
 {
-    public override string AbilityName => "Jump";
+    private int _attackRange = 1;
 
+    public override string AbilityName => "Jump";
+    public override string Icon => "Shoot";
     public override string Description => "Leaps into the sky and freezes overhead";
 
     public override int ActionCost => 2;
@@ -14,10 +16,10 @@ public class AbilityBigSlimeJump : Ability
     public override TargetType TargetType => TargetType.Self;
     private Element _element;
 
-    private int _maxCooldown = 2;
-    public int Cooldown { get; private set; }
-    public bool Active => Cooldown <= 0;
     public bool InAir { get; private set; }
+
+    public override int MaxCooldown => 2;
+
     public AbilityBigSlimeJump() { _element = Element.Physical; }
     public AbilityBigSlimeJump(Element element) { _element = element; }
 
@@ -31,6 +33,8 @@ public class AbilityBigSlimeJump : Ability
 
     private IEnumerator Jump(Unit unit)
     {
+        unit.StartCoroutine(unit.Canvas.PanelShow(unit.Canvas.PanelActionInfo("Jump"), 2));
+
         TerritroyReaded airTerritory = unit.ActualTerritory;
         var list = new List<Vector3> { airTerritory.GetCordinats() };
         for (int i = 0; i < 3; i++)
@@ -41,12 +45,14 @@ public class AbilityBigSlimeJump : Ability
             list.Add(airTerritory.GetCordinats());
         }
 
-        yield return unit.StartCoroutine(Manager.MovementManager.MoveEnemyToTerritory((Enemy)unit, list, airTerritory));
+        yield return unit.StartCoroutine(Manager.MovementManager.MoveUnitToTerritory(unit, list, airTerritory));
         InAir = true;
     }
 
     private IEnumerator Fall(Unit unit, object target)
     {
+        unit.StartCoroutine(unit.Canvas.PanelShow(unit.Canvas.PanelActionInfo("Fall"), 2));
+
         TerritroyReaded findedTerritory = unit.ActualTerritory;
         if(target != null)
         {
@@ -55,7 +61,7 @@ public class AbilityBigSlimeJump : Ability
         {
             for (int i = 0; i < 3; i++)
             {
-                if (findedTerritory.IndexBottom.Count == 0) continue;
+                if (findedTerritory.IndexDown.Count == 0) continue;
 
                 findedTerritory = Manager.Map[findedTerritory.IndexBottom.First()];
             }
@@ -69,14 +75,15 @@ public class AbilityBigSlimeJump : Ability
         };
 
         unit.Stats.SpeedIncreaser = 5; //mb to config
-        yield return unit.StartCoroutine(Manager.MovementManager.MoveEnemyToTerritory((Enemy)unit, list, findedTerritory));
+        yield return unit.StartCoroutine(Manager.MovementManager.MoveUnitToTerritory(unit, list, findedTerritory));
         unit.Stats.SpeedIncreaser = 0;
 
-        Debug.Log(target);
+        HubData.Instance.ParticleSystemFactory.CreateSlimeJump(_attackRange, findedTerritory.GetCordinats());
+
         if(target != null)
             unit.Animator.RotateLookAtImmediate((target as Unit).ActualTerritory.GetCordinats());
 
-        var adjancentAUnits = Manager.Map.GetAdjancentUnits(1, unit);
+        var adjancentAUnits = Manager.Map.GetAdjancentUnits(_attackRange, unit);
         foreach(var item in adjancentAUnits)
         {
             if (item is Enemy || item == unit)
@@ -86,11 +93,7 @@ public class AbilityBigSlimeJump : Ability
             item.Health.MakeHit(dmg, _element, unit);
         }
         InAir = false;
-        CooldownStart();
+        ActualCooldown = MaxCooldown;
     }
 
-    public void CooldownDecreaser() => Cooldown--;
-
-    public void CooldownStart() => Cooldown = _maxCooldown; //+ 1? becouse next turn 
-    
 }

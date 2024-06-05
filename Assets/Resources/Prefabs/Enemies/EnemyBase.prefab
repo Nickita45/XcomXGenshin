@@ -1308,7 +1308,6 @@ GameObject:
   - component: {fileID: 3923084164569473205}
   - component: {fileID: -1340898745121493489}
   - component: {fileID: 8254332665326490105}
-  - component: {fileID: 6644550376966339434}
   - component: {fileID: 1407980323682624283}
   - component: {fileID: 2031201254778850730}
   m_Layer: 0
@@ -1397,7 +1396,6 @@ MonoBehaviour:
   _stats: {fileID: 0}
   _canvas: {fileID: 8254332665326490105}
   _animator: {fileID: 2031201254778850730}
-  _modifiers: {fileID: 6644550376966339434}
   _bulletSpawner: {fileID: 0}
   _enemyAI: {fileID: 0}
 --- !u!114 &8254332665326490105
@@ -1425,18 +1423,6 @@ MonoBehaviour:
   _elementalReactionPrefab: {fileID: 4842593602491196280, guid: 71218b54ccd99454cad88a89fe2aa702, type: 3}
   _actionIconPopUp: {fileID: 3774079588979257113}
   _listDidntRotateObjects: []
---- !u!114 &6644550376966339434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6654390615234965879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689f99509c268074b8f6f9904ec300c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1407980323682624283
 MonoBehaviour:
   m_ObjectHideFlags: 0

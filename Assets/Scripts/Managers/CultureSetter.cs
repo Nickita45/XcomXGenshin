@@ -8,9 +8,9 @@ using UnityEngine;
 //
 // In particular, this makes floating point data representation consistent
 // so we can use it in the dictionary of MatrixMap.
-public class CultureSetter : MonoBehaviour
+public class CultureSetter
 {
-    private void Awake()
+    public CultureSetter()
     {
         CultureInfo culture = new CultureInfo("en-US");
         Thread.CurrentThread.CurrentCulture = culture;

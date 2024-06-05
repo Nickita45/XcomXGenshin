@@ -15,6 +15,7 @@ public class MatrixMap
     private Dictionary<string, GameObject> _planeToMovement = new();
     private ListUnitsMap<Enemy> _enemy = new();
     private ListUnitsMap<Character> _characters = new();
+    private ListUnitsMap<Entity> _entity = new();
     public int width, height;
 
     public TerritroyReaded AddVertex(TerritroyReaded ter, Dictionary<string, TerritroyReaded> collection)
@@ -52,6 +53,7 @@ public class MatrixMap
 
     public ListUnitsMap<Enemy> Enemies { get => _enemy; private set => _enemy = value; }
     public ListUnitsMap<Character> Characters { get => _characters; private set => _characters = value; }
+    public ListUnitsMap<Entity> Entities { get => _entity; private set => _entity = value; }
 
     public void AirPlatformRemove(TerritroyReaded ter) => _planeToMovement.Remove(ter.Index);
 
@@ -123,7 +125,7 @@ public class MatrixMap
     //Get a list of all units on the map
     public IEnumerable<Unit> GetAllUnits()
     {
-        return Characters.GetList.Select(c => (Unit)c).Concat(Enemies.GetList.Select(e => (Unit)e));
+        return Characters.GetList.Select(c => (Unit)c).Concat(Enemies.GetList.Select(e => (Unit)e)).Concat(Entities.GetList.Select(e => (Unit)e));
     }
 
     // Get a list of allies of the unit within n squares from them (including the unit themselves)
@@ -134,11 +136,14 @@ public class MatrixMap
         return Manager.Map.GetAllies(_target).Where(UnitsAdjancent(n, coordinats));
     }
 
-    private static Func<Unit, bool> UnitsAdjancent(int n, Vector3 coordinats)
+    private static Func<Unit, bool> UnitsAdjancent(int n, Vector3 coordinats, bool noY = false)
     {
         return unit =>
         {
             Vector3 otherCoordinats = unit.ActualTerritory.GetCordinats();
+            if (noY)
+                 return Mathf.Abs(coordinats.y - otherCoordinats.y) <= 2 && Math.Round(Vector3.Distance(coordinats, otherCoordinats)) <= n;
+
             // Find if any are within 1 square from the unit
             return Math.Round(Vector3.Distance(coordinats, otherCoordinats)) <= n;   
               //  Mathf.Abs(coordinats.x - otherCoordinats.x) <= n &&
@@ -148,11 +153,18 @@ public class MatrixMap
     }
 
     // Get a list of units of the unit within n squares from them (including the unit themselves)
-    public IEnumerable<Unit> GetAdjancentUnits(int n, Unit _target)
+    public IEnumerable<Unit> GetAdjancentUnits(int n, Unit _target, bool noY = false)
     {
         Vector3 coordinats = _target.ActualTerritory.GetCordinats();
 
-        return Manager.Map.GetAllUnits().Where(UnitsAdjancent(n, coordinats));
+        return Manager.Map.GetAllUnits().Where(UnitsAdjancent(n, coordinats, noY));
+    }
+
+    public IEnumerable<Unit> GetAdjancentUnits(int n, TerritroyReaded _target, bool noY = false)
+    {
+        Vector3 coordinats = _target.GetCordinats();
+
+        return Manager.Map.GetAllUnits().Where(UnitsAdjancent(n, coordinats, noY));
     }
 }
 
