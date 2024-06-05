@@ -118,17 +118,32 @@ public class TurnManager : MonoBehaviour
         UnitOverwatched.RemoveAll(unit => unit is Character);
 
         // Restore actions
-        foreach (Character character in Manager.Map.Characters.GetList) { character.ActionsLeft = 2; }
+        foreach (Character character in Manager.Map.Characters.GetList) { 
+            character.ActionsLeft = 2;
+            character.DecreaseCooldownAbilities();
+        }
         foreach (Enemy enemy in Manager.Map.Enemies.GetList) { enemy.ActionsLeft = enemy.Stats.BaseActions(); }
+        foreach (Entity entity in Manager.Map.Entities.GetList) { entity.LifeTimerDecrease(); }
 
         // Trigger modifiers on begin round
         foreach (Unit unit in Manager.Map.GetAllUnits())
         {
+            if (unit.Modifiers == null) continue;
+
             yield return StartCoroutine(unit.Modifiers.OnBeginRound());
             unit.Canvas.UpdateModifiersUI(unit.Modifiers);
         }
+        BeginEntityTurn();
 
         BeginPlayerTurn();
+    }
+
+    public void BeginEntityTurn()
+    {
+        foreach (Entity entity in Manager.Map.Entities.GetList)
+        {
+            entity.Activate();
+        }
     }
 
     public void BeginPlayerTurn()
@@ -215,6 +230,8 @@ public class TurnManager : MonoBehaviour
         // Trigger modifiers on end round
         foreach (Unit unit in Manager.Map.GetAllUnits())
         {
+            if (unit.Modifiers == null) continue;
+
             yield return StartCoroutine(unit.Modifiers.OnEndRound());
             unit.Canvas.UpdateModifiersUI(unit.Modifiers);
         }

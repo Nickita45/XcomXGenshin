@@ -94,6 +94,7 @@ public class AbilityPanel : MonoBehaviour
         _confirm.interactable = icon.AnyAvailableTargets;
 
         _selected = icon;
+        Manager.StatusMain.SetStatusSelectAction();
         if (icon.AnyAvailableTargets) icon.EnterTargetMode();
     }
 
@@ -164,7 +165,10 @@ public class AbilityPanel : MonoBehaviour
                     icon.AnyAvailableTargets = visibleEnemies.Count > 0;
                     break;
                 case TargetType.Self:
-                    icon.AnyAvailableTargets = true;
+                    icon.AnyAvailableTargets = icon.Ability.IsAvailable; //???
+                    break;
+                case TargetType.Summon:
+                    icon.AnyAvailableTargets = icon.Ability.IsAvailable; //mb???
                     break;
             }
 

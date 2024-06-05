@@ -6,6 +6,12 @@ public static class ShelterDetectUtils
 {
     public static void UpdateShelterObjects(TerritroyReaded territory, Character character)
     {
+        if (Manager.StatusMain.HasPermisson(Permissions.SummonObjectOnMap))
+        {
+            DisableShelterObjects(character);
+            return;
+        }
+
         Dictionary<ShelterSide, ShelterType> shelters = DetectShelters(territory);
         SetActiveShelters(shelters, character);
     }

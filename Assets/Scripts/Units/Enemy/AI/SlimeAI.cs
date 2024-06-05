@@ -61,7 +61,7 @@ public class SlimeAI : EnemyAI
         }
     }
 
-    public override IEnumerator Attack(Character character)
+    public override IEnumerator Attack(Unit character)
     {
         yield return _attack.Activate(_enemy, character);
         yield return new WaitForSeconds(2);

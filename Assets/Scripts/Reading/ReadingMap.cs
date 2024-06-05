@@ -11,6 +11,7 @@ public class ReadingMap : MonoBehaviour
 
     private const float TIMEWAITREADING = 0.02f;//Optimal timer
 
+    private CultureSetter _culture;
 
     [Header("DETECTER")]
     [SerializeField]
@@ -32,6 +33,7 @@ public class ReadingMap : MonoBehaviour
 
     private void Start()
     {
+        _culture = new CultureSetter();
         StartCoroutine(AlgoritmusReadingMap());
     }
 

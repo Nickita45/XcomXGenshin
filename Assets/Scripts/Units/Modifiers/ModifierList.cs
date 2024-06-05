@@ -6,23 +6,23 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ModifierList : MonoBehaviour
+public class ModifierList
 {
     private List<Modifier> _modifiers = new();
     public List<Modifier> Modifiers => _modifiers;
 
     private Unit _unit;
 
-    private void Start()
+    public ModifierList(Unit unit)
     {
-        _unit = GetComponent<Unit>();
+        _unit = unit;
     }
 
     public IEnumerator OnBeginRound()
     {
         foreach (Modifier modifier in Modifiers)
         {
-            yield return StartCoroutine(modifier.OnBeginRound(_unit));
+            yield return _unit.StartCoroutine(modifier.OnBeginRound(_unit));
         }
 
         _unit?.Canvas.UpdateModifiersUI(this);
@@ -35,7 +35,7 @@ public class ModifierList : MonoBehaviour
         {
             if (modifier.TurnDecrement())
             {
-                yield return StartCoroutine(modifier.OnEndRound(_unit));
+                yield return _unit.StartCoroutine(modifier.OnEndRound(_unit));
             }
             else
             {

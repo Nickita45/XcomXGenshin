@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BigSlimeAI : EnemyAI
@@ -37,13 +38,17 @@ public class BigSlimeAI : EnemyAI
     public override IEnumerator MakeTurn()
     {
         // Only apply element at the start of the turn (when actions are full)
-        _jump.CooldownDecreaser();
+        _jump.ActualCooldown--;
         if (_enemy.ActionsLeft == _enemy.Stats.BaseActions() && !_enemy.Modifiers.GetElements().Contains(_element)) ApplyElementToSelf();
         var character = _enemy.GetClosestVisibleCharacter();
-        if(_jump.InAir)
+        var characters = _enemy.GetVisibleCharacters();
+        if (_jump.InAir)
         {
             _enemy.ActionsLeft -= _jump.ActionCost;
-            yield return StartCoroutine(_jump.Activate(_enemy, character));
+            if(character.ActualTerritory.GetRandomTerritoryNearBy() != null)
+                yield return StartCoroutine(_jump.Activate(_enemy, character));
+            else
+                yield return StartCoroutine(_jump.Activate(_enemy, characters.FirstOrDefault(n => n.ActualTerritory.GetRandomTerritoryNearBy() != null)));
             yield break;
         }
 
@@ -56,8 +61,8 @@ public class BigSlimeAI : EnemyAI
         {
             if (character != null)
             {
-                if (_jump.Active &&
-                    Vector3.Distance(character.transform.localPosition, _enemy.transform.localPosition) > _enemy.Stats.MovementDistance() && RandomExtensions.GetChance(50))
+                if (_jump.IsAvailable &&
+                     RandomExtensions.GetChance(50)) //Vector3.Distance(character.transform.localPosition, _enemy.transform.localPosition) > _enemy.Stats.MovementDistance() &&
                 {
                     _enemy.ActionsLeft -= _jump.ActionCost;
                     yield return StartCoroutine(_jump.Activate(_enemy, character));
@@ -76,7 +81,7 @@ public class BigSlimeAI : EnemyAI
         }
     }
 
-    public override IEnumerator Attack(Character character)
+    public override IEnumerator Attack(Unit character)
     {
         yield return _attack.Activate(_enemy, character);
         yield return new WaitForSeconds(2);

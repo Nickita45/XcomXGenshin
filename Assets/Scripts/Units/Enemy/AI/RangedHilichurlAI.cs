@@ -8,13 +8,13 @@ public class RangedHilichurlAI : EnemyAI
 {
     private TerritroyReaded FindBestTerritoryForRangedAttack(Dictionary<TerritroyReaded, TerritroyReaded> allPaths)
     {
-        List<Character> characters = _enemy.GetVisibleCharacters();
+        List<Unit> characters = _enemy.GetVisibleCharacters();
 
         (TerritroyReaded territory, float percent) minimum = (null, Int32.MinValue); //the optimal territory with itss procent optimational
         foreach (var item in allPaths) //calculations
         {
-            int procMakeHit = characters.Sum(ch => AimUtils.CalculateHitChance(item.Key, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimPercent()).percent);
-            int procGetHit = characters.Sum(ch => AimUtils.CalculateHitChance(ch.ActualTerritory, item.Key, GunType.Automatic, 50).percent); //???
+            int procMakeHit = characters.Where(n => n is Character).Select(n => (Character)n).Sum(ch => AimUtils.CalculateHitChance(item.Key, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimPercent()).percent);
+            int procGetHit = characters.Where(n => n is Character).Select(n => (Character)n).Sum(ch => AimUtils.CalculateHitChance(ch.ActualTerritory, item.Key, GunType.Automatic, 50).percent); //???
             float proc = (2f * (100 - procGetHit) + 0.4f * procMakeHit) / (2f + 0.4f);
             if (proc > minimum.percent)
             {
@@ -41,7 +41,7 @@ public class RangedHilichurlAI : EnemyAI
         var characters = _enemy.GetVisibleCharacters();
         if (characters.Count > 0)
         {
-            if (_enemy.ActionsLeft == 2 && characters.Select(ch =>
+            if (_enemy.ActionsLeft == 2 && characters.Where(n => n is Character).Select(n => (Character)n).Select(ch =>
                         AimUtils.CalculateHitChance(_enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, _enemy.Stats.BaseAimPercent()).percent).Max() < 50)
             {
                 //make movement if has hit chance less then 50
@@ -52,7 +52,7 @@ public class RangedHilichurlAI : EnemyAI
             {
                 //make shoot if it is above 50 percent chance
                 _enemy.ActionsLeft -= 2;
-                yield return StartCoroutine(Attack(characters.OrderByDescending(ch =>
+                yield return StartCoroutine(Attack(characters.Where(n => n is Character).Select(n => (Character)n).OrderByDescending(ch =>
                 AimUtils.CalculateHitChance(_enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimPercent()).percent).First())); //slow?
             }
         }
@@ -83,7 +83,7 @@ public class RangedHilichurlAI : EnemyAI
         onFinish();
     }
 
-    public override IEnumerator Attack(Character character)
+    public override IEnumerator Attack(Unit character)
     {
         yield return _shoot.Activate(_enemy, character);
         yield return new WaitForSeconds(2);

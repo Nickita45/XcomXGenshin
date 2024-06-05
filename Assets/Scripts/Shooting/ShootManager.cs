@@ -26,7 +26,7 @@ public class ShootManager : MonoBehaviour
         // Manager.map for enemy?
             AimUtils.CalculateHitChance(shooter.ActualTerritory, defender.ActualTerritory, actualGun, shooter.Stats.BaseAimPercent()); //get chance
 
-        var result = RandomExtensions.GetChance(percent);
+        var result = RandomExtensions.GetChance(percent) || defender is Entity; //mb change in future
         //Debug.Log($"{shooter.Stats.Name()} has next {percent} to hit and got {result}");
         for (int i = 0; i < ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].countBullets; i++)
         {

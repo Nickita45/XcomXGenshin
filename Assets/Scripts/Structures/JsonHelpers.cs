@@ -76,10 +76,10 @@ public class TerritroyReaded
     {
         var allItems = new List<string>();
 
-        allItems.AddRange(IndexBottom.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air));
-        allItems.AddRange(IndexFront.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air));
-        allItems.AddRange(IndexLeft.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air));
-        allItems.AddRange(IndexRight.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air));
+        allItems.AddRange(IndexBottom.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air && Manager.Map[Manager.Map[n].IndexDown.First()].TerritoryInfo != TerritoryType.Air));
+        allItems.AddRange(IndexFront.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air && Manager.Map[Manager.Map[n].IndexDown.First()].TerritoryInfo != TerritoryType.Air));
+        allItems.AddRange(IndexLeft.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air && Manager.Map[Manager.Map[n].IndexDown.First()].TerritoryInfo != TerritoryType.Air));
+        allItems.AddRange(IndexRight.Where(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air && Manager.Map[Manager.Map[n].IndexDown.First()].TerritoryInfo != TerritoryType.Air));
 
         int randomIndex = UnityEngine.Random.Range(0,allItems.Count);
 

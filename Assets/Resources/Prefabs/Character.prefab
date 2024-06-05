@@ -4062,7 +4062,6 @@ GameObject:
   - component: {fileID: 767113258584801334}
   - component: {fileID: 6574580558388666161}
   - component: {fileID: 6410831071949143519}
-  - component: {fileID: 1748619464968573664}
   - component: {fileID: 7363743441411340796}
   - component: {fileID: 4303387861596680420}
   m_Layer: 0
@@ -4180,9 +4179,9 @@ MonoBehaviour:
   _stats: {fileID: 6574580558388666161}
   _canvas: {fileID: 767113258584801334}
   _animator: {fileID: 7363743441411340796}
-  _modifiers: {fileID: 1748619464968573664}
   _selectItem: {fileID: 7315670942795276779}
   _materialSelect: {fileID: 2100000, guid: b6054281107c63e4ba80253f44361f9e, type: 2}
+  _materialMovementSummon: {fileID: 2100000, guid: 6b88c4b7046ba7c49aa0efaa9783d77b, type: 2}
   _mover: {fileID: 5269969051388054375}
   _shelterSize: []
   _gunGameObjects:
@@ -4190,18 +4189,6 @@ MonoBehaviour:
   - {fileID: 1883848245566334000}
   - {fileID: 6968720043355437035}
   _gunPrefab: {fileID: 4332863957969416643}
---- !u!114 &1748619464968573664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5040088768253021677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689f99509c268074b8f6f9904ec300c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7363743441411340796
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class EnemyAnimator : UnitAnimator
         if (!_canCrouch)
         {
             Enemy enemy = GetComponent<Enemy>(); //maybe better save reference?
-            Character closestCharacter = enemy.GetClosestVisibleCharacter();
+            Unit closestCharacter = enemy.GetClosestVisibleCharacter();
 
             if (closestCharacter)
             {

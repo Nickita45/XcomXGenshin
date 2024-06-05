@@ -74,7 +74,7 @@ public class Enemy : Unit
             {
                 _triggered = true;
 
-                Character character = GetClosestCharacter();
+                Unit character = GetClosestCharacter();
                 ObjectUtils.LookAtXZ(Animator.Model.transform, character.transform.position);
 
                 StartCoroutine(Canvas.PanelShow(Canvas.PanelActionInfo("Triggered!","TriggerEnemy"), 2));
@@ -119,27 +119,27 @@ public class Enemy : Unit
     }
 
     // Gets the character closest to the enemy.
-    public Character GetClosestCharacter()
+    public Unit GetClosestCharacter()
     {
-        return Manager.Map.Characters.GetList
+        return Manager.Map.Characters.GetList.Concat(Manager.Map.Entities.GetList.Select(e => (Unit)e))
                 .OrderBy(ch => Vector3.Distance(ch.transform.localPosition, transform.localPosition))
                 .FirstOrDefault();
     }
 
     // Gets a list of characters that the enemy can see.
-    public List<Character> GetVisibleCharacters()
+    public List<Unit> GetVisibleCharacters()
     {
         // we check whether the enemy can see the character by supplying
         // vision distance to the CanTarget function. This
         // implementation might change in future.
-        return Manager.Map.Characters.GetList
-            .Where(character => TargetUtils.CanSee(character, this))
+        return Manager.Map.Characters.GetList.Concat(Manager.Map.Entities.GetList.Select(e => (Unit)e))
+            .Where(character => TargetUtils.CanSee(this, character))
             .ToList();
     }
 
     // Gets the character closest to the enemy,
     // chosen out of all characters that the enemy can see.
-    public Character GetClosestVisibleCharacter()
+    public Unit GetClosestVisibleCharacter()
     {
         return GetVisibleCharacters()
             .OrderBy(n => Vector3.Distance(n.transform.localPosition, transform.localPosition))

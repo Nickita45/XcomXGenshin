@@ -112,3 +112,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usualMat: {fileID: 2100000, guid: 4157de2dac1bc774da858d720f2f6d6e, type: 2}
   chargeMat: {fileID: 2100000, guid: 0288283fea5d61b45b7c91d281fd0e3b, type: 2}
+  summmonMat: {fileID: 2100000, guid: 6b5c4fec3591cec4c856a93215f7bf68, type: 2}
