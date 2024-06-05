@@ -27,8 +27,9 @@ public class UnitHealth
     // Deal a set amount of elemental damage to the unit.
     // 
     // damageSource is an object that caused the damage.
+    // createrOfDamageSource is an object that creates of source the damage. Needed to creating energy
     // Right now it can either be a Unit, a Modifier, or a null (other).
-    public void MakeHit(int hit, Element element, object damageSource)
+    public void MakeHit(int hit, Element element, object damageSource, Character createrOfDamageSource = null)
     {
 
         if ((Unit)damageSource != _mainUnit && hit <= 0) return; // Unless is the source is the unit themselves, do not do anything if the attack deals no damage
@@ -153,12 +154,29 @@ public class UnitHealth
             int saveHit = hit; //helping to see if was any dmg 
             hit = OnResistance(hit, element);
 
-            if(hit <= 0 && saveHit != hit) _canvas?.StartCoroutine(_canvas.PanelShow(_canvas.PanelActionInfo("Immunity"), 4));
-            else if(hit > 0) _canvas?.StartCoroutine(_canvas.PanelShow(_canvas.PanelHit(hit, element), 4));
+            if (hit <= 0 && saveHit != hit) _canvas?.StartCoroutine(_canvas.PanelShow(_canvas.PanelActionInfo("Immunity"), 4));
+            else if (hit > 0)
+            {
+                _canvas?.StartCoroutine(_canvas.PanelShow(_canvas.PanelHit(hit, element), 4));
+
+                if (damageSource is Character sourceCharacter)
+                    sourceCharacter.GiveEnergy(hit, element);
+                else if(damageSource is Entity) 
+                    createrOfDamageSource.GiveEnergy(hit, element); //mb move to action
+            }
         }
         else
         {
-            if (hit > 0) _canvas?.StartCoroutine(_canvas.PanelShow(_canvas.PanelHit(hit, element), 4));
+            if (hit > 0)
+            {
+                _canvas?.StartCoroutine(_canvas.PanelShow(_canvas.PanelHit(hit, element), 4));
+
+                if (damageSource is Character sourceCharacter)
+                    sourceCharacter.GiveEnergy(hit, element);
+                else if (damageSource is Entity)
+                    createrOfDamageSource.GiveEnergy(hit, element); //mb move to action
+
+            }
         }
 
         _countHp -= hit;
@@ -175,6 +193,5 @@ public class UnitHealth
     }
 
     public bool IsKilled => _countHp <= 0;
-
 
 }

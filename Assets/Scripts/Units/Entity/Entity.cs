@@ -5,10 +5,11 @@ using UnityEngine;
 
 public abstract class Entity : Unit
 {
+    protected Unit _creator;
     protected int _lifeTime { get; set; }
-    public abstract void Activate();
     public override TerritroyReaded ActualTerritory { get; set; }
     public override int ActionsLeft { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public abstract void Activate();
     public void LifeTimerDecrease()
     {
         _lifeTime--;
@@ -28,6 +29,7 @@ public abstract class Entity : Unit
     public virtual void OnCreate(Unit creater, TerritroyReaded newPosition)
     {
         Manager.Map.Entities.Add(this);
+        _creator = creater;
     }
 
     public override void Kill()

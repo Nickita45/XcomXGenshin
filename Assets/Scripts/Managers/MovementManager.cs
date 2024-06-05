@@ -134,7 +134,6 @@ public class MovementManager : MonoBehaviour
             _lineRenderer.SetPosition(i, points[i] + Manager.MainParent.transform.position);
         }
     }
-
     
 
     #region Algoritmuses

@@ -85,6 +85,13 @@ public class Character : Unit
         Manager.StatusMain.OnStatusChange += OnStatusChange;
     }
 
+    public void GiveEnergy(int countHit, Element element)
+    {
+        foreach (var item in _abilities)
+            if (item is AbilityUltimate ultimate)
+                ultimate.GetEnergy(countHit, element);
+    }
+
     public void OnIndexSet()
     {
         gameObject.name = Stats.Name(); //set name

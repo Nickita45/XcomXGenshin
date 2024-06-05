@@ -36,8 +36,9 @@ public class AlbedoFlowerEntity : Entity
         HubData.Instance.ParticleSystemFactory.CreateAlbedoFlower(_abilityRange, ActualTerritory.GetCordinats());
         foreach (var unit in Manager.Map.GetAdjancentUnits(_abilityRange, ActualTerritory, true))
         {
-            if (unit is Enemy enemy)
-                enemy.Health.MakeHit(dmg, _element, this);
+            if (unit is Enemy enemy) { 
+                enemy.Health.MakeHit(dmg, _element, this, _creator as Character);
+            }
         }
     }
 
@@ -56,7 +57,6 @@ public class AlbedoFlowerEntity : Entity
         //if(target.y < _mainPartFlower.transform.localPosition.y) minusKoef = -1;
 
         while (Vector3.Distance(_mainPartFlower.transform.localPosition, target) > 0.05f) {
-            Debug.Log(Vector3.Lerp(_mainPartFlower.transform.localPosition, target, _speed * Time.deltaTime) * minusKoef);
             _mainPartFlower.transform.localPosition =
              Vector3.Lerp(_mainPartFlower.transform.localPosition, target, _speed * Time.deltaTime) * minusKoef;
             // Vector3.Lerp(Vector3.Min(_mainPartFlower.transform.localPosition, target), Vector3.Max(_mainPartFlower.transform.localPosition, target), _speed * Time.deltaTime) * minusKoef;

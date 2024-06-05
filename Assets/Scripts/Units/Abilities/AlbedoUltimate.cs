@@ -1,24 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 
-public class AbillityAlbedoUltimate : Ability, IAbilityArea
+public class AbillityAlbedoUltimate : AbilityUltimate, IAbilityArea
 {
-    private Element _element = Element.Geo;
     private int _abilityRange = 5;
     private int _dealDmg = 2;
     private int _dealDmgFlower = 1;
     private AbilityElementalSkill _albedoFlowerSkill;
 
-    public AbillityAlbedoUltimate(AbilityElementalSkill albedoFlowerSkill)
-    {
-        _albedoFlowerSkill = albedoFlowerSkill;
-    }
-
     public override string AbilityName => "Albedo Ultimate";
-
     public override string Description => "Albedo ultimate";
-    public override string Icon => _element.ToString();
+    public override string Icon => ElementAbility().ToString();
 
     public override int MaxCooldown => 0;
 
@@ -26,6 +20,15 @@ public class AbillityAlbedoUltimate : Ability, IAbilityArea
 
     public override TargetType TargetType => TargetType.Self;
     public int RangeArea() => 5;
+    public override int MaxEnergy() => 60;
+
+    public override Element ElementAbility() => Element.Geo;
+
+    public AbillityAlbedoUltimate(AbilityElementalSkill albedoFlowerSkill)
+    {
+        _albedoFlowerSkill = albedoFlowerSkill;
+    }
+
     public void SummonArea()
     {
         if (_albedoFlowerSkill.FlowerEntity != null && !_albedoFlowerSkill.FlowerEntity.IsKilled)
@@ -34,10 +37,7 @@ public class AbillityAlbedoUltimate : Ability, IAbilityArea
                 (Manager.TurnManager.SelectedCharacter.ActualTerritory.GetCordinats(), RangeArea()),
                 (_albedoFlowerSkill.FlowerEntity.ActualTerritory.GetCordinats(), _albedoFlowerSkill.RangeArea()));
         } else
-        {
-            Debug.Log("OKE?");
             Manager.AbilityAreaController.AddOrEditAreas((Manager.TurnManager.SelectedCharacter.ActualTerritory.GetCordinats(), RangeArea()));
-        }
     }
 
 
@@ -48,7 +48,7 @@ public class AbillityAlbedoUltimate : Ability, IAbilityArea
         yield return new WaitForSeconds(0.5f);
         foreach (var detectedUnit in Manager.Map.GetAdjancentUnits(_abilityRange, unit.ActualTerritory)) {
             if(detectedUnit is Enemy) Debug.Log(detectedUnit.Stats.Name());
-            if (detectedUnit is Enemy enemy) enemy.Health.MakeHit(_dealDmg, _element, unit);
+            if (detectedUnit is Enemy enemy) enemy.Health.MakeHit(_dealDmg, ElementAbility(), unit);
         }
         
         if (_albedoFlowerSkill.FlowerEntity != null && !_albedoFlowerSkill.FlowerEntity.IsKilled)
@@ -61,5 +61,5 @@ public class AbillityAlbedoUltimate : Ability, IAbilityArea
         yield return null;
     }
 
-
+   
 }

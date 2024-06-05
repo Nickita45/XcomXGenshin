@@ -3,14 +3,15 @@ using System.Collections;
 // An ability the unit can use in the battle, which makes.
 public abstract class Ability
 {
+
     public abstract string AbilityName { get; }
     public abstract string Description { get; }
-    public int ActualCooldown { get; set; }
+    public virtual int ActualCooldown { get; set; }
     public abstract int MaxCooldown { get; }
 
     public virtual string Icon => AbilityName;
 
-    public bool IsAvailable => ActualCooldown <= 0;
+    public virtual bool IsAvailable => ActualCooldown <= 0;
 
     // the amount of action points the ability costs
     public abstract int ActionCost { get; } 
@@ -21,6 +22,7 @@ public abstract class Ability
     {
         return AbilityName;
     }
+
 }
 
 // Defines what kind of target do you need to choose to
