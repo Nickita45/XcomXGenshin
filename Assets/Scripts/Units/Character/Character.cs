@@ -101,32 +101,7 @@ public class Character : Unit
 
         SetGunByIndex((int)Stats.Weapon); //set gun
 
-        _abilities = new();
-
-        foreach (AbilitiesList list in Stats.AbilitiesLists)
-        {
-            if (!string.IsNullOrEmpty(list.childFunction))
-            {
-                var parentAbility = _abilities.Find(item => item.GetType().Name == list.childFunction);
-                _abilities.Add(AbilitiesHelper.GetAbilityFromList(list.name, parentAbility));
-            }
-            else
-            {
-                var element = Enum.Parse<Element>(list.element);
-                _abilities.Add(AbilitiesHelper.GetAbilityFromList(list.name, element));
-            }
-        }
-        /*
-        var abilityFirst = new AbilityElementalSkill(Stats.Element); //will changed
-        _abilities = new() {
-            new AbilityShoot(),
-            new AbilityShoot(Stats.Element),
-            new AbilityOverwatch(),
-            new AbilityHunkerDown(),
-            abilityFirst,
-            new AbillityAlbedoUltimate(abilityFirst)
-        }; //set abilities
-        */
+        _abilities = AbilitiesHelper.GetAllAbilities(Stats.AbilitiesLists);
 
         Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath); //
         Animator.GetComponentInChildren<GunModel>().Init(); //
