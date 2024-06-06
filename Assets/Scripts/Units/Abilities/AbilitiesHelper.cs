@@ -1,23 +1,47 @@
 using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AbilitiesHelper
 {
-    public static Ability GetAbilityFromList(string abilityName, Element element){
+    public static Ability GetAbilityFromList(string abilityName, Element element)
+    {
+        var cls = GetAbilityType(abilityName);
+        return (Ability)CreateInstance(cls, new object[] { element });
+    }
 
-        Type cls = Type.GetType(abilityName);
-        object instance = new object();
-        if (cls != null) {
-            instance = Activator.CreateInstance(cls);
-        }
-        if(element != Element.Physical)
+    public static Ability GetAbilityFromList(string abilityName, Ability ability)
+    {
+        var cls = GetAbilityType(abilityName);
+        return (Ability)CreateInstance(cls, new object[] { ability });
+    }
+
+    private static Type GetAbilityType(string abilityName)
+    {
+        var cls = Type.GetType(abilityName);
+        if (cls == null)
         {
-            var constructor = cls.GetConstructor(new Type[] { typeof(Element) });
-            instance = constructor.Invoke(new object[] { element });
+            throw new ArgumentException($"Ability type '{abilityName}' not found.");
+        }
+        return cls;
+    }
+
+    private static object CreateInstance(Type cls, params object[] args)
+    {
+        if (args.Length == 0 || cls.GetConstructor(GetConstructorParameterTypes(args)) == null)
+        {
+            return Activator.CreateInstance(cls);
         }
 
-        return (Ability)instance;
+        return cls.GetConstructor(GetConstructorParameterTypes(args)).Invoke(args);
+    }
+
+    private static Type[] GetConstructorParameterTypes(object[] args)
+    {
+        var types = new Type[args.Length];
+        for (int i = 0; i < args.Length; i++)
+        {
+            types[i] = args[i].GetType();
+        }
+        return types;
     }
 }

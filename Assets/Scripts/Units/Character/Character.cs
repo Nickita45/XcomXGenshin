@@ -105,7 +105,16 @@ public class Character : Unit
 
         foreach (AbilitiesList list in Stats.AbilitiesLists)
         {
-            _abilities.Add(AbilitiesHelper.GetAbilityFromList(list.name, Enum.Parse<Element>(list.element)));
+            if (!string.IsNullOrEmpty(list.childFunction))
+            {
+                var parentAbility = _abilities.Find(item => item.GetType().Name == list.childFunction);
+                _abilities.Add(AbilitiesHelper.GetAbilityFromList(list.name, parentAbility));
+            }
+            else
+            {
+                var element = Enum.Parse<Element>(list.element);
+                _abilities.Add(AbilitiesHelper.GetAbilityFromList(list.name, element));
+            }
         }
         /*
         var abilityFirst = new AbilityElementalSkill(Stats.Element); //will changed
@@ -203,7 +212,7 @@ public class Character : Unit
 
     private void OnStatusChange(HashSet<Permissions> permissions)
     {
-        if(permissions.Contains(Permissions.SummonObjectOnMap))
+        if (permissions.Contains(Permissions.SummonObjectOnMap))
             _mover.GetComponent<MeshRenderer>().material = _materialMovementSummon;
         else
             _mover.GetComponent<MeshRenderer>().material = _basicMovementMaterial;

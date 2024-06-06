@@ -197,6 +197,7 @@ public class CharacterData
 public class AbilitiesList{
     public string name; 
     public string element; 
+    public string childFunction = "";
 }
 [System.Serializable]
 public class EnemyData

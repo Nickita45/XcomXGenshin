@@ -24,6 +24,15 @@
         {
             "name": "AbilityHunkerDown",
             "element": "Physical"
+        },
+        {
+            "name": "AbilityElementalSkill",
+            "element": "Geo"
+        },
+        {
+            "name": "AbillityAlbedoUltimate",
+            "element": "Geo",
+            "childFunction": "AbilityElementalSkill"
         }
     ]
 }
