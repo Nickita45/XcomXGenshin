@@ -26,7 +26,7 @@ public class AbillityAlbedoUltimate : AbilityUltimate, IAbilityArea
 
     public AbillityAlbedoUltimate(Ability albedoFlowerSkill)
     {
-        _albedoFlowerSkill = (AbilityElementalSkill)albedoFlowerSkill;
+        _albedoFlowerSkill = albedoFlowerSkill as AbilityElementalSkill;
     }
 
     public void SummonArea()
