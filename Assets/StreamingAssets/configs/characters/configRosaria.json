@@ -7,5 +7,23 @@
     "characterBaseHealth": 5,
     "characterWeapon": 0,
     "characterAvatarPath": "Characters/Rosaria/Rosaria",
-    "element": "Cryo"
+    "element": "Cryo",
+    "abilities": [
+        {
+            "name": "AbilityShoot",
+            "element": "Physical"
+        },
+        {
+            "name": "AbilityShoot",
+            "element": "Cryo"
+        },
+        {
+            "name": "AbilityOverwatch",
+            "element": "Physical"
+        },
+        {
+            "name": "AbilityHunkerDown",
+            "element": "Physical"
+        }
+    ]
 }

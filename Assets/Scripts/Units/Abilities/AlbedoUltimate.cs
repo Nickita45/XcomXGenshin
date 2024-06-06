@@ -24,9 +24,9 @@ public class AbillityAlbedoUltimate : AbilityUltimate, IAbilityArea
 
     public override Element ElementAbility() => Element.Geo;
 
-    public AbillityAlbedoUltimate(AbilityElementalSkill albedoFlowerSkill)
+    public AbillityAlbedoUltimate(Ability albedoFlowerSkill)
     {
-        _albedoFlowerSkill = albedoFlowerSkill;
+        _albedoFlowerSkill = albedoFlowerSkill as AbilityElementalSkill;
     }
 
     public void SummonArea()

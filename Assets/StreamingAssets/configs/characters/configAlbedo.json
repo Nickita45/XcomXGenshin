@@ -7,5 +7,32 @@
     "characterBaseHealth": 8,
     "characterWeapon": 0,
     "characterAvatarPath": "Characters/Albedo/Albedo",
-    "element": "Geo"
+    "element": "Geo",
+    "abilities": [
+        {
+            "name": "AbilityShoot",
+            "element": "Physical"
+        },
+        {
+            "name": "AbilityShoot",
+            "element": "Geo"
+        },
+        {
+            "name": "AbilityOverwatch",
+            "element": "Physical"
+        },
+        {
+            "name": "AbilityHunkerDown",
+            "element": "Physical"
+        },
+        {
+            "name": "AbilityElementalSkill",
+            "element": "Geo"
+        },
+        {
+            "name": "AbillityAlbedoUltimate",
+            "element": "Geo",
+            "childFunction": "AbilityElementalSkill"
+        }
+    ]
 }

@@ -101,15 +101,7 @@ public class Character : Unit
 
         SetGunByIndex((int)Stats.Weapon); //set gun
 
-        var abilityFirst = new AbilityElementalSkill(Stats.Element); //will changed
-        _abilities = new() {
-            new AbilityShoot(),
-            new AbilityShoot(Stats.Element),
-            new AbilityOverwatch(),
-            new AbilityHunkerDown(),
-            abilityFirst,
-            new AbillityAlbedoUltimate(abilityFirst)
-        }; //set abilities
+        _abilities = AbilitiesHelper.GetAllAbilities(Stats.AbilitiesLists);
 
         Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath); //
         Animator.GetComponentInChildren<GunModel>().Init(); //
@@ -195,7 +187,7 @@ public class Character : Unit
 
     private void OnStatusChange(HashSet<Permissions> permissions)
     {
-        if(permissions.Contains(Permissions.SummonObjectOnMap))
+        if (permissions.Contains(Permissions.SummonObjectOnMap))
             _mover.GetComponent<MeshRenderer>().material = _materialMovementSummon;
         else
             _mover.GetComponent<MeshRenderer>().material = _basicMovementMaterial;

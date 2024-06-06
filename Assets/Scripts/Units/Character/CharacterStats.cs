@@ -15,4 +15,5 @@ public class CharacterStats : UnitStats
     public GunType Weapon => (GunType)ConfigurationManager.CharactersData[Index].characterWeapon;
     public override int BaseActions() => 2;
     public Element Element => (Element)Enum.Parse(typeof(Element), ConfigurationManager.CharactersData[Index].element);
+    public AbilitiesList[] AbilitiesLists => ConfigurationManager.CharactersData[Index].abilities;
 }
