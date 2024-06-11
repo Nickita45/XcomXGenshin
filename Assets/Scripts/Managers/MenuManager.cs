@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
-using System.IO;
 using System.Linq;
 
 public class MenuManager : MonoBehaviour
@@ -74,6 +72,6 @@ public class MenuManager : MonoBehaviour
         bool set = !_panelResult.gameObject.activeInHierarchy;
 
         _panelResult.gameObject.SetActive(set);
-        _panelResult.GetComponent<ResultPanel>().SetResultPanel();
+        _panelResult.SetResultPanel();
     }
 }

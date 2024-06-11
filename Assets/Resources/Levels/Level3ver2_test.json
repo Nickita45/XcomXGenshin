@@ -23516,7 +23516,7 @@
       ],
       "Index": "1.5_0.5_-11.5",
       "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
-      "PathPrefabAdditional": "Prefabs/Enemies/SlimeBigElectro",
+      "PathPrefabAdditional": "RANDOM_ENEMY",
       "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,
@@ -25428,7 +25428,7 @@
       ],
       "Index": "-0.5_0.5_-13.5",
       "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
-      "PathPrefabAdditional": "Prefabs/Enemies/SlimeBigElectro",
+      "PathPrefabAdditional": "RANDOM_ENEMY",
       "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,

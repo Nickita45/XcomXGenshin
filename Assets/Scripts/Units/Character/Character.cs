@@ -220,4 +220,19 @@ public class Character : Unit
 
         Manager.StatisticsUtil.SoldierDeathCount++;
     }
+
+    private void OnDisable()
+    {
+        OnSelected -= Select;
+        OnSelected -= Manager.MovementManager.OnCharacterSelect;
+        OnSelected -= Manager.EnemyPanel.OnCharacterSelect;
+        OnSelected -= Manager.AbilityPanel.SetCharacter;
+
+        OnDeselected -= Disable;
+        OnDeselected -= Manager.EnemyPanel.OnCharacterDeselect;
+        OnDeselected -= Manager.MovementManager.OnCharacterDeselect;
+
+        Manager.StatusMain.OnStatusChange -= OnStatusChange;
+
+    }
 }

@@ -103,7 +103,13 @@ public static class TargetUtils
         return _availableTargets;
     }
 
-    // Determines whether the unit A can see the unit B.
+    /// <summary>
+    /// Determines whether the unit A can see the unit B.
+    /// With stats from A.
+    /// </summary>
+    /// <param name="a">Watcher</param>
+    /// <param name="b">Target</param>
+    /// <returns>Is unit A see unit B</returns>
     public static bool CanSee(Unit a, Unit b)
     {
         return CanTarget(a.transform, b.transform, a.Stats.VisionDistance());

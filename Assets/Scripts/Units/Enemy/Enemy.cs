@@ -70,7 +70,7 @@ public class Enemy : Unit
         if (!_triggered)
         {
             // Trigger if any of the characters can see the enemy
-            if (Manager.Map.Characters.GetList.Any(character => TargetUtils.CanSee(character, this)))
+            if (Manager.Map.Characters.GetList.Any(character => TargetUtils.CanSee(this, character)))
             {
                 _triggered = true;
 

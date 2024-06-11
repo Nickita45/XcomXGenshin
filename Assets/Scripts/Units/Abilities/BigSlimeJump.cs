@@ -39,7 +39,7 @@ public class AbilityBigSlimeJump : Ability
         var list = new List<Vector3> { airTerritory.GetCordinats() };
         for (int i = 0; i < 3; i++)
         {
-            if (airTerritory.IndexBottom.Count == 0) continue;
+            if (airTerritory.IndexUp.Count == 0) continue;
 
             airTerritory = Manager.Map[airTerritory.IndexUp.First()];
             list.Add(airTerritory.GetCordinats());
@@ -63,7 +63,7 @@ public class AbilityBigSlimeJump : Ability
             {
                 if (findedTerritory.IndexDown.Count == 0) continue;
 
-                findedTerritory = Manager.Map[findedTerritory.IndexBottom.First()];
+                findedTerritory = Manager.Map[findedTerritory.IndexDown.First()];
             }
         }
 
