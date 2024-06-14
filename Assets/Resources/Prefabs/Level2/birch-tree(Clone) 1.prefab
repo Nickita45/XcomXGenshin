@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 6913076820958414418}
   - component: {fileID: 3516246860827768059}
   - component: {fileID: 249939868453203581}
+  - component: {fileID: 1982046666882801529}
   m_Layer: 0
   m_Name: Stages_Birchtree02_Leaf_Lod9
   m_TagString: Untagged
@@ -152,7 +153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3411559726809311205}
   m_LocalRotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0048999023, y: 0, z: -0.00020019531}
+  m_LocalPosition: {x: -0.0048999023, y: 0.0111, z: -0.0002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -209,6 +210,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1982046666882801529
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3411559726809311205}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.054852296, y: 0.091689825, z: 0.073185176}
+  m_Center: {x: -0.010024761, y: 0.11324323, z: 0.0032343904}
 --- !u!1 &4026612638086172011
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,6 +234,7 @@ GameObject:
   - component: {fileID: 1056596695139529258}
   - component: {fileID: 2836118634693260065}
   - component: {fileID: 8571483907763553422}
+  - component: {fileID: 254126987701863807}
   m_Layer: 0
   m_Name: Stages_Birchtree01_Bark_Lod0
   m_TagString: Untagged
@@ -292,6 +307,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &254126987701863807
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026612638086172011}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06937141, y: 0.091689825, z: 0.07128993}
+  m_Center: {x: -0.008032349, y: 0.11324323, z: 0.0041820137}
 --- !u!1 &4292436969814610134
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +331,7 @@ GameObject:
   - component: {fileID: 4292436969814610135}
   - component: {fileID: 4292436969814610129}
   - component: {fileID: 4292436969814610128}
+  - component: {fileID: 486672164804778203}
   m_Layer: 0
   m_Name: Stages_Birchtree02_Leaf_Lod9 (1)
   m_TagString: Untagged
@@ -318,7 +347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4292436969814610134}
   m_LocalRotation: {x: 0.00000006004048, y: -0.67583656, z: -0.000000055053878, w: 0.7370516}
-  m_LocalPosition: {x: 0.011378555, y: -0.000000002524122, z: 0.000029224631}
+  m_LocalPosition: {x: 0.011378555, y: 0.011099998, z: 0.000029419152}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -375,6 +404,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &486672164804778203
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4292436969814610134}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.062045697, y: 0.091689825, z: 0.070595145}
+  m_Center: {x: -0.004369513, y: 0.11324323, z: 0.004529404}
 --- !u!1 &4292436970810153840
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +428,7 @@ GameObject:
   - component: {fileID: 4292436970810153841}
   - component: {fileID: 4292436970810153843}
   - component: {fileID: 4292436970810153842}
+  - component: {fileID: 8607186129595131822}
   m_Layer: 0
   m_Name: Stages_Birchtree02_Leaf_Lod9 (2)
   m_TagString: Untagged
@@ -401,7 +444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4292436970810153840}
   m_LocalRotation: {x: -0.08603368, y: -0.99629223, z: 0.000025292898, w: 0.0002938452}
-  m_LocalPosition: {x: -0.0075359843, y: 0.0002280903, z: 0.017788397}
+  m_LocalPosition: {x: -0.0075359843, y: 0.011328091, z: 0.01778859}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -458,6 +501,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8607186129595131822
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4292436970810153840}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.063573696, y: 0.091689736, z: 0.065928176}
+  m_Center: {x: -0.0051282453, y: 0.11338214, z: 0.006862886}
 --- !u!1 &5252325504420742075
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +575,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level2/birch-tree(Clone) 1
+  _pathPrefabBase: Prefabs/Level2/birch-tree(Clone) 1
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

@@ -126,7 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level2/Area_Common_Build_Hili_House_07_Lod1
+  _pathPrefabBase: Prefabs/Level2/Area_Common_Build_Hili_House_07_Lod1
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

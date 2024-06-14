@@ -1,6 +1,7 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class FreeCamera : MonoBehaviour
 {
@@ -179,10 +180,14 @@ public class FreeCamera : MonoBehaviour
             // Find the target position after zoom
             Vector3 target = projected - transform.forward * _zoom;
 
+            // Only change the Y coordinate of the camera's position
+            Vector3 targetYOnly = new Vector3(transform.position.x, target.y, transform.position.z);
+
             // Move to the target position
-            if (Vector3.Distance(transform.position, target) > 0.1f)
+            if (Mathf.Abs(transform.position.y - targetYOnly.y) > 0.1f)
             {
-                Vector3 newPosition = Vector3.MoveTowards(transform.position, target, _speedZoom * Time.deltaTime);
+                Vector3 velocity = Vector3.zero;
+                Vector3 newPosition = Vector3.Lerp(transform.position, targetYOnly, _speedZoom /10 * Time.deltaTime);
                 transform.position = newPosition;
             }
         }
