@@ -127,7 +127,8 @@ public class CameraObjectTransparency : MonoBehaviour
 
                     }
                     var listMat = materials.ToList();
-                    listMat.RemoveRange(materials.Length - 2, 2);
+                    if(listMat.Count >= 3)
+                        listMat.RemoveRange(materials.Length - 2, 2);
 
 
                     renderers[m].materials = listMat.ToArray();
@@ -152,7 +153,7 @@ public class CameraObjectTransparency : MonoBehaviour
             // Hit all colliders from a position slightly behind of the camera
             RaycastHit[] hits = Physics.RaycastAll(freeCamera.transform.position - freeCamera.transform.forward * 3f, freeCamera.transform.forward, 4.5f);
 
-            SetNewRenderersFromHits(hits);
+            SetNewRenderersFromHits(hits);  
         }
     }
 }

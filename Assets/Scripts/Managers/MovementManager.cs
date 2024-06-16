@@ -660,6 +660,7 @@ public class MovementManager : MonoBehaviour
             if (character)
             {
                 Manager.TurnManager.SelectedCharacter.SelectChanges();
+                ShelterDetectUtils.DisableShelterObjects(character);
                 _lineRenderer.gameObject.SetActive(true);
                 _territoriesCalculated = CalculateAllPossible(character.Stats.MovementDistance(), character);
                 Manager.TurnManager.SelectedCharacter.MoverActive(true);
