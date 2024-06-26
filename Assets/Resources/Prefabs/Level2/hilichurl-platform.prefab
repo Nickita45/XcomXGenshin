@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4851406459383217546}
   - component: {fileID: 6964959276407521926}
   - component: {fileID: 5436786384952875668}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hilichurl-platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level2/hilichurl-platform
+  _pathPrefabBase: Prefabs/Level2/hilichurl-platform
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

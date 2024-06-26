@@ -1,3 +1,4 @@
+using FischlWorks_FogWar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -58,6 +59,9 @@ public class Manager : MonoBehaviour
     private AbilityAreaController _abilityAreaController;
     public static AbilityAreaController AbilityAreaController => Instance._abilityAreaController;
 
+    [SerializeField]
+    private csFogWar _csFogWar;
+    public static csFogWar CsFogWar => Instance._csFogWar;
 
 
     [Header("MainObjects")]
@@ -142,7 +146,11 @@ public class Manager : MonoBehaviour
         IEnumerator ActivateCoroutine(AbilityIcon icon)
         {
             // Wait until the interaction is finished
-            StatusMain.SetStatusWaiting();
+
+            if (icon.Ability is AbilityShoot) // maybe not good solution
+                StatusMain.SetStatusShooting();
+            else
+                StatusMain.SetStatusWaiting();
 
             OutlineManager.ClearTargets();
 

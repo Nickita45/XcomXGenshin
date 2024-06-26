@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3941086735204427179}
   - component: {fileID: 3941086735204427180}
   - component: {fileID: 4091102248728731797}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,5 +111,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _pathPrefab: Prefabs/Level1/Tree
-  _shelterType: 0
+  _pathPrefabBase: Prefabs/Level1/Tree
+  _pathPrefabAdditional: 
+  _shelterInfo:
+    _shelterInfoLeft: 0
+    _shelterInfoRight: 0
+    _shelterInfoBottom: 0
+    _shelterInfoFront: 0
+  _setOnStartToEveryone: 0

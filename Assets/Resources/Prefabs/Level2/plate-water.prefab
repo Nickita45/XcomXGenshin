@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4680105543022003493}
   - component: {fileID: 5105634893389672061}
   - component: {fileID: 7252242955019664042}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: plate-water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 7
-  _pathPrefab: Prefabs/Level2/plate-water
+  _pathPrefabBase: Prefabs/Level2/plate-water
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

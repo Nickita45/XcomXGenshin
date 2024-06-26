@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5243091211042091212}
   - component: {fileID: 6846216957071486038}
   - component: {fileID: -7164935621809771445}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hilichurl-totem-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level2/hilichurl-totem-3
+  _pathPrefabBase: Prefabs/Level2/hilichurl-totem-3
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

@@ -1310,6 +1310,7 @@ GameObject:
   - component: {fileID: 8254332665326490105}
   - component: {fileID: 1407980323682624283}
   - component: {fileID: 2031201254778850730}
+  - component: {fileID: 7986607427808358310}
   m_Layer: 0
   m_Name: EnemyBase
   m_TagString: Untagged
@@ -1397,6 +1398,7 @@ MonoBehaviour:
   _canvas: {fileID: 8254332665326490105}
   _animator: {fileID: 2031201254778850730}
   _bulletSpawner: {fileID: 0}
+  _fogVisibilityAgent: {fileID: 7986607427808358310}
   _enemyAI: {fileID: 0}
 --- !u!114 &8254332665326490105
 MonoBehaviour:
@@ -1451,6 +1453,22 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _gun: {fileID: 0}
   _outline: {fileID: 1407980323682624283}
+--- !u!114 &7986607427808358310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6654390615234965879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236dc86038eee3c44b1ccc3efa0c94e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogWar: {fileID: 0}
+  visibility: 0
+  additionalRadius: 0
+  _enemy: {fileID: -1340898745121493489}
 --- !u!1 &6654509893336421984
 GameObject:
   m_ObjectHideFlags: 0

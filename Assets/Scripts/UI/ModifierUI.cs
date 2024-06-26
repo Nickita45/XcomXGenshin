@@ -30,11 +30,11 @@ public class ModifierUI : MonoBehaviour
         _icon.sprite = Manager.UIIcons.GetIconByName(_modifier.IconName())?.sprite;
         if (_modifier.IsInfinite)
         {
-            _durationText.gameObject.SetActive(false);
+            _durationText?.gameObject.SetActive(false);
         }
         else
         {
-            _durationText.gameObject.SetActive(true);
+            _durationText?.gameObject.SetActive(true);
             _durationText.text = _modifier.Turns.ToString();
         }
     }

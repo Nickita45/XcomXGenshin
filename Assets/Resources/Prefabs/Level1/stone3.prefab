@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8341738592373586312}
   - component: {fileID: 414357829074339158}
   - component: {fileID: 7176723311505155437}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: stone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,12 +98,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level1/stone3
+  _pathPrefabBase: Prefabs/Level1/stone3
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 2
     _shelterInfoRight: 2
     _shelterInfoBottom: 2
     _shelterInfoFront: 2
+  _setOnStartToEveryone: 0
 --- !u!65 &7176723311505155437
 BoxCollider:
   m_ObjectHideFlags: 0

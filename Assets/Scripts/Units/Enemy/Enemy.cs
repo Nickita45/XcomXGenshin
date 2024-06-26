@@ -1,9 +1,9 @@
+using FischlWorks_FogWar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class Enemy : Unit
 {
@@ -18,6 +18,9 @@ public class Enemy : Unit
 
     [SerializeField]
     private GameObject _bulletSpawner;
+    [SerializeField]
+    private csFogVisibilityAgent _fogVisibilityAgent;
+    public csFogVisibilityAgent csFogVisibilityAgent => _fogVisibilityAgent;
 
     [SerializeField]
     private EnemyAI _enemyAI;

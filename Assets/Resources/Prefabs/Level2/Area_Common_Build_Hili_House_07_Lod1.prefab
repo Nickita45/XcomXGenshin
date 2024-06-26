@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3879506352982144773}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_Defence_03_Lod0 (merge)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5874343145518602069}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_Defence_01_Lod2 (merge).001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 2651137630096956366}
   - component: {fileID: 2540033340902538283}
   - component: {fileID: -7469124785104916495}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_House_07_Lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2024218382627463645}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_House_09_Lod2 (merge)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 6862259409993325253}
   - component: {fileID: 678751364487328954}
   - component: {fileID: 3403959352502386832}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_House_07_Lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7466557011027239344}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_House_07_Lod1 (merge)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2471220679428724270}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_Defence_01_Lod2 (merge)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

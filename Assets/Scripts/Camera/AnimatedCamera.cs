@@ -23,7 +23,7 @@ public class AnimatedCamera : MonoBehaviour
             var animation = _animations[Random.Range(0, _animations.Count())]; 
             if(animation.CanBeUsed(_target))
             {
-        Manager.StatusMain.SetStatusShooting();
+                Manager.StatusMain.SetStatusShooting();
 
                 StartCoroutine(animation.CameraRotate(_target.transform));
                 _camera.enabled = true;
@@ -45,7 +45,7 @@ public class AnimatedCamera : MonoBehaviour
 
     private void OnStatusChange(HashSet<Permissions> permissions)
     {
-        if(!permissions.Contains(Permissions.AnimationShooting))
+        if(!permissions.Contains(Permissions.AnimationShooting)) // remake
             _camera.enabled = false;
     }
 

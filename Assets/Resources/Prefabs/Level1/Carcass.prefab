@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 19157483106785752}
   - component: {fileID: 6003192511308088121}
   - component: {fileID: 3873934711927021727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Roof Totem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5670594411311319650}
   - component: {fileID: 8623622683660297465}
   - component: {fileID: 2776626160187527519}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 2840468352953315938}
   - component: {fileID: 8548834512510422755}
   - component: {fileID: 269960757308499817}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Roof Fabric
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 6757086554552801898}
   - component: {fileID: 2186958387056228274}
   - component: {fileID: 7088297753939923157}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 2521014238219758054}
   - component: {fileID: 131187251863353657}
   - component: {fileID: 9006151912979484844}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 1757422526643564069}
   - component: {fileID: 5118378770739219573}
   - component: {fileID: 6074525107453701874}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   - component: {fileID: 3115813125372558082}
   - component: {fileID: 4036928153032267165}
   - component: {fileID: 8147919113042940982}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 7228131210409869873}
   - component: {fileID: 2000216524085969915}
   - component: {fileID: 2926333722052448850}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -682,7 +682,7 @@ GameObject:
   - component: {fileID: 3840714264868768001}
   - component: {fileID: 8506333755721985558}
   - component: {fileID: 6853080177203943745}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 7086937050470052776}
   - component: {fileID: 5372395320433780472}
   - component: {fileID: 4827987122581691307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Carcass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -878,7 +878,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: 
+  _pathPrefabBase: 
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -896,7 +897,7 @@ GameObject:
   - component: {fileID: 1236704412699406613}
   - component: {fileID: 4915362141043922313}
   - component: {fileID: 4391217348302730501}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -980,7 +981,7 @@ GameObject:
   - component: {fileID: 1250466508417344889}
   - component: {fileID: 4760494846829620340}
   - component: {fileID: 9094892278819958011}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Roof Planks
   m_TagString: Untagged
   m_Icon: {fileID: 0}

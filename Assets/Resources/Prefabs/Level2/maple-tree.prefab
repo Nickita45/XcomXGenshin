@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7272969813674413811}
   - component: {fileID: 3132417444136863534}
   - component: {fileID: 4647818202158504461}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Dq_Grass_Common_Maple_05_Lod0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6525474117169141907}
   - component: {fileID: 8118161497133192364}
   - component: {fileID: 1814061178122122270}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: maple-tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 7
-  _pathPrefab: Prefabs/Level2/maple-tree
+  _pathPrefabBase: Prefabs/Level2/maple-tree
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

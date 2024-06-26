@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6363348651599910250}
   - component: {fileID: 6802387284528184882}
   - component: {fileID: 8942196507637820133}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: water-plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}

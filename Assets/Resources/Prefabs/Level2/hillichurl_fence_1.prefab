@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4275463215085210023}
   - component: {fileID: 4386442648573587018}
   - component: {fileID: 8775883706227926574}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hillichurl_fence_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level2/hillichurl_fence_1
+  _pathPrefabBase: Prefabs/Level2/hillichurl_fence_1
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 1
     _shelterInfoRight: 1
@@ -78,7 +79,7 @@ GameObject:
   - component: {fileID: 1598589849929375896}
   - component: {fileID: 8966966543719509977}
   - component: {fileID: 5196478458257231001}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_Defence_01_Lod2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

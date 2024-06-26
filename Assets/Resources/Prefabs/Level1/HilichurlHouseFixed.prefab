@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6807549556502281590}
   - component: {fileID: 1520758303966561863}
   - component: {fileID: 5247095715398127059}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HilichurlHouseFixed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _pathPrefab: Prefabs/Level1/HilichurlHouseFixed
+  _pathPrefabBase: Prefabs/Level1/HilichurlHouseFixed
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

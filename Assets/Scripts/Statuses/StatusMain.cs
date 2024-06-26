@@ -44,14 +44,15 @@ public class StatusMain : MonoBehaviour
     {
         ActualPermissions = new HashSet<Permissions> {
             Permissions.ActionSelect,
-            Permissions.SelectEnemy
+            Permissions.SelectEnemy,
+            Permissions.NonFog
         };
         OnStatusChange(ActualPermissions);
     }
 
     public void SetStatusShooting()
     {
-        ActualPermissions = new HashSet<Permissions> { Permissions.AnimationShooting };
+        ActualPermissions = new HashSet<Permissions> { Permissions.AnimationShooting, Permissions.NonFog };
         OnStatusChange(ActualPermissions);
     }
 
@@ -75,6 +76,17 @@ public class StatusMain : MonoBehaviour
         };
         OnStatusChange(ActualPermissions);
     }
+
+    public void SetStatusWaitingWithNonFog()
+    {
+        ActualPermissions = new HashSet<Permissions>
+        {
+            Permissions.NonFog,
+            Permissions.Waiting
+        };
+        OnStatusChange(ActualPermissions);
+    }
+
 
     public void SetStatusSummon()
     {
@@ -104,5 +116,6 @@ public enum Permissions
     AnimationShooting,
     AnimationRunning,
     Waiting,
-    SummonObjectOnMap
+    SummonObjectOnMap,
+    NonFog,
 }

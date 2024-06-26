@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8639703923401991880}
   - component: {fileID: 6928771880389065290}
   - component: {fileID: 6928771880389065289}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hilichurl-stone-platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level2/hilichurl-stone-platform
+  _pathPrefabBase: Prefabs/Level2/hilichurl-stone-platform
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

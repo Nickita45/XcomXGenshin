@@ -46,6 +46,7 @@ public class MenuManager : MonoBehaviour
         Manager.StatusMain.SetStatusZero();
         Manager.Instance.OnClearMap(); //Clear all elements which have different information in their memory
         Manager.DeReadingMap.DeSerelizete(name);
+        new FogOfWarManager(Manager.CsFogWar);
         FindObjectOfType<GrassComputeScript>()?.Reset();
         StartCoroutine(AfterNewMap());
     }

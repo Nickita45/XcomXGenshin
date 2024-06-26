@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 835688420702560814}
   - component: {fileID: 835688420702560815}
   - component: {fileID: -2698950656636703590}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_House_09_Lod2_second
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _pathPrefab: Prefabs/Level2/Area_Common_Build_Hili_House_09_Lod2_second
+  _pathPrefabBase: Prefabs/Level2/Area_Common_Build_Hili_House_09_Lod2_second
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -95,7 +96,7 @@ GameObject:
   - component: {fileID: 2724331407780119676}
   - component: {fileID: 2720238196499788324}
   - component: {fileID: 1738055690071328413}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_House_09_Lod2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2093666489916320011}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_Defence_03_Lod0 (merge)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8745197843723438427}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_Defence_01_Lod2 (merge).001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 762092331988158496}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_Defence_01_Lod2 (merge)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3805404287590580179}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area_Common_Build_Hili_House_09_Lod2 (merge)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

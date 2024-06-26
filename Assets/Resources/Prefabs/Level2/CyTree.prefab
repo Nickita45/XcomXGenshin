@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4371533652428323706}
   - component: {fileID: 4902353043503157435}
   - component: {fileID: 6586943468850225180}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CyTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 7009605893529360565}
   - component: {fileID: 4981120308077226552}
   - component: {fileID: 8322770719454967905}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stages_CyTree02_Leaf_Lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 7710754310078031977}
   - component: {fileID: 1700290292624107708}
   - component: {fileID: 4742270907530483251}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stages_CyTree02_Bark_Lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4705734222743170863}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stages_CyTree12_Lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
