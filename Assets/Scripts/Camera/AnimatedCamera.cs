@@ -31,6 +31,8 @@ public class AnimatedCamera : MonoBehaviour
         }
     }
 
+    public bool IsCameraActive => _camera.enabled;
+
     private void Instalization()
     {
         _animations = new List<ICameraAnimation>() { new BehindCameraAnimation(_camera), new FrontFaceCameraAnimation(_camera), new SimpleCameraAnimation(_camera) }; 

@@ -33,7 +33,7 @@ namespace FischlWorks_FogWar
     public class csFogVisibilityAgent : MonoBehaviour
     {
         [SerializeField]
-        private csFogWar fogWar = null;
+        protected csFogWar fogWar = null;
 
         public void SetcsFogWar(csFogWar fogWar) => this.fogWar = fogWar;
 
@@ -42,7 +42,7 @@ namespace FischlWorks_FogWar
 
         [SerializeField]
         [Range(0, 2)]
-        private int additionalRadius = 0;
+        protected int additionalRadius = 0;
 
         protected List<MeshRenderer> meshRenderers = null;
         protected List<SkinnedMeshRenderer> skinnedMeshRenderers = null;
