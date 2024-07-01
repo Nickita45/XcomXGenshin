@@ -30,7 +30,8 @@ public class ModifierUI : MonoBehaviour
         _icon.sprite = Manager.UIIcons.GetIconByName(_modifier.IconName())?.sprite;
         if (_modifier.IsInfinite)
         {
-            _durationText?.gameObject.SetActive(false);
+            if(_durationText != null)
+                _durationText.gameObject.SetActive(false);
         }
         else
         {

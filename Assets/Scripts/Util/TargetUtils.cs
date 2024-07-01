@@ -11,7 +11,7 @@ public static class TargetUtils
     //
     // This means the units can see each other, are at an appropriate distance from one another,
     // and there are no major obstacles inbetween.
-    public static bool CanTarget(Transform unitA, Transform unitB, float maxDistance)
+    public static bool CanTarget(Transform unitA, Transform unitB, float maxDistance, bool debug = false)
     {
         // Can't target if the distance between units is too big
         if (Vector3.Distance(unitA.position, unitB.position) > maxDistance) return false;
@@ -32,7 +32,6 @@ public static class TargetUtils
             // The ray is done in inverse direction because it is more reliable
             // at detecting colliders at the end of the ray.
             RaycastHit[] hits = Physics.RaycastAll(target, -delta.normalized, delta.magnitude);
-
             bool blocked = false;
 
             // Find out which sides of the shelter are targeted
@@ -49,16 +48,18 @@ public static class TargetUtils
                 TerritoryInfo info = hit.transform.GetComponent<TerritoryInfo>();
 
                 // Check if the hit is blocking
-                if (info && IsBlocking(info, sides))
+                if (info && IsBlocking(info, sides, unitA))
                 {
                     blocked = true;
                     break;
                 }
             }
 
-            //Color color = blocked ? Color.blue : Color.red;
-            //Debug.DrawRay(origin, delta, color, 60f);
-
+            if (debug)
+            {
+                Color color = blocked ? Color.blue : Color.red;
+                Debug.DrawRay(origin, delta, color, 60f);
+            }
             // If the ray wasn't blocked, targeting is possible
             if (!blocked) return true;
         }
@@ -68,17 +69,97 @@ public static class TargetUtils
     }
 
     // Detects whether a TerritoryInfo blocks the target ray.
-    private static bool IsBlocking(TerritoryInfo info, List<ShelterSide> sides)
+    private static bool IsBlocking(TerritoryInfo info, List<ShelterSide> sides, Transform unitA)
     {
         // 1. Block through the ground
-        if (info.Type == TerritoryType.ShelterGround) return true;
+        if (info.Type == TerritoryType.ShelterGround
+            || info.Type == TerritoryType.Ground) return true;
 
         // 2. Block through full shelters on the targeted sides
+        //Dictionary<ShelterSide, ShelterType> shelters = info.ShelterType.ToDictionary();
+        //if (sides.Any(side => shelters[side] == ShelterType.Full)) return true;
+        TerritroyReaded infoTerritoryReaded = Manager.Map[info.transform.localPosition]; //mb refactoring in future
         Dictionary<ShelterSide, ShelterType> shelters = info.ShelterType.ToDictionary();
-        if (sides.Any(side => shelters[side] == ShelterType.Full)) return true;
+
+        // all these checks 3 blocks (1 of self and 2 others)
+        if (infoTerritoryReaded != null) 
+        {
+            if (sides.Contains(ShelterSide.Back) || sides.Contains(ShelterSide.Front)) // for - (front) and _ (back)
+            {
+                Dictionary<ShelterSide, ShelterType> sheltersLeft =
+                    Manager.Map[infoTerritoryReaded.IndexLeft?.First()].ShelterType.ToDictionary();
+                Dictionary<ShelterSide, ShelterType> sheltersRight =
+                    Manager.Map[infoTerritoryReaded.IndexRight?.First()].ShelterType.ToDictionary();
+
+                if (CheckSheltersSides(sides, shelters)
+                    && CheckSheltersSides(sides, sheltersLeft)
+                    && CheckSheltersSides(sides, sheltersRight)) return true;
+            }
+            else if (sides.Contains(ShelterSide.Left) || sides.Contains(ShelterSide.Right)) // for | (left) and | (right)
+            {
+                Dictionary<ShelterSide, ShelterType> sheltersFront =
+                                        Manager.Map[infoTerritoryReaded.IndexFront?.First()].ShelterType.ToDictionary();
+                Dictionary<ShelterSide, ShelterType> sheltersBottom =
+                    Manager.Map[infoTerritoryReaded.IndexBottom?.First()].ShelterType.ToDictionary();
+
+                if (CheckSheltersSides(sides, shelters)
+                   && CheckSheltersSides(sides, sheltersFront)
+                   && CheckSheltersSides(sides, sheltersBottom)) return true;
+            }
+
+            if(sides.Contains(ShelterSide.Left) && sides.Contains(ShelterSide.Front)) // for _|
+            {
+                Dictionary<ShelterSide, ShelterType> sheltersLeft =
+                     Manager.Map[infoTerritoryReaded.IndexLeft?.First()].ShelterType.ToDictionary();
+                Dictionary<ShelterSide, ShelterType> sheltersFront =
+                    Manager.Map[infoTerritoryReaded.IndexFront?.First()].ShelterType.ToDictionary();
+
+                if (CheckSheltersSides(sides, shelters)
+                   && CheckSheltersSides(sides, sheltersFront)
+                   && CheckSheltersSides(sides, sheltersLeft)) return true;
+
+            } else if(sides.Contains(ShelterSide.Right) && sides.Contains(ShelterSide.Front)) // for |_
+            {
+                Dictionary<ShelterSide, ShelterType> sheltersRight =
+                     Manager.Map[infoTerritoryReaded.IndexRight?.First()].ShelterType.ToDictionary();
+                Dictionary<ShelterSide, ShelterType> sheltersFront =
+                    Manager.Map[infoTerritoryReaded.IndexFront?.First()].ShelterType.ToDictionary();
+
+                if (CheckSheltersSides(sides, shelters)
+                   && CheckSheltersSides(sides, sheltersFront)
+                   && CheckSheltersSides(sides, sheltersRight)) return true;
+
+            } else if (sides.Contains(ShelterSide.Right) && sides.Contains(ShelterSide.Back)) // for |-
+            {
+                Dictionary<ShelterSide, ShelterType> sheltersRight =
+                     Manager.Map[infoTerritoryReaded.IndexRight?.First()].ShelterType.ToDictionary();
+                Dictionary<ShelterSide, ShelterType> sheltersBottom =
+                    Manager.Map[infoTerritoryReaded.IndexBottom?.First()].ShelterType.ToDictionary();
+
+                if (CheckSheltersSides(sides, shelters)
+                  && CheckSheltersSides(sides, sheltersBottom)
+                  && CheckSheltersSides(sides, sheltersRight)) return true;
+
+            } else if (sides.Contains(ShelterSide.Left) && sides.Contains(ShelterSide.Back)) // for -|
+            {
+                Dictionary<ShelterSide, ShelterType> sheltersLeft =
+                     Manager.Map[infoTerritoryReaded.IndexLeft?.First()].ShelterType.ToDictionary();
+                Dictionary<ShelterSide, ShelterType> sheltersBottom =
+                    Manager.Map[infoTerritoryReaded.IndexBottom?.First()].ShelterType.ToDictionary();
+
+                if (CheckSheltersSides(sides, shelters)
+                  && CheckSheltersSides(sides, sheltersBottom)
+                  && CheckSheltersSides(sides, sheltersLeft)) return true;
+            }
+        }
 
         // Other territories do not block targeting
         return false;
+    }
+
+    private static bool CheckSheltersSides(List<ShelterSide> sides, Dictionary<ShelterSide, ShelterType> shelters)
+    {
+        return shelters == null || sides.Any(side => shelters[side] == ShelterType.Full);
     }
 
     // Gets the list of all enemies
@@ -110,9 +191,9 @@ public static class TargetUtils
     /// <param name="a">Watcher</param>
     /// <param name="b">Target</param>
     /// <returns>Is unit A see unit B</returns>
-    public static bool CanSee(Unit a, Unit b)
+    public static bool CanSee(Unit a, Unit b, bool debug = false)
     {
-        return CanTarget(a.transform, b.transform, a.Stats.VisionDistance());
+        return CanTarget(a.transform, b.transform, a.Stats.VisionDistance(), debug);
     }
 
     private static readonly Vector3[] DIRECTIONS = {

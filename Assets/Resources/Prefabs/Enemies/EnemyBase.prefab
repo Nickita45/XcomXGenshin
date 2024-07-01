@@ -1398,7 +1398,7 @@ MonoBehaviour:
   _canvas: {fileID: 8254332665326490105}
   _animator: {fileID: 2031201254778850730}
   _bulletSpawner: {fileID: 0}
-  _fogVisibilityAgent: {fileID: 7986607427808358310}
+  <csFogVisibilityAgent>k__BackingField: {fileID: 7986607427808358310}
   _enemyAI: {fileID: 0}
 --- !u!114 &8254332665326490105
 MonoBehaviour:
@@ -1425,6 +1425,7 @@ MonoBehaviour:
   _elementalReactionPrefab: {fileID: 4842593602491196280, guid: 71218b54ccd99454cad88a89fe2aa702, type: 3}
   _actionIconPopUp: {fileID: 3774079588979257113}
   _listDidntRotateObjects: []
+  csFogVisibilityAgent: {fileID: 7986607427808358310}
 --- !u!114 &1407980323682624283
 MonoBehaviour:
   m_ObjectHideFlags: 0

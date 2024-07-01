@@ -9,6 +9,8 @@ public class csFogVisibilityAgentEnemy : csFogVisibilityAgent
     [SerializeField]
     private Enemy _enemy;
 
+    public bool IsVisible => visibility;
+
     protected override void Update()
     {
         base.Update();

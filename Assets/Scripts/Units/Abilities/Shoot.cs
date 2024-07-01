@@ -36,7 +36,10 @@ public class AbilityShoot : Ability
             yield return unit.StartCoroutine(animator.StopAttackRanged());
             yield return unit.StartCoroutine(animator.StartCrouching());
             yield return unit.StartCoroutine(animator.CrouchRotateHideBehindShelter(unit.transform.localPosition));
-            Manager.StatusMain.SetStatusWaitingWithNonFog();
+            if(unit is Character)
+                Manager.StatusMain.SetStatusWaitingWithNonFog();
+            else
+                Manager.StatusMain.SetStatusWaiting();
             //Maybe here is timer...
         }
 

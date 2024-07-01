@@ -11,6 +11,7 @@ public class Enemy : Unit
     public new EnemyCanvas Canvas => (EnemyCanvas)_canvas;
     public new EnemyAnimator Animator => (EnemyAnimator)_animator;
 
+
     public override TerritroyReaded ActualTerritory { get; set; }
 
     private int _actionsLeft = 2;
@@ -18,9 +19,7 @@ public class Enemy : Unit
 
     [SerializeField]
     private GameObject _bulletSpawner;
-    [SerializeField]
-    private csFogVisibilityAgent _fogVisibilityAgent;
-    public csFogVisibilityAgent csFogVisibilityAgent => _fogVisibilityAgent;
+    [field: SerializeField] public csFogVisibilityAgent csFogVisibilityAgent { get; private set; }
 
     [SerializeField]
     private EnemyAI _enemyAI;
@@ -73,7 +72,7 @@ public class Enemy : Unit
         if (!_triggered)
         {
             // Trigger if any of the characters can see the enemy
-            if (Manager.Map.Characters.GetList.Any(character => TargetUtils.CanSee(this, character)))
+            if (Manager.Map.Characters.GetList.Any(character => TargetUtils.CanSee(this, character, true)))
             {
                 _triggered = true;
 
