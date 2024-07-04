@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParticleSystemFactory;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,14 +27,17 @@ public class AlbedoFlowerEntity : Entity
 
     public override void Activate()
     {
-        Debug.Log("what?");
         _canvas.UpdateHealthUI(_lifeTime);
         MakeDamageForAdjancentUnits(_dealDmg);
     }
 
     public void MakeDamageForAdjancentUnits(int dmg)
     {
-        HubData.Instance.ParticleSystemFactory.CreateAlbedoFlower(_abilityRange, ActualTerritory.GetCordinats());
+        ParticleSystemFactoryCreator.CreateParticle(ParticleType.AlbedoFlower, new ParticleData
+        (
+            distance: _abilityRange, position: ActualTerritory.GetCordinats(), parent: Manager.MainParent.transform
+        )) ;
+
         foreach (var unit in Manager.Map.GetAdjancentUnits(_abilityRange, ActualTerritory, true))
         {
             if (unit is Enemy enemy) { 

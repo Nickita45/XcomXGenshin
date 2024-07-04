@@ -1,3 +1,4 @@
+using ParticleSystemFactory;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,7 +71,6 @@ public class AbilityBigSlimeJump : Ability
         var list = new List<Vector3>
         {
             unit.ActualTerritory.GetCordinats(),
-            //new Vector3(findedTerritory.XPosition, unit.ActualTerritory.YPosition, findedTerritory.ZPosition),
             findedTerritory.GetCordinats()
         };
 
@@ -78,9 +78,12 @@ public class AbilityBigSlimeJump : Ability
         yield return unit.StartCoroutine(Manager.MovementManager.MoveUnitToTerritory(unit, list, findedTerritory));
         unit.Stats.SpeedIncreaser = 0;
 
-        HubData.Instance.ParticleSystemFactory.CreateSlimeJump(_attackRange, findedTerritory.GetCordinats());
+        ParticleSystemFactoryCreator.CreateParticle(ParticleType.AlbedoFlower, new ParticleData
+        (
+           distance: _attackRange, position: unit.ActualTerritory.GetCordinats(), parent: Manager.MainParent.transform
+        ));
 
-        if(target != null)
+        if (target != null)
             unit.Animator.RotateLookAtImmediate((target as Unit).ActualTerritory.GetCordinats());
 
         var adjancentAUnits = Manager.Map.GetAdjancentUnits(_attackRange, unit);

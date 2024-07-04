@@ -1,3 +1,4 @@
+using ParticleSystemFactory;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,7 +45,10 @@ public class AbillityAlbedoUltimate : AbilityUltimate, IAbilityArea
     public override IEnumerator Activate(Unit unit, object target)
     {
         Debug.Log("Albedo ultimate");
-        HubData.Instance.ParticleSystemFactory.CreateAlbedoUltimate(unit.ActualTerritory.GetCordinats());
+        ParticleSystemFactoryCreator.CreateParticle(ParticleType.AlbedoFlower, new ParticleData
+        (
+            position: unit.ActualTerritory.GetCordinats(), parent: Manager.MainParent.transform
+        ));
         yield return new WaitForSeconds(0.5f);
         foreach (var detectedUnit in Manager.Map.GetAdjancentUnits(_abilityRange, unit.ActualTerritory)) {
             if(detectedUnit is Enemy) Debug.Log(detectedUnit.Stats.Name());
