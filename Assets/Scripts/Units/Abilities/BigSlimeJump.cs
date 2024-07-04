@@ -80,7 +80,7 @@ public class AbilityBigSlimeJump : Ability
 
         ParticleSystemFactoryCreator.CreateParticle(ParticleType.AlbedoFlower, new ParticleData
         (
-           distance: _attackRange, position: unit.ActualTerritory.GetCordinats(), parent: Manager.MainParent.transform
+           distance: _attackRange, position: unit.ActualTerritory.GetCordinats()
         ));
 
         if (target != null)

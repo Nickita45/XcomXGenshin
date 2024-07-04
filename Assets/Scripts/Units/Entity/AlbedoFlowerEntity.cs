@@ -35,7 +35,7 @@ public class AlbedoFlowerEntity : Entity
     {
         ParticleSystemFactoryCreator.CreateParticle(ParticleType.AlbedoFlower, new ParticleData
         (
-            distance: _abilityRange, position: ActualTerritory.GetCordinats(), parent: Manager.MainParent.transform
+            distance: _abilityRange, position: ActualTerritory.GetCordinats()
         )) ;
 
         foreach (var unit in Manager.Map.GetAdjancentUnits(_abilityRange, ActualTerritory, true))

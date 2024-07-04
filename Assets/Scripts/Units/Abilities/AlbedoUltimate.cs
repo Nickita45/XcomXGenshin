@@ -47,7 +47,7 @@ public class AbillityAlbedoUltimate : AbilityUltimate, IAbilityArea
         Debug.Log("Albedo ultimate");
         ParticleSystemFactoryCreator.CreateParticle(ParticleType.AlbedoFlower, new ParticleData
         (
-            position: unit.ActualTerritory.GetCordinats(), parent: Manager.MainParent.transform
+            position: unit.ActualTerritory.GetCordinats()
         ));
         yield return new WaitForSeconds(0.5f);
         foreach (var detectedUnit in Manager.Map.GetAdjancentUnits(_abilityRange, unit.ActualTerritory)) {
