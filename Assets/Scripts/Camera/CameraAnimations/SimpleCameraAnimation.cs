@@ -1,30 +1,34 @@
 using System.Collections;
 using UnityEngine;
 
-public class SimpleCameraAnimation : ICameraAnimation
+
+namespace AnimationCameras
 {
-    private const float rotationSpeed = 2f;
-    private const float timeToEndAnimation = 2f;
-    private Camera _camera;
-
-    public SimpleCameraAnimation(Camera camera) => _camera = camera;
-
-    public IEnumerator CameraRotate(Transform target)
+    public class SimpleCameraAnimation : ICameraAnimation
     {
-        float timer = 0;
-        _camera.transform.position = target.position + new Vector3(-2.0f, 1.0f, 0);
+        private const float rotationSpeed = 2f;
+        private const float timeToEndAnimation = 2f;
+        private Camera _camera;
 
-        while (timer < timeToEndAnimation)
+        public SimpleCameraAnimation(Camera camera) => _camera = camera;
+
+        public IEnumerator CameraRotate(Transform target)
         {
-            float angle = rotationSpeed * Time.deltaTime;
+            float timer = 0;
+            _camera.transform.position = target.position + new Vector3(-2.0f, 1.0f, 0);
 
-            _camera.transform.RotateAround(target.position, Vector3.up, angle);
-            _camera.transform.LookAt(target.position);
-            timer += Time.deltaTime;
+            while (timer < timeToEndAnimation)
+            {
+                float angle = rotationSpeed * Time.deltaTime;
 
-            yield return null;
+                _camera.transform.RotateAround(target.position, Vector3.up, angle);
+                _camera.transform.LookAt(target.position);
+                timer += Time.deltaTime;
+
+                yield return null;
+            }
         }
-    }
 
-    public bool CanBeUsed(Unit target) => true;
+        public bool CanBeUsed(Unit target) => true;
+    }
 }

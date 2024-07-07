@@ -45,7 +45,7 @@ public class AbillityAlbedoUltimate : AbilityUltimate, IAbilityArea
     public override IEnumerator Activate(Unit unit, object target)
     {
         Debug.Log("Albedo ultimate");
-        ParticleSystemFactoryCreator.CreateParticle(ParticleType.AlbedoFlower, new ParticleData
+        ParticleSystemFactoryCreator.CreateParticle(ParticleType.AlbedoUltimate, new ParticleData
         (
             position: unit.ActualTerritory.GetCordinats()
         ));

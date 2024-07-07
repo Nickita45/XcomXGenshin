@@ -248,7 +248,7 @@ public class TurnManager : MonoBehaviour
             if (unitOvewatch is Character && unit is Character || unitOvewatch is Enemy && unit is Enemy)
                 continue;
 
-            if (TargetUtils.CanSee(unit, unitOvewatch))
+            if (TargetUtils.CanSee(unit.transform, unitOvewatch.transform, unit.Stats.VisionDistance()))
             {
                 mustBeDeleted.Add(unitOvewatch);
                 yield return unitOvewatch;

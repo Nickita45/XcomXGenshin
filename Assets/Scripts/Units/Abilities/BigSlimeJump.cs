@@ -78,7 +78,7 @@ public class AbilityBigSlimeJump : Ability
         yield return unit.StartCoroutine(Manager.MovementManager.MoveUnitToTerritory(unit, list, findedTerritory));
         unit.Stats.SpeedIncreaser = 0;
 
-        ParticleSystemFactoryCreator.CreateParticle(ParticleType.AlbedoFlower, new ParticleData
+        ParticleSystemFactoryCreator.CreateParticle(ParticleType.SlimeJump, new ParticleData
         (
            distance: _attackRange, position: unit.ActualTerritory.GetCordinats()
         ));

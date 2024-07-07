@@ -1,9 +1,7 @@
-using System.Collections;
+using AnimationCameras;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class AnimatedCamera : MonoBehaviour
 {
@@ -43,6 +41,12 @@ public class AnimatedCamera : MonoBehaviour
         _camera = GetComponent<Camera>();
         Manager.StatusMain.OnStatusChange += OnStatusChange;
         Manager.Instance.OnClearMap += Instalization;
+    }
+
+    private void OnDestroy()
+    {
+        Manager.StatusMain.OnStatusChange -= OnStatusChange;
+        Manager.Instance.OnClearMap -= Instalization;
     }
 
     private void OnStatusChange(HashSet<Permissions> permissions)
