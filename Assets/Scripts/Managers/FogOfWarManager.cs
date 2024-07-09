@@ -11,7 +11,7 @@ public class FogOfWarManager
     {
         foreach(var character in Manager.Map.Characters.GetList)
         {
-            csFogWar.AddFogRevealer(new csFogWar.FogRevealer(character.gameObject.transform, (int)character.Stats.VisionDistance() - 1, true));
+            csFogWar.AddFogRevealer(new csFogWar.FogRevealer(character.gameObject.transform, (int)character.Stats.VisionDistance(), true));
         }
 
         foreach (var enemy in Manager.Map.Enemies.GetList)

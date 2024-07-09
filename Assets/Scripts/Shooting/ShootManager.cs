@@ -20,8 +20,7 @@ public class ShootManager : MonoBehaviour
     {
         Transform firePoint = shooter.GetBulletSpawner(_nameBulletSpawner); //position for spawning bullets
 
-        //int randomGenerate = UnityEngine.Random.Range(0, 101); // [0;101)
-
+        Debug.Log(defender.Stats.Name() + " " + defender.ActualTerritory + " " + shooter.Stats.Name() + " " + shooter.ActualTerritory);
         (int percent, _) =
         // Manager.map for enemy?
             AimUtils.CalculateHitChance(shooter.ActualTerritory, defender.ActualTerritory, actualGun, shooter.Stats.BaseAimPercent()); //get chance

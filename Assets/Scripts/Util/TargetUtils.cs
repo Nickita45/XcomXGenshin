@@ -13,7 +13,7 @@ public static class TargetUtils
     public static bool CanTarget(TerritroyReaded unitA, TerritroyReaded unitB, float maxDistance, bool debug = false)
     {
         // Can't target if the distance between units is too big
-        if (Math.Round(Vector3.Distance(unitA.GetCordinats(), unitB.GetCordinats())) > maxDistance) return false;
+        if ((int)Vector3.Distance(unitA.GetCordinats(), unitB.GetCordinats()) > maxDistance) return false;
 
         if (IsCanSeeMakeRayCastDetect(unitA.GetCordinats(), unitB.GetCordinats())) return true;
 
@@ -40,7 +40,7 @@ public static class TargetUtils
     public static bool CanTarget(Transform unitA, Transform unitB, float maxDistance, bool debug = false)
     {
         // Can't target if the distance between units is too big
-        if (Math.Round(Vector3.Distance(unitA.position, unitB.position)) > maxDistance) return false;
+        if ((int)Vector3.Distance(unitA.position, unitB.position) > maxDistance) return false;
 
         return IsCanSeeMakeRayCastDetect(unitA.position, unitB.position);
     }
@@ -50,8 +50,6 @@ public static class TargetUtils
     {
         // 1. Block through the ground
         if (!ValidateShelter(info.Type)) return true;
-        //if (info.Type == TerritoryType.ShelterGround
-        //    || info.Type == TerritoryType.Ground) return true;
 
         // 2. Block through full shelters on the targeted sides
         Dictionary<ShelterSide, ShelterType> shelters = info.ShelterType.ToDictionary();

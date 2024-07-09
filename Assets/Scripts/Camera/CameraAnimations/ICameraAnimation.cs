@@ -11,4 +11,12 @@ namespace AnimationCameras
 
         bool CanBeUsed(Unit target);
     }
+
+    public class AnimationCameraBase
+    {
+        protected const float timeToEndAnimation = 0.5f;
+        protected Camera _camera;
+
+        public AnimationCameraBase(Camera camera) => _camera = camera;
+    }
 }

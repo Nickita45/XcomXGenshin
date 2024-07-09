@@ -115,9 +115,9 @@
         "14.11_-0.2313_10.78",
         "9.08_2.0425_13.24",
         "13.5_0.5_-14.5",
-        "13.54_0.5_-13.44",
+        "13.5_0.5_-13.5",
         "13.5_0.5_-12.5",
-        "13.54_0.5_-11.52",
+        "13.5_0.5_-11.5",
         "13.5_0.5_-10.5",
         "13.5_0.5_-9.5",
         "13.5_0.5_-8.5",
@@ -141,7 +141,7 @@
         "13.5_0.5_9.5",
         "12.62_-0.2313_10.67",
         "12.5_0.5_-14.5",
-        "12.5_0.5_-13.51",
+        "12.5_0.5_-13.5",
         "12.5_0.5_-12.5",
         "12.5_0.5_-11.5",
         "12.5_0.5_-10.5",
@@ -168,7 +168,7 @@
         "11.5_0.5_-14.5",
         "11.5_0.5_-13.5",
         "11.5_0.5_-12.5",
-        "11.54_0.5_-11.52",
+        "11.5_0.5_-11.5",
         "11.5_0.5_-10.5",
         "11.5_0.5_-9.5",
         "11.5_0.5_-8.5",
@@ -758,7 +758,7 @@
         "-12.5_0.5_-0.5",
         "-12.5_0.5_0.5",
         "-12.47189_0_1.47505",
-        "-13_0.5_2.5",
+        "-12.5_0.5_2.5",
         "-12.5_0.5_3.5",
         "-12.5_0.5_4.5",
         "-12.5_0.5_5.5",
@@ -769,7 +769,7 @@
         "-13.26_-0.09000003_-9.53",
         "-13.5_0.5_-8.5",
         "-13.5_0.5_-7.5",
-        "-13.61_0.5_-6.47",
+        "-13.5_0.5_-6.5",
         "-13.5_0.5_-5.5",
         "-13.5_0.5_-4.5",
         "-13.5_0.5_-3.5",
@@ -777,6 +777,7 @@
         "-13.5_0.5_-0.5",
         "-13.5_0.5_0.5",
         "-13.5_0.5_1.5",
+        "-13.5_0.5_2.5",
         "-13.5_0.5_3.5",
         "-13.5_0.5_4.5",
         "-13.5_0.5_5.5",
@@ -875,7 +876,7 @@
       ],
       "IndexFront": [],
       "IndexBottom": [
-        "13.54_0.5_-13.44"
+        "13.5_0.5_-13.5"
       ],
       "Index": "14.5_0.5_-13.5",
       "PathPrefabBase": null,
@@ -951,7 +952,7 @@
       ],
       "IndexFront": [],
       "IndexBottom": [
-        "13.54_0.5_-11.52"
+        "13.5_0.5_-11.5"
       ],
       "Index": "14.5_0.5_-11.5",
       "PathPrefabBase": null,
@@ -1935,7 +1936,7 @@
       "WRotation": 1.0,
       "IndexLeft": [],
       "IndexRight": [
-        "13.54_0.5_-13.44"
+        "13.5_0.5_-13.5"
       ],
       "IndexUp": [
         "13.5_1.5_-14.5"
@@ -1960,13 +1961,13 @@
         "Front": 0
       }
     },
-    "13.54_0.5_-13.44": {
+    "13.5_0.5_-13.5": {
       "XSize": 0.5,
       "YSize": 0.5,
       "ZSize": 0.5,
-      "XPosition": 13.54,
+      "XPosition": 13.5,
       "YPosition": 0.5,
-      "ZPosition": -13.44,
+      "ZPosition": -13.5,
       "XRotation": 0.0,
       "YRotation": 0.0,
       "ZRotation": 0.0,
@@ -1987,12 +1988,12 @@
         "14.5_0.5_-13.5"
       ],
       "IndexBottom": [
-        "12.5_0.5_-13.51"
+        "12.5_0.5_-13.5"
       ],
-      "Index": "13.54_0.5_-13.44",
+      "Index": "13.5_0.5_-13.5",
       "PathPrefabBase": "Prefabs/Character",
       "PathPrefabAdditional": "",
-      "TerritoryInfo": 0,
+      "TerritoryInfo": 8,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -2012,10 +2013,10 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "13.54_0.5_-13.44"
+        "13.5_0.5_-13.5"
       ],
       "IndexRight": [
-        "13.54_0.5_-11.52"
+        "13.5_0.5_-11.5"
       ],
       "IndexUp": [
         "13.5_1.5_-12.5"
@@ -2040,13 +2041,13 @@
         "Front": 0
       }
     },
-    "13.54_0.5_-11.52": {
+    "13.5_0.5_-11.5": {
       "XSize": 0.5,
       "YSize": 0.5,
       "ZSize": 0.5,
-      "XPosition": 13.54,
+      "XPosition": 13.5,
       "YPosition": 0.5,
-      "ZPosition": -11.52,
+      "ZPosition": -11.5,
       "XRotation": 0.0,
       "YRotation": 0.0,
       "ZRotation": 0.0,
@@ -2069,10 +2070,10 @@
       "IndexBottom": [
         "12.5_0.5_-11.5"
       ],
-      "Index": "13.54_0.5_-11.52",
+      "Index": "13.5_0.5_-11.5",
       "PathPrefabBase": "Prefabs/Character",
       "PathPrefabAdditional": "",
-      "TerritoryInfo": 0,
+      "TerritoryInfo": 8,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -2092,7 +2093,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "13.54_0.5_-11.52"
+        "13.5_0.5_-11.5"
       ],
       "IndexRight": [
         "13.5_0.5_-9.5"
@@ -2949,7 +2950,7 @@
       "WRotation": 1.0,
       "IndexLeft": [],
       "IndexRight": [
-        "12.5_0.5_-13.51"
+        "12.5_0.5_-13.5"
       ],
       "IndexUp": [
         "12.5_1.5_-14.5"
@@ -2974,13 +2975,13 @@
         "Front": 0
       }
     },
-    "12.5_0.5_-13.51": {
+    "12.5_0.5_-13.5": {
       "XSize": 0.5,
       "YSize": 0.5,
       "ZSize": 0.5,
       "XPosition": 12.5,
       "YPosition": 0.5,
-      "ZPosition": -13.51,
+      "ZPosition": -13.5,
       "XRotation": 0.0,
       "YRotation": 0.0,
       "ZRotation": 0.0,
@@ -2998,15 +2999,15 @@
         "-15_-1_-15"
       ],
       "IndexFront": [
-        "13.54_0.5_-13.44"
+        "13.5_0.5_-13.5"
       ],
       "IndexBottom": [
         "11.5_0.5_-13.5"
       ],
-      "Index": "12.5_0.5_-13.51",
+      "Index": "12.5_0.5_-13.5",
       "PathPrefabBase": "Prefabs/Character",
       "PathPrefabAdditional": "",
-      "TerritoryInfo": 0,
+      "TerritoryInfo": 8,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -3026,7 +3027,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "12.5_0.5_-13.51"
+        "12.5_0.5_-13.5"
       ],
       "IndexRight": [
         "12.5_0.5_-11.5"
@@ -3078,10 +3079,10 @@
         "-15_-1_-15"
       ],
       "IndexFront": [
-        "13.54_0.5_-11.52"
+        "13.5_0.5_-11.5"
       ],
       "IndexBottom": [
-        "11.54_0.5_-11.52"
+        "11.5_0.5_-11.5"
       ],
       "Index": "12.5_0.5_-11.5",
       "PathPrefabBase": null,
@@ -4059,7 +4060,7 @@
         "-15_-1_-15"
       ],
       "IndexFront": [
-        "12.5_0.5_-13.51"
+        "12.5_0.5_-13.5"
       ],
       "IndexBottom": [
         "10.5_0.5_-13.5"
@@ -4090,7 +4091,7 @@
         "11.5_0.5_-13.5"
       ],
       "IndexRight": [
-        "11.54_0.5_-11.52"
+        "11.5_0.5_-11.5"
       ],
       "IndexUp": [
         "11.5_1.5_-12.5"
@@ -4115,13 +4116,13 @@
         "Front": 0
       }
     },
-    "11.54_0.5_-11.52": {
+    "11.5_0.5_-11.5": {
       "XSize": 0.5,
       "YSize": 0.5,
       "ZSize": 0.5,
-      "XPosition": 11.54,
+      "XPosition": 11.5,
       "YPosition": 0.5,
-      "ZPosition": -11.52,
+      "ZPosition": -11.5,
       "XRotation": 0.0,
       "YRotation": 0.0,
       "ZRotation": 0.0,
@@ -4144,10 +4145,10 @@
       "IndexBottom": [
         "10.5_0.5_-11.5"
       ],
-      "Index": "11.54_0.5_-11.52",
+      "Index": "11.5_0.5_-11.5",
       "PathPrefabBase": "Prefabs/Character",
       "PathPrefabAdditional": "",
-      "TerritoryInfo": 0,
+      "TerritoryInfo": 8,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
@@ -4167,7 +4168,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "11.54_0.5_-11.52"
+        "11.5_0.5_-11.5"
       ],
       "IndexRight": [
         "11.5_0.5_-9.5"
@@ -5278,7 +5279,7 @@
         "-15_-1_-15"
       ],
       "IndexFront": [
-        "11.54_0.5_-11.52"
+        "11.5_0.5_-11.5"
       ],
       "IndexBottom": [
         "9.5_0.5_-11.5"
@@ -15297,7 +15298,7 @@
       ],
       "Index": "1.5_0.5_-11.5",
       "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
-      "PathPrefabAdditional": "Prefabs/Enemies/SlimeBigElectro",
+      "PathPrefabAdditional": "RANDOM_ENEMY",
       "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,
@@ -17364,7 +17365,7 @@
       ],
       "Index": "-0.5_0.5_-13.5",
       "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
-      "PathPrefabAdditional": "Prefabs/Enemies/SlimeBigElectro",
+      "PathPrefabAdditional": "RANDOM_ENEMY",
       "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,
@@ -23308,7 +23309,7 @@
       "IndexUp": [
         "-5.5_3.5_9.5",
         "-5.5_3.5_10.5",
-        "-6.5_3_9.5",
+        "-6.5_2.5_9.5",
         "-6.5_3.5_10.5"
       ],
       "IndexDown": [
@@ -23327,7 +23328,7 @@
         "-7.5_0.5_10.5",
         "-7.5_1.5_9.5",
         "-7.5_1.5_10.5",
-        "-6.5_3_9.5",
+        "-6.5_2.5_9.5",
         "-7.5_2.5_10.5"
       ],
       "Index": "-6.02206_-0.05_9.94",
@@ -25840,12 +25841,12 @@
         "-9.5_0.5_3.5",
         "-8.5_1.5_3.5",
         "-9.5_1.5_3.5",
-        "-8.5_3_2.5",
+        "-8.5_2.5_2.5",
         "-9.5_2.5_3.5"
       ],
       "IndexUp": [
         "-8.5_3.5_1.5",
-        "-8.5_3_2.5",
+        "-8.5_2.5_2.5",
         "-9.5_3.5_1.5",
         "-9.5_3.5_2.5"
       ],
@@ -28462,7 +28463,7 @@
         "-10.5_0.5_2.5"
       ],
       "IndexBottom": [
-        "-13_0.5_2.5"
+        "-12.5_0.5_2.5"
       ],
       "Index": "-11.5_0.5_2.5",
       "PathPrefabBase": null,
@@ -28862,7 +28863,7 @@
         "-11.5_0.5_-6.5"
       ],
       "IndexBottom": [
-        "-13.61_0.5_-6.47"
+        "-13.5_0.5_-6.5"
       ],
       "Index": "-12.5_0.5_-6.5",
       "PathPrefabBase": null,
@@ -29133,7 +29134,7 @@
         "-12.5_3.5_0.5"
       ],
       "IndexRight": [
-        "-13_0.5_2.5",
+        "-12.5_0.5_2.5",
         "-12.5_1.5_2.5",
         "-12.5_2.5_2.5",
         "-12.5_3.5_2.5"
@@ -29167,11 +29168,11 @@
         "Front": 2
       }
     },
-    "-13_0.5_2.5": {
+    "-12.5_0.5_2.5": {
       "XSize": 0.5,
       "YSize": 0.5,
       "ZSize": 0.5,
-      "XPosition": -13.0,
+      "XPosition": -12.5,
       "YPosition": 0.5,
       "ZPosition": 2.5,
       "XRotation": 0.0,
@@ -29179,16 +29180,13 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-12.47189_0_1.47505",
-        "-13.5_0.5_1.5"
+        "-12.47189_0_1.47505"
       ],
       "IndexRight": [
-        "-12.5_0.5_3.5",
-        "-13.5_0.5_3.5"
+        "-12.5_0.5_3.5"
       ],
       "IndexUp": [
-        "-12.5_1.5_2.5",
-        "-13.5_1.5_2.5"
+        "-12.5_1.5_2.5"
       ],
       "IndexDown": [
         "-15_-1_-15"
@@ -29197,9 +29195,9 @@
         "-11.5_0.5_2.5"
       ],
       "IndexBottom": [
-        "-14.5_0.5_2.5"
+        "-13.5_0.5_2.5"
       ],
-      "Index": "-13_0.5_2.5",
+      "Index": "-12.5_0.5_2.5",
       "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
       "PathPrefabAdditional": "RANDOM_ENEMY",
       "TerritoryInfo": 6,
@@ -29222,7 +29220,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-13_0.5_2.5"
+        "-12.5_0.5_2.5"
       ],
       "IndexRight": [
         "-12.5_0.5_4.5"
@@ -29601,7 +29599,7 @@
         "-13.5_0.5_-8.5"
       ],
       "IndexRight": [
-        "-13.61_0.5_-6.47"
+        "-13.5_0.5_-6.5"
       ],
       "IndexUp": [
         "-13.5_1.5_-7.5"
@@ -29626,13 +29624,13 @@
         "Front": 0
       }
     },
-    "-13.61_0.5_-6.47": {
+    "-13.5_0.5_-6.5": {
       "XSize": 0.5,
       "YSize": 0.5,
       "ZSize": 0.5,
-      "XPosition": -13.61,
+      "XPosition": -13.5,
       "YPosition": 0.5,
-      "ZPosition": -6.47,
+      "ZPosition": -6.5,
       "XRotation": 0.0,
       "YRotation": 0.0,
       "ZRotation": 0.0,
@@ -29655,7 +29653,7 @@
       "IndexBottom": [
         "-14.5_0.5_-6.5"
       ],
-      "Index": "-13.61_0.5_-6.47",
+      "Index": "-13.5_0.5_-6.5",
       "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
       "PathPrefabAdditional": "RANDOM_ENEMY",
       "TerritoryInfo": 6,
@@ -29678,7 +29676,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-13.61_0.5_-6.47"
+        "-13.5_0.5_-6.5"
       ],
       "IndexRight": [
         "-13.5_0.5_-4.5"
@@ -29921,7 +29919,7 @@
         "-13.5_0.5_0.5"
       ],
       "IndexRight": [
-        "-13_0.5_2.5"
+        "-13.5_0.5_2.5"
       ],
       "IndexUp": [
         "-13.5_1.5_1.5"
@@ -29946,6 +29944,46 @@
         "Front": 0
       }
     },
+    "-13.5_0.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -13.5,
+      "YPosition": 0.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-13.5_0.5_1.5"
+      ],
+      "IndexRight": [
+        "-13.5_0.5_3.5"
+      ],
+      "IndexUp": [
+        "-13.5_1.5_2.5"
+      ],
+      "IndexDown": [
+        "-15_-1_-15"
+      ],
+      "IndexFront": [
+        "-12.5_0.5_2.5"
+      ],
+      "IndexBottom": [
+        "-14.5_0.5_2.5"
+      ],
+      "Index": "-13.5_0.5_2.5",
+      "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
+      "PathPrefabAdditional": "RANDOM_ENEMY",
+      "TerritoryInfo": 6,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-13.5_0.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -29958,7 +29996,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-13_0.5_2.5"
+        "-13.5_0.5_2.5"
       ],
       "IndexRight": [
         "-13.5_0.5_4.5"
@@ -30318,7 +30356,7 @@
         "-15_-1_-15"
       ],
       "IndexFront": [
-        "-13.61_0.5_-6.47"
+        "-13.5_0.5_-6.5"
       ],
       "IndexBottom": [],
       "Index": "-14.5_0.5_-6.5",
@@ -30660,7 +30698,7 @@
         "-15_-1_-15"
       ],
       "IndexFront": [
-        "-13_0.5_2.5"
+        "-13.5_0.5_2.5"
       ],
       "IndexBottom": [],
       "Index": "-14.5_0.5_2.5",
@@ -31795,7 +31833,7 @@
         "13.5_2.5_-13.5"
       ],
       "IndexDown": [
-        "13.54_0.5_-13.44"
+        "13.5_0.5_-13.5"
       ],
       "IndexFront": [
         "14.5_1.5_-13.5"
@@ -31875,7 +31913,7 @@
         "13.5_2.5_-11.5"
       ],
       "IndexDown": [
-        "13.54_0.5_-11.52"
+        "13.5_0.5_-11.5"
       ],
       "IndexFront": [
         "14.5_1.5_-11.5"
@@ -32713,7 +32751,7 @@
         "12.5_2.5_-13.5"
       ],
       "IndexDown": [
-        "12.5_0.5_-13.51"
+        "12.5_0.5_-13.5"
       ],
       "IndexFront": [
         "13.5_1.5_-13.5"
@@ -33711,7 +33749,7 @@
         "11.5_2.5_-11.5"
       ],
       "IndexDown": [
-        "11.54_0.5_-11.52"
+        "11.5_0.5_-11.5"
       ],
       "IndexFront": [
         "12.5_1.5_-11.5"
@@ -56449,7 +56487,7 @@
         "-12.5_2.5_2.5"
       ],
       "IndexDown": [
-        "-13_0.5_2.5"
+        "-12.5_0.5_2.5"
       ],
       "IndexFront": [
         "-11.5_1.5_2.5"
@@ -56999,7 +57037,7 @@
         "-13.5_2.5_-6.5"
       ],
       "IndexDown": [
-        "-13.61_0.5_-6.47"
+        "-13.5_0.5_-6.5"
       ],
       "IndexFront": [
         "-12.5_1.5_-6.5"
@@ -57319,7 +57357,7 @@
         "-13.5_2.5_2.5"
       ],
       "IndexDown": [
-        "-13_0.5_2.5"
+        "-13.5_0.5_2.5"
       ],
       "IndexFront": [
         "-12.5_1.5_2.5"
@@ -83986,7 +84024,7 @@
         "-7.5_1.5_9.5"
       ],
       "IndexFront": [
-        "-6.5_3_9.5"
+        "-6.5_2.5_9.5"
       ],
       "IndexBottom": [
         "-8.5_2.5_9.5"
@@ -84758,24 +84796,22 @@
         "Front": 0
       }
     },
-    "-8.5_3_2.5": {
+    "-8.5_2.5_2.5": {
       "XSize": 0.5,
       "YSize": 0.5,
       "ZSize": 0.5,
       "XPosition": -8.5,
-      "YPosition": 3.0,
+      "YPosition": 2.5,
       "ZPosition": 2.5,
       "XRotation": 0.0,
       "YRotation": 0.0,
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8.970735_0_1.818223",
-        "-8.5_3.5_1.5"
+        "-8.970735_0_1.818223"
       ],
       "IndexRight": [
-        "-8.5_2.5_3.5",
-        "-8.5_3.5_3.5"
+        "-8.5_2.5_3.5"
       ],
       "IndexUp": [
         "-8.5_3.5_2.5"
@@ -84783,13 +84819,9 @@
       "IndexDown": [
         "-8.970735_0_1.818223"
       ],
-      "IndexFront": [
-        "-7.5_3.5_2.5"
-      ],
-      "IndexBottom": [
-        "-9.5_3.5_2.5"
-      ],
-      "Index": "-8.5_3_2.5",
+      "IndexFront": [],
+      "IndexBottom": [],
+      "Index": "-8.5_2.5_2.5",
       "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
       "PathPrefabAdditional": "RANDOM_ENEMY",
       "TerritoryInfo": 6,
@@ -84812,7 +84844,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8.5_3_2.5"
+        "-8.5_2.5_2.5"
       ],
       "IndexRight": [
         "-8.5_2.5_4.5"
@@ -114449,7 +114481,7 @@
         "-4.5_3.5_9.5"
       ],
       "IndexBottom": [
-        "-6.5_3_9.5"
+        "-6.5_3.5_9.5"
       ],
       "Index": "-5.5_3.5_9.5",
       "PathPrefabBase": null,
@@ -115553,7 +115585,7 @@
         "-6.5_3.5_7.5"
       ],
       "IndexRight": [
-        "-6.5_3_9.5"
+        "-6.5_3.5_9.5"
       ],
       "IndexUp": [
         "-6.5_4.5_8.5"
@@ -115578,12 +115610,12 @@
         "Front": 0
       }
     },
-    "-6.5_3_9.5": {
+    "-6.5_3.5_9.5": {
       "XSize": 0.5,
       "YSize": 0.5,
       "ZSize": 0.5,
       "XPosition": -6.5,
-      "YPosition": 3.0,
+      "YPosition": 3.5,
       "ZPosition": 9.5,
       "XRotation": 0.0,
       "YRotation": 0.0,
@@ -115596,20 +115628,18 @@
         "-6.5_3.5_10.5"
       ],
       "IndexUp": [
-        "-6.5_3.5_9.5"
+        "-6.5_4.5_9.5"
       ],
       "IndexDown": [
-        "-6.02206_-0.05_9.94"
+        "-6.5_2.5_9.5"
       ],
       "IndexFront": [
-        "-6.02206_-0.05_9.94",
         "-5.5_3.5_9.5"
       ],
       "IndexBottom": [
-        "-7.5_2.5_9.5",
         "-7.5_3.5_9.5"
       ],
-      "Index": "-6.5_3_9.5",
+      "Index": "-6.5_3.5_9.5",
       "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
       "PathPrefabAdditional": "RANDOM_ENEMY",
       "TerritoryInfo": 6,
@@ -115632,7 +115662,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-6.5_3_9.5"
+        "-6.5_3.5_9.5"
       ],
       "IndexRight": [
         "-6.5_3.5_11.5"
@@ -116523,7 +116553,7 @@
         "-6.5_3.5_2.5"
       ],
       "IndexBottom": [
-        "-8.5_3_2.5"
+        "-8.5_3.5_2.5"
       ],
       "Index": "-7.5_3.5_2.5",
       "PathPrefabBase": null,
@@ -116800,7 +116830,7 @@
         "-7.5_2.5_9.5"
       ],
       "IndexFront": [
-        "-6.5_3_9.5"
+        "-6.5_3.5_9.5"
       ],
       "IndexBottom": [
         "-8.5_3.5_9.5"
@@ -117667,7 +117697,7 @@
         "-8.5_3.5_0.5"
       ],
       "IndexRight": [
-        "-8.5_3_2.5"
+        "-8.5_3.5_2.5"
       ],
       "IndexUp": [
         "-8.5_4.5_1.5"
@@ -117692,6 +117722,46 @@
         "Front": 0
       }
     },
+    "-8.5_3.5_2.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -8.5,
+      "YPosition": 3.5,
+      "ZPosition": 2.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [
+        "-8.5_3.5_1.5"
+      ],
+      "IndexRight": [
+        "-8.5_3.5_3.5"
+      ],
+      "IndexUp": [
+        "-8.5_4.5_2.5"
+      ],
+      "IndexDown": [
+        "-8.5_2.5_2.5"
+      ],
+      "IndexFront": [
+        "-7.5_3.5_2.5"
+      ],
+      "IndexBottom": [
+        "-9.5_3.5_2.5"
+      ],
+      "Index": "-8.5_3.5_2.5",
+      "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
+      "PathPrefabAdditional": "RANDOM_ENEMY",
+      "TerritoryInfo": 6,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "-8.5_3.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -117704,7 +117774,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8.5_3_2.5"
+        "-8.5_3.5_2.5"
       ],
       "IndexRight": [
         "-8.5_3.5_4.5"
@@ -118872,7 +118942,7 @@
         "-8.970735_0_1.818223"
       ],
       "IndexFront": [
-        "-8.5_3_2.5"
+        "-8.5_3.5_2.5"
       ],
       "IndexBottom": [
         "-10.5_3.5_2.5"
@@ -159368,6 +159438,42 @@
         "Front": 0
       }
     },
+    "-6.5_2.5_9.5": {
+      "XSize": 0.5,
+      "YSize": 0.5,
+      "ZSize": 0.5,
+      "XPosition": -6.5,
+      "YPosition": 2.5,
+      "ZPosition": 9.5,
+      "XRotation": 0.0,
+      "YRotation": 0.0,
+      "ZRotation": 0.0,
+      "WRotation": 1.0,
+      "IndexLeft": [],
+      "IndexRight": [],
+      "IndexUp": [
+        "-6.5_3.5_9.5"
+      ],
+      "IndexDown": [
+        "-6.02206_-0.05_9.94"
+      ],
+      "IndexFront": [
+        "-6.02206_-0.05_9.94"
+      ],
+      "IndexBottom": [
+        "-7.5_2.5_9.5"
+      ],
+      "Index": "-6.5_2.5_9.5",
+      "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
+      "PathPrefabAdditional": "RANDOM_ENEMY",
+      "TerritoryInfo": 6,
+      "ShelterType": {
+        "Left": 0,
+        "Right": 0,
+        "Bottom": 0,
+        "Front": 0
+      }
+    },
     "7.5_2.5_10.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -159943,70 +160049,6 @@
       "IndexFront": [],
       "IndexBottom": [],
       "Index": "3.5_3.5_12.5",
-      "PathPrefabBase": null,
-      "PathPrefabAdditional": null,
-      "TerritoryInfo": 2,
-      "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
-      }
-    },
-    "-6.5_3.5_9.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -6.5,
-      "YPosition": 3.5,
-      "ZPosition": 9.5,
-      "XRotation": 0.0,
-      "YRotation": 0.0,
-      "ZRotation": 0.0,
-      "WRotation": 1.0,
-      "IndexLeft": [],
-      "IndexRight": [],
-      "IndexUp": [
-        "-6.5_4.5_9.5"
-      ],
-      "IndexDown": [
-        "-6.5_3_9.5"
-      ],
-      "IndexFront": [],
-      "IndexBottom": [],
-      "Index": "-6.5_3.5_9.5",
-      "PathPrefabBase": null,
-      "PathPrefabAdditional": null,
-      "TerritoryInfo": 2,
-      "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
-      }
-    },
-    "-8.5_3.5_2.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -8.5,
-      "YPosition": 3.5,
-      "ZPosition": 2.5,
-      "XRotation": 0.0,
-      "YRotation": 0.0,
-      "ZRotation": 0.0,
-      "WRotation": 1.0,
-      "IndexLeft": [],
-      "IndexRight": [],
-      "IndexUp": [
-        "-8.5_4.5_2.5"
-      ],
-      "IndexDown": [
-        "-8.5_3_2.5"
-      ],
-      "IndexFront": [],
-      "IndexBottom": [],
-      "Index": "-8.5_3.5_2.5",
       "PathPrefabBase": null,
       "PathPrefabAdditional": null,
       "TerritoryInfo": 2,

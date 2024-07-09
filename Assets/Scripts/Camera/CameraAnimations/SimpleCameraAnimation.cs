@@ -4,13 +4,11 @@ using UnityEngine;
 
 namespace AnimationCameras
 {
-    public class SimpleCameraAnimation : ICameraAnimation
+    public class SimpleCameraAnimation : AnimationCameraBase, ICameraAnimation
     {
         private const float rotationSpeed = 2f;
-        private const float timeToEndAnimation = 2f;
-        private Camera _camera;
 
-        public SimpleCameraAnimation(Camera camera) => _camera = camera;
+        public SimpleCameraAnimation(Camera camera) : base(camera) {}
 
         public IEnumerator CameraRotate(Transform target)
         {

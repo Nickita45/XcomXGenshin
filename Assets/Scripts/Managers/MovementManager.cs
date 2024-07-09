@@ -400,7 +400,13 @@ public class MovementManager : MonoBehaviour
 
                     if (detectItem.TerritoryInfo == TerritoryType.ShelterGround) //if we detect Shelter Ground, set detectItem as air above it 
                     {
-                        detectItem = Manager.Map[detectItem.IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(orig.Index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault()];
+                        var gettedString = detectItem.IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(orig.Index), TerritroyReaded.MakeVectorFromIndex(n)))
+                            .FirstOrDefault(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(orig.Index), TerritroyReaded.MakeVectorFromIndex(n)) < 2);
+
+                        if (gettedString == null) continue;
+                        detectItem = 
+                            Manager.Map[gettedString];
+
                     }
                     if (detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air) == 1)//if there's air under the block, it's going down.
                     {
@@ -471,7 +477,12 @@ public class MovementManager : MonoBehaviour
 
                     if (detectItem.TerritoryInfo == TerritoryType.ShelterGround) //if we detect Shelter Ground, set detectItem as air above it 
                     {
-                        detectItem = Manager.Map[detectItem.IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(orig.Index), TerritroyReaded.MakeVectorFromIndex(n))).FirstOrDefault()];
+                        var gettedString = detectItem.IndexUp.OrderBy(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(orig.Index), TerritroyReaded.MakeVectorFromIndex(n)))
+                              .FirstOrDefault(n => Vector3.Distance(TerritroyReaded.MakeVectorFromIndex(orig.Index), TerritroyReaded.MakeVectorFromIndex(n)) < 2);
+
+                        if (gettedString == null) continue;
+                        detectItem =
+                            Manager.Map[gettedString];
                     }
                     if (detectItem.IndexDown.Count(n => Manager.Map[n].TerritoryInfo == TerritoryType.Air) == 1)//if there's air under the block, it's going down.
                     {

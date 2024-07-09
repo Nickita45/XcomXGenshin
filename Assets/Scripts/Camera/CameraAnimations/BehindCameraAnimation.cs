@@ -5,12 +5,9 @@ using UnityEngine;
 
 namespace AnimationCameras
 {
-    public class BehindCameraAnimation : ICameraAnimation
+    public class BehindCameraAnimation : AnimationCameraBase, ICameraAnimation
     {
-        private const float timeToEndAnimation = 2f;
-        private Camera _camera;
-
-        public BehindCameraAnimation(Camera camera) => _camera = camera;
+        public BehindCameraAnimation(Camera camera) : base(camera) {}
 
         public IEnumerator CameraRotate(Transform target)
         {

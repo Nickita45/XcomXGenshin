@@ -77,12 +77,12 @@ public abstract class Unit : MonoBehaviour
                 foreach (var unitOverwatched in Manager.TurnManager.CheckOverwatchMake(this))
                 {
                     _animator.SetSpeedAnimatorSlow(true);
-                    this.ActualTerritory = new TerritroyReaded(transform);
+                    ActualTerritory = new TerritroyReaded(transform);
 
                     Time.timeScale = 0.5f;
                     if (unitOverwatched is Character)
                     {
-                        yield return StartCoroutine(((Character)unitOverwatched).Abilities[0].Activate(unitOverwatched, this));
+                        yield return StartCoroutine(((Character)unitOverwatched).Abilities.First(ab => ab is AbilityShoot).Activate(unitOverwatched, this));
                     }
                     else if (unitOverwatched is Enemy)
                     {
@@ -90,6 +90,7 @@ public abstract class Unit : MonoBehaviour
                     }
                     Time.timeScale = 1f;
                     _animator.SetSpeedAnimatorSlow(false);
+                    Manager.StatusMain.SetStatusWaiting();
                 }
 
                 if (IsKilled)

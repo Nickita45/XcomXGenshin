@@ -5,14 +5,12 @@ using UnityEngine;
 
 namespace AnimationCameras
 {
-    public class FrontFaceCameraAnimation : ICameraAnimation
+    public class FrontFaceCameraAnimation : AnimationCameraBase, ICameraAnimation
     {
-        private const float timeToEndAnimation = 2f;
         private const float _distance = 1.2f;
         private const float height = 1.7f;
-        private Camera _camera;
 
-        public FrontFaceCameraAnimation(Camera camera) => _camera = camera;
+        public FrontFaceCameraAnimation(Camera camera) : base(camera) {}
 
         public IEnumerator CameraRotate(Transform target)
         {
