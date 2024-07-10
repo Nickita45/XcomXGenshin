@@ -17,22 +17,34 @@ public static class TargetUtils
 
         if (IsCanSeeMakeRayCastDetect(unitA.GetCordinats(), unitB.GetCordinats())) return true;
 
-        if(unitA.IndexLeft.Count > 0 && unitB.IndexLeft.Count > 0)
-            if(ValidateShelter(Manager.Map[unitA.IndexLeft.First()].TerritoryInfo) && ValidateShelter(Manager.Map[unitB.IndexLeft.First()].TerritoryInfo))
+        if (unitA.IndexLeft.Count > 0 && unitB.IndexLeft.Count > 0)
+            if (ValidateShelter(Manager.Map[unitA.IndexLeft.First()].TerritoryInfo) && ValidateShelter(Manager.Map[unitB.IndexLeft.First()].TerritoryInfo))
+            {
                 if (IsCanSeeMakeRayCastDetect(Manager.Map[unitA.IndexLeft.First()].GetCordinats(), Manager.Map[unitB.IndexLeft.First()].GetCordinats())) return true;
+                if (IsCanSeeMakeRayCastDetect(Manager.Map[unitA.IndexLeft.First()].GetCordinats(), unitB.GetCordinats())) return true;
+            }
 
         if (unitA.IndexRight.Count > 0 && unitB.IndexRight.Count > 0)
             if (ValidateShelter(Manager.Map[unitA.IndexRight.First()].TerritoryInfo) && ValidateShelter(Manager.Map[unitB.IndexRight.First()].TerritoryInfo))
+            {
                 if (IsCanSeeMakeRayCastDetect(Manager.Map[unitA.IndexRight.First()].GetCordinats(), Manager.Map[unitB.IndexRight.First()].GetCordinats())) return true;
+                if (IsCanSeeMakeRayCastDetect(Manager.Map[unitA.IndexRight.First()].GetCordinats(), unitB.GetCordinats())) return true;
+            }
 
         if (unitA.IndexBottom.Count > 0 && unitB.IndexBottom.Count > 0)
             if (ValidateShelter(Manager.Map[unitA.IndexBottom.First()].TerritoryInfo) && ValidateShelter(Manager.Map[unitB.IndexBottom.First()].TerritoryInfo))
+            {
                 if (IsCanSeeMakeRayCastDetect(Manager.Map[unitA.IndexBottom.First()].GetCordinats(), Manager.Map[unitB.IndexBottom.First()].GetCordinats())) return true;
-        
+                if (IsCanSeeMakeRayCastDetect(Manager.Map[unitA.IndexBottom.First()].GetCordinats(), unitB.GetCordinats())) return true;
+            }
+
         if (unitA.IndexFront.Count > 0 && unitB.IndexFront.Count > 0)
             if (ValidateShelter(Manager.Map[unitA.IndexFront.First()].TerritoryInfo) && ValidateShelter(Manager.Map[unitB.IndexFront.First()].TerritoryInfo))
+            {
                 if (IsCanSeeMakeRayCastDetect(Manager.Map[unitA.IndexFront.First()].GetCordinats(), Manager.Map[unitB.IndexFront.First()].GetCordinats())) return true;
-        
+                if (IsCanSeeMakeRayCastDetect(Manager.Map[unitA.IndexFront.First()].GetCordinats(), unitB.GetCordinats())) return true;
+            }
+
         // If all rays are blocked, targeting is impossible
         return false;
     }

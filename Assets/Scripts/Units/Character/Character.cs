@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Character : Unit
 {
@@ -83,6 +84,7 @@ public class Character : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Character;
 
         Manager.StatusMain.OnStatusChange += OnStatusChange;
+        Manager.TurnManager.RoundBegin += OnRoundBegin;
     }
 
     public void GiveEnergy(int countHit, Element element)
@@ -105,6 +107,12 @@ public class Character : Unit
 
         Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath); //
         Animator.GetComponentInChildren<GunModel>().Init(); //
+    }
+
+    public void OnRoundBegin()
+    {
+        ActionsLeft = 2;
+        DecreaseCooldownAbilities();
     }
 
     private void OnMouseEnter()
@@ -219,6 +227,7 @@ public class Character : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set character's block to air
 
         Manager.StatisticsUtil.SoldierDeathCount++;
+        Manager.TurnManager.RoundBegin -= OnRoundBegin;
     }
 
     private void OnDisable()
@@ -233,6 +242,7 @@ public class Character : Unit
         OnDeselected -= Manager.MovementManager.OnCharacterDeselect;
 
         Manager.StatusMain.OnStatusChange -= OnStatusChange;
+        Manager.TurnManager.RoundBegin -= OnRoundBegin;
 
     }
 }

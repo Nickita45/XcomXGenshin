@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,8 @@ public class TurnManager : MonoBehaviour
     // which is often being modified.
     private Character _selectedCharacter;
     public Character SelectedCharacter => _selectedCharacter;
+
+    public Action RoundBegin, EntityTurnBegin, PlayerTurnBegin, PlayerTurnEnd, EnemyTurnBegin, EnemyTurnEnd, RoundEnd;
 
     public List<Unit> UnitOverwatched { get; private set; }
 
@@ -117,16 +120,17 @@ public class TurnManager : MonoBehaviour
         // Remove overwatch from all characters
         UnitOverwatched.RemoveAll(unit => unit is Character);
 
+        RoundBegin?.Invoke();
         // Restore actions
-        foreach (Character character in Manager.Map.Characters.GetList) { 
+        /*foreach (Character character in Manager.Map.Characters.GetList) { 
             character.ActionsLeft = 2;
             character.DecreaseCooldownAbilities();
-        }
-        foreach (Enemy enemy in Manager.Map.Enemies.GetList) { enemy.ActionsLeft = enemy.Stats.BaseActions(); }
-        foreach (Entity entity in Manager.Map.Entities.GetList) { entity.LifeTimerDecrease(); }
+        }*/
+        //foreach (Enemy enemy in Manager.Map.Enemies.GetList) { enemy.ActionsLeft = enemy.Stats.BaseActions(); }
+        //foreach (Entity entity in Manager.Map.Entities.GetList) { entity.LifeTimerDecrease(); }
 
         // Trigger modifiers on begin round
-        foreach (Unit unit in Manager.Map.GetAllUnits())
+        foreach (Unit unit in Manager.Map.GetAllUnits()) 
         {
             if (unit.Modifiers == null) continue;
 
@@ -140,15 +144,17 @@ public class TurnManager : MonoBehaviour
 
     public void BeginEntityTurn()
     {
-        foreach (Entity entity in Manager.Map.Entities.GetList)
+        EntityTurnBegin?.Invoke();
+        /*foreach (Entity entity in Manager.Map.Entities.GetList)
         {
             entity.Activate();
-        }
+        }*/
     }
 
     public void BeginPlayerTurn()
     {
         Debug.Log("Begin turn");
+        PlayerTurnBegin?.Invoke();
 
         _characters.AddRange(Manager.Map.Characters.GetList);
         if (_characters.Count > 0) SelectCharacter(_characters[0]);
@@ -198,6 +204,7 @@ public class TurnManager : MonoBehaviour
     private IEnumerator EndPlayerTurn()
     {
         Debug.Log("End turn");
+        PlayerTurnEnd?.Invoke();
 
         yield return new WaitForSeconds(_secondsEndTurn);
         yield return StartCoroutine(MakeEnemyTurn());
@@ -205,6 +212,7 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator MakeEnemyTurn()
     {
+        EnemyTurnBegin?.Invoke();
         _menuManager.SetPanelEnemy(true);
         UnitOverwatched.RemoveAll(unit => unit is Enemy);
 
@@ -222,11 +230,13 @@ public class TurnManager : MonoBehaviour
             }
         }
         _menuManager.SetPanelEnemy(false);
+        EnemyTurnEnd?.Invoke();
         yield return StartCoroutine(EndRound());
     }
 
     private IEnumerator EndRound()
     {
+        RoundEnd?.Invoke();
         // Trigger modifiers on end round
         foreach (Unit unit in Manager.Map.GetAllUnits())
         {

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Enemy : Unit
 {
@@ -61,6 +62,7 @@ public class Enemy : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Character; //set actual block type on character tyoe
 
         Manager.StatusMain.OnStatusChange += OnStatusChange;
+        Manager.TurnManager.RoundBegin += OnRoundBegin;
 
         _enemyAI.Init(this);
         _enemyAI.OnSpawn();
@@ -98,6 +100,10 @@ public class Enemy : Unit
 
         if (_actionsLeft > 0) yield return StartCoroutine(_enemyAI.MakeTurn());
     }
+    private void OnRoundBegin()
+    {
+        ActionsLeft = Stats.BaseActions();
+    }
 
     public override void Kill()
     {
@@ -113,6 +119,14 @@ public class Enemy : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set his block type on air
 
         Manager.StatisticsUtil.EnemiesDeathCount++;
+        Manager.TurnManager.RoundBegin -= OnRoundBegin;
+
+    }
+
+    private void OnDisable()
+    {
+        Manager.TurnManager.RoundBegin -= OnRoundBegin;
+        Manager.StatusMain.OnStatusChange -= OnStatusChange;
     }
 
     private void OnDestroy()

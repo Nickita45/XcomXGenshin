@@ -1,7 +1,7 @@
 {
     "characterName": "Diluc",
     "characterSpeed": 3.0,
-    "characterMoveDistance": 5,
+    "characterMoveDistance": 15,
     "characterRangedTargetDistance": 10.0,
     "characterBaseAim": 55,
     "characterBaseHealth": 6,

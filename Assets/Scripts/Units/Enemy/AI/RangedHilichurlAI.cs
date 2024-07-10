@@ -54,6 +54,7 @@ public class RangedHilichurlAI : EnemyAI
                 _enemy.ActionsLeft -= 2;
                 yield return StartCoroutine(Attack(characters.Where(n => n is Character).Select(n => (Character)n).OrderByDescending(ch =>
                 AimUtils.CalculateHitChance(_enemy.ActualTerritory, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimPercent()).percent).First())); //slow?
+                Manager.StatusMain.SetStatusWaiting();
             }
         }
         else
