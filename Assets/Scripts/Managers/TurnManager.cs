@@ -19,7 +19,7 @@ public class TurnManager : MonoBehaviour
     private Character _selectedCharacter;
     public Character SelectedCharacter => _selectedCharacter;
 
-    public Action RoundBegin, EntityTurnBegin, PlayerTurnBegin, PlayerTurnEnd, EnemyTurnBegin, EnemyTurnEnd, RoundEnd;
+    public Action RoundBeginEvent, EntityTurnBeginEvenet, PlayerTurnBeginEvent, PlayerTurnEndEvent, EnemyTurnBeginEvent, EnemyTurnEndEvent, RoundEndEvent;
 
     public List<Unit> UnitOverwatched { get; private set; }
 
@@ -120,7 +120,7 @@ public class TurnManager : MonoBehaviour
         // Remove overwatch from all characters
         UnitOverwatched.RemoveAll(unit => unit is Character);
 
-        RoundBegin?.Invoke();
+        RoundBeginEvent?.Invoke();
         // Restore actions
         /*foreach (Character character in Manager.Map.Characters.GetList) { 
             character.ActionsLeft = 2;
@@ -144,7 +144,7 @@ public class TurnManager : MonoBehaviour
 
     public void BeginEntityTurn()
     {
-        EntityTurnBegin?.Invoke();
+        EntityTurnBeginEvenet?.Invoke();
         /*foreach (Entity entity in Manager.Map.Entities.GetList)
         {
             entity.Activate();
@@ -154,7 +154,7 @@ public class TurnManager : MonoBehaviour
     public void BeginPlayerTurn()
     {
         Debug.Log("Begin turn");
-        PlayerTurnBegin?.Invoke();
+        PlayerTurnBeginEvent?.Invoke();
 
         _characters.AddRange(Manager.Map.Characters.GetList);
         if (_characters.Count > 0) SelectCharacter(_characters[0]);
@@ -204,7 +204,7 @@ public class TurnManager : MonoBehaviour
     private IEnumerator EndPlayerTurn()
     {
         Debug.Log("End turn");
-        PlayerTurnEnd?.Invoke();
+        PlayerTurnEndEvent?.Invoke();
 
         yield return new WaitForSeconds(_secondsEndTurn);
         yield return StartCoroutine(MakeEnemyTurn());
@@ -212,7 +212,7 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator MakeEnemyTurn()
     {
-        EnemyTurnBegin?.Invoke();
+        EnemyTurnBeginEvent?.Invoke();
         _menuManager.SetPanelEnemy(true);
         UnitOverwatched.RemoveAll(unit => unit is Enemy);
 
@@ -230,13 +230,13 @@ public class TurnManager : MonoBehaviour
             }
         }
         _menuManager.SetPanelEnemy(false);
-        EnemyTurnEnd?.Invoke();
+        EnemyTurnEndEvent?.Invoke();
         yield return StartCoroutine(EndRound());
     }
 
     private IEnumerator EndRound()
     {
-        RoundEnd?.Invoke();
+        RoundEndEvent?.Invoke();
         // Trigger modifiers on end round
         foreach (Unit unit in Manager.Map.GetAllUnits())
         {

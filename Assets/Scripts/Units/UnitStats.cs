@@ -20,4 +20,12 @@ public abstract class UnitStats : MonoBehaviour
 
     public abstract string Name();
     public abstract string Description();
+
+}
+
+public interface IShooter
+{
+    int MinDmg();
+    int MaxDmg();
+    int RandomDmg();
 }

@@ -25,8 +25,8 @@ public abstract class Entity : Unit
     public override void Start()
     {
         Resurrect();
-        Manager.TurnManager.RoundBegin += OnRoundBegin;
-        Manager.TurnManager.EntityTurnBegin += Activate; //mb change in future
+        Manager.TurnManager.RoundBeginEvent += OnRoundBegin;
+        Manager.TurnManager.EntityTurnBeginEvenet += Activate; //mb change in future
     }
 
     public virtual void OnCreate(Unit creater, TerritroyReaded newPosition)
@@ -49,15 +49,15 @@ public abstract class Entity : Unit
         foreach (var col in gameObject.GetComponentsInChildren<CapsuleCollider>()) col.enabled = false;
         foreach (Transform obj in gameObject.transform) obj.gameObject.SetActive(false);
 
-        Manager.TurnManager.RoundBegin -= OnRoundBegin;
-        Manager.TurnManager.EntityTurnBegin -= Activate; //mb change in future
+        Manager.TurnManager.RoundBeginEvent -= OnRoundBegin;
+        Manager.TurnManager.EntityTurnBeginEvenet -= Activate; //mb change in future
 
     }
 
     private void OnDisable()
     {
-        Manager.TurnManager.RoundBegin -= OnRoundBegin;
-        Manager.TurnManager.EntityTurnBegin -= Activate; //mb change in future
+        Manager.TurnManager.RoundBeginEvent -= OnRoundBegin;
+        Manager.TurnManager.EntityTurnBeginEvenet -= Activate; //mb change in future
     }
 
 }

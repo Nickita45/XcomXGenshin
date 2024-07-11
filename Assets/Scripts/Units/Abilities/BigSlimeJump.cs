@@ -92,7 +92,7 @@ public class AbilityBigSlimeJump : Ability
             if (item is Enemy || item == unit)
                 continue;
 
-            int dmg = UnityEngine.Random.Range((unit as Enemy).Stats.MinDamage, (unit as Enemy).Stats.MaxDamage + 1);
+            int dmg = UnityEngine.Random.Range((unit.Stats as IShooter).MinDmg(), (unit.Stats as IShooter).MaxDmg() + 1);
             item.Health.MakeHit(dmg, _element, unit);
         }
         InAir = false;

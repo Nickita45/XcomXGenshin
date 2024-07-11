@@ -1,7 +1,7 @@
+using ChanceResistance;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using UnityEngine;
 
@@ -28,6 +28,8 @@ public abstract class Unit : MonoBehaviour
     protected ModifierList _modifiers;
     public virtual ModifierList Modifiers => _modifiers;
 
+    public UnitChanceResistance ChanceResistance { get; private set; }
+
     // The amount of action points, which can be used for moving (dashing) and abilities.
     public abstract int ActionsLeft { get; set; }
 
@@ -42,6 +44,7 @@ public abstract class Unit : MonoBehaviour
     public virtual void Start()
     {
         _modifiers = new ModifierList(this);
+        ChanceResistance = new UnitChanceResistance();
         Resurrect();
 
         Canvas?.UpdateHealthUI(Stats.MaxHP()); //update visual hp of unit

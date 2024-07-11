@@ -1,6 +1,7 @@
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class EnemyStats : UnitStats
+public class EnemyStats : UnitStats, IShooter
 {
     [SerializeField]
     private string _configEnemyName;
@@ -8,9 +9,6 @@ public class EnemyStats : UnitStats
     [SerializeField]
     private Sprite _icon;
     public Sprite Icon => _icon;
-
-    public int MinDamage => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMinAttackValue;
-    public int MaxDamage => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMaxAttackValue;
 
     public override int MaxHP() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyBaseHealth;
     public override int BaseAimPercent() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyBaseAim;
@@ -20,4 +18,8 @@ public class EnemyStats : UnitStats
     public override float VisionDistance() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyRangedTargetDistance;
     public override string Name() => _configEnemyName;
     public override string Description() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyDescription;
+
+    public int MinDmg() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMinAttackValue;
+    public int MaxDmg() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMaxAttackValue;
+    public int RandomDmg() => UnityEngine.Random.Range(MinDmg(), MaxDmg() + 1);
 }

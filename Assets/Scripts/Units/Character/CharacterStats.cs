@@ -1,6 +1,6 @@
 using System;
 
-public class CharacterStats : UnitStats
+public class CharacterStats : UnitStats, IShooter
 {
     //Config atributes
     public int Index { get; set; }
@@ -14,6 +14,12 @@ public class CharacterStats : UnitStats
     public override int BaseAimPercent() => ConfigurationManager.CharactersData[Index].characterBaseAim;
     public GunType Weapon => (GunType)ConfigurationManager.CharactersData[Index].characterWeapon;
     public override int BaseActions() => 2;
+
+    public int MinDmg() => ConfigurationManager.GlobalDataJson.typeGun[(int)Weapon].minHitValue;
+
+    public int MaxDmg() => ConfigurationManager.GlobalDataJson.typeGun[(int)Weapon].maxHitValue;
+
+    public int RandomDmg() => UnityEngine.Random.Range(MinDmg(), MaxDmg() + 1);
     public Element Element => (Element)Enum.Parse(typeof(Element), ConfigurationManager.CharactersData[Index].element);
     public AbilitiesList[] AbilitiesLists => ConfigurationManager.CharactersData[Index].abilities;
 }

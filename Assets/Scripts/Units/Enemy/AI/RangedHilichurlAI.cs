@@ -13,7 +13,8 @@ public class RangedHilichurlAI : EnemyAI
         (TerritroyReaded territory, float percent) minimum = (null, Int32.MinValue); //the optimal territory with itss procent optimational
         foreach (var item in allPaths) //calculations
         {
-            int procMakeHit = characters.Where(n => n is Character).Select(n => (Character)n).Sum(ch => AimUtils.CalculateHitChance(item.Key, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimPercent()).percent);
+            int procMakeHit = characters.Where(n => n is Character).Select(n => (Character)n)
+                .Sum(ch => AimUtils.CalculateHitChance(item.Key, ch.ActualTerritory, ch.Stats.Weapon, ch.Stats.BaseAimPercent()).percent);
             int procGetHit = characters.Where(n => n is Character).Select(n => (Character)n).Sum(ch => AimUtils.CalculateHitChance(ch.ActualTerritory, item.Key, GunType.Automatic, 50).percent); //???
             float proc = (2f * (100 - procGetHit) + 0.4f * procMakeHit) / (2f + 0.4f);
             if (proc > minimum.percent)

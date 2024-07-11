@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -84,7 +85,7 @@ public class Character : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Character;
 
         Manager.StatusMain.OnStatusChange += OnStatusChange;
-        Manager.TurnManager.RoundBegin += OnRoundBegin;
+        Manager.TurnManager.RoundBeginEvent += OnRoundBegin;
     }
 
     public void GiveEnergy(int countHit, Element element)
@@ -104,6 +105,8 @@ public class Character : Unit
         SetGunByIndex((int)Stats.Weapon); //set gun
 
         _abilities = AbilitiesHelper.GetAllAbilities(Stats.AbilitiesLists);
+        _abilities.RemoveAll(n => n is AbilityHunkerDown);
+        _abilities.Add(new AbilityHunkerDown(this));
 
         Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath); //
         Animator.GetComponentInChildren<GunModel>().Init(); //
@@ -227,7 +230,7 @@ public class Character : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set character's block to air
 
         Manager.StatisticsUtil.SoldierDeathCount++;
-        Manager.TurnManager.RoundBegin -= OnRoundBegin;
+        Manager.TurnManager.RoundBeginEvent -= OnRoundBegin;
     }
 
     private void OnDisable()
@@ -242,7 +245,7 @@ public class Character : Unit
         OnDeselected -= Manager.MovementManager.OnCharacterDeselect;
 
         Manager.StatusMain.OnStatusChange -= OnStatusChange;
-        Manager.TurnManager.RoundBegin -= OnRoundBegin;
+        Manager.TurnManager.RoundBeginEvent -= OnRoundBegin;
 
     }
 }

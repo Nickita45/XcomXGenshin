@@ -32,7 +32,7 @@ public class AbilityMeleeAttack : Ability
             targetUnit.StartCoroutine(targetUnit.Canvas.PanelShow(targetUnit.Canvas.PanelMiss));
         else
         {
-            int dmg = UnityEngine.Random.Range(((Enemy)unit).Stats.MinDamage, ((Enemy)unit).Stats.MaxDamage + 1);
+            int dmg = UnityEngine.Random.Range((unit.Stats as IShooter).MinDmg(), (unit.Stats as IShooter).MaxDmg() + 1);
             targetUnit.Health.MakeHit(dmg, _element, unit);
         }
 

@@ -9,10 +9,9 @@ public static class AimUtils
     public static int HIGHGROUNDPERCENT = ConfigurationManager.GlobalDataJson.bonusAimFromHighGround;
     public static int LOWGROUNDPERCENT = ConfigurationManager.GlobalDataJson.bonusAimFromLowGround;
 
-    public static (int percent, ShelterType status) CalculateHitChance(TerritroyReaded shooter, TerritroyReaded defender, GunType gun, int baseAim, params int[] parameters)
+    public static (int percent, ShelterType status) CalculateHitChance(TerritroyReaded shooter, TerritroyReaded defender, GunType gun, int baseAim)
     {
-        (CordinatesSide xSide, CordinatesSide zSide) side =
-            GetSidesFromShooterAndDefender(shooter, defender); //getting data on which side the opponent is relative to the shooter
+        ShelterType maxValue = GetMaxShelterType(shooter, defender);
 
         int groundPercent = 0;  //getting data on how high the opponent is relative to the shooter
         if (shooter.YPosition - defender.YPosition < 0)
@@ -20,12 +19,9 @@ public static class AimUtils
         else if (shooter.YPosition - defender.YPosition > 0)
             groundPercent = LOWGROUNDPERCENT;
 
-
-        //getting the type of maximum shelter
-        ShelterType maxValue = (ShelterType)Mathf.Max((int)GetShelterTypeByCordinateSide(defender, side.xSide), (int)GetShelterTypeByCordinateSide(defender, side.zSide));
-       
         //getting the result according to the formula
-        int result = baseAim + parameters.Sum() + GetPercentByType(maxValue) + groundPercent + GetPercentFromGunType(gun, (int)Mathf.Round(Vector3.Distance(defender.GetCordinats(), shooter.GetCordinats())));
+        int result = baseAim + GetPercentByType(maxValue) +
+            groundPercent + GetPercentFromGunType(gun, (int)Mathf.Round(Vector3.Distance(defender.GetCordinats(), shooter.GetCordinats())));
         return (Mathf.Min(Mathf.Max(result, 1), 100), maxValue);
     }
 
@@ -59,6 +55,18 @@ public static class AimUtils
         }
 
         return (xSide, zSide);
+    }
+
+    public static ShelterType GetMaxShelterType(TerritroyReaded shooter, TerritroyReaded defender)
+    {
+        //getting data on which side the opponent is relative to the shooter
+        (CordinatesSide xSide, CordinatesSide zSide) side =
+            GetSidesFromShooterAndDefender(shooter, defender);
+
+        //getting the type of maximum shelter
+        ShelterType maxValue = (ShelterType)Mathf.Max((int)GetShelterTypeByCordinateSide(defender, side.xSide), (int)GetShelterTypeByCordinateSide(defender, side.zSide));
+
+        return maxValue;
     }
 
     private static ShelterType GetShelterTypeByCordinateSide(TerritroyReaded teritory, CordinatesSide cordinatesSide)

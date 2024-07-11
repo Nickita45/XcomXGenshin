@@ -20,10 +20,16 @@ public class ShootManager : MonoBehaviour
     {
         Transform firePoint = shooter.GetBulletSpawner(_nameBulletSpawner); //position for spawning bullets
 
-        Debug.Log(defender.Stats.Name() + " " + defender.ActualTerritory + " " + shooter.Stats.Name() + " " + shooter.ActualTerritory);
+        int dmg = (shooter.Stats as IShooter).RandomDmg();
+
         (int percent, _) =
-        // Manager.map for enemy?
             AimUtils.CalculateHitChance(shooter.ActualTerritory, defender.ActualTerritory, actualGun, shooter.Stats.BaseAimPercent()); //get chance
+
+        Debug.Log(shooter.Stats.Name() + " " + defender.Stats.Name() + " Before " + percent + " " + dmg);
+
+        defender.ChanceResistance.GetResistance(shooter, defender, actualGun, element, ref percent, ref dmg);
+
+        Debug.Log(shooter.Stats.Name() + " " + defender.Stats.Name() + " => " + percent + " " + dmg);
 
         var result = RandomExtensions.GetChance(percent) || defender is Entity; //mb change in future
         //Debug.Log($"{shooter.Stats.Name()} has next {percent} to hit and got {result}");
@@ -49,19 +55,8 @@ public class ShootManager : MonoBehaviour
         if (!result)
             StartCoroutine(defender.Canvas.PanelShow(defender.Canvas.PanelMiss, 4)); //show panel miss
         else
-        {
-            int dmg; //getting dmg
-            if (shooter is Enemy enemy)
-            {
-                dmg = enemy.GetRandomDmg();
-            }
-            else
-            {
-                dmg = UnityEngine.Random.Range(ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].minHitValue, ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].maxHitValue + 1);
-            }
-
             defender.Health.MakeHit(dmg, element, shooter);
-        }
+        
         yield return new WaitForSeconds(ConfigurationManager.GlobalDataJson.timeAfterShooting);
     }
 

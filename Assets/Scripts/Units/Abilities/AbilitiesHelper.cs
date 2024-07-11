@@ -33,7 +33,6 @@ public class AbilitiesHelper
         var cls = GetAbilityType(abilityName);
         return (Ability)CreateInstance(cls, new object[] { ability });
     }
-
     private static Type GetAbilityType(string abilityName)
     {
         var cls = Type.GetType(abilityName);
