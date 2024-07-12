@@ -1,3 +1,4 @@
+using AbilitiesFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -104,7 +105,7 @@ public class Character : Unit
 
         SetGunByIndex((int)Stats.Weapon); //set gun
 
-        _abilities = AbilitiesHelper.GetAllAbilities(Stats.AbilitiesLists);
+        _abilities = AbilitiesFactoryCreator.GetAllAbilities(Stats.AbilitiesLists, this);
         _abilities.RemoveAll(n => n is AbilityHunkerDown);
         _abilities.Add(new AbilityHunkerDown(this));
 

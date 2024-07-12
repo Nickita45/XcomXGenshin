@@ -9,9 +9,7 @@ public class AbilityHunkerDown : Ability
     {
         _creator = creator;
     }
-    public AbilityHunkerDown()
-    {
-    }
+
     public override string AbilityName => "Hunker Down";
     public override string Description => "Hunker Down Description";
     public override int ActionCost => 2;

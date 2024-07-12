@@ -9,7 +9,7 @@ public class AbillityAlbedoUltimate : AbilityUltimate, IAbilityArea
     private int _abilityRange = 5;
     private int _dealDmg = 2;
     private int _dealDmgFlower = 1;
-    private AbilityElementalSkill _albedoFlowerSkill;
+    private AbilityAlbedoElementalSkill _albedoFlowerSkill;
 
     public override string AbilityName => "Albedo Ultimate";
     public override string Description => "Albedo ultimate";
@@ -27,7 +27,7 @@ public class AbillityAlbedoUltimate : AbilityUltimate, IAbilityArea
 
     public AbillityAlbedoUltimate(Ability albedoFlowerSkill)
     {
-        _albedoFlowerSkill = albedoFlowerSkill as AbilityElementalSkill;
+        _albedoFlowerSkill = albedoFlowerSkill as AbilityAlbedoElementalSkill;
     }
 
     public void SummonArea()

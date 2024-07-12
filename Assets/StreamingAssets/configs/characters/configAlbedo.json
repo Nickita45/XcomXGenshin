@@ -18,21 +18,17 @@
             "element": "Geo"
         },
         {
-            "name": "AbilityOverwatch",
-            "element": "Physical"
+            "name": "AbilityOverwatch"
         },
         {
-            "name": "AbilityHunkerDown",
-            "element": "Physical"
+            "name": "AbilityHunkerDown"
         },
         {
-            "name": "AbilityElementalSkill",
-            "element": "Geo"
+          "name": "AbilityAlbedoElementalSkill",
+          "element": "Geo"
         },
         {
-            "name": "AbillityAlbedoUltimate",
-            "element": "Geo",
-            "childFunction": "AbilityElementalSkill"
+            "name": "AbillityAlbedoUltimate"
         }
     ]
 }

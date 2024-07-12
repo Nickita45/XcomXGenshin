@@ -2,11 +2,11 @@ using System.Collections;
 using UnityEngine;
 
 // A placeholder for the elemental skills that would be added in future
-public class AbilityElementalSkill : Ability, IAbilitySummon, IAbilityArea
+public class AbilityAlbedoElementalSkill : Ability, IAbilitySummon, IAbilityArea
 {
     private Element _element;
     private AlbedoFlowerEntity _entity;
-    public AbilityElementalSkill(Element element) //mb not nessary?
+    public AbilityAlbedoElementalSkill(Element element) //mb not nessary?
     {
         _element = element;
     }
