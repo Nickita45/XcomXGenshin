@@ -74,7 +74,7 @@ public class DeReadingMap : MonoBehaviour
                 enemy.SetStats(additionalObj.GetComponent<EnemyStats>());
 
                 // Connect AI
-                enemy.SetAI(additionalObj.GetComponent<EnemyAI>());
+                enemy.SetAI(additionalObj.GetComponent<Enemies.AI.EnemyAI>());
 
                 // Connect animation
                 Transform avatar = additionalObj.transform.GetChild(0);

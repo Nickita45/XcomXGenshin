@@ -123,47 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!21 &2139199
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_ShaderGraph GrassUnlitBasic(Clone)
-  m_Shader: {fileID: -6465566751694194690, guid: 42afa9c08d1fb0146b3386c0778d5eb6, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _Blend: 0
-    - _BlendMult: 0
-    - _BlendOff: 0
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &8974369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1227,6 +1186,18 @@ PrefabInstance:
     - target: {fileID: 5161656484826993752, guid: 349663f5f2cf4c74f8ffc1fe4762ae7c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431493880899528975, guid: 349663f5f2cf4c74f8ffc1fe4762ae7c, type: 3}
+      propertyPath: m_Size.y
+      value: 0.055800695
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431493880899528975, guid: 349663f5f2cf4c74f8ffc1fe4762ae7c, type: 3}
+      propertyPath: m_Center.y
+      value: 0.02741837
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431493880899528975, guid: 349663f5f2cf4c74f8ffc1fe4762ae7c, type: 3}
+      propertyPath: m_Center.z
+      value: -0.000035279987
       objectReference: {fileID: 0}
     - target: {fileID: 5542299007348641506, guid: 349663f5f2cf4c74f8ffc1fe4762ae7c, type: 3}
       propertyPath: m_RootOrder
@@ -11345,47 +11316,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 18, z: 4}
   m_Center: {x: 0.0125, y: 9, z: 0}
---- !u!21 &873405793
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_ShaderGraph GrassUnlitBasic(Clone)
-  m_Shader: {fileID: -6465566751694194690, guid: 42afa9c08d1fb0146b3386c0778d5eb6, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _Blend: 0
-    - _BlendMult: 0
-    - _BlendOff: 0
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &875391875
 GameObject:
   m_ObjectHideFlags: 0
@@ -11666,7 +11596,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887326194}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.5, y: 3, z: 9.5}
+  m_LocalPosition: {x: -6.5, y: 3.5, z: 9.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11687,7 +11617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: RANDOM_ENEMY
+  _pathPrefabAdditional: Prefabs/Enemies/HilichurlStayRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -11865,6 +11795,47 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8501538861971258099, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
   m_PrefabInstance: {fileID: 920294431}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &923510234
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_ShaderGraph GrassUnlitBasic(Clone)
+  m_Shader: {fileID: -6465566751694194690, guid: 42afa9c08d1fb0146b3386c0778d5eb6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Blend: 0
+    - _BlendMult: 0
+    - _BlendOff: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &939744563
 GameObject:
   m_ObjectHideFlags: 0
@@ -15536,7 +15507,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219819028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.5, y: 3, z: 2.5}
+  m_LocalPosition: {x: -8.5, y: 3.5, z: 2.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15557,7 +15528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 6
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
-  _pathPrefabAdditional: RANDOM_ENEMY
+  _pathPrefabAdditional: Prefabs/Enemies/HilichurlStayRanger
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0
@@ -19723,15 +19694,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5431493880899528975, guid: 349663f5f2cf4c74f8ffc1fe4762ae7c, type: 3}
       propertyPath: m_Size.y
-      value: 0.060795672
+      value: 0.05348935
       objectReference: {fileID: 0}
     - target: {fileID: 5431493880899528975, guid: 349663f5f2cf4c74f8ffc1fe4762ae7c, type: 3}
       propertyPath: m_Center.y
-      value: 0.032210834
+      value: 0.028557668
       objectReference: {fileID: 0}
     - target: {fileID: 5431493880899528975, guid: 349663f5f2cf4c74f8ffc1fe4762ae7c, type: 3}
       propertyPath: m_Center.z
-      value: -0.000035279987
+      value: -0.00003527999
       objectReference: {fileID: 0}
     - target: {fileID: 5542299007348641506, guid: 349663f5f2cf4c74f8ffc1fe4762ae7c, type: 3}
       propertyPath: m_RootOrder
@@ -23026,6 +22997,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4304063804754440837, guid: a351fe00e13b3c847a891758b9ebfd25, type: 3}
   m_PrefabInstance: {fileID: 1896407962}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1905044889
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_ShaderGraph GrassUnlitBasic(Clone)
+  m_Shader: {fileID: -6465566751694194690, guid: 42afa9c08d1fb0146b3386c0778d5eb6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Blend: 0
+    - _BlendMult: 0
+    - _BlendOff: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1001 &1917880927
 PrefabInstance:
   m_ObjectHideFlags: 0

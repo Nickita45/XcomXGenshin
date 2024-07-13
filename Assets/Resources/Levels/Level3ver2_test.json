@@ -23304,12 +23304,12 @@
         "-5.5_1.5_11.5",
         "-6.5_1.5_11.5",
         "-5.5_2.5_11.5",
-        "-6.5_2.5_10.5"
+        "-6.5_2.5_11.5"
       ],
       "IndexUp": [
         "-5.5_3.5_9.5",
         "-5.5_3.5_10.5",
-        "-6.5_2.5_9.5",
+        "-6.5_3.5_9.5",
         "-6.5_3.5_10.5"
       ],
       "IndexDown": [
@@ -23328,7 +23328,7 @@
         "-7.5_0.5_10.5",
         "-7.5_1.5_9.5",
         "-7.5_1.5_10.5",
-        "-6.5_2.5_9.5",
+        "-7.5_2.5_9.5",
         "-7.5_2.5_10.5"
       ],
       "Index": "-6.02206_-0.05_9.94",
@@ -25841,12 +25841,12 @@
         "-9.5_0.5_3.5",
         "-8.5_1.5_3.5",
         "-9.5_1.5_3.5",
-        "-8.5_2.5_2.5",
+        "-8.5_2.5_3.5",
         "-9.5_2.5_3.5"
       ],
       "IndexUp": [
         "-8.5_3.5_1.5",
-        "-8.5_2.5_2.5",
+        "-8.5_3.5_2.5",
         "-9.5_3.5_1.5",
         "-9.5_3.5_2.5"
       ],
@@ -25867,7 +25867,7 @@
         "-10.5_1.5_1.5",
         "-10.5_1.5_2.5",
         "-10.5_2.5_1.5",
-        "-9.5_2.5_2.5"
+        "-10.5_2.5_2.5"
       ],
       "Index": "-8.970735_0_1.818223",
       "PathPrefabBase": "Prefabs/Level2/hilichurl-tower",
@@ -82886,38 +82886,6 @@
         "Front": 0
       }
     },
-    "-6.5_2.5_10.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -6.5,
-      "YPosition": 2.5,
-      "ZPosition": 10.5,
-      "XRotation": 0.0,
-      "YRotation": 0.0,
-      "ZRotation": 0.0,
-      "WRotation": 1.0,
-      "IndexLeft": [
-        "-6.02206_-0.05_9.94"
-      ],
-      "IndexRight": [
-        "-6.5_2.5_11.5"
-      ],
-      "IndexUp": [],
-      "IndexDown": [],
-      "IndexFront": [],
-      "IndexBottom": [],
-      "Index": "-6.5_2.5_10.5",
-      "PathPrefabBase": null,
-      "PathPrefabAdditional": null,
-      "TerritoryInfo": 2,
-      "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
-      }
-    },
     "-6.5_2.5_11.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -82930,7 +82898,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-6.5_2.5_10.5"
+        "-6.02206_-0.05_9.94"
       ],
       "IndexRight": [
         "-6.5_2.5_12.5"
@@ -84024,7 +83992,7 @@
         "-7.5_1.5_9.5"
       ],
       "IndexFront": [
-        "-6.5_2.5_9.5"
+        "-6.02206_-0.05_9.94"
       ],
       "IndexBottom": [
         "-8.5_2.5_9.5"
@@ -84796,42 +84764,6 @@
         "Front": 0
       }
     },
-    "-8.5_2.5_2.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -8.5,
-      "YPosition": 2.5,
-      "ZPosition": 2.5,
-      "XRotation": 0.0,
-      "YRotation": 0.0,
-      "ZRotation": 0.0,
-      "WRotation": 1.0,
-      "IndexLeft": [
-        "-8.970735_0_1.818223"
-      ],
-      "IndexRight": [
-        "-8.5_2.5_3.5"
-      ],
-      "IndexUp": [
-        "-8.5_3.5_2.5"
-      ],
-      "IndexDown": [
-        "-8.970735_0_1.818223"
-      ],
-      "IndexFront": [],
-      "IndexBottom": [],
-      "Index": "-8.5_2.5_2.5",
-      "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
-      "PathPrefabAdditional": "RANDOM_ENEMY",
-      "TerritoryInfo": 6,
-      "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
-      }
-    },
     "-8.5_2.5_3.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -84844,7 +84776,7 @@
       "ZRotation": 0.0,
       "WRotation": 1.0,
       "IndexLeft": [
-        "-8.5_2.5_2.5"
+        "-8.970735_0_1.818223"
       ],
       "IndexRight": [
         "-8.5_2.5_4.5"
@@ -86964,7 +86896,7 @@
         "-10.5_1.5_2.5"
       ],
       "IndexFront": [
-        "-9.5_2.5_2.5"
+        "-8.970735_0_1.818223"
       ],
       "IndexBottom": [
         "-11.5_2.5_2.5"
@@ -115631,7 +115563,7 @@
         "-6.5_4.5_9.5"
       ],
       "IndexDown": [
-        "-6.5_2.5_9.5"
+        "-6.02206_-0.05_9.94"
       ],
       "IndexFront": [
         "-5.5_3.5_9.5"
@@ -115641,7 +115573,7 @@
       ],
       "Index": "-6.5_3.5_9.5",
       "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
-      "PathPrefabAdditional": "RANDOM_ENEMY",
+      "PathPrefabAdditional": "Prefabs/Enemies/HilichurlStayRanger",
       "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,
@@ -117743,7 +117675,7 @@
         "-8.5_4.5_2.5"
       ],
       "IndexDown": [
-        "-8.5_2.5_2.5"
+        "-8.970735_0_1.818223"
       ],
       "IndexFront": [
         "-7.5_3.5_2.5"
@@ -117753,7 +117685,7 @@
       ],
       "Index": "-8.5_3.5_2.5",
       "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
-      "PathPrefabAdditional": "RANDOM_ENEMY",
+      "PathPrefabAdditional": "Prefabs/Enemies/HilichurlStayRanger",
       "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,
@@ -159342,38 +159274,6 @@
         "Front": 0
       }
     },
-    "-9.5_2.5_2.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -9.5,
-      "YPosition": 2.5,
-      "ZPosition": 2.5,
-      "XRotation": 0.0,
-      "YRotation": 0.0,
-      "ZRotation": 0.0,
-      "WRotation": 1.0,
-      "IndexLeft": [],
-      "IndexRight": [],
-      "IndexUp": [],
-      "IndexDown": [],
-      "IndexFront": [
-        "-8.970735_0_1.818223"
-      ],
-      "IndexBottom": [
-        "-10.5_2.5_2.5"
-      ],
-      "Index": "-9.5_2.5_2.5",
-      "PathPrefabBase": null,
-      "PathPrefabAdditional": null,
-      "TerritoryInfo": 2,
-      "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
-      }
-    },
     "7.5_2.5_9.5": {
       "XSize": 0.5,
       "YSize": 0.5,
@@ -159431,42 +159331,6 @@
       "PathPrefabBase": null,
       "PathPrefabAdditional": null,
       "TerritoryInfo": 2,
-      "ShelterType": {
-        "Left": 0,
-        "Right": 0,
-        "Bottom": 0,
-        "Front": 0
-      }
-    },
-    "-6.5_2.5_9.5": {
-      "XSize": 0.5,
-      "YSize": 0.5,
-      "ZSize": 0.5,
-      "XPosition": -6.5,
-      "YPosition": 2.5,
-      "ZPosition": 9.5,
-      "XRotation": 0.0,
-      "YRotation": 0.0,
-      "ZRotation": 0.0,
-      "WRotation": 1.0,
-      "IndexLeft": [],
-      "IndexRight": [],
-      "IndexUp": [
-        "-6.5_3.5_9.5"
-      ],
-      "IndexDown": [
-        "-6.02206_-0.05_9.94"
-      ],
-      "IndexFront": [
-        "-6.02206_-0.05_9.94"
-      ],
-      "IndexBottom": [
-        "-7.5_2.5_9.5"
-      ],
-      "Index": "-6.5_2.5_9.5",
-      "PathPrefabBase": "Prefabs/Enemies/EnemyBase",
-      "PathPrefabAdditional": "RANDOM_ENEMY",
-      "TerritoryInfo": 6,
       "ShelterType": {
         "Left": 0,
         "Right": 0,
