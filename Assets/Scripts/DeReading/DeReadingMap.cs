@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Linq;
 using UnityEngine;
 
 public class DeReadingMap : MonoBehaviour
@@ -87,6 +88,15 @@ public class DeReadingMap : MonoBehaviour
             {
                 Debug.LogError("Unknown Enemy: " + item.PathPrefabAdditional);
             }
+        }
+
+        if (territoryInfo.Type == TerritoryType.Ground)
+        {
+            foreach (Transform mount in obj.transform)
+            {
+                if (mount.tag == "Mountains")
+                    mount.gameObject.SetActive(true);
+            } 
         }
 
         return obj;
