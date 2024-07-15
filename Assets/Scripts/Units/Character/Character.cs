@@ -106,8 +106,6 @@ public class Character : Unit
         SetGunByIndex((int)Stats.Weapon); //set gun
 
         _abilities = AbilitiesFactoryCreator.GetAllAbilities(Stats.AbilitiesLists, this);
-        _abilities.RemoveAll(n => n is AbilityHunkerDown);
-        _abilities.Add(new AbilityHunkerDown(this));
 
         Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath); //
         Animator.GetComponentInChildren<GunModel>().Init(); //

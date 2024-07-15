@@ -1,7 +1,7 @@
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class EnemyStats : UnitStats, IShooter
+public class EnemyStats : UnitStats, IShooter, IMelee
 {
     [SerializeField]
     private string _configEnemyName;
@@ -19,7 +19,16 @@ public class EnemyStats : UnitStats, IShooter
     public override string Name() => _configEnemyName;
     public override string Description() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyDescription;
 
-    public int MinDmg() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMinAttackValue;
-    public int MaxDmg() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMaxAttackValue;
-    public int RandomDmg() => UnityEngine.Random.Range(MinDmg(), MaxDmg() + 1);
+    public int MinShootDmg() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMinAttackValue;
+    public int MaxShootDmg() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMaxAttackValue;
+    public int RandomShootDmg() => UnityEngine.Random.Range(MinShootDmg(), MaxShootDmg() + 1);
+
+
+    //in future to subclass, something like EnemyMeleeStats
+    public int MinMeleeDmg() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMinAttackValue;
+
+    public int MaxMeleeDmg() => ConfigurationManager.EnemiesDataJson[_configEnemyName].enemyMinAttackValue;
+
+    public int RandomMeleeDmg() => UnityEngine.Random.Range(MinMeleeDmg(), MaxMeleeDmg() + 1);
+    public int BaseMeleeAim() => BaseAimPercent();
 }

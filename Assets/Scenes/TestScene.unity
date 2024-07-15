@@ -6658,6 +6658,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: e3066ed0bfce2f24a95ee2ba70f3d0ef, type: 3}
   - name: ElectroShoot
     sprite: {fileID: 21300000, guid: e33cef10ffbd8894590e8dd84e7e67e5, type: 3}
+  - name: Melee Attack
+    sprite: {fileID: 21300000, guid: 8c0a908444990de4f988df4528cfb19a, type: 3}
 --- !u!1 &1775152536
 GameObject:
   m_ObjectHideFlags: 0

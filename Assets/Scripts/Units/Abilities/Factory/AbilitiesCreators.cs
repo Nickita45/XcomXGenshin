@@ -32,4 +32,9 @@ namespace AbilitiesFactory
         public Ability Create(AbilitiesCreateData data, List<Ability> abilities) => new AbillityAlbedoUltimate(abilities.First(n => n is AbilityAlbedoElementalSkill));
     }
 
+    public class AbillityAlbedoMeleeAtackCreator : IAbilityCreator
+    {
+        public Ability Create(AbilitiesCreateData data, List<Ability> abilities) => new AbilityMeleeAttack(data.Element, data.Creator);
+    }
+
 }

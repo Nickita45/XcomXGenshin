@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace AbilitiesFactory
@@ -13,6 +14,7 @@ namespace AbilitiesFactory
             {nameof(AbilityHunkerDown), new HunkerDownCreator() },
             {nameof(AbilityAlbedoElementalSkill), new AlbedoElementalSkillCreator() },
             {nameof(AbillityAlbedoUltimate), new AbillityAlbedoUltimateCreator() },
+            {nameof(AbilityMeleeAttack), new AbillityAlbedoMeleeAtackCreator() },
         };
 
         public static List<Ability> GetAllAbilities(AbilitiesList[] abilitiesLists, Unit creator)
@@ -20,8 +22,13 @@ namespace AbilitiesFactory
             var _abilities = new List<Ability>();
             foreach (AbilitiesList list in abilitiesLists)
             {
-                Enum.TryParse(list.element, out Element element);
+                Element element = Element.Physical;
 
+                if (!string.IsNullOrEmpty(list.element))
+                    element = Enum.Parse<Element>(list.element);
+
+                Debug.Log(list.name + " " + list.element);
+                
                 Ability ability = _generator[list.name].Create(new AbilitiesCreateData(
                         element: element,
                         creator: creator),

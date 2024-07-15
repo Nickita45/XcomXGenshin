@@ -1,6 +1,6 @@
 using System;
 
-public class CharacterStats : UnitStats, IShooter
+public class CharacterStats : UnitStats, IShooter, IMelee
 {
     //Config atributes
     public int Index { get; set; }
@@ -15,11 +15,16 @@ public class CharacterStats : UnitStats, IShooter
     public GunType Weapon => (GunType)ConfigurationManager.CharactersData[Index].characterWeapon;
     public override int BaseActions() => 2;
 
-    public int MinDmg() => ConfigurationManager.GlobalDataJson.typeGun[(int)Weapon].minHitValue;
+    public int MinShootDmg() => ConfigurationManager.GlobalDataJson.typeGun[(int)Weapon].minHitValue;
 
-    public int MaxDmg() => ConfigurationManager.GlobalDataJson.typeGun[(int)Weapon].maxHitValue;
+    public int MaxShootDmg() => ConfigurationManager.GlobalDataJson.typeGun[(int)Weapon].maxHitValue;
 
-    public int RandomDmg() => UnityEngine.Random.Range(MinDmg(), MaxDmg() + 1);
+    public int RandomShootDmg() => UnityEngine.Random.Range(MinShootDmg(), MaxShootDmg() + 1);
+    public int MinMeleeDmg() => ConfigurationManager.CharactersData[Index].characterMinMeleeDmg;
+    public int MaxMeleeDmg() => ConfigurationManager.CharactersData[Index].characterMaxMeleeDmg;
+    public int RandomMeleeDmg() => UnityEngine.Random.Range(MinMeleeDmg(), MaxMeleeDmg() + 1);
+    public int BaseMeleeAim() => ConfigurationManager.CharactersData[Index].characterBaseAimMelee;
+
     public Element Element => (Element)Enum.Parse(typeof(Element), ConfigurationManager.CharactersData[Index].element);
     public AbilitiesList[] AbilitiesLists => ConfigurationManager.CharactersData[Index].abilities;
 }

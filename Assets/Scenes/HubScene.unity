@@ -4857,7 +4857,6 @@ GameObject:
   - component: {fileID: 1540133107}
   - component: {fileID: 1540133106}
   - component: {fileID: 1540133108}
-  - component: {fileID: 1540133109}
   m_Layer: 0
   m_Name: HubData
   m_TagString: Untagged
@@ -4904,7 +4903,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653f8c08e5056ac4bbc7382bff990625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystemFactory: {fileID: 1540133109}
   charactersPoolID: 00000000010000000200000003000000
   enemiesPaths:
   - Prefabs/Enemies/HilichurlRanger
@@ -4916,22 +4914,6 @@ MonoBehaviour:
   - Prefabs/Enemies/SlimeAnemo
   - Prefabs/Enemies/SlimeGeo
   - Prefabs/Enemies/SlimeBigElectro
---- !u!114 &1540133109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540133105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f62327c986061074c94c40063d72e87d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerLifeNonLoopingParticles: 3
-  _albedoFlower: {fileID: 3484803225924301149, guid: deb1455cf1d6ef34092bbbd88913296b, type: 3}
-  _slimeJump: {fileID: 8085837018956487246, guid: 35f597f385a54be468bdb5054addb553, type: 3}
-  _albedoUltimate: {fileID: 8523540387209099084, guid: eb5116aba0a70e94996450015906e1aa, type: 3}
 --- !u!1 &1591048338
 GameObject:
   m_ObjectHideFlags: 0

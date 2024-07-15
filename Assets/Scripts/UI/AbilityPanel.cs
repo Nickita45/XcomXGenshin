@@ -82,6 +82,9 @@ public class AbilityPanel : MonoBehaviour
     // Peforms the camera enter transition.
     public void SelectAbility(AbilityIcon icon)
     {
+        if (_selected == null)
+            Manager.EnemyPanel.SaveActualVisibleEnemyList();
+
         ClearSelection();
 
         Color tmpColor = Color.blue;
@@ -94,8 +97,14 @@ public class AbilityPanel : MonoBehaviour
         _confirm.interactable = icon.AnyAvailableTargets;
 
         _selected = icon;
+        if(_selected.Ability is IEnemyList enemyList)
+            Manager.EnemyPanel.UpdateVisibleEnemies(enemyList.GetVisibleEnemies());
+        else
+            Manager.EnemyPanel.ReturnToSavedVisibleEnemyList();
+
         Manager.StatusMain.SetStatusSelectAction();
         if (icon.AnyAvailableTargets) icon.EnterTargetMode();
+        else icon.ExitTargetMode();
     }
 
     public void SelectShootAbility()
@@ -117,7 +126,11 @@ public class AbilityPanel : MonoBehaviour
     public void UnselectAbility(bool keepTargetMode)
     {
         AbilityIcon oldSelected = ClearSelection();
-        if (oldSelected != null && !keepTargetMode) oldSelected.ExitTargetMode();
+        if (oldSelected != null && !keepTargetMode)
+        {
+            Manager.EnemyPanel.ReturnToSavedVisibleEnemyList();
+            oldSelected.ExitTargetMode();
+        }
     }
 
     // Clears the selection. If any ability was selected, returns it.
@@ -155,22 +168,11 @@ public class AbilityPanel : MonoBehaviour
     //
     // If the selected ability has changed from disabled to enabled, performs the
     // camera enter transition.
-    private void DisableAbilitiesWithoutTargets(HashSet<Enemy> visibleEnemies)
+    private void DisableAbilitiesWithoutTargets()
     {
         foreach (AbilityIcon icon in _icons)
         {
-            switch (icon.Ability.TargetType)
-            {
-                case TargetType.Enemy:
-                    icon.AnyAvailableTargets = visibleEnemies.Count > 0;
-                    break;
-                case TargetType.Self:
-                    icon.AnyAvailableTargets = icon.Ability.IsAvailable; //???
-                    break;
-                case TargetType.Summon:
-                    icon.AnyAvailableTargets = icon.Ability.IsAvailable; //mb???
-                    break;
-            }
+            icon.AnyAvailableTargets = icon.Ability.IsAvailable; //???
 
             if (_selected == icon && icon.AnyAvailableTargets)
             {
@@ -211,7 +213,7 @@ public class AbilityPanel : MonoBehaviour
         {
             gameObject.SetActive(true);
             _abilityDialog.SetActive(_selected != null);
-            DisableAbilitiesWithoutTargets(TargetUtils.GetAvailableTargets(Manager.TurnManager.SelectedCharacter));
+            DisableAbilitiesWithoutTargets();
         }
 
         if (permissions.Contains(Permissions.AnimationRunning))
@@ -249,7 +251,7 @@ public class AbilityPanel : MonoBehaviour
             }
         }
 
-        DisableAbilitiesWithoutTargets(TargetUtils.GetAvailableTargets(Manager.TurnManager.SelectedCharacter));
+        DisableAbilitiesWithoutTargets();
     }
 
     public void ClearAbilities()

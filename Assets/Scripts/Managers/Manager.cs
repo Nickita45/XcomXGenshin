@@ -147,7 +147,7 @@ public class Manager : MonoBehaviour
         {
             // Wait until the interaction is finished
 
-            if (icon.Ability is AbilityShoot) // maybe not good solution
+            if (icon.Ability.TargetType == TargetType.Enemy) //(icon.Ability is AbilityShoot || icon.Ability is AbilityMeleeAttack) // maybe not good solution
                 StatusMain.SetStatusShooting();
             else
                 StatusMain.SetStatusWaiting();

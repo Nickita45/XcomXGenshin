@@ -74,19 +74,28 @@ public class EnemyIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
     public void SetPercent()
     {
-        Character character = Manager.TurnManager.SelectedCharacter;
+        (int percent, ShelterType shelter) calculation;
 
-        (int percent, ShelterType shelter) =
-            AimUtils.CalculateHitChance(
-                character.ActualTerritory,
-                _enemy.ActualTerritory,
-                character.Stats.Weapon,
-                character.Stats.BaseAimPercent()
-            );
+        if ( Manager.AbilityPanel.Selected?.Ability is IPercent percentCalculation)
+        {
+            calculation = percentCalculation.GetCalculationProcents(_enemy);
+        } else
+        {
+            Character character = Manager.TurnManager.SelectedCharacter;
 
-        _textPercent.text = percent.ToString() + "%";
+            calculation =
+                AimUtils.CalculateHitChance(
+                    character.ActualTerritory,
+                    _enemy.ActualTerritory,
+                    character.Stats.Weapon,
+                    character.Stats.BaseAimPercent()
+                );
+        }
 
-        if (shelter == ShelterType.None)
+
+        _textPercent.text = calculation.percent.ToString() + "%";
+
+        if (calculation.shelter == ShelterType.None)
             _textPercent.color = Color.yellow;
         else
             _textPercent.color = Color.red;

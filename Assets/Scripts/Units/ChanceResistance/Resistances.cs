@@ -31,7 +31,7 @@ namespace ChanceResistance
             else if (maxShelter == ShelterType.Full)
                 percent -= _fullShelterResistance;
 
-            if (hit == (shooter.Stats as IShooter).MaxDmg()) hit--;
+            if (hit == (shooter.Stats as IShooter).MaxShootDmg()) hit--;
 
         }
     }

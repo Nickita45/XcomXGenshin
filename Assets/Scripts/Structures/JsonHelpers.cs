@@ -189,7 +189,10 @@ public class CharacterData
     public int characterMoveDistance;
     public float characterRangedTargetDistance;
     public int characterBaseAim;
+    public int characterBaseAimMelee;
     public int characterBaseHealth;
+    public int characterMinMeleeDmg;
+    public int characterMaxMeleeDmg;
     public int characterWeapon;
     public string characterAvatarPath;
     public string element;
