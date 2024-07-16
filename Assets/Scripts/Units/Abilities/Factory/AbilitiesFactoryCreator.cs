@@ -27,8 +27,6 @@ namespace AbilitiesFactory
                 if (!string.IsNullOrEmpty(list.element))
                     element = Enum.Parse<Element>(list.element);
 
-                Debug.Log(list.name + " " + list.element);
-                
                 Ability ability = _generator[list.name].Create(new AbilitiesCreateData(
                         element: element,
                         creator: creator),

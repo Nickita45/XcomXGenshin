@@ -30,7 +30,6 @@ public class AbilityMeleeAttack : Ability, IEnemyList, IPercent
 
     public AbilityMeleeAttack(Element element, Unit creator = null) 
     {
-        Debug.Log(element);
         _element = element;
         
         if(creator != null) 
