@@ -6,16 +6,18 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 10f;
-    
-    [SerializeField]
-    private float _lifetime = 4f;
 
 
     private void Update()
     {
         Vector3 moveDirection = transform.forward * _speed * Time.deltaTime;
-        transform.Translate(moveDirection, Space.World); //moving
-        Destroy(gameObject, _lifetime);
+        transform.Translate(moveDirection, Space.World);
+    }
+
+    public void SetBasicSettings(Transform firepoint)
+    {
+        transform.position = firepoint.position;
+        transform.rotation = firepoint.rotation;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -27,7 +27,7 @@ namespace ParticleSystemFactory
         #region Object Pool
         private ParticleSystem CreateParticleSystem()
         {
-            GameObject obj = Object.Instantiate(_prefab, _parent); //maybe to other place
+            GameObject obj = Object.Instantiate(_prefab, _parent);
             ParticleSystem particleSystem = obj.GetComponent<ParticleSystem>();
 
             return particleSystem;

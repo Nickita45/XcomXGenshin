@@ -1,14 +1,33 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class ShootManager : MonoBehaviour
 {
+    private const int MAX_SIZE = 32;
+    private const int DEFAULT_SIZE = 16;
+    
+
     [SerializeField]
     private GameObject _bulletPrefab;
 
     [SerializeField]
+    private float _lifetime = 4f;
+
+    [SerializeField]
     private string _nameBulletSpawner = "BulletSpawner"; //script ill find gameobject for spawning bullets with such name 
+
+    private IObjectPool<Bullet> _pool;
+    private bool collectionCheck = true;
+
+    private void Start()
+    {
+        _pool = new ObjectPool<Bullet>(CreateParticleSystem,
+                    OnGetFromPool, OnReleaseToPool, OnDestroyPooledObject,
+                    collectionCheck: collectionCheck, defaultCapacity: DEFAULT_SIZE, maxSize: MAX_SIZE);
+    }
+
 
     public IEnumerator Shoot(
         Unit shooter,
@@ -25,11 +44,7 @@ public class ShootManager : MonoBehaviour
         (int percent, _) =
             AimUtils.CalculateHitChance(shooter.ActualTerritory, defender.ActualTerritory, actualGun, shooter.Stats.BaseAimPercent()); //get chance
 
-        Debug.Log(shooter.Stats.Name() + " " + defender.Stats.Name() + " Before " + percent + " " + dmg);
-
         defender.ChanceResistance.GetResistance(shooter, defender, actualGun, element, ref percent, ref dmg);
-
-        Debug.Log(shooter.Stats.Name() + " " + defender.Stats.Name() + " => " + percent + " " + dmg);
 
         var result = RandomExtensions.GetChance(percent) || defender is Entity; //mb change in future
         //Debug.Log($"{shooter.Stats.Name()} has next {percent} to hit and got {result}");
@@ -37,14 +52,17 @@ public class ShootManager : MonoBehaviour
         {
             Vector3 addShootRange = GenerateCoordinatesFromResult(!result); //getting a spread depending on the result of a hit
 
-            GameObject bullet = Instantiate(_bulletPrefab, firePoint.position, firePoint.rotation); //create bullet
-            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            //GameObject bullet = Instantiate(_bulletPrefab, firePoint.position, firePoint.rotation); //create bullet
+            //Bullet bulletScript = bullet.GetComponent<Bullet>();
+            Bullet bulletScript = _pool.Get();
+            bulletScript.SetBasicSettings(firePoint);
 
             if (bulletScript != null && defender != null)
             {
                 Vector3 directionToTarget = defender.transform.position - firePoint.position; //setting the direction
-                bullet.transform.forward = directionToTarget + addShootRange;
+                bulletScript.transform.forward = directionToTarget + addShootRange;
             }
+            StartCoroutine(ReturnToPoolAfterLifetime(bulletScript, _lifetime));
             yield return new WaitForSeconds(UnityEngine.Random.Range(ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].minTimeBetweenShooting,
                 ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].maxTimeBetweenShooting));
         }
@@ -72,4 +90,32 @@ public class ShootManager : MonoBehaviour
                 UnityEngine.Random.Range(-0.55f, -0.25f) * minus + UnityEngine.Random.Range(0.25f, 0.55f) * ((minus + 1) % 2));
         }
     }
+
+    #region Object Pool
+    private Bullet CreateParticleSystem()
+    {
+        GameObject obj = Instantiate(_bulletPrefab);
+        Bullet particleSystem = obj.GetComponent<Bullet>();
+
+        return particleSystem;
+    }
+    private void OnGetFromPool(Bullet pooledObject)
+    {
+        pooledObject.gameObject.SetActive(true);
+    }
+    private void OnReleaseToPool(Bullet pooledObject)
+    {
+        pooledObject.gameObject.SetActive(false);
+    }
+    private void OnDestroyPooledObject(Bullet pooledObject)
+    {   
+        Destroy(pooledObject.gameObject);
+    }
+
+    public IEnumerator ReturnToPoolAfterLifetime(Bullet pooledObject, float lifetime)
+    {
+        yield return new WaitForSeconds(lifetime);
+        _pool.Release(pooledObject);
+    }
+    #endregion
 }
