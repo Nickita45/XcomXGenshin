@@ -29,7 +29,7 @@ public class CharacterCanvas : UnitCanvas
             return;
         }
 
-        if (permissions.Contains(Permissions.SelectEnemy) || permissions.Contains(Permissions.AnimationShooting))
+        if (permissions.Contains(Permissions.SelectEnemy) || permissions.Contains(Permissions.AnimationShooting) || permissions.Contains(Permissions.NonFog))
             _canvas.gameObject.SetActive(false);
         else
             _canvas.gameObject.SetActive(true);

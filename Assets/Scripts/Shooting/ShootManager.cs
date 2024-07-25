@@ -1,3 +1,4 @@
+using ParticleSystemFactory;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -50,19 +51,7 @@ public class ShootManager : MonoBehaviour
         //Debug.Log($"{shooter.Stats.Name()} has next {percent} to hit and got {result}");
         for (int i = 0; i < ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].countBullets; i++)
         {
-            Vector3 addShootRange = GenerateCoordinatesFromResult(!result); //getting a spread depending on the result of a hit
-
-            //GameObject bullet = Instantiate(_bulletPrefab, firePoint.position, firePoint.rotation); //create bullet
-            //Bullet bulletScript = bullet.GetComponent<Bullet>();
-            Bullet bulletScript = _pool.Get();
-            bulletScript.SetBasicSettings(firePoint);
-
-            if (bulletScript != null && defender != null)
-            {
-                Vector3 directionToTarget = defender.transform.position - firePoint.position; //setting the direction
-                bulletScript.transform.forward = directionToTarget + addShootRange;
-            }
-            StartCoroutine(ReturnToPoolAfterLifetime(bulletScript, _lifetime));
+            SpawnBullet(defender, firePoint, result);
             yield return new WaitForSeconds(UnityEngine.Random.Range(ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].minTimeBetweenShooting,
                 ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].maxTimeBetweenShooting));
         }
@@ -78,9 +67,26 @@ public class ShootManager : MonoBehaviour
         yield return new WaitForSeconds(ConfigurationManager.GlobalDataJson.timeAfterShooting);
     }
 
-    private Vector3 GenerateCoordinatesFromResult(bool miss)
+    private void SpawnBullet(Unit defender, Transform firePoint, bool result)
     {
-        if (!miss)
+        //getting a spread depending on the result of a hit
+        Vector3 addShootRange = GenerateCoordinatesFromResult(result);
+        Bullet bulletScript = _pool.Get();
+
+        //setting the direction
+        Vector3 directionToTarget = defender.transform.position - firePoint.position;
+
+        bulletScript.SetBasicSettings(firePoint, directionToTarget, addShootRange, result);
+        ParticleSystemFactoryCreator.CreateParticle(ParticleType.ShootFlash, new ParticleData
+        (
+            position: firePoint.position
+        ));
+        StartCoroutine(ReturnToPoolAfterLifetime(bulletScript, _lifetime));
+    }
+
+    private Vector3 GenerateCoordinatesFromResult(bool hit)
+    {
+        if (hit)
             return new Vector3(UnityEngine.Random.Range(-0.15f, 0.15f), UnityEngine.Random.Range(-0.15f, 0.15f), UnityEngine.Random.Range(-0.15f, 0.15f));//spread for hit
         else
         { //spread for missing

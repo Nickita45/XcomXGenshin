@@ -65,5 +65,18 @@ namespace ParticleSystemFactory
         public abstract void Create(ParticleData data);
     }
 
-   
+
+    public abstract class ParticleSystemBaseOnlySummon : ParticleSystemBase
+    {
+        protected ParticleSystemBaseOnlySummon(Transform parent) : base(parent) {}
+
+        public override void Create(ParticleData data)
+        {
+            ParticleSystem obj = _pool.Get();
+            obj.transform.localPosition = data.Position;
+            EndOfCreating(obj);
+        }
+    }
+
+
 }

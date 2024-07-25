@@ -6717,6 +6717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 5783682952171341627, guid: f23e581095bc1a947b55e7b46c58a4e7, type: 3}
+  _lifetime: 4
   _nameBulletSpawner: BulletSpawner
 --- !u!114 &1775152540
 MonoBehaviour:

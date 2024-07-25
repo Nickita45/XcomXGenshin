@@ -33,7 +33,10 @@ public class AnimatedCamera : MonoBehaviour
 
     private void Instalization()
     {
-        _animations = new List<ICameraAnimation>() { new BehindCameraAnimation(_camera), new FrontFaceCameraAnimation(_camera), new SimpleCameraAnimation(_camera) }; 
+        _animations = new List<ICameraAnimation>() { 
+            new BehindCameraAnimation(_camera),
+            new FrontFaceCameraAnimation(_camera),
+            new SimpleCameraAnimation(_camera) }; 
     }
 
     private void Start()

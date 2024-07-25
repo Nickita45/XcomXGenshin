@@ -8,7 +8,9 @@ namespace ParticleSystemFactory
     {
         AlbedoFlower,
         SlimeJump,
-        AlbedoUltimate
+        AlbedoUltimate,
+        ShootFlash,
+        HitEffect
     }
 
     public static class ParticleSystemFactoryCreator
@@ -18,6 +20,8 @@ namespace ParticleSystemFactory
             { ParticleType.AlbedoFlower, new AlbedoFlowerParticle(Manager.MainParent.transform)},
             { ParticleType.SlimeJump, new SlimeJumpParticle(Manager.MainParent.transform)},
             { ParticleType.AlbedoUltimate, new AlbedoUltimateParticle(Manager.MainParent.transform)},
+            { ParticleType.ShootFlash, new ShootFlashParticle(Manager.MainParent.transform)},
+            { ParticleType.HitEffect, new HitEffectParticle(Manager.MainParent.transform)},
         };
 
         public static void CreateParticle(ParticleType type, ParticleData data) => _particles[type].Create(data);

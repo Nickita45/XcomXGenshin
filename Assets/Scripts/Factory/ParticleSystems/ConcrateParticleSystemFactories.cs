@@ -54,21 +54,36 @@ namespace ParticleSystemFactory
         public override int MaxCapacity() => 5;
     }
 
-    public class AlbedoUltimateParticle : ParticleSystemBase
+    public class AlbedoUltimateParticle : ParticleSystemBaseOnlySummon
     {
         public AlbedoUltimateParticle(Transform parent) : base(parent) {}
 
         public override string PrefabName() => "UltimateAlbedo";
 
-        public override void Create(ParticleData data)
-        {
-            ParticleSystem obj = _pool.Get();
-            obj.transform.localPosition = data.Position;
-            EndOfCreating(obj);
-        }
-
         public override int DefaultCapacity() => 1;
 
         public override int MaxCapacity() => 5;
+    }
+
+    public class ShootFlashParticle : ParticleSystemBaseOnlySummon
+    {
+        public ShootFlashParticle(Transform parent) : base(parent) { }
+
+        public override string PrefabName() => "MuzzleFlash01";
+
+        public override int DefaultCapacity() => 16;
+
+        public override int MaxCapacity() => 32;
+    }
+
+    public class HitEffectParticle : ParticleSystemBaseOnlySummon
+    {
+        public HitEffectParticle(Transform parent) : base(parent) { }
+
+        public override string PrefabName() => "HitEffect";
+
+        public override int DefaultCapacity() => 16;
+
+        public override int MaxCapacity() => 32;
     }
 }

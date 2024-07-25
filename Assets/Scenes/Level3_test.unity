@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 4
+  _type: 16
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -253,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -403,7 +403,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 414357829074339158, guid: 405262717bd02c64586f2a3e34dd38b4, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7172232893568631527, guid: 405262717bd02c64586f2a3e34dd38b4, type: 3}
       propertyPath: m_RootOrder
@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -609,7 +609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -1139,7 +1139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: PathPrefab
@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 4
+  _type: 16
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -1470,7 +1470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -1685,10 +1685,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
-      propertyPath: _type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: _pathPrefab
       value: Prefabs/CubeNew
       objectReference: {fileID: 0}
@@ -1821,7 +1817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 5
+  _type: 32
   _pathPrefabBase: 
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -1896,6 +1892,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1247441250015943284, guid: db39f3d5bf0ccaa4195fc92a0f22d0e0, type: 3}
   m_PrefabInstance: {fileID: 195777166}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &197269640
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_ShaderGraph GrassUnlitBasic(Clone)
+  m_Shader: {fileID: -6465566751694194690, guid: 42afa9c08d1fb0146b3386c0778d5eb6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Blend: 0
+    - _BlendMult: 0
+    - _BlendOff: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1001 &200525093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1909,7 +1946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -2293,7 +2330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -2481,7 +2518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -2677,7 +2714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -2827,7 +2864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: PathPrefab
@@ -3125,7 +3162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: PathPrefab
@@ -3171,7 +3208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -3351,7 +3388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 4
+  _type: 16
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -3668,7 +3705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 4
+  _type: 16
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -3769,7 +3806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -4358,7 +4395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -4789,7 +4826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -5239,7 +5276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -5952,10 +5989,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
-      propertyPath: _type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: _pathPrefab
       value: Prefabs/CubeNew
       objectReference: {fileID: 0}
@@ -6517,7 +6550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -6599,7 +6632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -6756,7 +6789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: PathPrefab
@@ -7265,7 +7298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -7288,12 +7321,16 @@ PrefabInstance:
       value: 189
       objectReference: {fileID: 0}
     - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.1935
+      objectReference: {fileID: 0}
+    - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.81
       objectReference: {fileID: 0}
     - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0043
       objectReference: {fileID: 0}
     - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7423,7 +7460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6922548334371915227, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6922548334371915227, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
       propertyPath: _pathPrefab
@@ -7805,7 +7842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -7937,7 +7974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -8105,7 +8142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 3
+  _type: 8
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -8136,7 +8173,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4840215351017620806, guid: 41c73326959887c49ac74430215ac89c, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -4840215351017620806, guid: 41c73326959887c49ac74430215ac89c, type: 3}
       propertyPath: PathPrefab
@@ -8312,7 +8349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 3
+  _type: 8
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -8622,7 +8659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -8900,7 +8937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -8998,7 +9035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -9100,7 +9137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -9314,7 +9351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -9855,7 +9892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 5
+  _type: 32
   _pathPrefabBase: 
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -9945,7 +9982,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: PathPrefab
@@ -10073,7 +10110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 4
+  _type: 16
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -10198,7 +10235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -10221,12 +10258,16 @@ PrefabInstance:
       value: 187
       objectReference: {fileID: 0}
     - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.194699
+      objectReference: {fileID: 0}
+    - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.904
       objectReference: {fileID: 0}
     - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0043
       objectReference: {fileID: 0}
     - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10330,7 +10371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -10667,7 +10708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -10753,7 +10794,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -10967,7 +11008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -11422,10 +11463,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
-      propertyPath: _type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: _pathPrefab
       value: Prefabs/CubeNew
       objectReference: {fileID: 0}
@@ -11545,7 +11582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 8
+  _type: 256
   _pathPrefabBase: Prefabs/Character
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -11615,7 +11652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: Prefabs/Enemies/HilichurlStayRanger
   _shelterInfo:
@@ -11926,7 +11963,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -12073,6 +12110,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1c9227a9e1c9e8e48bb514589d473321, type: 3}
   m_PrefabInstance: {fileID: 961497765}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &962574716
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_ShaderGraph GrassUnlitBasic(Clone)
+  m_Shader: {fileID: -6465566751694194690, guid: 42afa9c08d1fb0146b3386c0778d5eb6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Blend: 0
+    - _BlendMult: 0
+    - _BlendOff: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1001 &962966995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12086,7 +12164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -12345,10 +12423,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
-      propertyPath: _type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: _pathPrefab
       value: Prefabs/CubeNew
       objectReference: {fileID: 0}
@@ -12418,7 +12492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -12538,7 +12612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -12893,6 +12967,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4375841408538852201, guid: 1eeaa019c1f64664393383fc00632c63, type: 3}
   m_PrefabInstance: {fileID: 1018095019}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1027004254
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_ShaderGraph GrassUnlitBasic(Clone)
+  m_Shader: {fileID: -6465566751694194690, guid: 42afa9c08d1fb0146b3386c0778d5eb6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Blend: 0
+    - _BlendMult: 0
+    - _BlendOff: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1001 &1036032088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12906,7 +13021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -13073,7 +13188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -13261,7 +13376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 4
+  _type: 16
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -13378,7 +13493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 4
+  _type: 16
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -13800,7 +13915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -14245,47 +14360,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6000860025135985757, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
   m_PrefabInstance: {fileID: 1130729730}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &1135233870
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_ShaderGraph GrassUnlitBasic(Clone)
-  m_Shader: {fileID: -6465566751694194690, guid: 42afa9c08d1fb0146b3386c0778d5eb6, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _Blend: 0
-    - _BlendMult: 0
-    - _BlendOff: 0
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &1136728775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14399,10 +14473,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 760121607}
     m_Modifications:
-    - target: {fileID: -4900295794376493732, guid: bff9dad3f73d0894fb173b7f1173fcc8, type: 3}
-      propertyPath: _type
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: -4900295794376493732, guid: bff9dad3f73d0894fb173b7f1173fcc8, type: 3}
       propertyPath: _pathPrefab
       value: Prefabs/Level1/hilichurl-bath
@@ -14581,7 +14651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -14769,7 +14839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 4
+  _type: 16
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -14804,7 +14874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -14988,7 +15058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -15277,10 +15347,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
-      propertyPath: _type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: _pathPrefab
       value: Prefabs/CubeNew
       objectReference: {fileID: 0}
@@ -15526,7 +15592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: Prefabs/Enemies/HilichurlStayRanger
   _shelterInfo:
@@ -15612,7 +15678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -15751,10 +15817,6 @@ PrefabInstance:
     - target: {fileID: 7271401854055684379, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
-      propertyPath: _type
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: _pathPrefab
@@ -15987,7 +16049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: PathPrefab
@@ -16067,7 +16129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -16311,7 +16373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -17429,7 +17491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -17452,12 +17514,16 @@ PrefabInstance:
       value: 186
       objectReference: {fileID: 0}
     - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.1805177
+      objectReference: {fileID: 0}
+    - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.65
       objectReference: {fileID: 0}
     - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0043
       objectReference: {fileID: 0}
     - target: {fileID: 6627544382084279096, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17531,7 +17597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -17625,7 +17691,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 414357829074339158, guid: 405262717bd02c64586f2a3e34dd38b4, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7172232893568631527, guid: 405262717bd02c64586f2a3e34dd38b4, type: 3}
       propertyPath: m_RootOrder
@@ -17715,7 +17781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -18025,7 +18091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -18131,7 +18197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -18297,7 +18363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: PathPrefab
@@ -18403,7 +18469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6922548334371915227, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6922548334371915227, guid: c468b3bbbc2a2134d829e263f70427c4, type: 3}
       propertyPath: _pathPrefab
@@ -18640,10 +18706,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
-      propertyPath: _type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: _pathPrefab
       value: Prefabs/CubeNew
       objectReference: {fileID: 0}
@@ -18713,7 +18775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -19088,7 +19150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 4
+  _type: 16
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -19164,10 +19226,6 @@ PrefabInstance:
     - target: {fileID: 7271401854055684379, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
-      propertyPath: _type
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: _pathPrefab
@@ -19385,7 +19443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -19573,7 +19631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 4
+  _type: 16
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -19802,7 +19860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -19931,10 +19989,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
-      propertyPath: _type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: _pathPrefab
       value: Prefabs/CubeNew
       objectReference: {fileID: 0}
@@ -19974,7 +20028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -20306,7 +20360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -20501,7 +20555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 5
+  _type: 32
   _pathPrefabBase: 
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -20523,7 +20577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -20693,7 +20747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: PathPrefab
@@ -20773,7 +20827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -20919,7 +20973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: PathPrefab
@@ -20965,7 +21019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -21168,7 +21222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 5
+  _type: 32
   _pathPrefabBase: 
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -21320,7 +21374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: _type
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6169848652478288308, guid: 471a60b53918be4488361e98df8e7a6f, type: 3}
       propertyPath: PathPrefab
@@ -21456,7 +21510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -21656,47 +21710,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
---- !u!21 &1771603914
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_ShaderGraph GrassUnlitBasic(Clone)
-  m_Shader: {fileID: -6465566751694194690, guid: 42afa9c08d1fb0146b3386c0778d5eb6, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _Blend: 0
-    - _BlendMult: 0
-    - _BlendOff: 0
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &1778147015
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21986,7 +21999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 8
+  _type: 256
   _pathPrefabBase: Prefabs/Character
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -22056,7 +22069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -22672,7 +22685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -22937,7 +22950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 8
+  _type: 256
   _pathPrefabBase: Prefabs/Character
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -23092,10 +23105,6 @@ PrefabInstance:
     - target: {fileID: 7271401854055684379, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
-      propertyPath: _type
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: _pathPrefab
@@ -23663,7 +23672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -23763,7 +23772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1999467436
 Transform:
   m_ObjectHideFlags: 0
@@ -23873,6 +23882,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4375841408538852201, guid: 1eeaa019c1f64664393383fc00632c63, type: 3}
   m_PrefabInstance: {fileID: 2004955304}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &2006116727
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_ShaderGraph GrassUnlitBasic(Clone)
+  m_Shader: {fileID: -6465566751694194690, guid: 42afa9c08d1fb0146b3386c0778d5eb6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Blend: 0
+    - _BlendMult: 0
+    - _BlendOff: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &2012679526
 GameObject:
   m_ObjectHideFlags: 0
@@ -23917,7 +23967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -24487,7 +24537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -24699,7 +24749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -24954,7 +25004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -25083,10 +25133,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
-      propertyPath: _type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7271401854055684381, guid: dae0ad1525d02bb49830657170c14e1a, type: 3}
       propertyPath: _pathPrefab
       value: Prefabs/CubeNew
       objectReference: {fileID: 0}
@@ -25122,7 +25168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _type
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5989965386610928501, guid: 2ca35a616b4ac4a46840a76597271ca9, type: 3}
       propertyPath: _shelterInfo._shelterInfoLeft
@@ -25302,7 +25348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 4
+  _type: 16
   _pathPrefabBase: Prefabs/Level1/stone
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -25533,7 +25579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _type
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -3491840992885219663, guid: 77c5152c639e7e043a87898bca2cc01d, type: 3}
       propertyPath: _pathPrefab
@@ -25849,7 +25895,7 @@ PrefabInstance:
     - target: {fileID: 363298552834286185, guid: 293195195225394499f25aac0fb68aa3, type: 3}
       propertyPath: m_InstantiatedMaterial
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 962574716}
     - target: {fileID: 387913767497124640, guid: 293195195225394499f25aac0fb68aa3, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -25909,7 +25955,7 @@ PrefabInstance:
     - target: {fileID: 1184135983000686056, guid: 293195195225394499f25aac0fb68aa3, type: 3}
       propertyPath: m_InstantiatedMaterial
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1027004254}
     - target: {fileID: 1201828330629749005, guid: 293195195225394499f25aac0fb68aa3, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -27064,7 +27110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: RANDOM_ENEMY
   _shelterInfo:
@@ -27156,7 +27202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 8
+  _type: 256
   _pathPrefabBase: Prefabs/Character
   _pathPrefabAdditional: 
   _shelterInfo:

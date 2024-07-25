@@ -32,11 +32,7 @@ public class EnemyCanvas : UnitCanvas
         if (permissions.Contains(Permissions.SelectEnemy) || permissions.Contains(Permissions.AnimationShooting)
             || permissions.Contains(Permissions.NonFog)) //mb in future new permission Show Enemy Canvas or only NonFog
         {
-            if (Manager.EnemyPanel.Enemy == null || _canvas != Manager.EnemyPanel.Enemy.Canvas.CanvasGameObject)
-                _canvas.gameObject.SetActive(false);
-            else
-                _canvas.gameObject.SetActive(true);
-
+            
 
             foreach (Transform child in _canvas.transform)
             {
@@ -53,6 +49,12 @@ public class EnemyCanvas : UnitCanvas
                         //    child.LookAt(Manager.CameraManager.AnimatedCamera.transform.position);
                     }
             }
+
+            if (Manager.EnemyPanel.Enemy == null || _canvas != Manager.EnemyPanel.Enemy.Canvas.CanvasGameObject)
+                _canvas.gameObject.SetActive(false);
+            else
+                _canvas.gameObject.SetActive(true);
+
         }
         else
         {

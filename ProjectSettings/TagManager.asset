@@ -7,6 +7,7 @@ TagManager:
   - PanelMovement
   - InFog
   - Mountains
+  - BulletsDontDestroyer
   layers:
   - Default
   - TransparentFX

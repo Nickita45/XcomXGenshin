@@ -5,9 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.TextCore.Text;
-using static UnityEditor.Progress;
-using static UnityEngine.EventSystems.EventTrigger;
 
 // Manages UI and game elements related to the movement of the selected character.
 public class MovementManager : MonoBehaviour

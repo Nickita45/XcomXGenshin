@@ -13,7 +13,7 @@ namespace AnimationCameras
         public IEnumerator CameraRotate(Transform target)
         {
             float timer = 0;
-            _camera.transform.position = target.position + new Vector3(-2.0f, 1.0f, 0);
+            _camera.transform.position = target.position + new Vector3(-3.0f, 2.0f, 0);
 
             while (timer < timeToEndAnimation)
             {
