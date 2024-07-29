@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2817976035003674610}
   - component: {fileID: 5093763877088109334}
   - component: {fileID: 3228242873245165351}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _pathPrefab: Prefabs/Level1/stone
+  _pathPrefabBase: Prefabs/Level1/stone
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

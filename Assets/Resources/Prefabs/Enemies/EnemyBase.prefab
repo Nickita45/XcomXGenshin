@@ -892,6 +892,52 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4962661307847785589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7999647978101449550}
+  - component: {fileID: 7677230268425444374}
+  m_Layer: 0
+  m_Name: CapsuleCollider
+  m_TagString: BulletsDontDestroyer
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7999647978101449550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4962661307847785589}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6654390615234965878}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7677230268425444374
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4962661307847785589}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5709521405462544130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,9 +1356,10 @@ GameObject:
   - component: {fileID: 8254332665326490105}
   - component: {fileID: 1407980323682624283}
   - component: {fileID: 2031201254778850730}
+  - component: {fileID: 7986607427808358310}
   m_Layer: 0
   m_Name: EnemyBase
-  m_TagString: Untagged
+  m_TagString: BulletsDontDestroyer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1330,6 +1377,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3717470096384619139}
+  - {fileID: 7999647978101449550}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1372,7 +1420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 64
   _pathPrefabBase: Prefabs/Enemies/EnemyBase
   _pathPrefabAdditional: 
   _shelterInfo:
@@ -1397,6 +1445,7 @@ MonoBehaviour:
   _canvas: {fileID: 8254332665326490105}
   _animator: {fileID: 2031201254778850730}
   _bulletSpawner: {fileID: 0}
+  <csFogVisibilityAgent>k__BackingField: {fileID: 7986607427808358310}
   _enemyAI: {fileID: 0}
 --- !u!114 &8254332665326490105
 MonoBehaviour:
@@ -1423,6 +1472,7 @@ MonoBehaviour:
   _elementalReactionPrefab: {fileID: 4842593602491196280, guid: 71218b54ccd99454cad88a89fe2aa702, type: 3}
   _actionIconPopUp: {fileID: 3774079588979257113}
   _listDidntRotateObjects: []
+  csFogVisibilityAgent: {fileID: 7986607427808358310}
 --- !u!114 &1407980323682624283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1451,6 +1501,22 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _gun: {fileID: 0}
   _outline: {fileID: 1407980323682624283}
+--- !u!114 &7986607427808358310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6654390615234965879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236dc86038eee3c44b1ccc3efa0c94e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogWar: {fileID: 0}
+  visibility: 0
+  additionalRadius: 0
+  _enemy: {fileID: -1340898745121493489}
 --- !u!1 &6654509893336421984
 GameObject:
   m_ObjectHideFlags: 0

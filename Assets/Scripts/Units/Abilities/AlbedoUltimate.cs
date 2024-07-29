@@ -1,3 +1,4 @@
+using ParticleSystemFactory;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class AbillityAlbedoUltimate : AbilityUltimate, IAbilityArea
     private int _abilityRange = 5;
     private int _dealDmg = 2;
     private int _dealDmgFlower = 1;
-    private AbilityElementalSkill _albedoFlowerSkill;
+    private AbilityAlbedoElementalSkill _albedoFlowerSkill;
 
     public override string AbilityName => "Albedo Ultimate";
     public override string Description => "Albedo ultimate";
@@ -26,7 +27,7 @@ public class AbillityAlbedoUltimate : AbilityUltimate, IAbilityArea
 
     public AbillityAlbedoUltimate(Ability albedoFlowerSkill)
     {
-        _albedoFlowerSkill = albedoFlowerSkill as AbilityElementalSkill;
+        _albedoFlowerSkill = albedoFlowerSkill as AbilityAlbedoElementalSkill;
     }
 
     public void SummonArea()
@@ -44,7 +45,10 @@ public class AbillityAlbedoUltimate : AbilityUltimate, IAbilityArea
     public override IEnumerator Activate(Unit unit, object target)
     {
         Debug.Log("Albedo ultimate");
-        HubData.Instance.ParticleSystemFactory.CreateAlbedoUltimate(unit.ActualTerritory.GetCordinats());
+        ParticleSystemFactoryCreator.CreateParticle(ParticleType.AlbedoUltimate, new ParticleData
+        (
+            position: unit.ActualTerritory.GetCordinats()
+        ));
         yield return new WaitForSeconds(0.5f);
         foreach (var detectedUnit in Manager.Map.GetAdjancentUnits(_abilityRange, unit.ActualTerritory)) {
             if(detectedUnit is Enemy) Debug.Log(detectedUnit.Stats.Name());

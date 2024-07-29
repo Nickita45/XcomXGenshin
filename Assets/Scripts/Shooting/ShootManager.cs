@@ -1,14 +1,34 @@
+using ParticleSystemFactory;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class ShootManager : MonoBehaviour
 {
+    private const int MAX_SIZE = 32;
+    private const int DEFAULT_SIZE = 16;
+    
+
     [SerializeField]
     private GameObject _bulletPrefab;
 
     [SerializeField]
+    private float _lifetime = 4f;
+
+    [SerializeField]
     private string _nameBulletSpawner = "BulletSpawner"; //script ill find gameobject for spawning bullets with such name 
+
+    private IObjectPool<Bullet> _pool;
+    private bool collectionCheck = true;
+
+    private void Start()
+    {
+        _pool = new ObjectPool<Bullet>(CreateParticleSystem,
+                    OnGetFromPool, OnReleaseToPool, OnDestroyPooledObject,
+                    collectionCheck: collectionCheck, defaultCapacity: DEFAULT_SIZE, maxSize: MAX_SIZE);
+    }
+
 
     public IEnumerator Shoot(
         Unit shooter,
@@ -20,26 +40,18 @@ public class ShootManager : MonoBehaviour
     {
         Transform firePoint = shooter.GetBulletSpawner(_nameBulletSpawner); //position for spawning bullets
 
-        //int randomGenerate = UnityEngine.Random.Range(0, 101); // [0;101)
+        int dmg = (shooter.Stats as IShooter).RandomShootDmg();
 
         (int percent, _) =
-        // Manager.map for enemy?
             AimUtils.CalculateHitChance(shooter.ActualTerritory, defender.ActualTerritory, actualGun, shooter.Stats.BaseAimPercent()); //get chance
+
+        defender.ChanceResistance.GetResistance(shooter, defender, actualGun, element, ref percent, ref dmg);
 
         var result = RandomExtensions.GetChance(percent) || defender is Entity; //mb change in future
         //Debug.Log($"{shooter.Stats.Name()} has next {percent} to hit and got {result}");
         for (int i = 0; i < ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].countBullets; i++)
         {
-            Vector3 addShootRange = GenerateCoordinatesFromResult(!result); //getting a spread depending on the result of a hit
-
-            GameObject bullet = Instantiate(_bulletPrefab, firePoint.position, firePoint.rotation); //create bullet
-            Bullet bulletScript = bullet.GetComponent<Bullet>();
-
-            if (bulletScript != null && defender != null)
-            {
-                Vector3 directionToTarget = defender.transform.position - firePoint.position; //setting the direction
-                bullet.transform.forward = directionToTarget + addShootRange;
-            }
+            SpawnBullet(defender, firePoint, result);
             yield return new WaitForSeconds(UnityEngine.Random.Range(ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].minTimeBetweenShooting,
                 ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].maxTimeBetweenShooting));
         }
@@ -50,25 +62,31 @@ public class ShootManager : MonoBehaviour
         if (!result)
             StartCoroutine(defender.Canvas.PanelShow(defender.Canvas.PanelMiss, 4)); //show panel miss
         else
-        {
-            int dmg; //getting dmg
-            if (shooter is Enemy enemy)
-            {
-                dmg = enemy.GetRandomDmg();
-            }
-            else
-            {
-                dmg = UnityEngine.Random.Range(ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].minHitValue, ConfigurationManager.GlobalDataJson.typeGun[(int)actualGun].maxHitValue + 1);
-            }
-
             defender.Health.MakeHit(dmg, element, shooter);
-        }
+        
         yield return new WaitForSeconds(ConfigurationManager.GlobalDataJson.timeAfterShooting);
     }
 
-    private Vector3 GenerateCoordinatesFromResult(bool miss)
+    private void SpawnBullet(Unit defender, Transform firePoint, bool result)
     {
-        if (!miss)
+        //getting a spread depending on the result of a hit
+        Vector3 addShootRange = GenerateCoordinatesFromResult(result);
+        Bullet bulletScript = _pool.Get();
+
+        //setting the direction
+        Vector3 directionToTarget = defender.transform.position - firePoint.position;
+
+        bulletScript.SetBasicSettings(firePoint, directionToTarget, addShootRange, result);
+        ParticleSystemFactoryCreator.CreateParticle(ParticleType.ShootFlash, new ParticleData
+        (
+            position: firePoint.position
+        ));
+        StartCoroutine(ReturnToPoolAfterLifetime(bulletScript, _lifetime));
+    }
+
+    private Vector3 GenerateCoordinatesFromResult(bool hit)
+    {
+        if (hit)
             return new Vector3(UnityEngine.Random.Range(-0.15f, 0.15f), UnityEngine.Random.Range(-0.15f, 0.15f), UnityEngine.Random.Range(-0.15f, 0.15f));//spread for hit
         else
         { //spread for missing
@@ -78,4 +96,32 @@ public class ShootManager : MonoBehaviour
                 UnityEngine.Random.Range(-0.55f, -0.25f) * minus + UnityEngine.Random.Range(0.25f, 0.55f) * ((minus + 1) % 2));
         }
     }
+
+    #region Object Pool
+    private Bullet CreateParticleSystem()
+    {
+        GameObject obj = Instantiate(_bulletPrefab);
+        Bullet particleSystem = obj.GetComponent<Bullet>();
+
+        return particleSystem;
+    }
+    private void OnGetFromPool(Bullet pooledObject)
+    {
+        pooledObject.gameObject.SetActive(true);
+    }
+    private void OnReleaseToPool(Bullet pooledObject)
+    {
+        pooledObject.gameObject.SetActive(false);
+    }
+    private void OnDestroyPooledObject(Bullet pooledObject)
+    {   
+        Destroy(pooledObject.gameObject);
+    }
+
+    public IEnumerator ReturnToPoolAfterLifetime(Bullet pooledObject, float lifetime)
+    {
+        yield return new WaitForSeconds(lifetime);
+        _pool.Release(pooledObject);
+    }
+    #endregion
 }

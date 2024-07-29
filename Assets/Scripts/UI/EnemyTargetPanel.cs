@@ -15,6 +15,8 @@ public class EnemyTargetPanel : MonoBehaviour
 
     private Action<object> _onSelect;
 
+    private HashSet<Enemy> _savedIcons;
+
     void Start()
     {
         Manager.Instance.OnClearMap += ClearVisibleEnemies;
@@ -57,6 +59,9 @@ public class EnemyTargetPanel : MonoBehaviour
             _icons.Add(icon);
         }
     }
+
+    public void SaveActualVisibleEnemyList() => _savedIcons = TargetUtils.GetAvailableTargets(Manager.TurnManager.SelectedCharacter);
+    public void ReturnToSavedVisibleEnemyList() => UpdateVisibleEnemies(_savedIcons);
 
     public void ClearVisibleEnemies()
     {

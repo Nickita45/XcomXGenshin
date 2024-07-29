@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -42,15 +43,28 @@ public class TerritoryInfo : MonoBehaviour
 
 public enum TerritoryType
 {
-    Undefined,
-    Ground,
-    Air,
-    Shelter,
-    ShelterGround,
-    Boarder,
-    Enemy,
-    Decor,
-    Character,
-    MapObject,//didnt work
+    Undefined = TerritoryTypeFlags.Undefined,
+    Ground = TerritoryTypeFlags.Ground,
+    Air = TerritoryTypeFlags.Air,
+    Shelter = TerritoryTypeFlags.Shelter,
+    ShelterGround = TerritoryTypeFlags.ShelterGround,
+    Boarder = TerritoryTypeFlags.Boarder,
+    Enemy = TerritoryTypeFlags.Enemy,
+    Decor = TerritoryTypeFlags.Decor,
+    Character = TerritoryTypeFlags.Character
+}
 
+[Flags]
+public enum TerritoryTypeFlags
+{
+    None = 0,
+    Undefined = 1,
+    Ground = 2,
+    Air = 4,
+    Shelter = 8,
+    ShelterGround = 16,
+    Boarder = 32,
+    Enemy = 64,
+    Decor = 128,
+    Character = 256
 }

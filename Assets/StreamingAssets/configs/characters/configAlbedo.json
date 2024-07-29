@@ -1,38 +1,40 @@
 {
-    "characterName": "Albedo",
-    "characterSpeed": 2.0,
-    "characterMoveDistance": 4,
-    "characterRangedTargetDistance": 10.0,
-    "characterBaseAim": 70,
-    "characterBaseHealth": 8,
-    "characterWeapon": 0,
-    "characterAvatarPath": "Characters/Albedo/Albedo",
-    "element": "Geo",
-    "abilities": [
-        {
-            "name": "AbilityShoot",
-            "element": "Physical"
-        },
-        {
-            "name": "AbilityShoot",
-            "element": "Geo"
-        },
-        {
-            "name": "AbilityOverwatch",
-            "element": "Physical"
-        },
-        {
-            "name": "AbilityHunkerDown",
-            "element": "Physical"
-        },
-        {
-            "name": "AbilityElementalSkill",
-            "element": "Geo"
-        },
-        {
-            "name": "AbillityAlbedoUltimate",
-            "element": "Geo",
-            "childFunction": "AbilityElementalSkill"
-        }
-    ]
+  "characterName": "Albedo",
+  "characterSpeed": 2.0,
+  "characterMoveDistance": 4,
+  "characterRangedTargetDistance": 10.0,
+  "characterBaseAim": 70,
+  "characterBaseAimMelee": 90,
+  "characterMinMeleeDmg": 1,
+  "characterMaxMeleeDmg": 3,
+  "characterBaseHealth": 8,
+  "characterWeapon": 0,
+  "characterAvatarPath": "Characters/Albedo/Albedo",
+  "element": "Geo",
+  "abilities": [
+    {
+      "name": "AbilityShoot",
+      "element": "Physical"
+    },
+    {
+      "name": "AbilityShoot",
+      "element": "Geo"
+    },
+    {
+      "name": "AbilityOverwatch"
+    },
+    {
+      "name": "AbilityHunkerDown"
+    },
+    {
+      "name": "AbilityMeleeAttack"
+    },
+    {
+      "name": "AbilityAlbedoElementalSkill",
+      "element": "Geo"
+    },
+    {
+      "name": "AbillityAlbedoUltimate"
+    }
+  ]
 }

@@ -2,36 +2,41 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class FrontFaceCameraAnimation : ICameraAnimation
+
+namespace AnimationCameras
 {
-    private const float timeToEndAnimation = 2f;
-    private const float _distance = 1.2f;
-    private const float height = 1.7f;
-    private Camera _camera;
-
-    public FrontFaceCameraAnimation(Camera camera) => _camera = camera;
-
-    public IEnumerator CameraRotate(Transform target)
+    public class FrontFaceCameraAnimation : AnimationCameraBase, ICameraAnimation
     {
-        float timer = 0;
-        var unitAnimator = target.GetComponent<Unit>().Animator;
+        private const float _distance = 2f;
+        private const float height = 2.4f;
+        private const float heightModel = 1.7f;
 
+        public FrontFaceCameraAnimation(Camera camera) : base(camera) {}
 
-        _camera.transform.position = unitAnimator.Model.transform.position + 
-            unitAnimator.Model.transform.forward * _distance + Vector3.up * height;
-
-        while (timer < timeToEndAnimation)
+        public IEnumerator CameraRotate(Transform target)
         {
-            Vector3 positionModel = unitAnimator.Model.transform.position;
-            Vector3 positionGun = unitAnimator.GunModel != null ?
-                unitAnimator.GunModel.transform.position : unitAnimator.Model.transform.position;
+            Debug.Log("I SHOW SPEED");
+            float timer = 0;
+            var unitAnimator = target.GetComponent<Unit>().Animator;
 
-            _camera.transform.LookAt((positionModel + positionGun)/2);
-            timer += Time.deltaTime;
 
-            yield return null;
+            _camera.transform.position = unitAnimator.Model.transform.position +
+                unitAnimator.Model.transform.forward * _distance + Vector3.up * height;
+
+            while (timer < timeToEndAnimation)
+            {
+                Vector3 positionModel = unitAnimator.Model.transform.position;
+                Vector3 positionGun = unitAnimator.GunModel != null ?
+                    unitAnimator.GunModel.transform.position : unitAnimator.Model.transform.position;
+
+                _camera.transform.LookAt((positionModel + positionGun) / 2);
+                //_camera.transform.LookAt(new Vector3(positionModel.x, heightModel, positionModel.z));//(positionModel + positionGun) / 2);
+                timer += Time.deltaTime;
+
+                yield return null;
+            }
         }
-    }
 
-    public bool CanBeUsed(Unit target) => true;
+        public bool CanBeUsed(Unit target) => true;
+    }
 }

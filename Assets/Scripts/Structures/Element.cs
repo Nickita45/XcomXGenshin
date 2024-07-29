@@ -10,5 +10,6 @@ public enum Element
     Anemo,
     Geo,
     Dendro,
-    Physical // for simplicity, we treat physical damage as an element
+    Physical, // for simplicity, we treat physical damage as an element
+    Default = Physical 
 }

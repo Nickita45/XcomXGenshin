@@ -1,3 +1,4 @@
+using ParticleSystemFactory;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,7 @@ public class AbilityBigSlimeJump : Ability
         var list = new List<Vector3> { airTerritory.GetCordinats() };
         for (int i = 0; i < 3; i++)
         {
-            if (airTerritory.IndexBottom.Count == 0) continue;
+            if (airTerritory.IndexUp.Count == 0) continue;
 
             airTerritory = Manager.Map[airTerritory.IndexUp.First()];
             list.Add(airTerritory.GetCordinats());
@@ -63,14 +64,13 @@ public class AbilityBigSlimeJump : Ability
             {
                 if (findedTerritory.IndexDown.Count == 0) continue;
 
-                findedTerritory = Manager.Map[findedTerritory.IndexBottom.First()];
+                findedTerritory = Manager.Map[findedTerritory.IndexDown.First()];
             }
         }
 
         var list = new List<Vector3>
         {
             unit.ActualTerritory.GetCordinats(),
-            //new Vector3(findedTerritory.XPosition, unit.ActualTerritory.YPosition, findedTerritory.ZPosition),
             findedTerritory.GetCordinats()
         };
 
@@ -78,9 +78,12 @@ public class AbilityBigSlimeJump : Ability
         yield return unit.StartCoroutine(Manager.MovementManager.MoveUnitToTerritory(unit, list, findedTerritory));
         unit.Stats.SpeedIncreaser = 0;
 
-        HubData.Instance.ParticleSystemFactory.CreateSlimeJump(_attackRange, findedTerritory.GetCordinats());
+        ParticleSystemFactoryCreator.CreateParticle(ParticleType.SlimeJump, new ParticleData
+        (
+           distance: _attackRange, position: unit.ActualTerritory.GetCordinats()
+        ));
 
-        if(target != null)
+        if (target != null)
             unit.Animator.RotateLookAtImmediate((target as Unit).ActualTerritory.GetCordinats());
 
         var adjancentAUnits = Manager.Map.GetAdjancentUnits(_attackRange, unit);
@@ -89,7 +92,7 @@ public class AbilityBigSlimeJump : Ability
             if (item is Enemy || item == unit)
                 continue;
 
-            int dmg = UnityEngine.Random.Range((unit as Enemy).Stats.MinDamage, (unit as Enemy).Stats.MaxDamage + 1);
+            int dmg = UnityEngine.Random.Range((unit.Stats as IShooter).MinShootDmg(), (unit.Stats as IShooter).MaxShootDmg() + 1);
             item.Health.MakeHit(dmg, _element, unit);
         }
         InAir = false;

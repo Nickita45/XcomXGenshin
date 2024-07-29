@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - PanelMovement
+  - InFog
+  - Mountains
+  - BulletsDontDestroyer
   layers:
   - Default
   - TransparentFX
@@ -13,7 +16,7 @@ TagManager:
   - Water
   - UI
   - Developer
-  - 
+  - InFog
   - 
   - 
   - 

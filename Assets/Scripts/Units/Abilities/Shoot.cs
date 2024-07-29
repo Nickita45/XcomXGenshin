@@ -1,6 +1,7 @@
 using System.Collections;
+using System.Collections.Generic;
 
-public class AbilityShoot : Ability
+public class AbilityShoot : Ability, IEnemyList, IPercent
 {
     public override string AbilityName => (_element == Element.Physical) ?
         "Shoot" :
@@ -15,7 +16,10 @@ public class AbilityShoot : Ability
     public override int ActionCost => 2;
     public override TargetType TargetType => TargetType.Enemy;
     public override int MaxCooldown => 0;
-    
+
+    public override bool IsAvailable => TargetUtils.GetAvailableTargets(Manager.TurnManager.SelectedCharacter).Count > 0;
+    public HashSet<Enemy> GetVisibleEnemies() => TargetUtils.GetAvailableTargets(Manager.TurnManager.SelectedCharacter);
+
     private Element _element;
 
     public AbilityShoot() { _element = Element.Physical; }
@@ -36,8 +40,11 @@ public class AbilityShoot : Ability
             yield return unit.StartCoroutine(animator.StopAttackRanged());
             yield return unit.StartCoroutine(animator.StartCrouching());
             yield return unit.StartCoroutine(animator.CrouchRotateHideBehindShelter(unit.transform.localPosition));
+            //if(unit is Character)
+            //    Manager.StatusMain.SetStatusWaitingWithNonFog();
+            //else
+            //    Manager.StatusMain.SetStatusWaiting();
             //Maybe here is timer...
-            Manager.StatusMain.SetStatusWaiting();
         }
 
         // Shoot
@@ -57,5 +64,20 @@ public class AbilityShoot : Ability
             _element,
             IEnumeratorActionMethod()
         ));
+    }
+
+    public (int percent, ShelterType shelter) GetCalculationProcents(Unit enemy)
+    {
+       Character character = Manager.TurnManager.SelectedCharacter;
+
+        (int percent, ShelterType shelter) =
+            AimUtils.CalculateHitChance(
+                character.ActualTerritory,
+                enemy.ActualTerritory,
+                character.Stats.Weapon,
+                character.Stats.BaseAimPercent()
+            );
+
+        return (percent, shelter);
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5454677584817885271}
   - component: {fileID: 5989965386610928501}
   - component: {fileID: 8459694684947633348}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: stone4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
+  _type: 8
   _pathPrefabBase: Prefabs/Level1/stone4
   _pathPrefabAdditional: 
   _shelterInfo:
