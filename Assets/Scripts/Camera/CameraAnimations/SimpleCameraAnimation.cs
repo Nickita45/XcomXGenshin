@@ -27,6 +27,6 @@ namespace AnimationCameras
             }
         }
 
-        public bool CanBeUsed(Unit target) => true;
+        public ICameraAnimation GetNextAnimation() => this;
     }
 }

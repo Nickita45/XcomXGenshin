@@ -30,7 +30,10 @@ public class CharacterCanvas : UnitCanvas
         }
 
         if (permissions.Contains(Permissions.SelectEnemy) || permissions.Contains(Permissions.AnimationShooting) || permissions.Contains(Permissions.NonFog))
-            _canvas.gameObject.SetActive(false);
+            if (ShootManager.TargetUnit == null || _canvas != ShootManager.TargetUnit.Canvas.CanvasGameObject)
+                _canvas.gameObject.SetActive(false);
+            else
+                _canvas.gameObject.SetActive(true);
         else
             _canvas.gameObject.SetActive(true);
     }

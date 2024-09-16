@@ -23,29 +23,28 @@ public class Bullet : MonoBehaviour
         //transform.Translate(moveDirection, Space.World);
     }
 
-    public void SetBasicSettings(Transform firepoint, Vector3 directionToTarget, Vector3 addShootRange, bool isHit)
+    public void SetBasicSettings(Transform firepoint, Vector3 directionToTarget, Vector3 addShootRange, Vector3 targetPos, bool isHit)
     {
-        if (_rigidbody == null)
-            _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
 
         isHitBullet = isHit;
         transform.position = firepoint.position;
         Vector3 shootDirection = (directionToTarget + addShootRange).normalized;
-
         transform.forward = shootDirection;
 
+        _rigidbody.velocity = Vector3.zero; // ќбнул€ем скорость перед применением новой силы
         _rigidbody.AddForce(shootDirection * _speed, ForceMode.Impulse);
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
-
         if (isHitBullet)
-            if (other.tag == "BulletsDontDestroyer")
+            if (other.GetComponent<Unit>() == ShootManager.TargetUnit) //other.tag == "BulletsDontDestroyer")
                 BulletHit(other);
         else
-            if (other.gameObject.TryGetComponent(out TerritoryInfo info) && _destroyOnHit.HasFlag((TerritoryTypeFlags) info.Type))
+            if (other.gameObject.TryGetComponent(out TerritoryInfo info) && _destroyOnHit.HasFlag((TerritoryTypeFlags) info.Type)
+                && other.tag != "BulletsDontDestroyer")
                 BulletHit(other);
     }
 

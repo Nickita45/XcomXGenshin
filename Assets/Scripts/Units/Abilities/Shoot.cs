@@ -25,10 +25,12 @@ public class AbilityShoot : Ability, IEnemyList, IPercent
     public AbilityShoot() { _element = Element.Physical; }
     public AbilityShoot(Element element) { _element = element; }
 
+
     public override IEnumerator Activate(Unit unit, object target)
     {
         UnitAnimator animator = unit.Animator;
-        Unit targetUnit = (Unit)target;
+        var targetUnit = (Unit)target;
+        ShootManager.TargetUnit = targetUnit;
 
         yield return unit.StartCoroutine(animator.RotateLookAt(targetUnit.transform.localPosition));
         yield return unit.StartCoroutine(animator.StopCrouching());
@@ -40,6 +42,7 @@ public class AbilityShoot : Ability, IEnemyList, IPercent
             yield return unit.StartCoroutine(animator.StopAttackRanged());
             yield return unit.StartCoroutine(animator.StartCrouching());
             yield return unit.StartCoroutine(animator.CrouchRotateHideBehindShelter(unit.transform.localPosition));
+            ShootManager.TargetUnit = null;
             //if(unit is Character)
             //    Manager.StatusMain.SetStatusWaitingWithNonFog();
             //else

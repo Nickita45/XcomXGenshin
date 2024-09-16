@@ -9,7 +9,8 @@ namespace AnimationCameras
     {
         IEnumerator CameraRotate(Transform target);
 
-        bool CanBeUsed(Unit target);
+        ICameraAnimation GetNextAnimation();
+
     }
 
     public class AnimationCameraBase

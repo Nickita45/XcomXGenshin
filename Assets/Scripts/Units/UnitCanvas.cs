@@ -58,6 +58,8 @@ public abstract class UnitCanvas : MonoBehaviour
 
         else if (Manager.CameraManager.FreeCamera.IsMainCamera())
             _canvas.transform.localRotation = Manager.CameraManager.FreeCamera.transform.localRotation;
+        else if (Manager.CameraManager.AnimatedCamera.IsMainCamera())
+            _canvas.transform.localRotation = Manager.CameraManager.AnimatedCamera.transform.localRotation;
     }
 
     public abstract void OnStatusChange(HashSet<Permissions> permissions);

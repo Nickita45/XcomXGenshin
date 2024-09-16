@@ -21,6 +21,7 @@ public class ShootManager : MonoBehaviour
 
     private IObjectPool<Bullet> _pool;
     private bool collectionCheck = true;
+    public static Unit TargetUnit { get; set; }
 
     private void Start()
     {
@@ -72,11 +73,11 @@ public class ShootManager : MonoBehaviour
         //getting a spread depending on the result of a hit
         Vector3 addShootRange = GenerateCoordinatesFromResult(result);
         Bullet bulletScript = _pool.Get();
-
         //setting the direction
         Vector3 directionToTarget = defender.transform.position - firePoint.position;
+        Debug.Log(defender.transform.position + " " + directionToTarget);
 
-        bulletScript.SetBasicSettings(firePoint, directionToTarget, addShootRange, result);
+        bulletScript.SetBasicSettings(firePoint, directionToTarget, addShootRange, defender.transform.position, result);
         ParticleSystemFactoryCreator.CreateParticle(ParticleType.ShootFlash, new ParticleData
         (
             position: firePoint.position

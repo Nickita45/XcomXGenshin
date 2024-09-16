@@ -13,16 +13,17 @@ namespace AnimationCameras
         {
             float timer = 0;
             var unitAnimator = target.GetComponent<Unit>().Animator;
+            Transform bulletSpawner = unitAnimator.GunModel != null ? unitAnimator.GunModel.transform : target.GetComponent<Unit>().GetBulletSpawner("");
 
-            _camera.transform.position = unitAnimator.GunModel.transform.position +
-                -unitAnimator.GunModel.transform.forward * 1f + Vector3.up * 0.5f;
+            _camera.transform.position = bulletSpawner.transform.position +
+                -bulletSpawner.transform.forward * 1f + Vector3.up * 0.5f;
 
 
             while (timer < timeToEndAnimation)
             {
-                Vector3 positionModel = Manager.EnemyPanel.Enemy.gameObject.transform.position;
-                Vector3 positionGun = unitAnimator.GunModel != null ?
-                    unitAnimator.GunModel.transform.position : unitAnimator.Model.transform.position;
+                Vector3 positionModel = ShootManager.TargetUnit.gameObject.transform.position;
+                Vector3 positionGun = bulletSpawner != null ?
+                    bulletSpawner.transform.position : unitAnimator.Model.transform.position;
 
                 _camera.transform.LookAt((positionModel + positionGun) / 2);
                 timer += Time.deltaTime;
@@ -31,7 +32,6 @@ namespace AnimationCameras
             }
         }
 
-        public bool CanBeUsed(Unit target) => target is Character &&
-                                    Manager.EnemyPanel.Enemy != null;
+        public ICameraAnimation GetNextAnimation() => null;
     }
 }
