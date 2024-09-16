@@ -118,7 +118,14 @@ public class TurnManager : MonoBehaviour
     public IEnumerator BeginRound()
     {
         // Remove overwatch from all characters
-        UnitOverwatched.RemoveAll(unit => unit is Character);
+        UnitOverwatched.RemoveAll(unit => {
+            if (unit is Character)
+            {
+                unit.Canvas.PanelOverwatch.SetActive(false);
+                return true;
+            }
+            return false;
+        });
 
         RoundBeginEvent?.Invoke();
         // Restore actions
@@ -214,7 +221,14 @@ public class TurnManager : MonoBehaviour
     {
         EnemyTurnBeginEvent?.Invoke();
         _menuManager.SetPanelEnemy(true);
-        UnitOverwatched.RemoveAll(unit => unit is Enemy);
+        UnitOverwatched.RemoveAll(unit => {
+            if(unit is Enemy)
+            {
+                unit.Canvas.PanelOverwatch.SetActive(false);
+                return true;
+            }
+            return false;
+        });
 
         foreach (var enemy in Manager.Map.Enemies.GetList)//for (int i = Manager.Map.Enemies.Count - 1; i >= 0; i--) //make from bottom to up to savly removing killed enemies
         {
