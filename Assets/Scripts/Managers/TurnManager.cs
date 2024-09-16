@@ -226,6 +226,7 @@ public class TurnManager : MonoBehaviour
                 if (!enemy.Triggered)
                     break;
 
+                Manager.CameraManager.FreeCamera.MoveTo(enemy.gameObject);
                 yield return StartCoroutine(enemy.MakeTurn());
             }
         }

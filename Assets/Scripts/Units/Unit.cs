@@ -91,6 +91,7 @@ public abstract class Unit : MonoBehaviour
                     {
                         yield return StartCoroutine(((Enemy)unitOverwatched).AI.Attack((Character)this));
                     }
+                    unitOverwatched.Canvas.PanelOverwatch.SetActive(false);
                     Time.timeScale = 1f;
                     _animator.SetSpeedAnimatorSlow(false);
                     Manager.StatusMain.SetStatusWaiting();

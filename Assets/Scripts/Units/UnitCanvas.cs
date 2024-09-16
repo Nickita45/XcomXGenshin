@@ -18,6 +18,9 @@ public abstract class UnitCanvas : MonoBehaviour
 
     [Header("Basic")]
     [SerializeField]
+    private GameObject _overwatchPanel;
+
+    [SerializeField]
     protected GameObject _panelMiss, _panelHit, _panelAction;
 
     [SerializeField]
@@ -34,6 +37,7 @@ public abstract class UnitCanvas : MonoBehaviour
 
     public GameObject CanvasGameObject => _canvas;
 
+    public GameObject PanelOverwatch => _overwatchPanel;
     public GameObject PanelMiss => CreateObjectPanel(_panelMiss);
 
     private Queue<(GameObject panel, float timer)> _panelsQueue = new ();
