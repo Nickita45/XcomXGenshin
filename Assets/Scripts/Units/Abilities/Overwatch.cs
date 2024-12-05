@@ -13,6 +13,7 @@ public class AbilityOverwatch : Ability
         Debug.Log("Overwatch");
         Manager.TurnManager.UnitOverwatched.Add(unit);
         yield return new WaitForSeconds(0.5f);
+        unit.Canvas.PanelOverwatch.SetActive(true);
         yield return null;
     }
 

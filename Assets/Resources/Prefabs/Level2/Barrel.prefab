@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6873230139632168653}
   - component: {fileID: 6916605663410745063}
   - component: {fileID: 1265200615646417709}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,8 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 3
-  _pathPrefab: Prefabs/Level2/barrel
+  _type: 8
+  _pathPrefabBase: Prefabs/Level2/barrel
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

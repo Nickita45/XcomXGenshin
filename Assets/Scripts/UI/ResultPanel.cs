@@ -36,11 +36,16 @@ public class ResultPanel : MonoBehaviour
         _textCountKilledSoldiers.text = _statisticsUtil.SoldierDeathCount + "/" + _statisticsUtil.SoldierTotalCount;
         _textCountWondedSoldiers.text = _statisticsUtil.GetCountCharacterWonded + "/" + _statisticsUtil.SoldierTotalCount;
 
-        for (int i = 0; i < _statisticsUtil.EnemiesDeathCount && i < _scrollMaxEnemiesIcons; i++)
+        if(_objectPrefabRoot.transform.childCount < _statisticsUtil.EnemiesDeathCount)
         {
-            GameObject generatedIconEnemy = Instantiate(_prefabIconsEnemies, _objectPrefabRoot.transform);
-            generatedIconEnemy.GetComponent<Image>().sprite = _statisticsUtil.GetEnemiesKilledList().ElementAt(i);
+            for (int i = _objectPrefabRoot.transform.childCount; i < _statisticsUtil.EnemiesDeathCount && i < _scrollMaxEnemiesIcons; i++)
+            {
+                GameObject generatedIconEnemy = Instantiate(_prefabIconsEnemies, _objectPrefabRoot.transform);
+                generatedIconEnemy.GetComponent<Image>().sprite = _statisticsUtil.GetEnemiesKilledList().ElementAt(i);
+            }
+
         }
+
 
         _textGrade.text = _statisticsUtil.GetGrade();
     }

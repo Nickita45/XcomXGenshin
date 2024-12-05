@@ -174,8 +174,10 @@ public class GlobalDataJson
     public string outlineEnemyColor;
     public string outlineEnemyTargetColor;
     public string outlineCharacterColor;
+    public string outlineObjectsOnMapColor;
     public string outlineCharacterTargetColor;
     public float outlineWidth;
+    public float outlineObjectsOnMapWidth;
 
     public GunTypeConfig[] typeGun;
 }
@@ -187,7 +189,10 @@ public class CharacterData
     public int characterMoveDistance;
     public float characterRangedTargetDistance;
     public int characterBaseAim;
+    public int characterBaseAimMelee;
     public int characterBaseHealth;
+    public int characterMinMeleeDmg;
+    public int characterMaxMeleeDmg;
     public int characterWeapon;
     public string characterAvatarPath;
     public string element;

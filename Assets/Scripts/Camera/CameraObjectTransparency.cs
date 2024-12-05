@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class CameraObjectTransparency : MonoBehaviour
 {
+    [SerializeField]
+    private Material _transperent;
+
     // Cached data about the renderer
     private class RenderData
     {
@@ -21,7 +24,7 @@ public class CameraObjectTransparency : MonoBehaviour
         public List<Color> Colors;
     }
 
-    private List<RenderData> _renderers = new();
+    private List<(Outline outline,Material[][] materials)> _renderers = new();
 
     public void HideObjectsInLine(Vector3 origin, Vector3 target)
     {
@@ -34,65 +37,108 @@ public class CameraObjectTransparency : MonoBehaviour
 
     public void SetNewRenderersFromHits(RaycastHit[] hits)
     {
-        List<RenderData> newRenderers = new();
+        List<(Outline outline, Material[][] materials)> newRenderers = new();
 
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
 
             // If the component or its parent can be hidden
-            if (hit.transform.GetComponent<TerritoryInfo>()?.CanBeHiddenByCamera() == true ||
-                hit.transform.parent?.GetComponent<TerritoryInfo>()?.CanBeHiddenByCamera() == true)
+            if (hit.transform.GetComponentsInParent<TerritoryInfo>().Any(n => n.CanBeHiddenByCamera()))
             {
                 // Get list of renderers on the game object, all of its children and its parent
-                List<Renderer> rends = hit.transform.GetComponentsInChildren<Renderer>().ToList();
-                Renderer parentRenderer = hit.transform.GetComponentInParent<Renderer>();
-                if (parentRenderer) rends.Add(parentRenderer);
-
-                foreach (var rend in rends)
+                //List<Outline> rends = hit.transform.GetComponentsInChildren<Renderer>().ToList();
+                //Renderer parentRenderer = hit.transform.GetComponentInParent<Renderer>();
+                //if (parentRenderer) rends.Add(parentRenderer);
+                var parent = hit.transform.GetComponentsInParent<TerritoryInfo>().First();
+                var outline = parent.gameObject.GetComponent<Outline>();
+                Material[][] materials = parent.gameObject.GetComponentsInChildren<Renderer>().Select(n => n.sharedMaterials).ToArray();
+                if (!outline || outline == null)
                 {
-                    newRenderers.Add(
-                        new(rend,
-                            rend.materials.Select(material => material.shader).ToList(),
-                            rend.materials.Select(material => material.color).ToList())
-                    );
+                    Color color;
+                    ColorUtility.TryParseHtmlString(ConfigurationManager.GlobalDataJson.outlineObjectsOnMapColor, out color);
+                    outline = ObjectUtils.AddOutline(parent.gameObject,
+                        color,
+                        ConfigurationManager.GlobalDataJson.outlineObjectsOnMapWidth);
+                    outline.enabled = false;
                 }
+                newRenderers.Add((outline, materials));
+                //foreach (var rend in rends)
+               // {
+               //     newRenderers.Add(
+                        //new(rend,
+                        //    rend.materials.Select(material => material.shader).ToList(),
+                         //   rend.materials.Select(material => material.color).ToList())
+                //    );
+                //}
             }
         }
 
         for (int i = 0; i < newRenderers.Count; i++)
         {
-            int index = _renderers.FindIndex(r => r.Renderer == newRenderers[i].Renderer);
+            int index = _renderers.FindIndex(r => r.outline == newRenderers[i].outline);
             if (index == -1)
             {
+                newRenderers[i].outline.enabled = true;
+                foreach (var renderer in newRenderers[i].outline.gameObject.GetComponentsInChildren<Renderer>())
+                {
+                    var materials = renderer.materials; 
+                    for (int j = 0; j < materials.Length-2; j++)
+                    {
+                        materials[j] = _transperent;
+                    }
+                    renderer.materials = materials; 
+                }
+
                 // Replace shaders and colors for new renderers
-                foreach (Material material in newRenderers[i].Renderer.materials)
+                /*foreach (Material material in newRenderers[i].Renderer.materials)
                 {
                     material.shader = Shader.Find("Universal Render Pipeline/Simple Lit");
                     material.SetFloat("_Surface", 1);
                     Color tempColor = material.color;
                     tempColor.a = 0.4F;
                     material.color = tempColor;
-                }
+                }*/
             }
             else
             {
+
                 // For old renderers, cache the previous values of shaders and colors
-                newRenderers[i].Shaders = _renderers[index].Shaders;
-                newRenderers[i].Colors = _renderers[index].Colors;
+                newRenderers[i] =(_renderers[index].outline, _renderers[index].materials);
+
+                //newRenderers[i].Shaders = _renderers[index].Shaders;
+                //newRenderers[i].Colors = _renderers[index].Colors;
             }
         }
 
         for (int i = 0; i < _renderers.Count; i++)
         {
-            if (newRenderers.FindIndex(r => r.Renderer == _renderers[i].Renderer) == -1)
+            if (newRenderers.FindIndex(r => r.outline == _renderers[i].outline) == -1)
             {
-                for (int j = 0; j < _renderers[i].Shaders.Count; j++)
+                _renderers[i].outline.enabled = false;
+                var renderers = _renderers[i].outline.gameObject.GetComponentsInChildren<Renderer>();
+
+                for (int m = 0; m < renderers.Length; m++)
+                {
+                    var materials = renderers[m].materials; 
+                    for (int j = 0; j < materials.Length - 2; j++) 
+                    {
+                        materials[j] = _renderers[i].materials[m][j];
+
+                    }
+                    var listMat = materials.ToList();
+                    if(listMat.Count >= 3)
+                        listMat.RemoveRange(materials.Length - 2, 2);
+
+
+                    renderers[m].materials = listMat.ToArray();
+                }
+                /*for (int j = 0; j < _renderers[i].Shaders.Count; j++)
                 {
                     // Return old shaders and colors to objects
                     _renderers[i].Renderer.materials[j].shader = _renderers[i].Shaders[j];
                     _renderers[i].Renderer.materials[j].color = _renderers[i].Colors[j];
-                }
+                }*/
             }
         }
 
@@ -107,7 +153,7 @@ public class CameraObjectTransparency : MonoBehaviour
             // Hit all colliders from a position slightly behind of the camera
             RaycastHit[] hits = Physics.RaycastAll(freeCamera.transform.position - freeCamera.transform.forward * 3f, freeCamera.transform.forward, 4.5f);
 
-            SetNewRenderersFromHits(hits);
+            SetNewRenderersFromHits(hits);  
         }
     }
 }

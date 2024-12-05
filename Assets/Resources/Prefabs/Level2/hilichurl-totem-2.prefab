@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 73431887024054555}
   - component: {fileID: 1640845493307440609}
   - component: {fileID: 9207902993681946721}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hilichurl-totem-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,8 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 3
-  _pathPrefab: Prefabs/Level2/hilichurl-totem-2
+  _type: 8
+  _pathPrefabBase: Prefabs/Level2/hilichurl-totem-2
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

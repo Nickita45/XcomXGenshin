@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: BookmarkSetting
   m_EditorClassIdentifier: 
   bookmarks:
-  - {fileID: 102900000, guid: 75444346cfc40de4c83dc9c6cb8ddf7a, type: 3}
   - {fileID: 102900000, guid: ad8d3c471e4dd474497f9f2ecff7296e, type: 3}
-  - {fileID: 102900000, guid: 3c572e5c8ab16364981f9609edb74d1b, type: 3}
-  - {fileID: 102900000, guid: 36357ab38ae53a84692894f3955cc897, type: 3}

@@ -20,4 +20,20 @@ public abstract class UnitStats : MonoBehaviour
 
     public abstract string Name();
     public abstract string Description();
+
+}
+
+public interface IShooter
+{
+    int MinShootDmg();
+    int MaxShootDmg();
+    int RandomShootDmg();
+}
+
+public interface IMelee
+{
+    int MinMeleeDmg();
+    int MaxMeleeDmg();
+    int RandomMeleeDmg();
+    int BaseMeleeAim();
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6496919943461773861}
   - component: {fileID: 5503606730445796121}
   - component: {fileID: 6731958138032840708}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hilichurl-tower-alternate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _pathPrefab: Prefabs/Level1/hilichurl-tower-alternate
+  _pathPrefabBase: Prefabs/Level1/hilichurl-tower-alternate
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

@@ -1,7 +1,10 @@
+using AbilitiesFactory;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Character : Unit
 {
@@ -83,6 +86,7 @@ public class Character : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Character;
 
         Manager.StatusMain.OnStatusChange += OnStatusChange;
+        Manager.TurnManager.RoundBeginEvent += OnRoundBegin;
     }
 
     public void GiveEnergy(int countHit, Element element)
@@ -101,10 +105,16 @@ public class Character : Unit
 
         SetGunByIndex((int)Stats.Weapon); //set gun
 
-        _abilities = AbilitiesHelper.GetAllAbilities(Stats.AbilitiesLists);
+        _abilities = AbilitiesFactoryCreator.GetAllAbilities(Stats.AbilitiesLists, this);
 
         Animator.InitCharacter(ConfigurationManager.CharactersData[Stats.Index].characterAvatarPath); //
         Animator.GetComponentInChildren<GunModel>().Init(); //
+    }
+
+    public void OnRoundBegin()
+    {
+        ActionsLeft = 2;
+        DecreaseCooldownAbilities();
     }
 
     private void OnMouseEnter()
@@ -219,5 +229,22 @@ public class Character : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set character's block to air
 
         Manager.StatisticsUtil.SoldierDeathCount++;
+        Manager.TurnManager.RoundBeginEvent -= OnRoundBegin;
+    }
+
+    private void OnDisable()
+    {
+        OnSelected -= Select;
+        OnSelected -= Manager.MovementManager.OnCharacterSelect;
+        OnSelected -= Manager.EnemyPanel.OnCharacterSelect;
+        OnSelected -= Manager.AbilityPanel.SetCharacter;
+
+        OnDeselected -= Disable;
+        OnDeselected -= Manager.EnemyPanel.OnCharacterDeselect;
+        OnDeselected -= Manager.MovementManager.OnCharacterDeselect;
+
+        Manager.StatusMain.OnStatusChange -= OnStatusChange;
+        Manager.TurnManager.RoundBeginEvent -= OnRoundBegin;
+
     }
 }

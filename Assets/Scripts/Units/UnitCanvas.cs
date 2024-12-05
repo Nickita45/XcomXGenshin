@@ -5,6 +5,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 // A part of the UI that is attached to the unit, showing
 // useful info such as their health.
@@ -16,6 +17,9 @@ public abstract class UnitCanvas : MonoBehaviour
     protected GameObject _canvas;
 
     [Header("Basic")]
+    [SerializeField]
+    private GameObject _overwatchPanel;
+
     [SerializeField]
     protected GameObject _panelMiss, _panelHit, _panelAction;
 
@@ -33,8 +37,11 @@ public abstract class UnitCanvas : MonoBehaviour
 
     public GameObject CanvasGameObject => _canvas;
 
+    public GameObject PanelOverwatch => _overwatchPanel;
     public GameObject PanelMiss => CreateObjectPanel(_panelMiss);
 
+    private Queue<(GameObject panel, float timer)> _panelsQueue = new ();
+    private bool queueStarts = false;
     public virtual void Start()
     {
         Manager.StatusMain.OnStatusChange += OnStatusChange;
@@ -55,6 +62,8 @@ public abstract class UnitCanvas : MonoBehaviour
 
         else if (Manager.CameraManager.FreeCamera.IsMainCamera())
             _canvas.transform.localRotation = Manager.CameraManager.FreeCamera.transform.localRotation;
+        else if (Manager.CameraManager.AnimatedCamera.IsMainCamera())
+            _canvas.transform.localRotation = Manager.CameraManager.AnimatedCamera.transform.localRotation;
     }
 
     public abstract void OnStatusChange(HashSet<Permissions> permissions);
@@ -156,16 +165,33 @@ public abstract class UnitCanvas : MonoBehaviour
         GameObject obj = Instantiate(_panel, _canvas.transform);
         obj.transform.localPosition += new Vector3(Random.Range(0, KOEFRANGEFORCREATINGCANVAS.x), Random.Range(0, KOEFRANGEFORCREATINGCANVAS.y));
         obj.name = _panel.name;
-        Destroy(obj, 15);
         return obj;
     }
 
-    public IEnumerator PanelShow(GameObject panel, float timerBeforeDisable = 0)
+    public IEnumerator PanelShow(GameObject panel, float timerBeforeDisable = 0) //refactoring => change type
     {
-        yield return StartCoroutine(PanelAnimation(panel: panel, speed: 1.4f, toNumberEverything: 1, toNumberPanel: panel.GetComponent<Image>().color.a, timeFinish: 2));
+        _panelsQueue.Enqueue((panel, timerBeforeDisable));
+        if (!queueStarts)
+            StartCoroutine(PanelShowInQuenue());
+
         yield return new WaitForSeconds(timerBeforeDisable);
-        yield return StartCoroutine(PanelAnimation(panel: panel, speed: -0.5f, toNumberEverything: 0, toNumberPanel: 0, timeFinish: 2));
-        panel.SetActive(false);
+        //yield return StartCoroutine(PanelAnimation(panel: panel, speed: 1.4f, toNumberEverything: 1, toNumberPanel: panel.GetComponent<Image>().color.a, timeFinish: 2));
+        //yield return new WaitForSeconds(timerBeforeDisable);
+        //yield return StartCoroutine(PanelAnimation(panel: panel, speed: -0.5f, toNumberEverything: 0, toNumberPanel: 0, timeFinish: 2));
+        //panel.SetActive(false);
+    }
+
+    public IEnumerator PanelShowInQuenue()
+    {
+        queueStarts = true;
+        while(_panelsQueue.Count > 0)
+        {
+            var getQueue = _panelsQueue.Dequeue();
+            yield return StartCoroutine(PanelAnimation(panel: getQueue.panel, speed: 1.4f, toNumberEverything: 1, toNumberPanel: getQueue.panel.GetComponent<Image>().color.a, timeFinish: 2));
+            yield return new WaitForSeconds(getQueue.timer);
+            StartCoroutine(PanelAnimation(panel: getQueue.panel, speed: -0.5f, toNumberEverything: 0, toNumberPanel: 0, timeFinish: 2));
+        }
+        queueStarts = false;
     }
 
 
@@ -207,9 +233,13 @@ public abstract class UnitCanvas : MonoBehaviour
         yield return new WaitForSeconds(timeFinish);
 
         panelColor.color = new Color(panelColor.color.r, panelColor.color.g, panelColor.color.b, gValuePanelColor); //set saved alpha parameter to color of panel
-
-        colors.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 1)); //set all colours of images alpha value to 1
-        texts.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 1));//set all colours of images alpha value to 1
+        if (speed < 0)
+            Destroy(panel);
+        else
+        {
+            colors.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 1)); //set all colours of images alpha value to 1
+            texts.ForEach(n => n.color = new Color(n.color.r, n.color.g, n.color.b, 1));//set all colours of images alpha value to 1
+        }
     }
 
     public void DisableAll()

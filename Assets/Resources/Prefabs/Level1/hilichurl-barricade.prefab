@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 682767413228889141}
   - component: {fileID: -4840215351017620806}
   - component: {fileID: 6011287971116909972}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hilichurl-barricade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,8 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
-  _pathPrefab: Prefabs/Level1/hilichurl-barricade
+  _type: 8
+  _pathPrefabBase: Prefabs/Level1/hilichurl-barricade
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

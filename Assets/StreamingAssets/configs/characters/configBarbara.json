@@ -1,29 +1,35 @@
 {
-    "characterName": "Barbara",
-    "characterSpeed": 2.0,
-    "characterMoveDistance": 4,
-    "characterRangedTargetDistance": 10.0,
-    "characterBaseAim": 70,
-    "characterBaseHealth": 8,
-    "characterWeapon": 1,
-    "characterAvatarPath": "Characters/Barbara/Barbara",
-    "element": "Hydro",
-    "abilities": [
-        {
-            "name": "AbilityShoot",
-            "element": "Physical"
-        },
-        {
-            "name": "AbilityShoot",
-            "element": "Hydro"
-        },
-        {
-            "name": "AbilityOverwatch",
-            "element": "Physical"
-        },
-        {
-            "name": "AbilityHunkerDown",
-            "element": "Physical"
-        }
-    ]
+  "characterName": "Barbara",
+  "characterSpeed": 2.0,
+  "characterMoveDistance": 4,
+  "characterRangedTargetDistance": 10.0,
+  "characterBaseAim": 70,
+  "characterBaseAimMelee": 90,
+  "characterMinMeleeDmg": 1,
+  "characterMaxMeleeDmg": 3,
+  "characterBaseHealth": 8,
+  "characterWeapon": 1,
+  "characterAvatarPath": "Characters/Barbara/Barbara",
+  "element": "Hydro",
+  "abilities": [
+    {
+      "name": "AbilityShoot",
+      "element": "Physical"
+    },
+    {
+      "name": "AbilityShoot",
+      "element": "Hydro"
+    },
+    {
+      "name": "AbilityOverwatch",
+      "element": "Physical"
+    },
+    {
+      "name": "AbilityHunkerDown",
+      "element": "Physical"
+    },
+    {
+      "name": "AbilityMeleeAttack"
+    }
+  ]
 }

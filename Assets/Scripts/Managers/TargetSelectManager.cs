@@ -73,7 +73,7 @@ public class TargetSelectManager : MonoBehaviour
 
             Character character = Manager.TurnManager.SelectedCharacter;
 
-            if (closestEnemy && TargetUtils.CanTarget(character.transform, closestEnemy.transform, character.Stats.AttackRangedDistance()))
+            if (closestEnemy && TargetUtils.CanTarget(character.ActualTerritory, closestEnemy.ActualTerritory, character.Stats.AttackRangedDistance()))
             {
                 if (Input.GetMouseButtonDown(0))
                 {

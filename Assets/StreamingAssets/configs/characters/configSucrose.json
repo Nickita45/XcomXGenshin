@@ -1,29 +1,35 @@
 {
-    "characterName": "Sucrose",
-    "characterSpeed": 2.0,
-    "characterMoveDistance": 4,
-    "characterRangedTargetDistance": 10.0,
-    "characterBaseAim": 70,
-    "characterBaseHealth": 8,
-    "characterWeapon": 0,
-    "characterAvatarPath": "Characters/Sucrose/Sucrose",
-    "element": "Anemo",
-    "abilities": [
-        {
-            "name": "AbilityShoot",
-            "element": "Physical"
-        },
-        {
-            "name": "AbilityShoot",
-            "element": "Anemo"
-        },
-        {
-            "name": "AbilityOverwatch",
-            "element": "Physical"
-        },
-        {
-            "name": "AbilityHunkerDown",
-            "element": "Physical"
-        }
-    ]
+  "characterName": "Sucrose",
+  "characterSpeed": 2.0,
+  "characterMoveDistance": 4,
+  "characterRangedTargetDistance": 10.0,
+  "characterBaseAim": 70,
+  "characterBaseHealth": 8,
+  "characterBaseAimMelee": 90,
+  "characterMinMeleeDmg": 1,
+  "characterMaxMeleeDmg": 3,
+  "characterWeapon": 0,
+  "characterAvatarPath": "Characters/Sucrose/Sucrose",
+  "element": "Anemo",
+  "abilities": [
+    {
+      "name": "AbilityShoot",
+      "element": "Physical"
+    },
+    {
+      "name": "AbilityShoot",
+      "element": "Anemo"
+    },
+    {
+      "name": "AbilityOverwatch",
+      "element": "Physical"
+    },
+    {
+      "name": "AbilityHunkerDown",
+      "element": "Physical"
+    },
+    {
+      "name": "AbilityMeleeAttack"
+    }
+  ]
 }

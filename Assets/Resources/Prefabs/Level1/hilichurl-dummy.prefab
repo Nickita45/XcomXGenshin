@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3166091996089469418}
   - component: {fileID: -4469091267659225771}
   - component: {fileID: 8906670467143836794}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hilichurl-dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,8 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 3
-  _pathPrefab: Prefabs/Level1/hilichurl-dummy
+  _type: 8
+  _pathPrefabBase: Prefabs/Level1/hilichurl-dummy
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 1
     _shelterInfoRight: 1

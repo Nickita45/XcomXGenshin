@@ -1,15 +1,17 @@
+using Enemies.AI;
+using FischlWorks_FogWar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class Enemy : Unit
 {
     public new EnemyStats Stats => (EnemyStats)_stats;
     public new EnemyCanvas Canvas => (EnemyCanvas)_canvas;
     public new EnemyAnimator Animator => (EnemyAnimator)_animator;
+
 
     public override TerritroyReaded ActualTerritory { get; set; }
 
@@ -18,6 +20,7 @@ public class Enemy : Unit
 
     [SerializeField]
     private GameObject _bulletSpawner;
+    [field: SerializeField] public csFogVisibilityAgent csFogVisibilityAgent { get; private set; }
 
     [SerializeField]
     private EnemyAI _enemyAI;
@@ -48,8 +51,6 @@ public class Enemy : Unit
 
     public override Transform GetBulletSpawner(string name) => _bulletSpawner.transform;
 
-    public int GetRandomDmg() => UnityEngine.Random.Range(Stats.MinDamage, Stats.MaxDamage + 1);
-
     public override void Start()
     {
         Resurrect();//set maximum hp
@@ -59,6 +60,7 @@ public class Enemy : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Character; //set actual block type on character tyoe
 
         Manager.StatusMain.OnStatusChange += OnStatusChange;
+        Manager.TurnManager.RoundBeginEvent += OnRoundBegin;
 
         _enemyAI.Init(this);
         _enemyAI.OnSpawn();
@@ -70,7 +72,7 @@ public class Enemy : Unit
         if (!_triggered)
         {
             // Trigger if any of the characters can see the enemy
-            if (Manager.Map.Characters.GetList.Any(character => TargetUtils.CanSee(character, this)))
+            if (Manager.Map.Characters.GetList.Any(character => TargetUtils.CanSee(this, character, true)))
             {
                 _triggered = true;
 
@@ -96,6 +98,10 @@ public class Enemy : Unit
 
         if (_actionsLeft > 0) yield return StartCoroutine(_enemyAI.MakeTurn());
     }
+    private void OnRoundBegin()
+    {
+        ActionsLeft = Stats.BaseActions();
+    }
 
     public override void Kill()
     {
@@ -111,6 +117,14 @@ public class Enemy : Unit
         ActualTerritory.TerritoryInfo = TerritoryType.Air; //set his block type on air
 
         Manager.StatisticsUtil.EnemiesDeathCount++;
+        Manager.TurnManager.RoundBeginEvent -= OnRoundBegin;
+
+    }
+
+    private void OnDisable()
+    {
+        Manager.TurnManager.RoundBeginEvent -= OnRoundBegin;
+        Manager.StatusMain.OnStatusChange -= OnStatusChange;
     }
 
     private void OnDestroy()

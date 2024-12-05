@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4375841408538852207}
   - component: {fileID: 4220950647708209207}
   - component: {fileID: 1795857808529835232}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: road-decor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,8 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67815acc2708dd47b2c44741d7a313c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 7
-  _pathPrefab: Prefabs/Level2/road-decor
+  _type: 128
+  _pathPrefabBase: Prefabs/Level2/road-decor
+  _pathPrefabAdditional: 
   _shelterInfo:
     _shelterInfoLeft: 0
     _shelterInfoRight: 0

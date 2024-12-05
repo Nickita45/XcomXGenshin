@@ -166,7 +166,8 @@ public class ReadingMap : MonoBehaviour
         }
         else
         {
-            if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Boarder) //if it is boarder
+            TerritoryType type = _aktualGameObject.GetComponent<TerritoryInfo>().Type;
+            if (type == TerritoryType.Boarder) //if it is boarder
             {
                 return;
             }
@@ -175,14 +176,14 @@ public class ReadingMap : MonoBehaviour
             {
                 transforObject = _aktualGameObject.transform.parent;
             }
-            else if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Decor) //if the block is a decoration, we create it on the basis of our block detecter
+            else if (type == TerritoryType.Decor || type == TerritoryType.Enemy || type == TerritoryType.Character) //if the block is a decoration, we create it on the basis of our block detecter
             {
                 transforObject = _objectDetect.transform;
             }
 
             if (!_matrixMap.ContainsVertexByPos(transforObject.position, out newItem)) //if such block of territory will not already added
             {
-                if (_aktualGameObject.GetComponent<TerritoryInfo>().Type == TerritoryType.Decor) //creating for decor type
+                if (type == TerritoryType.Decor) //creating for decor type
                 {
                     newItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject) //creating block of air on this decor territory
                     {
@@ -197,18 +198,24 @@ public class ReadingMap : MonoBehaviour
                             TerritoryInfo = TerritoryType.Decor,
                             PathPrefabBase = _aktualGameObject.GetComponent<TerritoryInfo>().PathBase
                         }, _matrixMap.Decors);
-                        //decorItem.SetNewPosition(_aktualGameObject.transform);
                     }
                 }
                 else
                 {
-                    newItem = _matrixMap.AddVertex(new TerritroyReaded(transforObject) //creating for other type
+                    Transform mainTransform = transforObject;
+                    if (type == TerritoryType.Enemy || type == TerritoryType.Character)
+                        mainTransform = _objectDetect.transform;    
+
+                    newItem = _matrixMap.AddVertex(new TerritroyReaded(mainTransform) //creating for other type
                     {
-                        TerritoryInfo = _aktualGameObject.GetComponent<TerritoryInfo>().Type,
+                        TerritoryInfo = type,
                         ShelterType = _aktualGameObject.GetComponent<TerritoryInfo>().ShelterType,
                         PathPrefabBase = _aktualGameObject.GetComponent<TerritoryInfo>().PathBase,
                         PathPrefabAdditional = _aktualGameObject.GetComponent<TerritoryInfo>().PathAdditional
                     }, _matrixMap.Vertex);
+
+                    if (type == TerritoryType.Enemy || type == TerritoryType.Character)
+                        Debug.Log(newItem + " " + newItem.TerritoryInfo);
                 }
             }
         }

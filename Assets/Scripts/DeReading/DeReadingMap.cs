@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Linq;
 using UnityEngine;
 
 public class DeReadingMap : MonoBehaviour
@@ -17,7 +18,7 @@ public class DeReadingMap : MonoBehaviour
 
         foreach (var item in _matrixMap)
         {
-            if (item.TerritoryInfo == TerritoryType.Air || item.TerritoryInfo == TerritoryType.Undefined || item.TerritoryInfo == TerritoryType.Enemy)
+            if (item.TerritoryInfo == TerritoryType.Air || item.TerritoryInfo == TerritoryType.Character || item.TerritoryInfo == TerritoryType.Enemy)
             { //if this is air or enemy, create block of air
                 var obj = Manager.Instance.CreatePlatformMovement(item); //create place for moving
                 _matrixMap.AddAirPlane(item, obj);
@@ -31,14 +32,12 @@ public class DeReadingMap : MonoBehaviour
             var objMap = CreateMapObject(item); //create block as real object
 
             if (item.TerritoryInfo == TerritoryType.Decor)
-            {
                 objMap.GetComponent<BoxCollider>().enabled = false;
-            }
 
             if (item.TerritoryInfo == TerritoryType.Enemy)
                 _matrixMap.Enemies.Add(objMap.GetComponent<Enemy>());
 
-            if (item.TerritoryInfo == TerritoryType.Undefined) //Characters now
+            if (item.TerritoryInfo == TerritoryType.Character) //Characters now
                 _matrixMap.Characters.Add(objMap.GetComponent<Character>());
         }
 
@@ -76,7 +75,7 @@ public class DeReadingMap : MonoBehaviour
                 enemy.SetStats(additionalObj.GetComponent<EnemyStats>());
 
                 // Connect AI
-                enemy.SetAI(additionalObj.GetComponent<EnemyAI>());
+                enemy.SetAI(additionalObj.GetComponent<Enemies.AI.EnemyAI>());
 
                 // Connect animation
                 Transform avatar = additionalObj.transform.GetChild(0);
@@ -89,6 +88,15 @@ public class DeReadingMap : MonoBehaviour
             {
                 Debug.LogError("Unknown Enemy: " + item.PathPrefabAdditional);
             }
+        }
+
+        if (territoryInfo.Type == TerritoryType.Ground)
+        {
+            foreach (Transform mount in obj.transform)
+            {
+                if (mount.tag == "Mountains")
+                    mount.gameObject.SetActive(true);
+            } 
         }
 
         return obj;

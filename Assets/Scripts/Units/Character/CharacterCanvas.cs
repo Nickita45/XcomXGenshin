@@ -29,8 +29,11 @@ public class CharacterCanvas : UnitCanvas
             return;
         }
 
-        if (permissions.Contains(Permissions.SelectEnemy) || permissions.Contains(Permissions.AnimationShooting))
-            _canvas.gameObject.SetActive(false);
+        if (permissions.Contains(Permissions.SelectEnemy) || permissions.Contains(Permissions.AnimationShooting) || permissions.Contains(Permissions.NonFog))
+            if (ShootManager.TargetUnit == null || _canvas != ShootManager.TargetUnit.Canvas.CanvasGameObject)
+                _canvas.gameObject.SetActive(false);
+            else
+                _canvas.gameObject.SetActive(true);
         else
             _canvas.gameObject.SetActive(true);
     }
